@@ -1,0 +1,93 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: #faf8f5;
+  --foreground: #171716;
+}
+
+html {
+  background-color: var(--background);
+  color: var(--foreground);
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  background-color: var(--background);
+  color: var(--foreground);
+  overflow-x: hidden;
+}
+
+/* Photography editorial image treatment */
+.img-editorial {
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1), filter 0.4s ease;
+}
+
+.group:hover .img-editorial {
+  transform: scale(1.035);
+}
+
+/* Hairline dividers */
+.hairline-b {
+  border-bottom: 1px solid #e7e4dc;
+}
+.hairline-t {
+  border-top: 1px solid #e7e4dc;
+}
+.hairline-r {
+  border-right: 1px solid #e7e4dc;
+}
+.hairline-l {
+  border-left: 1px solid #e7e4dc;
+}
+
+/* Animated editorial text link underline */
+.link-underline {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+}
+.link-underline::after {
+  content: "";
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0%;
+  height: 1px;
+  background-color: currentColor;
+  transition: width 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.link-underline:hover::after {
+  width: 100%;
+}
+
+/* Subtle custom scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #f3efe9;
+}
+::-webkit-scrollbar-thumb {
+  background: #d4cec4;
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #b5ada2;
+}
+
+/* Reduced motion respect */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
