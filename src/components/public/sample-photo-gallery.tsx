@@ -1,9 +1,10 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import Image from "next/image";
-import { Camera, ZoomIn, X, ChevronLeft, ChevronRight } from "lucide-react";
+import { Camera, ZoomIn } from "lucide-react";
 import { EquipmentSampleImage } from "@/types/database";
+import { ImageLightbox, LightboxImage } from "@/components/ui/image-lightbox";
 
 interface SamplePhotoGalleryProps {
   cameraName: string;
@@ -15,33 +16,16 @@ export function SamplePhotoGallery({ cameraName, sampleImages = [] }: SamplePhot
 
   const activeImages = sampleImages.filter((img) => img.is_active);
 
-  // Lock body scroll and listen for ESC / arrow keys
-  useEffect(() => {
-    if (selectedIdx === null) return;
-
-    const originalOverflow = document.body.style.overflow;
-    document.body.style.overflow = "hidden";
-
-    const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === "Escape") {
-        setSelectedIdx(null);
-      } else if (e.key === "ArrowLeft") {
-        setSelectedIdx((prev) => (prev! > 0 ? prev! - 1 : activeImages.length - 1));
-      } else if (e.key === "ArrowRight") {
-        setSelectedIdx((prev) => (prev! < activeImages.length - 1 ? prev! + 1 : 0));
-      }
-    };
-
-    window.addEventListener("keydown", handleKeyDown);
-    return () => {
-      document.body.style.overflow = originalOverflow;
-      window.removeEventListener("keydown", handleKeyDown);
-    };
-  }, [selectedIdx, activeImages.length]);
-
   if (!sampleImages || sampleImages.length === 0 || activeImages.length === 0) {
     return null;
   }
+
+  // Format images for shared lightbox
+  const lightboxImages: LightboxImage[] = activeImages.map((sample) => ({
+    url: sample.image_url,
+    alt: sample.alt_text || `Ảnh chụp thực tế từ ${cameraName}`,
+    caption: sample.caption ? `${cameraName} · ${sample.caption}` : `Màu ảnh thực tế từ ${cameraName}`,
+  }));
 
   return (
     <section className="pt-12 sm:pt-16 hairline-t">
@@ -59,109 +43,50 @@ export function SamplePhotoGallery({ cameraName, sampleImages = [] }: SamplePhot
         </p>
       </div>
 
-      {/* Masonry / Responsive Photo Grid */}
+      {/* Photography-first Responsive Photo Grid */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
         {activeImages.map((sample, idx) => (
           <div
             key={sample.id || idx}
             onClick={() => setSelectedIdx(idx)}
-            className="group relative aspect-[4/3] rounded-2xl overflow-hidden bg-[#faf8f4] border border-[#e8e2d7] cursor-pointer shadow-xs hover:shadow-md transition-all duration-300"
+            className="group relative aspect-[4/3] rounded-2xl overflow-hidden bg-[#faf8f4] border border-[#e8e2d7] cursor-zoom-in shadow-xs hover:shadow-md transition-all duration-300"
           >
             <Image
               src={sample.image_url}
               alt={sample.alt_text || `Ảnh chụp thực tế từ ${cameraName}`}
               fill
               sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-              className="object-cover group-hover:scale-105 transition-transform duration-500"
+              className="object-cover group-hover:scale-[1.02] transition-transform duration-500"
             />
 
-            {/* Overlay Gradient & Caption */}
-            <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent opacity-80 group-hover:opacity-100 transition-opacity flex flex-col justify-between p-4 text-white">
-              <div className="self-end p-2 rounded-full bg-black/40 backdrop-blur-md opacity-0 group-hover:opacity-100 transition-opacity">
+            {/* Subtle Hover Overlay (Photography-first: light gradient on hover only) */}
+            <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-between p-4 text-white">
+              <div className="self-end p-2 rounded-full bg-black/30 backdrop-blur-xs">
                 <ZoomIn className="w-3.5 h-3.5" />
               </div>
 
-              <div>
-                <p className="text-xs font-medium text-white/95 line-clamp-2">
-                  {sample.caption || `Chụp bằng ${cameraName}`}
-                </p>
-              </div>
+              {sample.caption && (
+                <div>
+                  <p className="text-xs font-medium text-white/95 line-clamp-2 drop-shadow-sm">
+                    {sample.caption}
+                  </p>
+                </div>
+              )}
             </div>
           </div>
         ))}
       </div>
 
-      {/* Lightbox Modal (Highest z-index, ESC & click outside to close) */}
-      {selectedIdx !== null && (
-        <div
-          onClick={() => setSelectedIdx(null)}
-          className="fixed inset-0 z-[9999] bg-black/95 backdrop-blur-md flex items-center justify-center p-4 sm:p-8 animate-in fade-in duration-200"
-        >
-          {/* Top Bar with Counter and Close button */}
-          <div
-            onClick={(e) => e.stopPropagation()}
-            className="absolute top-4 left-4 right-4 flex items-center justify-between z-50 text-white/80 font-mono text-xs"
-          >
-            <span className="px-3 py-1.5 rounded-full bg-white/10 backdrop-blur-md">
-              {selectedIdx + 1} / {activeImages.length}
-            </span>
-
-            <button
-              onClick={() => setSelectedIdx(null)}
-              className="p-2.5 rounded-full bg-white/15 hover:bg-white text-white hover:text-black transition-colors flex items-center gap-1.5 px-4 font-bold"
-              aria-label="Đóng (ESC)"
-            >
-              <X className="w-5 h-5" />
-              <span className="hidden sm:inline text-xs uppercase tracking-wider">Đóng (ESC)</span>
-            </button>
-          </div>
-
-          {/* Prev Button */}
-          <button
-            onClick={(e) => {
-              e.stopPropagation();
-              setSelectedIdx((prev) => (prev! > 0 ? prev! - 1 : activeImages.length - 1));
-            }}
-            className="absolute left-3 sm:left-6 top-1/2 -translate-y-1/2 p-3 rounded-full bg-white/10 hover:bg-white text-white hover:text-black transition-colors z-40"
-            aria-label="Ảnh trước"
-          >
-            <ChevronLeft className="w-6 h-6" />
-          </button>
-
-          {/* Next Button */}
-          <button
-            onClick={(e) => {
-              e.stopPropagation();
-              setSelectedIdx((prev) => (prev! < activeImages.length - 1 ? prev! + 1 : 0));
-            }}
-            className="absolute right-3 sm:right-6 top-1/2 -translate-y-1/2 p-3 rounded-full bg-white/10 hover:bg-white text-white hover:text-black transition-colors z-40"
-            aria-label="Ảnh kế"
-          >
-            <ChevronRight className="w-6 h-6" />
-          </button>
-
-          {/* Main Image Container */}
-          <div
-            onClick={(e) => e.stopPropagation()}
-            className="flex flex-col items-center max-w-5xl w-full max-h-[85vh] z-30"
-          >
-            <div className="relative w-full h-[65vh] sm:h-[75vh]">
-              <Image
-                src={activeImages[selectedIdx].image_url}
-                alt={cameraName}
-                fill
-                sizes="100vw"
-                className="object-contain select-none"
-              />
-            </div>
-            {activeImages[selectedIdx].caption && (
-              <div className="mt-3 px-4 py-2 rounded-xl bg-white/10 backdrop-blur-md text-white text-xs sm:text-sm font-medium text-center max-w-xl font-mono">
-                {activeImages[selectedIdx].caption}
-              </div>
-            )}
-          </div>
-        </div>
-      )}
+      {/* Shared Unified Lightbox */}
+      <ImageLightbox
+        images={lightboxImages}
+        activeIndex={selectedIdx !== null ? selectedIdx : 0}
+        open={selectedIdx !== null}
+        onOpenChange={(open) => {
+          if (!open) setSelectedIdx(null);
+        }}
+        onIndexChange={(idx) => setSelectedIdx(idx)}
+      />
     </section>
   );
 }
