@@ -1,21 +1,51 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import Image from "next/image";
-import Link from "next/link";
-import { ArrowDown, ArrowUpRight, Sparkles, ShieldCheck, MapPin } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
+import { ArrowDown, ArrowUpRight, Sparkles, ShieldCheck, MapPin, PackageCheck } from "lucide-react";
 
 interface LandingHeroProps {
   messengerUrl?: string;
   phone?: string;
 }
 
+const HERO_CAMERAS = [
+  {
+    id: "r50",
+    name: "Canon EOS R50",
+    badge: "KIHO PICK · CANON R50",
+    image: "/images/landing/cutouts/canon-r50.png",
+    subName: "CANON R50",
+    alt: "Canon EOS R50 Mirrorless",
+  },
+  {
+    id: "x100v",
+    name: "Fujifilm X100V",
+    badge: "FUJIFILM X100V · CHECK-IN FAVORITE",
+    image: "/images/landing/cutouts/fujifilm-x100v.png",
+    subName: "FUJIFILM X100V",
+    alt: "Fujifilm X100V Retro Camera",
+  },
+  {
+    id: "g7x3",
+    name: "Canon G7X Mark III",
+    badge: "CANON G7X III · VLOG & SELFIE",
+    image: "/images/landing/cutouts/canon-g7x-mark3.png",
+    subName: "G7X MARK III",
+    alt: "Canon PowerShot G7X Mark III",
+  },
+];
+
 export function LandingHero({
   messengerUrl = "https://m.me/kihocameradonghoi",
   phone = "0387 274 669",
 }: LandingHeroProps) {
+  const [activeIdx, setActiveIdx] = useState(0);
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
+  const [pauseUntil, setPauseUntil] = useState<number>(0);
 
+  // Parallax on mouse move
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {
       const { innerWidth, innerHeight } = window;
@@ -28,6 +58,23 @@ export function LandingHero({
     return () => window.removeEventListener("mousemove", handleMouseMove);
   }, []);
 
+  // Robust Autoplay with user-interaction priority
+  useEffect(() => {
+    const interval = setInterval(() => {
+      const now = Date.now();
+      if (now < pauseUntil) return; // Paused after manual interaction
+      setActiveIdx((prev) => (prev + 1) % HERO_CAMERAS.length);
+    }, 4500);
+
+    return () => clearInterval(interval);
+  }, [pauseUntil]);
+
+  // Immediate Click Handler (Instant priority + 6s autoplay pause)
+  const handleSelectCamera = (index: number) => {
+    setActiveIdx(index);
+    setPauseUntil(Date.now() + 6000);
+  };
+
   const scrollToPricing = (e: React.MouseEvent) => {
     e.preventDefault();
     const elem = document.getElementById("bang-gia");
@@ -35,6 +82,8 @@ export function LandingHero({
       elem.scrollIntoView({ behavior: "smooth" });
     }
   };
+
+  const activeCamera = HERO_CAMERAS[activeIdx];
 
   return (
     <section className="relative overflow-hidden pt-4 pb-12 sm:pt-8 sm:pb-20 lg:min-h-[82vh] flex items-center bg-[#faf8f4]">
@@ -45,7 +94,7 @@ export function LandingHero({
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-center">
           
           {/* LEFT EDITORIAL COLUMN (Hero Copy & CTAs) */}
-          <div className="lg:col-span-6 space-y-6 sm:space-y-8">
+          <div className="lg:col-span-6 space-y-6 sm:space-y-7">
             
             {/* Eyebrow Pill */}
             <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#f0eae1] border border-[#e2dbcf] text-xs font-mono font-bold tracking-wider text-ink-800">
@@ -83,12 +132,27 @@ export function LandingHero({
               Cho thuê máy ảnh tại Quảng Bình — <strong className="text-ink-900 font-semibold">Canon, Fujifilm, Sony</strong> sẵn sàng cho các chuyến du lịch Phong Nha, check-in biển Nhật Lệ, chụp ảnh couple và quay vlog sắc nét.
             </p>
 
+            {/* USP Highlight Card: No Deposit */}
+            <div className="p-3.5 sm:p-4 rounded-2xl bg-white border border-[#e8e2d7] shadow-xs flex items-center gap-3.5 max-w-lg">
+              <div className="p-2 rounded-xl bg-[#f0eae1] text-accent shrink-0">
+                <ShieldCheck className="w-5 h-5" />
+              </div>
+              <div className="space-y-0.5">
+                <h4 className="text-xs font-mono font-bold uppercase tracking-wider text-ink-900">
+                  Thuê dễ dàng hơn bạn nghĩ
+                </h4>
+                <p className="text-xs text-ink-600 font-medium">
+                  <strong className="text-ink-900 font-semibold">Không cần cọc tiền máy</strong> — chỉ cần ảnh CCCD hoặc VNeID để xác minh.
+                </p>
+              </div>
+            </div>
+
             {/* CTA Row */}
-            <div className="pt-2 flex flex-wrap items-center gap-4">
+            <div className="pt-1 flex flex-wrap items-center gap-4">
               {/* Primary CTA: Scroll to Pricing */}
               <button
                 onClick={scrollToPricing}
-                className="bg-ink-900 hover:bg-accent text-white px-7 py-3.5 rounded-xl text-sm font-mono font-bold uppercase tracking-wider shadow-md hover:shadow-lg transition-all duration-300 flex items-center gap-2.5 group"
+                className="bg-ink-900 hover:bg-accent text-white px-7 py-3.5 rounded-xl text-sm font-mono font-bold uppercase tracking-wider shadow-md hover:shadow-lg transition-all duration-300 flex items-center gap-2.5 group cursor-pointer"
               >
                 <span>Xem bảng giá</span>
                 <ArrowDown className="w-4 h-4 group-hover:translate-y-1 transition-transform" />
@@ -99,15 +163,15 @@ export function LandingHero({
                 href={messengerUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="bg-white hover:bg-[#f0eae1] text-ink-900 px-6 py-3.5 rounded-xl text-sm font-mono font-bold uppercase tracking-wider border border-[#e0d6c7] shadow-xs transition-all duration-300 flex items-center gap-2 group"
+                className="bg-white hover:bg-[#f0eae1] text-ink-900 px-6 py-3.5 rounded-xl text-sm font-mono font-bold uppercase tracking-wider border border-[#e0d6c7] shadow-xs transition-all duration-300 flex items-center gap-2 group cursor-pointer"
               >
                 <span>Nhắn Kiho</span>
                 <ArrowUpRight className="w-4 h-4 text-ink-500 group-hover:text-ink-900 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all" />
               </a>
             </div>
 
-            {/* Microcopy Trust Badges */}
-            <div className="flex flex-wrap items-center gap-y-2 gap-x-6 text-xs text-ink-500 font-mono pt-2">
+            {/* Microcopy Metadata Under CTA (Readable, non-duplicated) */}
+            <div className="flex flex-wrap items-center gap-y-2 gap-x-5 text-xs sm:text-[13px] text-ink-600 font-mono font-medium pt-1">
               <span className="flex items-center gap-1.5">
                 <Sparkles className="w-3.5 h-3.5 text-accent" />
                 Giá từ 80K / buổi
@@ -119,106 +183,141 @@ export function LandingHero({
               </span>
               <span className="text-ink-300">•</span>
               <span className="flex items-center gap-1.5">
-                <ShieldCheck className="w-3.5 h-3.5 text-emerald-600" />
-                Thủ tục nhanh 5 phút
+                <PackageCheck className="w-3.5 h-3.5 text-emerald-700" />
+                Kèm trọn bộ pin + thẻ
               </span>
             </div>
           </div>
 
-          {/* RIGHT VISUAL COLUMN (Multilayer Depth Composition with Real Cutouts & Landscape Backdrop) */}
+          {/* RIGHT VISUAL COLUMN (Dynamic Interactive 3-Camera Layered Showcase) */}
           <div className="lg:col-span-6 relative flex items-center justify-center">
             
             {/* Visual Container */}
             <div className="relative w-full max-w-[540px] aspect-[4/3] sm:aspect-[16/11]">
               
-              {/* Layer 1: Travel Landscape Backdrop Card with Editorial Mask */}
+              {/* Layer 1: Travel Landscape Backdrop Card (Visible, scenic, warm golden hour) */}
               <div
                 className="absolute inset-0 rounded-[32px] sm:rounded-[40px] overflow-hidden border border-[#e8e0d4] shadow-xl bg-[#f4efe6] transition-transform duration-300 ease-out"
                 style={{
-                  transform: `translate3d(${mousePos.x * -4}px, ${mousePos.y * -4}px, 0)`,
+                  transform: `translate3d(${mousePos.x * -3}px, ${mousePos.y * -3}px, 0)`,
                 }}
               >
                 <Image
                   src="/images/landing/hero-quang-binh.webp"
-                  alt="Quảng Bình landscape"
+                  alt="Hoàng hôn Quảng Bình"
                   fill
                   priority
-                  className="object-cover opacity-90 filter saturate-[1.05]"
+                  className="object-cover opacity-95 filter saturate-[1.1] contrast-[1.04]"
                   sizes="(max-width: 1024px) 100vw, 540px"
                 />
                 
-                {/* Soft Warm Gradient Overlay */}
-                <div className="absolute inset-0 bg-gradient-to-t from-[#faf8f4]/80 via-transparent to-black/10 pointer-events-none" />
-                
-                {/* Location Badge */}
-                <div className="absolute top-4 left-4 sm:top-6 sm:left-6 px-3 py-1 rounded-full bg-white/80 backdrop-blur-md border border-white/60 text-[10px] font-mono font-bold tracking-wider text-ink-900 uppercase shadow-xs">
-                  ✦ QUẢNG BÌNH SUNSET
-                </div>
+                {/* Soft Warm Vignette Overlay (Leaves the scene clear while making cameras pop) */}
+                <div className="absolute inset-0 bg-gradient-to-t from-[#faf8f4]/85 via-[#faf8f4]/15 to-transparent pointer-events-none" />
               </div>
 
-              {/* Layer 2: Fujifilm X100V (Back Left Layer with Parallax) */}
-              <div
-                className="absolute -top-4 -left-4 sm:-top-8 sm:-left-6 w-[45%] aspect-square z-20 transition-transform duration-300 ease-out"
-                style={{
-                  transform: `translate3d(${mousePos.x * 5}px, ${mousePos.y * 5}px, 0) rotate(-4deg)`,
-                }}
-              >
-                <div className="relative w-full h-full">
-                  <Image
-                    src="/images/landing/cutouts/fujifilm-x100v.png"
-                    alt="Fujifilm X100V"
-                    fill
-                    sizes="240px"
-                    className="object-contain filter drop-shadow-[0_16px_24px_rgba(30,20,10,0.3)]"
-                  />
-                  <span className="absolute bottom-2 left-2 bg-[#2c2621]/90 text-white text-[9px] font-mono font-bold px-2 py-0.5 rounded shadow">
-                    FUJIFILM X100V
-                  </span>
-                </div>
-              </div>
+              {/* 3 Interactive Layered Cameras (Pointer-events cleanly decoupled to ensure instant clicks) */}
+              {HERO_CAMERAS.map((cam, idx) => {
+                const isCenter = idx === activeIdx;
+                const isLeftBack = idx === (activeIdx + 2) % 3;
+                const isRightBack = idx === (activeIdx + 1) % 3;
 
-              {/* Layer 3: Canon G7X Mark III (Top Right Layer) */}
-              <div
-                className="absolute -top-6 -right-2 sm:-top-10 sm:right-2 w-[40%] aspect-square z-20 transition-transform duration-300 ease-out"
-                style={{
-                  transform: `translate3d(${mousePos.x * -6}px, ${mousePos.y * -6}px, 0) rotate(6deg)`,
-                }}
-              >
-                <div className="relative w-full h-full">
-                  <Image
-                    src="/images/landing/cutouts/canon-g7x-mark3.png"
-                    alt="Canon G7X Mark III"
-                    fill
-                    sizes="200px"
-                    className="object-contain filter drop-shadow-[0_14px_20px_rgba(30,20,10,0.28)]"
-                  />
-                  <span className="absolute bottom-2 right-2 bg-white/95 text-ink-900 text-[9px] font-mono font-bold px-2 py-0.5 rounded shadow border border-black/10">
-                    G7X MARK III
-                  </span>
-                </div>
-              </div>
+                // Motion & depth configurations
+                let motionConfig = {
+                  x: 0,
+                  y: 12,
+                  scale: 1.12,
+                  rotate: 0,
+                  zIndex: 30,
+                  opacity: 1,
+                  filter: "drop-shadow(0 28px 40px rgba(20,15,10,0.45))",
+                };
 
-              {/* Layer 4: Canon EOS R50 Foreground Flagship (Center Hero Cutout) */}
-              <div
-                className="absolute -bottom-6 sm:-bottom-10 left-1/2 -translate-x-1/2 w-[72%] sm:w-[68%] aspect-square z-30 transition-transform duration-300 ease-out"
-                style={{
-                  transform: `translate3d(calc(-50% + ${mousePos.x * 8}px), ${mousePos.y * 8}px, 0)`,
-                }}
-              >
-                <div className="relative w-full h-full group">
-                  <Image
-                    src="/images/landing/cutouts/canon-r50.png"
-                    alt="Canon EOS R50"
-                    fill
-                    priority
-                    sizes="380px"
-                    className="object-contain filter drop-shadow-[0_28px_40px_rgba(20,15,10,0.45)] group-hover:scale-105 transition-transform duration-500"
-                  />
-                  {/* Flagship Tag */}
-                  <div className="absolute -bottom-2 left-1/2 -translate-x-1/2 whitespace-nowrap bg-accent text-white text-[10px] sm:text-xs font-mono font-bold px-3 py-1 rounded-full shadow-lg border border-white/20">
-                    ★ CANON R50 · TOP PICK 2026
-                  </div>
-                </div>
+                if (isLeftBack) {
+                  motionConfig = {
+                    x: -125,
+                    y: -65,
+                    scale: 0.60,
+                    rotate: -6,
+                    zIndex: 20,
+                    opacity: 0.90,
+                    filter: "drop-shadow(0 14px 22px rgba(20,15,10,0.25))",
+                  };
+                } else if (isRightBack) {
+                  motionConfig = {
+                    x: 125,
+                    y: -60,
+                    scale: 0.56,
+                    rotate: 6,
+                    zIndex: 20,
+                    opacity: 0.90,
+                    filter: "drop-shadow(0 12px 20px rgba(20,15,10,0.25))",
+                  };
+                }
+
+                return (
+                  <motion.div
+                    key={cam.id}
+                    animate={{
+                      x: motionConfig.x + (isCenter ? mousePos.x * 6 : mousePos.x * 3),
+                      y: motionConfig.y + (isCenter ? mousePos.y * 6 : mousePos.y * 3),
+                      scale: motionConfig.scale,
+                      rotate: motionConfig.rotate,
+                      zIndex: motionConfig.zIndex,
+                      opacity: motionConfig.opacity,
+                    }}
+                    transition={{
+                      duration: 0.55,
+                      ease: [0.22, 1, 0.36, 1],
+                    }}
+                    className="absolute inset-0 flex items-center justify-center pointer-events-none"
+                  >
+                    {/* Camera Hitbox & Interaction Container */}
+                    <div
+                      onClick={() => handleSelectCamera(idx)}
+                      className={`relative w-[65%] sm:w-[60%] aspect-square flex items-center justify-center pointer-events-auto transition-transform duration-300 ${
+                        isCenter
+                          ? "cursor-default"
+                          : "cursor-pointer group hover:scale-[1.08] hover:-translate-y-1.5"
+                      }`}
+                    >
+                      <Image
+                        src={cam.image}
+                        alt={cam.alt}
+                        fill
+                        sizes="380px"
+                        priority={idx === 0}
+                        className="object-contain select-none"
+                        style={{
+                          filter: motionConfig.filter,
+                        }}
+                      />
+
+                      {/* Side Camera Subtle Name Pill */}
+                      {!isCenter && (
+                        <div className="absolute -bottom-1.5 whitespace-nowrap bg-[#2c2621]/90 backdrop-blur-xs text-white text-[9px] sm:text-[10px] font-mono font-bold px-2.5 py-0.5 rounded shadow-sm opacity-90 group-hover:opacity-100 group-hover:bg-[#171716] transition-all">
+                          {cam.subName}
+                        </div>
+                      )}
+                    </div>
+                  </motion.div>
+                );
+              })}
+
+              {/* Dynamic Center Spotlight Badge (Bottom Center) */}
+              <div className="absolute -bottom-3 sm:-bottom-4 left-1/2 -translate-x-1/2 z-40">
+                <AnimatePresence mode="wait">
+                  <motion.div
+                    key={activeCamera.id}
+                    initial={{ opacity: 0, y: 6, scale: 0.95 }}
+                    animate={{ opacity: 1, y: 0, scale: 1 }}
+                    exit={{ opacity: 0, y: -6, scale: 0.95 }}
+                    transition={{ duration: 0.22, ease: "easeOut" }}
+                    className="whitespace-nowrap bg-ink-900/95 backdrop-blur-md text-white text-[11px] sm:text-xs font-mono font-bold px-4 py-1.5 rounded-full shadow-xl border border-white/20 tracking-wide flex items-center gap-1.5"
+                  >
+                    <span className="w-1.5 h-1.5 rounded-full bg-accent animate-pulse" />
+                    <span>{activeCamera.badge}</span>
+                  </motion.div>
+                </AnimatePresence>
               </div>
 
             </div>

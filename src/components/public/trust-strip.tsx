@@ -3,11 +3,11 @@
 import React from "react";
 
 const TRUST_ITEMS = [
-  "NHẬN MÁY TẠI ĐỒNG HỚI",
+  "KHÔNG CẦN CỌC TIỀN MÁY",
+  "CHỈ CẦN ẢNH CCCD / VNEID",
   "KÈM TRỌN BỘ PIN + THẺ NHỚ",
-  "HƯỚNG DẪN DÙNG MÁY 1:1 TẬN TÌNH",
-  "HỖ TRỢ TRONG SUỐT CHUYẾN ĐI",
-  "GIAO MÁY TẬN NƠI KHÁCH SẠN / GA TÀU",
+  "HƯỚNG DẪN DÙNG TRƯỚC KHI NHẬN",
+  "GIAO MÁY TẬN NƠI ĐỒNG HỚI",
 ];
 
 export function TrustStrip() {

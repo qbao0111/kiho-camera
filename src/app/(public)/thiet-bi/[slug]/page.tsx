@@ -186,19 +186,27 @@ export default async function ProductDetailPage({ params }: PageProps) {
               </p>
             )}
 
-            {/* Primary Action Button */}
+            {/* Primary Action Button & Support Note */}
             <div className="space-y-3 pt-2">
               <a
                 href={messengerChatUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-full inline-flex items-center justify-center gap-2 bg-ink-900 hover:bg-accent text-white font-mono font-bold py-4 px-6 rounded-2xl shadow-md transition-all text-sm sm:text-base group"
+                className="w-full inline-flex items-center justify-center gap-2 bg-ink-900 hover:bg-accent text-white font-mono font-bold py-4 px-6 rounded-2xl shadow-md transition-all text-sm sm:text-base group cursor-pointer"
               >
                 <span>Nhắn Kiho Camera để thuê máy này</span>
                 <ArrowUpRight className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
               </a>
 
-              <div className="flex items-center justify-between text-[11px] font-mono text-ink-400 px-1">
+              {/* Subtle Support Note */}
+              <div className="p-3.5 rounded-2xl bg-[#f0eae1] border border-[#e2dbcf] flex items-center gap-3 text-xs font-mono text-ink-800">
+                <ShieldCheck className="w-4 h-4 text-emerald-700 shrink-0" />
+                <span>
+                  <strong className="text-ink-900 font-bold">Không cần cọc tiền máy</strong> · Chỉ cần ảnh CCCD hoặc VNeID để xác minh
+                </span>
+              </div>
+
+              <div className="flex items-center justify-between text-[11px] font-mono text-ink-400 px-1 pt-1">
                 <span>TƯ VẤN 1:1 QUA MESSENGER / ZALO</span>
                 <a href="tel:0387274669" className="hover:text-ink-900">HOTLINE: 0387 274 669</a>
               </div>
@@ -259,14 +267,14 @@ export default async function ProductDetailPage({ params }: PageProps) {
                 </div>
               )}
 
-              {/* 4. Rental Policy & Deposit */}
+              {/* 4. Rental Policy & Verification */}
               <div className="space-y-2.5 pt-6 hairline-t">
                 <span className="text-[11px] font-mono font-bold tracking-widest text-ink-400 uppercase block">
-                  LƯU Ý THUÊ & CỌC CCCD
+                  THỦ TỤC XÁC MINH & NHẬN MÁY
                 </span>
                 <p className="text-xs sm:text-sm text-ink-700 leading-relaxed font-medium">
                   {equipment.deposit_note ||
-                    "Khách mang theo CCCD gắn chip chính chủ để làm thủ tục nhận máy tại 48 Ngô Quyền hoặc giao tận nơi khách sạn."}
+                    "Kiho Camera không yêu cầu cọc tiền máy. Bạn chỉ cần cung cấp ảnh CCCD gắn chip chính chủ hoặc tài khoản VNeID để xác minh khi nhận máy tại 48 Ngô Quyền hoặc giao tận nơi khách sạn."}
                 </p>
                 <div className="pt-1">
                   <Link

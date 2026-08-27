@@ -54,7 +54,7 @@ export function FinalCta({
 
           {/* Subtitle */}
           <p className="text-base sm:text-xl text-ink-300 leading-relaxed max-w-2xl font-medium">
-            Nhắn Kiho, nói tụi mình biết bạn định đi đâu và muốn chụp kiểu gì. Tụi mình sẽ chuẩn bị sẵn chiếc máy phù hợp cùng trọn bộ pin, sạc và thẻ nhớ tốc độ cao.
+            Nhắn Kiho để được gợi ý máy phù hợp. Thuê nhanh, không cần cọc tiền máy — chỉ cần ảnh CCCD hoặc VNeID để xác minh.
           </p>
 
           {/* CTA Buttons */}
@@ -63,7 +63,7 @@ export function FinalCta({
               href={messengerUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2.5 bg-accent hover:bg-accent-hover text-white text-sm font-mono font-bold uppercase tracking-wider px-8 py-4 rounded-xl shadow-lg transition-colors group"
+              className="inline-flex items-center gap-2.5 bg-accent hover:bg-accent-hover text-white text-sm font-mono font-bold uppercase tracking-wider px-8 py-4 rounded-xl shadow-lg transition-colors group cursor-pointer"
             >
               <span>Nhắn Kiho tư vấn ngay</span>
               <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
@@ -71,9 +71,9 @@ export function FinalCta({
 
             <button
               onClick={scrollToPricing}
-              className="inline-flex items-center gap-2 bg-white/10 hover:bg-white/20 text-white text-sm font-mono font-bold uppercase tracking-wider px-6 py-4 rounded-xl border border-white/20 backdrop-blur-sm transition-colors"
+              className="inline-flex items-center gap-2 bg-white/10 hover:bg-white/20 text-white text-sm font-mono font-bold uppercase tracking-wider px-6 py-4 rounded-xl border border-white/20 backdrop-blur-sm transition-colors cursor-pointer"
             >
-              <span>Xem lại bảng giá</span>
+              <span>Xem bảng giá</span>
               <ArrowDown className="w-4 h-4" />
             </button>
           </div>
