@@ -119,20 +119,11 @@ export function CanonR50Spotlight({
               <div className="flex items-center gap-3">
                 <Link
                   href="/thiet-bi/canon-eos-r50"
-                  className="px-4 py-3 rounded-xl border border-[#e0d6c7] text-xs font-mono font-bold uppercase tracking-wider text-ink-800 hover:bg-[#faf8f4] transition-colors"
+                  className="bg-ink-900 hover:bg-accent text-white px-6 py-3.5 rounded-xl text-xs font-mono font-bold uppercase tracking-wider transition-colors shadow-md flex items-center gap-2 group"
                 >
-                  Xem chi tiết
-                </Link>
-
-                <a
-                  href={`https://zalo.me/0387274669?text=Chào Kiho, mình muốn thuê máy Canon EOS R50`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="bg-ink-900 hover:bg-accent text-white px-6 py-3 rounded-xl text-xs font-mono font-bold uppercase tracking-wider transition-colors shadow-md flex items-center gap-2 group"
-                >
-                  <span>Thuê R50 ngay</span>
+                  <span>Xem máy Canon R50</span>
                   <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
-                </a>
+                </Link>
               </div>
             </div>
 

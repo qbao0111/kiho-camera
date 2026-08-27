@@ -418,23 +418,21 @@ export function CameraPricingSlider({
           </Link>
         </div>
 
-        {/* Bottom Contact Card Banner */}
-        <div className="mt-12 bg-[#2c2621] text-white rounded-3xl p-6 sm:p-8 shadow-xl relative overflow-hidden">
-          <div className="absolute top-0 right-0 w-80 h-80 bg-[#e6a84d]/10 rounded-full blur-3xl pointer-events-none" />
-
-          <div className="relative z-10 grid grid-cols-1 md:grid-cols-3 gap-6 items-center text-xs font-mono">
+        {/* Bottom Contact Card Banner (Warm Editorial Light) */}
+        <div className="mt-12 bg-[#faf8f5] text-[#171716] rounded-3xl p-6 sm:p-8 border border-[#e8e2d7] shadow-xs relative overflow-hidden">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 items-center text-xs font-mono">
             {/* Phone / Zalo */}
             <div className="flex items-center gap-3.5">
-              <div className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center shrink-0 text-[#e6a84d]">
+              <div className="w-10 h-10 rounded-xl bg-[#E85D2A]/10 text-[#E85D2A] flex items-center justify-center shrink-0">
                 <Phone className="w-5 h-5" />
               </div>
               <div>
-                <span className="text-white/60 block text-[10px] uppercase tracking-wider">
-                  SĐT / ZALO TƯ VẤN
+                <span className="text-[#716A62] block text-[10px] uppercase font-bold tracking-wider">
+                  SĐT / Zalo tư vấn
                 </span>
                 <a
                   href="tel:0387274669"
-                  className="text-base sm:text-lg font-black text-white hover:text-[#e6a84d] transition-colors"
+                  className="text-base sm:text-lg font-black text-[#171716] hover:text-[#E85D2A] transition-colors"
                 >
                   0387 274 669
                 </a>
@@ -443,18 +441,18 @@ export function CameraPricingSlider({
 
             {/* Instagram */}
             <div className="flex items-center gap-3.5">
-              <div className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center shrink-0 text-[#e6a84d]">
+              <div className="w-10 h-10 rounded-xl bg-[#5659C9]/10 text-[#5659C9] flex items-center justify-center shrink-0">
                 <Instagram className="w-5 h-5" />
               </div>
               <div>
-                <span className="text-white/60 block text-[10px] uppercase tracking-wider">
-                  INSTAGRAM CHÍNH THỨC
+                <span className="text-[#716A62] block text-[10px] uppercase font-bold tracking-wider">
+                  Instagram chính thức
                 </span>
                 <a
                   href="https://www.instagram.com/thuemayanhqbb/"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-sm sm:text-base font-bold text-white hover:text-[#e6a84d] transition-colors"
+                  className="text-sm sm:text-base font-bold text-[#171716] hover:text-[#5659C9] transition-colors"
                 >
                   @thuemayanhqbb
                 </a>
@@ -463,26 +461,26 @@ export function CameraPricingSlider({
 
             {/* Store Address */}
             <div className="flex items-center gap-3.5">
-              <div className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center shrink-0 text-[#e6a84d]">
+              <div className="w-10 h-10 rounded-xl bg-[#5DAEA5]/15 text-[#2A8B80] flex items-center justify-center shrink-0">
                 <MapPin className="w-5 h-5" />
               </div>
               <div>
-                <span className="text-white/60 block text-[10px] uppercase tracking-wider">
-                  ĐỊA CHỈ NHẬN MÁY
+                <span className="text-[#716A62] block text-[10px] uppercase font-bold tracking-wider">
+                  Địa chỉ nhận máy
                 </span>
-                <span className="text-xs sm:text-sm font-semibold text-white">
+                <span className="text-xs sm:text-sm font-semibold text-[#171716]">
                   48 Ngô Quyền, Đồng Hới, Quảng Bình
                 </span>
               </div>
             </div>
           </div>
 
-          {/* Slogan */}
-          <div className="relative z-10 mt-6 pt-5 border-t border-white/10 flex items-center justify-center text-center">
-            <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-accent/20 text-accent-light text-xs font-mono font-bold tracking-wide">
-              <Heart className="w-3.5 h-3.5 fill-current text-accent" />
-              TRỌN MỌI KHOẢNH KHẮC – ĐỒNG HÀNH CÙNG HÀNH TRÌNH CỦA BẠN!
-            </span>
+          {/* Slogan: Clean Editorial Line */}
+          <div className="mt-6 pt-5 border-t border-[#ede6db] flex items-center justify-center text-center">
+            <p className="text-xs sm:text-sm font-mono text-[#716A62] flex items-center justify-center gap-2">
+              <Heart className="w-3.5 h-3.5 text-[#E85D2A] fill-[#E85D2A]/30" />
+              <span>Trọn mọi khoảnh khắc · Đồng hành cùng chuyến đi của bạn</span>
+            </p>
           </div>
         </div>
 

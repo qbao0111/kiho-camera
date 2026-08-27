@@ -1,9 +1,13 @@
 "use client";
 
 import React from "react";
-import { Sparkles, ArrowRight, ShieldCheck, HelpCircle } from "lucide-react";
+import { Sparkles, ShieldCheck, HelpCircle } from "lucide-react";
 
-export function RentalProcess({ messengerUrl = "https://m.me/kihocameradonghoi" }: { messengerUrl?: string }) {
+interface RentalProcessProps {
+  messengerUrl?: string;
+}
+
+export function RentalProcess({}: RentalProcessProps = {}) {
   const steps = [
     {
       num: "01",
@@ -23,37 +27,25 @@ export function RentalProcess({ messengerUrl = "https://m.me/kihocameradonghoi" 
   ];
 
   return (
-    <section className="py-16 sm:py-24 bg-[#faf8f4]">
+    <section className="py-20 sm:py-28 bg-[#faf8f4] border-t border-[#e8e2d7]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
-        {/* Section Header */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 sm:mb-16 gap-6">
-          <div>
-            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#f0eae1] border border-[#e2dbcf] text-xs font-mono font-bold uppercase tracking-wider text-ink-700 mb-3">
-              <Sparkles className="w-3.5 h-3.5 text-accent" />
-              <span>QUY TRÌNH TINH GỌN</span>
-            </div>
-            <h2 className="text-3xl sm:text-5xl font-black text-ink-900 tracking-tight leading-tight">
-              Thủ tục gọn nhẹ trong 3 bước
-            </h2>
-            <p className="mt-2 text-sm sm:text-base text-ink-600 font-medium max-w-xl">
-              Không cần cọc tiền máy. Xác minh nhanh qua CCCD/VNeID, hướng dẫn 5 phút rồi tự tin lên đường.
-            </p>
+        {/* Section Header (Purely Informational & Clean) */}
+        <div className="mb-12 sm:mb-16 max-w-2xl">
+          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#f0eae1] border border-[#e2dbcf] text-xs font-mono font-bold uppercase tracking-wider text-ink-700 mb-3">
+            <Sparkles className="w-3.5 h-3.5 text-accent" />
+            <span>QUY TRÌNH TINH GỌN</span>
           </div>
-
-          <a
-            href={messengerUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 bg-ink-900 hover:bg-accent text-white text-xs font-mono font-bold uppercase tracking-wider px-6 py-3 rounded-xl transition-colors shadow-sm shrink-0"
-          >
-            <span>Nhắn đặt lịch trước</span>
-            <ArrowRight className="w-3.5 h-3.5" />
-          </a>
+          <h2 className="text-3xl sm:text-5xl font-black text-ink-900 tracking-tight leading-tight font-mono">
+            Thủ tục gọn nhẹ trong 3 bước
+          </h2>
+          <p className="mt-2 text-sm sm:text-base text-ink-600 font-medium leading-relaxed">
+            Không cần cọc tiền máy. Xác minh nhanh qua CCCD/VNeID, hướng dẫn 5 phút rồi tự tin lên đường.
+          </p>
         </div>
 
         {/* 3 Large Typography Step Columns */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 sm:gap-12">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 sm:gap-10">
           {steps.map((step, idx) => (
             <div
               key={step.num}

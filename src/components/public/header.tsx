@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { ArrowUpRight, Menu, X } from "lucide-react";
+import { ArrowUpRight, Menu, X, Phone, MessageCircle, MapPin } from "lucide-react";
 import { SiteSettings } from "@/types/database";
 
 interface HeaderProps {
@@ -38,7 +38,7 @@ export function Header({ settings }: HeaderProps) {
     <header
       className={`sticky top-0 z-50 transition-all duration-300 ${
         isScrolled
-          ? "bg-[#faf8f4]/90 backdrop-blur-md hairline-b py-3.5 shadow-[0_1px_12px_rgba(0,0,0,0.03)]"
+          ? "bg-[#faf8f4]/95 backdrop-blur-md hairline-b py-3 sm:py-3.5 shadow-[0_1px_12px_rgba(0,0,0,0.03)]"
           : "bg-[#faf8f4] hairline-b py-4 sm:py-5"
       }`}
     >
@@ -82,43 +82,54 @@ export function Header({ settings }: HeaderProps) {
             })}
           </nav>
 
-          {/* Desktop Right CTA */}
-          <div className="hidden md:flex items-center gap-6">
+          {/* Desktop Right CTA & Contact Info */}
+          <div className="hidden md:flex items-center gap-5">
             <a
               href="tel:0387274669"
-              className="text-xs font-mono font-bold text-ink-600 hover:text-ink-900 transition-colors"
+              className="inline-flex items-center gap-1.5 text-xs font-mono font-bold text-ink-700 hover:text-accent transition-colors py-1.5 px-2.5 rounded-lg hover:bg-[#f0eae1]"
             >
-              0387 274 669
+              <Phone className="w-3.5 h-3.5 text-accent" />
+              <span>0387 274 669</span>
             </a>
 
             <a
               href={settings.messenger_url}
               target="_blank"
               rel="noopener noreferrer"
-              className="group inline-flex items-center gap-1.5 text-xs font-mono font-bold uppercase tracking-wider bg-ink-900 hover:bg-accent text-white px-4 py-2 rounded-lg transition-colors shadow-xs"
+              className="group inline-flex items-center gap-2 text-xs font-mono font-bold uppercase tracking-wider bg-ink-900 hover:bg-accent text-white px-4 py-2 rounded-xl transition-all shadow-xs"
             >
+              <MessageCircle className="w-3.5 h-3.5 text-accent group-hover:text-white transition-colors" />
               <span>Nhắn Kiho Camera</span>
-              <ArrowUpRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all" />
+              <ArrowUpRight className="w-3.5 h-3.5 text-white/70 group-hover:text-white group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all" />
             </a>
           </div>
 
-          {/* Mobile Right Menu Button */}
-          <div className="flex items-center gap-3 md:hidden">
+          {/* Mobile Right Action & Menu Button */}
+          <div className="flex items-center gap-2.5 md:hidden">
+            <a
+              href="tel:0387274669"
+              className="p-2 text-ink-700 hover:text-accent rounded-lg border border-[#e8e2d7] bg-white transition-colors"
+              aria-label="Gọi hotline"
+            >
+              <Phone className="w-4 h-4 text-accent" />
+            </a>
+
             <a
               href={settings.messenger_url}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-xs font-mono font-bold text-white bg-ink-900 hover:bg-accent px-3 py-1.5 rounded-lg transition-colors"
+              className="inline-flex items-center gap-1.5 text-xs font-mono font-bold text-white bg-ink-900 hover:bg-accent px-3 py-2 rounded-xl transition-colors shadow-xs"
             >
-              Nhắn tin →
+              <MessageCircle className="w-3.5 h-3.5 text-accent" />
+              <span>Nhắn tin</span>
             </a>
 
             <button
               onClick={() => setIsOpen(!isOpen)}
-              className="p-1.5 text-ink-900 hover:text-accent transition-colors"
+              className="p-2 text-ink-900 hover:text-accent transition-colors rounded-lg border border-[#e8e2d7] bg-white"
               aria-label="Menu"
             >
-              {isOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+              {isOpen ? <X className="w-4 h-4" /> : <Menu className="w-4 h-4" />}
             </button>
           </div>
         </div>
@@ -150,23 +161,32 @@ export function Header({ settings }: HeaderProps) {
 
           <div className="pt-8 hairline-t space-y-4 font-mono">
             <div>
-              <span className="text-[10px] font-bold text-ink-400 uppercase tracking-widest block mb-1">
+              <span className="text-[10px] font-bold text-ink-400 uppercase tracking-widest block mb-2">
                 LIÊN HỆ TRỰC TIẾP
               </span>
               <a
                 href={settings.messenger_url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-full inline-flex items-center justify-between py-3 px-4 bg-ink-900 text-white rounded-xl font-bold text-xs uppercase tracking-wider hover:bg-accent transition-colors"
+                className="w-full inline-flex items-center justify-between py-3.5 px-4 bg-ink-900 text-white rounded-xl font-bold text-xs uppercase tracking-wider hover:bg-accent transition-colors shadow-xs"
               >
-                <span>Nhắn tư vấn qua Messenger</span>
+                <div className="flex items-center gap-2">
+                  <MessageCircle className="w-4 h-4 text-accent" />
+                  <span>Nhắn tư vấn qua Messenger</span>
+                </div>
                 <ArrowUpRight className="w-4 h-4" />
               </a>
             </div>
 
-            <div className="flex items-center justify-between text-xs text-ink-500 pt-2">
-              <span>Hotline: 0387 274 669</span>
-              <span>48 Ngô Quyền, Đồng Hới</span>
+            <div className="flex flex-col gap-2 text-xs text-ink-600 pt-2 bg-[#f0eae1] p-3 rounded-xl border border-[#e2dbcf]">
+              <a href="tel:0387274669" className="flex items-center gap-2 font-bold text-ink-900 hover:text-accent transition-colors">
+                <Phone className="w-3.5 h-3.5 text-accent shrink-0" />
+                <span>Hotline: 0387 274 669</span>
+              </a>
+              <div className="flex items-center gap-2 text-ink-500">
+                <MapPin className="w-3.5 h-3.5 text-accent shrink-0" />
+                <span>48 Ngô Quyền, TP. Đồng Hới, Quảng Bình</span>
+              </div>
             </div>
           </div>
         </div>

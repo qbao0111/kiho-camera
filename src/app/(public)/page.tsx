@@ -9,7 +9,6 @@ import { CanonR50Spotlight } from "@/components/public/canon-r50-spotlight";
 import { UseCaseSection } from "@/components/public/use-case-section";
 import { RentalRequestSection } from "@/components/public/rental-request-section";
 import { RentalProcess } from "@/components/public/rental-process";
-import { FinalCta } from "@/components/public/final-cta";
 
 export default async function HomePage() {
   const [settings, equipmentList] = await Promise.all([
@@ -40,7 +39,7 @@ export default async function HomePage() {
       {/* 5. CANON R50 SPOTLIGHT (Editorial Feature Band) */}
       <CanonR50Spotlight messengerUrl={settings.messenger_url} />
 
-      {/* 6. USE CASES ("Bạn định mang máy đi đâu?" - 4 visual storytelling photo tiles) */}
+      {/* 6. USE CASES ("Chọn vibe chuyến đi" - 4 authentic travel photo cards) */}
       <UseCaseSection />
 
       {/* 7. LEAD CONVERSION FORM ("Không biết chọn máy nào?" - Direct lead capture) */}
@@ -51,13 +50,6 @@ export default async function HomePage() {
 
       {/* 8. RENTAL PROCESS (3-step clean typography workflow) */}
       <RentalProcess messengerUrl={settings.messenger_url} />
-
-      {/* 9. FINAL LIFESTYLE CTA (Editorial dark warm backdrop with direct contact) */}
-      <FinalCta
-        messengerUrl={settings.messenger_url}
-        phone={settings.phone}
-        address={settings.address}
-      />
     </div>
   );
 }

@@ -1,17 +1,17 @@
 [
   {
     "id": "e01",
-    "category_id": "c1111111-1111-1111-1111-111111111111",
-    "brand": "Fujifilm",
     "name": "FUJIFILM X100VI",
     "slug": "fujifilm-x100vi",
-    "short_description": "Flagship cao cấp cảm biến 40.2MP, chống rung IBIS 6.0 stops, 20 bộ lọc màu film hoài niệm độc quyền.",
-    "description": "Fujifilm X100VI là siêu phẩm máy ảnh du lịch được săn đón nhất thế giới hiện nay. Thân máy rangefinder kim loại cổ điển với cảm biến X-Trans CMOS 5 HR 40.2MP kết hợp hệ thống chống rung 5 trục trong thân máy, cho ra những khung hình đậm chất điện ảnh tại Phong Nha và bờ biển Quảng Bình mà không cần bất kỳ thao tác hậu kỳ nào.",
+    "brand": "Fujifilm",
+    "category_id": "c1111111-1111-1111-1111-111111111111",
     "price_session": 350000,
     "price_per_day": 450000,
     "price_three_days": 420000,
     "price_poster_url": "/images/price-posters/fujifilm-x100vi.webp",
     "deposit_note": "CCCD gắn chip chính chủ hoặc đặt cọc linh hoạt.",
+    "short_description": "Flagship cao cấp cảm biến 40.2MP, chống rung IBIS 6.0 stops, 20 bộ lọc màu film hoài niệm độc quyền.",
+    "description": "Fujifilm X100VI là siêu phẩm máy ảnh du lịch được săn đón nhất thế giới hiện nay. Thân máy rangefinder kim loại cổ điển với cảm biến X-Trans CMOS 5 HR 40.2MP kết hợp hệ thống chống rung 5 trục trong thân máy, cho ra những khung hình đậm chất điện ảnh tại Phong Nha và bờ biển Quảng Bình mà không cần bất kỳ thao tác hậu kỳ nào.",
     "specifications": {
       "Cảm biến": "40.2MP X-Trans CMOS 5 HR",
       "Bộ xử lý": "X-Processor 5 siêu tốc",
@@ -21,16 +21,9 @@
       "Quay video": "6.2K 30p, 4K 60p 10-bit",
       "Trọng lượng": "521g (kèm pin & thẻ)"
     },
-    "included_items": [
-      "Thân máy Fujifilm X100VI (Bạc / Đen)",
-      "Ống kính gắn liền Fujinon 23mm f/2 II",
-      "2 Pin Fujifilm dung lượng cao",
-      "Dock sạc đôi nhanh",
-      "Thẻ nhớ SanDisk Extreme Pro 128GB",
-      "Túi máy ảnh thời trang chống sốc",
-      "Dây đeo vintage da cao cấp",
-      "Đầu đọc thẻ OTG cho iPhone & Type-C"
-    ],
+    "is_featured": true,
+    "is_active": true,
+    "sort_order": 1,
     "use_cases": [
       "Du lịch",
       "Chân dung",
@@ -43,27 +36,26 @@
       "Màu film 40MP",
       "Chống rung IBIS"
     ],
-    "is_featured": true,
-    "is_active": true,
-    "sort_order": 1,
+    "included_items": [
+      "Thân máy Fujifilm X100VI (Bạc / Đen)",
+      "Ống kính gắn liền Fujinon 23mm f/2 II",
+      "2 Pin Fujifilm dung lượng cao",
+      "Dock sạc đôi nhanh",
+      "Thẻ nhớ SanDisk Extreme Pro 128GB",
+      "Túi máy ảnh thời trang chống sốc",
+      "Dây đeo vintage da cao cấp",
+      "Đầu đọc thẻ OTG cho iPhone & Type-C"
+    ],
     "seo_title": "Thuê máy ảnh Fujifilm X100VI tại Quảng Bình | Kiho Camera",
     "seo_description": "Dịch vụ cho thuê Fujifilm X100VI chính hãng tại Đồng Hới, Quảng Bình. Cảm biến 40.2MP, chống rung IBIS, 20 giả lập film.",
     "images": [
       {
-        "id": "img-01-1",
+        "id": "img-e01-1",
         "equipment_id": "e01",
         "image_url": "/images/cameras/fujifilm-x100vi.jpg",
-        "alt_text": "Fujifilm X100VI chính diện",
+        "alt_text": "FUJIFILM X100VI",
         "is_cover": true,
         "sort_order": 1
-      },
-      {
-        "id": "img-01-2",
-        "equipment_id": "e01",
-        "image_url": "/images/price-posters/fujifilm-x100vi.webp",
-        "alt_text": "Bảng giá thuê Fujifilm X100VI",
-        "is_cover": false,
-        "sort_order": 2
       }
     ],
     "sample_images": [
@@ -72,7 +64,7 @@
         "equipment_id": "e01",
         "image_url": "/images/samples/sample-fuji-1.webp",
         "caption": "Tone màu Reala Ace tại cồn cát Quang Phú",
-        "alt_text": "Ảnh chụp bằng Fujifilm X100VI",
+        "alt_text": "Ảnh chụp thực tế từ FUJIFILM X100VI",
         "sort_order": 1,
         "is_active": true
       },
@@ -81,7 +73,7 @@
         "equipment_id": "e01",
         "image_url": "/images/samples/sample-fuji-2.webp",
         "caption": "Chân dung Classic Chrome chiều hoàng hôn",
-        "alt_text": "Ảnh chân dung Fujifilm X100VI",
+        "alt_text": "Ảnh chụp thực tế từ FUJIFILM X100VI",
         "sort_order": 2,
         "is_active": true
       },
@@ -90,7 +82,7 @@
         "equipment_id": "e01",
         "image_url": "/images/samples/sample-fuji-3.webp",
         "caption": "Sương sớm sông Son Phong Nha",
-        "alt_text": "Phong cảnh Fujifilm X100VI",
+        "alt_text": "Ảnh chụp thực tế từ FUJIFILM X100VI",
         "sort_order": 3,
         "is_active": true
       }
@@ -98,17 +90,17 @@
   },
   {
     "id": "e02",
-    "category_id": "c1111111-1111-1111-1111-111111111111",
-    "brand": "Fujifilm",
     "name": "FUJIFILM X100V",
     "slug": "fujifilm-x100v",
-    "short_description": "Huyền thoại máy ảnh đường phố với màu film Classic Negative trứ danh và thiết kế rangefinder sang trọng.",
-    "description": "Fujifilm X100V là chiếc máy ảnh tạo nên cơn sốt toàn cầu nhờ màu ảnh Classic Negative hoài niệm và ống kính 23mm f/2 sắc nét. Thích hợp cho các chuyến du lịch, hẹn hò, check-in quán cafe và dạo biển Đồng Hới.",
+    "brand": "Fujifilm",
+    "category_id": "c1111111-1111-1111-1111-111111111111",
     "price_session": 250000,
     "price_per_day": 380000,
     "price_three_days": 350000,
     "price_poster_url": "/images/price-posters/fujifilm-x100v.webp",
     "deposit_note": "CCCD gắn chip chính chủ hoặc đặt cọc linh hoạt.",
+    "short_description": "Huyền thoại máy ảnh đường phố với màu film Classic Negative trứ danh và thiết kế rangefinder sang trọng.",
+    "description": "Fujifilm X100V là chiếc máy ảnh tạo nên cơn sốt toàn cầu nhờ màu ảnh Classic Negative hoài niệm và ống kính 23mm f/2 sắc nét. Thích hợp cho các chuyến du lịch, hẹn hò, check-in quán cafe và dạo biển Đồng Hới.",
     "specifications": {
       "Cảm biến": "26.1MP X-Trans CMOS 4",
       "Bộ xử lý": "X-Processor 4",
@@ -117,15 +109,9 @@
       "Giả lập film": "17 chế độ (Classic Neg, Eterna, Acros...)",
       "Trọng lượng": "478g"
     },
-    "included_items": [
-      "Thân máy Fujifilm X100V",
-      "Ống kính Fujinon 23mm f/2",
-      "2 Pin dung lượng cao",
-      "Sạc đôi nhanh",
-      "Thẻ nhớ SanDisk 64GB",
-      "Túi chống sốc",
-      "Đầu đọc thẻ OTG"
-    ],
+    "is_featured": true,
+    "is_active": true,
+    "sort_order": 2,
     "use_cases": [
       "Du lịch",
       "Màu film",
@@ -138,27 +124,25 @@
       "Classic Neg",
       "Cổ điển"
     ],
-    "is_featured": true,
-    "is_active": true,
-    "sort_order": 2,
+    "included_items": [
+      "Thân máy Fujifilm X100V",
+      "Ống kính Fujinon 23mm f/2",
+      "2 Pin dung lượng cao",
+      "Sạc đôi nhanh",
+      "Thẻ nhớ SanDisk 64GB",
+      "Túi chống sốc",
+      "Đầu đọc thẻ OTG"
+    ],
     "seo_title": "Thuê máy ảnh Fujifilm X100V màu film tại Quảng Bình | Kiho Camera",
     "seo_description": "Cho thuê máy ảnh Fujifilm X100V giá tốt tại Đồng Hới Quảng Bình. Màu film hoài niệm, ống kính 23mm f2 sắc nét.",
     "images": [
       {
-        "id": "img-02-1",
+        "id": "img-e02-1",
         "equipment_id": "e02",
         "image_url": "/images/cameras/fujifilm-x100v.jpg",
-        "alt_text": "Fujifilm X100V chính diện",
+        "alt_text": "FUJIFILM X100V",
         "is_cover": true,
         "sort_order": 1
-      },
-      {
-        "id": "img-02-2",
-        "equipment_id": "e02",
-        "image_url": "/images/price-posters/fujifilm-x100v.webp",
-        "alt_text": "Bảng giá Fujifilm X100V",
-        "is_cover": false,
-        "sort_order": 2
       }
     ],
     "sample_images": [
@@ -167,7 +151,7 @@
         "equipment_id": "e02",
         "image_url": "/images/samples/sample-fuji-2.webp",
         "caption": "Màu film Classic Neg hoài niệm",
-        "alt_text": "Ảnh chụp Fujifilm X100V",
+        "alt_text": "Ảnh chụp thực tế từ FUJIFILM X100V",
         "sort_order": 1,
         "is_active": true
       },
@@ -176,7 +160,7 @@
         "equipment_id": "e02",
         "image_url": "/images/samples/sample-fuji-1.webp",
         "caption": "Check-in biển Nhật Lệ rực rỡ",
-        "alt_text": "Ảnh biển Fujifilm X100V",
+        "alt_text": "Ảnh chụp thực tế từ FUJIFILM X100V",
         "sort_order": 2,
         "is_active": true
       }
@@ -184,17 +168,17 @@
   },
   {
     "id": "e03",
-    "category_id": "c1111111-1111-1111-1111-111111111111",
-    "brand": "Fujifilm",
     "name": "FUJIFILM XS10",
     "slug": "fujifilm-xs10",
-    "short_description": "Báng cầm chắc chắn, màn hình xoay lật đa góc, chống rung IBIS mạnh mẽ chụp và quay video film.",
-    "description": "Fujifilm X-S10 sở hữu báng tay cầm sâu chống mỏi, màn hình xoay lật 180 độ cùng chống rung cảm biến IBIS 5 trục. Thích hợp vừa chụp ảnh du lịch vừa quay vlog sắc nét mượt mà.",
+    "brand": "Fujifilm",
+    "category_id": "c1111111-1111-1111-1111-111111111111",
     "price_session": 230000,
     "price_per_day": 350000,
     "price_three_days": 320000,
     "price_poster_url": "/images/price-posters/fujifilm-xs10.webp",
     "deposit_note": "CCCD gắn chip chính chủ.",
+    "short_description": "Báng cầm chắc chắn, màn hình xoay lật đa góc, chống rung IBIS mạnh mẽ chụp và quay video film.",
+    "description": "Fujifilm X-S10 sở hữu báng tay cầm sâu chống mỏi, màn hình xoay lật 180 độ cùng chống rung cảm biến IBIS 5 trục. Thích hợp vừa chụp ảnh du lịch vừa quay vlog sắc nét mượt mà.",
     "specifications": {
       "Cảm biến": "APS-C X-Trans CMOS 4 26.1MP",
       "Chống rung": "IBIS 5 trục trong thân máy",
@@ -202,14 +186,9 @@
       "Quay video": "4K 30p, Full HD 240p",
       "Trọng lượng": "465g"
     },
-    "included_items": [
-      "Body Fujifilm X-S10",
-      "Lens Fujinon zoom kèm theo",
-      "2 Pin + Sạc đôi",
-      "Thẻ nhớ tốc độ cao 64GB",
-      "Túi máy ảnh chống sốc",
-      "Đầu đọc thẻ OTG"
-    ],
+    "is_featured": false,
+    "is_active": true,
+    "sort_order": 3,
     "use_cases": [
       "Du lịch",
       "Vlog",
@@ -221,27 +200,24 @@
       "Chống rung IBIS",
       "Màn xoay lật"
     ],
-    "is_featured": false,
-    "is_active": true,
-    "sort_order": 3,
+    "included_items": [
+      "Body Fujifilm X-S10",
+      "Lens Fujinon zoom kèm theo",
+      "2 Pin + Sạc đôi",
+      "Thẻ nhớ tốc độ cao 64GB",
+      "Túi máy ảnh chống sốc",
+      "Đầu đọc thẻ OTG"
+    ],
     "seo_title": "Thuê máy ảnh Fujifilm X-S10 tại Đồng Hới Quảng Bình | Kiho Camera",
     "seo_description": "Dịch vụ cho thuê Fujifilm X-S10 kèm lens tại Quảng Bình. Chống rung IBIS, màn xoay lật tiện quay chụp.",
     "images": [
       {
-        "id": "img-03-1",
+        "id": "img-e03-1",
         "equipment_id": "e03",
         "image_url": "/images/cameras/fujifilm-xs10.jpg",
-        "alt_text": "Fujifilm X-S10 chính diện",
+        "alt_text": "FUJIFILM XS10",
         "is_cover": true,
         "sort_order": 1
-      },
-      {
-        "id": "img-03-2",
-        "equipment_id": "e03",
-        "image_url": "/images/price-posters/fujifilm-xs10.webp",
-        "alt_text": "Bảng giá Fujifilm X-S10",
-        "is_cover": false,
-        "sort_order": 2
       }
     ],
     "sample_images": [
@@ -250,7 +226,7 @@
         "equipment_id": "e03",
         "image_url": "/images/samples/sample-fuji-3.webp",
         "caption": "Phong cảnh thiên nhiên Phong Nha",
-        "alt_text": "Sample Fujifilm XS10",
+        "alt_text": "Ảnh chụp thực tế từ FUJIFILM XS10",
         "sort_order": 1,
         "is_active": true
       }
@@ -258,31 +234,26 @@
   },
   {
     "id": "e04",
-    "category_id": "c1111111-1111-1111-1111-111111111111",
-    "brand": "Canon",
     "name": "CANON M100",
     "slug": "canon-m100",
-    "short_description": "Màu trắng tinh khôi, nhỏ gọn đút túi, màn hình lật selfie, màu da trắng hồng nịnh mắt.",
-    "description": "Canon EOS M100 màu trắng là chiếc máy cực kỳ được các bạn nữ yêu thích nhờ thiết kế thon gọn xinh xắn và khả năng chụp ảnh chân dung với tone da sáng hồng đặc trưng của Canon.",
+    "brand": "Canon",
+    "category_id": "c1111111-1111-1111-1111-111111111111",
     "price_session": 100000,
     "price_per_day": 180000,
     "price_three_days": 150000,
     "price_poster_url": "/images/price-posters/canon-m100.webp",
     "deposit_note": "CCCD gắn chip chính chủ.",
+    "short_description": "Màu trắng tinh khôi, nhỏ gọn đút túi, màn hình lật selfie, màu da trắng hồng nịnh mắt.",
+    "description": "Canon EOS M100 màu trắng là chiếc máy cực kỳ được các bạn nữ yêu thích nhờ thiết kế thon gọn xinh xắn và khả năng chụp ảnh chân dung với tone da sáng hồng đặc trưng của Canon.",
     "specifications": {
       "Cảm biến": "APS-C CMOS 24.2MP",
       "Lấy nét": "Dual Pixel CMOS AF",
       "Màn hình": "Cảm ứng lật 180 độ selfie",
       "Trọng lượng": "302g siêu nhẹ"
     },
-    "included_items": [
-      "Body Canon EOS M100 White",
-      "Lens Canon EF-M 15-45mm IS STM",
-      "2 Pin + Sạc pin",
-      "Thẻ nhớ 64GB",
-      "Túi máy ảnh thời trang",
-      "Đầu đọc thẻ OTG"
-    ],
+    "is_featured": false,
+    "is_active": true,
+    "sort_order": 4,
     "use_cases": [
       "Selfie",
       "Du lịch",
@@ -294,27 +265,24 @@
       "Da trắng hồng",
       "Giá tiết kiệm"
     ],
-    "is_featured": false,
-    "is_active": true,
-    "sort_order": 4,
+    "included_items": [
+      "Body Canon EOS M100 White",
+      "Lens Canon EF-M 15-45mm IS STM",
+      "2 Pin + Sạc pin",
+      "Thẻ nhớ 64GB",
+      "Túi máy ảnh thời trang",
+      "Đầu đọc thẻ OTG"
+    ],
     "seo_title": "Thuê máy ảnh Canon M100 màu trắng tại Quảng Bình | Kiho Camera",
     "seo_description": "Cho thuê Canon M100 màu trắng tại Đồng Hới. Màn lật selfie, màu da trắng hồng, máy nhẹ dễ dùng.",
     "images": [
       {
-        "id": "img-04-1",
+        "id": "img-e04-1",
         "equipment_id": "e04",
         "image_url": "/images/cameras/canon-m100.jpg",
-        "alt_text": "Canon M100 White chính diện",
+        "alt_text": "CANON M100",
         "is_cover": true,
         "sort_order": 1
-      },
-      {
-        "id": "img-04-2",
-        "equipment_id": "e04",
-        "image_url": "/images/price-posters/canon-m100.webp",
-        "alt_text": "Bảng giá Canon M100",
-        "is_cover": false,
-        "sort_order": 2
       }
     ],
     "sample_images": [
@@ -323,7 +291,7 @@
         "equipment_id": "e04",
         "image_url": "/images/samples/sample-r50-1.webp",
         "caption": "Tone da sáng mịn tự nhiên của Canon",
-        "alt_text": "Ảnh chụp Canon M100",
+        "alt_text": "Ảnh chụp thực tế từ CANON M100",
         "sort_order": 1,
         "is_active": true
       }
@@ -331,17 +299,17 @@
   },
   {
     "id": "e05",
-    "category_id": "c1111111-1111-1111-1111-111111111111",
-    "brand": "Canon",
     "name": "CANON RP",
     "slug": "canon-eos-rp",
-    "short_description": "Máy ảnh Full-Frame nhẹ nhất hệ EOS R, xóa phông mịn màng, chụp chân dung và phong cảnh xuất sắc.",
-    "description": "Canon EOS RP mang cảm biến Full-Frame 26.2MP cao cấp trong một thân máy nhỏ gọn 485g. Xóa phông mịt mù, màu ảnh trong trẻo và khả năng chụp đêm không lo nhiễu hạt.",
+    "brand": "Canon",
+    "category_id": "c1111111-1111-1111-1111-111111111111",
     "price_session": 170000,
     "price_per_day": 280000,
     "price_three_days": 250000,
     "price_poster_url": "/images/price-posters/canon-eos-rp.webp",
     "deposit_note": "CCCD gắn chip chính chủ.",
+    "short_description": "Máy ảnh Full-Frame nhẹ nhất hệ EOS R, xóa phông mịn màng, chụp chân dung và phong cảnh xuất sắc.",
+    "description": "Canon EOS RP mang cảm biến Full-Frame 26.2MP cao cấp trong một thân máy nhỏ gọn 485g. Xóa phông mịt mù, màu ảnh trong trẻo và khả năng chụp đêm không lo nhiễu hạt.",
     "specifications": {
       "Cảm biến": "Full-Frame CMOS 26.2MP",
       "Bộ xử lý": "DIGIC 8",
@@ -349,14 +317,9 @@
       "Màn hình": "Xoay lật cảm ứng đa góc",
       "Trọng lượng": "485g"
     },
-    "included_items": [
-      "Body Canon EOS RP",
-      "Ống kính Canon RF kèm theo",
-      "2 Pin dung lượng cao + Sạc",
-      "Thẻ nhớ SanDisk 64GB",
-      "Túi máy ảnh chống sốc",
-      "Đầu đọc thẻ OTG"
-    ],
+    "is_featured": false,
+    "is_active": true,
+    "sort_order": 5,
     "use_cases": [
       "Chân dung",
       "Du lịch",
@@ -369,27 +332,24 @@
       "Xoá phông mịn",
       "Giá rẻ"
     ],
-    "is_featured": false,
-    "is_active": true,
-    "sort_order": 5,
+    "included_items": [
+      "Body Canon EOS RP",
+      "Ống kính Canon RF kèm theo",
+      "2 Pin dung lượng cao + Sạc",
+      "Thẻ nhớ SanDisk 64GB",
+      "Túi máy ảnh chống sốc",
+      "Đầu đọc thẻ OTG"
+    ],
     "seo_title": "Thuê máy ảnh Full-Frame Canon EOS RP tại Quảng Bình | Kiho Camera",
     "seo_description": "Cho thuê máy ảnh Full-Frame Canon RP tại Đồng Hới Quảng Bình. Xóa phông chân dung tuyệt đẹp.",
     "images": [
       {
-        "id": "img-05-1",
+        "id": "img-e05-1",
         "equipment_id": "e05",
         "image_url": "/images/cameras/canon-rp.jpg",
-        "alt_text": "Canon EOS RP chính diện",
+        "alt_text": "CANON RP",
         "is_cover": true,
         "sort_order": 1
-      },
-      {
-        "id": "img-05-2",
-        "equipment_id": "e05",
-        "image_url": "/images/price-posters/canon-eos-rp.webp",
-        "alt_text": "Bảng giá Canon RP",
-        "is_cover": false,
-        "sort_order": 2
       }
     ],
     "sample_images": [
@@ -398,7 +358,7 @@
         "equipment_id": "e05",
         "image_url": "/images/samples/sample-r50-3.webp",
         "caption": "Ảnh đôi xóa phông Full-frame",
-        "alt_text": "Sample Canon RP",
+        "alt_text": "Ảnh chụp thực tế từ CANON RP",
         "sort_order": 1,
         "is_active": true
       }
@@ -406,17 +366,17 @@
   },
   {
     "id": "e06",
-    "category_id": "c1111111-1111-1111-1111-111111111111",
-    "brand": "Canon",
     "name": "CANON G7X MARK III",
     "slug": "canon-g7x-mark-iii",
-    "short_description": "Máy ảnh compact du lịch quốc dân, màn lật 180 độ selfie, ống kính khẩu lớn f/1.8-2.8, màu da tươi sáng.",
-    "description": "Canon G7X Mark III là lựa chọn số 1 cho các bạn trẻ đi du lịch, quay vlog và chụp selfie. Cảm biến 1-inch 20.1MP cùng màu da tươi tắn không cần chỉnh sửa.",
+    "brand": "Canon",
+    "category_id": "c1111111-1111-1111-1111-111111111111",
     "price_session": 200000,
     "price_per_day": 320000,
     "price_three_days": 300000,
     "price_poster_url": "/images/price-posters/canon-g7x-mark-iii.webp",
     "deposit_note": "CCCD gắn chip chính chủ.",
+    "short_description": "Máy ảnh compact du lịch quốc dân, màn lật 180 độ selfie, ống kính khẩu lớn f/1.8-2.8, màu da tươi sáng.",
+    "description": "Canon G7X Mark III là lựa chọn số 1 cho các bạn trẻ đi du lịch, quay vlog và chụp selfie. Cảm biến 1-inch 20.1MP cùng màu da tươi tắn không cần chỉnh sửa.",
     "specifications": {
       "Cảm biến": "1.0-type stacked CMOS 20.1MP",
       "Ống kính": "24-100mm f/1.8-2.8 (Zoom quang 4.2x)",
@@ -424,14 +384,9 @@
       "Quay video": "4K 30p, Full HD 120p không crop",
       "Trọng lượng": "304g"
     },
-    "included_items": [
-      "Thân máy Canon G7X Mark III",
-      "2 Pin dung lượng cao",
-      "Sạc pin chính hãng",
-      "Thẻ nhớ SanDisk 64GB",
-      "Túi chống sốc / Bao da",
-      "Đầu đọc thẻ OTG"
-    ],
+    "is_featured": true,
+    "is_active": true,
+    "sort_order": 6,
     "use_cases": [
       "Du lịch",
       "Selfie",
@@ -443,27 +398,24 @@
       "Màu da đẹp",
       "Compact"
     ],
-    "is_featured": true,
-    "is_active": true,
-    "sort_order": 6,
+    "included_items": [
+      "Thân máy Canon G7X Mark III",
+      "2 Pin dung lượng cao",
+      "Sạc pin chính hãng",
+      "Thẻ nhớ SanDisk 64GB",
+      "Túi chống sốc / Bao da",
+      "Đầu đọc thẻ OTG"
+    ],
     "seo_title": "Thuê máy ảnh Canon G7X Mark III tại Đồng Hới Quảng Bình | Kiho Camera",
     "seo_description": "Cho thuê máy ảnh compact du lịch Canon G7X Mark III tại Quảng Bình. Màn lật selfie, màu da đẹp.",
     "images": [
       {
-        "id": "img-06-1",
+        "id": "img-e06-1",
         "equipment_id": "e06",
         "image_url": "/images/cameras/canon-g7x-mark3.jpg",
-        "alt_text": "Canon G7X Mark III chính diện",
+        "alt_text": "CANON G7X MARK III",
         "is_cover": true,
         "sort_order": 1
-      },
-      {
-        "id": "img-06-2",
-        "equipment_id": "e06",
-        "image_url": "/images/price-posters/canon-g7x-mark-iii.webp",
-        "alt_text": "Bảng giá Canon G7X Mark III",
-        "is_cover": false,
-        "sort_order": 2
       }
     ],
     "sample_images": [
@@ -472,7 +424,7 @@
         "equipment_id": "e06",
         "image_url": "/images/samples/sample-g7x-1.webp",
         "caption": "Selfie da trắng hồng tự nhiên",
-        "alt_text": "Ảnh selfie Canon G7X III",
+        "alt_text": "Ảnh chụp thực tế từ CANON G7X MARK III",
         "sort_order": 1,
         "is_active": true
       },
@@ -481,7 +433,7 @@
         "equipment_id": "e06",
         "image_url": "/images/samples/sample-g7x-2.webp",
         "caption": "Check-in chuyến đi dã ngoại",
-        "alt_text": "Ảnh du lịch Canon G7X III",
+        "alt_text": "Ảnh chụp thực tế từ CANON G7X MARK III",
         "sort_order": 2,
         "is_active": true
       }
@@ -545,14 +497,6 @@
         "alt_text": "CANON R50",
         "is_cover": true,
         "sort_order": 1
-      },
-      {
-        "id": "img-e07-2",
-        "equipment_id": "e07",
-        "image_url": "/images/price-posters/canon-eos-r50.webp",
-        "alt_text": "CANON R50",
-        "is_cover": false,
-        "sort_order": 2
       }
     ],
     "sample_images": [
@@ -578,31 +522,26 @@
   },
   {
     "id": "e08",
-    "category_id": "c1111111-1111-1111-1111-111111111111",
-    "brand": "Canon",
     "name": "CANON M3",
     "slug": "canon-m3",
-    "short_description": "Gọn nhẹ kèm lens zoom, báng cầm đầm tay, thích hợp chụp check-in du lịch biển và gia đình.",
-    "description": "Canon EOS M3 là dòng máy mirrorless nhỏ gọn, trang bị cảm biến 24.2MP và màn hình lật tiện lợi, giá thuê siêu tiết kiệm cho học sinh, sinh viên và khách du lịch.",
+    "brand": "Canon",
+    "category_id": "c1111111-1111-1111-1111-111111111111",
     "price_session": 110000,
     "price_per_day": 180000,
     "price_three_days": 150000,
     "price_poster_url": "/images/price-posters/canon-m3.webp",
     "deposit_note": "CCCD gắn chip chính chủ.",
+    "short_description": "Gọn nhẹ kèm lens zoom, báng cầm đầm tay, thích hợp chụp check-in du lịch biển và gia đình.",
+    "description": "Canon EOS M3 là dòng máy mirrorless nhỏ gọn, trang bị cảm biến 24.2MP và màn hình lật tiện lợi, giá thuê siêu tiết kiệm cho học sinh, sinh viên và khách du lịch.",
     "specifications": {
       "Cảm biến": "APS-C CMOS 24.2MP",
       "Lấy nét": "Hybrid CMOS AF III 49 điểm",
       "Màn hình": "Cảm ứng lật 180 độ",
       "Trọng lượng": "366g"
     },
-    "included_items": [
-      "Body Canon EOS M3",
-      "Lens zoom EF-M",
-      "2 Pin + Sạc",
-      "Thẻ nhớ 64GB",
-      "Túi chống sốc",
-      "Đầu đọc thẻ OTG"
-    ],
+    "is_featured": false,
+    "is_active": true,
+    "sort_order": 8,
     "use_cases": [
       "Du lịch",
       "Check-in",
@@ -612,27 +551,24 @@
       "Tiết kiệm",
       "Dễ chụp"
     ],
-    "is_featured": false,
-    "is_active": true,
-    "sort_order": 8,
+    "included_items": [
+      "Body Canon EOS M3",
+      "Lens zoom EF-M",
+      "2 Pin + Sạc",
+      "Thẻ nhớ 64GB",
+      "Túi chống sốc",
+      "Đầu đọc thẻ OTG"
+    ],
     "seo_title": "Thuê máy ảnh Canon M3 tại Quảng Bình | Kiho Camera",
     "seo_description": "Cho thuê máy ảnh Canon EOS M3 giá rẻ tại Đồng Hới Quảng Bình.",
     "images": [
       {
-        "id": "img-08-1",
+        "id": "img-e08-1",
         "equipment_id": "e08",
         "image_url": "/images/cameras/canon-m3.jpg",
-        "alt_text": "Canon M3 chính diện",
+        "alt_text": "CANON M3",
         "is_cover": true,
         "sort_order": 1
-      },
-      {
-        "id": "img-08-2",
-        "equipment_id": "e08",
-        "image_url": "/images/price-posters/canon-m3.webp",
-        "alt_text": "Bảng giá Canon M3",
-        "is_cover": false,
-        "sort_order": 2
       }
     ],
     "sample_images": [
@@ -641,7 +577,7 @@
         "equipment_id": "e08",
         "image_url": "/images/samples/sample-r50-2.webp",
         "caption": "Ảnh chụp du lịch biển",
-        "alt_text": "Sample Canon M3",
+        "alt_text": "Ảnh chụp thực tế từ CANON M3",
         "sort_order": 1,
         "is_active": true
       }
@@ -649,17 +585,17 @@
   },
   {
     "id": "e09",
-    "category_id": "c1111111-1111-1111-1111-111111111111",
-    "brand": "Sony",
     "name": "SONY ZV1 MARK II",
     "slug": "sony-zv1-mark-ii",
-    "short_description": "Ống kính góc siêu rộng 18-50mm, mic 3 hướng thông minh, lấy nét nhận diện nhiều gương mặt.",
-    "description": "Sony ZV-1 II là chiếc máy quay vlog du lịch đỉnh cao thế hệ mới. Ống kính góc siêu rộng 18-50mm giúp quay chụp selfie nhóm không bị gò bó, màu da tươi sáng và chống rung mượt mà.",
+    "brand": "Sony",
+    "category_id": "c1111111-1111-1111-1111-111111111111",
     "price_session": 130000,
     "price_per_day": 200000,
     "price_three_days": 180000,
     "price_poster_url": "/images/price-posters/sony-zv1-mark-ii.webp",
     "deposit_note": "CCCD gắn chip chính chủ.",
+    "short_description": "Ống kính góc siêu rộng 18-50mm, mic 3 hướng thông minh, lấy nét nhận diện nhiều gương mặt.",
+    "description": "Sony ZV-1 II là chiếc máy quay vlog du lịch đỉnh cao thế hệ mới. Ống kính góc siêu rộng 18-50mm giúp quay chụp selfie nhóm không bị gò bó, màu da tươi sáng và chống rung mượt mà.",
     "specifications": {
       "Cảm biến": "1.0-type Exmor RS CMOS 20.1MP",
       "Ống kính": "ZEISS Vario-Sonnar T* 18-50mm f/1.8-4.0",
@@ -667,15 +603,9 @@
       "Âm thanh": "Micro 3 đầu thu định hướng + Lọc gió",
       "Trọng lượng": "292g"
     },
-    "included_items": [
-      "Thân máy Sony ZV-1 II",
-      "Bông lọc gió chuyên dụng",
-      "2 Pin Sony dung lượng cao",
-      "Sạc nhanh Type-C",
-      "Thẻ nhớ SanDisk Extreme 64GB",
-      "Túi chống sốc",
-      "Đầu đọc thẻ OTG"
-    ],
+    "is_featured": true,
+    "is_active": true,
+    "sort_order": 9,
     "use_cases": [
       "Vlog",
       "Du lịch",
@@ -688,27 +618,25 @@
       "Góc rộng 18mm",
       "Vlog đỉnh cao"
     ],
-    "is_featured": true,
-    "is_active": true,
-    "sort_order": 9,
+    "included_items": [
+      "Thân máy Sony ZV-1 II",
+      "Bông lọc gió chuyên dụng",
+      "2 Pin Sony dung lượng cao",
+      "Sạc nhanh Type-C",
+      "Thẻ nhớ SanDisk Extreme 64GB",
+      "Túi chống sốc",
+      "Đầu đọc thẻ OTG"
+    ],
     "seo_title": "Thuê máy ảnh vlog Sony ZV-1 II tại Quảng Bình | Kiho Camera",
     "seo_description": "Cho thuê máy quay vlog Sony ZV-1 Mark II góc rộng 18-50mm tại Đồng Hới Quảng Bình.",
     "images": [
       {
-        "id": "img-09-1",
+        "id": "img-e09-1",
         "equipment_id": "e09",
         "image_url": "/images/cameras/sony-zv1-mark2.jpg",
-        "alt_text": "Sony ZV-1 II chính diện",
+        "alt_text": "SONY ZV1 MARK II",
         "is_cover": true,
         "sort_order": 1
-      },
-      {
-        "id": "img-09-2",
-        "equipment_id": "e09",
-        "image_url": "/images/price-posters/sony-zv1-mark-ii.webp",
-        "alt_text": "Bảng giá Sony ZV-1 II",
-        "is_cover": false,
-        "sort_order": 2
       }
     ],
     "sample_images": [
@@ -717,7 +645,7 @@
         "equipment_id": "e09",
         "image_url": "/images/samples/sample-sony-1.webp",
         "caption": "Góc rộng 18mm quay chụp sắc nét",
-        "alt_text": "Sample Sony ZV1 II",
+        "alt_text": "Ảnh chụp thực tế từ SONY ZV1 MARK II",
         "sort_order": 1,
         "is_active": true
       },
@@ -726,7 +654,7 @@
         "equipment_id": "e09",
         "image_url": "/images/samples/sample-sony-2.webp",
         "caption": "Chi tiết màu da tươi sáng tự nhiên",
-        "alt_text": "Portrait Sony ZV1 II",
+        "alt_text": "Ảnh chụp thực tế từ SONY ZV1 MARK II",
         "sort_order": 2,
         "is_active": true
       }
@@ -734,31 +662,26 @@
   },
   {
     "id": "e10",
-    "category_id": "c1111111-1111-1111-1111-111111111111",
-    "brand": "Sony",
     "name": "SONY ZV1F",
     "slug": "sony-zv1f",
-    "short_description": "Thân máy màu trắng thời trang, góc siêu rộng 20mm chụp nhóm, chống rung mượt mà cho TikTok & Reels.",
-    "description": "Sony ZV-1F màu trắng siêu xinh được tối ưu hóa cho quay video khung dọc TikTok và Reels. Ống kính góc cố định 20mm f/2.0 giúp bạn luôn nổi bật trong khung hình.",
+    "brand": "Sony",
+    "category_id": "c1111111-1111-1111-1111-111111111111",
     "price_session": 90000,
     "price_per_day": 150000,
     "price_three_days": 130000,
     "price_poster_url": "/images/price-posters/sony-zv1f.webp",
     "deposit_note": "CCCD gắn chip chính chủ.",
+    "short_description": "Thân máy màu trắng thời trang, góc siêu rộng 20mm chụp nhóm, chống rung mượt mà cho TikTok & Reels.",
+    "description": "Sony ZV-1F màu trắng siêu xinh được tối ưu hóa cho quay video khung dọc TikTok và Reels. Ống kính góc cố định 20mm f/2.0 giúp bạn luôn nổi bật trong khung hình.",
     "specifications": {
       "Cảm biến": "1.0-type Exmor RS CMOS 20.1MP",
       "Ống kính": "Góc siêu rộng 20mm f/2.0",
       "Màn hình": "Xoay lật cảm ứng",
       "Trọng lượng": "256g siêu nhẹ"
     },
-    "included_items": [
-      "Thân máy Sony ZV-1F White",
-      "Bông lọc gió",
-      "2 Pin + Cáp sạc",
-      "Thẻ nhớ 64GB",
-      "Túi máy ảnh thời trang",
-      "Đầu đọc thẻ OTG"
-    ],
+    "is_featured": false,
+    "is_active": true,
+    "sort_order": 10,
     "use_cases": [
       "TikTok",
       "Vlog",
@@ -770,27 +693,24 @@
       "Màu trắng xinh",
       "Giá rẻ"
     ],
-    "is_featured": false,
-    "is_active": true,
-    "sort_order": 10,
+    "included_items": [
+      "Thân máy Sony ZV-1F White",
+      "Bông lọc gió",
+      "2 Pin + Cáp sạc",
+      "Thẻ nhớ 64GB",
+      "Túi máy ảnh thời trang",
+      "Đầu đọc thẻ OTG"
+    ],
     "seo_title": "Thuê máy ảnh Sony ZV-1F màu trắng tại Quảng Bình | Kiho Camera",
     "seo_description": "Cho thuê máy quay TikTok Sony ZV-1F tại Đồng Hới Quảng Bình. Giá chỉ từ 90K.",
     "images": [
       {
-        "id": "img-10-1",
+        "id": "img-e10-1",
         "equipment_id": "e10",
         "image_url": "/images/cameras/sony-zv1f.jpg",
-        "alt_text": "Sony ZV-1F White chính diện",
+        "alt_text": "SONY ZV1F",
         "is_cover": true,
         "sort_order": 1
-      },
-      {
-        "id": "img-10-2",
-        "equipment_id": "e10",
-        "image_url": "/images/price-posters/sony-zv1f.webp",
-        "alt_text": "Bảng giá Sony ZV-1F",
-        "is_cover": false,
-        "sort_order": 2
       }
     ],
     "sample_images": [
@@ -799,7 +719,7 @@
         "equipment_id": "e10",
         "image_url": "/images/samples/sample-sony-2.webp",
         "caption": "Ảnh chụp góc rộng 20mm",
-        "alt_text": "Sample Sony ZV1F",
+        "alt_text": "Ảnh chụp thực tế từ SONY ZV1F",
         "sort_order": 1,
         "is_active": true
       }
@@ -807,31 +727,26 @@
   },
   {
     "id": "e11",
-    "category_id": "c1111111-1111-1111-1111-111111111111",
-    "brand": "Canon",
     "name": "CANON M",
     "slug": "canon-m",
-    "short_description": "Thân máy kim loại nguyên khối cổ điển, siêu nhỏ gọn bỏ túi, giá thuê siêu hạt dẻ cho người mới.",
-    "description": "Canon EOS M nguyên bản với cảm biến APS-C 18MP và thiết kế kim loại đầm tay. Lựa chọn tuyệt vời cho các chuyến đi ngắn ngày với chi phí tiết kiệm nhất.",
+    "brand": "Canon",
+    "category_id": "c1111111-1111-1111-1111-111111111111",
     "price_session": 90000,
     "price_per_day": 150000,
     "price_three_days": 130000,
     "price_poster_url": "/images/price-posters/canon-m.webp",
     "deposit_note": "CCCD gắn chip chính chủ.",
+    "short_description": "Thân máy kim loại nguyên khối cổ điển, siêu nhỏ gọn bỏ túi, giá thuê siêu hạt dẻ cho người mới.",
+    "description": "Canon EOS M nguyên bản với cảm biến APS-C 18MP và thiết kế kim loại đầm tay. Lựa chọn tuyệt vời cho các chuyến đi ngắn ngày với chi phí tiết kiệm nhất.",
     "specifications": {
       "Cảm biến": "APS-C CMOS 18.0MP",
       "Lấy nét": "Hybrid CMOS AF",
       "Màn hình": "Cảm ứng Clear View II 3.0 inch",
       "Trọng lượng": "298g"
     },
-    "included_items": [
-      "Body Canon EOS M",
-      "Lens pancake EF-M",
-      "2 Pin + Sạc",
-      "Thẻ nhớ 64GB",
-      "Túi chống sốc",
-      "Đầu đọc thẻ OTG"
-    ],
+    "is_featured": false,
+    "is_active": true,
+    "sort_order": 11,
     "use_cases": [
       "Du lịch",
       "Check-in",
@@ -841,27 +756,24 @@
       "Giá siêu rẻ",
       "Kim loại cổ điển"
     ],
-    "is_featured": false,
-    "is_active": true,
-    "sort_order": 11,
+    "included_items": [
+      "Body Canon EOS M",
+      "Lens pancake EF-M",
+      "2 Pin + Sạc",
+      "Thẻ nhớ 64GB",
+      "Túi chống sốc",
+      "Đầu đọc thẻ OTG"
+    ],
     "seo_title": "Thuê máy ảnh Canon M giá rẻ tại Quảng Bình | Kiho Camera",
     "seo_description": "Cho thuê Canon EOS M tại Đồng Hới Quảng Bình. Giá thuê chỉ từ 90K.",
     "images": [
       {
-        "id": "img-11-1",
+        "id": "img-e11-1",
         "equipment_id": "e11",
         "image_url": "/images/cameras/canon-m.jpg",
-        "alt_text": "Canon M chính diện",
+        "alt_text": "CANON M",
         "is_cover": true,
         "sort_order": 1
-      },
-      {
-        "id": "img-11-2",
-        "equipment_id": "e11",
-        "image_url": "/images/price-posters/canon-m.webp",
-        "alt_text": "Bảng giá Canon M",
-        "is_cover": false,
-        "sort_order": 2
       }
     ],
     "sample_images": [
@@ -870,7 +782,7 @@
         "equipment_id": "e11",
         "image_url": "/images/samples/sample-r50-4.webp",
         "caption": "Ảnh chụp dã ngoại cuối tuần",
-        "alt_text": "Sample Canon M",
+        "alt_text": "Ảnh chụp thực tế từ CANON M",
         "sort_order": 1,
         "is_active": true
       }
@@ -878,32 +790,26 @@
   },
   {
     "id": "e12",
-    "category_id": "c1111111-1111-1111-1111-111111111111",
-    "brand": "Canon",
     "name": "CANON IXY 640",
     "slug": "canon-ixy-640",
-    "short_description": "Digicam Y2K hoài niệm, màu ảnh flash đêm nghệ thuật cực hot trend, nhỏ gọn đút vừa túi áo.",
-    "description": "Canon IXY 640 là chiếc máy ảnh kỹ thuật số cổ điển mang trọn vẹn vibe Y2K hoài niệm. Chụp ảnh đêm đánh flash tạo chất ảnh hạt vintage độc lạ không lẫn vào đâu được.",
+    "brand": "Canon",
+    "category_id": "c1111111-1111-1111-1111-111111111111",
     "price_session": 80000,
     "price_per_day": 120000,
     "price_three_days": 100000,
     "price_poster_url": "/images/price-posters/canon-ixy-640.webp",
     "deposit_note": "CCCD gắn chip chính chủ.",
+    "short_description": "Digicam Y2K hoài niệm, màu ảnh flash đêm nghệ thuật cực hot trend, nhỏ gọn đút vừa túi áo.",
+    "description": "Canon IXY 640 là chiếc máy ảnh kỹ thuật số cổ điển mang trọn vẹn vibe Y2K hoài niệm. Chụp ảnh đêm đánh flash tạo chất ảnh hạt vintage độc lạ không lẫn vào đâu được.",
     "specifications": {
       "Cảm biến": "High-Sensitivity CMOS 20.2MP",
       "Ống kính": "Zoom quang học 12x",
       "Đèn Flash": "Flash tích hợp đánh sáng nghệ thuật Y2K",
       "Trọng lượng": "147g siêu nhẹ bỏ túi áo"
     },
-    "included_items": [
-      "Máy ảnh Canon IXY 640 Silver",
-      "2 Pin dung lượng cao",
-      "Sạc pin",
-      "Thẻ nhớ SD tốc độ cao",
-      "Bao da mini vintage",
-      "Dây đeo tay",
-      "Đầu đọc thẻ OTG"
-    ],
+    "is_featured": true,
+    "is_active": true,
+    "sort_order": 12,
     "use_cases": [
       "Y2K",
       "Check-in",
@@ -915,27 +821,25 @@
       "Flash đêm nghệ",
       "Nhỏ gọn"
     ],
-    "is_featured": true,
-    "is_active": true,
-    "sort_order": 12,
+    "included_items": [
+      "Máy ảnh Canon IXY 640 Silver",
+      "2 Pin dung lượng cao",
+      "Sạc pin",
+      "Thẻ nhớ SD tốc độ cao",
+      "Bao da mini vintage",
+      "Dây đeo tay",
+      "Đầu đọc thẻ OTG"
+    ],
     "seo_title": "Thuê máy ảnh Digicam Y2K Canon IXY 640 tại Quảng Bình | Kiho Camera",
     "seo_description": "Cho thuê máy ảnh vintage Canon IXY 640 tại Đồng Hới Quảng Bình. Màu ảnh flash Y2K siêu hot trend.",
     "images": [
       {
-        "id": "img-12-1",
+        "id": "img-e12-1",
         "equipment_id": "e12",
         "image_url": "/images/cameras/canon-ixy640.jpg",
-        "alt_text": "Canon IXY 640 Silver chính diện",
+        "alt_text": "CANON IXY 640",
         "is_cover": true,
         "sort_order": 1
-      },
-      {
-        "id": "img-12-2",
-        "equipment_id": "e12",
-        "image_url": "/images/price-posters/canon-ixy-640.webp",
-        "alt_text": "Bảng giá Canon IXY 640",
-        "is_cover": false,
-        "sort_order": 2
       }
     ],
     "sample_images": [
@@ -944,7 +848,7 @@
         "equipment_id": "e12",
         "image_url": "/images/samples/sample-y2k-1.webp",
         "caption": "Chụp flash đêm vibe Y2K hoài niệm",
-        "alt_text": "Ảnh flash Canon IXY 640",
+        "alt_text": "Ảnh chụp thực tế từ CANON IXY 640",
         "sort_order": 1,
         "is_active": true
       },
@@ -953,7 +857,7 @@
         "equipment_id": "e12",
         "image_url": "/images/samples/sample-y2k-2.webp",
         "caption": "Tone màu vintage không cần chỉnh sửa",
-        "alt_text": "Ảnh vintage Canon IXY 640",
+        "alt_text": "Ảnh chụp thực tế từ CANON IXY 640",
         "sort_order": 2,
         "is_active": true
       }

@@ -2,8 +2,9 @@
 
 import React, { useState, useEffect } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
-import { ArrowDown, ArrowUpRight, Sparkles, ShieldCheck, MapPin, PackageCheck } from "lucide-react";
+import { ArrowDown, ArrowUpRight, ArrowRight, Sparkles, ShieldCheck, MapPin, PackageCheck } from "lucide-react";
 
 interface LandingHeroProps {
   messengerUrl?: string;
@@ -188,16 +189,14 @@ export function LandingHero({
                 <ArrowDown className="w-4 h-4 group-hover:translate-y-1 transition-transform" />
               </button>
 
-              {/* Secondary CTA: Message Kiho */}
-              <a
-                href={messengerUrl}
-                target="_blank"
-                rel="noopener noreferrer"
+              {/* Secondary CTA: Explore 12 Models */}
+              <Link
+                href="/thiet-bi"
                 className="bg-white hover:bg-[#f0eae1] text-ink-900 px-6 py-3.5 rounded-xl text-sm font-mono font-bold uppercase tracking-wider border border-[#e0d6c7] shadow-xs transition-all duration-300 flex items-center gap-2 group cursor-pointer"
               >
-                <span>Nhắn Kiho</span>
-                <ArrowUpRight className="w-4 h-4 text-ink-500 group-hover:text-ink-900 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all" />
-              </a>
+                <span>Xem 12 dòng máy</span>
+                <ArrowRight className="w-4 h-4 text-ink-500 group-hover:text-ink-900 group-hover:translate-x-0.5 transition-transform" />
+              </Link>
             </div>
 
             {/* Microcopy Metadata Under CTA (Readable, non-duplicated) */}
