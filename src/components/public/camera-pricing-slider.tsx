@@ -4,190 +4,26 @@ import React, { useState, useRef, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { Sparkles, ArrowRight, ChevronLeft, ChevronRight, Phone, Instagram, MapPin, Heart, Clock, Calendar, Tag, ArrowUpRight } from "lucide-react";
+import { Equipment } from "@/types/database";
+import { formatCurrency } from "@/lib/utils";
 
-export interface CameraPriceItem {
-  id: string;
-  num: string;
-  brand: "fujifilm" | "canon" | "sony" | "compact";
-  name: string;
-  subtitle: string;
-  image: string;
-  priceSession: string; // 1 buổi
-  priceDay: string;     // 1 ngày
-  price3Days: string;   // 3 ngày
-  isTopPick?: boolean;
-  badge?: string;
-  slug: string;
+interface CameraPricingSliderProps {
+  equipment?: Equipment[];
+  messengerUrl?: string;
 }
 
-export const KIHO_PRICE_LIST: CameraPriceItem[] = [
-  {
-    id: "01",
-    num: "01",
-    brand: "fujifilm",
-    name: "FUJIFILM X100VI",
-    subtitle: "Flagship giả lập màu film 40MP, chống rung IBIS",
-    image: "/images/cameras/fujifilm-x100vi.jpg",
-    priceSession: "350K",
-    priceDay: "450K",
-    price3Days: "420K/ngày",
-    badge: "Siêu phẩm",
-    slug: "fujifilm-x100vi",
-  },
-  {
-    id: "02",
-    num: "02",
-    brand: "fujifilm",
-    name: "FUJIFILM X100V",
-    subtitle: "Huyền thoại màu film hoài niệm, ống kính 23mm f/2",
-    image: "/images/cameras/fujifilm-x100v.jpg",
-    priceSession: "250K",
-    priceDay: "380K",
-    price3Days: "350K/ngày",
-    badge: "Màu film",
-    slug: "fujifilm-x100v",
-  },
-  {
-    id: "03",
-    num: "03",
-    brand: "fujifilm",
-    name: "FUJIFILM XS10",
-    subtitle: "Báng cầm chắc chắn, màn xoay lật, màu film Classic Neg",
-    image: "/images/cameras/fujifilm-xs10.jpg",
-    priceSession: "230K",
-    priceDay: "350K",
-    price3Days: "320K/ngày",
-    badge: "Quay & Chụp",
-    slug: "fujifilm-xs10",
-  },
-  {
-    id: "04",
-    num: "04",
-    brand: "canon",
-    name: "CANON M100",
-    subtitle: "Nhỏ gọn màu trắng tinh khôi, màu da trắng hồng",
-    image: "/images/cameras/canon-m100.jpg",
-    priceSession: "100K",
-    priceDay: "180K",
-    price3Days: "150K/ngày",
-    badge: "Trắng xinh",
-    slug: "canon-m100",
-  },
-  {
-    id: "05",
-    num: "05",
-    brand: "canon",
-    name: "CANON RP",
-    subtitle: "Full-frame siêu nhẹ, xóa phông mịn màng du lịch",
-    image: "/images/cameras/canon-rp.jpg",
-    priceSession: "170K",
-    priceDay: "280K",
-    price3Days: "250K/ngày",
-    badge: "Full-Frame",
-    slug: "canon-eos-rp",
-  },
-  {
-    id: "06",
-    num: "06",
-    brand: "canon",
-    name: "CANON G7X MARK III",
-    subtitle: "Máy compact du lịch quốc dân, màn lật 180° selfie",
-    image: "/images/cameras/canon-g7x-mark3.jpg",
-    priceSession: "200K",
-    priceDay: "320K",
-    price3Days: "300K/ngày",
-    badge: "Vlog & Selfie",
-    slug: "canon-g7x-mark-iii",
-  },
-  {
-    id: "07",
-    num: "07",
-    brand: "canon",
-    name: "CANON R50",
-    subtitle: "24.2MP Dual Pixel AF II, màu da đẹp, siêu nhẹ 375g",
-    image: "/images/cameras/canon-r50.jpg",
-    priceSession: "150K",
-    priceDay: "250K",
-    price3Days: "230K/ngày",
-    isTopPick: true,
-    badge: "TOP PICK",
-    slug: "canon-eos-r50",
-  },
-  {
-    id: "08",
-    num: "08",
-    brand: "canon",
-    name: "CANON M3",
-    subtitle: "Gọn nhẹ kèm kit zoom, thích hợp chụp check-in biển",
-    image: "/images/cameras/canon-m3.jpg",
-    priceSession: "110K",
-    priceDay: "180K",
-    price3Days: "150K/ngày",
-    badge: "Tiết kiệm",
-    slug: "canon-m3",
-  },
-  {
-    id: "09",
-    num: "09",
-    brand: "sony",
-    name: "SONY ZV1 MARK II",
-    subtitle: "Ống kính góc siêu rộng 18-50mm, lấy nét nhận diện mặt",
-    image: "/images/cameras/sony-zv1-mark2.jpg",
-    priceSession: "130K",
-    priceDay: "200K",
-    price3Days: "180K/ngày",
-    isTopPick: true,
-    badge: "TOP PICK",
-    slug: "sony-zv1-mark-ii",
-  },
-  {
-    id: "10",
-    num: "10",
-    brand: "sony",
-    name: "SONY ZV1F",
-    subtitle: "Góc rộng 20mm chụp nhóm, chống rung điện tử mượt mà",
-    image: "/images/cameras/sony-zv1f.jpg",
-    priceSession: "90K",
-    priceDay: "150K",
-    price3Days: "130K/ngày",
-    badge: "TikTok & Reels",
-    slug: "sony-zv1f",
-  },
-  {
-    id: "11",
-    num: "11",
-    brand: "canon",
-    name: "CANON M",
-    subtitle: "Thiết kế kim loại đầm tay, giá thuê siêu hạt dẻ",
-    image: "/images/cameras/canon-m.jpg",
-    priceSession: "90K",
-    priceDay: "150K",
-    price3Days: "130K/ngày",
-    badge: "Giá rẻ",
-    slug: "canon-m",
-  },
-  {
-    id: "12",
-    num: "12",
-    brand: "compact",
-    name: "CANON IXY 640",
-    subtitle: "Digicam Y2K hoài niệm, màu ảnh vintage cực hot",
-    image: "/images/cameras/canon-ixy640.jpg",
-    priceSession: "80K",
-    priceDay: "120K",
-    price3Days: "100K/ngày",
-    badge: "Trend Y2K",
-    slug: "canon-ixy-640",
-  },
-];
-
-export function CameraPricingSlider({ messengerUrl = "https://m.me/kihocameradonghoi" }: { messengerUrl?: string }) {
+export function CameraPricingSlider({
+  equipment = [],
+  messengerUrl = "https://m.me/kihocameradonghoi",
+}: CameraPricingSliderProps) {
   const [selectedBrand, setSelectedBrand] = useState<string>("all");
   const [isPaused, setIsPaused] = useState(false);
   const sliderRef = useRef<HTMLDivElement>(null);
 
-  const filteredCameras = KIHO_PRICE_LIST.filter(
-    (c) => selectedBrand === "all" || c.brand === selectedBrand
+  const cameraItems = equipment.length > 0 ? equipment : [];
+
+  const filteredCameras = cameraItems.filter(
+    (c) => selectedBrand === "all" || c.brand.toLowerCase() === selectedBrand.toLowerCase()
   );
 
   // Duplicated list for seamless looping
@@ -196,9 +32,9 @@ export function CameraPricingSlider({ messengerUrl = "https://m.me/kihocameradon
   // Auto-scroll logic with seamless wrap
   useEffect(() => {
     const slider = sliderRef.current;
-    if (!slider || isPaused) return;
+    if (!slider || isPaused || filteredCameras.length === 0) return;
 
-    const scrollSpeed = 0.8; // Gentle speed
+    const scrollSpeed = 0.8;
     let animationFrameId: number;
 
     const step = () => {
@@ -228,6 +64,10 @@ export function CameraPricingSlider({ messengerUrl = "https://m.me/kihocameradon
     }
   };
 
+  const fujiCount = cameraItems.filter((c) => c.brand.toLowerCase() === "fujifilm").length;
+  const canonCount = cameraItems.filter((c) => c.brand.toLowerCase() === "canon").length;
+  const sonyCount = cameraItems.filter((c) => c.brand.toLowerCase() === "sony").length;
+
   return (
     <section id="bang-gia" className="py-16 sm:py-24 bg-[#faf8f4] overflow-hidden hairline-t hairline-b">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -243,7 +83,7 @@ export function CameraPricingSlider({ messengerUrl = "https://m.me/kihocameradon
               Bảng Giá Thuê Máy Ảnh Kiho
             </h2>
             <p className="mt-2 text-sm sm:text-base text-ink-600 font-medium">
-              Máy xịn, giá rõ ràng, nhận máy là chụp đẹp ngay tại TP. Đồng Hới.
+              Máy xịn, giá rõ ràng, trọn bộ phụ kiện đi kèm — nhận máy là chụp đẹp ngay.
             </p>
           </div>
 
@@ -252,11 +92,10 @@ export function CameraPricingSlider({ messengerUrl = "https://m.me/kihocameradon
             {/* Filter Tabs */}
             <div className="flex items-center gap-1 bg-[#f0eae1] p-1 rounded-xl border border-[#e0d6c7]">
               {[
-                { key: "all", label: "Tất cả (12)" },
-                { key: "fujifilm", label: "Fujifilm (3)" },
-                { key: "canon", label: "Canon (6)" },
-                { key: "sony", label: "Sony (2)" },
-                { key: "compact", label: "Y2K (1)" },
+                { key: "all", label: `Tất cả (${cameraItems.length})` },
+                { key: "fujifilm", label: `Fujifilm (${fujiCount})` },
+                { key: "canon", label: `Canon (${canonCount})` },
+                { key: "sony", label: `Sony (${sonyCount})` },
               ].map((tab) => (
                 <button
                   key={tab.key}
@@ -302,95 +141,112 @@ export function CameraPricingSlider({ messengerUrl = "https://m.me/kihocameradon
           className="flex gap-5 sm:gap-6 overflow-x-auto scrollbar-none pb-6 pt-2 select-none scroll-smooth cursor-grab active:cursor-grabbing"
           style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
         >
-          {displayItems.map((item, index) => (
-            <div
-              key={`${item.id}-${index}`}
-              className="w-[280px] sm:w-[310px] shrink-0 bg-white rounded-2xl p-5 border border-[#e8e2d7]/80 shadow-[0_4px_20px_rgba(0,0,0,0.03)] hover:shadow-[0_12px_30px_rgba(0,0,0,0.08)] hover:border-ink-900/30 transition-all duration-300 flex flex-col justify-between group relative"
-            >
-              {/* Card Top: Number & Badges */}
-              <div className="flex items-start justify-between gap-2 mb-2">
-                <span className="w-7 h-7 rounded-full bg-[#f4efe6] text-ink-900 font-mono text-xs font-black flex items-center justify-center border border-[#e2dbcf]">
-                  {item.num}
-                </span>
+          {displayItems.map((item, index) => {
+            const coverImg =
+              item.images?.find((img) => img.is_cover)?.image_url ||
+              item.images?.[0]?.image_url ||
+              `/images/cameras/${item.slug.replace("canon-eos-", "canon-").replace("-kit", "")}.jpg`;
 
-                <div className="flex items-center gap-1.5">
-                  {item.isTopPick ? (
-                    <span className="px-2.5 py-0.5 rounded-full bg-[#6366f1] text-white text-[10px] font-mono font-bold uppercase tracking-wider shadow-xs">
-                      ★ TOP PICK
-                    </span>
-                  ) : item.badge ? (
-                    <span className="px-2.5 py-0.5 rounded-full bg-[#f4efe6] text-ink-700 text-[10px] font-mono font-bold border border-[#e2dbcf]">
-                      {item.badge}
-                    </span>
-                  ) : null}
-                </div>
-              </div>
+            const formatK = (price: number) => {
+              if (!price) return "---";
+              return `${Math.round(price / 1000)}K`;
+            };
 
-              {/* Camera Image Showcase (Clean studio render ~10% larger) */}
-              <div className="relative aspect-square w-full my-1 flex items-center justify-center p-2 rounded-xl bg-[#faf8f4]">
-                <Image
-                  src={item.image}
-                  alt={item.name}
-                  fill
-                  sizes="310px"
-                  className="object-contain p-2 filter drop-shadow-[0_8px_16px_rgba(0,0,0,0.12)] group-hover:scale-[1.03] transition-transform duration-300 ease-out"
-                />
-              </div>
+            const numStr = String(item.sort_order).padStart(2, "0");
 
-              {/* Model Info */}
-              <div className="mt-2 mb-3">
-                <h3 className="text-base sm:text-lg font-black text-ink-900 tracking-tight uppercase group-hover:text-accent transition-colors font-mono">
-                  {item.name}
-                </h3>
-                <p className="text-xs text-ink-500 line-clamp-1 mt-0.5 font-medium">
-                  {item.subtitle}
-                </p>
-              </div>
-
-              {/* Price Grid (1 Buổi | 1 Ngày | 3 Ngày) */}
-              <div className="space-y-1.5 pt-3 border-t border-[#f0eae1] font-mono text-xs">
-                {/* 1 Buổi */}
-                <div className="flex items-center justify-between text-ink-600">
-                  <span className="flex items-center gap-1 text-[11px]">
-                    <Clock className="w-3 h-3 text-ink-400" />
-                    1 buổi:
+            return (
+              <div
+                key={`${item.id}-${index}`}
+                className="w-[280px] sm:w-[310px] shrink-0 bg-white rounded-2xl p-5 border border-[#e8e2d7]/80 shadow-[0_4px_20px_rgba(0,0,0,0.03)] hover:shadow-[0_12px_30px_rgba(0,0,0,0.08)] hover:border-ink-900/30 transition-all duration-300 flex flex-col justify-between group relative"
+              >
+                {/* Card Top: Number & Badges */}
+                <div className="flex items-start justify-between gap-2 mb-2">
+                  <span className="w-7 h-7 rounded-full bg-[#f4efe6] text-ink-900 font-mono text-xs font-black flex items-center justify-center border border-[#e2dbcf]">
+                    {numStr}
                   </span>
-                  <span className="font-bold text-ink-900">{item.priceSession}</span>
+
+                  <div className="flex items-center gap-1.5">
+                    {item.is_featured ? (
+                      <span className="px-2.5 py-0.5 rounded-full bg-ink-900 text-white text-[10px] font-mono font-bold uppercase tracking-wider shadow-xs">
+                        ★ TOP PICK
+                      </span>
+                    ) : item.badges?.[0] ? (
+                      <span className="px-2.5 py-0.5 rounded-full bg-[#f4efe6] text-ink-700 text-[10px] font-mono font-bold border border-[#e2dbcf]">
+                        {item.badges[0]}
+                      </span>
+                    ) : null}
+                  </div>
                 </div>
 
-                {/* 1 Ngày */}
-                <div className="flex items-center justify-between text-ink-600">
-                  <span className="flex items-center gap-1 text-[11px]">
-                    <Calendar className="w-3 h-3 text-ink-400" />
-                    1 ngày:
-                  </span>
-                  <span className="font-bold text-ink-900 text-sm">{item.priceDay}</span>
-                </div>
-
-                {/* 3 Ngày (Highlighted Badge) */}
-                <div className="flex items-center justify-between bg-[#fef2f2] text-[#dc2626] px-2.5 py-1 rounded-md font-bold mt-1">
-                  <span className="flex items-center gap-1 text-[11px]">
-                    <Tag className="w-3 h-3" />
-                    3 ngày:
-                  </span>
-                  <span className="text-xs">{item.price3Days}</span>
-                </div>
-              </div>
-
-              {/* Action Button */}
-              <div className="pt-4 mt-2">
-                <a
-                  href={`https://zalo.me/0387274669?text=Chào Kiho, mình muốn thuê máy ${encodeURIComponent(item.name)}`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="w-full bg-ink-900 hover:bg-accent text-white text-xs font-mono font-bold py-2.5 px-4 rounded-xl flex items-center justify-center gap-2 transition-colors shadow-xs"
+                {/* Camera Image Showcase */}
+                <Link
+                  href={`/thiet-bi/${item.slug}`}
+                  className="relative aspect-square w-full my-1 flex items-center justify-center p-2 rounded-xl bg-[#faf8f4] block"
                 >
-                  <span>Thuê máy {item.name.split(" ")[1] || ""}</span>
-                  <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
-                </a>
+                  <Image
+                    src={coverImg}
+                    alt={item.name}
+                    fill
+                    sizes="310px"
+                    className="object-contain p-2 filter drop-shadow-[0_8px_16px_rgba(0,0,0,0.12)] group-hover:scale-[1.03] transition-transform duration-300 ease-out"
+                  />
+                </Link>
+
+                {/* Model Info */}
+                <div className="mt-2 mb-3">
+                  <Link href={`/thiet-bi/${item.slug}`}>
+                    <h3 className="text-base sm:text-lg font-black text-ink-900 tracking-tight uppercase group-hover:text-accent transition-colors font-mono">
+                      {item.name}
+                    </h3>
+                  </Link>
+                  <p className="text-xs text-ink-500 line-clamp-1 mt-0.5 font-medium">
+                    {item.short_description || "Kèm trọn bộ phụ kiện pin sạc thẻ nhớ"}
+                  </p>
+                </div>
+
+                {/* Price Grid (1 Buổi | 1 Ngày | 3 Ngày) */}
+                <div className="space-y-1.5 pt-3 border-t border-[#f0eae1] font-mono text-xs">
+                  {/* 1 Buổi */}
+                  <div className="flex items-center justify-between text-ink-600">
+                    <span className="flex items-center gap-1 text-[11px]">
+                      <Clock className="w-3 h-3 text-ink-400" />
+                      1 buổi:
+                    </span>
+                    <span className="font-bold text-ink-900">{formatK(item.price_session)}</span>
+                  </div>
+
+                  {/* 1 Ngày */}
+                  <div className="flex items-center justify-between text-ink-600">
+                    <span className="flex items-center gap-1 text-[11px]">
+                      <Calendar className="w-3 h-3 text-ink-400" />
+                      1 ngày:
+                    </span>
+                    <span className="font-bold text-ink-900 text-sm">{formatK(item.price_per_day)}</span>
+                  </div>
+
+                  {/* 3 Ngày (Highlighted Badge) */}
+                  <div className="flex items-center justify-between bg-[#fef2f2] text-[#dc2626] px-2.5 py-1 rounded-md font-bold mt-1">
+                    <span className="flex items-center gap-1 text-[11px]">
+                      <Tag className="w-3 h-3" />
+                      3 ngày:
+                    </span>
+                    <span className="text-xs">{formatK(item.price_three_days)}/ngày</span>
+                  </div>
+                </div>
+
+                {/* Action Button */}
+                <div className="pt-4 mt-2">
+                  <Link
+                    href={`/thiet-bi/${item.slug}`}
+                    className="w-full bg-ink-900 hover:bg-accent text-white text-xs font-mono font-bold py-2.5 px-4 rounded-xl flex items-center justify-center gap-2 transition-colors shadow-xs"
+                  >
+                    <span>Xem máy {item.name.split(" ")[1] || ""}</span>
+                    <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
+                  </Link>
+                </div>
               </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
 
         {/* Link to Full Equipment Catalog */}
@@ -399,7 +255,7 @@ export function CameraPricingSlider({ messengerUrl = "https://m.me/kihocameradon
             href="/thiet-bi"
             className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-white hover:bg-ink-900 text-ink-900 hover:text-white border border-[#e0d6c7] text-xs font-mono font-bold uppercase tracking-wider transition-all duration-300 shadow-xs group"
           >
-            <span>Xem toàn bộ kho máy & phụ kiện</span>
+            <span>Xem toàn bộ 12 dòng máy ảnh</span>
             <ArrowUpRight className="w-4 h-4 text-ink-400 group-hover:text-white transition-colors" />
           </Link>
         </div>

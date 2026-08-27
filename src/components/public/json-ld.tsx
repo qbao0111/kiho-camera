@@ -70,15 +70,18 @@ export function ProductJsonLd({ equipment, siteUrl }: { equipment: Equipment; si
     "description": equipment.short_description || equipment.description,
     "brand": {
       "@type": "Brand",
-      "name": "Kiho Camera"
+      "name": equipment.brand || "Kiho Camera"
     },
     "offers": {
       "@type": "Offer",
       "url": `${siteUrl}/thiet-bi/${equipment.slug}`,
       "priceCurrency": "VND",
       "price": equipment.price_per_day,
-      "availability": "https://schema.org/InStock",
-      "priceValidUntil": "2027-12-31"
+      "priceValidUntil": "2027-12-31",
+      "seller": {
+        "@type": "Organization",
+        "name": "Kiho Camera"
+      }
     }
   };
 

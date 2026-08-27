@@ -6,8 +6,6 @@ import { usePathname, useRouter } from "next/navigation";
 import {
   LayoutDashboard,
   Camera,
-  FolderTree,
-  MessageSquareQuote,
   Settings,
   LogOut,
   ExternalLink,
@@ -33,9 +31,7 @@ export function AdminSidebar() {
 
   const navItems = [
     { href: "/admin", label: "Tổng quan", icon: LayoutDashboard, exact: true },
-    { href: "/admin/equipment", label: "Thiết bị & Giá", icon: Camera },
-    { href: "/admin/categories", label: "Danh mục", icon: FolderTree },
-    { href: "/admin/feedback", label: "Feedback khách", icon: MessageSquareQuote },
+    { href: "/admin/equipment", label: "Máy ảnh & Giá", icon: Camera },
     { href: "/admin/settings", label: "Nội dung & Cài đặt", icon: Settings },
   ];
 
@@ -45,12 +41,12 @@ export function AdminSidebar() {
         {/* Brand */}
         <div className="px-2 py-3 flex items-center justify-between border-b border-slate-800">
           <div className="flex items-center gap-2.5">
-            <div className="w-8 h-8 rounded-lg bg-brand-500 text-white flex items-center justify-center font-bold">
+            <div className="w-8 h-8 rounded-lg bg-accent text-white flex items-center justify-center font-bold font-mono">
               K
             </div>
             <div>
-              <h2 className="font-extrabold text-white text-base leading-none">KIHO ADMIN</h2>
-              <span className="text-[10px] text-slate-400 font-medium">Hệ thống quản trị</span>
+              <h2 className="font-extrabold text-white text-base leading-none font-mono">KIHO ADMIN</h2>
+              <span className="text-[10px] text-slate-400 font-medium">Quản trị máy ảnh</span>
             </div>
           </div>
         </div>
@@ -69,7 +65,7 @@ export function AdminSidebar() {
                 href={item.href}
                 className={`flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium transition-colors ${
                   isActive
-                    ? "bg-brand-500 text-white font-semibold shadow-sm"
+                    ? "bg-accent text-white font-semibold shadow-sm"
                     : "text-slate-400 hover:text-white hover:bg-slate-800"
                 }`}
               >

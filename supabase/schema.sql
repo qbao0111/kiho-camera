@@ -19,15 +19,19 @@ CREATE TABLE IF NOT EXISTS public.categories (
     updated_at TIMESTAMPTZ DEFAULT NOW()
 );
 
--- 3. Create Equipment Table
+-- 3. Create Equipment Table (12 Camera Models)
 CREATE TABLE IF NOT EXISTS public.equipment (
     id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
     category_id UUID REFERENCES public.categories(id) ON DELETE SET NULL,
+    brand VARCHAR(100) NOT NULL DEFAULT 'Canon',
     name VARCHAR(255) NOT NULL,
     slug VARCHAR(255) NOT NULL UNIQUE,
     short_description TEXT,
     description TEXT,
+    price_session NUMERIC(12, 0) NOT NULL DEFAULT 0,
     price_per_day NUMERIC(12, 0) NOT NULL DEFAULT 0,
+    price_three_days NUMERIC(12, 0) NOT NULL DEFAULT 0,
+    price_poster_url TEXT,
     deposit_note TEXT,
     specifications JSONB DEFAULT '{}'::jsonb,
     included_items TEXT[] DEFAULT '{}',
@@ -42,7 +46,7 @@ CREATE TABLE IF NOT EXISTS public.equipment (
     updated_at TIMESTAMPTZ DEFAULT NOW()
 );
 
--- 4. Create Equipment Images Table
+-- 4. Create Equipment Images Table (Product Gallery)
 CREATE TABLE IF NOT EXISTS public.equipment_images (
     id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
     equipment_id UUID NOT NULL REFERENCES public.equipment(id) ON DELETE CASCADE,
@@ -53,7 +57,20 @@ CREATE TABLE IF NOT EXISTS public.equipment_images (
     created_at TIMESTAMPTZ DEFAULT NOW()
 );
 
--- 5. Create Feedback Table
+-- 5. Create Equipment Sample Images Table (Ảnh chụp thực tế từ máy)
+CREATE TABLE IF NOT EXISTS public.equipment_sample_images (
+    id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+    equipment_id UUID NOT NULL REFERENCES public.equipment(id) ON DELETE CASCADE,
+    image_url TEXT NOT NULL,
+    caption TEXT,
+    alt_text VARCHAR(255),
+    sort_order INT DEFAULT 0,
+    is_active BOOLEAN DEFAULT true,
+    created_at TIMESTAMPTZ DEFAULT NOW(),
+    updated_at TIMESTAMPTZ DEFAULT NOW()
+);
+
+-- 6. Create Feedback Table (Legacy preserved)
 CREATE TABLE IF NOT EXISTS public.feedback (
     id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
     customer_name VARCHAR(255) NOT NULL,
@@ -68,24 +85,24 @@ CREATE TABLE IF NOT EXISTS public.feedback (
     updated_at TIMESTAMPTZ DEFAULT NOW()
 );
 
--- 6. Create Site Settings Table (Single-row or Key-Value)
+-- 7. Create Site Settings Table
 CREATE TABLE IF NOT EXISTS public.site_settings (
     id INT PRIMARY KEY DEFAULT 1,
     shop_name VARCHAR(255) DEFAULT 'Kiho Camera',
-    tagline VARCHAR(255) DEFAULT 'Cho thuê máy ảnh Quảng Bình - Ghi lại chuyến đi theo cách đẹp nhất.',
-    address VARCHAR(255) DEFAULT 'Thành phố Đồng Hới, Tỉnh Quảng Bình',
-    phone VARCHAR(50) DEFAULT '0912 345 678',
-    facebook_url VARCHAR(500) DEFAULT 'https://facebook.com/kihocamera',
-    messenger_url VARCHAR(500) DEFAULT 'https://m.me/kihocamera',
+    tagline VARCHAR(255) DEFAULT 'Cho thuê máy ảnh Quảng Bình – Máy xịn, giá rõ ràng, thuê nhanh tại Đồng Hới.',
+    address VARCHAR(255) DEFAULT '48 Ngô Quyền, TP. Đồng Hới, Tỉnh Quảng Bình',
+    phone VARCHAR(50) DEFAULT '0387 274 669',
+    facebook_url VARCHAR(500) DEFAULT 'https://facebook.com/kihocameradonghoi',
+    messenger_url VARCHAR(500) DEFAULT 'https://m.me/kihocameradonghoi',
     tiktok_url VARCHAR(500) DEFAULT 'https://tiktok.com/@kihocamera',
-    instagram_url VARCHAR(500) DEFAULT 'https://instagram.com/kihocamera',
-    maps_url TEXT DEFAULT 'https://maps.google.com/?q=Dong+Hoi+Quang+Binh',
+    instagram_url VARCHAR(500) DEFAULT 'https://www.instagram.com/thuemayanhqbb/',
+    maps_url TEXT DEFAULT 'https://maps.google.com/?q=48+Ngo+Quyen+Dong+Hoi+Quang+Binh',
     opening_hours VARCHAR(255) DEFAULT '07:30 - 21:00 (Tất cả các ngày trong tuần)',
     hero_title VARCHAR(255) DEFAULT 'Cho thuê máy ảnh tại Quảng Bình',
-    hero_subtitle TEXT DEFAULT 'Máy đẹp, dễ sử dụng, giá rõ ràng. Thuê máy ảnh, lens và phụ kiện du lịch chất lượng cao tại Kiho Camera Đồng Hới.',
-    hero_image TEXT DEFAULT 'https://images.unsplash.com/photo-1516035069371-29a1b244cc32?auto=format&fit=crop&w=1600&q=80',
-    about_text TEXT DEFAULT 'Kiho Camera là địa chỉ cho thuê máy ảnh, lens và thiết bị quay chụp uy tín hàng đầu tại Đồng Hới, Quảng Bình. Dù bạn đi du lịch Phong Nha - Kẻ Bàng, chụp ảnh kỷ yếu, sự kiện hay quay vlog, Kiho Camera luôn sẵn sàng hỗ trợ máy chất lượng cao cùng phụ kiện đầy đủ nhất.',
-    footer_text TEXT DEFAULT '© 2026 Kiho Camera - Dịch vụ cho thuê máy ảnh uy tín tại Quảng Bình. Hỗ trợ giao máy tận nơi khu vực Đồng Hới.',
+    hero_subtitle TEXT DEFAULT 'Máy đẹp, dễ sử dụng, giá rõ ràng. Thuê máy ảnh du lịch chất lượng cao tại Kiho Camera Đồng Hới.',
+    hero_image TEXT DEFAULT '/images/cameras/fujifilm-x100vi.jpg',
+    about_text TEXT DEFAULT 'Kiho Camera là địa chỉ cho thuê máy ảnh uy tín hàng đầu tại 48 Ngô Quyền, Đồng Hới, Quảng Bình.',
+    footer_text TEXT DEFAULT '© 2026 Kiho Camera - Dịch vụ cho thuê máy ảnh uy tín tại Quảng Bình. Hotline/Zalo: 0387 274 669.',
     updated_at TIMESTAMPTZ DEFAULT NOW(),
     CONSTRAINT single_row CHECK (id = 1)
 );
@@ -95,22 +112,26 @@ INSERT INTO public.site_settings (id)
 VALUES (1)
 ON CONFLICT (id) DO NOTHING;
 
--- 7. Indexes for Query Performance & SEO
+-- 8. Indexes for Performance & SEO
 CREATE INDEX IF NOT EXISTS idx_equipment_slug ON public.equipment(slug);
+CREATE INDEX IF NOT EXISTS idx_equipment_brand ON public.equipment(brand);
 CREATE INDEX IF NOT EXISTS idx_equipment_category ON public.equipment(category_id);
 CREATE INDEX IF NOT EXISTS idx_equipment_active ON public.equipment(is_active);
 CREATE INDEX IF NOT EXISTS idx_equipment_featured ON public.equipment(is_featured);
 CREATE INDEX IF NOT EXISTS idx_equipment_images_equip ON public.equipment_images(equipment_id);
+CREATE INDEX IF NOT EXISTS idx_equipment_sample_images_equip ON public.equipment_sample_images(equipment_id);
+CREATE INDEX IF NOT EXISTS idx_equipment_sample_images_active ON public.equipment_sample_images(is_active);
 CREATE INDEX IF NOT EXISTS idx_feedback_active ON public.feedback(is_active);
 
--- 8. Row Level Security (RLS) Setup
+-- 9. Row Level Security (RLS) Setup
 ALTER TABLE public.categories ENABLE ROW LEVEL SECURITY;
 ALTER TABLE public.equipment ENABLE ROW LEVEL SECURITY;
 ALTER TABLE public.equipment_images ENABLE ROW LEVEL SECURITY;
+ALTER TABLE public.equipment_sample_images ENABLE ROW LEVEL SECURITY;
 ALTER TABLE public.feedback ENABLE ROW LEVEL SECURITY;
 ALTER TABLE public.site_settings ENABLE ROW LEVEL SECURITY;
 
--- 8.1. Public Read Policies
+-- 9.1. Public Read Policies
 CREATE POLICY "Public can view active categories" 
 ON public.categories FOR SELECT 
 USING (is_active = true);
@@ -123,6 +144,10 @@ CREATE POLICY "Public can view equipment images"
 ON public.equipment_images FOR SELECT 
 USING (true);
 
+CREATE POLICY "Public can view active sample images" 
+ON public.equipment_sample_images FOR SELECT 
+USING (is_active = true);
+
 CREATE POLICY "Public can view active feedback" 
 ON public.feedback FOR SELECT 
 USING (is_active = true);
@@ -131,7 +156,7 @@ CREATE POLICY "Public can view site settings"
 ON public.site_settings FOR SELECT 
 USING (true);
 
--- 8.2. Authenticated Admin Policies (Full CRUD)
+-- 9.2. Authenticated Admin Policies (Full CRUD)
 CREATE POLICY "Admin full access on categories" 
 ON public.categories FOR ALL 
 TO authenticated 
@@ -147,6 +172,11 @@ ON public.equipment_images FOR ALL
 TO authenticated 
 USING (true) WITH CHECK (true);
 
+CREATE POLICY "Admin full access on equipment_sample_images" 
+ON public.equipment_sample_images FOR ALL 
+TO authenticated 
+USING (true) WITH CHECK (true);
+
 CREATE POLICY "Admin full access on feedback" 
 ON public.feedback FOR ALL 
 TO authenticated 
@@ -156,9 +186,3 @@ CREATE POLICY "Admin full access on site_settings"
 ON public.site_settings FOR ALL 
 TO authenticated 
 USING (true) WITH CHECK (true);
-
--- 9. Storage Setup (Run in Supabase Dashboard / SQL editor)
--- CREATE BUCKET IF NOT EXISTS "equipment-images" WITH (public = true);
--- CREATE POLICY "Public Access" ON storage.objects FOR SELECT USING (bucket_id = 'equipment-images');
--- CREATE POLICY "Admin Upload" ON storage.objects FOR INSERT TO authenticated WITH CHECK (bucket_id = 'equipment-images');
--- CREATE POLICY "Admin Delete" ON storage.objects FOR DELETE TO authenticated USING (bucket_id = 'equipment-images');

@@ -2,14 +2,15 @@ import React from "react";
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Link from "next/link";
-import { ArrowUpRight } from "lucide-react";
+import { ArrowUpRight, CheckCircle2, Clock, Calendar, Tag, ShieldCheck, Phone } from "lucide-react";
 import { getEquipmentBySlug, getRelatedEquipment } from "@/lib/services/equipment";
 import { getSiteSettings } from "@/lib/services/settings";
 import { ProductGallery } from "@/components/public/product-gallery";
+import { SamplePhotoGallery } from "@/components/public/sample-photo-gallery";
 import { ProductCard } from "@/components/public/product-card";
 import { StickyMessengerBar } from "@/components/public/sticky-messenger-bar";
 import { ProductJsonLd } from "@/components/public/json-ld";
-import { formatCurrency, buildMessengerUrl } from "@/lib/utils";
+import { buildMessengerUrl } from "@/lib/utils";
 import { FadeIn, StaggerContainer, StaggerItem } from "@/components/ui/motion";
 
 interface PageProps {
@@ -22,15 +23,15 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const equipment = await getEquipmentBySlug(params.slug);
   if (!equipment) {
     return {
-      title: "Thiết bị không tồn tại | Kiho Camera",
+      title: "Máy ảnh không tồn tại | Kiho Camera",
     };
   }
 
-  const title = equipment.seo_title || `${equipment.name} - Cho thuê máy ảnh Quảng Bình`;
+  const title = equipment.seo_title || `Thuê máy ảnh ${equipment.name} tại Quảng Bình | Kiho Camera`;
   const description =
     equipment.seo_description ||
     equipment.short_description ||
-    `Dịch vụ cho thuê ${equipment.name} uy tín giá rẻ tại Đồng Hới, Quảng Bình. Kèm đầy đủ phụ kiện pin sạc thẻ nhớ.`;
+    `Dịch vụ cho thuê máy ảnh ${equipment.name} uy tín giá rẻ tại Đồng Hới, Quảng Bình. Kèm 2 pin sạc thẻ nhớ túi chống sốc.`;
 
   const coverImage =
     equipment.images?.find((img) => img.is_cover)?.image_url ||
@@ -62,17 +63,23 @@ export default async function ProductDetailPage({ params }: PageProps) {
 
   const [settings, relatedEquipment] = await Promise.all([
     getSiteSettings(),
-    getRelatedEquipment(equipment.slug, equipment.category_id, 4),
+    getRelatedEquipment(equipment.slug, equipment.brand, 4),
   ]);
 
   const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://kihocamera.com";
   const messengerChatUrl = buildMessengerUrl(settings.messenger_url, equipment.name);
 
+  const formatK = (price: number) => {
+    if (!price) return "---";
+    return `${Math.round(price / 1000)}K`;
+  };
+
   return (
-    <div className="bg-[#faf8f5] min-h-screen py-8 pb-28 md:pb-20">
+    <div className="bg-[#faf8f4] min-h-screen py-8 pb-28 md:pb-20">
       <ProductJsonLd equipment={equipment} siteUrl={siteUrl} />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
+        
         {/* Minimal Breadcrumb */}
         <FadeIn direction="none" className="flex items-center gap-2 text-xs font-mono text-ink-400">
           <Link href="/" className="hover:text-ink-900 transition-colors">
@@ -80,104 +87,140 @@ export default async function ProductDetailPage({ params }: PageProps) {
           </Link>
           <span>/</span>
           <Link href="/thiet-bi" className="hover:text-ink-900 transition-colors">
-            THIẾT BỊ
+            MÁY ẢNH
           </Link>
-          {equipment.category && (
-            <>
-              <span>/</span>
-              <Link
-                href={`/thiet-bi?category=${equipment.category.slug}`}
-                className="hover:text-ink-900 transition-colors uppercase"
-              >
-                {equipment.category.name}
-              </Link>
-            </>
-          )}
           <span>/</span>
-          <span className="text-ink-900 font-bold truncate max-w-[200px]">
+          <span className="text-ink-900 font-bold uppercase truncate max-w-[200px]">
             {equipment.name}
           </span>
         </FadeIn>
 
         {/* Main Product Layout: Sticky Left Image / Editorial Right Content */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16">
+          
           {/* Left: Sticky Image Gallery (6 cols) */}
           <div className="lg:col-span-6 lg:sticky lg:top-24 self-start">
-            <ProductGallery images={equipment.images} productName={equipment.name} />
+            <ProductGallery
+              images={equipment.images}
+              pricePosterUrl={equipment.price_poster_url}
+              productName={equipment.name}
+            />
           </div>
 
-          {/* Right: Editorial Information & Hairline Dividers (6 cols) */}
+          {/* Right: Editorial Information & Pricing (6 cols) */}
           <div className="lg:col-span-6 space-y-8">
+            
             {/* Header / Title */}
             <div className="space-y-3 pb-6 hairline-b">
               <div className="flex items-center justify-between">
                 <span className="text-xs font-mono font-bold tracking-widest text-ink-400 uppercase">
-                  {equipment.category?.name || "THIẾT BỊ"}
+                  {equipment.brand} · MÁY ẢNH CHO THUÊ
                 </span>
                 {equipment.is_featured && (
-                  <span className="text-[10px] font-bold tracking-widest uppercase bg-ink-900 text-[#faf8f5] px-2 py-0.5 rounded-sm">
-                    Kiho Pick
+                  <span className="text-[10px] font-mono font-bold tracking-widest uppercase bg-ink-900 text-[#faf8f4] px-2.5 py-0.5 rounded-full">
+                    ★ Kiho Pick
                   </span>
                 )}
               </div>
 
-              <h1 className="text-3xl sm:text-4xl lg:text-5xl font-black text-ink-900 tracking-tight leading-[1.1]">
+              <h1 className="text-3xl sm:text-4xl lg:text-5xl font-black text-ink-900 tracking-tight leading-[1.1] font-mono uppercase">
                 {equipment.name}
               </h1>
 
               {equipment.use_cases?.length > 0 && (
-                <div className="text-xs text-ink-500 font-medium">
-                  {equipment.use_cases.join(" · ")}
+                <div className="text-xs text-ink-500 font-mono font-semibold uppercase tracking-wider">
+                  Phù hợp: {equipment.use_cases.join(" · ")}
                 </div>
               )}
+            </div>
 
-              {/* Price */}
-              <div className="pt-2 flex items-baseline gap-2">
-                <span className="text-2xl sm:text-3xl font-black text-ink-900">
-                  {formatCurrency(equipment.price_per_day)}
-                </span>
-                <span className="text-xs text-ink-400 font-mono">/ 24 giờ thuê</span>
+            {/* 3-Tier Price Block (1 Buổi | 1 Ngày | 3 Ngày) */}
+            <div className="bg-white rounded-3xl p-5 sm:p-6 border border-[#e8e2d7] shadow-xs space-y-4">
+              <span className="text-[10px] font-mono font-bold tracking-widest text-ink-400 uppercase block">
+                BẢNG GIÁ THUÊ NIÊM YẾT
+              </span>
+
+              <div className="grid grid-cols-3 gap-2 text-center divide-x divide-[#f0eae1] font-mono">
+                {/* Tier 1: 1 Buổi */}
+                <div className="px-2">
+                  <span className="text-[11px] text-ink-500 font-semibold block mb-1 flex items-center justify-center gap-1">
+                    <Clock className="w-3 h-3 text-ink-400" />
+                    1 BUỔI
+                  </span>
+                  <span className="text-xl sm:text-2xl font-black text-ink-900">
+                    {formatK(equipment.price_session)}
+                  </span>
+                  <span className="text-[10px] text-ink-400 block mt-0.5">4 - 5 tiếng</span>
+                </div>
+
+                {/* Tier 2: 1 Ngày */}
+                <div className="px-2">
+                  <span className="text-[11px] text-ink-500 font-semibold block mb-1 flex items-center justify-center gap-1">
+                    <Calendar className="w-3 h-3 text-ink-400" />
+                    1 NGÀY
+                  </span>
+                  <span className="text-xl sm:text-2xl font-black text-ink-900">
+                    {formatK(equipment.price_per_day)}
+                  </span>
+                  <span className="text-[10px] text-ink-400 block mt-0.5">24 tiếng</span>
+                </div>
+
+                {/* Tier 3: 3 Ngày + */}
+                <div className="px-2 bg-[#fef2f2] rounded-2xl py-1 text-[#dc2626]">
+                  <span className="text-[11px] font-bold block mb-1 flex items-center justify-center gap-1">
+                    <Tag className="w-3 h-3" />
+                    3 NGÀY+
+                  </span>
+                  <span className="text-xl sm:text-2xl font-black">
+                    {formatK(equipment.price_three_days)}
+                  </span>
+                  <span className="text-[10px] block mt-0.5 font-bold">/ ngày</span>
+                </div>
               </div>
             </div>
 
             {/* Short Description */}
             {equipment.short_description && (
-              <p className="text-sm sm:text-base text-ink-700 leading-relaxed font-normal">
+              <p className="text-sm sm:text-base text-ink-700 leading-relaxed font-medium">
                 {equipment.short_description}
               </p>
             )}
 
             {/* Primary Action Button */}
-            <div className="space-y-2.5 pt-2">
+            <div className="space-y-3 pt-2">
               <a
                 href={messengerChatUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-full inline-flex items-center justify-center gap-2 bg-ink-900 hover:bg-accent text-[#faf8f5] font-bold py-4 px-6 rounded-sm shadow-sm transition-colors text-sm sm:text-base"
+                className="w-full inline-flex items-center justify-center gap-2 bg-ink-900 hover:bg-accent text-white font-mono font-bold py-4 px-6 rounded-2xl shadow-md transition-all text-sm sm:text-base group"
               >
                 <span>Nhắn Kiho Camera để thuê máy này</span>
-                <ArrowUpRight className="w-4 h-4" />
+                <ArrowUpRight className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
               </a>
 
               <div className="flex items-center justify-between text-[11px] font-mono text-ink-400 px-1">
-                <span>TƯ VẤN NHANH QUA MESSENGER</span>
-                <span>HOTLINE: {settings.phone}</span>
+                <span>TƯ VẤN 1:1 QUA MESSENGER / ZALO</span>
+                <a href="tel:0387274669" className="hover:text-ink-900">HOTLINE: 0387 274 669</a>
               </div>
             </div>
 
             {/* Editorial Hairline Sections */}
             <div className="space-y-6 pt-4">
+              
               {/* 1. Included items */}
               {equipment.included_items && equipment.included_items.length > 0 && (
-                <div className="space-y-2.5 pt-6 hairline-t">
+                <div className="space-y-3 pt-6 hairline-t">
                   <span className="text-[11px] font-mono font-bold tracking-widest text-ink-400 uppercase block">
-                    BỘ THUÊ GỒM
+                    BỘ THUÊ ĐÃ BAO GỒM (NHẬN MÁY LÀ CHỤP)
                   </span>
-                  <ul className="text-sm text-ink-800 space-y-1.5 list-disc list-inside">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs sm:text-sm text-ink-800 font-medium">
                     {equipment.included_items.map((item, idx) => (
-                      <li key={idx} className="leading-snug">{item}</li>
+                      <div key={idx} className="flex items-center gap-2">
+                        <CheckCircle2 className="w-4 h-4 text-accent shrink-0" />
+                        <span>{item}</span>
+                      </div>
                     ))}
-                  </ul>
+                  </div>
                 </div>
               )}
 
@@ -185,15 +228,15 @@ export default async function ProductDetailPage({ params }: PageProps) {
               {equipment.specifications && Object.keys(equipment.specifications).length > 0 && (
                 <div className="space-y-3 pt-6 hairline-t">
                   <span className="text-[11px] font-mono font-bold tracking-widest text-ink-400 uppercase block">
-                    THÔNG SỐ KỸ THUẬT
+                    THÔNG SỐ KỸ THUẬT HỮU ÍCH
                   </span>
                   <div className="divide-y divide-[#e7e4dc] text-xs sm:text-sm">
                     {Object.entries(equipment.specifications).map(([key, val], idx) => (
-                      <div key={idx} className="py-2 flex justify-between gap-4">
+                      <div key={idx} className="py-2.5 flex justify-between gap-4">
                         <span className="text-ink-500 font-medium capitalize">
                           {key.replace(/_/g, " ")}
                         </span>
-                        <span className="text-ink-900 font-semibold text-right max-w-[240px]">
+                        <span className="text-ink-900 font-bold text-right max-w-[260px] font-mono">
                           {val}
                         </span>
                       </div>
@@ -208,7 +251,7 @@ export default async function ProductDetailPage({ params }: PageProps) {
                   <span className="text-[11px] font-mono font-bold tracking-widest text-ink-400 uppercase block">
                     CHI TIẾT TRẢI NGHIỆM
                   </span>
-                  <div className="text-xs sm:text-sm text-ink-700 leading-relaxed space-y-2">
+                  <div className="text-xs sm:text-sm text-ink-700 leading-relaxed space-y-2 font-medium">
                     {equipment.description.split("\n\n").map((para, idx) => (
                       <p key={idx}>{para}</p>
                     ))}
@@ -221,24 +264,28 @@ export default async function ProductDetailPage({ params }: PageProps) {
                 <span className="text-[11px] font-mono font-bold tracking-widest text-ink-400 uppercase block">
                   LƯU Ý THUÊ & CỌC CCCD
                 </span>
-                <p className="text-xs sm:text-sm text-ink-700 leading-relaxed">
+                <p className="text-xs sm:text-sm text-ink-700 leading-relaxed font-medium">
                   {equipment.deposit_note ||
-                    "Khách mang theo CCCD gắn chip chính chủ để làm thủ tục nhận máy. Trường hợp không giữ CCCD, bạn có thể đặt cọc theo thoả thuận."}
+                    "Khách mang theo CCCD gắn chip chính chủ để làm thủ tục nhận máy tại 48 Ngô Quyền hoặc giao tận nơi khách sạn."}
                 </p>
                 <div className="pt-1">
                   <Link
                     href="/huong-dan-thue"
-                    className="text-xs font-bold text-ink-900 underline underline-offset-4"
+                    className="text-xs font-mono font-bold text-ink-900 underline underline-offset-4"
                   >
-                    Xem chi tiết quy trình thuê máy →
+                    Xem chi tiết 3 bước thuê máy →
                   </Link>
                 </div>
               </div>
+
             </div>
           </div>
         </div>
 
-        {/* Related Equipment Section */}
+        {/* Real Sample Photos Section */}
+        <SamplePhotoGallery cameraName={equipment.name} sampleImages={equipment.sample_images} />
+
+        {/* Related Cameras Section */}
         {relatedEquipment.length > 0 && (
           <div className="pt-16 sm:pt-24 hairline-t space-y-8">
             <div className="flex items-baseline justify-between">
@@ -246,19 +293,19 @@ export default async function ProductDetailPage({ params }: PageProps) {
                 <span className="text-[11px] font-mono font-bold tracking-widest text-ink-400 uppercase block mb-1">
                   GỢI Ý THÊM
                 </span>
-                <h2 className="text-2xl sm:text-3xl font-black text-ink-900 tracking-tight">
-                  Thiết bị tương tự
+                <h2 className="text-2xl sm:text-3xl font-black text-ink-900 tracking-tight font-mono">
+                  Máy tương tự bạn có thể thích
                 </h2>
               </div>
               <Link
                 href="/thiet-bi"
-                className="text-xs font-bold text-ink-900 link-underline hidden sm:block"
+                className="text-xs font-mono font-bold text-ink-900 hover:text-accent hidden sm:block uppercase tracking-wider"
               >
-                Xem tất cả thiết bị →
+                Xem tất cả 12 máy →
               </Link>
             </div>
 
-            <StaggerContainer className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+            <StaggerContainer className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8">
               {relatedEquipment.map((item) => (
                 <StaggerItem key={item.id}>
                   <ProductCard key={item.id} equipment={item} />

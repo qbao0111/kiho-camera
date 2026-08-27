@@ -1,24 +1,24 @@
 import React from "react";
 import { getSiteSettings } from "@/lib/services/settings";
-import { getFeaturedFeedback } from "@/lib/services/feedback";
+import { getEquipmentList } from "@/lib/services/equipment";
 import { LandingHero } from "@/components/public/landing-hero";
 import { TrustStrip } from "@/components/public/trust-strip";
 import { CameraPricingSlider } from "@/components/public/camera-pricing-slider";
+import { FeaturedCameras } from "@/components/public/featured-cameras";
 import { CanonR50Spotlight } from "@/components/public/canon-r50-spotlight";
 import { UseCaseSection } from "@/components/public/use-case-section";
-import { EditorialFeedback } from "@/components/public/editorial-feedback";
 import { RentalProcess } from "@/components/public/rental-process";
 import { FinalCta } from "@/components/public/final-cta";
 
 export default async function HomePage() {
-  const [settings, feedbacks] = await Promise.all([
+  const [settings, equipmentList] = await Promise.all([
     getSiteSettings(),
-    getFeaturedFeedback(),
+    getEquipmentList({ onlyActive: true }),
   ]);
 
   return (
     <div className="bg-[#faf8f4]">
-      {/* 1. NEW EDITORIAL HERO (Multilayer depth with real camera cutouts & asymmetric composition) */}
+      {/* 1. EDITORIAL HERO (Multilayer depth with real camera cutouts & asymmetric composition) */}
       <LandingHero
         messengerUrl={settings.messenger_url}
         phone={settings.phone}
@@ -27,17 +27,20 @@ export default async function HomePage() {
       {/* 2. TRUST STRIP (Marquee bar with key guarantees) */}
       <TrustStrip />
 
-      {/* 3. CAMERA PRICING SLIDER (12 models from official price flyer with seamless auto-scroll) */}
-      <CameraPricingSlider messengerUrl={settings.messenger_url} />
+      {/* 3. CAMERA PRICING SLIDER (12 models reading directly from database) */}
+      <CameraPricingSlider
+        equipment={equipmentList}
+        messengerUrl={settings.messenger_url}
+      />
 
-      {/* 4. CANON R50 SPOTLIGHT (Editorial Feature Band) */}
+      {/* 4. MÁY ĐANG CÓ TẠI KIHO (6 curated camera cards preview) */}
+      <FeaturedCameras equipment={equipmentList} />
+
+      {/* 5. CANON R50 SPOTLIGHT (Editorial Feature Band) */}
       <CanonR50Spotlight messengerUrl={settings.messenger_url} />
 
-      {/* 5. USE CASES ("Bạn định mang máy đi đâu?" - 4 visual storytelling photo tiles) */}
+      {/* 6. USE CASES ("Bạn định mang máy đi đâu?" - 4 visual storytelling photo tiles) */}
       <UseCaseSection />
-
-      {/* 6. SOCIAL PROOF / FEEDBACK ("Người ta mang Kiho đi đâu rồi?" - Contact sheet layout) */}
-      <EditorialFeedback feedbacks={feedbacks} />
 
       {/* 7. RENTAL PROCESS (3-step clean typography workflow) */}
       <RentalProcess messengerUrl={settings.messenger_url} />

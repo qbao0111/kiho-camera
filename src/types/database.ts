@@ -20,15 +20,31 @@ export interface EquipmentImage {
   created_at?: string;
 }
 
+export interface EquipmentSampleImage {
+  id: string;
+  equipment_id: string;
+  image_url: string;
+  caption: string | null;
+  alt_text: string | null;
+  sort_order: number;
+  is_active: boolean;
+  created_at?: string;
+  updated_at?: string;
+}
+
 export interface Equipment {
   id: string;
   category_id: string | null;
   category?: Category | null;
+  brand: "Fujifilm" | "Canon" | "Sony" | string;
   name: string;
   slug: string;
   short_description: string | null;
   description: string | null;
-  price_per_day: number;
+  price_session: number;       // Giá 1 buổi
+  price_per_day: number;       // Giá 1 ngày
+  price_three_days: number;    // Giá / ngày khi thuê từ 3 ngày
+  price_poster_url?: string | null;
   deposit_note: string | null;
   specifications: Record<string, string>;
   included_items: string[];
@@ -40,6 +56,7 @@ export interface Equipment {
   seo_title: string | null;
   seo_description: string | null;
   images?: EquipmentImage[];
+  sample_images?: EquipmentSampleImage[];
   created_at?: string;
   updated_at?: string;
 }

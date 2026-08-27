@@ -28,8 +28,8 @@ export function Header({ settings }: HeaderProps) {
   }, [pathname]);
 
   const navLinks = [
-    { href: "/thiet-bi", label: "Thiết bị" },
-    { href: "/feedback", label: "Feedback & Ảnh" },
+    { href: "/thiet-bi", label: "Máy ảnh" },
+    { href: "/#bang-gia", label: "Bảng giá" },
     { href: "/huong-dan-thue", label: "Hướng dẫn thuê" },
     { href: "/lien-he", label: "Liên hệ" },
   ];
@@ -38,15 +38,16 @@ export function Header({ settings }: HeaderProps) {
     <header
       className={`sticky top-0 z-50 transition-all duration-300 ${
         isScrolled
-          ? "bg-[#faf8f5]/90 backdrop-blur-md hairline-b py-3.5 shadow-[0_1px_8px_rgba(0,0,0,0.03)]"
-          : "bg-[#faf8f5] hairline-b py-4 sm:py-5"
+          ? "bg-[#faf8f4]/90 backdrop-blur-md hairline-b py-3.5 shadow-[0_1px_12px_rgba(0,0,0,0.03)]"
+          : "bg-[#faf8f4] hairline-b py-4 sm:py-5"
       }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between">
+          
           {/* Editorial Logo */}
           <Link href="/" className="group flex flex-col items-start">
-            <span className="text-lg sm:text-xl font-black tracking-tight text-ink-900 leading-none group-hover:text-accent transition-colors">
+            <span className="text-lg sm:text-xl font-black tracking-tight text-ink-900 leading-none group-hover:text-accent transition-colors font-mono">
               KIHO CAMERA
             </span>
             <span className="text-[9px] sm:text-[10px] font-semibold tracking-widest text-ink-500 uppercase mt-1">
@@ -58,8 +59,9 @@ export function Header({ settings }: HeaderProps) {
           <nav className="hidden md:flex items-center space-x-8 text-xs sm:text-sm font-medium tracking-wide">
             {navLinks.map((link) => {
               const isActive =
-                pathname === link.href ||
-                (link.href === "/thiet-bi" && pathname.startsWith("/thiet-bi/"));
+                link.href === "/thiet-bi"
+                  ? pathname.startsWith("/thiet-bi")
+                  : pathname === link.href;
 
               return (
                 <Link
@@ -73,30 +75,30 @@ export function Header({ settings }: HeaderProps) {
                 >
                   {link.label}
                   {isActive && (
-                    <span className="ml-1.5 inline-block w-1 h-1 rounded-full bg-accent" />
+                    <span className="ml-1.5 inline-block w-1.5 h-1.5 rounded-full bg-accent" />
                   )}
                 </Link>
               );
             })}
           </nav>
 
-          {/* Desktop Right CTA: Minimalist Editorial Link */}
+          {/* Desktop Right CTA */}
           <div className="hidden md:flex items-center gap-6">
             <a
-              href={`tel:${settings.phone.replace(/\s+/g, "")}`}
-              className="text-xs font-semibold text-ink-500 hover:text-ink-900 transition-colors"
+              href="tel:0387274669"
+              className="text-xs font-mono font-bold text-ink-600 hover:text-ink-900 transition-colors"
             >
-              {settings.phone}
+              0387 274 669
             </a>
 
             <a
               href={settings.messenger_url}
               target="_blank"
               rel="noopener noreferrer"
-              className="group inline-flex items-center gap-1.5 text-xs sm:text-sm font-bold text-ink-900 hover:text-accent py-2 transition-colors"
+              className="group inline-flex items-center gap-1.5 text-xs font-mono font-bold uppercase tracking-wider bg-ink-900 hover:bg-accent text-white px-4 py-2 rounded-lg transition-colors shadow-xs"
             >
               <span>Nhắn Kiho Camera</span>
-              <ArrowUpRight className="w-3.5 h-3.5 text-ink-400 group-hover:text-accent group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all" />
+              <ArrowUpRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all" />
             </a>
           </div>
 
@@ -106,7 +108,7 @@ export function Header({ settings }: HeaderProps) {
               href={settings.messenger_url}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-xs font-bold text-ink-900 hover:text-accent px-2.5 py-1.5 hairline-b border-ink-900"
+              className="text-xs font-mono font-bold text-white bg-ink-900 hover:bg-accent px-3 py-1.5 rounded-lg transition-colors"
             >
               Nhắn tin →
             </a>
@@ -124,16 +126,13 @@ export function Header({ settings }: HeaderProps) {
 
       {/* Mobile Drawer */}
       {isOpen && (
-        <div className="md:hidden fixed inset-x-0 top-[60px] bottom-0 bg-[#faf8f5] z-40 px-6 py-8 flex flex-col justify-between overflow-y-auto animate-in fade-in duration-200">
+        <div className="md:hidden fixed inset-x-0 top-[60px] bottom-0 bg-[#faf8f4] z-40 px-6 py-8 flex flex-col justify-between overflow-y-auto animate-in fade-in duration-200">
           <nav className="space-y-6">
-            <div className="text-[10px] font-bold text-ink-400 uppercase tracking-widest">
-              Điều hướng
+            <div className="text-[10px] font-mono font-bold text-ink-400 uppercase tracking-widest">
+              ĐIỀU HƯỚNG
             </div>
             <div className="flex flex-col space-y-4 text-xl font-bold tracking-tight text-ink-900">
-              <Link
-                href="/"
-                className="hover:text-accent transition-colors"
-              >
+              <Link href="/" className="hover:text-accent transition-colors">
                 Trang chủ
               </Link>
               {navLinks.map((link) => (
@@ -149,16 +148,16 @@ export function Header({ settings }: HeaderProps) {
             </div>
           </nav>
 
-          <div className="pt-8 hairline-t space-y-4">
+          <div className="pt-8 hairline-t space-y-4 font-mono">
             <div>
               <span className="text-[10px] font-bold text-ink-400 uppercase tracking-widest block mb-1">
-                Liên hệ nhanh
+                LIÊN HỆ TRỰC TIẾP
               </span>
               <a
                 href={settings.messenger_url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-full inline-flex items-center justify-between py-3 px-4 bg-ink-900 text-white rounded-md font-semibold text-sm hover:bg-accent transition-colors"
+                className="w-full inline-flex items-center justify-between py-3 px-4 bg-ink-900 text-white rounded-xl font-bold text-xs uppercase tracking-wider hover:bg-accent transition-colors"
               >
                 <span>Nhắn tư vấn qua Messenger</span>
                 <ArrowUpRight className="w-4 h-4" />
@@ -166,8 +165,8 @@ export function Header({ settings }: HeaderProps) {
             </div>
 
             <div className="flex items-center justify-between text-xs text-ink-500 pt-2">
-              <span>Hotline: {settings.phone}</span>
-              <span>Đồng Hới, Quảng Bình</span>
+              <span>Hotline: 0387 274 669</span>
+              <span>48 Ngô Quyền, Đồng Hới</span>
             </div>
           </div>
         </div>
