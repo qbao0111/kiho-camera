@@ -65,6 +65,7 @@ export function Footer({ settings }: FooterProps) {
             <div className="space-y-2 text-sm text-ink-300">
               <p>{settings.address}</p>
               <p>Hotline: <a href={`tel:${settings.phone.replace(/\s+/g, "")}`} className="hover:text-[#faf8f5] font-mono">{settings.phone}</a></p>
+              <p>Instagram: <a href="https://www.instagram.com/thuemayanhqbb/" target="_blank" rel="noopener noreferrer" className="hover:text-accent font-mono">@thuemayanhqbb</a></p>
               <p className="text-xs text-ink-500">{settings.opening_hours}</p>
             </div>
             <div className="pt-2">

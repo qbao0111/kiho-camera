@@ -9,7 +9,7 @@ export const MOCK_SITE_SETTINGS: SiteSettings = {
   facebook_url: "https://facebook.com/kihocameradonghoi",
   messenger_url: "https://m.me/kihocameradonghoi",
   tiktok_url: "https://tiktok.com/@kihocamera",
-  instagram_url: "https://instagram.com/Kiho.thuemayanhqbb",
+  instagram_url: "https://www.instagram.com/thuemayanhqbb/",
   maps_url: "https://maps.google.com/?q=48+Ngo+Quyen+Dong+Hoi+Quang+Binh",
   opening_hours: "07:30 - 21:00 (Tất cả các ngày trong tuần)",
   hero_title: "Cho thuê máy ảnh tại Quảng Bình",

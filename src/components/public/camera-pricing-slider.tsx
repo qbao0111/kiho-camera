@@ -3,14 +3,14 @@
 import React, { useState, useRef, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { Sparkles, ArrowRight, ChevronLeft, ChevronRight, Phone, Instagram, MapPin, Heart, Clock, Calendar, Tag } from "lucide-react";
+import { Sparkles, ArrowRight, ChevronLeft, ChevronRight, Phone, Instagram, MapPin, Heart, Clock, Calendar, Tag, ArrowUpRight } from "lucide-react";
 
 export interface CameraPriceItem {
   id: string;
   num: string;
   brand: "fujifilm" | "canon" | "sony" | "compact";
   name: string;
-  subtitle?: string;
+  subtitle: string;
   image: string;
   priceSession: string; // 1 buổi
   priceDay: string;     // 1 ngày
@@ -31,7 +31,7 @@ export const KIHO_PRICE_LIST: CameraPriceItem[] = [
     priceSession: "350K",
     priceDay: "450K",
     price3Days: "420K/ngày",
-    badge: "Siêu phẩm 2026",
+    badge: "Siêu phẩm",
     slug: "fujifilm-x100vi",
   },
   {
@@ -44,7 +44,7 @@ export const KIHO_PRICE_LIST: CameraPriceItem[] = [
     priceSession: "250K",
     priceDay: "380K",
     price3Days: "350K/ngày",
-    badge: "Màu film đẹp",
+    badge: "Màu film",
     slug: "fujifilm-x100v",
   },
   {
@@ -83,7 +83,7 @@ export const KIHO_PRICE_LIST: CameraPriceItem[] = [
     priceSession: "170K",
     priceDay: "280K",
     price3Days: "250K/ngày",
-    badge: "Full-Frame giá rẻ",
+    badge: "Full-Frame",
     slug: "canon-eos-rp",
   },
   {
@@ -163,7 +163,7 @@ export const KIHO_PRICE_LIST: CameraPriceItem[] = [
     priceSession: "90K",
     priceDay: "150K",
     price3Days: "130K/ngày",
-    badge: "Giá siêu rẻ",
+    badge: "Giá rẻ",
     slug: "canon-m",
   },
   {
@@ -190,20 +190,23 @@ export function CameraPricingSlider({ messengerUrl = "https://m.me/kihocameradon
     (c) => selectedBrand === "all" || c.brand === selectedBrand
   );
 
-  // Auto-scroll logic
+  // Duplicated list for seamless looping
+  const displayItems = [...filteredCameras, ...filteredCameras];
+
+  // Auto-scroll logic with seamless wrap
   useEffect(() => {
     const slider = sliderRef.current;
     if (!slider || isPaused) return;
 
-    const scrollSpeed = 1.2; // Pixels per frame
+    const scrollSpeed = 0.8; // Gentle speed
     let animationFrameId: number;
 
     const step = () => {
       if (slider) {
         slider.scrollLeft += scrollSpeed;
-        // Infinite loop wrap
-        if (slider.scrollLeft >= slider.scrollWidth - slider.clientWidth - 10) {
-          slider.scrollLeft = 0;
+        const halfWidth = slider.scrollWidth / 2;
+        if (slider.scrollLeft >= halfWidth) {
+          slider.scrollLeft -= halfWidth;
         }
       }
       animationFrameId = requestAnimationFrame(step);
@@ -215,32 +218,32 @@ export function CameraPricingSlider({ messengerUrl = "https://m.me/kihocameradon
 
   const scrollLeft = () => {
     if (sliderRef.current) {
-      sliderRef.current.scrollBy({ left: -360, behavior: "smooth" });
+      sliderRef.current.scrollBy({ left: -340, behavior: "smooth" });
     }
   };
 
   const scrollRight = () => {
     if (sliderRef.current) {
-      sliderRef.current.scrollBy({ left: 360, behavior: "smooth" });
+      sliderRef.current.scrollBy({ left: 340, behavior: "smooth" });
     }
   };
 
   return (
-    <section className="py-16 sm:py-24 bg-[#faf8f5] overflow-hidden hairline-t hairline-b">
+    <section id="bang-gia" className="py-16 sm:py-24 bg-[#faf8f4] overflow-hidden hairline-t hairline-b">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Section Header */}
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-8 sm:mb-12 gap-6">
           <div>
-            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#f3efe9] border border-[#e4dfd5] text-xs font-mono font-bold uppercase tracking-wider text-ink-700 mb-3">
+            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#f0eae1] border border-[#e2dbcf] text-xs font-mono font-bold uppercase tracking-wider text-ink-700 mb-3">
               <Sparkles className="w-3.5 h-3.5 text-accent" />
-              <span>Bảng Giá Niêm Yết 2026</span>
+              <span>BẢNG GIÁ NIÊM YẾT · ĐỒNG HỚI</span>
             </div>
             <h2 className="text-3xl sm:text-5xl font-black text-ink-900 tracking-tight leading-tight">
               Bảng Giá Thuê Máy Ảnh Kiho
             </h2>
             <p className="mt-2 text-sm sm:text-base text-ink-600 font-medium">
-              Cho thuê máy ảnh Quảng Bình – Máy xịn, giá rõ ràng, thuê nhanh tại Đồng Hới.
+              Máy xịn, giá rõ ràng, nhận máy là chụp đẹp ngay tại TP. Đồng Hới.
             </p>
           </div>
 
@@ -260,7 +263,7 @@ export function CameraPricingSlider({ messengerUrl = "https://m.me/kihocameradon
                   onClick={() => setSelectedBrand(tab.key)}
                   className={`px-3 py-1.5 rounded-lg text-xs font-mono font-bold transition-all ${
                     selectedBrand === tab.key
-                      ? "bg-white text-ink-900 shadow-sm"
+                      ? "bg-white text-ink-900 shadow-xs"
                       : "text-ink-600 hover:text-ink-900"
                   }`}
                 >
@@ -299,20 +302,20 @@ export function CameraPricingSlider({ messengerUrl = "https://m.me/kihocameradon
           className="flex gap-5 sm:gap-6 overflow-x-auto scrollbar-none pb-6 pt-2 select-none scroll-smooth cursor-grab active:cursor-grabbing"
           style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
         >
-          {filteredCameras.map((item) => (
+          {displayItems.map((item, index) => (
             <div
-              key={item.id}
-              className="w-[280px] sm:w-[320px] shrink-0 bg-white rounded-2xl p-5 border border-[#e8e2d7] shadow-sm hover:shadow-xl hover:border-ink-900/40 transition-all duration-300 flex flex-col justify-between group relative"
+              key={`${item.id}-${index}`}
+              className="w-[280px] sm:w-[310px] shrink-0 bg-white rounded-2xl p-5 border border-[#e8e2d7]/80 shadow-[0_4px_20px_rgba(0,0,0,0.03)] hover:shadow-[0_12px_30px_rgba(0,0,0,0.08)] hover:border-ink-900/30 transition-all duration-300 flex flex-col justify-between group relative"
             >
               {/* Card Top: Number & Badges */}
-              <div className="flex items-start justify-between gap-2 mb-3">
-                <span className="w-7 h-7 rounded-full bg-[#f3efe9] text-ink-900 font-mono text-xs font-black flex items-center justify-center border border-[#e4dfd5]">
+              <div className="flex items-start justify-between gap-2 mb-2">
+                <span className="w-7 h-7 rounded-full bg-[#f4efe6] text-ink-900 font-mono text-xs font-black flex items-center justify-center border border-[#e2dbcf]">
                   {item.num}
                 </span>
 
                 <div className="flex items-center gap-1.5">
                   {item.isTopPick ? (
-                    <span className="px-2.5 py-0.5 rounded-full bg-[#6366f1] text-white text-[10px] font-mono font-bold uppercase tracking-wider shadow-xs animate-pulse">
+                    <span className="px-2.5 py-0.5 rounded-full bg-[#6366f1] text-white text-[10px] font-mono font-bold uppercase tracking-wider shadow-xs">
                       ★ TOP PICK
                     </span>
                   ) : item.badge ? (
@@ -323,23 +326,23 @@ export function CameraPricingSlider({ messengerUrl = "https://m.me/kihocameradon
                 </div>
               </div>
 
-              {/* Camera Image Showcase (Clean studio render) */}
-              <div className="relative aspect-square w-full my-2 flex items-center justify-center p-2 rounded-xl bg-[#faf8f5]">
+              {/* Camera Image Showcase (Clean studio render ~10% larger) */}
+              <div className="relative aspect-square w-full my-1 flex items-center justify-center p-2 rounded-xl bg-[#faf8f4]">
                 <Image
                   src={item.image}
                   alt={item.name}
                   fill
-                  sizes="320px"
-                  className="object-contain p-2 filter drop-shadow-md group-hover:scale-110 transition-transform duration-500 ease-out"
+                  sizes="310px"
+                  className="object-contain p-2 filter drop-shadow-[0_8px_16px_rgba(0,0,0,0.12)] group-hover:scale-[1.03] transition-transform duration-300 ease-out"
                 />
               </div>
 
               {/* Model Info */}
-              <div className="mt-2 mb-4">
+              <div className="mt-2 mb-3">
                 <h3 className="text-base sm:text-lg font-black text-ink-900 tracking-tight uppercase group-hover:text-accent transition-colors font-mono">
                   {item.name}
                 </h3>
-                <p className="text-xs text-ink-500 line-clamp-1 mt-0.5">
+                <p className="text-xs text-ink-500 line-clamp-1 mt-0.5 font-medium">
                   {item.subtitle}
                 </p>
               </div>
@@ -380,19 +383,29 @@ export function CameraPricingSlider({ messengerUrl = "https://m.me/kihocameradon
                   href={`https://zalo.me/0387274669?text=Chào Kiho, mình muốn thuê máy ${encodeURIComponent(item.name)}`}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-full bg-ink-900 hover:bg-accent text-white text-xs font-mono font-bold py-2.5 px-4 rounded-xl flex items-center justify-center gap-2 transition-colors shadow-sm"
+                  className="w-full bg-ink-900 hover:bg-accent text-white text-xs font-mono font-bold py-2.5 px-4 rounded-xl flex items-center justify-center gap-2 transition-colors shadow-xs"
                 >
                   <span>Thuê máy {item.name.split(" ")[1] || ""}</span>
-                  <ArrowRight className="w-3.5 h-3.5" />
+                  <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
                 </a>
               </div>
             </div>
           ))}
         </div>
 
-        {/* Bottom Banner Card (Matching Banner Footer Information) */}
+        {/* Link to Full Equipment Catalog */}
+        <div className="mt-8 flex justify-center">
+          <Link
+            href="/thiet-bi"
+            className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-white hover:bg-ink-900 text-ink-900 hover:text-white border border-[#e0d6c7] text-xs font-mono font-bold uppercase tracking-wider transition-all duration-300 shadow-xs group"
+          >
+            <span>Xem toàn bộ kho máy & phụ kiện</span>
+            <ArrowUpRight className="w-4 h-4 text-ink-400 group-hover:text-white transition-colors" />
+          </Link>
+        </div>
+
+        {/* Bottom Contact Card Banner */}
         <div className="mt-12 bg-[#2c2621] text-white rounded-3xl p-6 sm:p-8 shadow-xl relative overflow-hidden">
-          {/* Subtle Background Glow */}
           <div className="absolute top-0 right-0 w-80 h-80 bg-[#e6a84d]/10 rounded-full blur-3xl pointer-events-none" />
 
           <div className="relative z-10 grid grid-cols-1 md:grid-cols-3 gap-6 items-center text-xs font-mono">
@@ -424,12 +437,12 @@ export function CameraPricingSlider({ messengerUrl = "https://m.me/kihocameradon
                   INSTAGRAM CHÍNH THỨC
                 </span>
                 <a
-                  href="https://instagram.com/Kiho.thuemayanhqbb"
+                  href="https://www.instagram.com/thuemayanhqbb/"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-sm sm:text-base font-bold text-white hover:text-[#e6a84d] transition-colors"
                 >
-                  @Kiho.thuemayanhqbb
+                  @thuemayanhqbb
                 </a>
               </div>
             </div>
@@ -450,7 +463,7 @@ export function CameraPricingSlider({ messengerUrl = "https://m.me/kihocameradon
             </div>
           </div>
 
-          {/* Slogan pill in banner */}
+          {/* Slogan */}
           <div className="relative z-10 mt-6 pt-5 border-t border-white/10 flex items-center justify-center text-center">
             <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-accent/20 text-accent-light text-xs font-mono font-bold tracking-wide">
               <Heart className="w-3.5 h-3.5 fill-current text-accent" />
@@ -458,6 +471,7 @@ export function CameraPricingSlider({ messengerUrl = "https://m.me/kihocameradon
             </span>
           </div>
         </div>
+
       </div>
     </section>
   );
