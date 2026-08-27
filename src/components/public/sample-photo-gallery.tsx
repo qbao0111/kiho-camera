@@ -28,7 +28,7 @@ export function SamplePhotoGallery({ cameraName, sampleImages = [] }: SamplePhot
   }));
 
   return (
-    <section className="pt-12 sm:pt-16 hairline-t">
+    <section id="anh-chup-thuc-te" className="pt-12 sm:pt-16 hairline-t scroll-mt-24 sm:scroll-mt-28">
       {/* Section Title */}
       <div className="space-y-3 mb-8">
         <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#f0eae1] border border-[#e2dbcf] text-xs font-mono font-bold uppercase tracking-wider text-ink-700">
@@ -38,8 +38,8 @@ export function SamplePhotoGallery({ cameraName, sampleImages = [] }: SamplePhot
         <h2 className="text-2xl sm:text-4xl font-black text-ink-900 tracking-tight font-mono uppercase">
           Màu ảnh thực tế từ {cameraName}
         </h2>
-        <p className="text-xs sm:text-sm text-ink-600 font-medium max-w-2xl">
-          Không filter quảng cáo — đây là chất lượng ảnh, màu da và độ chi tiết bạn có thể kỳ vọng khi mang chiếc máy này đi chơi.
+        <p className="text-xs sm:text-sm text-ink-600 font-medium max-w-2xl leading-relaxed">
+          Xem thử chiếc máy này cho ra màu da, ánh sáng và không khí bức ảnh như thế nào trước khi chọn thuê.
         </p>
       </div>
 

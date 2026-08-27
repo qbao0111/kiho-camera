@@ -2,11 +2,12 @@ import React from "react";
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Link from "next/link";
-import { ArrowUpRight, CheckCircle2, Clock, Calendar, Tag, ShieldCheck, Phone } from "lucide-react";
+import { ArrowUpRight, Clock, Calendar, Tag, ShieldCheck } from "lucide-react";
 import { getEquipmentBySlug, getRelatedEquipment } from "@/lib/services/equipment";
 import { getSiteSettings } from "@/lib/services/settings";
 import { ProductGallery } from "@/components/public/product-gallery";
 import { SamplePhotoGallery } from "@/components/public/sample-photo-gallery";
+import { EquipmentDetails } from "@/components/public/equipment-details";
 import { ProductCard } from "@/components/public/product-card";
 import { StickyMessengerBar } from "@/components/public/sticky-messenger-bar";
 import { ProductJsonLd } from "@/components/public/json-ld";
@@ -74,6 +75,8 @@ export default async function ProductDetailPage({ params }: PageProps) {
     return `${Math.round(price / 1000)}K`;
   };
 
+  const hasSampleImages = equipment.sample_images && equipment.sample_images.length > 0;
+
   return (
     <div className="bg-[#faf8f4] min-h-screen py-8 pb-28 md:pb-20">
       <ProductJsonLd equipment={equipment} siteUrl={siteUrl} />
@@ -95,20 +98,19 @@ export default async function ProductDetailPage({ params }: PageProps) {
           </span>
         </FadeIn>
 
-        {/* Main Product Layout: Sticky Left Image / Editorial Right Content */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16">
+        {/* 1. TOP HERO SECTION: Compact 2-Column Grid (Product Image + Essential Conversion Information) */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 items-start">
           
-          {/* Left: Sticky Image Gallery (6 cols) */}
+          {/* Left: Product Gallery (No Price Poster) */}
           <div className="lg:col-span-6 lg:sticky lg:top-24 self-start">
             <ProductGallery
               images={equipment.images}
-              pricePosterUrl={equipment.price_poster_url}
               productName={equipment.name}
             />
           </div>
 
-          {/* Right: Editorial Information & Pricing (6 cols) */}
-          <div className="lg:col-span-6 space-y-8">
+          {/* Right: Essential Decision & Conversion Information */}
+          <div className="lg:col-span-6 space-y-7">
             
             {/* Header / Title */}
             <div className="space-y-3 pb-6 hairline-b">
@@ -187,7 +189,7 @@ export default async function ProductDetailPage({ params }: PageProps) {
             )}
 
             {/* Primary Action Button & Support Note */}
-            <div className="space-y-3 pt-2">
+            <div className="space-y-3 pt-1">
               <a
                 href={messengerChatUrl}
                 target="_blank"
@@ -198,7 +200,7 @@ export default async function ProductDetailPage({ params }: PageProps) {
                 <ArrowUpRight className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
               </a>
 
-              {/* Subtle Support Note */}
+              {/* Subtle Support Note: No Deposit USP */}
               <div className="p-3.5 rounded-2xl bg-[#f0eae1] border border-[#e2dbcf] flex items-center gap-3 text-xs font-mono text-ink-800">
                 <ShieldCheck className="w-4 h-4 text-emerald-700 shrink-0" />
                 <span>
@@ -206,94 +208,36 @@ export default async function ProductDetailPage({ params }: PageProps) {
                 </span>
               </div>
 
+              {/* Sample Photo Discovery Link (Smooth Anchor Jump) */}
+              {hasSampleImages && (
+                <div className="pt-2">
+                  <a
+                    href="#anh-chup-thuc-te"
+                    className="inline-flex items-center gap-2 text-xs sm:text-sm font-mono font-bold text-ink-700 hover:text-ink-900 transition-colors group cursor-pointer"
+                  >
+                    <span className="w-2 h-2 rounded-full bg-accent animate-pulse" />
+                    <span>Xem {equipment.sample_images?.length} ảnh chụp thực tế từ máy này</span>
+                    <span className="text-accent group-hover:translate-y-0.5 transition-transform font-bold">↓</span>
+                  </a>
+                </div>
+              )}
+
               <div className="flex items-center justify-between text-[11px] font-mono text-ink-400 px-1 pt-1">
                 <span>TƯ VẤN 1:1 QUA MESSENGER / ZALO</span>
                 <a href="tel:0387274669" className="hover:text-ink-900">HOTLINE: 0387 274 669</a>
               </div>
             </div>
 
-            {/* Editorial Hairline Sections */}
-            <div className="space-y-6 pt-4">
-              
-              {/* 1. Included items */}
-              {equipment.included_items && equipment.included_items.length > 0 && (
-                <div className="space-y-3 pt-6 hairline-t">
-                  <span className="text-[11px] font-mono font-bold tracking-widest text-ink-400 uppercase block">
-                    BỘ THUÊ ĐÃ BAO GỒM (NHẬN MÁY LÀ CHỤP)
-                  </span>
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs sm:text-sm text-ink-800 font-medium">
-                    {equipment.included_items.map((item, idx) => (
-                      <div key={idx} className="flex items-center gap-2">
-                        <CheckCircle2 className="w-4 h-4 text-accent shrink-0" />
-                        <span>{item}</span>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              )}
-
-              {/* 2. Specifications */}
-              {equipment.specifications && Object.keys(equipment.specifications).length > 0 && (
-                <div className="space-y-3 pt-6 hairline-t">
-                  <span className="text-[11px] font-mono font-bold tracking-widest text-ink-400 uppercase block">
-                    THÔNG SỐ KỸ THUẬT HỮU ÍCH
-                  </span>
-                  <div className="divide-y divide-[#e7e4dc] text-xs sm:text-sm">
-                    {Object.entries(equipment.specifications).map(([key, val], idx) => (
-                      <div key={idx} className="py-2.5 flex justify-between gap-4">
-                        <span className="text-ink-500 font-medium capitalize">
-                          {key.replace(/_/g, " ")}
-                        </span>
-                        <span className="text-ink-900 font-bold text-right max-w-[260px] font-mono">
-                          {val}
-                        </span>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              )}
-
-              {/* 3. Detailed Overview */}
-              {equipment.description && (
-                <div className="space-y-2.5 pt-6 hairline-t">
-                  <span className="text-[11px] font-mono font-bold tracking-widest text-ink-400 uppercase block">
-                    CHI TIẾT TRẢI NGHIỆM
-                  </span>
-                  <div className="text-xs sm:text-sm text-ink-700 leading-relaxed space-y-2 font-medium">
-                    {equipment.description.split("\n\n").map((para, idx) => (
-                      <p key={idx}>{para}</p>
-                    ))}
-                  </div>
-                </div>
-              )}
-
-              {/* 4. Rental Policy & Verification */}
-              <div className="space-y-2.5 pt-6 hairline-t">
-                <span className="text-[11px] font-mono font-bold tracking-widest text-ink-400 uppercase block">
-                  THỦ TỤC XÁC MINH & NHẬN MÁY
-                </span>
-                <p className="text-xs sm:text-sm text-ink-700 leading-relaxed font-medium">
-                  {equipment.deposit_note ||
-                    "Kiho Camera không yêu cầu cọc tiền máy. Bạn chỉ cần cung cấp ảnh CCCD gắn chip chính chủ hoặc tài khoản VNeID để xác minh khi nhận máy tại 48 Ngô Quyền hoặc giao tận nơi khách sạn."}
-                </p>
-                <div className="pt-1">
-                  <Link
-                    href="/huong-dan-thue"
-                    className="text-xs font-mono font-bold text-ink-900 underline underline-offset-4"
-                  >
-                    Xem chi tiết 3 bước thuê máy →
-                  </Link>
-                </div>
-              </div>
-
-            </div>
           </div>
         </div>
 
-        {/* Real Sample Photos Section */}
+        {/* 2. REAL SAMPLE PHOTOS GALLERY (Immediately following Hero) */}
         <SamplePhotoGallery cameraName={equipment.name} sampleImages={equipment.sample_images} />
 
-        {/* Related Cameras Section */}
+        {/* 3. PRODUCT DETAILS SECTION (Structured 2-column on desktop, collapsible on mobile) */}
+        <EquipmentDetails equipment={equipment} messengerChatUrl={messengerChatUrl} />
+
+        {/* 4. RELATED CAMERAS SECTION */}
         {relatedEquipment.length > 0 && (
           <div className="pt-16 sm:pt-24 hairline-t space-y-8">
             <div className="flex items-baseline justify-between">

@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import { ArrowDown, ArrowUpRight, Sparkles, ShieldCheck, MapPin, PackageCheck } from "lucide-react";
@@ -36,6 +36,36 @@ const HERO_CAMERAS = [
     alt: "Canon PowerShot G7X Mark III",
   },
 ];
+
+const POSITIONS = {
+  center: {
+    top: "20%",
+    left: "15%",
+    width: "70%",
+    height: "70%",
+    zIndex: 30,
+    rotate: 0,
+    opacity: 1,
+  },
+  leftBack: {
+    top: "-6%",
+    left: "-4%",
+    width: "46%",
+    height: "46%",
+    zIndex: 20,
+    rotate: -5,
+    opacity: 0.92,
+  },
+  rightBack: {
+    top: "-8%",
+    left: "58%",
+    width: "44%",
+    height: "44%",
+    zIndex: 20,
+    rotate: 6,
+    opacity: 0.92,
+  },
+};
 
 export function LandingHero({
   messengerUrl = "https://m.me/kihocameradonghoi",
@@ -195,7 +225,7 @@ export function LandingHero({
             {/* Visual Container */}
             <div className="relative w-full max-w-[540px] aspect-[4/3] sm:aspect-[16/11]">
               
-              {/* Layer 1: Travel Landscape Backdrop Card (Visible, scenic, warm golden hour) */}
+              {/* Layer 1: Travel Landscape Backdrop Card */}
               <div
                 className="absolute inset-0 rounded-[32px] sm:rounded-[40px] overflow-hidden border border-[#e8e0d4] shadow-xl bg-[#f4efe6] transition-transform duration-300 ease-out"
                 style={{
@@ -207,94 +237,65 @@ export function LandingHero({
                   alt="Hoàng hôn Quảng Bình"
                   fill
                   priority
-                  className="object-cover opacity-95 filter saturate-[1.1] contrast-[1.04]"
+                  className="object-cover opacity-90 filter saturate-[1.15] contrast-[1.05]"
                   sizes="(max-width: 1024px) 100vw, 540px"
                 />
                 
-                {/* Soft Warm Vignette Overlay (Leaves the scene clear while making cameras pop) */}
-                <div className="absolute inset-0 bg-gradient-to-t from-[#faf8f4]/85 via-[#faf8f4]/15 to-transparent pointer-events-none" />
+                {/* Soft Warm Gradient Overlay */}
+                <div className="absolute inset-0 bg-gradient-to-t from-black/25 via-transparent to-transparent pointer-events-none" />
               </div>
 
-              {/* 3 Interactive Layered Cameras (Pointer-events cleanly decoupled to ensure instant clicks) */}
+              {/* 3 Interactive Layered Cameras (Direct Coordinate System - Cannot collapse) */}
               {HERO_CAMERAS.map((cam, idx) => {
                 const isCenter = idx === activeIdx;
-                const isLeftBack = idx === (activeIdx + 2) % 3;
-                const isRightBack = idx === (activeIdx + 1) % 3;
+                let targetPos = POSITIONS.center;
 
-                // Motion & depth configurations
-                let motionConfig = {
-                  x: 0,
-                  y: 12,
-                  scale: 1.12,
-                  rotate: 0,
-                  zIndex: 30,
-                  opacity: 1,
-                  filter: "drop-shadow(0 28px 40px rgba(20,15,10,0.45))",
-                };
-
-                if (isLeftBack) {
-                  motionConfig = {
-                    x: -125,
-                    y: -65,
-                    scale: 0.60,
-                    rotate: -6,
-                    zIndex: 20,
-                    opacity: 0.90,
-                    filter: "drop-shadow(0 14px 22px rgba(20,15,10,0.25))",
-                  };
-                } else if (isRightBack) {
-                  motionConfig = {
-                    x: 125,
-                    y: -60,
-                    scale: 0.56,
-                    rotate: 6,
-                    zIndex: 20,
-                    opacity: 0.90,
-                    filter: "drop-shadow(0 12px 20px rgba(20,15,10,0.25))",
-                  };
+                if (idx === (activeIdx + 2) % 3) {
+                  targetPos = POSITIONS.leftBack;
+                } else if (idx === (activeIdx + 1) % 3) {
+                  targetPos = POSITIONS.rightBack;
                 }
 
                 return (
                   <motion.div
                     key={cam.id}
                     animate={{
-                      x: motionConfig.x + (isCenter ? mousePos.x * 6 : mousePos.x * 3),
-                      y: motionConfig.y + (isCenter ? mousePos.y * 6 : mousePos.y * 3),
-                      scale: motionConfig.scale,
-                      rotate: motionConfig.rotate,
-                      zIndex: motionConfig.zIndex,
-                      opacity: motionConfig.opacity,
+                      top: targetPos.top,
+                      left: targetPos.left,
+                      width: targetPos.width,
+                      height: targetPos.height,
+                      rotate: targetPos.rotate,
+                      opacity: targetPos.opacity,
+                      x: isCenter ? mousePos.x * 6 : mousePos.x * 3,
+                      y: isCenter ? mousePos.y * 6 : mousePos.y * 3,
                     }}
                     transition={{
                       duration: 0.55,
                       ease: [0.22, 1, 0.36, 1],
                     }}
-                    className="absolute inset-0 flex items-center justify-center pointer-events-none"
+                    onClick={() => handleSelectCamera(idx)}
+                    className={`absolute aspect-square ${
+                      isCenter ? "cursor-default" : "cursor-pointer group"
+                    }`}
+                    style={{ zIndex: targetPos.zIndex }}
                   >
-                    {/* Camera Hitbox & Interaction Container */}
-                    <div
-                      onClick={() => handleSelectCamera(idx)}
-                      className={`relative w-[65%] sm:w-[60%] aspect-square flex items-center justify-center pointer-events-auto transition-transform duration-300 ${
-                        isCenter
-                          ? "cursor-default"
-                          : "cursor-pointer group hover:scale-[1.08] hover:-translate-y-1.5"
-                      }`}
-                    >
+                    <div className="relative w-full h-full transition-transform duration-300 group-hover:scale-105">
                       <Image
                         src={cam.image}
                         alt={cam.alt}
                         fill
                         sizes="380px"
                         priority={idx === 0}
-                        className="object-contain select-none"
-                        style={{
-                          filter: motionConfig.filter,
-                        }}
+                        className={`object-contain select-none filter ${
+                          isCenter
+                            ? "drop-shadow-[0_28px_40px_rgba(20,15,10,0.45)]"
+                            : "drop-shadow-[0_14px_22px_rgba(20,15,10,0.28)]"
+                        }`}
                       />
 
                       {/* Side Camera Subtle Name Pill */}
                       {!isCenter && (
-                        <div className="absolute -bottom-1.5 whitespace-nowrap bg-[#2c2621]/90 backdrop-blur-xs text-white text-[9px] sm:text-[10px] font-mono font-bold px-2.5 py-0.5 rounded shadow-sm opacity-90 group-hover:opacity-100 group-hover:bg-[#171716] transition-all">
+                        <div className="absolute -bottom-1 left-1/2 -translate-x-1/2 whitespace-nowrap bg-[#2c2621]/90 backdrop-blur-xs text-white text-[9px] sm:text-[10px] font-mono font-bold px-2 py-0.5 rounded shadow-sm opacity-90 group-hover:opacity-100 group-hover:bg-[#171716] transition-all">
                           {cam.subName}
                         </div>
                       )}

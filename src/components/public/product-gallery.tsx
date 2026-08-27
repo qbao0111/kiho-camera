@@ -8,28 +8,20 @@ import { ImageLightbox, LightboxImage } from "@/components/ui/image-lightbox";
 
 interface ProductGalleryProps {
   images?: EquipmentImage[];
-  pricePosterUrl?: string | null;
   productName: string;
 }
 
-export function ProductGallery({ images = [], pricePosterUrl, productName }: ProductGalleryProps) {
-  // Assemble full image list (product images + price poster if available)
+export function ProductGallery({ images = [], productName }: ProductGalleryProps) {
+  // Assemble product-only image list (No price poster in gallery)
   const imageList: LightboxImage[] = [];
 
-  if (images.length > 0) {
+  if (images && images.length > 0) {
     images.forEach((img) =>
       imageList.push({
         url: img.image_url,
         alt: `${productName} - ảnh chi tiết`,
       })
     );
-  }
-
-  if (pricePosterUrl && !imageList.some((img) => img.url === pricePosterUrl)) {
-    imageList.push({
-      url: pricePosterUrl,
-      alt: `Bảng giá niêm yết ${productName}`,
-    });
   }
 
   if (imageList.length === 0) {
@@ -47,7 +39,7 @@ export function ProductGallery({ images = [], pricePosterUrl, productName }: Pro
       {/* Main Showcase Image */}
       <div className="relative aspect-[4/3] w-full rounded-3xl overflow-hidden bg-white p-6 border border-[#e8e2d7] shadow-[0_4px_20px_rgba(0,0,0,0.04)] group">
         <Image
-          src={imageList[activeIndex].url}
+          src={imageList[activeIndex]?.url || imageList[0].url}
           alt={`${productName} - ảnh ${activeIndex + 1}`}
           fill
           priority
@@ -65,19 +57,20 @@ export function ProductGallery({ images = [], pricePosterUrl, productName }: Pro
           <ZoomIn className="w-3.5 h-3.5" />
         </button>
 
-        {/* Index indicator */}
-        <div className="absolute top-4 left-4">
-          <span className="px-2.5 py-1 rounded-full bg-[#f0eae1] text-ink-700 text-[10px] font-mono font-bold tracking-wider uppercase">
-            {activeIndex + 1} / {imageList.length}
-          </span>
-        </div>
+        {/* Index indicator (only shown if multiple images) */}
+        {imageList.length > 1 && (
+          <div className="absolute top-4 left-4">
+            <span className="px-2.5 py-1 rounded-full bg-[#f0eae1] text-ink-700 text-[10px] font-mono font-bold tracking-wider uppercase">
+              {activeIndex + 1} / {imageList.length}
+            </span>
+          </div>
+        )}
       </div>
 
-      {/* Thumbnails Row */}
+      {/* Thumbnails Row (only rendered if >= 2 images) */}
       {imageList.length > 1 && (
         <div className="flex gap-2.5 overflow-x-auto pb-1 scrollbar-none">
           {imageList.map((img, index) => {
-            const isPoster = img.url.includes("price-posters");
             const isSelected = activeIndex === index;
 
             return (
@@ -97,11 +90,6 @@ export function ProductGallery({ images = [], pricePosterUrl, productName }: Pro
                   sizes="80px"
                   className="object-contain p-1"
                 />
-                {isPoster && (
-                  <span className="absolute bottom-1 right-1 bg-accent text-white text-[8px] font-mono px-1 rounded-xs">
-                    Bảng giá
-                  </span>
-                )}
               </button>
             );
           })}
