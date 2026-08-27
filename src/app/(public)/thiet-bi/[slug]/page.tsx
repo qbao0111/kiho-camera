@@ -2,12 +2,13 @@ import React from "react";
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Link from "next/link";
-import { ArrowUpRight, Clock, Calendar, Tag, ShieldCheck } from "lucide-react";
+import { Clock, Calendar, Tag } from "lucide-react";
 import { getEquipmentBySlug, getRelatedEquipment } from "@/lib/services/equipment";
 import { getSiteSettings } from "@/lib/services/settings";
 import { ProductGallery } from "@/components/public/product-gallery";
 import { SamplePhotoGallery } from "@/components/public/sample-photo-gallery";
 import { EquipmentDetails } from "@/components/public/equipment-details";
+import { ProductRentalAction } from "@/components/public/product-rental-action";
 import { ProductCard } from "@/components/public/product-card";
 import { StickyMessengerBar } from "@/components/public/sticky-messenger-bar";
 import { ProductJsonLd } from "@/components/public/json-ld";
@@ -188,45 +189,13 @@ export default async function ProductDetailPage({ params }: PageProps) {
               </p>
             )}
 
-            {/* Primary Action Button & Support Note */}
-            <div className="space-y-3 pt-1">
-              <a
-                href={messengerChatUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-full inline-flex items-center justify-center gap-2 bg-ink-900 hover:bg-accent text-white font-mono font-bold py-4 px-6 rounded-2xl shadow-md transition-all text-sm sm:text-base group cursor-pointer"
-              >
-                <span>Nhắn Kiho Camera để thuê máy này</span>
-                <ArrowUpRight className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
-              </a>
-
-              {/* Subtle Support Note: No Deposit USP */}
-              <div className="p-3.5 rounded-2xl bg-[#f0eae1] border border-[#e2dbcf] flex items-center gap-3 text-xs font-mono text-ink-800">
-                <ShieldCheck className="w-4 h-4 text-emerald-700 shrink-0" />
-                <span>
-                  <strong className="text-ink-900 font-bold">Không cần cọc tiền máy</strong> · Chỉ cần ảnh CCCD hoặc VNeID để xác minh
-                </span>
-              </div>
-
-              {/* Sample Photo Discovery Link (Smooth Anchor Jump) */}
-              {hasSampleImages && (
-                <div className="pt-2">
-                  <a
-                    href="#anh-chup-thuc-te"
-                    className="inline-flex items-center gap-2 text-xs sm:text-sm font-mono font-bold text-ink-700 hover:text-ink-900 transition-colors group cursor-pointer"
-                  >
-                    <span className="w-2 h-2 rounded-full bg-accent animate-pulse" />
-                    <span>Xem {equipment.sample_images?.length} ảnh chụp thực tế từ máy này</span>
-                    <span className="text-accent group-hover:translate-y-0.5 transition-transform font-bold">↓</span>
-                  </a>
-                </div>
-              )}
-
-              <div className="flex items-center justify-between text-[11px] font-mono text-ink-400 px-1 pt-1">
-                <span>TƯ VẤN 1:1 QUA MESSENGER / ZALO</span>
-                <a href="tel:0387274669" className="hover:text-ink-900">HOTLINE: 0387 274 669</a>
-              </div>
-            </div>
+            {/* Action Buttons: Primary Lead Form Request + Secondary Messenger Link */}
+            <ProductRentalAction
+              equipment={equipment}
+              messengerChatUrl={messengerChatUrl}
+              hasSampleImages={hasSampleImages}
+              sampleImagesCount={equipment.sample_images?.length}
+            />
 
           </div>
         </div>

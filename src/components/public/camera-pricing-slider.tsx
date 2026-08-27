@@ -1,11 +1,10 @@
 "use client";
 
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useRef, useEffect, useCallback } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { Sparkles, ArrowRight, ChevronLeft, ChevronRight, Phone, Instagram, MapPin, Heart, Clock, Calendar, Tag, ArrowUpRight } from "lucide-react";
 import { Equipment } from "@/types/database";
-import { formatCurrency } from "@/lib/utils";
 
 interface CameraPricingSliderProps {
   equipment?: Equipment[];
@@ -17,8 +16,17 @@ export function CameraPricingSlider({
   messengerUrl = "https://m.me/kihocameradonghoi",
 }: CameraPricingSliderProps) {
   const [selectedBrand, setSelectedBrand] = useState<string>("all");
-  const [isPaused, setIsPaused] = useState(false);
+  const [isHovered, setIsHovered] = useState(false);
+  const [isDragging, setIsDragging] = useState(false);
+
   const sliderRef = useRef<HTMLDivElement>(null);
+  const manualPauseUntilRef = useRef<number>(0);
+  const isDragIntentRef = useRef(false);
+  const dragStartRef = useRef<{ startX: number; startScrollLeft: number; hasMoved: boolean }>({
+    startX: 0,
+    startScrollLeft: 0,
+    hasMoved: false,
+  });
 
   const cameraItems = equipment.length > 0 ? equipment : [];
 
@@ -29,16 +37,51 @@ export function CameraPricingSlider({
   // Duplicated list for seamless looping
   const displayItems = [...filteredCameras, ...filteredCameras];
 
-  // Auto-scroll logic with seamless wrap
+  const pauseManual = useCallback((ms = 3500) => {
+    manualPauseUntilRef.current = Date.now() + ms;
+  }, []);
+
+  // Measure dynamic card scroll step (card width + gap)
+  const getCardScrollStep = () => {
+    const slider = sliderRef.current;
+    if (!slider) return 330;
+    const firstCard = slider.firstElementChild as HTMLElement | null;
+    if (firstCard) {
+      const cardWidth = firstCard.offsetWidth;
+      const style = window.getComputedStyle(slider);
+      const gap = parseFloat(style.columnGap || style.gap) || 24;
+      return cardWidth + gap;
+    }
+    return 330;
+  };
+
+  // Normalize boundary without visible jump
+  const normalizeScrollPosition = () => {
+    const slider = sliderRef.current;
+    if (!slider) return;
+    const halfWidth = slider.scrollWidth / 2;
+    if (halfWidth <= 0) return;
+
+    if (slider.scrollLeft >= halfWidth) {
+      slider.scrollLeft -= halfWidth;
+    } else if (slider.scrollLeft <= 0) {
+      slider.scrollLeft += halfWidth;
+    }
+  };
+
+  // Continuous Autoplay loop (Clean state separation)
   useEffect(() => {
     const slider = sliderRef.current;
-    if (!slider || isPaused || filteredCameras.length === 0) return;
+    if (!slider || filteredCameras.length === 0) return;
 
-    const scrollSpeed = 0.8;
     let animationFrameId: number;
+    const scrollSpeed = 0.75;
 
     const step = () => {
-      if (slider) {
+      const now = Date.now();
+      const isPaused = isHovered || isDragging || now < manualPauseUntilRef.current;
+
+      if (!isPaused && slider) {
         slider.scrollLeft += scrollSpeed;
         const halfWidth = slider.scrollWidth / 2;
         if (slider.scrollLeft >= halfWidth) {
@@ -50,18 +93,118 @@ export function CameraPricingSlider({
 
     animationFrameId = requestAnimationFrame(step);
     return () => cancelAnimationFrame(animationFrameId);
-  }, [isPaused, filteredCameras]);
+  }, [isHovered, isDragging, filteredCameras.length]);
 
+  // Arrow buttons manual navigation
   const scrollLeft = () => {
-    if (sliderRef.current) {
-      sliderRef.current.scrollBy({ left: -340, behavior: "smooth" });
-    }
+    const slider = sliderRef.current;
+    if (!slider) return;
+
+    pauseManual(3500);
+    normalizeScrollPosition();
+
+    const step = getCardScrollStep();
+    slider.scrollBy({
+      left: -step,
+      behavior: "smooth",
+    });
   };
 
   const scrollRight = () => {
-    if (sliderRef.current) {
-      sliderRef.current.scrollBy({ left: 340, behavior: "smooth" });
+    const slider = sliderRef.current;
+    if (!slider) return;
+
+    pauseManual(3500);
+    normalizeScrollPosition();
+
+    const step = getCardScrollStep();
+    slider.scrollBy({
+      left: step,
+      behavior: "smooth",
+    });
+  };
+
+  // Desktop Pointer Drag (Mouse/Pen)
+  const handlePointerDown = (e: React.PointerEvent<HTMLDivElement>) => {
+    if (e.pointerType === "touch" || e.button !== 0) return;
+
+    const slider = sliderRef.current;
+    if (!slider) return;
+
+    dragStartRef.current = {
+      startX: e.clientX,
+      startScrollLeft: slider.scrollLeft,
+      hasMoved: false,
+    };
+    isDragIntentRef.current = true;
+    pauseManual(3500);
+  };
+
+  const handlePointerMove = (e: React.PointerEvent<HTMLDivElement>) => {
+    if (!isDragIntentRef.current) return;
+    const slider = sliderRef.current;
+    if (!slider) return;
+
+    const deltaX = e.clientX - dragStartRef.current.startX;
+
+    // 6px threshold to distinguish click vs drag
+    if (!dragStartRef.current.hasMoved && Math.abs(deltaX) > 6) {
+      dragStartRef.current.hasMoved = true;
+      setIsDragging(true);
+      try {
+        slider.setPointerCapture(e.pointerId);
+      } catch (_) {}
     }
+
+    if (dragStartRef.current.hasMoved) {
+      slider.scrollLeft = dragStartRef.current.startScrollLeft - deltaX;
+      normalizeScrollPosition();
+      pauseManual(3500);
+    }
+  };
+
+  const handlePointerUp = (e: React.PointerEvent<HTMLDivElement>) => {
+    if (!isDragIntentRef.current) return;
+    isDragIntentRef.current = false;
+
+    const slider = sliderRef.current;
+    if (slider && dragStartRef.current.hasMoved) {
+      try {
+        slider.releasePointerCapture(e.pointerId);
+      } catch (_) {}
+    }
+
+    // Brief timeout so link click is suppressed if moved
+    setTimeout(() => {
+      setIsDragging(false);
+      dragStartRef.current.hasMoved = false;
+    }, 60);
+
+    pauseManual(3500);
+  };
+
+  const handlePointerCancel = () => {
+    isDragIntentRef.current = false;
+    setIsDragging(false);
+    dragStartRef.current.hasMoved = false;
+    pauseManual(2000);
+  };
+
+  // Prevent accidental link navigation on drag
+  const handleCardClick = (e: React.MouseEvent) => {
+    if (dragStartRef.current.hasMoved || isDragging) {
+      e.preventDefault();
+      e.stopPropagation();
+    }
+  };
+
+  // Reset scroll on brand filter change
+  const handleBrandChange = (brand: string) => {
+    setSelectedBrand(brand);
+    if (sliderRef.current) {
+      sliderRef.current.scrollLeft = 0;
+    }
+    pauseManual(2500);
   };
 
   const fujiCount = cameraItems.filter((c) => c.brand.toLowerCase() === "fujifilm").length;
@@ -99,8 +242,8 @@ export function CameraPricingSlider({
               ].map((tab) => (
                 <button
                   key={tab.key}
-                  onClick={() => setSelectedBrand(tab.key)}
-                  className={`px-3 py-1.5 rounded-lg text-xs font-mono font-bold transition-all ${
+                  onClick={() => handleBrandChange(tab.key)}
+                  className={`px-3 py-1.5 rounded-lg text-xs font-mono font-bold transition-all cursor-pointer ${
                     selectedBrand === tab.key
                       ? "bg-white text-ink-900 shadow-xs"
                       : "text-ink-600 hover:text-ink-900"
@@ -111,18 +254,18 @@ export function CameraPricingSlider({
               ))}
             </div>
 
-            {/* Next / Prev Buttons */}
+            {/* Next / Prev Buttons (Smooth manual navigation with autoplay pause) */}
             <div className="hidden sm:flex items-center gap-1.5">
               <button
                 onClick={scrollLeft}
-                className="w-9 h-9 rounded-xl bg-white border border-[#e0d6c7] hover:bg-ink-900 hover:text-white text-ink-800 flex items-center justify-center transition-colors shadow-xs"
+                className="w-9 h-9 rounded-xl bg-white border border-[#e0d6c7] hover:bg-ink-900 hover:text-white text-ink-800 flex items-center justify-center transition-colors shadow-xs cursor-pointer active:scale-95"
                 aria-label="Xem lùi"
               >
                 <ChevronLeft className="w-4 h-4" />
               </button>
               <button
                 onClick={scrollRight}
-                className="w-9 h-9 rounded-xl bg-white border border-[#e0d6c7] hover:bg-ink-900 hover:text-white text-ink-800 flex items-center justify-center transition-colors shadow-xs"
+                className="w-9 h-9 rounded-xl bg-white border border-[#e0d6c7] hover:bg-ink-900 hover:text-white text-ink-800 flex items-center justify-center transition-colors shadow-xs cursor-pointer active:scale-95"
                 aria-label="Xem tiếp"
               >
                 <ChevronRight className="w-4 h-4" />
@@ -131,15 +274,25 @@ export function CameraPricingSlider({
           </div>
         </div>
 
-        {/* Auto-sliding Carousel Track */}
+        {/* Carousel Track with Real Pointer Drag & Isolated Autoplay */}
         <div
           ref={sliderRef}
-          onMouseEnter={() => setIsPaused(true)}
-          onMouseLeave={() => setIsPaused(false)}
-          onTouchStart={() => setIsPaused(true)}
-          onTouchEnd={() => setIsPaused(false)}
-          className="flex gap-5 sm:gap-6 overflow-x-auto scrollbar-none pb-6 pt-2 select-none scroll-smooth cursor-grab active:cursor-grabbing"
-          style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
+          onMouseEnter={() => setIsHovered(true)}
+          onMouseLeave={() => setIsHovered(false)}
+          onPointerDown={handlePointerDown}
+          onPointerMove={handlePointerMove}
+          onPointerUp={handlePointerUp}
+          onPointerCancel={handlePointerCancel}
+          onTouchStart={() => pauseManual(4000)}
+          onTouchEnd={() => pauseManual(3000)}
+          className={`flex gap-5 sm:gap-6 overflow-x-auto scrollbar-none pb-6 pt-2 select-none ${
+            isDragging ? "cursor-grabbing" : "cursor-grab"
+          }`}
+          style={{
+            scrollbarWidth: "none",
+            msOverflowStyle: "none",
+            touchAction: "pan-y",
+          }}
         >
           {displayItems.map((item, index) => {
             const coverImg =
@@ -181,6 +334,8 @@ export function CameraPricingSlider({
                 {/* Camera Image Showcase */}
                 <Link
                   href={`/thiet-bi/${item.slug}`}
+                  onClick={handleCardClick}
+                  draggable={false}
                   className="relative aspect-square w-full my-1 flex items-center justify-center p-2 rounded-xl bg-[#faf8f4] block"
                 >
                   <Image
@@ -188,13 +343,14 @@ export function CameraPricingSlider({
                     alt={item.name}
                     fill
                     sizes="310px"
-                    className="object-contain p-2 filter drop-shadow-[0_8px_16px_rgba(0,0,0,0.12)] group-hover:scale-[1.03] transition-transform duration-300 ease-out"
+                    draggable={false}
+                    className="object-contain p-2 filter drop-shadow-[0_8px_16px_rgba(0,0,0,0.12)] group-hover:scale-[1.03] transition-transform duration-300 ease-out select-none"
                   />
                 </Link>
 
                 {/* Model Info */}
                 <div className="mt-2 mb-3">
-                  <Link href={`/thiet-bi/${item.slug}`}>
+                  <Link href={`/thiet-bi/${item.slug}`} onClick={handleCardClick} draggable={false}>
                     <h3 className="text-base sm:text-lg font-black text-ink-900 tracking-tight uppercase group-hover:text-accent transition-colors font-mono">
                       {item.name}
                     </h3>
@@ -238,6 +394,8 @@ export function CameraPricingSlider({
                 <div className="pt-4 mt-2">
                   <Link
                     href={`/thiet-bi/${item.slug}`}
+                    onClick={handleCardClick}
+                    draggable={false}
                     className="w-full bg-ink-900 hover:bg-accent text-white text-xs font-mono font-bold py-2.5 px-4 rounded-xl flex items-center justify-center gap-2 transition-colors shadow-xs"
                   >
                     <span>Xem máy {item.name.split(" ")[1] || ""}</span>

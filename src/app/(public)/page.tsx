@@ -7,6 +7,7 @@ import { CameraPricingSlider } from "@/components/public/camera-pricing-slider";
 import { FeaturedCameras } from "@/components/public/featured-cameras";
 import { CanonR50Spotlight } from "@/components/public/canon-r50-spotlight";
 import { UseCaseSection } from "@/components/public/use-case-section";
+import { RentalRequestSection } from "@/components/public/rental-request-section";
 import { RentalProcess } from "@/components/public/rental-process";
 import { FinalCta } from "@/components/public/final-cta";
 
@@ -18,7 +19,7 @@ export default async function HomePage() {
 
   return (
     <div className="bg-[#faf8f4]">
-      {/* 1. EDITORIAL HERO (Multilayer depth with real camera cutouts & asymmetric composition) */}
+      {/* 1. EDITORIAL HERO (Multilayer depth with real camera cutouts & dynamic showcase) */}
       <LandingHero
         messengerUrl={settings.messenger_url}
         phone={settings.phone}
@@ -33,7 +34,7 @@ export default async function HomePage() {
         messengerUrl={settings.messenger_url}
       />
 
-      {/* 4. MÁY ĐANG CÓ TẠI KIHO (6 curated camera cards preview) */}
+      {/* 4. MÁY ĐANG CÓ TẠI KIHO (Curated camera cards preview) */}
       <FeaturedCameras equipment={equipmentList} />
 
       {/* 5. CANON R50 SPOTLIGHT (Editorial Feature Band) */}
@@ -42,10 +43,16 @@ export default async function HomePage() {
       {/* 6. USE CASES ("Bạn định mang máy đi đâu?" - 4 visual storytelling photo tiles) */}
       <UseCaseSection />
 
-      {/* 7. RENTAL PROCESS (3-step clean typography workflow) */}
+      {/* 7. LEAD CONVERSION FORM ("Không biết chọn máy nào?" - Direct lead capture) */}
+      <RentalRequestSection
+        equipmentList={equipmentList}
+        messengerUrl={settings.messenger_url}
+      />
+
+      {/* 8. RENTAL PROCESS (3-step clean typography workflow) */}
       <RentalProcess messengerUrl={settings.messenger_url} />
 
-      {/* 8. FINAL LIFESTYLE CTA (Editorial dark warm backdrop with direct contact) */}
+      {/* 9. FINAL LIFESTYLE CTA (Editorial dark warm backdrop with direct contact) */}
       <FinalCta
         messengerUrl={settings.messenger_url}
         phone={settings.phone}
