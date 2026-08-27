@@ -4,22 +4,22 @@ Tài liệu này hướng dẫn cách kết nối hệ thống **Lead / Yêu C�
 
 ---
 
-## 1. Cơ Chế Hoạt Động
+## 1. Cơ Chế Hoạt Động (Admin là Nguồn Chân Lý Duy Nhất)
 
 ```
 [Khách điền form trên website]
              ↓
 [Next.js Server API: /api/rental-request]
-(Lưu dự phòng vào src/data/rental-requests.json)
+(Đọc email nhận tin & secret từ Cấu hình Admin)
              ↓
-[Google Apps Script Webhook]
+[Google Apps Script Web App]
        ↙            ↘
 [Ghi dòng mới vào        [Gửi Email thông báo tức thì
- Google Sheets]           kèm link gọi / Zalo]
+ Google Sheets]           tới Email cấu hình trong Admin]
 ```
 
-- **Bảo mật tuyệt đối:** Khách hàng không nhìn thấy Google Sheets hay Apps Script endpoint.
-- **Không phụ thuộc vào Google Forms:** Giao diện hoàn toàn đồng bộ với thiết kế thương hiệu Kiho Camera.
+- **Quản lý tập trung:** Địa chỉ email nhận thông báo được điều khiển 100% từ giao diện Admin Kiho (`/admin/integrations/google-sheets`). Thay đổi email trong Admin sẽ có hiệu lực ngay mà không cần sửa code hay triển khai lại Apps Script.
+- **Bảo mật tuyệt đối:** Khách hàng không nhìn thấy Google Sheets hay Apps Script endpoint. Mã bảo mật webhook được mã hóa AES-256-GCM trên server.
 - **Không mất dữ liệu (Zero Data Loss):** Hệ thống luôn lưu một bản sao cục bộ trên server trước khi đẩy sang Google Sheets.
 
 ---
@@ -30,22 +30,14 @@ Tài liệu này hướng dẫn cách kết nối hệ thống **Lead / Yêu C�
 1. Mở [Google Sheets](https://sheets.new) và tạo một bảng tính mới.
 2. Đổi tên bảng tính thành: `Kiho Camera - Danh Sách Yêu Cầu Thuê`.
 3. Đổi tên trang tính đầu tiên thành: `Rental Requests`.
-4. (Tùy chọn) Điền hàng đầu tiên các cột:
-   - Cột A: `Thời gian`
-   - Cột B: `Họ tên`
-   - Cột C: `Số điện thoại`
-   - Cột D: `Dòng máy`
-   - Cột E: `Ngày thuê`
-   - Cột F: `Ngày trả`
-   - Cột G: `Ghi chú`
-   - Cột H: `Nguồn`
-   - Cột I: `Trạng thái`
+4. Copy `Sheet ID` từ đường link trên thanh địa chỉ trình duyệt:
+   `https://docs.google.com/spreadsheets/d/`**`[SHEET_ID]`**`/edit`
 
 ---
 
 ### Bước 2: Dán Code Google Apps Script
 1. Trên Google Sheets, nhấn menu **Tiện ích mở rộng** (Extensions) -> **Apps Script**.
-2. Xóa hết code mặc định trong file `Code.gs` và dán toàn bộ nội dung từ file [`src/data/google-apps-script.js`](file:///c:/Users/THIS%20PC/Desktop/Kiho/kiho-camera/src/data/google-apps-script.js) vào.
+2. Xóa hết code mặc định trong file `Code.gs` và dán toàn bộ mã nguồn được sinh trong trang **Admin Kiho Camera** (hoặc file [`src/data/google-apps-script.js`](file:///c:/Users/THIS%20PC/Desktop/Kiho/kiho-camera/src/data/google-apps-script.js)).
 3. Nhấn nút **Lưu** (biểu tượng Save hoặc `Ctrl + S`).
 
 ---
@@ -53,13 +45,10 @@ Tài liệu này hướng dẫn cách kết nối hệ thống **Lead / Yêu C�
 ### Bước 3: Cài Đặt Thuộc Tính Tập Lệnh (Script Properties)
 1. Trong màn hình Apps Script, nhấn vào biểu tượng **Cài đặt dự án** (bánh răng bên trái).
 2. Cuộn xuống phần **Thuộc tính tập lệnh** (Script Properties) -> bấm **Thêm thuộc tính tập lệnh**:
-   - Thuộc tính 1:
-     - Tên (Property): `NOTIFICATION_EMAIL`
-     - Giá trị (Value): Email nhận thông báo của Kiho (Ví dụ: `kihocameradonghoi@gmail.com`).
-   - Thuộc tính 2:
-     - Tên (Property): `RENTAL_REQUEST_WEBHOOK_SECRET`
-     - Giá trị (Value): Chuỗi ký tự bí mật bất kỳ do bạn tự đặt (Ví dụ: `kiho_lead_secret_2026_xyz`).
+   - Tên (Property): `RENTAL_REQUEST_WEBHOOK_SECRET`
+   - Giá trị (Value): Mã bí mật Webhook lấy từ Admin Kiho Camera (Ví dụ: `kiho_sec_...`).
 3. Bấm **Lưu thuộc tính tập lệnh**.
+*(Lưu ý: Bạn không cần cấu hình `NOTIFICATION_EMAIL` tại đây vì hệ thống tự động truyền email từ cấu hình Admin).*
 
 ---
 
@@ -76,18 +65,8 @@ Tài liệu này hướng dẫn cách kết nối hệ thống **Lead / Yêu C�
 
 ---
 
-### Bước 5: Cấu Hình Biến Môi Trường Trên Website
-Thêm 2 biến môi trường vào file `.env.local` (khi chạy ở máy cá nhân) hoặc cài đặt trên Dashboard của hosting (Vercel / Cloudflare Pages / Railway):
-
-```bash
-GOOGLE_APPS_SCRIPT_WEBHOOK_URL="https://script.google.com/macros/s/AKfycb.../exec"
-RENTAL_REQUEST_WEBHOOK_SECRET="kiho_lead_secret_2026_xyz"
-```
-
----
-
-## 3. Kiểm Tra (Testing)
-1. Mở trang chủ hoặc trang chi tiết một máy bất kỳ (ví dụ `/thiet-bi/canon-eos-r50`).
-2. Điền form yêu cầu thuê và bấm **Gửi yêu cầu thuê**.
-3. Kiểm tra Google Sheets: Dòng mới sẽ xuất hiện ngay lập tức trong sheet `Rental Requests`.
-4. Kiểm tra Email: Hòm thư `NOTIFICATION_EMAIL` sẽ nhận được email thông báo có định dạng đẹp mắt kèm số điện thoại có thể bấm gọi ngay.
+### Bước 5: Cấu Hình Trong Admin Kiho Camera
+1. Mở trang quản trị: `http://localhost:3000/admin/integrations/google-sheets`.
+2. Dán **Google Sheet ID**, **Apps Script Web App URL** và nhập **Email nhận thông báo**.
+3. Bấm **Lưu tất cả cấu hình**.
+4. Bấm **Kiểm tra kết nối** và **Gửi lead thử nghiệm** để xác nhận email thông báo được nhận chính xác!

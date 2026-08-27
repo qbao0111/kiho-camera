@@ -211,15 +211,11 @@ export function RentalRequestForm({
             <span className="text-ink-500">Dòng máy:</span>
             <span className="font-bold text-ink-900 uppercase">{successData.equipmentName}</span>
           </div>
-          <div className="flex justify-between items-center py-1 border-b border-[#f0eae1]">
+          <div className="flex justify-between items-center py-1">
             <span className="text-ink-500">Thời gian thuê:</span>
             <span className="font-bold text-ink-900">
               {formatDateDisplay(successData.rentalDate)} → {formatDateDisplay(successData.returnDate)}
             </span>
-          </div>
-          <div className="flex justify-between items-center py-1 text-ink-600">
-            <span>Thủ tục:</span>
-            <span className="text-emerald-700 font-bold">Không cần cọc tiền máy</span>
           </div>
         </div>
 

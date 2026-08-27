@@ -6,6 +6,7 @@ import { usePathname, useRouter } from "next/navigation";
 import {
   LayoutDashboard,
   Camera,
+  FileSpreadsheet,
   Settings,
   LogOut,
   ExternalLink,
@@ -32,6 +33,7 @@ export function AdminSidebar() {
   const navItems = [
     { href: "/admin", label: "Tổng quan", icon: LayoutDashboard, exact: true },
     { href: "/admin/equipment", label: "Máy ảnh & Giá", icon: Camera },
+    { href: "/admin/integrations/google-sheets", label: "Tích hợp Google Sheets", icon: FileSpreadsheet },
     { href: "/admin/settings", label: "Nội dung & Cài đặt", icon: Settings },
   ];
 
@@ -56,7 +58,8 @@ export function AdminSidebar() {
           {navItems.map((item) => {
             const isActive = item.exact
               ? pathname === item.href
-              : pathname.startsWith(item.href);
+              : pathname.startsWith(item.href) ||
+                (item.href.includes("/integrations") && pathname.startsWith("/admin/integrations"));
             const Icon = item.icon;
 
             return (
@@ -69,7 +72,7 @@ export function AdminSidebar() {
                     : "text-slate-400 hover:text-white hover:bg-slate-800"
                 }`}
               >
-                <Icon className="w-4 h-4" />
+                <Icon className="w-4 h-4 shrink-0" />
                 <span>{item.label}</span>
               </Link>
             );
@@ -90,7 +93,7 @@ export function AdminSidebar() {
 
         <button
           onClick={handleLogout}
-          className="w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-semibold text-rose-400 hover:bg-rose-500/10 hover:text-rose-300 transition-colors"
+          className="w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-semibold text-rose-400 hover:bg-rose-500/10 hover:text-rose-300 transition-colors cursor-pointer"
         >
           <LogOut className="w-4 h-4" />
           <span>Đăng xuất</span>

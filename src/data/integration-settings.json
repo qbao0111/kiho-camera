@@ -1,0 +1,12 @@
+{
+  "provider": "google_sheets",
+  "enabled": true,
+  "google_sheet_id": "1BxiMVs0XRA5nFMdKvBdBZjgmUUqptlbs74OgVE2upms",
+  "google_sheet_name": "Rental Requests",
+  "notification_email": "hoangquocbao011105@gmail.com",
+  "apps_script_url": "https://script.google.com/macros/s/AKfycbxsFHyU10umPGccExLKpbth3MP9k7tKp7rUfRJ-2hMOaYJ6qEflUDn8De75l6eM-D6YLg/exec",
+  "encrypted_webhook_secret": "eyJpdiI6ImNjM2M4Y2NhZGYwMzNhYjZlNWUyNTZmNzMxYWMyZjAwIiwiY2lwaGVydGV4dCI6ImQ0ZWE3N2Q0Y2M0ZDkwNzkxMDJjYjY5MzIyMGI3MDY1M2QzNTA2MjMyMTlkNDUxYjA0YmZlNzZiODc1YWM2OTBlNzExNDg5ZmE1MjViMjIzODMiLCJ0YWciOiIzNDMyODgyZGRjOWI4MDNiOTM2YWVlYWYzYjJjZjE3MiJ9",
+  "last_test_status": "success",
+  "updated_at": "2026-08-27T21:15:19.211Z",
+  "last_tested_at": "2026-08-27T21:15:00.000Z"
+}

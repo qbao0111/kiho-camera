@@ -1,5 +1,12 @@
 import { NextRequest, NextResponse } from "next/server";
 import { saveLocalRentalRequest, RentalRequestLead } from "@/lib/local-storage";
+import {
+  getIntegrationSettings,
+  getDecryptedWebhookSecret,
+} from "@/lib/services/integrations";
+
+export const dynamic = "force-dynamic";
+export const revalidate = 0;
 
 export async function POST(req: NextRequest) {
   try {
@@ -15,11 +22,12 @@ export async function POST(req: NextRequest) {
       note = "",
       source = "website",
       hp_website = "",
+      // Note: We deliberately ignore any client-supplied notificationEmail for security
     } = body;
 
     // 1. Honeypot check (Bot protection)
     if (hp_website && hp_website.trim() !== "") {
-      // Silently return success to confuse bot
+      // Silently return success to confuse bots
       return NextResponse.json({ success: true, message: "OK" });
     }
 
@@ -91,12 +99,24 @@ export async function POST(req: NextRequest) {
     // 4. Always save to local lead storage (Zero data loss)
     await saveLocalRentalRequest(leadData);
 
-    // 5. Forward to Google Apps Script Webhook if configured
-    const webhookUrl = process.env.GOOGLE_APPS_SCRIPT_WEBHOOK_URL;
-    const webhookSecret = process.env.RENTAL_REQUEST_WEBHOOK_SECRET || "";
+    // 5. Forward to Google Apps Script Webhook (Dynamic Settings with Env fallback)
+    try {
+      const integration = await getIntegrationSettings();
+      let webhookUrl = "";
+      let webhookSecret = "";
+      let notificationEmail = "";
 
-    if (webhookUrl && webhookUrl.startsWith("http")) {
-      try {
+      if (integration.enabled && integration.apps_script_url?.startsWith("http")) {
+        webhookUrl = integration.apps_script_url;
+        webhookSecret = await getDecryptedWebhookSecret();
+        notificationEmail = (integration.notification_email || "").trim();
+      } else if (process.env.GOOGLE_APPS_SCRIPT_WEBHOOK_URL?.startsWith("http")) {
+        webhookUrl = process.env.GOOGLE_APPS_SCRIPT_WEBHOOK_URL;
+        webhookSecret = process.env.RENTAL_REQUEST_WEBHOOK_SECRET || "";
+        notificationEmail = (integration.notification_email || process.env.NOTIFICATION_EMAIL || "").trim();
+      }
+
+      if (webhookUrl) {
         const gasPayload = {
           secret: webhookSecret,
           timestamp: formattedSubmittedAt,
@@ -106,27 +126,33 @@ export async function POST(req: NextRequest) {
           rentalDate: leadData.rentalDate,
           returnDate: leadData.returnDate,
           note: leadData.note || "",
-          source: leadData.source || "website",
+          source: leadData.source || "Website",
           status: "Mới",
+          notificationEmail: notificationEmail, // Injected dynamically from server configuration
         };
 
-        // Fire request to Google Apps Script with timeout
+        console.log(`[RentalRequest] Forwarding lead to Google Apps Script (${webhookUrl.slice(0, 45)}...) with notificationEmail: "${notificationEmail}"`);
+
         const gasResponse = await fetch(webhookUrl, {
           method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
+          headers: { "Content-Type": "application/json" },
           body: JSON.stringify(gasPayload),
-          signal: AbortSignal.timeout(7000),
+          signal: AbortSignal.timeout(8000),
         });
 
         if (!gasResponse.ok) {
           console.warn("[RentalRequest] Google Apps Script returned status:", gasResponse.status);
+        } else {
+          const gasResult = await gasResponse.json().catch(() => null);
+          console.log("[RentalRequest] Google Apps Script response:", gasResult);
+          if (gasResult && !gasResult.success) {
+            console.warn("[RentalRequest] Google Apps Script returned warning/error:", gasResult);
+          }
         }
-      } catch (gasErr) {
-        console.error("[RentalRequest] Failed to forward to Google Apps Script:", gasErr);
-        // Note: We still return success to user because lead is safely stored in local storage
       }
+    } catch (gasErr) {
+      console.error("[RentalRequest] Failed to forward to Google Apps Script:", gasErr);
+      // We still return success to customer because lead is safely stored locally
     }
 
     return NextResponse.json({
