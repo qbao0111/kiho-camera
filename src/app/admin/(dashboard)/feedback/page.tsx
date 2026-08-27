@@ -280,7 +280,7 @@ export default function AdminFeedbackPage() {
               </div>
 
               <p className="text-xs sm:text-sm text-slate-700 italic">
-                "{fb.content}"
+                &ldquo;{fb.content}&rdquo;
               </p>
             </div>
 

@@ -3,20 +3,20 @@ import { Category, Equipment, Feedback, SiteSettings } from "@/types/database";
 export const MOCK_SITE_SETTINGS: SiteSettings = {
   id: 1,
   shop_name: "Kiho Camera",
-  tagline: "Cho thuê máy ảnh Quảng Bình - Ghi lại chuyến đi theo cách đẹp nhất.",
-  address: "Thành phố Đồng Hới, Tỉnh Quảng Bình",
-  phone: "0912 345 678",
+  tagline: "Cho thuê máy ảnh Quảng Bình – Máy xịn, giá rõ ràng, thuê nhanh tại Đồng Hới.",
+  address: "48 Ngô Quyền, TP. Đồng Hới, Tỉnh Quảng Bình",
+  phone: "0387 274 669",
   facebook_url: "https://facebook.com/kihocameradonghoi",
   messenger_url: "https://m.me/kihocameradonghoi",
   tiktok_url: "https://tiktok.com/@kihocamera",
-  instagram_url: "https://instagram.com/kihocamera",
-  maps_url: "https://maps.google.com/?q=Dong+Hoi+Quang+Binh",
+  instagram_url: "https://instagram.com/Kiho.thuemayanhqbb",
+  maps_url: "https://maps.google.com/?q=48+Ngo+Quyen+Dong+Hoi+Quang+Binh",
   opening_hours: "07:30 - 21:00 (Tất cả các ngày trong tuần)",
   hero_title: "Cho thuê máy ảnh tại Quảng Bình",
   hero_subtitle: "Máy đẹp, dễ sử dụng, giá rõ ràng. Thuê máy ảnh, lens và phụ kiện du lịch chất lượng cao tại Kiho Camera Đồng Hới.",
-  hero_image: "https://images.unsplash.com/photo-1516035069371-29a1b244cc32?auto=format&fit=crop&w=1600&q=80",
-  about_text: "Kiho Camera là địa chỉ cho thuê máy ảnh, lens và thiết bị quay chụp uy tín hàng đầu tại Đồng Hới, Quảng Bình. Dù bạn đi du lịch Phong Nha - Kẻ Bàng, chụp ảnh kỷ yếu, sự kiện hay quay vlog, Kiho Camera luôn sẵn sàng hỗ trợ máy chất lượng cao cùng phụ kiện đầy đủ nhất.",
-  footer_text: "© 2026 Kiho Camera - Dịch vụ cho thuê máy ảnh uy tín tại Quảng Bình. Hỗ trợ giao máy tận nơi khu vực Đồng Hới.",
+  hero_image: "/images/cameras/fujifilm-x100vi.jpg",
+  about_text: "Kiho Camera là địa chỉ cho thuê máy ảnh, lens và thiết bị quay chụp uy tín hàng đầu tại 48 Ngô Quyền, Đồng Hới, Quảng Bình. Dù bạn đi du lịch Phong Nha - Kẻ Bàng, chụp ảnh kỷ yếu, sự kiện hay quay vlog, Kiho Camera luôn sẵn sàng hỗ trợ máy chất lượng cao cùng phụ kiện đầy đủ nhất.",
+  footer_text: "© 2026 Kiho Camera - Dịch vụ cho thuê máy ảnh uy tín tại Quảng Bình. Hotline/Zalo: 0387 274 669. Hỗ trợ giao máy tận nơi khu vực Đồng Hới.",
 };
 
 export const MOCK_CATEGORIES: Category[] = [
@@ -69,6 +69,69 @@ export const MOCK_CATEGORIES: Category[] = [
 
 export const MOCK_EQUIPMENT: Equipment[] = [
   {
+    id: "e0000000-0000-0000-0000-000000000000",
+    category_id: "c1111111-1111-1111-1111-111111111111",
+    name: "Canon EOS R50 + Kit RF-S 18-45mm STM",
+    slug: "canon-eos-r50",
+    short_description: "Máy ảnh mirrorless thế hệ mới nhỏ gọn nhất hệ RF, cảm biến 24.2MP, lấy nét Dual Pixel AF II nhận diện thông minh, quay 4K 30p 6K oversampled tuyệt đẹp.",
+    description: "Canon EOS R50 là chiếc máy ảnh mirrorless 'chân ái' dành cho các bạn trẻ mê du lịch, sáng tạo nội dung và chụp ảnh chân dung ngoại cảnh tại Quảng Bình. Với trọng lượng siêu nhẹ chỉ 375g cùng bộ xử lý DIGIC X mạnh mẽ và hệ thống lấy nét Dual Pixel CMOS AF II nhận diện ánh mắt chính xác, Canon R50 mang đến chất lượng hình ảnh xuất sắc, màu da người trắng hồng đặc trưng của Canon mà bất kỳ ai cũng có thể làm quen ngay trong 5 phút.",
+    price_per_day: 320000,
+    deposit_note: "CCCD gắn chip chính chủ hoặc đặt cọc linh hoạt.",
+    specifications: {
+      "Cảm biến": "APS-C CMOS 24.2 Megapixel",
+      "Bộ xử lý": "DIGIC X thế hệ mới siêu tốc",
+      "Lấy nét": "Dual Pixel CMOS AF II (651 vùng nhận diện người/mắt/động vật)",
+      "Màn hình": "Cảm ứng xoay lật đa góc 3.0 inch 1.04 triệu điểm ảnh",
+      "Quay video": "4K UHD 30p (Oversampling từ 6K) không crop, Full HD 120p",
+      "Chụp liên tiếp": "Lên đến 15 fps (màn trập điện tử)",
+      "Kết nối": "Wi-Fi & Bluetooth truyền ảnh tức thì sang smartphone qua app Canon Camera Connect",
+      "Trọng lượng": "375g (siêu gọn nhẹ bỏ túi)"
+    },
+    included_items: [
+      "Thân máy Canon EOS R50 (Chính hãng)",
+      "Ống kính Canon RF-S 18-45mm f/4.5-6.3 IS STM",
+      "2 Pin Canon LP-E17 dung lượng cao",
+      "Dock sạc nhanh kép",
+      "Thẻ nhớ SanDisk Extreme Pro 64GB / 128GB",
+      "Túi máy ảnh thời trang chống sốc cao cấp",
+      "Dây đeo cổ thao tác nhanh",
+      "Đầu đọc thẻ nhớ đa năng OTG cho iPhone & Android Type-C"
+    ],
+    use_cases: ["Du lịch", "Chụp chân dung", "Vlog", "Selfie", "Máy nhỏ gọn", "Kỷ yếu"],
+    badges: ["Flagship Hot", "Lấy nét Dual Pixel II", "Màu da đẹp", "Siêu nhẹ 375g"],
+    is_featured: true,
+    is_active: true,
+    sort_order: 0,
+    seo_title: "Thuê máy ảnh Canon EOS R50 tại Quảng Bình - Giá tốt nhất | Kiho Camera",
+    seo_description: "Dịch vụ cho thuê máy ảnh Canon EOS R50 kèm lens tại Đồng Hới, Quảng Bình. Cảm biến 24.2MP, quay 4K 30p, bắt nét mắt siêu nhanh, máy gọn nhẹ du lịch.",
+    images: [
+      {
+        id: "img-0-1",
+        equipment_id: "e0000000-0000-0000-0000-000000000000",
+        image_url: "/images/canon-r50/canon-r50-front.jpg",
+        alt_text: "Canon EOS R50 kèm lens RF-S 18-45mm IS STM góc chính diện",
+        is_cover: true,
+        sort_order: 1,
+      },
+      {
+        id: "img-0-2",
+        equipment_id: "e0000000-0000-0000-0000-000000000000",
+        image_url: "/images/canon-r50/canon-r50-top.jpg",
+        alt_text: "Canon EOS R50 góc nhìn đỉnh máy và phím bấm",
+        is_cover: false,
+        sort_order: 2,
+      },
+      {
+        id: "img-0-3",
+        equipment_id: "e0000000-0000-0000-0000-000000000000",
+        image_url: "/images/canon-r50/canon-r50-back.webp",
+        alt_text: "Canon EOS R50 góc nhìn mặt sau màn hình xoay lật",
+        is_cover: false,
+        sort_order: 3,
+      }
+    ]
+  },
+  {
     id: "e1111111-1111-1111-1111-111111111111",
     category_id: "c1111111-1111-1111-1111-111111111111",
     name: "Canon PowerShot G7X Mark III",
@@ -105,26 +168,10 @@ export const MOCK_EQUIPMENT: Equipment[] = [
       {
         id: "img-1-1",
         equipment_id: "e1111111-1111-1111-1111-111111111111",
-        image_url: "https://images.unsplash.com/photo-1516035069371-29a1b244cc32?auto=format&fit=crop&w=1000&q=80",
+        image_url: "/images/cameras/canon-g7x-mark3.jpg",
         alt_text: "Canon PowerShot G7X Mark III mặt trước",
         is_cover: true,
         sort_order: 1,
-      },
-      {
-        id: "img-1-2",
-        equipment_id: "e1111111-1111-1111-1111-111111111111",
-        image_url: "https://images.unsplash.com/photo-1526170375885-4d8ecf77b99f?auto=format&fit=crop&w=1000&q=80",
-        alt_text: "Canon G7X Mark III nhỏ gọn trên tay",
-        is_cover: false,
-        sort_order: 2,
-      },
-      {
-        id: "img-1-3",
-        equipment_id: "e1111111-1111-1111-1111-111111111111",
-        image_url: "https://images.unsplash.com/photo-1502920917128-1aa500764cbd?auto=format&fit=crop&w=1000&q=80",
-        alt_text: "Canon G7X Mark III góc chụp nghiêng",
-        is_cover: false,
-        sort_order: 3,
       }
     ]
   },
@@ -164,18 +211,10 @@ export const MOCK_EQUIPMENT: Equipment[] = [
       {
         id: "img-2-1",
         equipment_id: "e2222222-2222-2222-2222-222222222222",
-        image_url: "https://images.unsplash.com/photo-1502920917128-1aa500764cbd?auto=format&fit=crop&w=1000&q=80",
-        alt_text: "Fujifilm X-T30 II phong cách vintage",
+        image_url: "/images/cameras/fujifilm-x100vi.jpg",
+        alt_text: "Fujifilm phong cách vintage",
         is_cover: true,
         sort_order: 1,
-      },
-      {
-        id: "img-2-2",
-        equipment_id: "e2222222-2222-2222-2222-222222222222",
-        image_url: "https://images.unsplash.com/photo-1512790182412-b19e6d62bc39?auto=format&fit=crop&w=1000&q=80",
-        alt_text: "Fujifilm X-T30 II góc chụp trên cao",
-        is_cover: false,
-        sort_order: 2,
       }
     ]
   },
@@ -427,7 +466,7 @@ export const MOCK_EQUIPMENT: Equipment[] = [
       {
         id: "img-8-1",
         equipment_id: "e8888888-8888-8888-8888-888888888888",
-        image_url: "https://images.unsplash.com/photo-1589872510926-24e58b87d6cf?auto=format&fit=crop&w=1000&q=80",
+        image_url: "https://images.unsplash.com/photo-1527011046414-4781f1f94f8c?auto=format&fit=crop&w=1000&q=80",
         alt_text: "Gimbal chống rung DJI RS 3 Mini",
         is_cover: true,
         sort_order: 1,

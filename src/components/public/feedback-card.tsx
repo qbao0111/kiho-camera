@@ -25,7 +25,7 @@ export function FeedbackCard({ feedback }: FeedbackCardProps) {
       {/* Editorial Quote */}
       <div className="space-y-2">
         <p className="text-sm sm:text-base text-ink-900 leading-relaxed font-normal">
-          "{feedback.content}"
+          &ldquo;{feedback.content}&rdquo;
         </p>
 
         {/* Customer Attribution */}
