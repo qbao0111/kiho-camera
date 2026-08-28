@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   title: "Hướng dẫn & Thủ tục thuê máy ảnh tại Kiho Camera Quảng Bình",
   description:
     "Quy trình thuê máy ảnh du lịch đơn giản tại TP. Đồng Hới Quảng Bình. Không cần cọc tiền máy, xác minh nhanh qua ảnh CCCD hoặc VNeID.",
+  alternates: {
+    canonical: "/huong-dan-thue",
+  },
 };
 
 export default async function RentalGuidePage() {

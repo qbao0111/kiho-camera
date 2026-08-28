@@ -10,21 +10,23 @@ export function LocalBusinessJsonLd({ settings, siteUrl }: LocalBusinessProps) {
   const schema = {
     "@context": "https://schema.org",
     "@type": "LocalBusiness",
-    "name": settings.shop_name,
-    "description": settings.hero_subtitle || settings.tagline,
+    "name": settings.shop_name || "Kiho Camera",
+    "description":
+      settings.hero_subtitle ||
+      "Dịch vụ cho thuê máy ảnh du lịch Canon, Fujifilm, Sony chính hãng tại TP. Đồng Hới, Quảng Bình. Đầy đủ pin, sạc, thẻ nhớ đi kèm, không cần cọc tiền máy.",
     "url": siteUrl,
-    "telephone": settings.phone,
+    "telephone": settings.phone || "0387 274 669",
     "address": {
       "@type": "PostalAddress",
-      "streetAddress": settings.address,
+      "streetAddress": settings.address || "48 Ngô Quyền, TP. Đồng Hới, Tỉnh Quảng Bình",
       "addressLocality": "Đồng Hới",
       "addressRegion": "Quảng Bình",
-      "addressCountry": "VN"
+      "addressCountry": "VN",
     },
     "geo": {
       "@type": "GeoCoordinates",
       "latitude": "17.4760",
-      "longitude": "106.6000"
+      "longitude": "106.6000",
     },
     "openingHoursSpecification": [
       {
@@ -36,19 +38,19 @@ export function LocalBusinessJsonLd({ settings, siteUrl }: LocalBusinessProps) {
           "Thursday",
           "Friday",
           "Saturday",
-          "Sunday"
+          "Sunday",
         ],
         "opens": "07:30",
-        "closes": "21:00"
-      }
+        "closes": "21:00",
+      },
     ],
-    "priceRange": "150.000đ - 600.000đ",
-    "image": settings.hero_image,
+    "priceRange": "120.000₫ - 450.000₫",
+    "image": `${siteUrl}/images/landing/hero-quang-binh.webp`,
     "sameAs": [
       settings.facebook_url,
       settings.tiktok_url,
-      settings.instagram_url
-    ].filter(Boolean)
+      settings.instagram_url || "https://www.instagram.com/thuemayanhqbb/",
+    ].filter(Boolean),
   };
 
   return (
@@ -60,17 +62,26 @@ export function LocalBusinessJsonLd({ settings, siteUrl }: LocalBusinessProps) {
 }
 
 export function ProductJsonLd({ equipment, siteUrl }: { equipment: Equipment; siteUrl: string }) {
-  const coverImage = equipment.images?.find((i) => i.is_cover)?.image_url || equipment.images?.[0]?.image_url;
+  const coverImage =
+    equipment.images?.find((i) => i.is_cover)?.image_url ||
+    equipment.images?.[0]?.image_url ||
+    `${siteUrl}/images/cameras/${equipment.slug.replace("canon-eos-", "canon-").replace("-kit", "")}.jpg`;
+
+  const fullImageUrl = coverImage.startsWith("http") ? coverImage : `${siteUrl}${coverImage}`;
 
   const schema = {
     "@context": "https://schema.org",
     "@type": "Product",
     "name": equipment.name,
-    "image": coverImage,
-    "description": equipment.short_description || equipment.description,
+    "image": fullImageUrl,
+    "description":
+      equipment.seo_description ||
+      equipment.short_description ||
+      equipment.description ||
+      `Cho thuê máy ảnh ${equipment.name} chính hãng tại TP. Đồng Hới, Quảng Bình.`,
     "brand": {
       "@type": "Brand",
-      "name": equipment.brand || "Kiho Camera"
+      "name": equipment.brand || "Kiho Camera",
     },
     "offers": {
       "@type": "Offer",
@@ -78,11 +89,13 @@ export function ProductJsonLd({ equipment, siteUrl }: { equipment: Equipment; si
       "priceCurrency": "VND",
       "price": equipment.price_per_day,
       "priceValidUntil": "2027-12-31",
+      "availability": "https://schema.org/InStock",
+      "itemCondition": "https://schema.org/UsedCondition",
       "seller": {
         "@type": "Organization",
-        "name": "Kiho Camera"
-      }
-    }
+        "name": "Kiho Camera",
+      },
+    },
   };
 
   return (

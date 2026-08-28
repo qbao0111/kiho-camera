@@ -15,28 +15,34 @@ export const viewport: Viewport = {
   initialScale: 1,
 };
 
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://kihocamera.com";
+
 export const metadata: Metadata = {
-  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || "https://kihocamera.com"),
+  metadataBase: new URL(siteUrl),
   title: {
     default: "Kiho Camera - Cho thuê máy ảnh tại Quảng Bình",
     template: "%s | Kiho Camera Quảng Bình",
   },
   description:
-    "Dịch vụ cho thuê máy ảnh Canon, Sony, Fujifilm, máy quay DJI Pocket 3 và lens chụp ảnh du lịch tại TP. Đồng Hới, Quảng Bình. Bảng giá rõ ràng, thủ tục nhanh gọn.",
+    "Dịch vụ cho thuê máy ảnh du lịch Canon, Fujifilm, Sony chính hãng tại TP. Đồng Hới, Quảng Bình. Đầy đủ phụ kiện pin sạc thẻ nhớ, hỗ trợ giao nhận tận nơi, thủ tục nhanh gọn không cần cọc tiền máy.",
   keywords: [
     "thuê máy ảnh Quảng Bình",
     "cho thuê máy ảnh Quảng Bình",
-    "thuê camera Quảng Bình",
     "thuê máy ảnh Đồng Hới",
-    "thuê Canon G7X Quảng Bình",
-    "thuê Sony A7 Quảng Bình",
-    "thuê Fujifilm màu film Quảng Bình",
-    "thuê DJI Pocket 3 Quảng Bình",
-    "thuê máy ảnh du lịch Phong Nha",
+    "máy ảnh du lịch Quảng Bình",
+    "Canon R50",
+    "Canon G7X Mark III",
+    "Fujifilm X100V",
+    "Fujifilm X100VI",
+    "Sony ZV1",
+    "Sony ZV1F",
   ],
   authors: [{ name: "Kiho Camera" }],
   creator: "Kiho Camera",
   publisher: "Kiho Camera",
+  alternates: {
+    canonical: "/",
+  },
   robots: {
     index: true,
     follow: true,
@@ -51,28 +57,26 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     locale: "vi_VN",
-    url: "https://kihocamera.com",
+    url: "/",
     title: "Kiho Camera - Cho thuê máy ảnh tại Quảng Bình",
     description:
-      "Dịch vụ cho thuê máy ảnh, lens và thiết bị du lịch chất lượng cao tại Đồng Hới, Quảng Bình.",
+      "Dịch vụ cho thuê máy ảnh du lịch Canon, Fujifilm, Sony chính hãng tại TP. Đồng Hới, Quảng Bình. Đầy đủ pin, sạc, thẻ nhớ đi kèm.",
     siteName: "Kiho Camera",
     images: [
       {
-        url: "https://images.unsplash.com/photo-1516035069371-29a1b244cc32?auto=format&fit=crop&w=1200&h=630&q=80",
+        url: "/images/landing/hero-quang-binh.webp",
         width: 1200,
         height: 630,
-        alt: "Kiho Camera - Cho thuê máy ảnh tại Quảng Bình",
+        alt: "Kiho Camera - Cho thuê máy ảnh du lịch tại Đồng Hới, Quảng Bình",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Kiho Camera - Cho thuê máy ảnh Quảng Bình",
+    title: "Kiho Camera - Cho thuê máy ảnh tại Quảng Bình",
     description:
-      "Dịch vụ cho thuê máy ảnh, lens và thiết bị du lịch chất lượng cao tại Đồng Hới, Quảng Bình.",
-    images: [
-      "https://images.unsplash.com/photo-1516035069371-29a1b244cc32?auto=format&fit=crop&w=1200&h=630&q=80",
-    ],
+      "Dịch vụ cho thuê máy ảnh du lịch Canon, Fujifilm, Sony chính hãng tại TP. Đồng Hới, Quảng Bình. Đầy đủ pin, sạc, thẻ nhớ đi kèm.",
+    images: ["/images/landing/hero-quang-binh.webp"],
   },
 };
 

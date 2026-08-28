@@ -4,7 +4,7 @@ import { getEquipmentList } from "@/lib/services/equipment";
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://kihocamera.com";
 
-  // Public static routes
+  // Public static customer routes
   const staticRoutes: MetadataRoute.Sitemap = [
     {
       url: `${baseUrl}`,
@@ -17,12 +17,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       lastModified: new Date(),
       changeFrequency: "daily",
       priority: 0.9,
-    },
-    {
-      url: `${baseUrl}/feedback`,
-      lastModified: new Date(),
-      changeFrequency: "weekly",
-      priority: 0.8,
     },
     {
       url: `${baseUrl}/huong-dan-thue`,
@@ -38,7 +32,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     },
   ];
 
-  // Dynamic equipment routes
+  // Dynamic camera detail routes
   const equipmentList = await getEquipmentList({ onlyActive: true });
   const equipmentRoutes: MetadataRoute.Sitemap = equipmentList.map((item) => ({
     url: `${baseUrl}/thiet-bi/${item.slug}`,

@@ -11,6 +11,9 @@ export const metadata: Metadata = {
   title: "Danh sách máy ảnh cho thuê tại Quảng Bình | Kiho Camera",
   description:
     "Bảng giá cho thuê 12 dòng máy ảnh du lịch Canon, Fujifilm, Sony chính hãng tại TP. Đồng Hới, Quảng Bình. Đầy đủ pin, sạc, thẻ nhớ, nhận máy chụp đẹp ngay.",
+  alternates: {
+    canonical: "/thiet-bi",
+  },
 };
 
 interface EquipmentPageProps {

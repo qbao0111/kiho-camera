@@ -29,23 +29,38 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     };
   }
 
-  const title = equipment.seo_title || `Thuê máy ảnh ${equipment.name} tại Quảng Bình | Kiho Camera`;
+  const title =
+    equipment.seo_title ||
+    `Thuê máy ảnh ${equipment.name} tại Quảng Bình | Kiho Camera`;
+
   const description =
     equipment.seo_description ||
     equipment.short_description ||
-    `Dịch vụ cho thuê máy ảnh ${equipment.name} uy tín giá rẻ tại Đồng Hới, Quảng Bình. Kèm 2 pin sạc thẻ nhớ túi chống sốc.`;
+    `Dịch vụ cho thuê máy ảnh ${equipment.brand} ${equipment.name} chính hãng tại TP. Đồng Hới, Quảng Bình. Đầy đủ trọn bộ 2 pin, sạc đôi, thẻ nhớ và túi chống sốc.`;
 
   const coverImage =
     equipment.images?.find((img) => img.is_cover)?.image_url ||
-    equipment.images?.[0]?.image_url;
+    equipment.images?.[0]?.image_url ||
+    `/images/cameras/${equipment.slug.replace("canon-eos-", "canon-").replace("-kit", "")}.jpg`;
 
   return {
     title,
     description,
+    alternates: {
+      canonical: `/thiet-bi/${equipment.slug}`,
+    },
     openGraph: {
       title,
       description,
-      images: coverImage ? [{ url: coverImage }] : [],
+      url: `/thiet-bi/${equipment.slug}`,
+      images: coverImage
+        ? [
+            {
+              url: coverImage,
+              alt: `Thuê máy ảnh ${equipment.name} tại Quảng Bình`,
+            },
+          ]
+        : [],
     },
     twitter: {
       card: "summary_large_image",
