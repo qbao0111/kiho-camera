@@ -4,7 +4,7 @@ import React, { useEffect, useRef, useState } from "react";
 import * as THREE from "three";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js";
-import { Rotate3d, Sparkles, Upload, Eye, RefreshCw, ZoomIn } from "lucide-react";
+import { Rotate3d, Upload, RefreshCw, ZoomIn, Camera } from "lucide-react";
 
 interface ThreeCameraCanvasProps {
   className?: string;
@@ -58,7 +58,7 @@ export function ThreeCameraCanvas({ className = "", modelUrl = "/models/canon_r5
     controls.autoRotateSpeed = 2.0;
     controls.minDistance = 2.0;
     controls.maxDistance = 6.5;
-    controls.maxPolarAngle = Math.PI / 2 + 0.3; // Prevent flipping below ground
+    controls.maxPolarAngle = Math.PI / 2 + 0.3;
 
     // 4. Studio Lighting Environment
     const ambientLight = new THREE.AmbientLight(0xffffff, 1.2);
@@ -76,7 +76,7 @@ export function ThreeCameraCanvas({ className = "", modelUrl = "/models/canon_r5
     fillLight.position.set(-4, 2, 4);
     scene.add(fillLight);
 
-    const rimLight = new THREE.DirectionalLight(0xe05822, 2.2); // Warm Terracotta Rim
+    const rimLight = new THREE.DirectionalLight(0xe05822, 2.2);
     rimLight.position.set(0, 4, -4);
     scene.add(rimLight);
 
@@ -93,16 +93,14 @@ export function ThreeCameraCanvas({ className = "", modelUrl = "/models/canon_r5
     shadowPlane.receiveShadow = true;
     scene.add(shadowPlane);
 
-    // Root model container group
     const rootModelGroup = new THREE.Group();
     scene.add(rootModelGroup);
     cameraGroupRef.current = rootModelGroup;
 
-    // Helper: Create High-Detail Procedural Canon EOS R50
+    // Detailed Procedural Canon EOS R50
     const createDetailedCanonR50Model = () => {
       const g = new THREE.Group();
 
-      // Materials
       const matteBodyMat = new THREE.MeshStandardMaterial({
         color: 0x1a1a1a,
         roughness: 0.45,
@@ -122,7 +120,7 @@ export function ThreeCameraCanvas({ className = "", modelUrl = "/models/canon_r5
       });
 
       const canonRedRingMat = new THREE.MeshStandardMaterial({
-        color: 0xd92518, // Canon Signature Red
+        color: 0xd92518,
         roughness: 0.2,
         metalness: 0.7,
       });
@@ -145,14 +143,14 @@ export function ThreeCameraCanvas({ className = "", modelUrl = "/models/canon_r5
         metalness: 0.9,
       });
 
-      // 1. Main Camera Chassis (Curved Body)
+      // Chassis
       const bodyGeo = new THREE.BoxGeometry(1.6, 1.05, 0.75);
       const bodyMesh = new THREE.Mesh(bodyGeo, matteBodyMat);
       bodyMesh.castShadow = true;
       bodyMesh.receiveShadow = true;
       g.add(bodyMesh);
 
-      // 2. Ergonomic Handgrip
+      // Grip
       const gripGeo = new THREE.CylinderGeometry(0.28, 0.32, 1.02, 32);
       const gripMesh = new THREE.Mesh(gripGeo, texturedGripMat);
       gripMesh.scale.set(0.9, 1.0, 1.4);
@@ -161,7 +159,7 @@ export function ThreeCameraCanvas({ className = "", modelUrl = "/models/canon_r5
       gripMesh.castShadow = true;
       g.add(gripMesh);
 
-      // 3. Viewfinder Prism (Pentaprism / EVF hump)
+      // Prism
       const prismGeo = new THREE.CylinderGeometry(0.32, 0.48, 0.45, 4);
       const prismMesh = new THREE.Mesh(prismGeo, matteBodyMat);
       prismMesh.position.set(-0.05, 0.65, 0.05);
@@ -169,53 +167,50 @@ export function ThreeCameraCanvas({ className = "", modelUrl = "/models/canon_r5
       prismMesh.castShadow = true;
       g.add(prismMesh);
 
-      // Viewfinder Eyecup on the back
+      // Eyecup
       const eyecupGeo = new THREE.BoxGeometry(0.35, 0.25, 0.12);
       const eyecupMesh = new THREE.Mesh(eyecupGeo, texturedGripMat);
       eyecupMesh.position.set(-0.05, 0.6, -0.42);
       g.add(eyecupMesh);
 
-      // Hotshoe Mount
+      // Hotshoe
       const hotshoeGeo = new THREE.BoxGeometry(0.2, 0.05, 0.22);
       const hotshoeMesh = new THREE.Mesh(hotshoeGeo, metalChromeMat);
       hotshoeMesh.position.set(-0.05, 0.88, 0.05);
       g.add(hotshoeMesh);
 
-      // 4. Dials & Shutter on Top Plate
       // Mode Dial
       const modeDialGeo = new THREE.CylinderGeometry(0.18, 0.18, 0.12, 32);
       const modeDial = new THREE.Mesh(modeDialGeo, metalChromeMat);
       modeDial.position.set(-0.55, 0.58, 0.05);
       g.add(modeDial);
 
-      // Power Switch & Control Wheel
+      // Control Wheel
       const wheelGeo = new THREE.CylinderGeometry(0.16, 0.16, 0.08, 32);
       const wheel = new THREE.Mesh(wheelGeo, metalChromeMat);
       wheel.position.set(0.52, 0.56, 0.08);
       g.add(wheel);
 
-      // Shutter Button (Angled ergonomic release)
+      // Shutter
       const shutterGeo = new THREE.CylinderGeometry(0.09, 0.09, 0.08, 24);
       const shutter = new THREE.Mesh(shutterGeo, metalChromeMat);
       shutter.position.set(0.68, 0.54, 0.32);
       shutter.rotation.x = 0.25;
       g.add(shutter);
 
-      // Red Video Record Button
+      // Rec Button
       const recGeo = new THREE.CylinderGeometry(0.04, 0.04, 0.04, 16);
       const recButton = new THREE.Mesh(recGeo, canonRedRingMat);
       recButton.position.set(0.42, 0.56, 0.28);
       g.add(recButton);
 
-      // 5. Canon RF Lens Mount & Lens Barrel
-      // Chrome Mount Ring
+      // Lens Mount & Barrel
       const mountRingGeo = new THREE.CylinderGeometry(0.55, 0.55, 0.08, 48);
       const mountRing = new THREE.Mesh(mountRingGeo, metalChromeMat);
       mountRing.rotation.x = Math.PI / 2;
       mountRing.position.set(-0.05, 0.02, 0.42);
       g.add(mountRing);
 
-      // Base Lens Barrel (RF-S 18-45mm)
       const lensBaseGeo = new THREE.CylinderGeometry(0.52, 0.54, 0.45, 48);
       const lensBase = new THREE.Mesh(lensBaseGeo, matteBodyMat);
       lensBase.rotation.x = Math.PI / 2;
@@ -223,39 +218,34 @@ export function ThreeCameraCanvas({ className = "", modelUrl = "/models/canon_r5
       lensBase.castShadow = true;
       g.add(lensBase);
 
-      // Canon Signature Red Accent Ring
       const redRingGeo = new THREE.TorusGeometry(0.515, 0.016, 16, 64);
       const redRing = new THREE.Mesh(redRingGeo, canonRedRingMat);
       redRing.position.set(-0.05, 0.02, 0.88);
       g.add(redRing);
 
-      // Knurled Rubber Zoom / Focus Ring
       const knurlGeo = new THREE.CylinderGeometry(0.505, 0.505, 0.38, 64);
       const knurlRing = new THREE.Mesh(knurlGeo, texturedGripMat);
       knurlRing.rotation.x = Math.PI / 2;
       knurlRing.position.set(-0.05, 0.02, 1.08);
       g.add(knurlRing);
 
-      // Front Lens Barrel / Filter Thread
       const frontBarrelGeo = new THREE.CylinderGeometry(0.48, 0.5, 0.22, 48);
       const frontBarrel = new THREE.Mesh(frontBarrelGeo, matteBodyMat);
       frontBarrel.rotation.x = Math.PI / 2;
       frontBarrel.position.set(-0.05, 0.02, 1.35);
       g.add(frontBarrel);
 
-      // Optical Multi-Coated Curved Front Glass
       const glassGeo = new THREE.SphereGeometry(0.45, 36, 24, 0, Math.PI * 2, 0, Math.PI * 0.38);
       const frontGlass = new THREE.Mesh(glassGeo, multiCoatedGlassMat);
       frontGlass.position.set(-0.05, 0.02, 1.32);
       g.add(frontGlass);
 
-      // CMOS Sensor inside Mount
       const sensorGeo = new THREE.PlaneGeometry(0.42, 0.28);
       const sensorMesh = new THREE.Mesh(sensorGeo, sensorMat);
       sensorMesh.position.set(-0.05, 0.02, 0.39);
       g.add(sensorMesh);
 
-      // 6. Back Vari-Angle LCD Screen
+      // Back LCD
       const lcdFrameGeo = new THREE.BoxGeometry(1.0, 0.72, 0.06);
       const lcdFrame = new THREE.Mesh(lcdFrameGeo, matteBodyMat);
       lcdFrame.position.set(-0.15, -0.05, -0.4);
@@ -272,7 +262,7 @@ export function ThreeCameraCanvas({ className = "", modelUrl = "/models/canon_r5
       lcdScreen.rotation.y = Math.PI;
       g.add(lcdScreen);
 
-      // 7. Text Decal (Canon & EOS R50 Branding Badge)
+      // Decal
       const canvas = document.createElement("canvas");
       canvas.width = 512;
       canvas.height = 128;
@@ -293,7 +283,6 @@ export function ThreeCameraCanvas({ className = "", modelUrl = "/models/canon_r5
       badgeMesh.rotation.x = -0.2;
       g.add(badgeMesh);
 
-      // Initial angle & scale
       g.scale.set(1.1, 1.1, 1.1);
       g.position.set(0, -0.1, 0);
       g.rotation.set(0.12, -0.4, 0);
@@ -301,23 +290,19 @@ export function ThreeCameraCanvas({ className = "", modelUrl = "/models/canon_r5
       return g;
     };
 
-    // Helper: Load GLB / GLTF 3D model
     const loadGLBModel = (url: string) => {
       const loader = new GLTFLoader();
       setLoadingModel(true);
-      setStatusMessage("Đang tải mô hình thực tế Canon R50...");
+      setStatusMessage("Đang tải mô hình...");
 
       loader.load(
         url,
         (gltf) => {
-          // Clear previous model
           while (rootModelGroup.children.length > 0) {
             rootModelGroup.remove(rootModelGroup.children[0]);
           }
 
           const model = gltf.scene;
-
-          // Compute Bounding Box to auto-center and scale
           const box = new THREE.Box3().setFromObject(model);
           const size = box.getSize(new THREE.Vector3());
           const center = box.getCenter(new THREE.Vector3());
@@ -330,7 +315,6 @@ export function ThreeCameraCanvas({ className = "", modelUrl = "/models/canon_r5
           model.position.y = -center.y * scaleFactor - 0.1;
           model.position.z = -center.z * scaleFactor;
 
-          // Enable shadows and enhance materials on all meshes
           model.traverse((child) => {
             if ((child as THREE.Mesh).isMesh) {
               const mesh = child as THREE.Mesh;
@@ -346,12 +330,10 @@ export function ThreeCameraCanvas({ className = "", modelUrl = "/models/canon_r5
           rootModelGroup.add(model);
           setModelType("glb");
           setLoadingModel(false);
-          setStatusMessage("Đã tải mô hình thực tế thành công!");
+          setStatusMessage("Đã nạp mô hình thành công!");
         },
         undefined,
-        (err) => {
-          console.warn("Could not load external GLB file, falling back to detailed procedural model:", err);
-          // Fallback to detailed procedural model
+        () => {
           while (rootModelGroup.children.length > 0) {
             rootModelGroup.remove(rootModelGroup.children[0]);
           }
@@ -359,26 +341,21 @@ export function ThreeCameraCanvas({ className = "", modelUrl = "/models/canon_r5
           rootModelGroup.add(detailedProcedural);
           setModelType("procedural");
           setLoadingModel(false);
-          setStatusMessage("Đang hiển thị mô hình 3D Canon EOS R50");
+          setStatusMessage("Mô hình 3D Canon EOS R50");
         }
       );
     };
 
-    // Try loading external model or procedural
     loadGLBModel(modelUrl);
 
-    // 5. Animation Render Loop
     let animationId: number;
-
     const animate = () => {
       animationId = requestAnimationFrame(animate);
       controls.update();
       renderer.render(scene, camera);
     };
-
     animate();
 
-    // 6. Window Resize
     const handleResize = () => {
       if (!container) return;
       const w = container.clientWidth;
@@ -401,7 +378,6 @@ export function ThreeCameraCanvas({ className = "", modelUrl = "/models/canon_r5
     };
   }, [modelUrl, isAutoRotate]);
 
-  // Handle local GLB File Drag & Drop or Upload
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (!file) return;
@@ -413,7 +389,7 @@ export function ThreeCameraCanvas({ className = "", modelUrl = "/models/canon_r5
 
       const loader = new GLTFLoader();
       setLoadingModel(true);
-      setStatusMessage(`Đang tải tệp ${file.name}...`);
+      setStatusMessage(`Đang nạp ${file.name}...`);
 
       loader.parse(
         arrayBuffer,
@@ -455,39 +431,20 @@ export function ThreeCameraCanvas({ className = "", modelUrl = "/models/canon_r5
         (error) => {
           console.error("Error parsing GLB file:", error);
           setLoadingModel(false);
-          setStatusMessage("Không thể đọc tệp 3D. Vui lòng chọn định dạng .glb hợp lệ.");
+          setStatusMessage("Không thể đọc tệp 3D.");
         }
       );
     };
     reader.readAsArrayBuffer(file);
   };
 
-  const handleDrop = (e: React.DragEvent) => {
-    e.preventDefault();
-    const file = e.dataTransfer.files?.[0];
-    if (file && (file.name.endsWith(".glb") || file.name.endsWith(".gltf"))) {
-      if (fileInputRef.current) {
-        const dt = new DataTransfer();
-        dt.items.add(file);
-        fileInputRef.current.files = dt.files;
-        handleFileChange({ target: fileInputRef.current } as any);
-      }
-    }
-  };
-
   return (
-    <div
-      onDragOver={(e) => e.preventDefault()}
-      onDrop={handleDrop}
-      className={`relative w-full h-full min-h-[380px] sm:min-h-[460px] flex items-center justify-center select-none ${className}`}
-    >
-      {/* 3D WebGL Canvas */}
+    <div className={`relative w-full h-full min-h-[360px] sm:min-h-[440px] flex items-center justify-center select-none ${className}`}>
       <div
         ref={mountRef}
         className="w-full h-full cursor-grab active:cursor-grabbing flex items-center justify-center"
       />
 
-      {/* Hidden File Input for GLB Upload */}
       <input
         ref={fileInputRef}
         type="file"
@@ -498,28 +455,26 @@ export function ThreeCameraCanvas({ className = "", modelUrl = "/models/canon_r5
 
       {/* Top Floating Action Bar */}
       <div className="absolute top-3 inset-x-3 z-20 flex items-center justify-between pointer-events-none">
-        {/* Model Status Badge */}
-        <div className="pointer-events-auto flex items-center gap-2 bg-black/60 backdrop-blur-md px-3.5 py-1.5 rounded-full border border-white/20 text-white text-[11px] font-mono shadow-lg">
-          <Rotate3d className="w-3.5 h-3.5 text-accent animate-spin-slow" />
-          <span>{modelType === "glb" ? "3D Mesh Tripo" : "3D Canon EOS R50"}</span>
+        <div className="pointer-events-auto flex items-center gap-1.5 bg-black/60 backdrop-blur-md px-3 py-1 rounded-md border border-white/20 text-white text-[11px] font-mono shadow-md">
+          <Rotate3d className="w-3.5 h-3.5 text-accent" />
+          <span>{modelType === "glb" ? "3D Mesh GLB" : "3D Canon EOS R50"}</span>
         </div>
 
-        {/* Action Controls */}
-        <div className="pointer-events-auto flex items-center gap-1.5 bg-black/60 backdrop-blur-md p-1 rounded-full border border-white/20 shadow-lg">
+        <div className="pointer-events-auto flex items-center gap-1 bg-black/60 backdrop-blur-md p-1 rounded-md border border-white/20 shadow-md">
           <button
             onClick={() => setIsAutoRotate(!isAutoRotate)}
-            className={`px-2.5 py-1 rounded-full text-[11px] font-mono transition-all ${
-              isAutoRotate ? "bg-accent text-white font-bold" : "text-white/70 hover:text-white"
+            className={`px-2 py-1 rounded text-[11px] font-mono transition-all cursor-pointer ${
+              isAutoRotate ? "bg-accent text-white" : "text-white/70 hover:text-white"
             }`}
             title="Bật/Tắt tự động xoay 360°"
           >
-            <RefreshCw className={`w-3 h-3 ${isAutoRotate ? "animate-spin-slow" : ""}`} />
+            <RefreshCw className="w-3 h-3" />
           </button>
 
           <button
             onClick={() => fileInputRef.current?.click()}
-            className="flex items-center gap-1 px-2.5 py-1 rounded-full bg-white/15 hover:bg-white/30 text-white text-[11px] font-mono transition-all"
-            title="Tải lên file .glb từ Tripo3D"
+            className="flex items-center gap-1 px-2.5 py-1 rounded bg-white/15 hover:bg-white/30 text-white text-[11px] font-mono transition-all cursor-pointer"
+            title="Tải lên file .glb"
           >
             <Upload className="w-3 h-3" />
             <span className="hidden sm:inline">Nạp GLB</span>
@@ -529,12 +484,12 @@ export function ThreeCameraCanvas({ className = "", modelUrl = "/models/canon_r5
 
       {/* Bottom Info Bar */}
       <div className="absolute bottom-3 inset-x-3 z-20 flex items-center justify-between pointer-events-none">
-        <div className="pointer-events-auto flex items-center gap-2 bg-ink-900/90 backdrop-blur-md px-3.5 py-1.5 rounded-lg border border-white/10 text-white text-xs font-mono">
-          <Sparkles className="w-3.5 h-3.5 text-amber-300" />
-          <span className="font-bold">Canon EOS R50 · 24.2MP Dual Pixel AF II</span>
+        <div className="pointer-events-auto flex items-center gap-1.5 bg-ink-900/90 backdrop-blur-md px-3 py-1 rounded-md border border-white/10 text-white text-xs font-sans font-medium">
+          <Camera className="w-3.5 h-3.5 text-accent" />
+          <span>Canon EOS R50 · 24.2MP Dual Pixel AF II</span>
         </div>
 
-        <div className="hidden sm:flex pointer-events-auto items-center gap-1 text-[11px] font-mono text-white/70 bg-black/40 backdrop-blur-sm px-2.5 py-1 rounded-md border border-white/10">
+        <div className="hidden sm:flex pointer-events-auto items-center gap-1 text-[11px] font-mono text-white/70 bg-black/40 px-2 py-1 rounded border border-white/10">
           <ZoomIn className="w-3 h-3" />
           <span>Cuộn chuột để zoom</span>
         </div>

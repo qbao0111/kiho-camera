@@ -2,12 +2,12 @@
 
 import React, { useState, useRef, useEffect } from "react";
 import Image from "next/image";
-import { Rotate3d, Play, Pause, ZoomIn, Sparkles, ChevronLeft, ChevronRight, Info, Check, Eye } from "lucide-react";
+import { Rotate3d, Play, Pause, ZoomIn, ChevronLeft, ChevronRight, Check } from "lucide-react";
 
 interface Hotspot {
   id: string;
-  x: number; // percentage
-  y: number; // percentage
+  x: number;
+  y: number;
   title: string;
   desc: string;
   badge: string;
@@ -135,7 +135,6 @@ export function React360Viewer({ className = "" }: { className?: string }) {
 
   const currentView = PRODUCT_ANGLES[currentAngleIndex];
 
-  // Auto rotation loop
   useEffect(() => {
     if (!isAutoPlay) return;
     const interval = setInterval(() => {
@@ -144,11 +143,10 @@ export function React360Viewer({ className = "" }: { className?: string }) {
     return () => clearInterval(interval);
   }, [isAutoPlay]);
 
-  // Mouse Parallax Tilt
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
     const rect = e.currentTarget.getBoundingClientRect();
-    const x = ((e.clientX - rect.left) / rect.width - 0.5) * 16;
-    const y = ((e.clientY - rect.top) / rect.height - 0.5) * 16;
+    const x = ((e.clientX - rect.left) / rect.width - 0.5) * 14;
+    const y = ((e.clientY - rect.top) / rect.height - 0.5) * 14;
     setMouseTilt({ x, y });
   };
 
@@ -156,7 +154,6 @@ export function React360Viewer({ className = "" }: { className?: string }) {
     setMouseTilt({ x: 0, y: 0 });
   };
 
-  // Drag to rotate angles
   const handleMouseDown = (e: React.MouseEvent) => {
     setIsDragging(true);
     dragStartX.current = e.clientX;
@@ -168,10 +165,8 @@ export function React360Viewer({ className = "" }: { className?: string }) {
     const diff = e.clientX - dragStartX.current;
     if (Math.abs(diff) > 40) {
       if (diff > 0) {
-        // Drag right -> previous angle
         setCurrentAngleIndex((prev) => (prev === 0 ? PRODUCT_ANGLES.length - 1 : prev - 1));
       } else {
-        // Drag left -> next angle
         setCurrentAngleIndex((prev) => (prev + 1) % PRODUCT_ANGLES.length);
       }
     }
@@ -194,29 +189,26 @@ export function React360Viewer({ className = "" }: { className?: string }) {
 
   return (
     <div className={`relative w-full h-full flex flex-col justify-between select-none ${className}`}>
-      {/* Top Floating Controls Bar */}
-      <div className="relative z-30 flex items-center justify-between gap-2 p-3 bg-white/10 backdrop-blur-md rounded-2xl border border-white/20 shadow-lg text-white">
-        {/* Angle Badge */}
+      {/* Top Controls Bar */}
+      <div className="relative z-30 flex items-center justify-between gap-2 p-2.5 bg-white/10 backdrop-blur-md rounded-lg border border-white/20 shadow-md text-white">
         <div className="flex items-center gap-2">
-          <span className="flex items-center justify-center w-6 h-6 rounded-full bg-accent text-white text-[11px] font-bold">
-            <Rotate3d className="w-3.5 h-3.5" />
+          <span className="flex items-center justify-center w-5 h-5 rounded-md bg-accent text-white text-[10px] font-bold">
+            <Rotate3d className="w-3 h-3" />
           </span>
           <div>
-            <span className="text-[11px] font-mono text-white/70 block uppercase tracking-wider">
-              Góc nhìn {currentAngleIndex + 1}/{PRODUCT_ANGLES.length}
+            <span className="text-[10px] font-mono text-white/70 block uppercase tracking-wider">
+              Góc {currentAngleIndex + 1}/{PRODUCT_ANGLES.length}
             </span>
-            <h4 className="text-xs font-bold text-white tracking-tight leading-none">
+            <h4 className="text-xs font-sans font-semibold text-white tracking-tight leading-none">
               {currentView.name}
             </h4>
           </div>
         </div>
 
-        {/* Action Buttons */}
         <div className="flex items-center gap-1.5">
-          {/* Zoom Toggle */}
           <button
             onClick={() => setIsZoomed(!isZoomed)}
-            className={`p-1.5 rounded-lg border border-white/20 transition-all ${
+            className={`p-1.5 rounded-md border border-white/20 transition-all cursor-pointer ${
               isZoomed ? "bg-white text-ink-900 shadow" : "bg-black/30 text-white hover:bg-white/20"
             }`}
             title="Phóng to chi tiết"
@@ -224,11 +216,10 @@ export function React360Viewer({ className = "" }: { className?: string }) {
             <ZoomIn className="w-3.5 h-3.5" />
           </button>
 
-          {/* Auto Play / Pause */}
           <button
             onClick={() => setIsAutoPlay(!isAutoPlay)}
-            className={`flex items-center gap-1 px-2.5 py-1.5 rounded-lg text-[11px] font-mono border border-white/20 transition-all ${
-              isAutoPlay ? "bg-accent text-white font-bold" : "bg-black/30 text-white hover:bg-white/20"
+            className={`flex items-center gap-1 px-2.5 py-1.5 rounded-md text-[11px] font-sans font-medium border border-white/20 transition-all cursor-pointer ${
+              isAutoPlay ? "bg-accent text-white font-semibold" : "bg-black/30 text-white hover:bg-white/20"
             }`}
             title="Tự động xoay qua các góc"
           >
@@ -238,7 +229,7 @@ export function React360Viewer({ className = "" }: { className?: string }) {
         </div>
       </div>
 
-      {/* Main Interactive Turntable Viewer Canvas */}
+      {/* Turntable Canvas */}
       <div
         onMouseMove={handleMouseMove}
         onMouseLeave={handleMouseLeave}
@@ -246,19 +237,16 @@ export function React360Viewer({ className = "" }: { className?: string }) {
         onMouseUp={handleMouseUp}
         onTouchStart={handleTouchStart}
         onTouchEnd={handleTouchEnd}
-        className="relative flex-1 min-h-[300px] sm:min-h-[360px] flex items-center justify-center my-2 cursor-grab active:cursor-grabbing group overflow-hidden rounded-2xl"
+        className="relative flex-1 min-h-[280px] sm:min-h-[340px] flex items-center justify-center my-2 cursor-grab active:cursor-grabbing group overflow-hidden rounded-xl"
       >
-        {/* Soft Ambient Ground Shadow */}
-        <div className="absolute bottom-4 w-3/4 h-12 bg-black/40 rounded-full blur-2xl pointer-events-none transition-all duration-300 group-hover:scale-105" />
+        <div className="absolute bottom-4 w-3/4 h-10 bg-black/40 rounded-full blur-xl pointer-events-none transition-all duration-300 group-hover:scale-105" />
 
-        {/* 3D Spatial Image Container with Parallax Tilt */}
         <div
-          className="relative w-full max-w-[420px] aspect-[4/3] flex items-center justify-center transition-transform duration-300 ease-out"
+          className="relative w-full max-w-[400px] aspect-[4/3] flex items-center justify-center transition-transform duration-300 ease-out"
           style={{
             transform: `perspective(1000px) rotateY(${mouseTilt.x}deg) rotateX(${-mouseTilt.y}deg) scale(${isZoomed ? 1.25 : 1})`,
           }}
         >
-          {/* Crisp High-Res Camera Product Image */}
           <div className="relative w-full h-full p-2 flex items-center justify-center">
             <Image
               src={currentView.src}
@@ -266,11 +254,10 @@ export function React360Viewer({ className = "" }: { className?: string }) {
               fill
               priority
               sizes="(max-width: 768px) 100vw, 45vw"
-              className="object-contain filter drop-shadow-[0_15px_30px_rgba(0,0,0,0.35)] transition-all duration-500 ease-out"
+              className="object-contain filter drop-shadow-[0_12px_24px_rgba(0,0,0,0.35)] transition-all duration-500 ease-out"
             />
           </div>
 
-          {/* Interactive Feature Hotspots */}
           {!isZoomed &&
             currentView.hotspots.map((hotspot) => (
               <div
@@ -283,14 +270,11 @@ export function React360Viewer({ className = "" }: { className?: string }) {
                     e.stopPropagation();
                     setActiveHotspot(activeHotspot?.id === hotspot.id ? null : hotspot);
                   }}
-                  className="relative group/pin p-2 focus:outline-none"
+                  className="relative group/pin p-2 focus:outline-none cursor-pointer"
                   aria-label={hotspot.title}
                 >
-                  {/* Ping Wave Animation */}
-                  <span className="absolute inset-0 m-auto w-5 h-5 rounded-full bg-accent animate-ping opacity-75" />
-                  
-                  {/* Center Dot */}
-                  <span className="relative flex items-center justify-center w-5 h-5 rounded-full bg-ink-900 text-white border-2 border-white shadow-lg text-[10px] font-bold group-hover/pin:scale-125 group-hover/pin:bg-accent transition-all duration-200">
+                  <span className="absolute inset-0 m-auto w-4 h-4 rounded-full bg-accent animate-ping opacity-75" />
+                  <span className="relative flex items-center justify-center w-4 h-4 rounded-full bg-ink-900 text-white border border-white shadow-md text-[9px] font-bold group-hover/pin:scale-125 group-hover/pin:bg-accent transition-all duration-200">
                     +
                   </span>
                 </button>
@@ -298,16 +282,16 @@ export function React360Viewer({ className = "" }: { className?: string }) {
             ))}
         </div>
 
-        {/* Previous / Next Arrow Controls on Hover */}
+        {/* Arrow controls */}
         <button
           onClick={(e) => {
             e.stopPropagation();
             setCurrentAngleIndex((prev) => (prev === 0 ? PRODUCT_ANGLES.length - 1 : prev - 1));
           }}
-          className="absolute left-2 top-1/2 -translate-y-1/2 w-9 h-9 rounded-full bg-black/40 hover:bg-black/70 text-white backdrop-blur-md border border-white/20 flex items-center justify-center transition-all opacity-80 hover:opacity-100 hover:scale-110 shadow-lg z-20"
+          className="absolute left-2 top-1/2 -translate-y-1/2 w-8 h-8 rounded-lg bg-black/40 hover:bg-black/70 text-white backdrop-blur-md border border-white/20 flex items-center justify-center transition-all opacity-80 hover:opacity-100 shadow-md z-20 cursor-pointer"
           aria-label="Góc trước"
         >
-          <ChevronLeft className="w-5 h-5" />
+          <ChevronLeft className="w-4 h-4" />
         </button>
 
         <button
@@ -315,36 +299,35 @@ export function React360Viewer({ className = "" }: { className?: string }) {
             e.stopPropagation();
             setCurrentAngleIndex((prev) => (prev + 1) % PRODUCT_ANGLES.length);
           }}
-          className="absolute right-2 top-1/2 -translate-y-1/2 w-9 h-9 rounded-full bg-black/40 hover:bg-black/70 text-white backdrop-blur-md border border-white/20 flex items-center justify-center transition-all opacity-80 hover:opacity-100 hover:scale-110 shadow-lg z-20"
+          className="absolute right-2 top-1/2 -translate-y-1/2 w-8 h-8 rounded-lg bg-black/40 hover:bg-black/70 text-white backdrop-blur-md border border-white/20 flex items-center justify-center transition-all opacity-80 hover:opacity-100 shadow-md z-20 cursor-pointer"
           aria-label="Góc sau"
         >
-          <ChevronRight className="w-5 h-5" />
+          <ChevronRight className="w-4 h-4" />
         </button>
 
-        {/* Drag Hint Overlay */}
-        <div className="absolute bottom-2 inset-x-0 mx-auto w-fit pointer-events-none text-[10px] font-mono text-white/70 bg-black/50 backdrop-blur-md px-3 py-1 rounded-full border border-white/10">
-          ↔ Kéo hoặc bấm mũi tên để đổi góc nhìn
+        <div className="absolute bottom-2 inset-x-0 mx-auto w-fit pointer-events-none text-[10px] font-mono text-white/70 bg-black/50 backdrop-blur-md px-2.5 py-0.5 rounded-md border border-white/10">
+          Kéo hoặc bấm mũi tên để đổi góc nhìn
         </div>
       </div>
 
-      {/* Selected Hotspot Detail Card Popup */}
+      {/* Hotspot Popup */}
       {activeHotspot && (
-        <div className="relative z-30 mb-2 p-3 bg-white text-ink-900 rounded-xl shadow-2xl border border-black/10 animate-in fade-in slide-in-from-bottom-2 duration-200">
+        <div className="relative z-30 mb-2 p-3 bg-white text-ink-900 rounded-lg shadow-xl border border-black/10 animate-in fade-in slide-in-from-bottom-2 duration-200">
           <div className="flex items-start justify-between gap-2">
             <div>
-              <div className="inline-block px-2 py-0.5 rounded bg-accent/10 text-accent text-[10px] font-mono font-bold uppercase mb-1">
+              <div className="inline-block px-1.5 py-0.5 rounded bg-accent/10 text-accent text-[10px] font-mono font-medium uppercase mb-0.5">
                 {activeHotspot.badge}
               </div>
-              <h5 className="text-xs font-bold text-ink-900 leading-tight">
+              <h5 className="text-xs font-sans font-bold text-ink-900 leading-tight">
                 {activeHotspot.title}
               </h5>
-              <p className="text-[11px] text-ink-600 mt-0.5 leading-snug">
+              <p className="text-[11px] font-sans text-ink-600 mt-0.5 leading-snug">
                 {activeHotspot.desc}
               </p>
             </div>
             <button
               onClick={() => setActiveHotspot(null)}
-              className="p-1 text-ink-400 hover:text-ink-900 rounded text-xs font-bold"
+              className="p-1 text-ink-400 hover:text-ink-900 rounded text-xs font-bold cursor-pointer"
             >
               ✕
             </button>
@@ -352,7 +335,7 @@ export function React360Viewer({ className = "" }: { className?: string }) {
         </div>
       )}
 
-      {/* Bottom Angle Selector Pills (Thumbnails / Quick Switch) */}
+      {/* Angle Selector Tabs */}
       <div className="relative z-20 grid grid-cols-3 gap-2">
         {PRODUCT_ANGLES.map((angle, idx) => {
           const isActive = currentAngleIndex === idx;
@@ -363,19 +346,19 @@ export function React360Viewer({ className = "" }: { className?: string }) {
                 setCurrentAngleIndex(idx);
                 setActiveHotspot(null);
               }}
-              className={`p-2 rounded-xl text-left transition-all border ${
+              className={`p-2 rounded-lg text-left transition-all border cursor-pointer ${
                 isActive
-                  ? "bg-white text-ink-900 border-white shadow-lg scale-[1.02]"
+                  ? "bg-white text-ink-900 border-white shadow-md scale-[1.01]"
                   : "bg-white/10 hover:bg-white/20 text-white/80 border-white/15"
               }`}
             >
               <div className="flex items-center justify-between">
-                <span className={`text-[10px] font-mono font-bold ${isActive ? "text-accent" : "text-white/60"}`}>
+                <span className={`text-[10px] font-mono font-medium ${isActive ? "text-accent" : "text-white/60"}`}>
                   0{idx + 1}
                 </span>
                 {isActive && <Check className="w-3 h-3 text-accent" />}
               </div>
-              <div className="text-[11px] font-bold mt-0.5 truncate leading-tight">
+              <div className="text-[11px] font-sans font-semibold mt-0.5 truncate leading-tight">
                 {angle.name}
               </div>
             </button>

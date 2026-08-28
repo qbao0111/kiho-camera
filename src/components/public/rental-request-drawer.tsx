@@ -2,7 +2,7 @@
 
 import React, { useEffect, useState } from "react";
 import { createPortal } from "react-dom";
-import { X, Sparkles, ShieldCheck } from "lucide-react";
+import { X, MessageSquare } from "lucide-react";
 import { RentalRequestForm, EquipmentOption } from "@/components/public/rental-request-form";
 
 interface RentalRequestDrawerProps {
@@ -30,7 +30,6 @@ export function RentalRequestDrawer({
     setMounted(true);
   }, []);
 
-  // Body scroll lock & ESC key listener
   useEffect(() => {
     if (!isOpen) return;
 
@@ -58,7 +57,7 @@ export function RentalRequestDrawer({
       {/* Backdrop */}
       <div
         onClick={onClose}
-        className="fixed inset-0 bg-black/65 backdrop-blur-xs transition-opacity animate-fadeIn"
+        className="fixed inset-0 bg-black/60 backdrop-blur-xs transition-opacity animate-fadeIn"
       />
 
       {/* Modal / Drawer Dialog */}
@@ -66,30 +65,30 @@ export function RentalRequestDrawer({
         role="dialog"
         aria-modal="true"
         aria-labelledby="rental-drawer-title"
-        className="relative w-full max-w-lg bg-white rounded-3xl p-6 sm:p-8 shadow-2xl border border-[#e8e2d7] z-10 my-auto animate-scaleUp text-left"
+        className="relative w-full max-w-lg bg-white rounded-xl p-6 sm:p-7 shadow-2xl border border-ink-200 z-10 my-auto animate-scaleUp text-left"
       >
         {/* Close Button */}
         <button
           onClick={onClose}
-          className="absolute top-5 right-5 w-9 h-9 rounded-full bg-[#f4efe6] hover:bg-ink-900 hover:text-white text-ink-700 flex items-center justify-center transition-colors shadow-2xs cursor-pointer"
+          className="absolute top-4 right-4 w-8 h-8 rounded-lg bg-canvas-200 hover:bg-ink-900 hover:text-white text-ink-700 flex items-center justify-center transition-colors shadow-2xs cursor-pointer"
           aria-label="Đóng bảng yêu cầu"
         >
           <X className="w-4 h-4" />
         </button>
 
         {/* Drawer Header */}
-        <div className="space-y-2 mb-6 pr-8">
-          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#f0eae1] border border-[#e2dbcf] text-[11px] font-mono font-bold uppercase tracking-wider text-ink-700">
-            <Sparkles className="w-3 h-3 text-accent" />
+        <div className="space-y-1.5 mb-5 pr-8">
+          <div className="flex items-center gap-1.5 text-xs font-mono font-medium tracking-widest text-ink-500 uppercase">
+            <MessageSquare className="w-3 h-3 text-accent" />
             <span>KIHO LIÊN HỆ LẠI CHO BẠN</span>
           </div>
 
-          <h3 id="rental-drawer-title" className="text-2xl sm:text-3xl font-black text-ink-900 tracking-tight font-mono">
+          <h3 id="rental-drawer-title" className="font-display text-2xl sm:text-3xl font-bold text-ink-900 tracking-tight">
             Gửi yêu cầu thuê máy
           </h3>
 
-          <p className="text-xs sm:text-sm text-ink-600 font-medium leading-relaxed">
-            Để lại lịch thuê và SĐT, tụi mình kiểm tra máy rồi liên hệ tư vấn ngay.
+          <p className="text-xs sm:text-sm text-ink-600 font-sans font-normal leading-relaxed">
+            Để lại lịch thuê và số điện thoại, Kiho sẽ kiểm tra lịch máy và phản hồi cho bạn ngay.
           </p>
         </div>
 

@@ -11,7 +11,6 @@ interface EquipmentDetailsProps {
 }
 
 export function EquipmentDetails({ equipment, messengerChatUrl }: EquipmentDetailsProps) {
-  // Mobile accordion state (default open first 2 on mobile)
   const [openSections, setOpenSections] = useState<Record<string, boolean>>({
     included: true,
     specs: true,
@@ -28,34 +27,33 @@ export function EquipmentDetails({ equipment, messengerChatUrl }: EquipmentDetai
   const hasDesc = !!equipment.description;
 
   return (
-    <section className="pt-12 sm:pt-16 hairline-t space-y-8">
+    <section className="pt-10 sm:pt-14 border-t border-ink-200 space-y-6">
       {/* Section Header */}
-      <div className="space-y-2">
-        <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#f0eae1] border border-[#e2dbcf] text-xs font-mono font-bold uppercase tracking-wider text-ink-700">
+      <div className="space-y-1.5">
+        <div className="flex items-center gap-1.5 text-xs font-mono font-medium tracking-widest text-ink-500 uppercase">
           <Package className="w-3.5 h-3.5 text-accent" />
           <span>CHI TIẾT MÁY & DỊCH VỤ</span>
         </div>
-        <h2 className="text-2xl sm:text-4xl font-black text-ink-900 tracking-tight font-mono uppercase">
+        <h2 className="font-display text-2xl sm:text-3xl font-bold text-ink-900 tracking-tight">
           Thông tin về máy
         </h2>
-        <p className="text-xs sm:text-sm text-ink-600 font-medium max-w-2xl">
+        <p className="text-xs sm:text-sm text-ink-600 font-sans font-normal max-w-2xl">
           Trọn bộ thiết bị sẵn sàng sử dụng, thông số kỹ thuật hữu ích và chính sách thuê máy tại Kiho Camera.
         </p>
       </div>
 
-      {/* DESKTOP 2-COLUMN EDITORIAL GRID (Hidden on mobile) */}
-      <div className="hidden md:grid md:grid-cols-2 gap-8 lg:gap-12">
+      {/* DESKTOP 2-COLUMN GRID */}
+      <div className="hidden md:grid md:grid-cols-2 gap-6 lg:gap-8">
         
-        {/* Column 1: Included Items & Experience Details */}
-        <div className="space-y-8">
-          {/* 1. Included Items */}
+        {/* Column 1 */}
+        <div className="space-y-6">
           {hasIncluded && (
-            <div className="p-6 rounded-3xl bg-white border border-[#e8e2d7] shadow-xs space-y-4">
-              <div className="flex items-center gap-2 text-xs font-mono font-bold tracking-widest text-ink-900 uppercase">
+            <div className="p-5 sm:p-6 rounded-xl bg-white border border-ink-200 shadow-xs space-y-3.5">
+              <div className="flex items-center gap-2 text-xs font-mono font-medium tracking-wider text-ink-900 uppercase">
                 <Package className="w-4 h-4 text-accent" />
                 <span>BỘ THUÊ ĐÃ BAO GỒM (NHẬN MÁY LÀ CHỤP)</span>
               </div>
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs sm:text-sm text-ink-800 font-medium">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 text-xs sm:text-sm text-ink-800 font-sans font-medium">
                 {equipment.included_items!.map((item, idx) => (
                   <div key={idx} className="flex items-center gap-2">
                     <CheckCircle2 className="w-4 h-4 text-accent shrink-0" />
@@ -66,14 +64,13 @@ export function EquipmentDetails({ equipment, messengerChatUrl }: EquipmentDetai
             </div>
           )}
 
-          {/* 2. Detailed Experience */}
           {hasDesc && (
-            <div className="p-6 rounded-3xl bg-white border border-[#e8e2d7] shadow-xs space-y-3">
-              <div className="flex items-center gap-2 text-xs font-mono font-bold tracking-widest text-ink-900 uppercase">
+            <div className="p-5 sm:p-6 rounded-xl bg-white border border-ink-200 shadow-xs space-y-3">
+              <div className="flex items-center gap-2 text-xs font-mono font-medium tracking-wider text-ink-900 uppercase">
                 <FileText className="w-4 h-4 text-accent" />
                 <span>CHI TIẾT TRẢI NGHIỆM</span>
               </div>
-              <div className="text-xs sm:text-sm text-ink-700 leading-relaxed space-y-2 font-medium">
+              <div className="text-xs sm:text-sm text-ink-600 leading-relaxed space-y-2 font-sans font-normal">
                 {equipment.description!.split("\n\n").map((para, idx) => (
                   <p key={idx}>{para}</p>
                 ))}
@@ -82,22 +79,21 @@ export function EquipmentDetails({ equipment, messengerChatUrl }: EquipmentDetai
           )}
         </div>
 
-        {/* Column 2: Specifications & Rental Policy */}
-        <div className="space-y-8">
-          {/* 3. Specifications */}
+        {/* Column 2 */}
+        <div className="space-y-6">
           {hasSpecs && (
-            <div className="p-6 rounded-3xl bg-white border border-[#e8e2d7] shadow-xs space-y-4">
-              <div className="flex items-center gap-2 text-xs font-mono font-bold tracking-widest text-ink-900 uppercase">
+            <div className="p-5 sm:p-6 rounded-xl bg-white border border-ink-200 shadow-xs space-y-3.5">
+              <div className="flex items-center gap-2 text-xs font-mono font-medium tracking-wider text-ink-900 uppercase">
                 <Sliders className="w-4 h-4 text-accent" />
                 <span>THÔNG SỐ KỸ THUẬT HỮU ÍCH</span>
               </div>
-              <div className="divide-y divide-[#f0eae1] text-xs sm:text-sm">
+              <div className="divide-y divide-ink-200 text-xs">
                 {Object.entries(equipment.specifications!).map(([key, val], idx) => (
-                  <div key={idx} className="py-2.5 flex justify-between gap-4">
-                    <span className="text-ink-500 font-medium capitalize font-mono">
+                  <div key={idx} className="py-2 flex justify-between gap-4">
+                    <span className="text-ink-500 font-normal capitalize font-sans">
                       {key.replace(/_/g, " ")}
                     </span>
-                    <span className="text-ink-900 font-bold text-right font-mono">
+                    <span className="text-ink-900 font-semibold text-right font-mono">
                       {val}
                     </span>
                   </div>
@@ -106,20 +102,20 @@ export function EquipmentDetails({ equipment, messengerChatUrl }: EquipmentDetai
             </div>
           )}
 
-          {/* 4. Rental Policy & Verification */}
-          <div className="p-6 rounded-3xl bg-[#f0eae1] border border-[#e2dbcf] space-y-3">
-            <div className="flex items-center gap-2 text-xs font-mono font-bold tracking-widest text-ink-900 uppercase">
+          {/* Rental Policy */}
+          <div className="p-5 sm:p-6 rounded-xl bg-canvas-200/80 border border-ink-200 space-y-2.5">
+            <div className="flex items-center gap-2 text-xs font-mono font-medium tracking-wider text-ink-900 uppercase">
               <ShieldCheck className="w-4 h-4 text-emerald-700" />
               <span>THỦ TỤC XÁC MINH & NHẬN MÁY</span>
             </div>
-            <p className="text-xs sm:text-sm text-ink-700 leading-relaxed font-medium">
+            <p className="text-xs sm:text-sm text-ink-700 leading-relaxed font-sans font-normal">
               {equipment.deposit_note ||
                 "Kiho Camera không yêu cầu cọc tiền máy. Bạn chỉ cần cung cấp ảnh CCCD gắn chip chính chủ hoặc tài khoản VNeID để xác minh khi nhận máy tại 48 Ngô Quyền hoặc giao tận nơi khách sạn."}
             </p>
             <div className="pt-1">
               <Link
                 href="/huong-dan-thue"
-                className="inline-flex items-center gap-1.5 text-xs font-mono font-bold text-ink-900 hover:text-accent transition-colors underline underline-offset-4"
+                className="inline-flex items-center gap-1.5 text-xs font-sans font-semibold text-ink-900 hover:text-accent transition-colors underline underline-offset-4"
               >
                 <span>Xem chi tiết quy trình thuê máy</span>
                 <ArrowRight className="w-3.5 h-3.5" />
@@ -130,14 +126,13 @@ export function EquipmentDetails({ equipment, messengerChatUrl }: EquipmentDetai
 
       </div>
 
-      {/* MOBILE COLLAPSIBLE ACCORDIONS (Shown on mobile only for compact scanning) */}
-      <div className="md:hidden space-y-3">
-        {/* Mobile: 1. Included Items */}
+      {/* MOBILE ACCORDIONS */}
+      <div className="md:hidden space-y-2.5">
         {hasIncluded && (
-          <div className="rounded-2xl bg-white border border-[#e8e2d7] overflow-hidden">
+          <div className="rounded-lg bg-white border border-ink-200 overflow-hidden">
             <button
               onClick={() => toggleSection("included")}
-              className="w-full p-4 flex items-center justify-between text-left font-mono font-bold text-xs text-ink-900 uppercase"
+              className="w-full p-3.5 flex items-center justify-between text-left font-sans font-semibold text-xs text-ink-900"
             >
               <span className="flex items-center gap-2">
                 <Package className="w-4 h-4 text-accent" />
@@ -146,7 +141,7 @@ export function EquipmentDetails({ equipment, messengerChatUrl }: EquipmentDetai
               {openSections.included ? <ChevronUp className="w-4 h-4 text-ink-400" /> : <ChevronDown className="w-4 h-4 text-ink-400" />}
             </button>
             {openSections.included && (
-              <div className="p-4 pt-0 border-t border-[#f0eae1] grid grid-cols-1 gap-2.5 text-xs text-ink-800 font-medium">
+              <div className="p-3.5 pt-0 border-t border-ink-200 grid grid-cols-1 gap-2 text-xs text-ink-800 font-sans">
                 {equipment.included_items!.map((item, idx) => (
                   <div key={idx} className="flex items-center gap-2">
                     <CheckCircle2 className="w-4 h-4 text-accent shrink-0" />
@@ -158,12 +153,11 @@ export function EquipmentDetails({ equipment, messengerChatUrl }: EquipmentDetai
           </div>
         )}
 
-        {/* Mobile: 2. Specifications */}
         {hasSpecs && (
-          <div className="rounded-2xl bg-white border border-[#e8e2d7] overflow-hidden">
+          <div className="rounded-lg bg-white border border-ink-200 overflow-hidden">
             <button
               onClick={() => toggleSection("specs")}
-              className="w-full p-4 flex items-center justify-between text-left font-mono font-bold text-xs text-ink-900 uppercase"
+              className="w-full p-3.5 flex items-center justify-between text-left font-sans font-semibold text-xs text-ink-900"
             >
               <span className="flex items-center gap-2">
                 <Sliders className="w-4 h-4 text-accent" />
@@ -172,13 +166,13 @@ export function EquipmentDetails({ equipment, messengerChatUrl }: EquipmentDetai
               {openSections.specs ? <ChevronUp className="w-4 h-4 text-ink-400" /> : <ChevronDown className="w-4 h-4 text-ink-400" />}
             </button>
             {openSections.specs && (
-              <div className="p-4 pt-0 border-t border-[#f0eae1] divide-y divide-[#f0eae1] text-xs">
+              <div className="p-3.5 pt-0 border-t border-ink-200 divide-y divide-ink-200 text-xs">
                 {Object.entries(equipment.specifications!).map(([key, val], idx) => (
                   <div key={idx} className="py-2 flex justify-between gap-4">
-                    <span className="text-ink-500 font-medium capitalize font-mono">
+                    <span className="text-ink-500 font-sans capitalize">
                       {key.replace(/_/g, " ")}
                     </span>
-                    <span className="text-ink-900 font-bold text-right font-mono">
+                    <span className="text-ink-900 font-semibold font-mono text-right">
                       {val}
                     </span>
                   </div>
@@ -188,12 +182,11 @@ export function EquipmentDetails({ equipment, messengerChatUrl }: EquipmentDetai
           </div>
         )}
 
-        {/* Mobile: 3. Detailed Experience */}
         {hasDesc && (
-          <div className="rounded-2xl bg-white border border-[#e8e2d7] overflow-hidden">
+          <div className="rounded-lg bg-white border border-ink-200 overflow-hidden">
             <button
               onClick={() => toggleSection("description")}
-              className="w-full p-4 flex items-center justify-between text-left font-mono font-bold text-xs text-ink-900 uppercase"
+              className="w-full p-3.5 flex items-center justify-between text-left font-sans font-semibold text-xs text-ink-900"
             >
               <span className="flex items-center gap-2">
                 <FileText className="w-4 h-4 text-accent" />
@@ -202,7 +195,7 @@ export function EquipmentDetails({ equipment, messengerChatUrl }: EquipmentDetai
               {openSections.description ? <ChevronUp className="w-4 h-4 text-ink-400" /> : <ChevronDown className="w-4 h-4 text-ink-400" />}
             </button>
             {openSections.description && (
-              <div className="p-4 pt-0 border-t border-[#f0eae1] text-xs text-ink-700 leading-relaxed space-y-2 font-medium">
+              <div className="p-3.5 pt-0 border-t border-ink-200 text-xs text-ink-600 leading-relaxed space-y-2 font-sans">
                 {equipment.description!.split("\n\n").map((para, idx) => (
                   <p key={idx}>{para}</p>
                 ))}
@@ -211,11 +204,11 @@ export function EquipmentDetails({ equipment, messengerChatUrl }: EquipmentDetai
           </div>
         )}
 
-        {/* Mobile: 4. Rental Policy */}
-        <div className="rounded-2xl bg-[#f0eae1] border border-[#e2dbcf] overflow-hidden">
+        {/* Policy */}
+        <div className="rounded-lg bg-canvas-200/80 border border-ink-200 overflow-hidden">
           <button
             onClick={() => toggleSection("policy")}
-            className="w-full p-4 flex items-center justify-between text-left font-mono font-bold text-xs text-ink-900 uppercase"
+            className="w-full p-3.5 flex items-center justify-between text-left font-sans font-semibold text-xs text-ink-900"
           >
             <span className="flex items-center gap-2">
               <ShieldCheck className="w-4 h-4 text-emerald-700" />
@@ -224,7 +217,7 @@ export function EquipmentDetails({ equipment, messengerChatUrl }: EquipmentDetai
             {openSections.policy ? <ChevronUp className="w-4 h-4 text-ink-400" /> : <ChevronDown className="w-4 h-4 text-ink-400" />}
           </button>
           {openSections.policy && (
-            <div className="p-4 pt-0 border-t border-[#e2dbcf] space-y-2 text-xs text-ink-700 font-medium">
+            <div className="p-3.5 pt-0 border-t border-ink-200 space-y-2 text-xs text-ink-700 font-sans">
               <p className="leading-relaxed">
                 {equipment.deposit_note ||
                   "Kiho Camera không yêu cầu cọc tiền máy. Bạn chỉ cần cung cấp ảnh CCCD gắn chip chính chủ hoặc tài khoản VNeID để xác minh khi nhận máy tại 48 Ngô Quyền hoặc giao tận nơi khách sạn."}
@@ -232,7 +225,7 @@ export function EquipmentDetails({ equipment, messengerChatUrl }: EquipmentDetai
               <div className="pt-1">
                 <Link
                   href="/huong-dan-thue"
-                  className="text-xs font-mono font-bold text-ink-900 underline underline-offset-4"
+                  className="text-xs font-sans font-semibold text-ink-900 underline underline-offset-4"
                 >
                   Xem chi tiết quy trình thuê máy →
                 </Link>
@@ -242,14 +235,14 @@ export function EquipmentDetails({ equipment, messengerChatUrl }: EquipmentDetai
         </div>
       </div>
 
-      {/* Lightweight Mid-Page Conversion Card */}
+      {/* Mid-Page Conversion Card */}
       {messengerChatUrl && (
-        <div className="p-5 sm:p-6 rounded-3xl bg-white border border-[#e8e2d7] shadow-xs flex flex-col sm:flex-row items-center justify-between gap-4">
-          <div className="space-y-1 text-center sm:text-left">
-            <h4 className="text-sm sm:text-base font-black text-ink-900 font-mono">
+        <div className="p-4 sm:p-5 rounded-xl bg-white border border-ink-200 shadow-xs flex flex-col sm:flex-row items-center justify-between gap-4">
+          <div className="space-y-0.5 text-center sm:text-left">
+            <h4 className="text-sm sm:text-base font-bold font-sans text-ink-900">
               Ưng chiếc {equipment.name} này cho chuyến đi?
             </h4>
-            <p className="text-xs text-ink-500 font-medium">
+            <p className="text-xs text-ink-500 font-sans">
               Nhắn Kiho trước để giữ máy và được cài đặt profile màu chụp đẹp nhất.
             </p>
           </div>
@@ -258,7 +251,7 @@ export function EquipmentDetails({ equipment, messengerChatUrl }: EquipmentDetai
             href={messengerChatUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 bg-ink-900 hover:bg-accent text-white text-xs font-mono font-bold uppercase tracking-wider px-6 py-3 rounded-xl transition-colors shadow-sm shrink-0 cursor-pointer"
+            className="inline-flex items-center gap-2 bg-ink-900 hover:bg-black text-white text-xs font-sans font-semibold px-5 py-2.5 rounded-lg transition-colors shadow-xs shrink-0 cursor-pointer"
           >
             <span>Nhắn Kiho giữ máy</span>
             <ArrowRight className="w-3.5 h-3.5" />

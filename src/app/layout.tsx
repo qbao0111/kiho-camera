@@ -1,11 +1,25 @@
 import type { Metadata, Viewport } from "next";
-import { Plus_Jakarta_Sans } from "next/font/google";
+import { Playfair_Display, Be_Vietnam_Pro, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 
-const plusJakartaSans = Plus_Jakarta_Sans({
+const playfairDisplay = Playfair_Display({
+  subsets: ["latin", "vietnamese"],
+  weight: ["400", "600", "700", "800", "900"],
+  variable: "--font-display",
+  display: "swap",
+});
+
+const beVietnamPro = Be_Vietnam_Pro({
   subsets: ["latin", "vietnamese"],
   weight: ["300", "400", "500", "600", "700", "800"],
   variable: "--font-sans",
+  display: "swap",
+});
+
+const jetbrainsMono = JetBrains_Mono({
+  subsets: ["latin", "vietnamese"],
+  weight: ["400", "500", "600", "700"],
+  variable: "--font-mono",
   display: "swap",
 });
 
@@ -86,7 +100,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="vi" className={`${plusJakartaSans.variable} scroll-smooth`}>
+    <html
+      lang="vi"
+      className={`${playfairDisplay.variable} ${beVietnamPro.variable} ${jetbrainsMono.variable} scroll-smooth`}
+    >
       <body className="min-h-screen flex flex-col font-sans bg-[#faf8f5] text-ink-900 antialiased selection:bg-ink-900 selection:text-[#faf8f5]">
         {children}
       </body>

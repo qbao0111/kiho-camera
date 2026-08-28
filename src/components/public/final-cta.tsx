@@ -2,7 +2,7 @@
 
 import React from "react";
 import Image from "next/image";
-import { ArrowRight, ArrowDown, Phone, Instagram, MapPin, Sparkles } from "lucide-react";
+import { ArrowRight, ArrowDown, Phone, Instagram, MapPin, Camera } from "lucide-react";
 
 interface FinalCtaProps {
   messengerUrl?: string;
@@ -24,89 +24,80 @@ export function FinalCta({
   };
 
   return (
-    <section className="relative py-20 sm:py-28 overflow-hidden bg-[#F8F4EE] text-[#171716] border-t border-[#E8E2D7]">
-      {/* Background Scenic Overlay with soft warm wash */}
+    <section className="relative py-16 sm:py-24 overflow-hidden bg-canvas-100 text-ink-900 border-t border-ink-200">
       <div className="absolute inset-0 z-0 pointer-events-none">
         <Image
           src="/images/landing/hero-quang-binh.webp"
           alt="Quảng Bình landscape"
           fill
-          className="object-cover object-center opacity-15 filter contrast-105"
+          className="object-cover object-center opacity-10 filter contrast-105"
           sizes="100vw"
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-[#F8F4EE]/90 via-[#F8F4EE]/95 to-[#F8F4EE]" />
+        <div className="absolute inset-0 bg-gradient-to-b from-canvas-100/90 via-canvas-100/95 to-canvas-100" />
       </div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <div className="max-w-3xl space-y-7">
+        <div className="max-w-3xl space-y-6">
           
-          {/* Eyebrow Pill */}
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#FAF8F5] text-[#716A62] text-xs font-mono font-bold uppercase tracking-wider border border-[#E2DBCF] shadow-2xs">
-            <Sparkles className="w-3.5 h-3.5 text-[#E85D2A]" />
+          {/* Eyebrow */}
+          <div className="flex items-center gap-1.5 text-xs font-mono font-medium tracking-widest text-ink-500 uppercase">
+            <Camera className="w-3.5 h-3.5 text-accent" />
             <span>KIHO CAMERA · ĐỒNG HÀNH CÙNG CHUYẾN ĐI</span>
           </div>
 
           {/* Headline */}
-          <h2 className="text-4xl sm:text-6xl lg:text-7xl font-black tracking-tight leading-[1.06] text-[#171716] font-mono">
+          <h2 className="font-display text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight leading-[1.1] text-ink-900">
             Chuyến đi tới <br />
-            <span className="text-[#E85D2A]">mang máy nào đây?</span>
+            <span className="italic text-accent font-normal">mang máy nào đây?</span>
           </h2>
 
           {/* Subtitle */}
-          <p className="text-base sm:text-lg text-[#716A62] leading-relaxed max-w-2xl font-medium">
+          <p className="font-sans text-base sm:text-lg text-ink-600 leading-relaxed max-w-2xl font-normal">
             Nhắn Kiho để được gợi ý máy phù hợp. Thuê nhanh, không cần cọc tiền máy — chỉ cần ảnh CCCD hoặc VNeID để xác minh.
           </p>
 
           {/* CTA Buttons */}
-          <div className="pt-2 flex flex-wrap items-center gap-3.5">
-            {/* Primary CTA (Coral / Orange) */}
+          <div className="pt-2 flex flex-wrap items-center gap-3">
             <a
               href={messengerUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2.5 bg-[#E85D2A] hover:bg-[#d64e1c] text-white text-xs sm:text-sm font-mono font-bold uppercase tracking-wider px-7 py-4 rounded-2xl shadow-sm transition-all group cursor-pointer"
+              className="inline-flex items-center gap-2 bg-ink-900 hover:bg-black text-white text-xs sm:text-sm font-sans font-semibold px-6 py-3.5 rounded-lg shadow-xs transition-all group cursor-pointer"
             >
               <span>Nhắn Kiho tư vấn ngay</span>
-              <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+              <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
             </a>
 
-            {/* Secondary CTA (Light Beige Outline) */}
             <button
               onClick={scrollToPricing}
-              className="inline-flex items-center gap-2 bg-white hover:bg-[#F0E8DE] text-[#171716] text-xs sm:text-sm font-mono font-bold uppercase tracking-wider px-6 py-4 rounded-2xl border border-[#D8CEC0] shadow-2xs transition-all cursor-pointer"
+              className="inline-flex items-center gap-2 bg-white hover:bg-canvas-200 text-ink-900 text-xs sm:text-sm font-sans font-medium px-5 py-3.5 rounded-lg border border-ink-300 shadow-xs transition-all cursor-pointer"
             >
               <span>Xem bảng giá</span>
-              <ArrowDown className="w-4 h-4 text-[#716A62]" />
+              <ArrowDown className="w-4 h-4 text-ink-400" />
             </button>
           </div>
 
           {/* Store Quick Info Row */}
-          <div className="pt-8 border-t border-[#E8E2D7] grid grid-cols-1 sm:grid-cols-3 gap-5 text-xs font-mono text-[#716A62]">
-            <div className="flex items-center gap-3">
-              <div className="w-8 h-8 rounded-lg bg-[#5DAEA5]/15 text-[#2A8B80] flex items-center justify-center shrink-0">
-                <MapPin className="w-4 h-4" />
-              </div>
-              <span className="text-[#171716] font-medium leading-snug">{address}</span>
+          <div className="pt-8 border-t border-ink-200 grid grid-cols-1 sm:grid-cols-3 gap-5 text-xs font-sans text-ink-600">
+            <div className="flex items-center gap-2.5">
+              <MapPin className="w-4 h-4 text-accent shrink-0" />
+              <span className="leading-snug">{address}</span>
             </div>
 
-            <div className="flex items-center gap-3">
-              <div className="w-8 h-8 rounded-lg bg-[#E85D2A]/10 text-[#E85D2A] flex items-center justify-center shrink-0">
-                <Phone className="w-4 h-4" />
-              </div>
-              <a href="tel:0387274669" className="text-[#171716] hover:text-[#E85D2A] font-bold transition-colors">
+            <div className="flex items-center gap-2.5">
+              <Phone className="w-4 h-4 text-accent shrink-0" />
+              <a href="tel:0387274669" className="text-ink-900 hover:text-accent font-semibold transition-colors font-mono">
                 {phone}
               </a>
             </div>
 
-            <div className="flex items-center gap-3">
-              <div className="w-8 h-8 rounded-lg bg-[#5659C9]/10 text-[#5659C9] flex items-center justify-center shrink-0">
-                <Instagram className="w-4 h-4" />
-              </div>
+            <div className="flex items-center gap-2.5">
+              <Instagram className="w-4 h-4 text-accent shrink-0" />
               <a
                 href="https://www.instagram.com/thuemayanhqbb/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-[#171716] hover:text-[#5659C9] font-bold transition-colors"
+                className="text-ink-900 hover:text-accent font-semibold transition-colors font-mono"
               >
                 @thuemayanhqbb
               </a>
