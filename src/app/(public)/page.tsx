@@ -1,14 +1,14 @@
 import React from "react";
 import { getSiteSettings } from "@/lib/services/settings";
 import { getEquipmentList } from "@/lib/services/equipment";
-import { LandingHero } from "@/components/public/landing-hero";
+import { V3Hero } from "@/components/public/v3/v3-hero";
 import { TrustStrip } from "@/components/public/trust-strip";
-import { CameraPricingSlider } from "@/components/public/camera-pricing-slider";
-import { FeaturedCameras } from "@/components/public/featured-cameras";
-import { CanonR50Spotlight } from "@/components/public/canon-r50-spotlight";
-import { UseCaseSection } from "@/components/public/use-case-section";
-import { RentalRequestSection } from "@/components/public/rental-request-section";
-import { RentalProcess } from "@/components/public/rental-process";
+import { RentalPriceIndex } from "@/components/public/v3/rental-price-index";
+import { QuangBinhJourney } from "@/components/public/v3/quang-binh-journey";
+import { CameraStorytelling } from "@/components/public/v3/camera-storytelling";
+import { CameraStories } from "@/components/public/v3/camera-stories";
+import { TravelBookingNote } from "@/components/public/v3/travel-booking-note";
+import { PickupAndProcess } from "@/components/public/v3/pickup-and-process";
 
 export default async function HomePage() {
   const [settings, equipmentList] = await Promise.all([
@@ -17,39 +17,36 @@ export default async function HomePage() {
   ]);
 
   return (
-    <div className="bg-[#faf8f4]">
-      {/* 1. EDITORIAL HERO (Multilayer depth with real camera cutouts & dynamic showcase) */}
-      <LandingHero
-        messengerUrl={settings.messenger_url}
-        phone={settings.phone}
-      />
+    <div className="bg-[#faf8f5] text-ink-900 selection:bg-accent/20">
+      {/* 01 / ARRIVAL — Immersive 3D Hero */}
+      <V3Hero />
 
-      {/* 2. TRUST STRIP (Marquee bar with key guarantees) */}
+      {/* Trust Strip Ticker */}
       <TrustStrip />
 
-      {/* 3. CAMERA PRICING SLIDER (12 models reading directly from database) */}
-      <CameraPricingSlider
+      {/* 02 / RENTAL INDEX — Editorial Rental Price Index & Live Preview */}
+      <RentalPriceIndex
         equipment={equipmentList}
         messengerUrl={settings.messenger_url}
       />
 
-      {/* 4. MÁY ĐANG CÓ TẠI KIHO (Curated camera cards preview) */}
-      <FeaturedCameras equipment={equipmentList} />
+      {/* 03 / QUẢNG BÌNH, THROUGH A CAMERA — Photographic Travel Story & Subtle Parallax */}
+      <QuangBinhJourney />
 
-      {/* 5. CANON R50 SPOTLIGHT (Editorial Feature Band) */}
-      <CanonR50Spotlight messengerUrl={settings.messenger_url} />
+      {/* 04 / CHOOSE YOUR CAMERA — Storytelling Feature (Một chiếc máy — ba khoảnh khắc) */}
+      <CameraStorytelling />
 
-      {/* 6. USE CASES ("Chọn vibe chuyến đi" - 4 authentic travel photo cards) */}
-      <UseCaseSection />
+      {/* 05 / CAMERA STORIES — Asymmetric Lifestyle Contact-Sheet Collage */}
+      <CameraStories />
 
-      {/* 7. LEAD CONVERSION FORM ("Không biết chọn máy nào?" - Direct lead capture) */}
-      <RentalRequestSection
+      {/* 06 / BOOK YOUR TRIP — Open Travel Booking Lead Note */}
+      <TravelBookingNote
         equipmentList={equipmentList}
         messengerUrl={settings.messenger_url}
       />
 
-      {/* 8. RENTAL PROCESS (3-step clean typography workflow) */}
-      <RentalProcess messengerUrl={settings.messenger_url} />
+      {/* 07 / PICKUP & JOURNEY START — 3-Step Process & Journal Transition */}
+      <PickupAndProcess messengerUrl={settings.messenger_url} />
     </div>
   );
 }
