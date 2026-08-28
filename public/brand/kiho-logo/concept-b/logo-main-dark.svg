@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 200" width="520" height="200">
+  
+  <g transform="translate(60, 56)">
+    <!-- Letter K (Clean bold geometric) -->
+    <path d="M 0 -24 L 16 -24 L 16 20 L 48 -22 L 69 -22 L 33 24 L 72 76 L 51 76 L 16 30 L 16 76 L 0 76 Z" fill="#FFFFFF"/>
+
+    <!-- Letter i -->
+    <g transform="translate(86, 0)">
+      <circle cx="8" cy="-14" r="8" fill="#FFFFFF"/>
+      <rect x="0" y="6" width="16" height="70" rx="3" fill="#FFFFFF"/>
+    </g>
+
+    <!-- Letter h -->
+    <g transform="translate(122, 0)">
+      <rect x="0" y="-24" width="16" height="100" rx="3" fill="#FFFFFF"/>
+      <path d="M 16 26 C 25 10 40 6 52 6 C 68 6 76 16 76 32 L 76 76 L 60 76 L 60 35 C 60 25 54 19 45 19 C 34 19 16 26 16 40 L 16 76 L 0 76" fill="#FFFFFF"/>
+    </g>
+
+    <!-- Letter o as Complete Camera Body with Flash & Shutter Button -->
+    <g transform="translate(216, 0)">
+      <!-- Dynamic 5-Point Flash Burst (Camera Flash Pop) -->
+      <polygon points="41,-42 48,-21 62,-33 57,-16 73,-16 60,-4 42,-4 38,-16 26,-28 35,-21" fill="#FFFFFF"/>
+
+      <!-- Camera Shutter Button Notch on top-right -->
+      <rect x="62" y="-4" width="16" height="5" rx="1.8" fill="#FFFFFF"/>
+
+      <!-- Outer Camera Lens / Body -->
+      <circle cx="41" cy="41" r="37" fill="#FFFFFF"/>
+      <!-- Aperture Opening -->
+      <circle cx="41" cy="41" r="25" fill="#FAF8F5"/>
+      <!-- Optical Element -->
+      <circle cx="41" cy="41" r="16" fill="#FFFFFF"/>
+      <!-- Lens Glint (White Reflection) -->
+      <circle cx="35" cy="35" r="5" fill="#FAF8F5"/>
+    </g>
+  </g>
+
+  <!-- Subtitle: camera -->
+  <text x="210" y="168" font-family="'Be Vietnam Pro', sans-serif" font-size="14" font-weight="700" fill="#FFFFFF" letter-spacing="10" text-anchor="middle">CAMERA</text>
+</svg>

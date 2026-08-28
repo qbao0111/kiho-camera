@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Kiho Camera — KH Monogram &amp; Lens Refinement (v2.2)</title>
+  <title>Kiho Camera — Redesign Concepts (A, B, C)</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Playfair+Display:ital,wght@0,600;0,700;1,400&display=swap" rel="stylesheet">
@@ -14,7 +14,6 @@
       --card-bg: #FFFFFF;
       --border: #E8E4DE;
       --muted: #767676;
-      --terracotta: #D95D39;
     }
     * { box-sizing: border-box; margin: 0; padding: 0; }
     body {
@@ -26,7 +25,7 @@
     }
     .container { max-width: 1300px; margin: 0 auto; }
     header {
-      margin-bottom: 40px;
+      margin-bottom: 32px;
       border-bottom: 1.5px solid var(--border);
       padding-bottom: 24px;
     }
@@ -34,7 +33,6 @@
       font-family: 'Playfair Display', serif;
       font-size: 32px;
       font-weight: 700;
-      letter-spacing: 1px;
     }
     .subtitle {
       font-size: 13px;
@@ -43,6 +41,20 @@
       letter-spacing: 2px;
       text-transform: uppercase;
       margin-top: 6px;
+    }
+    .banner-img {
+      width: 100%;
+      border-radius: 16px;
+      border: 1.5px solid var(--border);
+      box-shadow: 0 8px 30px rgba(0,0,0,0.04);
+      margin-bottom: 40px;
+    }
+    .section-title {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 14px;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      margin-bottom: 20px;
     }
     .grid-3 {
       display: grid;
@@ -55,54 +67,37 @@
       border: 1.5px solid var(--border);
       border-radius: 16px;
       padding: 32px;
-      box-shadow: 0 4px 20px rgba(0,0,0,0.03);
       display: flex;
       flex-direction: column;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.03);
     }
     .badge {
       display: inline-block;
       font-family: 'JetBrains Mono', monospace;
       font-size: 11px;
       font-weight: 600;
-      padding: 4px 10px;
+      padding: 4px 12px;
       border-radius: 6px;
-      background: var(--bg-paper);
-      border: 1px solid var(--border);
       margin-bottom: 16px;
       align-self: flex-start;
     }
-    .badge.rec {
-      background: #111111;
-      color: #FFFFFF;
-      border-color: #111111;
-    }
-    .card h3 {
-      font-family: 'Playfair Display', serif;
-      font-size: 20px;
-      margin-bottom: 4px;
-    }
-    .card p.desc {
-      font-size: 12px;
-      color: var(--muted);
-      margin-bottom: 24px;
-    }
-    .logo-view {
+    .badge.b { background: #111111; color: #FFFFFF; }
+    .badge.a, .badge.c { background: var(--bg-paper); border: 1px solid var(--border); }
+    .card h3 { font-family: 'Playfair Display', serif; font-size: 22px; margin-bottom: 4px; }
+    .card p.desc { font-size: 12px; color: var(--muted); margin-bottom: 20px; }
+    .preview-box {
+      background: var(--bg-paper);
+      border-radius: 12px;
+      padding: 24px;
+      min-height: 160px;
       display: flex;
       align-items: center;
       justify-content: center;
-      min-height: 200px;
-      background: var(--bg-paper);
-      border-radius: 12px;
-      margin-bottom: 24px;
-      padding: 20px;
+      margin-bottom: 20px;
     }
-    .logo-view img { max-width: 140px; height: auto; }
-    .features {
-      font-size: 12px;
-      color: #4A4A4A;
-      margin-bottom: 24px;
-      flex-grow: 1;
-    }
+    .preview-box img { max-width: 100%; height: auto; }
+    .preview-box.dark { background: #111111; }
+    .features { font-size: 12px; color: #4A4A4A; margin-bottom: 24px; flex-grow: 1; }
     .features li { margin-bottom: 6px; list-style: none; }
     .features li::before { content: "• "; color: var(--ink); font-weight: bold; }
     .scale-row {
@@ -112,98 +107,94 @@
       border-top: 1px solid #F0ECE4;
       padding-top: 16px;
     }
-    .scale-item { text-align: center; }
-    .scale-item span {
-      display: block;
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 9px;
-      color: var(--muted);
-      margin-top: 4px;
-    }
-    .preview-board-img {
-      width: 100%;
-      border-radius: 16px;
-      border: 1.5px solid var(--border);
-      box-shadow: 0 8px 30px rgba(0,0,0,0.04);
-      margin-bottom: 40px;
-    }
+    .scale-item { text-align: center; font-size: 10px; font-family: 'JetBrains Mono', monospace; color: var(--muted); }
+    .scale-item img { display: block; margin: 0 auto 4px; }
   </style>
 </head>
 <body>
   <div class="container">
     <header>
       <h1 class="brand-title">KIHO CAMERA</h1>
-      <div class="subtitle">KH Monogram &amp; Optical Lens Refinement · 3 Clean Directions</div>
+      <div class="subtitle">Complete Redesign Exploration · Inspiration from Reference · Concepts A, B, C</div>
     </header>
 
-    <h2 style="font-size: 18px; margin-bottom: 20px; font-family: 'JetBrains Mono', monospace;">01 · BẢNG TỔNG QUAN 3 ĐỊNH HƯỚNG REFINEMENT</h2>
-    <img src="kiho-logo-preview.png" class="preview-board-img" alt="KH Monogram 3 Directions Comparison Board">
+    <div class="section-title">01 · BẢNG TỔNG QUAN SO SÁNH 3 CONCEPTS</div>
+    <img src="kiho-logo-preview.png" class="banner-img" alt="3 Concepts Comparison Board">
 
-    <h2 style="font-size: 18px; margin-bottom: 20px; font-family: 'JetBrains Mono', monospace;">02 · SO SÁNH TRỰC QUAN 3 ĐỊNH HƯỚNG</h2>
+    <div class="section-title">02 · BỘ FILE CHI TIẾT THEO TỪNG CONCEPT</div>
     <div class="grid-3">
       <!-- Card A -->
       <div class="card">
-        <span class="badge rec">DIRECTION A · RECOMMENDED</span>
-        <h3>Clear KH Monogram</h3>
-        <p class="desc">Chữ K và H tách bạch 100% + Thấu kính quang học tinh tế</p>
-        <div class="logo-view">
-          <img src="kiho-logo-icon.png" alt="Direction A">
+        <span class="badge a">CONCEPT A · EDITORIAL</span>
+        <h3>Editorial High-End</h3>
+        <p class="desc">Uppercase KIHO + Thấu kính quang học "O" + Ánh lóe ✦</p>
+        <div class="preview-box">
+          <img src="concept-a/logo-main.png" alt="Concept A">
+        </div>
+        <div class="preview-box dark">
+          <img src="concept-a/logo-main-dark.png" alt="Concept A Dark">
         </div>
         <ul class="features">
-          <li><strong>Đọc KH tức thì:</strong> Cột đứng K và 2 cột đứng H nhận diện rõ ràng.</li>
-          <li><strong>Thấu kính quang học:</strong> Vòng bezel + vòng khẩu độ, tâm mở không target dot.</li>
-          <li><strong>Nhận diện vi mô:</strong> Sắc nét và đọc rõ "KH" ngay ở kích thước 16px/24px/32px.</li>
-          <li><strong>Không cần giải thích:</strong> Ai nhìn vào cũng đọc được chữ K và chữ H.</li>
+          <li><strong>Typography:</strong> All-Caps hiện đại, quyền lực, đậm chất editorial cao cấp.</li>
+          <li><strong>Thấu kính "O":</strong> Ống kính quang học nhiều lớp, tâm mở có điểm phản chiếu.</li>
+          <li><strong>Ánh lóe:</strong> Ngôi sao 4 cánh (✦) tượng trưng cho ánh chớp flash tinh tế.</li>
+          <li><strong>Thư mục:</strong> <code>public/brand/kiho-logo/concept-a/</code></li>
         </ul>
         <div class="scale-row">
-          <div class="scale-item"><img src="kiho-logo-icon.png" style="width: 48px;"><br><span>48px</span></div>
-          <div class="scale-item"><img src="kiho-logo-icon.png" style="width: 32px;"><br><span>32px</span></div>
-          <div class="scale-item"><img src="kiho-logo-icon.png" style="width: 24px;"><br><span>24px</span></div>
-          <div class="scale-item"><img src="kiho-logo-icon.png" style="width: 16px;"><br><span>16px</span></div>
+          <div class="scale-item"><img src="concept-a/logo-icon-512.png" style="width: 44px;">44px</div>
+          <div class="scale-item"><img src="concept-a/logo-icon-512.png" style="width: 32px;">32px</div>
+          <div class="scale-item"><img src="concept-a/logo-icon-512.png" style="width: 20px;">20px</div>
+          <div class="scale-item"><img src="concept-a/app-icon-squircle.png" style="width: 44px; border-radius: 10px;">App</div>
         </div>
       </div>
 
       <!-- Card B -->
       <div class="card">
-        <span class="badge">DIRECTION B</span>
-        <h3>Compact Camera Body</h3>
-        <p class="desc">KH đóng vai trò khung vỏ máy ảnh + gờ nút chụp rangefinder</p>
-        <div class="logo-view">
-          <img src="../../scratch/dir_b.png" alt="Direction B">
+        <span class="badge b">CONCEPT B · REFERENCE MOOD (KHUYÊN DÙNG)</span>
+        <h3>Camera-Pop Wordmark</h3>
+        <p class="desc">Titlecase Kiho + "o" hóa thân thành Camera kèm Flash &amp; Nút chụp</p>
+        <div class="preview-box">
+          <img src="concept-b/logo-main.png" alt="Concept B">
+        </div>
+        <div class="preview-box dark">
+          <img src="concept-b/logo-main-dark.png" alt="Concept B Dark">
         </div>
         <ul class="features">
-          <li><strong>Hình thể máy ảnh:</strong> Cột K tạo báng cầm, cột H tạo thân máy.</li>
-          <li><strong>Chi tiết nhiếp ảnh:</strong> Gờ nút chụp trên đầu cột H gợi nhớ Leica M / X100V.</li>
-          <li><strong>Thấu kính trung tâm:</strong> Đặt chính diện như lens pancake máy compact.</li>
-          <li><strong>Cảm xúc:</strong> Đậm chất nhiếp ảnh cổ điển, hơi playful.</li>
+          <li><strong>Bắt trọn tinh thần Reference:</strong> Chữ "o" là thân camera với ống kính, tia chớp flash và nút bấm chụp.</li>
+          <li><strong>Wordmark trung tâm:</strong> "Kiho" tròn trịa, chắc nét, dễ nhớ, tự nhiên.</li>
+          <li><strong>Icon độc lập:</strong> Biểu tượng camera "o" làm avatar mạng xã hội và app icon cực kỳ bắt mắt.</li>
+          <li><strong>Thư mục:</strong> <code>public/brand/kiho-logo/concept-b/</code></li>
         </ul>
         <div class="scale-row">
-          <div class="scale-item"><img src="../../scratch/dir_b.png" style="width: 48px;"><br><span>48px</span></div>
-          <div class="scale-item"><img src="../../scratch/dir_b.png" style="width: 32px;"><br><span>32px</span></div>
-          <div class="scale-item"><img src="../../scratch/dir_b.png" style="width: 24px;"><br><span>24px</span></div>
-          <div class="scale-item"><img src="../../scratch/dir_b.png" style="width: 16px;"><br><span>16px</span></div>
+          <div class="scale-item"><img src="concept-b/logo-icon-512.png" style="width: 44px;">44px</div>
+          <div class="scale-item"><img src="concept-b/logo-icon-512.png" style="width: 32px;">32px</div>
+          <div class="scale-item"><img src="concept-b/logo-icon-512.png" style="width: 20px;">20px</div>
+          <div class="scale-item"><img src="concept-b/app-icon-squircle.png" style="width: 44px; border-radius: 10px;">App</div>
         </div>
       </div>
 
       <!-- Card C -->
       <div class="card">
-        <span class="badge">DIRECTION C</span>
-        <h3>Seamless KH Ligature</h3>
-        <p class="desc">Ligature nối liền nét K và H + Thấu kính âm bản giữa 2 chữ</p>
-        <div class="logo-view">
-          <img src="../../scratch/dir_c.png" alt="Direction C">
+        <span class="badge c">CONCEPT C · LIFESTYLE</span>
+        <h3>Lifestyle Studio</h3>
+        <p class="desc">Lowercase kiho + Dấu chấm "i" flash spark + Focus ring "o"</p>
+        <div class="preview-box">
+          <img src="concept-c/logo-main.png" alt="Concept C">
+        </div>
+        <div class="preview-box dark">
+          <img src="concept-c/logo-main-dark.png" alt="Concept C Dark">
         </div>
         <ul class="features">
-          <li><strong>Liên kết liền mạch:</strong> Nét chéo K hòa vào thanh ngang của chữ H.</li>
-          <li><strong>Khoảng âm thấu kính:</strong> Tạo thành khẩu độ quang học tự nhiên.</li>
-          <li><strong>1 vòng khuyên concentric:</strong> Tối giản tuyệt đối, thanh lịch.</li>
-          <li><strong>Cảm xúc:</strong> Mang tính đồ họa hiện đại, sang trọng.</li>
+          <li><strong>Typography:</strong> Chữ thường "kiho" thân thiện, mềm mại, gu Hàn/Nhật.</li>
+          <li><strong>Điểm nhấn:</strong> Dấu chấm "i" chớp sáng (✦), chữ "o" mang vòng điều cự lấy nét.</li>
+          <li><strong>Cảm giác:</strong> Nhẹ nhàng, sáng tạo, hợp photobooth và studio ảnh kỷ yếu/du lịch.</li>
+          <li><strong>Thư mục:</strong> <code>public/brand/kiho-logo/concept-c/</code></li>
         </ul>
         <div class="scale-row">
-          <div class="scale-item"><img src="../../scratch/dir_c.png" style="width: 48px;"><br><span>48px</span></div>
-          <div class="scale-item"><img src="../../scratch/dir_c.png" style="width: 32px;"><br><span>32px</span></div>
-          <div class="scale-item"><img src="../../scratch/dir_c.png" style="width: 24px;"><br><span>24px</span></div>
-          <div class="scale-item"><img src="../../scratch/dir_c.png" style="width: 16px;"><br><span>16px</span></div>
+          <div class="scale-item"><img src="concept-c/logo-icon-512.png" style="width: 44px;">44px</div>
+          <div class="scale-item"><img src="concept-c/logo-icon-512.png" style="width: 32px;">32px</div>
+          <div class="scale-item"><img src="concept-c/logo-icon-512.png" style="width: 20px;">20px</div>
+          <div class="scale-item"><img src="concept-c/app-icon-squircle.png" style="width: 44px; border-radius: 10px;">App</div>
         </div>
       </div>
     </div>
