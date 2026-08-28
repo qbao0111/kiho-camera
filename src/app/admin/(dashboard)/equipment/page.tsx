@@ -4,6 +4,7 @@ import Image from "next/image";
 import { Plus, Edit, Sparkles, Eye, EyeOff } from "lucide-react";
 import { getEquipmentList } from "@/lib/services/equipment";
 import { getCategories } from "@/lib/services/categories";
+import { getEquipmentCoverImage } from "@/lib/equipment-images";
 
 export default async function AdminEquipmentPage() {
   const [equipmentList] = await Promise.all([
@@ -56,10 +57,7 @@ export default async function AdminEquipmentPage() {
             </thead>
             <tbody className="divide-y divide-slate-100 font-mono">
               {equipmentList.map((item) => {
-                const cover =
-                  item.images?.find((img) => img.is_cover)?.image_url ||
-                  item.images?.[0]?.image_url ||
-                  `/images/cameras/${item.slug.replace("canon-eos-", "canon-").replace("-kit", "")}.jpg`;
+                const cover = getEquipmentCoverImage(item);
 
                 return (
                   <tr key={item.id} className="hover:bg-slate-50/70 transition-colors">

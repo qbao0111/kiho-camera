@@ -5,7 +5,7 @@ import { getSiteSettings } from "@/lib/services/settings";
 import { FadeIn } from "@/components/ui/motion";
 
 export const metadata: Metadata = {
-  title: "Hướng dẫn & Thủ tục thuê máy ảnh tại Kiho Camera Quảng Bình",
+  title: "Hướng dẫn & Thủ tục thuê máy ảnh tại Quảng Bình",
   description:
     "Quy trình thuê máy ảnh du lịch đơn giản tại TP. Đồng Hới Quảng Bình. Không cần cọc tiền máy, xác minh nhanh qua ảnh CCCD hoặc VNeID.",
   alternates: {

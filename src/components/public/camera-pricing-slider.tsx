@@ -5,6 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { Sparkles, ArrowRight, ChevronLeft, ChevronRight, Clock, Calendar, Tag, ArrowUpRight, ShieldCheck } from "lucide-react";
 import { Equipment } from "@/types/database";
+import { getEquipmentCoverImage } from "@/lib/equipment-images";
 
 interface CameraPricingSliderProps {
   equipment?: Equipment[];
@@ -294,10 +295,7 @@ export function CameraPricingSlider({
           }}
         >
           {displayItems.map((item, index) => {
-            const coverImg =
-              item.images?.find((img) => img.is_cover)?.image_url ||
-              item.images?.[0]?.image_url ||
-              `/images/cameras/${item.slug.replace("canon-eos-", "canon-").replace("-kit", "")}.jpg`;
+            const coverImg = getEquipmentCoverImage(item);
 
             const formatK = (price: number) => {
               if (!price) return "---";

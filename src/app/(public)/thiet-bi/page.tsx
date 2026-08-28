@@ -8,7 +8,7 @@ import { CatalogFilterBar } from "@/components/public/catalog-filter-bar";
 import { FadeIn, StaggerContainer, StaggerItem } from "@/components/ui/motion";
 
 export const metadata: Metadata = {
-  title: "Danh sách máy ảnh cho thuê tại Quảng Bình | Kiho Camera",
+  title: "Danh sách máy ảnh cho thuê tại Quảng Bình",
   description:
     "Bảng giá cho thuê 12 dòng máy ảnh du lịch Canon, Fujifilm, Sony chính hãng tại TP. Đồng Hới, Quảng Bình. Đầy đủ pin, sạc, thẻ nhớ, nhận máy chụp đẹp ngay.",
   alternates: {

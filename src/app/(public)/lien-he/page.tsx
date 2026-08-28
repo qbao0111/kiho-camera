@@ -5,7 +5,7 @@ import { getSiteSettings } from "@/lib/services/settings";
 import { FadeIn } from "@/components/ui/motion";
 
 export const metadata: Metadata = {
-  title: "Liên hệ & Địa chỉ cửa hàng | Kiho Camera Quảng Bình",
+  title: "Liên hệ & Địa chỉ cửa hàng",
   description:
     "Thông tin liên hệ cửa hàng Kiho Camera tại TP. Đồng Hới, Quảng Bình. Hotline tư vấn thuê máy ảnh, fanpage và chỉ đường Google Maps.",
   alternates: {

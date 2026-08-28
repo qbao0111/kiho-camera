@@ -13,6 +13,7 @@ import { ProductCard } from "@/components/public/product-card";
 import { StickyMessengerBar } from "@/components/public/sticky-messenger-bar";
 import { ProductJsonLd } from "@/components/public/json-ld";
 import { buildMessengerUrl } from "@/lib/utils";
+import { getEquipmentCoverImage } from "@/lib/equipment-images";
 import { FadeIn, StaggerContainer, StaggerItem } from "@/components/ui/motion";
 
 interface PageProps {
@@ -25,23 +26,20 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const equipment = await getEquipmentBySlug(params.slug);
   if (!equipment) {
     return {
-      title: "Máy ảnh không tồn tại | Kiho Camera",
+      title: "Máy ảnh không tồn tại",
     };
   }
 
   const title =
     equipment.seo_title ||
-    `Thuê máy ảnh ${equipment.name} tại Quảng Bình | Kiho Camera`;
+    `Thuê máy ảnh ${equipment.name} tại Quảng Bình`;
 
   const description =
     equipment.seo_description ||
     equipment.short_description ||
     `Dịch vụ cho thuê máy ảnh ${equipment.brand} ${equipment.name} chính hãng tại TP. Đồng Hới, Quảng Bình. Đầy đủ trọn bộ 2 pin, sạc đôi, thẻ nhớ và túi chống sốc.`;
 
-  const coverImage =
-    equipment.images?.find((img) => img.is_cover)?.image_url ||
-    equipment.images?.[0]?.image_url ||
-    `/images/cameras/${equipment.slug.replace("canon-eos-", "canon-").replace("-kit", "")}.jpg`;
+  const coverImage = getEquipmentCoverImage(equipment);
 
   return {
     title,

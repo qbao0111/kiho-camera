@@ -69,7 +69,7 @@ export const MOCK_EQUIPMENT: Equipment[] = [
     is_featured: true,
     is_active: true,
     sort_order: 1,
-    seo_title: "Thuê máy ảnh Fujifilm X100VI tại Quảng Bình | Kiho Camera",
+    seo_title: "Thuê máy ảnh Fujifilm X100VI tại Quảng Bình",
     seo_description: "Dịch vụ cho thuê Fujifilm X100VI chính hãng tại Đồng Hới, Quảng Bình. Cảm biến 40.2MP, chống rung IBIS, 20 giả lập film.",
     images: [
       { id: "img-01-1", equipment_id: "e01", image_url: "/images/cameras/fujifilm-x100vi.jpg", alt_text: "Fujifilm X100VI chính diện", is_cover: true, sort_order: 1 },
@@ -116,7 +116,7 @@ export const MOCK_EQUIPMENT: Equipment[] = [
     is_featured: true,
     is_active: true,
     sort_order: 2,
-    seo_title: "Thuê máy ảnh Fujifilm X100V màu film tại Quảng Bình | Kiho Camera",
+    seo_title: "Thuê máy ảnh Fujifilm X100V màu film tại Quảng Bình",
     seo_description: "Cho thuê máy ảnh Fujifilm X100V giá tốt tại Đồng Hới Quảng Bình. Màu film hoài niệm, ống kính 23mm f2 sắc nét.",
     images: [
       { id: "img-02-1", equipment_id: "e02", image_url: "/images/cameras/fujifilm-x100v.jpg", alt_text: "Fujifilm X100V chính diện", is_cover: true, sort_order: 1 },
@@ -160,7 +160,7 @@ export const MOCK_EQUIPMENT: Equipment[] = [
     is_featured: false,
     is_active: true,
     sort_order: 3,
-    seo_title: "Thuê máy ảnh Fujifilm X-S10 tại Đồng Hới Quảng Bình | Kiho Camera",
+    seo_title: "Thuê máy ảnh Fujifilm X-S10 tại Đồng Hới Quảng Bình",
     seo_description: "Dịch vụ cho thuê Fujifilm X-S10 kèm lens tại Quảng Bình. Chống rung IBIS, màn xoay lật tiện quay chụp.",
     images: [
       { id: "img-03-1", equipment_id: "e03", image_url: "/images/cameras/fujifilm-xs10.jpg", alt_text: "Fujifilm X-S10 chính diện", is_cover: true, sort_order: 1 },
@@ -202,7 +202,7 @@ export const MOCK_EQUIPMENT: Equipment[] = [
     is_featured: false,
     is_active: true,
     sort_order: 4,
-    seo_title: "Thuê máy ảnh Canon M100 màu trắng tại Quảng Bình | Kiho Camera",
+    seo_title: "Thuê máy ảnh Canon M100 màu trắng tại Quảng Bình",
     seo_description: "Cho thuê Canon M100 màu trắng tại Đồng Hới. Màn lật selfie, màu da trắng hồng, máy nhẹ dễ dùng.",
     images: [
       { id: "img-04-1", equipment_id: "e04", image_url: "/images/cameras/canon-m100.jpg", alt_text: "Canon M100 White chính diện", is_cover: true, sort_order: 1 },
@@ -245,7 +245,7 @@ export const MOCK_EQUIPMENT: Equipment[] = [
     is_featured: false,
     is_active: true,
     sort_order: 5,
-    seo_title: "Thuê máy ảnh Full-Frame Canon EOS RP tại Quảng Bình | Kiho Camera",
+    seo_title: "Thuê máy ảnh Full-Frame Canon EOS RP tại Quảng Bình",
     seo_description: "Cho thuê máy ảnh Full-Frame Canon RP tại Đồng Hới Quảng Bình. Xóa phông chân dung tuyệt đẹp.",
     images: [
       { id: "img-05-1", equipment_id: "e05", image_url: "/images/cameras/canon-rp.jpg", alt_text: "Canon EOS RP chính diện", is_cover: true, sort_order: 1 },
@@ -288,7 +288,7 @@ export const MOCK_EQUIPMENT: Equipment[] = [
     is_featured: true,
     is_active: true,
     sort_order: 6,
-    seo_title: "Thuê máy ảnh Canon G7X Mark III tại Đồng Hới Quảng Bình | Kiho Camera",
+    seo_title: "Thuê máy ảnh Canon G7X Mark III tại Đồng Hới Quảng Bình",
     seo_description: "Cho thuê máy ảnh compact du lịch Canon G7X Mark III tại Quảng Bình. Màn lật selfie, màu da đẹp.",
     images: [
       { id: "img-06-1", equipment_id: "e06", image_url: "/images/cameras/canon-g7x-mark3.jpg", alt_text: "Canon G7X Mark III chính diện", is_cover: true, sort_order: 1 },
@@ -335,7 +335,7 @@ export const MOCK_EQUIPMENT: Equipment[] = [
     is_featured: true,
     is_active: true,
     sort_order: 7,
-    seo_title: "Thuê máy ảnh Canon EOS R50 tại Quảng Bình - Giá tốt nhất | Kiho Camera",
+    seo_title: "Thuê máy ảnh Canon EOS R50 tại Quảng Bình - Giá tốt nhất",
     seo_description: "Dịch vụ cho thuê máy ảnh Canon EOS R50 kèm lens tại Đồng Hới, Quảng Bình. Cảm biến 24.2MP, quay 4K 30p, bắt nét mắt siêu nhanh.",
     images: [
       { id: "img-07-1", equipment_id: "e07", image_url: "/images/cameras/canon-r50.jpg", alt_text: "Canon EOS R50 kèm lens kit", is_cover: true, sort_order: 1 },
@@ -380,7 +380,7 @@ export const MOCK_EQUIPMENT: Equipment[] = [
     is_featured: false,
     is_active: true,
     sort_order: 8,
-    seo_title: "Thuê máy ảnh Canon M3 tại Quảng Bình | Kiho Camera",
+    seo_title: "Thuê máy ảnh Canon M3 tại Quảng Bình",
     seo_description: "Cho thuê máy ảnh Canon EOS M3 giá rẻ tại Đồng Hới Quảng Bình.",
     images: [
       { id: "img-08-1", equipment_id: "e08", image_url: "/images/cameras/canon-m3.jpg", alt_text: "Canon M3 chính diện", is_cover: true, sort_order: 1 },
@@ -424,7 +424,7 @@ export const MOCK_EQUIPMENT: Equipment[] = [
     is_featured: true,
     is_active: true,
     sort_order: 9,
-    seo_title: "Thuê máy ảnh vlog Sony ZV-1 II tại Quảng Bình | Kiho Camera",
+    seo_title: "Thuê máy ảnh vlog Sony ZV-1 II tại Quảng Bình",
     seo_description: "Cho thuê máy quay vlog Sony ZV-1 Mark II góc rộng 18-50mm tại Đồng Hới Quảng Bình.",
     images: [
       { id: "img-09-1", equipment_id: "e09", image_url: "/images/cameras/sony-zv1-mark2.jpg", alt_text: "Sony ZV-1 II chính diện", is_cover: true, sort_order: 1 },
@@ -467,7 +467,7 @@ export const MOCK_EQUIPMENT: Equipment[] = [
     is_featured: false,
     is_active: true,
     sort_order: 10,
-    seo_title: "Thuê máy ảnh Sony ZV-1F màu trắng tại Quảng Bình | Kiho Camera",
+    seo_title: "Thuê máy ảnh Sony ZV-1F màu trắng tại Quảng Bình",
     seo_description: "Cho thuê máy quay TikTok Sony ZV-1F tại Đồng Hới Quảng Bình. Giá chỉ từ 90K.",
     images: [
       { id: "img-10-1", equipment_id: "e10", image_url: "/images/cameras/sony-zv1f.jpg", alt_text: "Sony ZV-1F White chính diện", is_cover: true, sort_order: 1 },
@@ -509,7 +509,7 @@ export const MOCK_EQUIPMENT: Equipment[] = [
     is_featured: false,
     is_active: true,
     sort_order: 11,
-    seo_title: "Thuê máy ảnh Canon M giá rẻ tại Quảng Bình | Kiho Camera",
+    seo_title: "Thuê máy ảnh Canon M giá rẻ tại Quảng Bình",
     seo_description: "Cho thuê Canon EOS M tại Đồng Hới Quảng Bình. Giá thuê chỉ từ 90K.",
     images: [
       { id: "img-11-1", equipment_id: "e11", image_url: "/images/cameras/canon-m.jpg", alt_text: "Canon M chính diện", is_cover: true, sort_order: 1 },
@@ -552,7 +552,7 @@ export const MOCK_EQUIPMENT: Equipment[] = [
     is_featured: true,
     is_active: true,
     sort_order: 12,
-    seo_title: "Thuê máy ảnh Digicam Y2K Canon IXY 640 tại Quảng Bình | Kiho Camera",
+    seo_title: "Thuê máy ảnh Digicam Y2K Canon IXY 640 tại Quảng Bình",
     seo_description: "Cho thuê máy ảnh vintage Canon IXY 640 tại Đồng Hới Quảng Bình. Màu ảnh flash Y2K siêu hot trend.",
     images: [
       { id: "img-12-1", equipment_id: "e12", image_url: "/images/cameras/canon-ixy640.jpg", alt_text: "Canon IXY 640 Silver chính diện", is_cover: true, sort_order: 1 },

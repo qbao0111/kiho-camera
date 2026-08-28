@@ -19,6 +19,7 @@ import {
   Eye,
 } from "lucide-react";
 import { Category, Equipment, EquipmentImage, EquipmentSampleImage } from "@/types/database";
+import { EQUIPMENT_IMAGE_FALLBACK } from "@/lib/equipment-images";
 import { slugify } from "@/lib/utils";
 import { createClient } from "@/lib/supabase/client";
 
@@ -80,7 +81,7 @@ export function EquipmentForm({ initialData, categories }: EquipmentFormProps) {
   const [productImages, setProductImages] = useState<{ url: string; isCover: boolean }[]>(
     initialData?.images?.length
       ? initialData.images.map((img) => ({ url: img.image_url, isCover: img.is_cover }))
-      : [{ url: `/images/cameras/${initialData?.slug || "canon-r50"}.jpg`, isCover: true }]
+      : [{ url: EQUIPMENT_IMAGE_FALLBACK, isCover: true }]
   );
   const [newProductUrl, setNewProductUrl] = useState("");
   const [uploadingProduct, setUploadingProduct] = useState(false);
@@ -233,7 +234,7 @@ export function EquipmentForm({ initialData, categories }: EquipmentFormProps) {
         use_cases: useCases,
         badges,
         included_items: includedItems,
-        seo_title: seoTitle || `Thuê máy ảnh ${name} tại Quảng Bình | Kiho Camera`,
+        seo_title: seoTitle || `Thuê máy ảnh ${name} tại Quảng Bình`,
         seo_description: seoDescription || shortDescription,
       };
 

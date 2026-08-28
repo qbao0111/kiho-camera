@@ -5,6 +5,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { ArrowRight } from "lucide-react";
 import { Equipment } from "@/types/database";
+import { getEquipmentCoverImage } from "@/lib/equipment-images";
 
 interface ProductCardProps {
   equipment: Equipment;
@@ -12,10 +13,7 @@ interface ProductCardProps {
 }
 
 export function ProductCard({ equipment, priority = false }: ProductCardProps) {
-  const coverImage =
-    equipment.images?.find((img) => img.is_cover)?.image_url ||
-    equipment.images?.[0]?.image_url ||
-    `/images/cameras/${equipment.slug.replace("canon-eos-", "canon-").replace("-kit", "")}.jpg`;
+  const coverImage = getEquipmentCoverImage(equipment);
 
   const formatK = (price: number) => {
     if (!price) return "---";

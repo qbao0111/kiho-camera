@@ -3,6 +3,8 @@ import { AdminSidebar } from "@/components/admin/admin-sidebar";
 import { getAuthenticatedAdmin } from "@/lib/auth/admin";
 import { redirect } from "next/navigation";
 
+export const dynamic = "force-dynamic";
+
 export default async function AdminDashboardLayout({
   children,
 }: {

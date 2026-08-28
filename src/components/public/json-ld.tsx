@@ -1,5 +1,6 @@
 import React from "react";
 import { SiteSettings, Equipment } from "@/types/database";
+import { getEquipmentCoverImage } from "@/lib/equipment-images";
 
 interface LocalBusinessProps {
   settings: SiteSettings;
@@ -44,7 +45,7 @@ export function LocalBusinessJsonLd({ settings, siteUrl }: LocalBusinessProps) {
         "closes": "21:00",
       },
     ],
-    "priceRange": "120.000₫ - 450.000₫",
+    "priceRange": "80.000₫ - 450.000₫",
     "image": `${siteUrl}/images/landing/hero-quang-binh.webp`,
     "sameAs": [
       settings.facebook_url,
@@ -62,10 +63,7 @@ export function LocalBusinessJsonLd({ settings, siteUrl }: LocalBusinessProps) {
 }
 
 export function ProductJsonLd({ equipment, siteUrl }: { equipment: Equipment; siteUrl: string }) {
-  const coverImage =
-    equipment.images?.find((i) => i.is_cover)?.image_url ||
-    equipment.images?.[0]?.image_url ||
-    `${siteUrl}/images/cameras/${equipment.slug.replace("canon-eos-", "canon-").replace("-kit", "")}.jpg`;
+  const coverImage = getEquipmentCoverImage(equipment);
 
   const fullImageUrl = coverImage.startsWith("http") ? coverImage : `${siteUrl}${coverImage}`;
 
@@ -88,9 +86,6 @@ export function ProductJsonLd({ equipment, siteUrl }: { equipment: Equipment; si
       "url": `${siteUrl}/thiet-bi/${equipment.slug}`,
       "priceCurrency": "VND",
       "price": equipment.price_per_day,
-      "priceValidUntil": "2027-12-31",
-      "availability": "https://schema.org/InStock",
-      "itemCondition": "https://schema.org/UsedCondition",
       "seller": {
         "@type": "Organization",
         "name": "Kiho Camera",

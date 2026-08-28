@@ -7,7 +7,7 @@ import { FeedbackCard } from "@/components/public/feedback-card";
 import { FadeIn, StaggerContainer, StaggerItem } from "@/components/ui/motion";
 
 export const metadata: Metadata = {
-  title: "Feedback & Ảnh chụp thực tế của khách | Kiho Camera Quảng Bình",
+  title: "Feedback & Ảnh chụp thực tế của khách",
   description:
     "Cảm nhận và hình ảnh check-in thực tế của khách du lịch, thợ ảnh khi thuê máy ảnh Canon, Sony, Fujifilm tại Kiho Camera Đồng Hới.",
 };
