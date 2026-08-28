@@ -1,0 +1,581 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kiho Camera — Brand Identity & Logo Preview</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Playfair+Display:ital,wght@0,600;0,700;1,600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-paper: #FAF8F5;
+      --deep-ink: #111111;
+      --burnt-orange: #D95D39;
+      --muted-ink: #4A4A4A;
+      --hairline: #E8E4DE;
+      --pure-white: #FFFFFF;
+    }
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      background-color: var(--bg-paper);
+      color: var(--deep-ink);
+      font-family: 'Be Vietnam Pro', -apple-system, BlinkMacSystemFont, sans-serif;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      padding-bottom: 80px;
+    }
+    .font-serif {
+      font-family: 'Playfair Display', Georgia, serif;
+    }
+    .font-mono {
+      font-family: 'JetBrains Mono', monospace;
+    }
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+    header.brand-header {
+      padding: 40px 0 24px;
+      border-bottom: 1px solid var(--hairline);
+      margin-bottom: 40px;
+    }
+    .badge {
+      display: inline-block;
+      padding: 4px 10px;
+      background: #FFF5EB;
+      color: var(--burnt-orange);
+      font-size: 11px;
+      font-weight: 600;
+      border-radius: 4px;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+    h1.page-title {
+      font-size: 32px;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      margin-bottom: 6px;
+    }
+    p.subtitle {
+      color: var(--muted-ink);
+      font-size: 15px;
+    }
+
+    /* Section styling */
+    .section-title {
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: #767676;
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .section-title::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--hairline);
+    }
+
+    /* Cards Grid */
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+      gap: 24px;
+      margin-bottom: 48px;
+    }
+    .card {
+      background: var(--pure-white);
+      border: 1px solid var(--hairline);
+      border-radius: 16px;
+      padding: 28px;
+      display: flex;
+      flex-direction: column;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.02);
+      transition: all 0.2s ease;
+    }
+    .card:hover {
+      border-color: #D6D0C7;
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.04);
+    }
+    .card-tag {
+      font-size: 11px;
+      font-weight: 600;
+      color: #767676;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 4px;
+    }
+    .card-title {
+      font-size: 18px;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+    .card-desc {
+      font-size: 13px;
+      color: var(--muted-ink);
+      margin-bottom: 24px;
+      min-height: 40px;
+    }
+    .logo-stage {
+      flex: 1;
+      min-height: 240px;
+      background: var(--bg-paper);
+      border: 1px solid var(--hairline);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 32px;
+      margin-bottom: 20px;
+      position: relative;
+      overflow: hidden;
+      transition: background 0.3s ease;
+    }
+    .logo-stage.dark-mode {
+      background: var(--deep-ink);
+    }
+    .logo-stage img {
+      max-width: 100%;
+      max-height: 180px;
+      object-fit: contain;
+      transition: transform 0.2s ease;
+    }
+    .logo-stage:hover img {
+      transform: scale(1.03);
+    }
+    .file-meta {
+      font-size: 11px;
+      color: #8E8E93;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-top: 1px solid var(--hairline);
+      padding-top: 14px;
+    }
+
+    /* Live Controls Bar */
+    .controls-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: var(--pure-white);
+      border: 1px solid var(--hairline);
+      border-radius: 12px;
+      padding: 12px 20px;
+      margin-bottom: 32px;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+    .theme-toggle-group {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .btn-toggle {
+      border: 1px solid var(--hairline);
+      background: var(--bg-paper);
+      padding: 8px 14px;
+      border-radius: 8px;
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--deep-ink);
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.15s ease;
+    }
+    .btn-toggle.active {
+      background: var(--deep-ink);
+      color: var(--pure-white);
+      border-color: var(--deep-ink);
+    }
+
+    /* Website Header Preview */
+    .mock-browser {
+      background: var(--pure-white);
+      border: 1px solid var(--hairline);
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 10px 40px rgba(0,0,0,0.04);
+      margin-bottom: 48px;
+    }
+    .browser-topbar {
+      background: #F4EFEA;
+      border-bottom: 1px solid var(--hairline);
+      padding: 10px 16px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .window-dots {
+      display: flex;
+      gap: 6px;
+    }
+    .dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+    }
+    .dot-red { background: #FF5F56; }
+    .dot-yellow { background: #FFBD2E; }
+    .dot-green { background: #27C93F; }
+    .browser-tab {
+      background: var(--pure-white);
+      padding: 4px 14px;
+      border-radius: 6px;
+      font-size: 11px;
+      font-weight: 500;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      border: 1px solid var(--hairline);
+      box-shadow: 0 1px 3px rgba(0,0,0,0.03);
+    }
+    .live-header-bar {
+      background: #FAF8F5;
+      padding: 16px 28px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid var(--hairline);
+    }
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 28px;
+      font-size: 13px;
+      font-weight: 500;
+    }
+    .nav-links a {
+      text-decoration: none;
+      color: #4A4A4A;
+      transition: color 0.15s;
+    }
+    .nav-links a.active {
+      color: var(--deep-ink);
+      font-weight: 600;
+      position: relative;
+    }
+    .nav-links a.active::after {
+      content: '';
+      display: inline-block;
+      width: 4px;
+      height: 4px;
+      border-radius: 50%;
+      background: var(--burnt-orange);
+      margin-left: 6px;
+      vertical-align: middle;
+    }
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+    .btn-cta {
+      background: var(--deep-ink);
+      color: var(--pure-white);
+      padding: 8px 16px;
+      border-radius: 6px;
+      font-size: 12px;
+      font-weight: 600;
+      text-decoration: none;
+      transition: background 0.15s;
+    }
+    .btn-cta:hover {
+      background: #000;
+    }
+
+    /* Color Swatches */
+    .palette-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 16px;
+      margin-bottom: 48px;
+    }
+    .swatch-card {
+      background: var(--pure-white);
+      border: 1px solid var(--hairline);
+      border-radius: 12px;
+      padding: 16px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+    .swatch-pill {
+      width: 54px;
+      height: 54px;
+      border-radius: 10px;
+      border: 1px solid rgba(0,0,0,0.08);
+      flex-shrink: 0;
+    }
+
+    /* Scaling Grid */
+    .scale-row {
+      display: flex;
+      align-items: flex-end;
+      gap: 32px;
+      background: var(--pure-white);
+      border: 1px solid var(--hairline);
+      border-radius: 16px;
+      padding: 32px;
+      margin-bottom: 48px;
+      flex-wrap: wrap;
+    }
+    .scale-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 12px;
+    }
+    .scale-label {
+      font-size: 11px;
+      font-family: 'JetBrains Mono', monospace;
+      color: #767676;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header class="brand-header">
+      <div class="badge">Bản thiết kế chính thức · 2026</div>
+      <h1 class="page-title font-serif">Kiho Camera — Hệ Thống Nhận Diện Logo</h1>
+      <p class="subtitle">Dịch vụ cho thuê máy ảnh du lịch tại Đồng Hới, Quảng Bình · Triết lý Visual Journal &amp; Contact Sheet</p>
+    </header>
+
+    <!-- Controls -->
+    <div class="controls-bar">
+      <div class="theme-toggle-group">
+        <span style="font-size: 12px; font-weight: 600; color: #767676;">CHUYỂN NỀN XEM THỬ:</span>
+        <button class="btn-toggle active" onclick="setMode('paper')">Nền Giấy (#FAF8F5)</button>
+        <button class="btn-toggle" onclick="setMode('white')">Nền Trắng (#FFFFFF)</button>
+        <button class="btn-toggle" onclick="setMode('dark')">Nền Tối (#111111)</button>
+      </div>
+      <div style="font-size: 12px; color: #767676;" class="font-mono">
+        Status: Sẵn sàng tại local (/public/brand/kiho-logo/)
+      </div>
+    </div>
+
+    <!-- Section 1: The 3 Logo Variants -->
+    <div class="section-title font-mono">01 · BỘ 3 BIẾN THỂ LOGO ĐỒNG BỘ</div>
+    <div class="grid-3">
+      <!-- Variant 1: Master Logo -->
+      <div class="card">
+        <div class="card-tag font-mono">Biến thể 1</div>
+        <div class="card-title">Master Logo (Huy Hiệu Gốc)</div>
+        <div class="card-desc">Phiên bản hoàn chỉnh nhất gồm biểu tượng Khung ngắm K + Chữ Kiho Camera + Niên hiệu &amp; Địa danh.</div>
+        <div class="logo-stage" id="stage-master">
+          <img src="kiho-logo-master.svg" alt="Kiho Camera Master Logo" id="img-master" style="max-height: 220px;">
+        </div>
+        <div class="file-meta font-mono">
+          <span>kiho-logo-master.svg</span>
+          <span>PNG 800×640</span>
+        </div>
+      </div>
+
+      <!-- Variant 2: Icon Only -->
+      <div class="card">
+        <div class="card-tag font-mono">Biến thể 2</div>
+        <div class="card-title">Icon-Only (Biểu Tượng Độc Lập)</div>
+        <div class="card-desc">Tối ưu cho Favicon, Avatar mạng xã hội, App Icon điện thoại, Watermark đóng dấu góc ảnh chụp.</div>
+        <div class="logo-stage" id="stage-icon">
+          <img src="kiho-logo-icon.svg" alt="Kiho Camera Icon" id="img-icon" style="max-height: 140px;">
+        </div>
+        <div class="file-meta font-mono">
+          <span>kiho-logo-icon.svg</span>
+          <span>512×512 &amp; 1024×1024</span>
+        </div>
+      </div>
+
+      <!-- Variant 3: Wordmark Lockup -->
+      <div class="card">
+        <div class="card-tag font-mono">Biến thể 3</div>
+        <div class="card-title">Wordmark (Lockup Ngang)</div>
+        <div class="card-desc">Bố cục dàn ngang hoàn hảo cho Header Website, thanh điều hướng sticky và banner ngang.</div>
+        <div class="logo-stage" id="stage-wordmark">
+          <img src="kiho-logo-wordmark.svg" alt="Kiho Camera Wordmark" id="img-wordmark" style="max-height: 80px;">
+        </div>
+        <div class="file-meta font-mono">
+          <span>kiho-logo-wordmark.svg</span>
+          <span>2x Retina Export</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Section 2: Website Header Preview -->
+    <div class="section-title font-mono">02 · MÔ PHỎNG THỰC TẾ TRÊN HEADER WEBSITE KIHO</div>
+    <div class="mock-browser">
+      <div class="browser-topbar">
+        <div class="window-dots">
+          <div class="dot dot-red"></div>
+          <div class="dot dot-yellow"></div>
+          <div class="dot dot-green"></div>
+        </div>
+        <div class="browser-tab">
+          <img src="kiho-logo-icon.svg" width="14" height="14" alt="Favicon">
+          <span>Kiho Camera — Cho thuê máy ảnh Đồng Hới, Quảng Bình</span>
+        </div>
+      </div>
+      <div class="live-header-bar">
+        <a href="#" style="display: flex; align-items: center; text-decoration: none;">
+          <img src="kiho-logo-wordmark.svg" height="42" alt="Kiho Camera Logo Header">
+        </a>
+        <nav class="nav-links">
+          <a href="#" class="active">Máy ảnh</a>
+          <a href="#">Bảng giá</a>
+          <a href="#">Hướng dẫn thuê</a>
+          <a href="#">Liên hệ</a>
+        </nav>
+        <div class="header-actions">
+          <span style="font-size: 12px; font-weight: 600; color: #111;" class="font-mono">0387 274 669</span>
+          <a href="#" class="btn-cta">Nhắn tư vấn →</a>
+        </div>
+      </div>
+      <div style="padding: 32px; background: #FAF8F5; text-align: center; color: #767676; font-size: 13px;">
+        <em>Trang hiển thị mẫu: Header website kết hợp hoàn hảo cùng Wordmark sắc nét, thanh thoát, chuẩn tỷ lệ vàng.</em>
+      </div>
+    </div>
+
+    <!-- Section 3: Scalability -->
+    <div class="section-title font-mono">03 · ĐỘ SẮC NÉT &amp; KHẢ NĂNG CO GIÃN (SCALABILITY)</div>
+    <div class="scale-row">
+      <div class="scale-item">
+        <div style="width: 96px; height: 96px; border-radius: 22px; background: #FAF8F5; border: 1px solid #E8E4DE; display: flex; align-items: center; justify-content: center; box-shadow: 0 10px 25px rgba(0,0,0,0.06);">
+          <img src="kiho-logo-icon.svg" width="56" height="56" alt="96px app icon">
+        </div>
+        <span class="scale-label">App Icon 96px</span>
+      </div>
+
+      <div class="scale-item">
+        <div style="width: 72px; height: 72px; border-radius: 50%; background: #111111; display: flex; align-items: center; justify-content: center;">
+          <img src="kiho-logo-icon-dark.svg" width="42" height="42" alt="72px avatar">
+        </div>
+        <span class="scale-label">Avatar IG 72px</span>
+      </div>
+
+      <div class="scale-item">
+        <div style="width: 48px; height: 48px; border-radius: 10px; background: #FAF8F5; border: 1px solid #E8E4DE; display: flex; align-items: center; justify-content: center;">
+          <img src="kiho-logo-icon.svg" width="28" height="28" alt="48px">
+        </div>
+        <span class="scale-label">48px</span>
+      </div>
+
+      <div class="scale-item">
+        <div style="width: 32px; height: 32px; border-radius: 6px; background: #FAF8F5; border: 1px solid #E8E4DE; display: flex; align-items: center; justify-content: center;">
+          <img src="kiho-logo-icon.svg" width="20" height="20" alt="32px favicon">
+        </div>
+        <span class="scale-label">32px Favicon</span>
+      </div>
+
+      <div class="scale-item">
+        <div style="width: 24px; height: 24px; border-radius: 4px; background: #FAF8F5; border: 1px solid #E8E4DE; display: flex; align-items: center; justify-content: center;">
+          <img src="kiho-logo-icon.svg" width="16" height="16" alt="16px micro favicon">
+        </div>
+        <span class="scale-label">16px Tab Icon</span>
+      </div>
+
+      <div style="flex: 1; min-width: 260px; padding-left: 24px; border-left: 1px solid var(--hairline);">
+        <h4 style="font-size: 14px; font-weight: 700; margin-bottom: 6px;">Đặc tính kỹ thuật Vector thuần</h4>
+        <p style="font-size: 12px; color: #767676; line-height: 1.6;">Biểu tượng Viewfinder Focus K được tính toán toán học để ngay cả ở 16px, 4 góc kính ngắm và điểm bắt nét màu cam hoàng hôn vẫn hiển thị rõ ràng, không bị bết nét hoặc nhòe.</p>
+      </div>
+    </div>
+
+    <!-- Section 4: Palette -->
+    <div class="section-title font-mono">04 · BẢNG MÀU THƯƠNG HIỆU (MINI BRAND PALETTE)</div>
+    <div class="palette-grid font-mono">
+      <div class="swatch-card">
+        <div class="swatch-pill" style="background: #FAF8F5;"></div>
+        <div>
+          <strong style="display:block; font-size: 13px; color: #111;">Paper Canvas</strong>
+          <span style="font-size: 12px; color: #767676;">#FAF8F5 · 80%</span>
+        </div>
+      </div>
+      <div class="swatch-card">
+        <div class="swatch-pill" style="background: #111111;"></div>
+        <div>
+          <strong style="display:block; font-size: 13px; color: #111;">Deep Ink</strong>
+          <span style="font-size: 12px; color: #767676;">#111111 · 15%</span>
+        </div>
+      </div>
+      <div class="swatch-card">
+        <div class="swatch-pill" style="background: #D95D39;"></div>
+        <div>
+          <strong style="display:block; font-size: 13px; color: #111;">Burnt Terracotta</strong>
+          <span style="font-size: 12px; color: #767676;">#D95D39 · 5% Focus</span>
+        </div>
+      </div>
+      <div class="swatch-card">
+        <div class="swatch-pill" style="background: #E8E4DE;"></div>
+        <div>
+          <strong style="display:block; font-size: 13px; color: #111;">Hairline Rule</strong>
+          <span style="font-size: 12px; color: #767676;">#E8E4DE · Divider</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Presentation Sheet Banner -->
+    <div class="section-title font-mono">05 · FILE TRÌNH DIỄN TỔNG THỂ ĐÃ XUẤT</div>
+    <div style="background: var(--pure-white); border: 1px solid var(--hairline); border-radius: 16px; padding: 20px; text-align: center;">
+      <a href="kiho-logo-preview.png" target="_blank">
+        <img src="kiho-logo-preview.png" alt="Kiho Logo Specification Sheet" style="max-width: 100%; border-radius: 8px; box-shadow: 0 4px 20px rgba(0,0,0,0.06);">
+      </a>
+      <p style="margin-top: 14px; font-size: 12px; color: #767676;" class="font-mono">
+        Nhấn vào ảnh để xem bản gốc kiho-logo-preview.png (1800×1350, siêu sắc nét)
+      </p>
+    </div>
+  </div>
+
+  <script>
+    function setMode(mode) {
+      const stages = [
+        document.getElementById('stage-master'),
+        document.getElementById('stage-icon'),
+        document.getElementById('stage-wordmark')
+      ];
+      const imgMaster = document.getElementById('img-master');
+      const imgIcon = document.getElementById('img-icon');
+      const imgWordmark = document.getElementById('img-wordmark');
+      const btns = document.querySelectorAll('.btn-toggle');
+
+      btns.forEach(b => b.classList.remove('active'));
+
+      if (mode === 'dark') {
+        stages.forEach(s => {
+          s.style.background = '#111111';
+        });
+        imgMaster.src = 'kiho-logo-master-dark.svg';
+        imgIcon.src = 'kiho-logo-icon-dark.svg';
+        imgWordmark.src = 'kiho-logo-wordmark-dark.svg';
+        event.target.classList.add('active');
+      } else if (mode === 'white') {
+        stages.forEach(s => {
+          s.style.background = '#FFFFFF';
+        });
+        imgMaster.src = 'kiho-logo-master.svg';
+        imgIcon.src = 'kiho-logo-icon.svg';
+        imgWordmark.src = 'kiho-logo-wordmark.svg';
+        event.target.classList.add('active');
+      } else {
+        stages.forEach(s => {
+          s.style.background = '#FAF8F5';
+        });
+        imgMaster.src = 'kiho-logo-master.svg';
+        imgIcon.src = 'kiho-logo-icon.svg';
+        imgWordmark.src = 'kiho-logo-wordmark.svg';
+        event.target.classList.add('active');
+      }
+    }
+  </script>
+</body>
+</html>

@@ -38,5 +38,6 @@ next-env.d.ts
 /src/data/integration-settings.json
 /src/data/rental-requests.json
 /public/uploads/
+/scratch/
 
 .env*

@@ -2,12 +2,14 @@ import React from "react";
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Link from "next/link";
-import { Clock, Calendar, Tag, Camera } from "lucide-react";
+import { Clock, Calendar, Tag } from "lucide-react";
 import { getEquipmentBySlug, getRelatedEquipment } from "@/lib/services/equipment";
 import { getSiteSettings } from "@/lib/services/settings";
+import { getCameraSeoContent } from "@/lib/content/camera-seo-content";
 import { ProductGallery } from "@/components/public/product-gallery";
 import { SamplePhotoGallery } from "@/components/public/sample-photo-gallery";
 import { EquipmentDetails } from "@/components/public/equipment-details";
+import { CameraEditorialGuide } from "@/components/public/camera-editorial-guide";
 import { ProductRentalAction } from "@/components/public/product-rental-action";
 import { ProductCard } from "@/components/public/product-card";
 import { StickyMessengerBar } from "@/components/public/sticky-messenger-bar";
@@ -30,11 +32,15 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     };
   }
 
+  const editorialContent = getCameraSeoContent(params.slug);
+
   const title =
+    editorialContent?.seoTitle ||
     equipment.seo_title ||
-    `Thuê máy ảnh ${equipment.name} tại Quảng Bình`;
+    `Thuê máy ảnh ${equipment.name} tại Quảng Bình | Kiho Camera`;
 
   const description =
+    editorialContent?.seoDescription ||
     equipment.seo_description ||
     equipment.short_description ||
     `Dịch vụ cho thuê máy ảnh ${equipment.brand} ${equipment.name} chính hãng tại TP. Đồng Hới, Quảng Bình. Đầy đủ trọn bộ 2 pin, sạc đôi, thẻ nhớ và túi chống sốc.`;
@@ -79,8 +85,8 @@ export default async function ProductDetailPage({ params }: PageProps) {
     notFound();
   }
 
+  const editorialContent = getCameraSeoContent(params.slug);
   const relatedEquipment = await getRelatedEquipment(equipment.slug, equipment.brand, 4);
-
 
   const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://kihocamera.com";
   const messengerChatUrl = buildMessengerUrl(settings.messenger_url, equipment.name);
@@ -217,10 +223,15 @@ export default async function ProductDetailPage({ params }: PageProps) {
         {/* 2. REAL SAMPLE PHOTOS GALLERY */}
         <SamplePhotoGallery cameraName={equipment.name} sampleImages={equipment.sample_images} />
 
-        {/* 3. PRODUCT DETAILS SECTION */}
+        {/* 3. PRODUCT DETAILS SECTION (Included accessories & technical specifications) */}
         <EquipmentDetails equipment={equipment} messengerChatUrl={messengerChatUrl} />
 
-        {/* 4. RELATED CAMERAS SECTION */}
+        {/* 4. UNIQUE EDITORIAL ON-PAGE SEO GUIDE & FAQS */}
+        {editorialContent && (
+          <CameraEditorialGuide content={editorialContent} />
+        )}
+
+        {/* 5. RELATED CAMERAS SECTION */}
         {relatedEquipment.length > 0 && (
           <div className="pt-12 sm:pt-16 border-t border-ink-200 space-y-6">
             <div className="flex items-baseline justify-between">
