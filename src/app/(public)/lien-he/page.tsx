@@ -24,8 +24,18 @@ export default async function ContactPage() {
       : "https://www.google.com/maps");
 
   // 2. Embedded Google Maps URL (for the iframe)
-  const mapAddress = settings.address?.trim() || "Đồng Hới, Quảng Bình";
-  const mapEmbedUrl = `https://www.google.com/maps?q=${encodeURIComponent(mapAddress)}&output=embed`;
+  const rawEmbedUrl = settings.maps_embed_url?.trim();
+  let mapEmbedUrl: string;
+
+  if (rawEmbedUrl) {
+    // If user pasted a full <iframe src="..." ...> embed code, extract the URL inside src
+    const iframeSrcMatch = rawEmbedUrl.match(/src=["']([^"']+)["']/i);
+    mapEmbedUrl = iframeSrcMatch ? iframeSrcMatch[1] : rawEmbedUrl;
+  } else {
+    // Fallback to address search embed only if maps_embed_url is empty
+    const mapAddress = settings.address?.trim() || "Đồng Hới, Quảng Bình";
+    mapEmbedUrl = `https://www.google.com/maps?q=${encodeURIComponent(mapAddress)}&output=embed`;
+  }
 
   return (
     <div className="bg-[#faf8f5] min-h-screen py-10 sm:py-16">

@@ -87,6 +87,7 @@ export interface SiteSettings {
   tiktok_url: string;
   instagram_url: string;
   maps_url: string;
+  maps_embed_url?: string;
   opening_hours: string;
   hero_title: string;
   hero_subtitle: string;
@@ -95,3 +96,4 @@ export interface SiteSettings {
   footer_text: string;
   updated_at?: string;
 }
+

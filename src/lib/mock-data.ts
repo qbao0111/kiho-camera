@@ -11,7 +11,9 @@ export const MOCK_SITE_SETTINGS: SiteSettings = {
   tiktok_url: "https://tiktok.com/@kihocamera",
   instagram_url: "https://www.instagram.com/thuemayanhqbb/",
   maps_url: "https://maps.google.com/?q=48+Ngo+Quyen+Dong+Hoi+Quang+Binh",
+  maps_embed_url: "",
   opening_hours: "07:30 - 21:00 (Tất cả các ngày trong tuần)",
+
   hero_title: "Cho thuê máy ảnh tại Quảng Bình",
   hero_subtitle: "Máy đẹp, dễ sử dụng, giá rõ ràng. Thuê máy ảnh du lịch chất lượng cao tại Kiho Camera Đồng Hới.",
   hero_image: "/images/cameras/fujifilm-x100vi.jpg",
