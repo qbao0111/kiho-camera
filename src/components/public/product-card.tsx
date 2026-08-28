@@ -3,7 +3,7 @@
 import React from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { ArrowRight, Tag } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { Equipment } from "@/types/database";
 
 interface ProductCardProps {
@@ -23,12 +23,12 @@ export function ProductCard({ equipment, priority = false }: ProductCardProps) {
   };
 
   return (
-    <article className="group bg-white rounded-3xl p-5 border border-[#e8e2d7]/80 shadow-[0_4px_20px_rgba(0,0,0,0.03)] hover:shadow-[0_12px_30px_rgba(0,0,0,0.08)] hover:border-ink-900/30 transition-all duration-300 flex flex-col justify-between">
+    <article className="group bg-white rounded-3xl p-5 border border-[#e8e2d7]/80 shadow-[0_4px_20px_rgba(0,0,0,0.03)] hover:shadow-[0_12px_30px_rgba(0,0,0,0.08)] hover:border-ink-900/30 transition-all duration-300 flex flex-col justify-between h-full">
       <div>
         {/* Large Camera Photography Container */}
         <Link
           href={`/thiet-bi/${equipment.slug}`}
-          className="relative block aspect-[4/3] w-full bg-[#faf8f4] overflow-hidden rounded-2xl p-4 mb-4"
+          className="relative block aspect-[4/3] w-full bg-[#faf8f4] overflow-hidden rounded-2xl p-4 mb-4 focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-accent"
         >
           <Image
             src={coverImage}
@@ -64,7 +64,10 @@ export function ProductCard({ equipment, priority = false }: ProductCardProps) {
             )}
           </div>
 
-          <Link href={`/thiet-bi/${equipment.slug}`} className="block group-hover:text-accent transition-colors">
+          <Link
+            href={`/thiet-bi/${equipment.slug}`}
+            className="block group-hover:text-accent transition-colors focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-accent rounded-sm"
+          >
             <h3 className="text-lg font-black text-ink-900 tracking-tight leading-snug font-mono uppercase">
               {equipment.name}
             </h3>
@@ -93,7 +96,7 @@ export function ProductCard({ equipment, priority = false }: ProductCardProps) {
 
           <Link
             href={`/thiet-bi/${equipment.slug}`}
-            className="inline-flex items-center gap-1.5 bg-[#f4efe6] group-hover:bg-ink-900 text-ink-900 group-hover:text-white text-xs font-mono font-bold px-3 py-2 rounded-xl transition-all duration-300 shadow-xs shrink-0"
+            className="inline-flex items-center gap-1.5 bg-[#f4efe6] group-hover:bg-ink-900 text-ink-900 group-hover:text-white text-xs font-mono font-bold px-3 py-2 rounded-xl transition-all duration-300 shadow-xs shrink-0 focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-accent"
             aria-label={`Xem máy ${equipment.name}`}
           >
             <span>Xem máy</span>

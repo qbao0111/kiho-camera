@@ -1,10 +1,10 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
-import { ArrowDown, ArrowUpRight, ArrowRight, Sparkles, ShieldCheck, MapPin, PackageCheck } from "lucide-react";
+import { ArrowDown, ArrowRight, Sparkles, ShieldCheck, MapPin, PackageCheck } from "lucide-react";
 
 interface LandingHeroProps {
   messengerUrl?: string;
@@ -68,25 +68,42 @@ const POSITIONS = {
   },
 };
 
-export function LandingHero({
-  messengerUrl = "https://m.me/kihocameradonghoi",
-  phone = "0387 274 669",
-}: LandingHeroProps) {
+export function LandingHero({}: LandingHeroProps = {}) {
   const [activeIdx, setActiveIdx] = useState(0);
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
   const [pauseUntil, setPauseUntil] = useState<number>(0);
+  const rafRef = useRef<number | null>(null);
 
-  // Parallax on mouse move
+  // Smooth throttled Parallax on fine pointer devices only
   useEffect(() => {
+    // Only track if fine pointer and no reduced motion preference
+    if (typeof window === "undefined") return;
+    const isFinePointer = window.matchMedia("(pointer: fine)").matches;
+    const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+    if (!isFinePointer || prefersReducedMotion) return;
+
+    let targetX = 0;
+    let targetY = 0;
+
     const handleMouseMove = (e: MouseEvent) => {
       const { innerWidth, innerHeight } = window;
-      const x = (e.clientX / innerWidth - 0.5) * 2; // -1 to 1
-      const y = (e.clientY / innerHeight - 0.5) * 2;
-      setMousePos({ x, y });
+      targetX = (e.clientX / innerWidth - 0.5) * 2; // -1 to 1
+      targetY = (e.clientY / innerHeight - 0.5) * 2;
+
+      if (!rafRef.current) {
+        rafRef.current = requestAnimationFrame(() => {
+          setMousePos({ x: targetX, y: targetY });
+          rafRef.current = null;
+        });
+      }
     };
 
     window.addEventListener("mousemove", handleMouseMove, { passive: true });
-    return () => window.removeEventListener("mousemove", handleMouseMove);
+    return () => {
+      window.removeEventListener("mousemove", handleMouseMove);
+      if (rafRef.current) cancelAnimationFrame(rafRef.current);
+    };
   }, []);
 
   // Robust Autoplay with user-interaction priority
@@ -117,7 +134,7 @@ export function LandingHero({
   const activeCamera = HERO_CAMERAS[activeIdx];
 
   return (
-    <section className="relative overflow-hidden pt-4 pb-12 sm:pt-8 sm:pb-20 lg:min-h-[82vh] flex items-center bg-[#faf8f4]">
+    <section className="relative overflow-hidden pt-6 pb-12 sm:pt-10 sm:pb-20 lg:min-h-[82vh] flex items-center bg-[#faf8f4]">
       {/* Subtle Background Paper Grain Texture */}
       <div className="absolute inset-0 pointer-events-none opacity-[0.025] bg-[radial-gradient(#000_1px,transparent_1px)] [background-size:16px_16px]" />
 
@@ -135,7 +152,7 @@ export function LandingHero({
 
             {/* Main H1 Headline */}
             <div className="space-y-2">
-              <h1 className="text-4xl sm:text-6xl lg:text-[68px] font-black text-ink-900 tracking-tight leading-[1.08]">
+              <h1 className="text-4xl sm:text-6xl lg:text-[68px] font-black text-ink-900 tracking-tight leading-[1.08] font-mono">
                 Thuê một chiếc máy. <br />
                 <span className="relative inline-block">
                   <span className="relative z-10 text-accent">Mang về cả</span>
@@ -183,7 +200,7 @@ export function LandingHero({
               {/* Primary CTA: Scroll to Pricing */}
               <button
                 onClick={scrollToPricing}
-                className="bg-ink-900 hover:bg-accent text-white px-7 py-3.5 rounded-xl text-sm font-mono font-bold uppercase tracking-wider shadow-md hover:shadow-lg transition-all duration-300 flex items-center gap-2.5 group cursor-pointer"
+                className="bg-ink-900 hover:bg-accent text-white px-7 py-3.5 rounded-xl text-sm font-mono font-bold uppercase tracking-wider shadow-md hover:shadow-lg transition-all duration-300 flex items-center gap-2.5 group cursor-pointer focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2"
               >
                 <span>Xem bảng giá</span>
                 <ArrowDown className="w-4 h-4 group-hover:translate-y-1 transition-transform" />
@@ -192,7 +209,7 @@ export function LandingHero({
               {/* Secondary CTA: Explore 12 Models */}
               <Link
                 href="/thiet-bi"
-                className="bg-white hover:bg-[#f0eae1] text-ink-900 px-6 py-3.5 rounded-xl text-sm font-mono font-bold uppercase tracking-wider border border-[#e0d6c7] shadow-xs transition-all duration-300 flex items-center gap-2 group cursor-pointer"
+                className="bg-white hover:bg-[#f0eae1] text-ink-900 px-6 py-3.5 rounded-xl text-sm font-mono font-bold uppercase tracking-wider border border-[#e0d6c7] shadow-xs transition-all duration-300 flex items-center gap-2 group cursor-pointer focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2"
               >
                 <span>Xem 12 dòng máy</span>
                 <ArrowRight className="w-4 h-4 text-ink-500 group-hover:text-ink-900 group-hover:translate-x-0.5 transition-transform" />
@@ -294,7 +311,7 @@ export function LandingHero({
 
                       {/* Side Camera Subtle Name Pill */}
                       {!isCenter && (
-                        <div className="absolute -bottom-1 left-1/2 -translate-x-1/2 whitespace-nowrap bg-[#2c2621]/90 backdrop-blur-xs text-white text-[9px] sm:text-[10px] font-mono font-bold px-2 py-0.5 rounded shadow-sm opacity-90 group-hover:opacity-100 group-hover:bg-[#171716] transition-all">
+                        <div className="absolute -bottom-1 left-1/2 -translate-x-1/2 whitespace-nowrap bg-[#2c2621]/90 backdrop-blur-xs text-white text-[9px] sm:text-[10px] font-mono font-bold px-2 py-0.5 rounded-sm shadow-xs opacity-90 group-hover:opacity-100 group-hover:bg-[#171716] transition-all">
                           {cam.subName}
                         </div>
                       )}

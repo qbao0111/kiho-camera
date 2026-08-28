@@ -37,7 +37,7 @@ export function Footer({ settings }: FooterProps) {
 
           <Link
             href="/thiet-bi"
-            className="inline-flex items-center gap-2 text-xs font-mono font-bold uppercase tracking-wider text-[#171716] hover:text-[#E85D2A] bg-white hover:bg-[#FAF8F5] border border-[#D8CEC0] px-4 py-2.5 rounded-xl transition-all shadow-2xs shrink-0 self-start sm:self-auto"
+            className="inline-flex items-center gap-2 text-xs font-mono font-bold uppercase tracking-wider text-[#171716] hover:text-[#E85D2A] bg-white hover:bg-[#FAF8F5] border border-[#D8CEC0] px-4 py-2.5 rounded-xl transition-all shadow-2xs shrink-0 self-start sm:self-auto focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-accent"
           >
             <span>Xem tất cả 12 dòng máy</span>
             <ArrowUpRight className="w-3.5 h-3.5 text-[#716A62]" />
@@ -49,7 +49,7 @@ export function Footer({ settings }: FooterProps) {
           
           {/* 1. Brand & Intro (5 cols) */}
           <div className="md:col-span-5 space-y-3.5">
-            <Link href="/" className="inline-block group">
+            <Link href="/" className="inline-block group focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-accent rounded-lg">
               <span className="text-xl font-black tracking-tight text-[#171716] group-hover:text-[#E85D2A] transition-colors block font-mono">
                 KIHO CAMERA
               </span>
@@ -71,7 +71,7 @@ export function Footer({ settings }: FooterProps) {
               <li>
                 <Link
                   href="/thiet-bi"
-                  className="text-[#716A62] hover:text-[#E85D2A] transition-colors inline-flex items-center gap-2"
+                  className="text-[#716A62] hover:text-[#E85D2A] transition-colors inline-flex items-center gap-2 focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-accent rounded-sm px-1"
                 >
                   <Camera className="w-3.5 h-3.5 text-[#E85D2A]/70 shrink-0" />
                   <span>Tất cả 12 dòng máy</span>
@@ -80,7 +80,7 @@ export function Footer({ settings }: FooterProps) {
               <li>
                 <Link
                   href="/thiet-bi?brand=Fujifilm"
-                  className="text-[#716A62] hover:text-[#E85D2A] transition-colors inline-flex items-center gap-2"
+                  className="text-[#716A62] hover:text-[#E85D2A] transition-colors inline-flex items-center gap-2 focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-accent rounded-sm px-1"
                 >
                   <Camera className="w-3.5 h-3.5 text-[#E85D2A]/70 shrink-0" />
                   <span>Fujifilm (X100VI, X100V, XS10)</span>
@@ -89,7 +89,7 @@ export function Footer({ settings }: FooterProps) {
               <li>
                 <Link
                   href="/thiet-bi?brand=Canon"
-                  className="text-[#716A62] hover:text-[#E85D2A] transition-colors inline-flex items-center gap-2"
+                  className="text-[#716A62] hover:text-[#E85D2A] transition-colors inline-flex items-center gap-2 focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-accent rounded-sm px-1"
                 >
                   <Camera className="w-3.5 h-3.5 text-[#E85D2A]/70 shrink-0" />
                   <span>Canon (R50, RP, G7X III...)</span>
@@ -98,7 +98,7 @@ export function Footer({ settings }: FooterProps) {
               <li>
                 <Link
                   href="/thiet-bi?brand=Sony"
-                  className="text-[#716A62] hover:text-[#E85D2A] transition-colors inline-flex items-center gap-2"
+                  className="text-[#716A62] hover:text-[#E85D2A] transition-colors inline-flex items-center gap-2 focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-accent rounded-sm px-1"
                 >
                   <Camera className="w-3.5 h-3.5 text-[#E85D2A]/70 shrink-0" />
                   <span>Sony (ZV1 II, ZV1F)</span>
@@ -131,7 +131,10 @@ export function Footer({ settings }: FooterProps) {
                 </div>
                 <span className="text-xs sm:text-sm text-[#716A62]">
                   Hotline / Zalo:{" "}
-                  <a href="tel:0387274669" className="text-[#171716] hover:text-[#E85D2A] font-bold transition-colors">
+                  <a
+                    href="tel:0387274669"
+                    className="text-[#171716] hover:text-[#E85D2A] font-bold transition-colors focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-accent rounded-sm"
+                  >
                     0387 274 669
                   </a>
                 </span>
@@ -148,7 +151,7 @@ export function Footer({ settings }: FooterProps) {
                     href="https://www.instagram.com/thuemayanhqbb/"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-[#171716] hover:text-[#5659C9] font-bold transition-colors"
+                    className="text-[#171716] hover:text-[#5659C9] font-bold transition-colors focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-accent rounded-sm"
                   >
                     @thuemayanhqbb
                   </a>
@@ -170,7 +173,7 @@ export function Footer({ settings }: FooterProps) {
                 href={settings.messenger_url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group inline-flex items-center gap-2 text-xs font-bold text-[#171716] hover:text-[#E85D2A] bg-white hover:bg-[#FAF8F5] border border-[#D8CEC0] px-4 py-2 rounded-xl transition-all shadow-2xs"
+                className="group inline-flex items-center gap-2 text-xs font-bold text-[#171716] hover:text-[#E85D2A] bg-white hover:bg-[#FAF8F5] border border-[#D8CEC0] px-4 py-2 rounded-xl transition-all shadow-2xs focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-accent"
               >
                 <MessageCircle className="w-3.5 h-3.5 text-[#E85D2A]" />
                 <span>Nhắn tin tư vấn qua Messenger</span>

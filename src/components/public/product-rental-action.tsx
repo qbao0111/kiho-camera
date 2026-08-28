@@ -7,7 +7,6 @@ import {
   ShieldCheck,
   ArrowUpRight,
   ArrowRight,
-  Phone,
 } from "lucide-react";
 import { Equipment } from "@/types/database";
 import { RentalRequestDrawer } from "@/components/public/rental-request-drawer";
@@ -34,7 +33,7 @@ export function ProductRentalAction({
         {/* Button 1: Primary Lead Request Drawer */}
         <button
           onClick={() => setIsDrawerOpen(true)}
-          className="w-full inline-flex items-center justify-center gap-2.5 bg-ink-900 hover:bg-accent text-white font-mono font-bold py-4 px-6 rounded-2xl shadow-md hover:shadow-lg transition-all text-sm sm:text-base group cursor-pointer"
+          className="w-full inline-flex items-center justify-center gap-2.5 bg-ink-900 hover:bg-accent text-white font-mono font-bold py-4 px-6 rounded-2xl shadow-md hover:shadow-lg transition-all text-sm sm:text-base group cursor-pointer focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2"
         >
           <Send className="w-4 h-4 text-accent group-hover:text-white transition-colors shrink-0" />
           <span className="truncate">Gửi yêu cầu thuê {equipment.name}</span>
@@ -55,23 +54,12 @@ export function ProductRentalAction({
           href={messengerChatUrl}
           target="_blank"
           rel="noopener noreferrer"
-          className="w-full inline-flex items-center justify-center gap-2.5 bg-[#f0eae1] hover:bg-[#e4dcce] border border-[#dacfc0] hover:border-[#c8bcab] text-ink-900 hover:text-accent font-mono font-bold py-3.5 sm:py-4 px-6 rounded-2xl transition-all text-sm sm:text-base shadow-2xs group cursor-pointer"
+          className="w-full inline-flex items-center justify-center gap-2.5 bg-[#f0eae1] hover:bg-[#e4dcce] border border-[#dacfc0] hover:border-[#c8bcab] text-ink-900 hover:text-accent font-mono font-bold py-3.5 sm:py-4 px-6 rounded-2xl transition-all text-sm sm:text-base shadow-2xs group cursor-pointer focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2"
         >
           <MessageCircle className="w-4 h-4 text-accent shrink-0" />
           <span className="truncate">Nhắn Kiho tư vấn ngay</span>
           <ArrowUpRight className="w-4 h-4 text-ink-500 group-hover:text-accent group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all shrink-0" />
         </a>
-
-        {/* Direct Phone Support Microcopy */}
-        <div className="pt-1 text-center">
-          <a
-            href="tel:0387274669"
-            className="inline-flex items-center justify-center gap-1.5 text-xs font-mono text-ink-500 hover:text-ink-900 transition-colors"
-          >
-            <Phone className="w-3 h-3 text-accent" />
-            <span>Cần gấp? Hotline / Zalo: <strong className="text-ink-800 font-bold">0387 274 669</strong></span>
-          </a>
-        </div>
       </div>
 
       {/* Subtle Support Note: No Deposit USP */}
@@ -87,7 +75,7 @@ export function ProductRentalAction({
         <div className="pt-1">
           <a
             href="#anh-chup-thuc-te"
-            className="inline-flex items-center gap-2 text-xs sm:text-sm font-mono font-bold text-ink-700 hover:text-ink-900 transition-colors group cursor-pointer"
+            className="inline-flex items-center gap-2 text-xs sm:text-sm font-mono font-bold text-ink-700 hover:text-ink-900 transition-colors group cursor-pointer focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-accent rounded-md px-1 py-0.5"
           >
             <span className="w-2 h-2 rounded-full bg-accent animate-pulse" />
             <span>Xem {sampleImagesCount} ảnh chụp thực tế từ máy này</span>

@@ -301,7 +301,7 @@ export function RentalRequestForm({
           value={customerName}
           onChange={(e) => setCustomerName(e.target.value)}
           placeholder="Ví dụ: Nguyễn Minh Anh"
-          className="w-full px-4 py-3 rounded-xl bg-[#faf8f4] border border-[#e8e2d7] text-sm text-ink-900 placeholder:text-ink-400 focus:outline-hidden focus:border-ink-900 focus:bg-white transition-colors"
+          className="w-full px-4 py-3 rounded-xl bg-[#faf8f4] border border-[#e8e2d7] text-sm text-ink-900 placeholder:text-ink-400 focus:outline-hidden focus:border-ink-900 focus:ring-2 focus:ring-accent/25 focus:bg-white transition-all font-sans"
         />
       </div>
 
@@ -319,7 +319,7 @@ export function RentalRequestForm({
             disabled={isSubmitting}
             value={rentalDate}
             onChange={(e) => handleRentalDateChange(e.target.value)}
-            className="w-full px-4 py-3 rounded-xl bg-[#faf8f4] border border-[#e8e2d7] text-sm text-ink-900 focus:outline-hidden focus:border-ink-900 focus:bg-white transition-colors font-mono"
+            className="w-full px-4 py-3 rounded-xl bg-[#faf8f4] border border-[#e8e2d7] text-sm text-ink-900 focus:outline-hidden focus:border-ink-900 focus:ring-2 focus:ring-accent/25 focus:bg-white transition-all font-mono"
           />
         </div>
 
@@ -335,7 +335,7 @@ export function RentalRequestForm({
             disabled={isSubmitting}
             value={returnDate}
             onChange={(e) => setReturnDate(e.target.value)}
-            className="w-full px-4 py-3 rounded-xl bg-[#faf8f4] border border-[#e8e2d7] text-sm text-ink-900 focus:outline-hidden focus:border-ink-900 focus:bg-white transition-colors font-mono"
+            className="w-full px-4 py-3 rounded-xl bg-[#faf8f4] border border-[#e8e2d7] text-sm text-ink-900 focus:outline-hidden focus:border-ink-900 focus:ring-2 focus:ring-accent/25 focus:bg-white transition-all font-mono"
           />
         </div>
       </div>
@@ -350,7 +350,7 @@ export function RentalRequestForm({
           disabled={isSubmitting}
           value={equipmentName}
           onChange={(e) => handleEquipmentChange(e.target.value)}
-          className="w-full px-4 py-3 rounded-xl bg-[#faf8f4] border border-[#e8e2d7] text-sm text-ink-900 focus:outline-hidden focus:border-ink-900 focus:bg-white transition-colors font-mono cursor-pointer"
+          className="w-full px-4 py-3 rounded-xl bg-[#faf8f4] border border-[#e8e2d7] text-sm text-ink-900 focus:outline-hidden focus:border-ink-900 focus:ring-2 focus:ring-accent/25 focus:bg-white transition-all font-mono cursor-pointer"
         >
           {variant !== "drawer" && (
             <option value="Chưa biết — nhờ Kiho tư vấn">
@@ -381,7 +381,7 @@ export function RentalRequestForm({
           value={phone}
           onChange={(e) => setPhone(e.target.value)}
           placeholder="0912 345 678"
-          className="w-full px-4 py-3 rounded-xl bg-[#faf8f4] border border-[#e8e2d7] text-sm text-ink-900 placeholder:text-ink-400 focus:outline-hidden focus:border-ink-900 focus:bg-white transition-colors font-mono"
+          className="w-full px-4 py-3 rounded-xl bg-[#faf8f4] border border-[#e8e2d7] text-sm text-ink-900 placeholder:text-ink-400 focus:outline-hidden focus:border-ink-900 focus:ring-2 focus:ring-accent/25 focus:bg-white transition-all font-mono"
         />
       </div>
 
@@ -397,7 +397,7 @@ export function RentalRequestForm({
           value={note}
           onChange={(e) => setNote(e.target.value)}
           placeholder="Bạn định đi Phong Nha, check-in biển hay quay vlog..."
-          className="w-full px-4 py-2.5 rounded-xl bg-[#faf8f4] border border-[#e8e2d7] text-sm text-ink-900 placeholder:text-ink-400 focus:outline-hidden focus:border-ink-900 focus:bg-white transition-colors resize-none"
+          className="w-full px-4 py-2.5 rounded-xl bg-[#faf8f4] border border-[#e8e2d7] text-sm text-ink-900 placeholder:text-ink-400 focus:outline-hidden focus:border-ink-900 focus:ring-2 focus:ring-accent/25 focus:bg-white transition-all resize-none font-sans"
         />
       </div>
 
@@ -406,7 +406,7 @@ export function RentalRequestForm({
         <button
           type="submit"
           disabled={isSubmitting}
-          className="w-full bg-ink-900 hover:bg-accent text-white py-3.5 px-6 rounded-xl font-mono font-bold text-xs sm:text-sm uppercase tracking-wider transition-all duration-200 flex items-center justify-center gap-2 shadow-sm hover:shadow-md cursor-pointer disabled:opacity-70 disabled:cursor-not-allowed group"
+          className="w-full bg-ink-900 hover:bg-accent text-white py-3.5 px-6 rounded-xl font-mono font-bold text-xs sm:text-sm uppercase tracking-wider transition-all duration-200 flex items-center justify-center gap-2 shadow-sm hover:shadow-md cursor-pointer disabled:opacity-70 disabled:cursor-not-allowed group focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2"
         >
           {isSubmitting ? (
             <>

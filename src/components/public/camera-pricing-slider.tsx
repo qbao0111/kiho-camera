@@ -3,7 +3,7 @@
 import React, { useState, useRef, useEffect, useCallback } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { Sparkles, ArrowRight, ChevronLeft, ChevronRight, Phone, Instagram, MapPin, Heart, Clock, Calendar, Tag, ArrowUpRight } from "lucide-react";
+import { Sparkles, ArrowRight, ChevronLeft, ChevronRight, Clock, Calendar, Tag, ArrowUpRight, ShieldCheck } from "lucide-react";
 import { Equipment } from "@/types/database";
 
 interface CameraPricingSliderProps {
@@ -13,7 +13,6 @@ interface CameraPricingSliderProps {
 
 export function CameraPricingSlider({
   equipment = [],
-  messengerUrl = "https://m.me/kihocameradonghoi",
 }: CameraPricingSliderProps) {
   const [selectedBrand, setSelectedBrand] = useState<string>("all");
   const [isHovered, setIsHovered] = useState(false);
@@ -212,7 +211,7 @@ export function CameraPricingSlider({
   const sonyCount = cameraItems.filter((c) => c.brand.toLowerCase() === "sony").length;
 
   return (
-    <section id="bang-gia" className="py-16 sm:py-24 bg-[#faf8f4] overflow-hidden hairline-t hairline-b">
+    <section id="bang-gia" className="py-20 sm:py-28 bg-[#faf8f4] overflow-hidden border-t border-[#e8e2d7]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Section Header */}
@@ -222,11 +221,11 @@ export function CameraPricingSlider({
               <Sparkles className="w-3.5 h-3.5 text-accent" />
               <span>BẢNG GIÁ NIÊM YẾT · ĐỒNG HỚI</span>
             </div>
-            <h2 className="text-3xl sm:text-5xl font-black text-ink-900 tracking-tight leading-tight">
+            <h2 className="text-3xl sm:text-5xl font-black text-ink-900 tracking-tight leading-tight font-mono">
               Bảng Giá Thuê Máy Ảnh Kiho
             </h2>
-            <p className="mt-2 text-sm sm:text-base text-ink-600 font-medium">
-              Máy xịn, giá rõ ràng, trọn bộ phụ kiện đi kèm — nhận máy là chụp đẹp ngay.
+            <p className="mt-2 text-sm sm:text-base text-ink-600 font-medium max-w-xl leading-relaxed">
+              Máy chuẩn, giá niêm yết rõ ràng, trọn bộ phụ kiện đi kèm — nhận máy là chụp đẹp ngay.
             </p>
           </div>
 
@@ -243,7 +242,7 @@ export function CameraPricingSlider({
                 <button
                   key={tab.key}
                   onClick={() => handleBrandChange(tab.key)}
-                  className={`px-3 py-1.5 rounded-lg text-xs font-mono font-bold transition-all cursor-pointer ${
+                  className={`px-3 py-1.5 rounded-lg text-xs font-mono font-bold transition-all cursor-pointer focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-accent ${
                     selectedBrand === tab.key
                       ? "bg-white text-ink-900 shadow-xs"
                       : "text-ink-600 hover:text-ink-900"
@@ -258,15 +257,15 @@ export function CameraPricingSlider({
             <div className="hidden sm:flex items-center gap-1.5">
               <button
                 onClick={scrollLeft}
-                className="w-9 h-9 rounded-xl bg-white border border-[#e0d6c7] hover:bg-ink-900 hover:text-white text-ink-800 flex items-center justify-center transition-colors shadow-xs cursor-pointer active:scale-95"
-                aria-label="Xem lùi"
+                className="w-9 h-9 rounded-xl bg-white border border-[#e0d6c7] hover:bg-ink-900 hover:text-white text-ink-800 flex items-center justify-center transition-colors shadow-xs cursor-pointer active:scale-95 focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-accent"
+                aria-label="Xem dòng máy trước"
               >
                 <ChevronLeft className="w-4 h-4" />
               </button>
               <button
                 onClick={scrollRight}
-                className="w-9 h-9 rounded-xl bg-white border border-[#e0d6c7] hover:bg-ink-900 hover:text-white text-ink-800 flex items-center justify-center transition-colors shadow-xs cursor-pointer active:scale-95"
-                aria-label="Xem tiếp"
+                className="w-9 h-9 rounded-xl bg-white border border-[#e0d6c7] hover:bg-ink-900 hover:text-white text-ink-800 flex items-center justify-center transition-colors shadow-xs cursor-pointer active:scale-95 focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-accent"
+                aria-label="Xem dòng máy tiếp theo"
               >
                 <ChevronRight className="w-4 h-4" />
               </button>
@@ -310,7 +309,7 @@ export function CameraPricingSlider({
             return (
               <div
                 key={`${item.id}-${index}`}
-                className="w-[280px] sm:w-[310px] shrink-0 bg-white rounded-2xl p-5 border border-[#e8e2d7]/80 shadow-[0_4px_20px_rgba(0,0,0,0.03)] hover:shadow-[0_12px_30px_rgba(0,0,0,0.08)] hover:border-ink-900/30 transition-all duration-300 flex flex-col justify-between group relative"
+                className="w-[280px] sm:w-[310px] shrink-0 bg-white rounded-3xl p-5 border border-[#e8e2d7]/80 shadow-[0_4px_20px_rgba(0,0,0,0.03)] hover:shadow-[0_12px_30px_rgba(0,0,0,0.08)] hover:border-ink-900/30 transition-all duration-300 flex flex-col justify-between group relative"
               >
                 {/* Card Top: Number & Badges */}
                 <div className="flex items-start justify-between gap-2 mb-2">
@@ -336,7 +335,7 @@ export function CameraPricingSlider({
                   href={`/thiet-bi/${item.slug}`}
                   onClick={handleCardClick}
                   draggable={false}
-                  className="relative aspect-square w-full my-1 flex items-center justify-center p-2 rounded-xl bg-[#faf8f4] block"
+                  className="relative aspect-square w-full my-1 flex items-center justify-center p-2 rounded-2xl bg-[#faf8f4] block focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-accent"
                 >
                   <Image
                     src={coverImg}
@@ -396,9 +395,9 @@ export function CameraPricingSlider({
                     href={`/thiet-bi/${item.slug}`}
                     onClick={handleCardClick}
                     draggable={false}
-                    className="w-full bg-ink-900 hover:bg-accent text-white text-xs font-mono font-bold py-2.5 px-4 rounded-xl flex items-center justify-center gap-2 transition-colors shadow-xs"
+                    className="w-full bg-ink-900 hover:bg-accent text-white text-xs font-mono font-bold py-2.5 px-4 rounded-xl flex items-center justify-center gap-2 transition-colors shadow-xs focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-accent"
                   >
-                    <span>Xem máy {item.name.split(" ")[1] || ""}</span>
+                    <span>Xem chi tiết máy</span>
                     <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
                   </Link>
                 </div>
@@ -407,80 +406,19 @@ export function CameraPricingSlider({
           })}
         </div>
 
-        {/* Link to Full Equipment Catalog */}
-        <div className="mt-8 flex justify-center">
+        {/* Link to Full Equipment Catalog & Subtle Trust Chip */}
+        <div className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-4 text-center">
           <Link
             href="/thiet-bi"
-            className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-white hover:bg-ink-900 text-ink-900 hover:text-white border border-[#e0d6c7] text-xs font-mono font-bold uppercase tracking-wider transition-all duration-300 shadow-xs group"
+            className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-white hover:bg-ink-900 text-ink-900 hover:text-white border border-[#e0d6c7] text-xs font-mono font-bold uppercase tracking-wider transition-all duration-300 shadow-xs group focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-accent"
           >
             <span>Xem toàn bộ 12 dòng máy ảnh</span>
             <ArrowUpRight className="w-4 h-4 text-ink-400 group-hover:text-white transition-colors" />
           </Link>
-        </div>
 
-        {/* Bottom Contact Card Banner (Warm Editorial Light) */}
-        <div className="mt-12 bg-[#faf8f5] text-[#171716] rounded-3xl p-6 sm:p-8 border border-[#e8e2d7] shadow-xs relative overflow-hidden">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 items-center text-xs font-mono">
-            {/* Phone / Zalo */}
-            <div className="flex items-center gap-3.5">
-              <div className="w-10 h-10 rounded-xl bg-[#E85D2A]/10 text-[#E85D2A] flex items-center justify-center shrink-0">
-                <Phone className="w-5 h-5" />
-              </div>
-              <div>
-                <span className="text-[#716A62] block text-[10px] uppercase font-bold tracking-wider">
-                  SĐT / Zalo tư vấn
-                </span>
-                <a
-                  href="tel:0387274669"
-                  className="text-base sm:text-lg font-black text-[#171716] hover:text-[#E85D2A] transition-colors"
-                >
-                  0387 274 669
-                </a>
-              </div>
-            </div>
-
-            {/* Instagram */}
-            <div className="flex items-center gap-3.5">
-              <div className="w-10 h-10 rounded-xl bg-[#5659C9]/10 text-[#5659C9] flex items-center justify-center shrink-0">
-                <Instagram className="w-5 h-5" />
-              </div>
-              <div>
-                <span className="text-[#716A62] block text-[10px] uppercase font-bold tracking-wider">
-                  Instagram chính thức
-                </span>
-                <a
-                  href="https://www.instagram.com/thuemayanhqbb/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-sm sm:text-base font-bold text-[#171716] hover:text-[#5659C9] transition-colors"
-                >
-                  @thuemayanhqbb
-                </a>
-              </div>
-            </div>
-
-            {/* Store Address */}
-            <div className="flex items-center gap-3.5">
-              <div className="w-10 h-10 rounded-xl bg-[#5DAEA5]/15 text-[#2A8B80] flex items-center justify-center shrink-0">
-                <MapPin className="w-5 h-5" />
-              </div>
-              <div>
-                <span className="text-[#716A62] block text-[10px] uppercase font-bold tracking-wider">
-                  Địa chỉ nhận máy
-                </span>
-                <span className="text-xs sm:text-sm font-semibold text-[#171716]">
-                  48 Ngô Quyền, Đồng Hới, Quảng Bình
-                </span>
-              </div>
-            </div>
-          </div>
-
-          {/* Slogan: Clean Editorial Line */}
-          <div className="mt-6 pt-5 border-t border-[#ede6db] flex items-center justify-center text-center">
-            <p className="text-xs sm:text-sm font-mono text-[#716A62] flex items-center justify-center gap-2">
-              <Heart className="w-3.5 h-3.5 text-[#E85D2A] fill-[#E85D2A]/30" />
-              <span>Trọn mọi khoảnh khắc · Đồng hành cùng chuyến đi của bạn</span>
-            </p>
+          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#f0eae1] border border-[#e2dbcf] text-xs font-mono text-ink-700">
+            <ShieldCheck className="w-3.5 h-3.5 text-accent" />
+            <span>Kèm trọn bộ 2 pin, sạc đôi & thẻ nhớ</span>
           </div>
         </div>
 
