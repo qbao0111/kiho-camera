@@ -37,8 +37,13 @@ export async function POST(req: NextRequest) {
       console.warn("Revalidation warning:", cacheErr);
     }
 
-    return NextResponse.json({ success: true, message: "Đã lưu cài đặt website thành công!" });
+    return NextResponse.json({
+      success: true,
+      message: result.warning || "Đã lưu cài đặt website thành công!",
+      warning: result.warning,
+    });
   } catch (err: any) {
     return NextResponse.json({ success: false, error: err?.message || "Lỗi lưu cài đặt" }, { status: 500 });
   }
 }
+

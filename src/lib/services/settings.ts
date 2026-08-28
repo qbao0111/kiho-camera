@@ -42,18 +42,43 @@ export const getSiteSettings = cache(async (): Promise<SiteSettings> => {
   return getCachedSiteSettings();
 });
 
-export async function updateSiteSettings(settings: Partial<SiteSettings>): Promise<{ success: boolean; error?: string }> {
+export async function updateSiteSettings(settings: Partial<SiteSettings>): Promise<{ success: boolean; warning?: string; error?: string }> {
   try {
     const supabase = await createServerClient();
     if (!supabase) {
       return { success: false, error: "Chưa cấu hình Supabase" };
     }
 
+    // Attempt standard upsert with all fields
     const { error } = await supabase
       .from("site_settings")
       .upsert({ id: 1, ...settings, updated_at: new Date().toISOString() });
 
     if (error) {
+      // If error is specifically because maps_embed_url column is not yet in Supabase schema cache
+      const isMapsEmbedColumnError =
+        error.message?.includes("maps_embed_url") ||
+        error.details?.includes("maps_embed_url") ||
+        error.hint?.includes("maps_embed_url") ||
+        error.code === "PGRST204" ||
+        error.code === "42703";
+
+      if (isMapsEmbedColumnError) {
+        // Fallback: strip maps_embed_url and save all other fields so user is never blocked
+        const { maps_embed_url, ...remainingSettings } = settings;
+        const retry = await supabase
+          .from("site_settings")
+          .upsert({ id: 1, ...remainingSettings, updated_at: new Date().toISOString() });
+
+        if (!retry.error) {
+          return {
+            success: true,
+            warning:
+              "Đã lưu các thông tin khác thành công. Riêng cột 'maps_embed_url' chưa được tạo trong database Supabase. Vui lòng mở Supabase Dashboard → SQL Editor và chạy câu lệnh: ALTER TABLE public.site_settings ADD COLUMN IF NOT EXISTS maps_embed_url TEXT DEFAULT '';",
+          };
+        }
+      }
+
       return { success: false, error: error.message };
     }
 
@@ -62,3 +87,4 @@ export async function updateSiteSettings(settings: Partial<SiteSettings>): Promi
     return { success: false, error: err.message || "Lỗi cập nhật cấu hình" };
   }
 }
+

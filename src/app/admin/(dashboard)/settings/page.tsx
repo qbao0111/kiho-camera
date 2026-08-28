@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import { Save, CheckCircle, AlertCircle, Phone, MapPin, Globe, Image as ImageIcon, MessageCircle, Loader2 } from "lucide-react";
+import { Save, CheckCircle, AlertCircle, AlertTriangle, Copy, Check, Phone, MapPin, Globe, Image as ImageIcon, MessageCircle, Loader2 } from "lucide-react";
 import { SiteSettings } from "@/types/database";
 import { MOCK_SITE_SETTINGS } from "@/lib/mock-data";
 
@@ -9,7 +9,8 @@ export default function AdminSettingsPage() {
   const [settings, setSettings] = useState<SiteSettings>(MOCK_SITE_SETTINGS);
   const [initialLoading, setInitialLoading] = useState(true);
   const [loading, setLoading] = useState(false);
-  const [msg, setMsg] = useState<{ type: "success" | "error"; text: string } | null>(null);
+  const [copiedSql, setCopiedSql] = useState(false);
+  const [msg, setMsg] = useState<{ type: "success" | "warning" | "error"; text: string; sql?: string } | null>(null);
 
   useEffect(() => {
     async function loadSettings() {
@@ -34,6 +35,12 @@ export default function AdminSettingsPage() {
     setSettings((prev) => ({ ...prev, [field]: value }));
   };
 
+  const handleCopySql = (sqlText: string) => {
+    navigator.clipboard.writeText(sqlText);
+    setCopiedSql(true);
+    setTimeout(() => setCopiedSql(false), 3000);
+  };
+
   const handleSave = async (e?: React.FormEvent) => {
     if (e) e.preventDefault();
     setLoading(true);
@@ -51,10 +58,18 @@ export default function AdminSettingsPage() {
         throw new Error(data.error || "Không thể lưu cài đặt");
       }
 
-      setMsg({ type: "success", text: "Đã lưu thông tin cấu hình website thành công!" });
-      setTimeout(() => {
-        setMsg(null);
-      }, 5000);
+      if (data.warning) {
+        setMsg({
+          type: "warning",
+          text: data.warning,
+          sql: "ALTER TABLE public.site_settings ADD COLUMN IF NOT EXISTS maps_embed_url TEXT DEFAULT '';",
+        });
+      } else {
+        setMsg({ type: "success", text: "Đã lưu thông tin cấu hình website thành công!" });
+        setTimeout(() => {
+          setMsg(null);
+        }, 5000);
+      }
     } catch (err: any) {
       setMsg({ type: "error", text: err.message || "Lỗi lưu cấu hình" });
     } finally {
@@ -97,20 +112,41 @@ export default function AdminSettingsPage() {
 
       {msg && (
         <div
-          className={`p-4 rounded-2xl flex items-center gap-2 text-sm transition-all ${
+          className={`p-4 rounded-2xl flex flex-col gap-2 text-sm transition-all ${
             msg.type === "success"
               ? "bg-emerald-50 text-emerald-800 border border-emerald-200"
+              : msg.type === "warning"
+              ? "bg-amber-50 text-amber-900 border border-amber-300"
               : "bg-rose-50 text-rose-800 border border-rose-200"
           }`}
         >
-          {msg.type === "success" ? (
-            <CheckCircle className="w-5 h-5 text-emerald-600 shrink-0" />
-          ) : (
-            <AlertCircle className="w-5 h-5 text-rose-600 shrink-0" />
+          <div className="flex items-start gap-2.5">
+            {msg.type === "success" ? (
+              <CheckCircle className="w-5 h-5 text-emerald-600 shrink-0 mt-0.5" />
+            ) : msg.type === "warning" ? (
+              <AlertTriangle className="w-5 h-5 text-amber-600 shrink-0 mt-0.5" />
+            ) : (
+              <AlertCircle className="w-5 h-5 text-rose-600 shrink-0 mt-0.5" />
+            )}
+            <span className="font-medium leading-relaxed">{msg.text}</span>
+          </div>
+
+          {msg.sql && (
+            <div className="mt-1 flex items-center justify-between gap-3 p-2.5 bg-white/80 border border-amber-300 rounded-xl">
+              <code className="text-xs font-mono text-slate-800 break-all">{msg.sql}</code>
+              <button
+                type="button"
+                onClick={() => handleCopySql(msg.sql!)}
+                className="inline-flex items-center gap-1 bg-amber-200 hover:bg-amber-300 text-amber-900 px-3 py-1.5 rounded-lg text-xs font-mono font-bold shrink-0 transition-colors cursor-pointer"
+              >
+                {copiedSql ? <Check className="w-3.5 h-3.5 text-emerald-700" /> : <Copy className="w-3.5 h-3.5" />}
+                <span>{copiedSql ? "Đã copy!" : "Copy SQL"}</span>
+              </button>
+            </div>
           )}
-          <span className="font-medium">{msg.text}</span>
         </div>
       )}
+
 
       <form onSubmit={handleSave} className="space-y-6">
         {/* 1. Liên hệ & Mạng xã hội */}
