@@ -1,35 +1,60 @@
 "use client";
 
-import React, { useState } from "react";
-import { Save, CheckCircle, AlertCircle, Phone, MapPin, Globe, Image as ImageIcon, MessageCircle } from "lucide-react";
+import React, { useState, useEffect } from "react";
+import { Save, CheckCircle, AlertCircle, Phone, MapPin, Globe, Image as ImageIcon, MessageCircle, Loader2 } from "lucide-react";
 import { SiteSettings } from "@/types/database";
 import { MOCK_SITE_SETTINGS } from "@/lib/mock-data";
-import { createClient } from "@/lib/supabase/client";
 
 export default function AdminSettingsPage() {
   const [settings, setSettings] = useState<SiteSettings>(MOCK_SITE_SETTINGS);
+  const [initialLoading, setInitialLoading] = useState(true);
   const [loading, setLoading] = useState(false);
   const [msg, setMsg] = useState<{ type: "success" | "error"; text: string } | null>(null);
+
+  useEffect(() => {
+    async function loadSettings() {
+      try {
+        const res = await fetch("/api/admin/settings");
+        if (res.ok) {
+          const data = await res.json();
+          if (data.settings) {
+            setSettings(data.settings);
+          }
+        }
+      } catch (err) {
+        console.error("Failed to load settings:", err);
+      } finally {
+        setInitialLoading(false);
+      }
+    }
+    loadSettings();
+  }, []);
 
   const handleChange = (field: keyof SiteSettings, value: string) => {
     setSettings((prev) => ({ ...prev, [field]: value }));
   };
 
-  const handleSave = async (e: React.FormEvent) => {
-    e.preventDefault();
+  const handleSave = async (e?: React.FormEvent) => {
+    if (e) e.preventDefault();
     setLoading(true);
     setMsg(null);
 
     try {
-      const supabase = createClient();
-      if (supabase) {
-        const { error } = await supabase
-          .from("site_settings")
-          .upsert({ id: 1, ...settings, updated_at: new Date().toISOString() });
-        if (error) throw error;
+      const res = await fetch("/api/admin/settings", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(settings),
+      });
+
+      const data = await res.json();
+      if (!res.ok || !data.success) {
+        throw new Error(data.error || "Không thể lưu cài đặt");
       }
 
       setMsg({ type: "success", text: "Đã lưu thông tin cấu hình website thành công!" });
+      setTimeout(() => {
+        setMsg(null);
+      }, 5000);
     } catch (err: any) {
       setMsg({ type: "error", text: err.message || "Lỗi lưu cấu hình" });
     } finally {
@@ -37,31 +62,53 @@ export default function AdminSettingsPage() {
     }
   };
 
+  if (initialLoading) {
+    return (
+      <div className="flex items-center justify-center min-h-[400px] text-slate-500 gap-2">
+        <Loader2 className="w-5 h-5 animate-spin text-orange-500" />
+        <span className="text-sm font-medium">Đang tải cài đặt website...</span>
+      </div>
+    );
+  }
+
   return (
-    <div className="space-y-6 max-w-4xl">
-      <div>
-        <h1 className="text-2xl sm:text-3xl font-black text-slate-900 tracking-tight">
-          Cài đặt nội dung Website & Liên hệ
-        </h1>
-        <p className="text-xs sm:text-sm text-slate-500 mt-0.5">
-          Tùy chỉnh thông tin liên hệ, hotline, link Messenger Fanpage, tiêu đề Hero và SEO chung.
-        </p>
+    <div className="space-y-6 max-w-4xl pb-16">
+      {/* Top Header with Prominent Save Button */}
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-2 border-b border-slate-200">
+        <div>
+          <h1 className="text-2xl sm:text-3xl font-black text-slate-900 tracking-tight">
+            Cài đặt nội dung Website & Liên hệ
+          </h1>
+          <p className="text-xs sm:text-sm text-slate-500 mt-0.5">
+            Tùy chỉnh thông tin liên hệ, hotline, link Messenger Fanpage, tiêu đề Hero và SEO chung.
+          </p>
+        </div>
+
+        <button
+          type="button"
+          onClick={() => handleSave()}
+          disabled={loading}
+          className="inline-flex items-center justify-center gap-2 bg-orange-500 hover:bg-orange-600 active:scale-[0.98] disabled:opacity-50 text-white font-bold text-sm px-6 py-3 rounded-xl shadow-sm transition-all shrink-0 cursor-pointer"
+        >
+          {loading ? <Loader2 className="w-4 h-4 animate-spin" /> : <Save className="w-4 h-4" />}
+          <span>{loading ? "Đang lưu..." : "Lưu tất cả cài đặt"}</span>
+        </button>
       </div>
 
       {msg && (
         <div
-          className={`p-4 rounded-2xl flex items-center gap-2 text-sm ${
+          className={`p-4 rounded-2xl flex items-center gap-2 text-sm transition-all ${
             msg.type === "success"
               ? "bg-emerald-50 text-emerald-800 border border-emerald-200"
               : "bg-rose-50 text-rose-800 border border-rose-200"
           }`}
         >
           {msg.type === "success" ? (
-            <CheckCircle className="w-5 h-5 text-emerald-600" />
+            <CheckCircle className="w-5 h-5 text-emerald-600 shrink-0" />
           ) : (
-            <AlertCircle className="w-5 h-5 text-rose-600" />
+            <AlertCircle className="w-5 h-5 text-rose-600 shrink-0" />
           )}
-          <span>{msg.text}</span>
+          <span className="font-medium">{msg.text}</span>
         </div>
       )}
 
@@ -69,7 +116,7 @@ export default function AdminSettingsPage() {
         {/* 1. Liên hệ & Mạng xã hội */}
         <div className="bg-white rounded-2xl p-6 border border-slate-200 shadow-sm space-y-4">
           <h2 className="text-base font-bold text-slate-900 flex items-center gap-2">
-            <MessageCircle className="w-4 h-4 text-brand-500" />
+            <MessageCircle className="w-4 h-4 text-orange-500" />
             <span>Kênh liên hệ & Chốt đơn</span>
           </h2>
 
@@ -84,7 +131,7 @@ export default function AdminSettingsPage() {
                 value={settings.messenger_url}
                 onChange={(e) => handleChange("messenger_url", e.target.value)}
                 placeholder="https://m.me/kihocameradonghoi"
-                className="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:border-brand-500"
+                className="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:border-orange-500 transition-colors"
               />
             </div>
 
@@ -98,7 +145,7 @@ export default function AdminSettingsPage() {
                 value={settings.facebook_url}
                 onChange={(e) => handleChange("facebook_url", e.target.value)}
                 placeholder="https://facebook.com/kihocameradonghoi"
-                className="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:border-brand-500"
+                className="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:border-orange-500 transition-colors"
               />
             </div>
 
@@ -111,8 +158,8 @@ export default function AdminSettingsPage() {
                 required
                 value={settings.phone}
                 onChange={(e) => handleChange("phone", e.target.value)}
-                placeholder="0912 345 678"
-                className="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:border-brand-500"
+                placeholder="0387 274 669"
+                className="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:border-orange-500 transition-colors"
               />
             </div>
 
@@ -124,8 +171,8 @@ export default function AdminSettingsPage() {
                 type="text"
                 value={settings.opening_hours}
                 onChange={(e) => handleChange("opening_hours", e.target.value)}
-                placeholder="07:30 - 21:00 (Hàng ngày)"
-                className="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:border-brand-500"
+                placeholder="07:30 – 21:00 (Tất cả các ngày trong tuần)"
+                className="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:border-orange-500 transition-colors"
               />
             </div>
 
@@ -138,8 +185,8 @@ export default function AdminSettingsPage() {
                 required
                 value={settings.address}
                 onChange={(e) => handleChange("address", e.target.value)}
-                placeholder="Thành phố Đồng Hới, Tỉnh Quảng Bình"
-                className="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:border-brand-500"
+                placeholder="48 Ngô Quyền, TP. Đồng Hới, Tỉnh Quảng Bình"
+                className="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:border-orange-500 transition-colors"
               />
             </div>
 
@@ -152,7 +199,7 @@ export default function AdminSettingsPage() {
                 value={settings.maps_url}
                 onChange={(e) => handleChange("maps_url", e.target.value)}
                 placeholder="https://maps.google.com/?q=..."
-                className="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:border-brand-500"
+                className="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:border-orange-500 transition-colors"
               />
             </div>
           </div>
@@ -161,7 +208,7 @@ export default function AdminSettingsPage() {
         {/* 2. Hero Section Trang Chủ */}
         <div className="bg-white rounded-2xl p-6 border border-slate-200 shadow-sm space-y-4">
           <h2 className="text-base font-bold text-slate-900 flex items-center gap-2">
-            <ImageIcon className="w-4 h-4 text-brand-500" />
+            <ImageIcon className="w-4 h-4 text-orange-500" />
             <span>Hero Section & Trang chủ</span>
           </h2>
 
@@ -176,7 +223,7 @@ export default function AdminSettingsPage() {
                 value={settings.hero_title}
                 onChange={(e) => handleChange("hero_title", e.target.value)}
                 placeholder="Cho thuê máy ảnh tại Quảng Bình"
-                className="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:border-brand-500"
+                className="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:border-orange-500 transition-colors"
               />
             </div>
 
@@ -188,7 +235,7 @@ export default function AdminSettingsPage() {
                 rows={2}
                 value={settings.hero_subtitle}
                 onChange={(e) => handleChange("hero_subtitle", e.target.value)}
-                className="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:border-brand-500"
+                className="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:border-orange-500 transition-colors"
               />
             </div>
 
@@ -200,7 +247,7 @@ export default function AdminSettingsPage() {
                 type="text"
                 value={settings.hero_image}
                 onChange={(e) => handleChange("hero_image", e.target.value)}
-                className="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:border-brand-500"
+                className="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:border-orange-500 transition-colors"
               />
             </div>
 
@@ -212,7 +259,7 @@ export default function AdminSettingsPage() {
                 rows={3}
                 value={settings.about_text}
                 onChange={(e) => handleChange("about_text", e.target.value)}
-                className="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:border-brand-500"
+                className="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:border-orange-500 transition-colors"
               />
             </div>
 
@@ -224,20 +271,21 @@ export default function AdminSettingsPage() {
                 type="text"
                 value={settings.footer_text}
                 onChange={(e) => handleChange("footer_text", e.target.value)}
-                className="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:border-brand-500"
+                className="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:border-orange-500 transition-colors"
               />
             </div>
           </div>
         </div>
 
-        {/* Save button */}
-        <div className="flex justify-end">
+        {/* Bottom Save button */}
+        <div className="flex items-center justify-between pt-2">
+          <span className="text-xs text-slate-500">Mọi thay đổi sẽ cập nhật trực tiếp lên website chính.</span>
           <button
             type="submit"
             disabled={loading}
-            className="inline-flex items-center gap-2 bg-brand-500 hover:bg-brand-600 disabled:opacity-50 text-white font-bold text-sm px-7 py-3 rounded-xl shadow transition-all active:scale-[0.98]"
+            className="inline-flex items-center gap-2 bg-orange-500 hover:bg-orange-600 active:scale-[0.98] disabled:opacity-50 text-white font-bold text-sm px-7 py-3 rounded-xl shadow-sm transition-all cursor-pointer"
           >
-            <Save className="w-4 h-4" />
+            {loading ? <Loader2 className="w-4 h-4 animate-spin" /> : <Save className="w-4 h-4" />}
             <span>{loading ? "Đang lưu cấu hình..." : "Lưu tất cả cài đặt"}</span>
           </button>
         </div>
