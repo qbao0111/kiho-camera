@@ -38,13 +38,40 @@ export default async function EquipmentListPage({ searchParams }: EquipmentPageP
   const canonCount = allEquipment.filter((e) => e.brand.toLowerCase() === "canon").length;
   const sonyCount = allEquipment.filter((e) => e.brand.toLowerCase() === "sony").length;
 
-  const filteredList = await getEquipmentList({
-    brand: currentBrand === "all" ? undefined : currentBrand,
-    useCase: currentUseCase,
-    searchQuery: currentSearch,
-    sortBy: currentSort,
-    onlyActive: true,
-  });
+  let filteredList = allEquipment;
+
+  if (currentBrand && currentBrand !== "all") {
+    const b = currentBrand.toLowerCase();
+    filteredList = filteredList.filter((e) => e.brand.toLowerCase() === b);
+  }
+
+  if (currentUseCase) {
+    const uc = currentUseCase.toLowerCase();
+    filteredList = filteredList.filter((e) =>
+      e.use_cases?.some((u) => u.toLowerCase() === uc)
+    );
+  }
+
+  if (currentSearch) {
+    const q = currentSearch.toLowerCase().trim();
+    filteredList = filteredList.filter(
+      (e) =>
+        e.name.toLowerCase().includes(q) ||
+        e.brand.toLowerCase().includes(q) ||
+        e.short_description?.toLowerCase().includes(q) ||
+        e.badges?.some((b) => b.toLowerCase().includes(q))
+    );
+  }
+
+  if (currentSort === "price_asc") {
+    filteredList = [...filteredList].sort((a, b) => a.price_per_day - b.price_per_day);
+  } else if (currentSort === "price_desc") {
+    filteredList = [...filteredList].sort((a, b) => b.price_per_day - a.price_per_day);
+  } else if (currentSort === "name_asc") {
+    filteredList = [...filteredList].sort((a, b) => a.name.localeCompare(b.name));
+  } else {
+    filteredList = [...filteredList].sort((a, b) => a.sort_order - b.sort_order);
+  }
 
   const brands = [
     { key: "all", label: `Tất cả (${totalCount})` },
@@ -52,6 +79,7 @@ export default async function EquipmentListPage({ searchParams }: EquipmentPageP
     { key: "canon", label: `Canon (${canonCount})` },
     { key: "sony", label: `Sony (${sonyCount})` },
   ];
+
 
   return (
     <div className="bg-[#faf8f5] min-h-screen py-10 sm:py-16">

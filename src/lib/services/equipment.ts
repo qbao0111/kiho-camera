@@ -1,4 +1,6 @@
-import { createClient } from "@/lib/supabase/server";
+import { cache } from "react";
+import { unstable_cache } from "next/cache";
+import { createPublicClient } from "@/lib/supabase/public";
 import { getLocalEquipment } from "@/lib/local-storage";
 import { MOCK_EQUIPMENT } from "@/lib/mock-data";
 import { Equipment } from "@/types/database";
@@ -12,113 +14,31 @@ export interface EquipmentFilterOptions {
   onlyActive?: boolean;
 }
 
-export async function getEquipmentList(options?: EquipmentFilterOptions): Promise<Equipment[]> {
+/**
+ * Raw database query for full equipment list with related relations.
+ */
+async function fetchRawEquipmentList(): Promise<Equipment[]> {
   try {
-    const supabase = await createClient();
+    const supabase = createPublicClient();
 
-    // Fallback or Local Development Mode
     if (!supabase || !process.env.NEXT_PUBLIC_SUPABASE_URL) {
-      let list = await getLocalEquipment();
-      if (!list || list.length === 0) list = MOCK_EQUIPMENT;
-
-      if (options?.onlyActive !== false) {
-        list = list.filter((e) => e.is_active);
-      }
-
-      if (options?.brand && options.brand !== "all") {
-        list = list.filter((e) => e.brand.toLowerCase() === options.brand?.toLowerCase());
-      }
-
-      if (options?.useCase) {
-        list = list.filter((e) =>
-          e.use_cases.some(
-            (u) => u.toLowerCase() === options.useCase?.toLowerCase()
-          )
-        );
-      }
-
-      if (options?.searchQuery) {
-        const q = options.searchQuery.toLowerCase().trim();
-        list = list.filter(
-          (e) =>
-            e.name.toLowerCase().includes(q) ||
-            e.brand.toLowerCase().includes(q) ||
-            e.short_description?.toLowerCase().includes(q) ||
-            e.badges.some((b) => b.toLowerCase().includes(q))
-        );
-      }
-
-      if (options?.sortBy === "price_asc") {
-        list.sort((a, b) => a.price_per_day - b.price_per_day);
-      } else if (options?.sortBy === "price_desc") {
-        list.sort((a, b) => b.price_per_day - a.price_per_day);
-      } else if (options?.sortBy === "name_asc") {
-        list.sort((a, b) => a.name.localeCompare(b.name));
-      } else {
-        list.sort((a, b) => a.sort_order - b.sort_order);
-      }
-
-      return list;
+      const list = await getLocalEquipment();
+      return list && list.length > 0 ? list : MOCK_EQUIPMENT;
     }
 
-    let query = supabase
+    const { data, error } = await supabase
       .from("equipment")
       .select("*, category:categories(*), images:equipment_images(*), sample_images:equipment_sample_images(*)")
       .order("sort_order", { ascending: true });
 
-    if (options?.onlyActive !== false) {
-      query = query.eq("is_active", true);
-    }
-
-    if (options?.brand && options.brand !== "all") {
-      query = query.ilike("brand", options.brand);
-    }
-
-    if (options?.sortBy === "price_asc") {
-      query = query.order("price_per_day", { ascending: true });
-    } else if (options?.sortBy === "price_desc") {
-      query = query.order("price_per_day", { ascending: false });
-    } else if (options?.sortBy === "name_asc") {
-      query = query.order("name", { ascending: true });
-    }
-
-    const { data, error } = await query;
     if (error || !data || data.length === 0) {
-      let list = await getLocalEquipment();
-      if (!list || list.length === 0) list = MOCK_EQUIPMENT;
-
-      if (options?.onlyActive !== false) {
-        list = list.filter((e) => e.is_active);
-      }
-
-      if (options?.brand && options.brand !== "all") {
-        list = list.filter((e) => e.brand.toLowerCase() === options.brand?.toLowerCase());
-      }
-
-      return list;
+      const list = await getLocalEquipment();
+      return list && list.length > 0 ? list : MOCK_EQUIPMENT;
     }
 
-    let results = data as Equipment[];
-
-    if (options?.useCase) {
-      results = results.filter((item) =>
-        item.use_cases?.some((u) => u.toLowerCase() === options.useCase?.toLowerCase())
-      );
-    }
-
-    if (options?.searchQuery) {
-      const q = options.searchQuery.toLowerCase().trim();
-      results = results.filter(
-        (item) =>
-          item.name.toLowerCase().includes(q) ||
-          item.brand.toLowerCase().includes(q) ||
-          item.short_description?.toLowerCase().includes(q)
-      );
-    }
-
-    return results;
+    return data as Equipment[];
   } catch (err) {
-    console.error("Error fetching equipment:", err);
+    console.error("Error fetching equipment list from Supabase:", err);
     try {
       const list = await getLocalEquipment();
       return list && list.length > 0 ? list : MOCK_EQUIPMENT;
@@ -128,14 +48,13 @@ export async function getEquipmentList(options?: EquipmentFilterOptions): Promis
   }
 }
 
-export async function getFeaturedEquipment(): Promise<Equipment[]> {
-  const all = await getEquipmentList({ onlyActive: true });
-  return all.filter((e) => e.is_featured);
-}
-
-export async function getEquipmentBySlug(slug: string): Promise<Equipment | null> {
+/**
+ * Raw database query for single equipment by slug.
+ */
+async function fetchRawEquipmentBySlug(slug: string): Promise<Equipment | null> {
   try {
-    const supabase = await createClient();
+    const supabase = createPublicClient();
+
     if (!supabase || !process.env.NEXT_PUBLIC_SUPABASE_URL) {
       const list = await getLocalEquipment();
       const all = list && list.length > 0 ? list : MOCK_EQUIPMENT;
@@ -156,6 +75,7 @@ export async function getEquipmentBySlug(slug: string): Promise<Equipment | null
 
     return data as Equipment;
   } catch (err) {
+    console.error(`Error fetching equipment slug "${slug}":`, err);
     try {
       const list = await getLocalEquipment();
       const all = list && list.length > 0 ? list : MOCK_EQUIPMENT;
@@ -166,9 +86,87 @@ export async function getEquipmentBySlug(slug: string): Promise<Equipment | null
   }
 }
 
-export async function getRelatedEquipment(currentSlug: string, brand?: string, limit: number = 4): Promise<Equipment[]> {
-  const all = await getEquipmentList({ onlyActive: true });
-  return all
-    .filter((e) => e.slug !== currentSlug && (brand ? e.brand.toLowerCase() === brand.toLowerCase() : true))
-    .slice(0, limit);
+// 1. Next.js Data Cache (persisted across requests, invalidated via tag 'equipment', TTL 300s)
+const getCachedEquipmentList = unstable_cache(
+  fetchRawEquipmentList,
+  ["equipment-list-all"],
+  {
+    tags: ["equipment"],
+    revalidate: 300,
+  }
+);
+
+const getCachedEquipmentBySlug = (slug: string) =>
+  unstable_cache(
+    () => fetchRawEquipmentBySlug(slug),
+    ["equipment-by-slug", slug],
+    {
+      tags: ["equipment", `equipment:${slug}`],
+      revalidate: 300,
+    }
+  )();
+
+/**
+ * Public cached & filtered equipment query.
+ */
+export async function getEquipmentList(options?: EquipmentFilterOptions): Promise<Equipment[]> {
+  let list = await getCachedEquipmentList();
+
+  if (options?.onlyActive !== false) {
+    list = list.filter((e) => e.is_active);
+  }
+
+  if (options?.brand && options.brand !== "all") {
+    const b = options.brand.toLowerCase();
+    list = list.filter((e) => e.brand.toLowerCase() === b);
+  }
+
+  if (options?.useCase) {
+    const uc = options.useCase.toLowerCase();
+    list = list.filter((e) =>
+      e.use_cases?.some((u) => u.toLowerCase() === uc)
+    );
+  }
+
+  if (options?.searchQuery) {
+    const q = options.searchQuery.toLowerCase().trim();
+    list = list.filter(
+      (e) =>
+        e.name.toLowerCase().includes(q) ||
+        e.brand.toLowerCase().includes(q) ||
+        e.short_description?.toLowerCase().includes(q) ||
+        e.badges?.some((b) => b.toLowerCase().includes(q))
+    );
+  }
+
+  if (options?.sortBy === "price_asc") {
+    list = [...list].sort((a, b) => a.price_per_day - b.price_per_day);
+  } else if (options?.sortBy === "price_desc") {
+    list = [...list].sort((a, b) => b.price_per_day - a.price_per_day);
+  } else if (options?.sortBy === "name_asc") {
+    list = [...list].sort((a, b) => a.name.localeCompare(b.name));
+  } else {
+    list = [...list].sort((a, b) => a.sort_order - b.sort_order);
+  }
+
+  return list;
 }
+
+export const getFeaturedEquipment = cache(async (): Promise<Equipment[]> => {
+  const all = await getEquipmentList({ onlyActive: true });
+  return all.filter((e) => e.is_featured);
+});
+
+// React per-request memoization for equipment by slug (deduplicates generateMetadata + Page)
+export const getEquipmentBySlug = cache(async (slug: string): Promise<Equipment | null> => {
+  return getCachedEquipmentBySlug(slug);
+});
+
+export const getRelatedEquipment = cache(
+  async (currentSlug: string, brand?: string, limit: number = 4): Promise<Equipment[]> => {
+    const all = await getEquipmentList({ onlyActive: true });
+    return all
+      .filter((e) => e.slug !== currentSlug && (brand ? e.brand.toLowerCase() === brand.toLowerCase() : true))
+      .slice(0, limit);
+  }
+);

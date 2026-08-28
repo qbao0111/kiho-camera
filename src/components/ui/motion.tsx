@@ -161,21 +161,10 @@ export function ImageReveal({
 }
 
 export function PageTransition({ children }: { children: React.ReactNode }) {
-  const [mounted, setMounted] = useState(false);
-
-  useEffect(() => {
-    setMounted(true);
-  }, []);
-
   return (
-    <div
-      style={{
-        opacity: mounted ? 1 : 0,
-        transform: mounted ? "translate3d(0, 0, 0)" : "translate3d(0, 8px, 0)",
-        transition: "opacity 0.35s cubic-bezier(0.21, 0.47, 0.32, 0.98), transform 0.35s cubic-bezier(0.21, 0.47, 0.32, 0.98)",
-      }}
-    >
+    <div className="page-transition">
       {children}
     </div>
   );
 }
+

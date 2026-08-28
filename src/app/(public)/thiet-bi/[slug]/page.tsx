@@ -70,16 +70,17 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 }
 
 export default async function ProductDetailPage({ params }: PageProps) {
-  const equipment = await getEquipmentBySlug(params.slug);
+  const [equipment, settings] = await Promise.all([
+    getEquipmentBySlug(params.slug),
+    getSiteSettings(),
+  ]);
 
   if (!equipment) {
     notFound();
   }
 
-  const [settings, relatedEquipment] = await Promise.all([
-    getSiteSettings(),
-    getRelatedEquipment(equipment.slug, equipment.brand, 4),
-  ]);
+  const relatedEquipment = await getRelatedEquipment(equipment.slug, equipment.brand, 4);
+
 
   const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://kihocamera.com";
   const messengerChatUrl = buildMessengerUrl(settings.messenger_url, equipment.name);

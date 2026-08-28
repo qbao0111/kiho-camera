@@ -1,37 +1,48 @@
-import { createClient } from "@/lib/supabase/server";
+import { cache } from "react";
+import { unstable_cache } from "next/cache";
+import { createPublicClient } from "@/lib/supabase/public";
 import { MOCK_FEEDBACK } from "@/lib/mock-data";
 import { Feedback } from "@/types/database";
 
-export async function getFeedbackList(onlyActive: boolean = true): Promise<Feedback[]> {
+async function fetchRawFeedbackList(): Promise<Feedback[]> {
   try {
-    const supabase = await createClient();
+    const supabase = createPublicClient();
     if (!supabase) {
-      return onlyActive ? MOCK_FEEDBACK.filter((f) => f.is_active) : MOCK_FEEDBACK;
+      return MOCK_FEEDBACK;
     }
 
-    let query = supabase
+    const { data, error } = await supabase
       .from("feedback")
       .select("*, equipment:equipment(*)")
       .order("sort_order", { ascending: true })
       .order("feedback_date", { ascending: false });
 
-    if (onlyActive) {
-      query = query.eq("is_active", true);
-    }
-
-    const { data, error } = await query;
     if (error || !data || data.length === 0) {
-      return onlyActive ? MOCK_FEEDBACK.filter((f) => f.is_active) : MOCK_FEEDBACK;
+      return MOCK_FEEDBACK;
     }
 
     return data as Feedback[];
   } catch (err) {
     console.error("Error fetching feedback:", err);
-    return onlyActive ? MOCK_FEEDBACK.filter((f) => f.is_active) : MOCK_FEEDBACK;
+    return MOCK_FEEDBACK;
   }
 }
 
-export async function getFeaturedFeedback(): Promise<Feedback[]> {
+const getCachedFeedbackList = unstable_cache(
+  fetchRawFeedbackList,
+  ["feedback-list-all"],
+  {
+    tags: ["feedback"],
+    revalidate: 300,
+  }
+);
+
+export const getFeedbackList = cache(async (onlyActive: boolean = true): Promise<Feedback[]> => {
+  const all = await getCachedFeedbackList();
+  return onlyActive ? all.filter((f) => f.is_active) : all;
+});
+
+export const getFeaturedFeedback = cache(async (): Promise<Feedback[]> => {
   const all = await getFeedbackList(true);
   return all.filter((f) => f.is_featured);
-}
+});

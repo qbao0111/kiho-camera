@@ -5,7 +5,7 @@ import { LocalBusinessJsonLd } from "@/components/public/json-ld";
 import { getSiteSettings } from "@/lib/services/settings";
 import { PageTransition } from "@/components/ui/motion";
 
-export const dynamic = "force-dynamic";
+export const revalidate = 120;
 
 export default async function PublicLayout({
   children,

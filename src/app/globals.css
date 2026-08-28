@@ -88,6 +88,20 @@ body {
   background: #b5ada2;
 }
 
+/* Page transition micro-fade */
+@keyframes pageFadeIn {
+  from {
+    opacity: 0.9;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.page-transition {
+  animation: pageFadeIn 0.15s ease-out forwards;
+}
+
 /* Reduced motion respect */
 @media (prefers-reduced-motion: reduce) {
   *,
@@ -98,4 +112,8 @@ body {
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
   }
+  .page-transition {
+    animation: none !important;
+  }
 }
+

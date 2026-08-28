@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
+import { revalidateTag, revalidatePath } from "next/cache";
 import { createClient } from "@/lib/supabase/server";
 import { getLocalEquipment, saveLocalEquipment } from "@/lib/local-storage";
 import { Equipment } from "@/types/database";
@@ -56,6 +57,19 @@ export async function POST(req: NextRequest) {
           await supabase.from("equipment_sample_images").insert(samplePayloads);
         }
 
+        // Invalidate equipment caches
+        try {
+          revalidateTag("equipment");
+          if (payload.slug) {
+            revalidateTag(`equipment:${payload.slug}`);
+            revalidatePath(`/thiet-bi/${payload.slug}`);
+          }
+          revalidatePath("/thiet-bi");
+          revalidatePath("/");
+        } catch (cacheErr) {
+          console.warn("Equipment revalidation warning:", cacheErr);
+        }
+
         return NextResponse.json({ success: true, id: equipmentId });
       }
     } catch (supabaseErr) {
@@ -108,6 +122,19 @@ export async function POST(req: NextRequest) {
     }
 
     await saveLocalEquipment(list);
+
+    // Invalidate equipment caches
+    try {
+      revalidateTag("equipment");
+      if (payload.slug) {
+        revalidateTag(`equipment:${payload.slug}`);
+        revalidatePath(`/thiet-bi/${payload.slug}`);
+      }
+      revalidatePath("/thiet-bi");
+      revalidatePath("/");
+    } catch (cacheErr) {
+      console.warn("Equipment revalidation warning:", cacheErr);
+    }
 
     return NextResponse.json({ success: true, id: equipmentId });
   } catch (error) {

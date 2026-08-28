@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
+import { revalidateTag, revalidatePath } from "next/cache";
 import { getSiteSettings, updateSiteSettings } from "@/lib/services/settings";
 import { getAuthenticatedAdmin } from "@/lib/auth/admin";
 
@@ -27,6 +28,15 @@ export async function POST(req: NextRequest) {
     if (!result.success) {
       return NextResponse.json({ success: false, error: result.error }, { status: 500 });
     }
+
+    // Invalidate site-settings cache and refresh public layout
+    try {
+      revalidateTag("site-settings");
+      revalidatePath("/", "layout");
+    } catch (cacheErr) {
+      console.warn("Revalidation warning:", cacheErr);
+    }
+
     return NextResponse.json({ success: true, message: "Đã lưu cài đặt website thành công!" });
   } catch (err: any) {
     return NextResponse.json({ success: false, error: err?.message || "Lỗi lưu cài đặt" }, { status: 500 });
