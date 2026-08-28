@@ -7,9 +7,13 @@ import { FeedbackCard } from "@/components/public/feedback-card";
 import { FadeIn, StaggerContainer, StaggerItem } from "@/components/ui/motion";
 
 export const metadata: Metadata = {
-  title: "Feedback & Ảnh chụp thực tế của khách",
+  title: "Feedback & Ảnh chụp thực tế của khách | Kiho Camera",
   description:
-    "Cảm nhận và hình ảnh check-in thực tế của khách du lịch, thợ ảnh khi thuê máy ảnh Canon, Sony, Fujifilm tại Kiho Camera Đồng Hới.",
+    "Cảm nhận và hình ảnh check-in thực tế của khách du lịch khi thuê máy ảnh Canon, Sony, Fujifilm tại Kiho Camera Đồng Hới.",
+  robots: {
+    index: false,
+    follow: true,
+  },
 };
 
 export default async function FeedbackPage() {
@@ -38,32 +42,24 @@ export default async function FeedbackPage() {
 
         {/* Feedback List Grid */}
         <StaggerContainer className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 sm:gap-12">
-          {feedbacks.map((fb) => (
-            <StaggerItem key={fb.id}>
-              <FeedbackCard feedback={fb} />
+          {feedbacks.map((item) => (
+            <StaggerItem key={item.id}>
+              <FeedbackCard feedback={item} />
             </StaggerItem>
           ))}
         </StaggerContainer>
 
-        {/* Bottom CTA */}
-        <FadeIn className="py-16 sm:py-20 hairline-t text-center space-y-6 max-w-2xl mx-auto">
-          <h2 className="text-2xl sm:text-4xl font-bold text-ink-900 tracking-tight">
-            Ghi lại chuyến đi của bạn cùng Kiho Camera.
-          </h2>
-          <p className="text-sm text-ink-600 leading-relaxed">
-            Nhắn cho tụi mình mẫu máy bạn muốn thuê để nhận tư vấn và giữ lịch sớm nhất.
-          </p>
-          <div className="pt-2">
-            <a
-              href={settings.messenger_url}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 bg-ink-900 hover:bg-accent text-[#faf8f5] font-bold text-sm px-8 py-3.5 rounded-sm shadow-sm transition-colors"
-            >
-              <span>Nhắn qua Facebook Messenger</span>
-              <ArrowUpRight className="w-4 h-4" />
-            </a>
-          </div>
+        {/* Bottom Messenger Consultation Link */}
+        <FadeIn className="pt-10 text-center">
+          <a
+            href={settings.messenger_url}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 text-xs font-mono font-bold uppercase tracking-wider text-ink-900 hover:text-accent bg-white border border-[#e8e2d7] px-6 py-3.5 rounded-xl transition-all shadow-xs"
+          >
+            <span>Nhắn Kiho tư vấn dòng máy phù hợp</span>
+            <ArrowUpRight className="w-4 h-4" />
+          </a>
         </FadeIn>
       </div>
     </div>
