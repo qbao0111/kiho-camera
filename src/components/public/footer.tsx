@@ -1,7 +1,6 @@
 import React from "react";
 import Link from "next/link";
 import {
-  ArrowUpRight,
   MapPin,
   Phone,
   Instagram,
@@ -19,42 +18,19 @@ export function Footer({ settings }: FooterProps) {
   return (
     <footer className="bg-canvas-200/90 text-ink-900 border-t border-ink-200">
       {/* Main Footer Container */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-12 sm:pt-16 pb-10">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-14">
         
-        {/* Editorial Intro Banner */}
-        <div className="pb-8 mb-10 border-b border-ink-200 flex flex-col sm:flex-row sm:items-end justify-between gap-6">
-          <div className="space-y-1 max-w-xl">
-            <span className="text-[11px] font-mono font-medium tracking-widest text-accent uppercase block">
-              KIHO CAMERA · ĐỒNG HỚI, QUẢNG BÌNH
-            </span>
-            <h3 className="font-display text-2xl sm:text-3xl font-bold text-ink-900 tracking-tight">
-              Chuyến đi tới mang máy nào đây?
-            </h3>
-            <p className="font-sans text-xs sm:text-sm text-ink-600 font-normal leading-relaxed">
-              Xem 12 dòng máy có sẵn hoặc nhắn Kiho để được tư vấn chiếc máy ưng ý nhất cho lịch trình của bạn.
-            </p>
-          </div>
-
-          <Link
-            href="/thiet-bi"
-            className="inline-flex items-center gap-1.5 text-xs font-sans font-semibold text-ink-900 hover:text-accent bg-white hover:bg-canvas-100 border border-ink-300 px-4 py-2.5 rounded-lg transition-all shadow-xs shrink-0 self-start sm:self-auto focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-accent"
-          >
-            <span>Xem tất cả 12 dòng máy</span>
-            <ArrowUpRight className="w-3.5 h-3.5 text-ink-400" />
-          </Link>
-        </div>
-
         {/* Main 3-Column Grid */}
         <div className="grid grid-cols-1 md:grid-cols-12 gap-8 sm:gap-12">
           
-          {/* 1. Brand & Intro (5 cols) */}
+          {/* 1. Brand & Description (5 cols) */}
           <div className="md:col-span-5 space-y-3">
             <Link href="/" className="inline-block group focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-accent rounded-sm">
               <span className="font-display text-2xl font-bold tracking-tight text-ink-900 group-hover:text-accent transition-colors block">
                 KIHO CAMERA
               </span>
-              <span className="text-[10px] font-mono font-medium tracking-widest text-ink-400 uppercase mt-0.5 block">
-                Cho thuê máy ảnh du lịch · Quảng Bình
+              <span className="text-[10px] font-mono font-medium tracking-wider text-ink-500 uppercase mt-0.5 block">
+                Cho thuê máy ảnh du lịch · Đồng Hới, Quảng Bình
               </span>
             </Link>
             <p className="font-sans text-xs sm:text-sm text-ink-600 leading-relaxed max-w-sm font-normal">
@@ -64,7 +40,7 @@ export function Footer({ settings }: FooterProps) {
 
           {/* 2. Quick Links (3 cols) */}
           <div className="md:col-span-3 space-y-2.5">
-            <span className="text-[11px] font-mono font-medium tracking-widest text-ink-500 uppercase block">
+            <span className="text-[11px] font-mono font-medium tracking-wider text-ink-500 uppercase block">
               Máy ảnh theo hãng
             </span>
             <ul className="space-y-1.5 text-xs sm:text-sm font-sans">
@@ -109,7 +85,7 @@ export function Footer({ settings }: FooterProps) {
 
           {/* 3. Contact Column (4 cols) */}
           <div className="md:col-span-4 space-y-3 font-sans">
-            <span className="text-[11px] font-mono font-medium tracking-widest text-ink-500 uppercase block">
+            <span className="text-[11px] font-mono font-medium tracking-wider text-ink-500 uppercase block">
               Liên hệ trực tiếp
             </span>
 
@@ -161,24 +137,13 @@ export function Footer({ settings }: FooterProps) {
                 href={settings.messenger_url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group inline-flex items-center gap-1.5 text-xs font-semibold text-ink-900 hover:text-accent bg-white hover:bg-canvas-100 border border-ink-300 px-3.5 py-2 rounded-lg transition-all shadow-xs"
+                className="group inline-flex items-center gap-1.5 text-xs font-semibold text-ink-900 hover:text-accent bg-white hover:bg-canvas-100 border border-ink-300 px-3.5 py-2 rounded-md transition-colors shadow-xs"
               >
                 <MessageCircle className="w-3.5 h-3.5 text-accent" />
                 <span>Nhắn tin tư vấn qua Messenger</span>
-                <ArrowUpRight className="w-3.5 h-3.5 text-ink-400 group-hover:text-accent group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
               </a>
             </div>
           </div>
-        </div>
-
-        {/* SEO Tags */}
-        <div className="mt-10 pt-5 border-t border-ink-200 flex flex-wrap gap-x-4 gap-y-1.5 text-[11px] font-mono text-ink-400">
-          <span>#thuê-máy-ảnh-quảng-bình</span>
-          <span>#thuê-máy-ảnh-đồng-hới</span>
-          <span>#thuê-canon-r50-quảng-bình</span>
-          <span>#thuê-fujifilm-x100vi-quảng-bình</span>
-          <span>#thuê-canon-g7x-mark-iii</span>
-          <span>#thuê-sony-zv1-quảng-bình</span>
         </div>
       </div>
 

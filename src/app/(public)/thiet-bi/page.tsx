@@ -59,7 +59,7 @@ export default async function EquipmentListPage({ searchParams }: EquipmentPageP
         
         {/* Editorial Heading */}
         <FadeIn className="space-y-2 pb-6 border-b border-ink-200">
-          <div className="flex items-center gap-1.5 text-xs font-mono font-medium tracking-widest text-ink-500 uppercase">
+          <div className="flex items-center gap-1.5 text-xs font-mono font-medium tracking-wider text-ink-500 uppercase">
             <Camera className="w-3.5 h-3.5 text-accent" />
             <span>MÁY ẢNH KIHO</span>
           </div>
@@ -72,8 +72,8 @@ export default async function EquipmentListPage({ searchParams }: EquipmentPageP
                 12 dòng máy cho du lịch, check-in, couple, vlog và những hôm chỉ muốn mang về thật nhiều ảnh đẹp.
               </p>
             </div>
-            <span className="text-xs sm:text-sm font-mono text-ink-500 shrink-0">
-              {filteredList.length} máy sẵn sàng tại 48 Ngô Quyền
+            <span className="text-xs sm:text-sm font-sans text-ink-500 shrink-0">
+              <strong className="font-mono font-bold text-ink-900">{filteredList.length}</strong> máy sẵn sàng tại 48 Ngô Quyền
             </span>
           </div>
         </FadeIn>

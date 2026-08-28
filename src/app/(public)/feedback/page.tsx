@@ -27,7 +27,7 @@ export default async function FeedbackPage() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-10 sm:space-y-12">
         {/* Page Header */}
         <FadeIn className="space-y-2 pb-6 border-b border-ink-200">
-          <div className="flex items-center gap-1.5 text-xs font-mono font-medium tracking-widest text-ink-500 uppercase">
+          <div className="flex items-center gap-1.5 text-xs font-mono font-medium tracking-wider text-ink-500 uppercase">
             <Camera className="w-3.5 h-3.5 text-accent" />
             <span>KIHO CAMERA STORIES</span>
           </div>
@@ -35,8 +35,8 @@ export default async function FeedbackPage() {
             <h1 className="font-display text-3xl sm:text-5xl font-bold text-ink-900 tracking-tight">
               Feedback & Ảnh khách chụp
             </h1>
-            <span className="text-xs sm:text-sm font-mono text-ink-500">
-              500+ chuyến đi cùng Kiho Camera
+            <span className="text-xs sm:text-sm font-sans text-ink-500">
+              Khoảnh khắc thực tế từ khách hàng
             </span>
           </div>
         </FadeIn>

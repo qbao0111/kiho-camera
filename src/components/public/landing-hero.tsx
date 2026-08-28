@@ -15,56 +15,53 @@ const HERO_CAMERAS = [
   {
     id: "r50",
     name: "Canon EOS R50",
-    badge: "CANON EOS R50 · MIRRORLESS",
+    spec: "RF-S 18-45MM · 24.2MP",
     image: "/images/landing/cutouts/canon-r50.png",
-    subName: "CANON R50",
     alt: "Canon EOS R50 Mirrorless",
   },
   {
     id: "x100v",
     name: "Fujifilm X100V",
-    badge: "FUJIFILM X100V · FILM RECIPE",
+    spec: "23MM F/2 · FILM RECIPE",
     image: "/images/landing/cutouts/fujifilm-x100v.png",
-    subName: "FUJIFILM X100V",
     alt: "Fujifilm X100V Retro Camera",
   },
   {
     id: "g7x3",
     name: "Canon G7X Mark III",
-    badge: "CANON G7X MARK III · COMPACT VLOG",
+    spec: "24-100MM · COMPACT VLOG",
     image: "/images/landing/cutouts/canon-g7x-mark3.png",
-    subName: "G7X MARK III",
     alt: "Canon PowerShot G7X Mark III",
   },
 ];
 
 const POSITIONS = {
   center: {
-    top: "20%",
-    left: "15%",
-    width: "70%",
-    height: "70%",
+    top: "16%",
+    left: "14%",
+    width: "72%",
+    height: "72%",
     zIndex: 30,
     rotate: 0,
     opacity: 1,
   },
   leftBack: {
-    top: "-6%",
-    left: "-4%",
-    width: "46%",
-    height: "46%",
+    top: "-2%",
+    left: "-2%",
+    width: "38%",
+    height: "38%",
     zIndex: 20,
-    rotate: -5,
-    opacity: 0.92,
+    rotate: -4,
+    opacity: 0.65,
   },
   rightBack: {
-    top: "-8%",
-    left: "58%",
-    width: "44%",
-    height: "44%",
+    top: "-4%",
+    left: "64%",
+    width: "38%",
+    height: "38%",
     zIndex: 20,
-    rotate: 6,
-    opacity: 0.92,
+    rotate: 5,
+    opacity: 0.65,
   },
 };
 
@@ -132,27 +129,30 @@ export function LandingHero({}: LandingHeroProps = {}) {
   const activeCamera = HERO_CAMERAS[activeIdx];
 
   return (
-    <section className="relative overflow-hidden pt-6 pb-12 sm:pt-10 sm:pb-16 lg:min-h-[80vh] flex items-center bg-[#faf8f5]">
+    <section className="relative overflow-hidden pt-6 pb-12 sm:pt-10 sm:pb-16 lg:min-h-[78vh] flex items-center bg-[#faf8f5]">
       {/* Subtle Background Paper Grain Texture */}
       <div className="absolute inset-0 pointer-events-none opacity-[0.025] bg-[radial-gradient(#000_1px,transparent_1px)] [background-size:16px_16px]" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full relative z-10">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
           
-          {/* LEFT EDITORIAL COLUMN (Hero Copy & CTAs) */}
-          <div className="lg:col-span-6 space-y-6">
+          {/* LEFT EDITORIAL COLUMN */}
+          <div className="lg:col-span-6 space-y-5 sm:space-y-6">
             
             {/* Metadata Eyebrow */}
-            <div className="flex items-center gap-2 text-xs font-mono font-medium tracking-widest text-ink-500 uppercase">
+            <div className="flex items-center gap-2 text-xs font-mono font-medium tracking-wider text-ink-500 uppercase">
               <span className="w-1.5 h-1.5 rounded-full bg-accent" />
               <span>KIHO CAMERA · ĐỒNG HỚI, QUẢNG BÌNH</span>
             </div>
 
             {/* Main Editorial H1 Headline */}
-            <div className="space-y-1">
-              <h1 className="font-display text-4xl sm:text-5xl lg:text-[62px] font-bold text-ink-900 tracking-tight leading-[1.12]">
-                Thuê một chiếc máy. <br />
-                <span className="italic text-accent font-normal">Mang về cả</span> chuyến đi.
+            <div>
+              <h1 className="font-display text-3xl sm:text-4xl md:text-5xl lg:text-[44px] xl:text-[52px] font-bold text-ink-900 tracking-tight leading-[1.14]">
+                <span className="block">Thuê một chiếc máy.</span>
+                <span className="block mt-1">
+                  <span className="italic text-accent font-normal">Mang về cả</span>{" "}
+                  <span className="whitespace-nowrap">chuyến đi.</span>
+                </span>
               </h1>
             </div>
 
@@ -161,21 +161,21 @@ export function LandingHero({}: LandingHeroProps = {}) {
               Dịch vụ cho thuê máy ảnh du lịch tại TP. Đồng Hới — <strong className="text-ink-900 font-semibold">Canon, Fujifilm, Sony</strong> trọn bộ pin sạc thẻ nhớ, hỗ trợ bạn ghi lại từng khoảnh khắc đẹp nhất tại Quảng Bình.
             </p>
 
-            {/* USP Highlight: No Deposit */}
-            <div className="py-3 px-4 rounded-lg bg-canvas-200/80 border border-ink-200 flex items-center gap-3.5 max-w-lg">
-              <ShieldCheck className="w-5 h-5 text-accent shrink-0" />
-              <div className="space-y-0.5">
-                <p className="font-sans text-xs sm:text-sm text-ink-700">
-                  <strong className="text-ink-900 font-semibold">Không cần cọc tiền máy</strong> — Xác thực nhanh chóng qua CCCD hoặc VNeID.
-                </p>
-              </div>
+            {/* Editorial Trust Line (Reassurance note, no large card/box) */}
+            <div className="flex items-start gap-2.5 pt-0.5 text-ink-700">
+              <ShieldCheck className="w-4 h-4 text-accent shrink-0 mt-0.5" />
+              <p className="font-sans text-xs sm:text-sm leading-relaxed">
+                <strong className="font-semibold text-ink-900">Không cần cọc tiền máy</strong>
+                <span className="text-ink-400 mx-1.5">·</span>
+                <span className="text-ink-600">Chỉ xác minh CCCD hoặc VNeID khi liên hệ nhận máy.</span>
+              </p>
             </div>
 
             {/* CTA Buttons */}
-            <div className="pt-2 flex flex-wrap items-center gap-3.5">
+            <div className="pt-2 flex flex-wrap items-center gap-3">
               <button
                 onClick={scrollToPricing}
-                className="bg-ink-900 hover:bg-black text-white px-6 py-3.5 rounded-lg text-sm font-sans font-semibold transition-all duration-200 flex items-center gap-2 group cursor-pointer shadow-xs focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-accent"
+                className="bg-ink-900 hover:bg-black text-white px-5 py-3 rounded-lg text-sm font-sans font-semibold transition-colors duration-200 flex items-center gap-2 group cursor-pointer shadow-xs focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-accent"
               >
                 <span>Xem bảng giá thuê</span>
                 <ArrowDown className="w-4 h-4 group-hover:translate-y-0.5 transition-transform" />
@@ -183,41 +183,41 @@ export function LandingHero({}: LandingHeroProps = {}) {
 
               <Link
                 href="/thiet-bi"
-                className="bg-white hover:bg-canvas-200 text-ink-900 border border-ink-300 px-5 py-3.5 rounded-lg text-sm font-sans font-medium transition-all duration-200 flex items-center gap-2 group cursor-pointer shadow-xs focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-accent"
+                className="bg-white hover:bg-canvas-200 text-ink-900 border border-ink-300 px-5 py-3 rounded-lg text-sm font-sans font-medium transition-colors duration-200 flex items-center gap-2 group cursor-pointer shadow-xs focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-accent"
               >
-                <span>12 dòng máy ảnh</span>
+                <span>Khám phá 12 dòng máy</span>
                 <ArrowRight className="w-4 h-4 text-ink-400 group-hover:text-ink-900 group-hover:translate-x-0.5 transition-all" />
               </Link>
             </div>
 
-            {/* Microcopy Metadata Strip */}
-            <div className="flex flex-wrap items-center gap-y-2 gap-x-4 text-xs text-ink-500 font-mono font-medium pt-1">
+            {/* Clean Editorial Metadata Line */}
+            <div className="flex flex-wrap items-center gap-y-1.5 gap-x-3 text-xs text-ink-500 font-sans pt-1 border-t border-ink-200/70">
               <span className="flex items-center gap-1.5">
                 <Camera className="w-3.5 h-3.5 text-accent" />
-                Từ 80.000₫ / buổi
+                <span>Từ <strong className="font-mono font-bold text-ink-800">80.000₫</strong> / buổi</span>
               </span>
               <span className="text-ink-300">·</span>
               <span className="flex items-center gap-1.5">
-                <MapPin className="w-3.5 h-3.5 text-ink-500" />
-                48 Ngô Quyền, Đồng Hới
+                <MapPin className="w-3.5 h-3.5 text-ink-400" />
+                <span>48 Ngô Quyền, Đồng Hới</span>
               </span>
               <span className="text-ink-300">·</span>
               <span className="flex items-center gap-1.5">
                 <PackageCheck className="w-3.5 h-3.5 text-emerald-700" />
-                Kèm 2 pin + sạc + thẻ 64GB
+                <span>Kèm 2 pin · sạc · thẻ 64GB</span>
               </span>
             </div>
           </div>
 
           {/* RIGHT VISUAL COLUMN (Interactive 3-Camera Layered Showcase) */}
-          <div className="lg:col-span-6 relative flex items-center justify-center">
+          <div className="lg:col-span-6 relative flex flex-col items-center">
             
             {/* Visual Container */}
-            <div className="relative w-full max-w-[520px] aspect-[4/3] sm:aspect-[16/11]">
+            <div className="relative w-full max-w-[500px] aspect-[4/3] sm:aspect-[16/11]">
               
-              {/* Layer 1: Travel Landscape Backdrop Card */}
+              {/* Layer 1: Travel Landscape Backdrop */}
               <div
-                className="absolute inset-0 rounded-xl overflow-hidden border border-ink-200 shadow-md bg-[#f4efe6] transition-transform duration-300 ease-out"
+                className="absolute inset-0 rounded-lg overflow-hidden border border-ink-200 shadow-xs bg-canvas-200 transition-transform duration-300 ease-out"
                 style={{
                   transform: `translate3d(${mousePos.x * -2}px, ${mousePos.y * -2}px, 0)`,
                 }}
@@ -227,12 +227,12 @@ export function LandingHero({}: LandingHeroProps = {}) {
                   alt="Hoàng hôn Quảng Bình - Kiho Camera"
                   fill
                   priority
-                  className="object-cover filter saturate-[1.1] contrast-[1.05]"
-                  sizes="(max-width: 1024px) 100vw, 520px"
+                  className="object-cover filter saturate-[1.08] contrast-[1.03]"
+                  sizes="(max-width: 1024px) 100vw, 500px"
                 />
                 
-                {/* Soft Warm Gradient Overlay */}
-                <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent pointer-events-none" />
+                {/* Soft Gradient Overlay */}
+                <div className="absolute inset-0 bg-gradient-to-t from-black/25 via-transparent to-transparent pointer-events-none" />
               </div>
 
               {/* 3 Interactive Layered Cameras */}
@@ -256,11 +256,11 @@ export function LandingHero({}: LandingHeroProps = {}) {
                       height: targetPos.height,
                       rotate: targetPos.rotate,
                       opacity: targetPos.opacity,
-                      x: isCenter ? mousePos.x * 5 : mousePos.x * 2.5,
-                      y: isCenter ? mousePos.y * 5 : mousePos.y * 2.5,
+                      x: isCenter ? mousePos.x * 4 : mousePos.x * 2,
+                      y: isCenter ? mousePos.y * 4 : mousePos.y * 2,
                     }}
                     transition={{
-                      duration: 0.55,
+                      duration: 0.5,
                       ease: [0.22, 1, 0.36, 1],
                     }}
                     onClick={() => handleSelectCamera(idx)}
@@ -274,44 +274,32 @@ export function LandingHero({}: LandingHeroProps = {}) {
                         src={cam.image}
                         alt={cam.alt}
                         fill
-                        sizes="380px"
+                        sizes="360px"
                         priority={idx === 0}
                         className={`object-contain select-none filter ${
                           isCenter
-                            ? "drop-shadow-[0_24px_36px_rgba(20,15,10,0.4)]"
-                            : "drop-shadow-[0_12px_20px_rgba(20,15,10,0.25)]"
+                            ? "drop-shadow-[0_20px_30px_rgba(20,15,10,0.35)]"
+                            : "drop-shadow-[0_8px_16px_rgba(20,15,10,0.18)]"
                         }`}
                       />
-
-                      {/* Side Camera Subtle Name Tag */}
-                      {!isCenter && (
-                        <div className="absolute -bottom-1 left-1/2 -translate-x-1/2 whitespace-nowrap bg-ink-900/90 text-white text-[9px] font-mono font-medium px-2 py-0.5 rounded-sm shadow-xs opacity-90 group-hover:opacity-100 transition-all">
-                          {cam.subName}
-                        </div>
-                      )}
                     </div>
                   </motion.div>
                 );
               })}
-
-              {/* Dynamic Center Spotlight Badge */}
-              <div className="absolute -bottom-3 left-1/2 -translate-x-1/2 z-40">
-                <AnimatePresence mode="wait">
-                  <motion.div
-                    key={activeCamera.id}
-                    initial={{ opacity: 0, y: 4, scale: 0.96 }}
-                    animate={{ opacity: 1, y: 0, scale: 1 }}
-                    exit={{ opacity: 0, y: -4, scale: 0.96 }}
-                    transition={{ duration: 0.2, ease: "easeOut" }}
-                    className="whitespace-nowrap bg-ink-900 text-white text-[11px] font-mono font-medium px-3.5 py-1 rounded-md shadow-md border border-white/10 flex items-center gap-1.5"
-                  >
-                    <span className="w-1.5 h-1.5 rounded-full bg-accent" />
-                    <span>{activeCamera.badge}</span>
-                  </motion.div>
-                </AnimatePresence>
-              </div>
-
             </div>
+
+            {/* Photographic Editorial Caption (Magazine / Contact sheet caption, no floating bubble) */}
+            <div className="w-full max-w-[500px] mt-2.5 pt-2 border-t border-ink-200/80 flex items-center justify-between text-xs">
+              <div className="flex items-center gap-2">
+                <span className="font-mono text-accent font-medium">0{activeIdx + 1}</span>
+                <span className="text-ink-300 font-mono">/</span>
+                <span className="font-sans font-semibold text-ink-900 tracking-tight">{activeCamera.name}</span>
+              </div>
+              <span className="font-mono text-[10px] text-ink-500 uppercase tracking-wider">
+                {activeCamera.spec}
+              </span>
+            </div>
+
           </div>
 
         </div>
