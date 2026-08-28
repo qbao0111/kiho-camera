@@ -465,14 +465,14 @@ export function EquipmentForm({ initialData, categories }: EquipmentFormProps) {
 
       {/* 3. Media Manager with 3 Tabs */}
       <div className="bg-white rounded-2xl p-6 border border-slate-200/80 shadow-xs space-y-6">
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-3 border-b border-slate-100">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-3 border-b border-slate-100">
           <h3 className="text-base font-bold text-slate-900 font-mono uppercase tracking-wider flex items-center gap-2">
             <ImageIcon className="w-4 h-4 text-accent" />
-            <span>3. Quản lý Hình ảnh (3 Tab Media)</span>
+            <span>3. Quản lý Ảnh & Bảng giá Poster</span>
           </h3>
 
-          {/* Media Tabs */}
-          <div className="flex items-center gap-1 bg-slate-100 p-1 rounded-xl font-mono text-xs font-bold">
+          {/* Media Sub-tabs */}
+          <div className="flex items-center gap-1 bg-slate-100 p-1 rounded-xl font-mono text-xs flex-wrap font-bold">
             <button
               type="button"
               onClick={() => setActiveMediaTab("product")}
@@ -868,12 +868,13 @@ export function EquipmentForm({ initialData, categories }: EquipmentFormProps) {
         <button
           type="submit"
           disabled={loading}
-          className="inline-flex items-center gap-2 bg-ink-900 hover:bg-accent text-white px-8 py-3.5 rounded-2xl font-mono text-sm font-bold uppercase tracking-wider shadow-md transition-colors disabled:opacity-50"
+          className="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-ink-900 hover:bg-accent text-white px-8 py-3.5 rounded-2xl font-mono text-sm font-bold uppercase tracking-wider shadow-md transition-colors disabled:opacity-50"
         >
           <Save className="w-4 h-4" />
           <span>{loading ? "Đang lưu..." : "Lưu máy ảnh"}</span>
         </button>
       </div>
+
 
     </form>
   );

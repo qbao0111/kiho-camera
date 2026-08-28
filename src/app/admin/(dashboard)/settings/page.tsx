@@ -76,7 +76,7 @@ export default function AdminSettingsPage() {
       {/* Top Header with Prominent Save Button */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-2 border-b border-slate-200">
         <div>
-          <h1 className="text-2xl sm:text-3xl font-black text-slate-900 tracking-tight">
+          <h1 className="text-xl sm:text-2xl lg:text-3xl font-black text-slate-900 tracking-tight">
             Cài đặt nội dung Website & Liên hệ
           </h1>
           <p className="text-xs sm:text-sm text-slate-500 mt-0.5">
@@ -88,7 +88,7 @@ export default function AdminSettingsPage() {
           type="button"
           onClick={() => handleSave()}
           disabled={loading}
-          className="inline-flex items-center justify-center gap-2 bg-orange-500 hover:bg-orange-600 active:scale-[0.98] disabled:opacity-50 text-white font-bold text-sm px-6 py-3 rounded-xl shadow-sm transition-all shrink-0 cursor-pointer"
+          className="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-orange-500 hover:bg-orange-600 active:scale-[0.98] disabled:opacity-50 text-white font-bold text-sm px-6 py-3 rounded-xl shadow-sm transition-all shrink-0 cursor-pointer"
         >
           {loading ? <Loader2 className="w-4 h-4 animate-spin" /> : <Save className="w-4 h-4" />}
           <span>{loading ? "Đang lưu..." : "Lưu tất cả cài đặt"}</span>
@@ -114,7 +114,7 @@ export default function AdminSettingsPage() {
 
       <form onSubmit={handleSave} className="space-y-6">
         {/* 1. Liên hệ & Mạng xã hội */}
-        <div className="bg-white rounded-2xl p-6 border border-slate-200 shadow-sm space-y-4">
+        <div className="bg-white rounded-2xl p-4 sm:p-6 border border-slate-200 shadow-sm space-y-4">
           <h2 className="text-base font-bold text-slate-900 flex items-center gap-2">
             <MessageCircle className="w-4 h-4 text-orange-500" />
             <span>Kênh liên hệ & Chốt đơn</span>
@@ -176,8 +176,8 @@ export default function AdminSettingsPage() {
               />
             </div>
 
-            <div className="sm:col-span-2">
-              <label className="block text-xs font-semibold text-slate-700 mb-1">
+            <div className="sm:col-span-2 space-y-1">
+              <label className="block text-xs font-semibold text-slate-700">
                 Địa chỉ cửa hàng (Đồng Hới, Quảng Bình) *
               </label>
               <input
@@ -188,11 +188,14 @@ export default function AdminSettingsPage() {
                 placeholder="48 Ngô Quyền, TP. Đồng Hới, Tỉnh Quảng Bình"
                 className="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:border-orange-500 transition-colors"
               />
+              <span className="text-[11px] text-slate-500 block">
+                Bản đồ Google Maps nhúng trên trang Liên hệ sẽ tự động định vị theo địa chỉ này.
+              </span>
             </div>
 
-            <div className="sm:col-span-2">
-              <label className="block text-xs font-semibold text-slate-700 mb-1">
-                Link Google Maps
+            <div className="sm:col-span-2 space-y-1">
+              <label className="block text-xs font-semibold text-slate-700">
+                Link Google Maps (Nút mở ngoài)
               </label>
               <input
                 type="text"
@@ -201,12 +204,15 @@ export default function AdminSettingsPage() {
                 placeholder="https://maps.google.com/?q=..."
                 className="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:border-orange-500 transition-colors"
               />
+              <span className="text-[11px] text-slate-500 block">
+                Link trực tiếp mở ứng dụng Google Maps khi khách hàng bấm nút &quot;Mở trong Google Maps&quot;.
+              </span>
             </div>
           </div>
         </div>
 
         {/* 2. Hero Section Trang Chủ */}
-        <div className="bg-white rounded-2xl p-6 border border-slate-200 shadow-sm space-y-4">
+        <div className="bg-white rounded-2xl p-4 sm:p-6 border border-slate-200 shadow-sm space-y-4">
           <h2 className="text-base font-bold text-slate-900 flex items-center gap-2">
             <ImageIcon className="w-4 h-4 text-orange-500" />
             <span>Hero Section & Trang chủ</span>
@@ -278,12 +284,12 @@ export default function AdminSettingsPage() {
         </div>
 
         {/* Bottom Save button */}
-        <div className="flex items-center justify-between pt-2">
+        <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3 pt-2">
           <span className="text-xs text-slate-500">Mọi thay đổi sẽ cập nhật trực tiếp lên website chính.</span>
           <button
             type="submit"
             disabled={loading}
-            className="inline-flex items-center gap-2 bg-orange-500 hover:bg-orange-600 active:scale-[0.98] disabled:opacity-50 text-white font-bold text-sm px-7 py-3 rounded-xl shadow-sm transition-all cursor-pointer"
+            className="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-orange-500 hover:bg-orange-600 active:scale-[0.98] disabled:opacity-50 text-white font-bold text-sm px-7 py-3 rounded-xl shadow-sm transition-all cursor-pointer"
           >
             {loading ? <Loader2 className="w-4 h-4 animate-spin" /> : <Save className="w-4 h-4" />}
             <span>{loading ? "Đang lưu cấu hình..." : "Lưu tất cả cài đặt"}</span>

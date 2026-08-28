@@ -45,12 +45,13 @@ export default async function AdminDashboardOverview() {
         <div className="flex items-center gap-2.5">
           <Link
             href="/admin/equipment/new"
-            className="inline-flex items-center gap-2 bg-brand-500 hover:bg-brand-600 text-white font-semibold text-xs sm:text-sm px-4 py-2.5 rounded-xl shadow-sm transition-colors"
+            className="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-brand-500 hover:bg-brand-600 text-white font-semibold text-xs sm:text-sm px-4 py-2.5 rounded-xl shadow-sm transition-colors"
           >
             <Plus className="w-4 h-4" />
             <span>Thêm thiết bị mới</span>
           </Link>
         </div>
+
       </div>
 
       {/* Integration Status Banner */}

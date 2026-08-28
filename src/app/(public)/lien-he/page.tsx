@@ -16,6 +16,17 @@ export const metadata: Metadata = {
 export default async function ContactPage() {
   const settings = await getSiteSettings();
 
+  // 1. External Google Maps URL (for the button)
+  const externalMapUrl =
+    settings.maps_url?.trim() ||
+    (settings.address?.trim()
+      ? `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(settings.address.trim())}`
+      : "https://www.google.com/maps");
+
+  // 2. Embedded Google Maps URL (for the iframe)
+  const mapAddress = settings.address?.trim() || "Đồng Hới, Quảng Bình";
+  const mapEmbedUrl = `https://www.google.com/maps?q=${encodeURIComponent(mapAddress)}&output=embed`;
+
   return (
     <div className="bg-[#faf8f5] min-h-screen py-10 sm:py-16">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12 sm:space-y-14">
@@ -103,7 +114,7 @@ export default async function ContactPage() {
                 BẢN ĐỒ GOOGLE MAPS
               </span>
               <a
-                href={settings.maps_url}
+                href={externalMapUrl}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-xs font-sans font-medium text-ink-900 hover:text-accent flex items-center gap-1"
@@ -116,7 +127,7 @@ export default async function ContactPage() {
             <div className="relative aspect-[16/11] w-full rounded-xl overflow-hidden bg-canvas-200 border border-ink-200 shadow-xs">
               <iframe
                 title="Google Maps Kiho Camera"
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d121731.42512966567!2d106.54929853926017!3d17.47248107936173!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3147570498b58fa7%3A0x6b44747db5aa025a!2zxJDhu5NuZyBI4bubaSwgUXXhuqNuZyBCw6xuaCwgVmnhu4d0IE5hbQ!5e0!3m2!1svi!2s!4v1700000000000!5m2!1svi!2s"
+                src={mapEmbedUrl}
                 width="100%"
                 height="100%"
                 style={{ border: 0 }}

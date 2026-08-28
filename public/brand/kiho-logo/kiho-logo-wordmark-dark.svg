@@ -1,22 +1,35 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 460 100" width="920" height="200">
-  <!-- Viewfinder K Icon (Scaled to 64x64 at x=14, y=18) -->
+  <!-- KH Monogram Icon (Scaled to 64x64 at x=14, y=18) -->
   <g transform="translate(14, 18) scale(0.533)">
     
-    <!-- Viewfinder Brackets: Precision 3.5px stroke with 2px corner radius -->
-    <path d="M 16 32 L 16 18 C 16 16.9 16.9 16 18 16 L 32 16" fill="none" stroke="#FFFFFF" stroke-width="3.5" stroke-linecap="round"/>
-    <path d="M 104 32 L 104 18 C 104 16.9 103.1 16 102 16 L 88 16" fill="none" stroke="#FFFFFF" stroke-width="3.5" stroke-linecap="round"/>
-    <path d="M 16 88 L 16 102 C 16 103.1 16.9 104 18 104 L 32 104" fill="none" stroke="#FFFFFF" stroke-width="3.5" stroke-linecap="round"/>
-    <path d="M 104 88 L 104 102 C 104 103.1 103.1 104 102 104 L 88 104" fill="none" stroke="#FFFFFF" stroke-width="3.5" stroke-linecap="round"/>
+  <defs>
+    <mask id="wordmark-dark">
+      <rect width="120" height="120" fill="white"/>
+      <!-- Circular negative space lens aperture: radius 12.5 at center junction (56, 60) -->
+      <circle cx="56" cy="60" r="12.5" fill="black"/>
+    </mask>
+  </defs>
+
+  <g mask="url(#wordmark-dark)">
+    <!-- Left Pillar (Stem of K and Left of H): width 12, height 76, rx 3.5 -->
+    <rect x="22" y="22" width="12" height="76" rx="3.5" fill="#FFFFFF"/>
     
-    <!-- K Stem: Solid architectural column (width 11, height 70, rx 3.5) -->
-    <rect x="34" y="25" width="11" height="70" rx="3.5" fill="#FFFFFF"/>
+    <!-- Right Pillar (Right stem of H): width 12, height 76, rx 3.5 -->
+    <rect x="86" y="22" width="12" height="76" rx="3.5" fill="#FFFFFF"/>
     
-    <!-- K Dynamic Chevron: 45 degree optical symmetry -->
-    <path d="M 45 53.5 L 78.5 24.5 C 80.5 22.8 83.5 23.5 84.8 25.8 L 89 32.5 C 90.2 34.8 89.5 37.5 87.2 39.2 L 62 60 L 87.2 80.8 C 89.5 82.5 90.2 85.2 89 87.5 L 84.8 94.2 C 83.5 96.5 80.5 97.2 78.5 95.5 L 45 66.5 Z" fill="#FFFFFF"/>
+    <!-- Horizontal Crossbar of H -->
+    <rect x="26" y="54.5" width="68" height="11" fill="#FFFFFF"/>
     
-    <!-- Optical Lens Element / Sunset Focus Point (True transparent aperture cutout) -->
-    <path d="M 74 52.5 A 7.5 7.5 0 1 0 74 67.5 A 7.5 7.5 0 1 0 74 52.5 Z M 74 56.8 A 3.2 3.2 0 1 1 74 63.2 A 3.2 3.2 0 1 1 74 56.8 Z" fill="#D95D39" fill-rule="evenodd"/>
+    <!-- K Upper Diagonal Arm -->
+    <path d="M 30 54 L 75 22.5 C 77 21 80 22 81 24.5 L 83 28 C 84 30.5 83 33 81 34.5 L 48 60 Z" fill="#FFFFFF"/>
     
+    <!-- K Lower Diagonal Leg -->
+    <path d="M 48 60 L 81 85.5 C 83 87 84 89.5 83 92 L 81 95.5 C 80 98 77 99 75 97.5 L 30 66 Z" fill="#FFFFFF"/>
+  </g>
+
+  <!-- Subtle concentric optical lens ring in negative space -->
+  <circle cx="56" cy="60" r="7" fill="none" stroke="#FFFFFF" stroke-width="2.2"/>
+
   </g>
 
   <!-- Hairline Vertical Rule -->

@@ -435,12 +435,13 @@ export default function GoogleSheetsIntegrationPage() {
         <button
           onClick={() => handleSaveConfig()}
           disabled={saving}
-          className="inline-flex items-center justify-center gap-2 bg-brand-500 hover:bg-brand-600 disabled:opacity-50 text-white font-bold text-xs sm:text-sm px-6 py-2.5 rounded-xl shadow-sm transition-all cursor-pointer shrink-0"
+          className="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-brand-500 hover:bg-brand-600 disabled:opacity-50 text-white font-bold text-xs sm:text-sm px-6 py-2.5 rounded-xl shadow-sm transition-all cursor-pointer shrink-0"
         >
           <Save className="w-4 h-4" />
           <span>{saving ? "Đang lưu..." : "Lưu tất cả cấu hình"}</span>
         </button>
       </div>
+
 
       {/* 2. Feedback Alert Message */}
       {feedbackMsg && (
@@ -876,13 +877,13 @@ export default function GoogleSheetsIntegrationPage() {
             </div>
 
             {/* Actions Row */}
-            <div className="flex flex-wrap items-center gap-3">
+            <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
               {/* Test Connection Button */}
               <button
                 type="button"
                 onClick={handleTestConnection}
                 disabled={testing || saving}
-                className="inline-flex items-center gap-2 bg-slate-900 hover:bg-slate-800 disabled:opacity-50 text-white font-mono font-bold text-xs uppercase px-5 py-3 rounded-xl transition-all shadow-xs cursor-pointer"
+                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-slate-900 hover:bg-slate-800 disabled:opacity-50 text-white font-mono font-bold text-xs uppercase px-5 py-3 rounded-xl transition-all shadow-xs cursor-pointer"
               >
                 <RefreshCw className={`w-3.5 h-3.5 ${testing ? "animate-spin" : ""}`} />
                 <span>{testing ? "ĐANG KIỂM TRA..." : "KIỂM TRA KẾT NỐI"}</span>
@@ -893,7 +894,7 @@ export default function GoogleSheetsIntegrationPage() {
                 type="button"
                 onClick={handleSendTestLead}
                 disabled={sendingTestLead || saving}
-                className="inline-flex items-center gap-2 bg-white hover:bg-slate-100 disabled:opacity-50 text-slate-800 border border-slate-300 font-mono font-bold text-xs uppercase px-5 py-3 rounded-xl transition-all shadow-2xs cursor-pointer"
+                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-white hover:bg-slate-100 disabled:opacity-50 text-slate-800 border border-slate-300 font-mono font-bold text-xs uppercase px-5 py-3 rounded-xl transition-all shadow-2xs cursor-pointer"
               >
                 <Send className="w-3.5 h-3.5 text-brand-600" />
                 <span>{sendingTestLead ? "ĐANG GỬI LEAD..." : "GỬI LEAD THỬ NGHIỆM"}</span>
@@ -904,7 +905,7 @@ export default function GoogleSheetsIntegrationPage() {
                 type="button"
                 onClick={() => handleSaveConfig()}
                 disabled={saving}
-                className="inline-flex items-center gap-2 bg-brand-500 hover:bg-brand-600 disabled:opacity-50 text-white font-mono font-bold text-xs uppercase px-6 py-3 rounded-xl transition-all shadow-xs cursor-pointer ml-auto"
+                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-brand-500 hover:bg-brand-600 disabled:opacity-50 text-white font-mono font-bold text-xs uppercase px-6 py-3 rounded-xl transition-all shadow-xs cursor-pointer sm:ml-auto"
               >
                 <Save className="w-3.5 h-3.5" />
                 <span>{saving ? "ĐANG LƯU..." : "LƯU CẤU HÌNH"}</span>
@@ -912,6 +913,7 @@ export default function GoogleSheetsIntegrationPage() {
             </div>
           </div>
         </div>
+
 
       </div>
     </div>
