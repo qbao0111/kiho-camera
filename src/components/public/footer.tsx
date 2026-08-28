@@ -1,5 +1,6 @@
 import React from "react";
 import Link from "next/link";
+import Image from "next/image";
 import {
   MapPin,
   Phone,
@@ -26,17 +27,19 @@ export function Footer({ settings }: FooterProps) {
           {/* 1. Brand & Description (5 cols) */}
           <div className="md:col-span-5 space-y-3">
             <Link href="/" className="inline-block group focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-accent rounded-sm">
-              <span className="font-display text-2xl font-bold tracking-tight text-ink-900 group-hover:text-accent transition-colors block">
-                KIHO CAMERA
-              </span>
-              <span className="text-[10px] font-mono font-medium tracking-wider text-ink-500 uppercase mt-0.5 block">
-                Cho thuê máy ảnh du lịch · Đồng Hới, Quảng Bình
-              </span>
+              <Image
+                src="/brand/kiho-logo-master-transparent.png"
+                alt="Kiho Camera"
+                width={180}
+                height={147}
+                className="h-16 sm:h-20 w-auto object-contain transition-transform group-hover:scale-[1.02]"
+              />
             </Link>
             <p className="font-sans text-xs sm:text-sm text-ink-600 leading-relaxed max-w-sm font-normal">
               Dịch vụ cho thuê máy ảnh du lịch tại TP. Đồng Hới. Trọn bộ phụ kiện đi kèm pin sạc thẻ nhớ túi chống sốc, hỗ trợ giao nhận máy tận nơi tại khách sạn & homestay.
             </p>
           </div>
+
 
           {/* 2. Quick Links (3 cols) */}
           <div className="md:col-span-3 space-y-2.5">

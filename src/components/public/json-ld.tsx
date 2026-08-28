@@ -46,6 +46,7 @@ export function LocalBusinessJsonLd({ settings, siteUrl }: LocalBusinessProps) {
       },
     ],
     "priceRange": "80.000₫ - 450.000₫",
+    "logo": `${siteUrl}/brand/kiho-logo-social.webp`,
     "image": `${siteUrl}/images/landing/hero-quang-binh.webp`,
     "sameAs": [
       settings.facebook_url,
@@ -53,6 +54,7 @@ export function LocalBusinessJsonLd({ settings, siteUrl }: LocalBusinessProps) {
       settings.instagram_url || "https://www.instagram.com/thuemayanhqbb/",
     ].filter(Boolean),
   };
+
 
   return (
     <script

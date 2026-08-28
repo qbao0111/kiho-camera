@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { ArrowUpRight, Menu, X, Phone, MessageCircle, MapPin } from "lucide-react";
 import { SiteSettings } from "@/types/database";
@@ -49,25 +50,28 @@ export function Header({ settings }: HeaderProps) {
     <header
       className={`sticky top-0 z-50 transition-all duration-200 ${
         isScrolled
-          ? "bg-[#faf8f5]/95 backdrop-blur-md border-b border-ink-200 py-3 shadow-[0_2px_12px_rgba(0,0,0,0.03)]"
-          : "bg-[#faf8f5] border-b border-ink-200/80 py-3.5 sm:py-4"
+          ? "bg-[#faf8f5]/95 backdrop-blur-md border-b border-ink-200 py-2.5 sm:py-3 shadow-[0_2px_12px_rgba(0,0,0,0.03)]"
+          : "bg-[#faf8f5] border-b border-ink-200/80 py-3 sm:py-3.5"
       }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-9 sm:h-10">
+        <div className="flex items-center justify-between h-10 sm:h-12">
           
-          {/* Editorial Logo */}
+          {/* Brand Logo */}
           <Link
             href="/"
-            className="group flex flex-col items-start focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-accent rounded-sm"
+            className="group inline-flex items-center focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-accent rounded-sm shrink-0"
           >
-            <span className="font-display text-xl sm:text-2xl font-bold tracking-tight text-ink-900 leading-none group-hover:text-accent transition-colors">
-              KIHO CAMERA
-            </span>
-            <span className="font-mono text-[9px] sm:text-[10px] font-medium tracking-wider text-ink-500 uppercase mt-0.5">
-              Đồng Hới · Quảng Bình
-            </span>
+            <Image
+              src="/brand/kiho-logo-header-transparent.png"
+              alt="Kiho Camera"
+              width={160}
+              height={128}
+              priority
+              className="h-10 sm:h-12 w-auto object-contain transition-transform group-hover:scale-[1.02]"
+            />
           </Link>
+
 
           {/* Desktop Navigation */}
           <nav className="hidden md:flex items-center space-x-7 text-sm font-sans font-medium">

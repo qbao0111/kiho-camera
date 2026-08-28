@@ -56,9 +56,22 @@ export const metadata: Metadata = {
   authors: [{ name: "Kiho Camera" }],
   creator: "Kiho Camera",
   publisher: "Kiho Camera",
+  icons: {
+    icon: [
+      { url: "/favicon.ico", sizes: "any" },
+      { url: "/brand/kiho-logo-icon-32.png", sizes: "32x32", type: "image/png" },
+      { url: "/brand/kiho-logo-icon-192.png", sizes: "192x192", type: "image/png" },
+      { url: "/brand/kiho-logo-icon-512.png", sizes: "512x512", type: "image/png" },
+    ],
+    apple: [
+      { url: "/apple-icon.png", sizes: "180x180", type: "image/png" },
+      { url: "/brand/kiho-logo-icon-180.png", sizes: "180x180", type: "image/png" },
+    ],
+  },
   alternates: {
     canonical: "/",
   },
+
   robots: {
     index: true,
     follow: true,
