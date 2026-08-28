@@ -3,7 +3,7 @@
 import React, { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowUpRight, Clock, Calendar, Tag, Camera, Check } from "lucide-react";
+import { ArrowUpRight, Camera, Check } from "lucide-react";
 import { Equipment } from "@/types/database";
 import { getEquipmentCoverImage } from "@/lib/equipment-images";
 
@@ -43,19 +43,18 @@ export function RentalPriceIndex({
     <section id="bang-gia" className="py-16 sm:py-24 bg-[#faf8f5] border-t border-ink-200">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
-        {/* Chapter Header */}
+        {/* Section Header */}
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-8 sm:mb-12 gap-6">
           <div className="space-y-1.5">
-            <div className="flex items-center gap-2 text-xs font-mono font-medium tracking-wider text-ink-500 uppercase">
-              <span className="text-accent font-bold">02 / RENTAL INDEX</span>
-              <span className="text-ink-300">·</span>
-              <span>BẢNG GIÁ NIÊM YẾT</span>
+            <div className="flex items-center gap-1.5 text-xs font-mono font-medium tracking-wider text-ink-500 uppercase">
+              <Camera className="w-3.5 h-3.5 text-accent" />
+              <span>BẢNG GIÁ NIÊM YẾT · ĐỒNG HỚI</span>
             </div>
             <h2 className="font-display text-3xl sm:text-4xl lg:text-5xl font-bold text-ink-900 tracking-tight leading-tight">
               Bảng Giá Thuê Máy Ảnh Kiho
             </h2>
             <p className="text-sm sm:text-base text-ink-600 font-sans font-normal max-w-xl leading-relaxed">
-              Tất cả 12 dòng máy có sẵn tại 48 Ngô Quyền, trọn bộ pin sạc thẻ nhớ túi chống sốc.
+              Tất cả 12 dòng máy có sẵn tại 48 Ngô Quyền, trọn bộ phụ kiện pin sạc thẻ nhớ túi chống sốc.
             </p>
           </div>
 
@@ -82,10 +81,10 @@ export function RentalPriceIndex({
           </div>
         </div>
 
-        {/* 2-COLUMN DESKTOP EDITORIAL LAYOUT (Left: Index Table, Right: Side Preview Dock) */}
+        {/* 2-COLUMN EDITORIAL LAYOUT (Left: Index Table, Right: Side Preview Dock) */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
           
-          {/* 1. LEFT: EDITORIAL PRICE TABLE (8 cols) */}
+          {/* 1. LEFT: EDITORIAL PRICE TABLE (8 cols on desktop) */}
           <div className="lg:col-span-8 bg-white rounded-xl border border-ink-200 overflow-hidden shadow-2xs">
             
             {/* Desktop Table */}
@@ -157,51 +156,65 @@ export function RentalPriceIndex({
               </table>
             </div>
 
-            {/* Mobile Compact Cards */}
+            {/* Mobile Compact Rows with Dividers */}
             <div className="sm:hidden divide-y divide-ink-200">
               {filteredCameras.map((item, idx) => {
                 const coverImg = getEquipmentCoverImage(item);
                 const numStr = String(idx + 1).padStart(2, "0");
 
                 return (
-                  <Link
+                  <div
                     key={item.id}
-                    href={`/thiet-bi/${item.slug}`}
-                    className="p-4 flex items-center justify-between gap-3 hover:bg-canvas-100 transition-colors"
+                    className="p-4 flex flex-col gap-3 bg-white"
                   >
-                    <div className="flex items-center gap-3">
-                      <div className="relative w-14 h-14 bg-canvas-100 rounded-md border border-ink-100 p-1 shrink-0 flex items-center justify-center">
-                        <Image
-                          src={coverImg}
-                          alt={item.name}
-                          fill
-                          sizes="60px"
-                          className="object-contain p-0.5"
-                        />
-                      </div>
-                      <div className="space-y-0.5">
-                        <div className="flex items-center gap-1.5 text-[10px] font-mono text-ink-400">
-                          <span>{numStr}</span>
-                          <span>·</span>
-                          <span>{item.brand}</span>
+                    <div className="flex items-start justify-between gap-3">
+                      <div className="flex items-center gap-3">
+                        <div className="relative w-12 h-12 bg-canvas-100 rounded-md border border-ink-100 p-1 shrink-0 flex items-center justify-center">
+                          <Image
+                            src={coverImg}
+                            alt={item.name}
+                            fill
+                            sizes="48px"
+                            className="object-contain p-0.5"
+                          />
                         </div>
-                        <h3 className="font-sans text-sm font-bold text-ink-900">
-                          {item.name}
-                        </h3>
-                        <div className="flex items-center gap-2 text-xs font-mono">
-                          <span className="font-bold text-ink-900">
-                            {formatK(item.price_per_day)}/ngày
-                          </span>
-                          <span className="text-ink-400">·</span>
-                          <span className="text-ink-600">
-                            {formatK(item.price_session)}/buổi
-                          </span>
+                        <div>
+                          <div className="flex items-center gap-1.5 text-[10px] font-mono text-ink-400">
+                            <span>{numStr}</span>
+                            <span>·</span>
+                            <span>{item.brand}</span>
+                          </div>
+                          <h3 className="font-sans text-sm font-bold text-ink-900">
+                            {item.name}
+                          </h3>
                         </div>
                       </div>
+
+                      <Link
+                        href={`/thiet-bi/${item.slug}`}
+                        className="inline-flex items-center gap-1 text-xs font-sans font-semibold text-ink-900 hover:text-accent px-2.5 py-1 rounded bg-canvas-100 border border-ink-200"
+                      >
+                        <span>Xem máy</span>
+                        <ArrowUpRight className="w-3 h-3" />
+                      </Link>
                     </div>
 
-                    <ArrowUpRight className="w-4 h-4 text-ink-400 shrink-0" />
-                  </Link>
+                    {/* Compact Price Tier Strip */}
+                    <div className="grid grid-cols-3 gap-2 py-2 px-3 bg-canvas-100/70 rounded-md border border-ink-100 text-center font-mono text-xs">
+                      <div>
+                        <span className="text-[10px] text-ink-400 block font-sans">Buổi</span>
+                        <span className="font-medium text-ink-700">{formatK(item.price_session)}</span>
+                      </div>
+                      <div className="border-x border-ink-200">
+                        <span className="text-[10px] text-ink-400 block font-sans">1 Ngày</span>
+                        <span className="font-bold text-ink-900">{formatK(item.price_per_day)}</span>
+                      </div>
+                      <div>
+                        <span className="text-[10px] text-accent block font-sans">3 Ngày+</span>
+                        <span className="font-bold text-accent">{formatK(item.price_three_days)}</span>
+                      </div>
+                    </div>
+                  </div>
                 );
               })}
             </div>
