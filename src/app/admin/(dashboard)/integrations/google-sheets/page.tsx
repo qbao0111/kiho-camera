@@ -22,7 +22,7 @@ import {
   Info,
   Mail,
 } from "lucide-react";
-import { GoogleSheetsIntegrationConfig } from "@/lib/services/integrations";
+import type { GoogleSheetsIntegrationConfig } from "@/lib/services/integrations";
 
 export default function GoogleSheetsIntegrationPage() {
   const [config, setConfig] = useState<GoogleSheetsIntegrationConfig>({

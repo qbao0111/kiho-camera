@@ -20,7 +20,7 @@ Tài liệu này hướng dẫn cách kết nối hệ thống **Lead / Yêu C�
 
 - **Quản lý tập trung:** Địa chỉ email nhận thông báo được điều khiển 100% từ giao diện Admin Kiho (`/admin/integrations/google-sheets`). Thay đổi email trong Admin sẽ có hiệu lực ngay mà không cần sửa code hay triển khai lại Apps Script.
 - **Bảo mật tuyệt đối:** Khách hàng không nhìn thấy Google Sheets hay Apps Script endpoint. Mã bảo mật webhook được mã hóa AES-256-GCM trên server.
-- **Không mất dữ liệu (Zero Data Loss):** Hệ thống luôn lưu một bản sao cục bộ trên server trước khi đẩy sang Google Sheets.
+- **Lưu bền vững trước:** Hệ thống lưu lead vào Supabase trước khi thử gửi sang Google Sheets. Nếu Apps Script tạm thời lỗi, lead vẫn còn trong `rental_requests` để admin xử lý.
 
 ---
 

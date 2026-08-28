@@ -31,7 +31,7 @@ function doPost(e) {
     var scriptProperties = PropertiesService.getScriptProperties();
     var expectedSecret = scriptProperties.getProperty("RENTAL_REQUEST_WEBHOOK_SECRET");
     
-    if (expectedSecret && data.secret !== expectedSecret) {
+    if (!expectedSecret || data.secret !== expectedSecret) {
       return createJsonResponse({ success: false, code: "INVALID_SECRET", error: "Mã bảo mật secret không khớp." });
     }
 
@@ -71,8 +71,8 @@ function doPost(e) {
     }
 
     // 5. Lấy Email nhận thông báo từ Server Payload (Admin là Single Source of Truth)
-    var notificationEmail = (data.notificationEmail || scriptProperties.getProperty("NOTIFICATION_EMAIL") || "").trim();
-    var emailRegex = /^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$/;
+    var notificationEmail = (data.notificationEmail || "").trim();
+    var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!notificationEmail || !emailRegex.test(notificationEmail)) {
       return createJsonResponse({
         success: false,
@@ -100,6 +100,20 @@ function doPost(e) {
       return dStr;
     }
 
+    function sanitizeSheetCell(value) {
+      var text = String(value == null ? "" : value);
+      return /^[=+\-@]/.test(text) ? "'" + text : text;
+    }
+
+    function escapeHtml(value) {
+      return String(value == null ? "" : value)
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#39;");
+    }
+
     var rentalDateVn = formatVnDate(rentalDate);
     var returnDateVn = formatVnDate(returnDate);
 
@@ -108,13 +122,13 @@ function doPost(e) {
     try {
       sheet.appendRow([
         timestamp,
-        customerName,
-        "'" + phone, // Thêm dấu ' để giữ số 0 đầu
-        equipmentName,
+        sanitizeSheetCell(customerName),
+        "'" + sanitizeSheetCell(phone), // Giữ số 0 đầu và chặn công thức
+        sanitizeSheetCell(equipmentName),
         rentalDateVn,
         returnDateVn,
-        note,
-        source,
+        sanitizeSheetCell(note),
+        sanitizeSheetCell(source),
         status
       ]);
       sheetSaved = true;
@@ -122,13 +136,18 @@ function doPost(e) {
       return createJsonResponse({
         success: false,
         code: "SHEET_APPEND_ERROR",
-        error: "Lỗi ghi dữ liệu vào Sheet: " + sheetErr.toString()
+        error: "Không thể ghi dữ liệu vào Google Sheet."
       });
     }
 
     // 7. Gửi Email thông báo tức thì cho Kiho Camera
     var isTest = data.isTest ? "[TEST TỪ ADMIN] " : "";
     var emailSubject = isTest + "📸 Lead mới — " + equipmentName + " — " + customerName;
+    var safeCustomerName = escapeHtml(customerName);
+    var safePhone = escapeHtml(phone);
+    var safeEquipmentName = escapeHtml(equipmentName);
+    var safeNote = escapeHtml(note);
+    var safeSource = escapeHtml(source);
 
     var emailHtml = `
       <div style="font-family: Arial, sans-serif; max-width: 560px; margin: 0 auto; background: #faf8f4; border: 1px solid #e8e2d7; border-radius: 16px; padding: 24px; color: #171716;">
@@ -140,18 +159,18 @@ function doPost(e) {
         <table style="width: 100%; border-collapse: collapse; font-size: 14px;">
           <tr>
             <td style="padding: 8px 0; color: #78716c; width: 130px;">Họ tên khách:</td>
-            <td style="padding: 8px 0; font-weight: bold; font-size: 15px; color: #171716;">${customerName}</td>
+            <td style="padding: 8px 0; font-weight: bold; font-size: 15px; color: #171716;">${safeCustomerName}</td>
           </tr>
           <tr>
             <td style="padding: 8px 0; color: #78716c;">Số điện thoại:</td>
             <td style="padding: 8px 0; font-weight: bold; font-size: 18px;">
-              <a href="tel:${phone}" style="color: #b45309; text-decoration: none;">📞 ${phone}</a>
-              <a href="https://zalo.me/${phone}" target="_blank" style="margin-left: 10px; font-size: 12px; color: #0284c7; text-decoration: none;">[Mở Zalo]</a>
+              <a href="tel:${safePhone}" style="color: #b45309; text-decoration: none;">📞 ${safePhone}</a>
+              <a href="https://zalo.me/${safePhone}" target="_blank" style="margin-left: 10px; font-size: 12px; color: #0284c7; text-decoration: none;">[Mở Zalo]</a>
             </td>
           </tr>
           <tr>
             <td style="padding: 8px 0; color: #78716c;">Dòng máy chọn:</td>
-            <td style="padding: 8px 0; font-weight: bold; color: #171716; text-transform: uppercase;">📷 ${equipmentName}</td>
+            <td style="padding: 8px 0; font-weight: bold; color: #171716; text-transform: uppercase;">📷 ${safeEquipmentName}</td>
           </tr>
           <tr>
             <td style="padding: 8px 0; color: #78716c;">Lịch thuê:</td>
@@ -160,17 +179,17 @@ function doPost(e) {
           ${note ? `
           <tr>
             <td style="padding: 8px 0; color: #78716c; vertical-align: top;">Ghi chú của khách:</td>
-            <td style="padding: 8px 0; color: #44403c; font-style: italic;">"${note}"</td>
+            <td style="padding: 8px 0; color: #44403c; font-style: italic;">"${safeNote}"</td>
           </tr>
           ` : ""}
           <tr>
             <td style="padding: 8px 0; color: #78716c;">Thời gian gửi:</td>
-            <td style="padding: 8px 0; color: #78716c; font-size: 12px;">${timestamp} (${source})</td>
+            <td style="padding: 8px 0; color: #78716c; font-size: 12px;">${timestamp} (${safeSource})</td>
           </tr>
         </table>
 
         <div style="margin-top: 24px; padding-top: 16px; border-top: 1px solid #e8e2d7; text-align: center;">
-          <a href="tel:${phone}" style="display: inline-block; background: #171716; color: #ffffff; padding: 12px 24px; border-radius: 10px; text-decoration: none; font-weight: bold; font-size: 13px;">
+          <a href="tel:${safePhone}" style="display: inline-block; background: #171716; color: #ffffff; padding: 12px 24px; border-radius: 10px; text-decoration: none; font-weight: bold; font-size: 13px;">
             GỌI LẠI CHO KHÁCH NGAY
           </a>
         </div>
@@ -192,7 +211,7 @@ function doPost(e) {
         sheetSaved: true,
         emailSent: false,
         code: "EMAIL_ERROR",
-        error: "Đã lưu vào Sheet nhưng gửi email thất bại: " + mailErr.toString(),
+        error: "Đã lưu vào Sheet nhưng gửi email thất bại.",
         notificationEmail: notificationEmail
       });
     }
@@ -206,7 +225,7 @@ function doPost(e) {
     });
 
   } catch (error) {
-    return createJsonResponse({ success: false, code: "UNKNOWN_ERROR", error: error.toString() });
+    return createJsonResponse({ success: false, code: "UNKNOWN_ERROR", error: "Apps Script gặp lỗi không xác định." });
   }
 }
 

@@ -6,21 +6,51 @@ import {
   generateAppsScriptCode,
   testAppsScriptConnection,
   sendTestLeadToAppsScript,
+  isValidAppsScriptUrl,
+  type GoogleSheetsIntegrationConfig,
 } from "@/lib/services/integrations";
 import { generateSecureWebhookSecret, encryptSecret } from "@/lib/encryption";
+import { getAuthenticatedAdmin } from "@/lib/auth/admin";
 
 export const dynamic = "force-dynamic";
 export const revalidate = 0;
 
+function unauthorized() {
+  return NextResponse.json(
+    { success: false, error: "Unauthorized" },
+    { status: 401 }
+  );
+}
+
+function toSafeSettings(settings: GoogleSheetsIntegrationConfig) {
+  const { encrypted_webhook_secret: _secret, ...safeSettings } = settings;
+  return safeSettings;
+}
+
+function validateConfigFields(email: string, sheetId: string, sheetName: string) {
+  if (email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+    return "Địa chỉ email nhận thông báo không hợp lệ.";
+  }
+  if (sheetId && !/^[A-Za-z0-9_-]{10,200}$/.test(sheetId)) {
+    return "Google Sheet ID không hợp lệ.";
+  }
+  if (!sheetName || sheetName.length > 100) {
+    return "Tên sheet phải có từ 1 đến 100 ký tự.";
+  }
+  return null;
+}
+
 export async function GET(req: NextRequest) {
+  if (!(await getAuthenticatedAdmin())) return unauthorized();
+
   try {
     const { searchParams } = new URL(req.url);
     const action = searchParams.get("action");
 
     const settings = await getIntegrationSettings();
-    const plainSecret = await getDecryptedWebhookSecret();
 
     if (action === "reveal_secret") {
+      const plainSecret = await getDecryptedWebhookSecret();
       return NextResponse.json({ success: true, secret: plainSecret });
     }
 
@@ -28,46 +58,43 @@ export async function GET(req: NextRequest) {
       const scriptCode = generateAppsScriptCode({
         sheetId: settings.google_sheet_id,
         sheetName: settings.google_sheet_name,
-        notificationEmail: settings.notification_email,
-        secret: plainSecret,
       });
       return NextResponse.json({ success: true, scriptCode });
     }
 
-    // Mask secret for normal view
-    const maskedSecret = plainSecret ? `••••••••••••••••${plainSecret.slice(-4)}` : "••••••••••••••••";
-
     const generatedScript = generateAppsScriptCode({
       sheetId: settings.google_sheet_id,
       sheetName: settings.google_sheet_name,
-      notificationEmail: settings.notification_email,
-      secret: plainSecret,
     });
 
     return NextResponse.json({
       success: true,
       data: {
-        ...settings,
-        masked_secret: maskedSecret,
+        ...toSafeSettings(settings),
+        masked_secret: "••••••••••••••••",
         generated_script: generatedScript,
       },
     });
-  } catch (err: any) {
-    console.error("[Admin Integration API] Error GET:", err);
+  } catch (err) {
+    console.error(
+      "[Admin Integration API] GET failed:",
+      err instanceof Error ? err.message : "Unknown error"
+    );
     return NextResponse.json(
-      { success: false, error: err?.message || "Lỗi lấy thông tin cấu hình." },
+      { success: false, error: "Lỗi lấy thông tin cấu hình." },
       { status: 500 }
     );
   }
 }
 
 export async function POST(req: NextRequest) {
+  if (!(await getAuthenticatedAdmin())) return unauthorized();
+
   try {
     const body = await req.json();
     const { action } = body;
 
     const currentSettings = await getIntegrationSettings();
-    let currentSecret = await getDecryptedWebhookSecret();
 
     // 1. Action: Save Configuration
     if (action === "save") {
@@ -84,11 +111,21 @@ export async function POST(req: NextRequest) {
       const trimmedSheetId = String(google_sheet_id || "").trim();
       const trimmedSheetName = String(google_sheet_name || "Rental Requests").trim();
 
-      // Validate email if provided
-      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-      if (trimmedEmail && !emailRegex.test(trimmedEmail)) {
+      const configError = validateConfigFields(
+        trimmedEmail,
+        trimmedSheetId,
+        trimmedSheetName
+      );
+      if (configError) {
         return NextResponse.json(
-          { success: false, error: "Địa chỉ email nhận thông báo không hợp lệ." },
+          { success: false, error: configError },
+          { status: 400 }
+        );
+      }
+
+      if (trimmedUrl && !isValidAppsScriptUrl(trimmedUrl)) {
+        return NextResponse.json(
+          { success: false, error: "Apps Script URL không hợp lệ." },
           { status: 400 }
         );
       }
@@ -111,7 +148,7 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({
         success: true,
         message: "Đã lưu cấu hình Google Sheets thành công!",
-        data: saveResult.data,
+        data: saveResult.data ? toSafeSettings(saveResult.data) : undefined,
       });
     }
 
@@ -120,16 +157,21 @@ export async function POST(req: NextRequest) {
       const newSecret = generateSecureWebhookSecret();
       const encrypted = encryptSecret(newSecret);
 
-      await saveIntegrationSettings({
+      const saveResult = await saveIntegrationSettings({
         encrypted_webhook_secret: encrypted,
         last_test_status: "untested",
       });
 
+      if (!saveResult.success) {
+        return NextResponse.json(
+          { success: false, error: saveResult.error },
+          { status: 500 }
+        );
+      }
+
       const updatedScript = generateAppsScriptCode({
         sheetId: currentSettings.google_sheet_id,
         sheetName: currentSettings.google_sheet_name,
-        notificationEmail: currentSettings.notification_email,
-        secret: newSecret,
       });
 
       return NextResponse.json({
@@ -149,6 +191,18 @@ export async function POST(req: NextRequest) {
       const targetSheetName = String(body.google_sheet_name || currentSettings.google_sheet_name || "Rental Requests").trim();
       const isEnabled = typeof body.enabled === "boolean" ? body.enabled : currentSettings.enabled;
 
+      const configError = validateConfigFields(
+        targetEmail,
+        targetSheetId,
+        targetSheetName
+      );
+      if (configError) {
+        return NextResponse.json(
+          { success: false, error: configError },
+          { status: 400 }
+        );
+      }
+
       if (!targetUrl) {
         return NextResponse.json(
           { success: false, error: "Vui lòng nhập Apps Script Web App URL trước khi kiểm tra kết nối." },
@@ -156,6 +210,14 @@ export async function POST(req: NextRequest) {
         );
       }
 
+      if (!isValidAppsScriptUrl(targetUrl)) {
+        return NextResponse.json(
+          { success: false, error: "Apps Script URL không hợp lệ." },
+          { status: 400 }
+        );
+      }
+
+      const currentSecret = await getDecryptedWebhookSecret();
       const testResult = await testAppsScriptConnection(targetUrl, currentSecret);
 
       const timestamp = new Date().toISOString();
@@ -163,7 +225,7 @@ export async function POST(req: NextRequest) {
       const errorMsg = testResult.success ? undefined : testResult.error;
 
       // Auto-persist all form values including email when testing connection
-      await saveIntegrationSettings({
+      const saveResult = await saveIntegrationSettings({
         enabled: isEnabled,
         google_sheet_id: targetSheetId,
         google_sheet_name: targetSheetName,
@@ -173,6 +235,13 @@ export async function POST(req: NextRequest) {
         last_test_status: status,
         last_test_error: errorMsg,
       });
+
+      if (!saveResult.success) {
+        return NextResponse.json(
+          { success: false, error: saveResult.error },
+          { status: 500 }
+        );
+      }
 
       if (!testResult.success) {
         return NextResponse.json(
@@ -204,9 +273,28 @@ export async function POST(req: NextRequest) {
       const targetSheetName = String(body.google_sheet_name || currentSettings.google_sheet_name || "Rental Requests").trim();
       const isEnabled = typeof body.enabled === "boolean" ? body.enabled : currentSettings.enabled;
 
+      const configError = validateConfigFields(
+        targetEmail,
+        targetSheetId,
+        targetSheetName
+      );
+      if (configError) {
+        return NextResponse.json(
+          { success: false, error: configError },
+          { status: 400 }
+        );
+      }
+
       if (!targetUrl) {
         return NextResponse.json(
           { success: false, error: "Vui lòng nhập Apps Script Web App URL trước khi gửi lead thử." },
+          { status: 400 }
+        );
+      }
+
+      if (!isValidAppsScriptUrl(targetUrl)) {
+        return NextResponse.json(
+          { success: false, error: "Apps Script URL không hợp lệ." },
           { status: 400 }
         );
       }
@@ -219,7 +307,7 @@ export async function POST(req: NextRequest) {
       }
 
       // Automatically persist the tested email and all config to DB/file immediately
-      await saveIntegrationSettings({
+      const saveResult = await saveIntegrationSettings({
         enabled: isEnabled,
         google_sheet_id: targetSheetId,
         google_sheet_name: targetSheetName,
@@ -227,6 +315,14 @@ export async function POST(req: NextRequest) {
         apps_script_url: targetUrl,
       });
 
+      if (!saveResult.success) {
+        return NextResponse.json(
+          { success: false, error: saveResult.error },
+          { status: 500 }
+        );
+      }
+
+      const currentSecret = await getDecryptedWebhookSecret();
       const leadResult = await sendTestLeadToAppsScript(targetUrl, currentSecret, targetEmail);
 
       if (!leadResult.success) {
@@ -254,10 +350,13 @@ export async function POST(req: NextRequest) {
       { success: false, error: "Action không hợp lệ." },
       { status: 400 }
     );
-  } catch (err: any) {
-    console.error("[Admin Integration API] Error POST:", err);
+  } catch (err) {
+    console.error(
+      "[Admin Integration API] POST failed:",
+      err instanceof Error ? err.message : "Unknown error"
+    );
     return NextResponse.json(
-      { success: false, error: err?.message || "Lỗi xử lý yêu cầu." },
+      { success: false, error: "Lỗi xử lý yêu cầu." },
       { status: 500 }
     );
   }

@@ -1,11 +1,26 @@
 import crypto from "crypto";
 
 const ALGORITHM = "aes-256-gcm";
-const DEFAULT_KEY_SEED = "kiho-camera-integration-secret-key-2026-master";
+const DEVELOPMENT_KEY_SEED = "kiho-camera-insecure-development-only-key";
 
-// Derive a 32-byte encryption key from environment or fallback
+// Derive a 32-byte key without ever allowing a production fallback.
 function getEncryptionKey(): Buffer {
-  const masterSecret = process.env.INTEGRATION_ENCRYPTION_KEY || DEFAULT_KEY_SEED;
+  let masterSecret = process.env.INTEGRATION_ENCRYPTION_KEY;
+
+  if (
+    !masterSecret &&
+    process.env.NODE_ENV !== "production" &&
+    process.env.ALLOW_INSECURE_DEV_ENCRYPTION_FALLBACK === "true"
+  ) {
+    masterSecret = DEVELOPMENT_KEY_SEED;
+  }
+
+  if (!masterSecret) {
+    throw new Error(
+      "INTEGRATION_ENCRYPTION_KEY is required to encrypt integration secrets."
+    );
+  }
+
   return crypto.createHash("sha256").update(masterSecret).digest();
 }
 
@@ -45,25 +60,20 @@ export function encryptSecret(plainText: string): string {
 export function decryptSecret(encryptedBase64: string): string {
   if (!encryptedBase64) return "";
 
-  try {
-    const rawJson = Buffer.from(encryptedBase64, "base64").toString("utf8");
-    const payload: EncryptedData = JSON.parse(rawJson);
+  const rawJson = Buffer.from(encryptedBase64, "base64").toString("utf8");
+  const payload: EncryptedData = JSON.parse(rawJson);
 
-    const key = getEncryptionKey();
-    const iv = Buffer.from(payload.iv, "hex");
-    const tag = Buffer.from(payload.tag, "hex");
-    const decipher = crypto.createDecipheriv(ALGORITHM, key, iv);
+  const key = getEncryptionKey();
+  const iv = Buffer.from(payload.iv, "hex");
+  const tag = Buffer.from(payload.tag, "hex");
+  const decipher = crypto.createDecipheriv(ALGORITHM, key, iv);
 
-    decipher.setAuthTag(tag);
+  decipher.setAuthTag(tag);
 
-    let decrypted = decipher.update(payload.ciphertext, "hex", "utf8");
-    decrypted += decipher.final("utf8");
+  let decrypted = decipher.update(payload.ciphertext, "hex", "utf8");
+  decrypted += decipher.final("utf8");
 
-    return decrypted;
-  } catch (err) {
-    console.error("[Encryption] Failed to decrypt secret:", err);
-    return "";
-  }
+  return decrypted;
 }
 
 /**

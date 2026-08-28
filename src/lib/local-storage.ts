@@ -10,21 +10,27 @@ const REQUESTS_DATA_FILE = path.join(process.cwd(), "src", "data", "rental-reque
 export async function getLocalEquipment(): Promise<Equipment[]> {
   try {
     if (!existsSync(EQUIPMENT_DATA_FILE)) {
-      await saveLocalEquipment(MOCK_EQUIPMENT);
+      try {
+        await saveLocalEquipment(MOCK_EQUIPMENT);
+      } catch (_) {}
       return MOCK_EQUIPMENT;
     }
     const data = await readFile(EQUIPMENT_DATA_FILE, "utf-8");
-    return JSON.parse(data) as Equipment[];
+    const parsed = JSON.parse(data) as Equipment[];
+    return parsed && parsed.length > 0 ? parsed : MOCK_EQUIPMENT;
   } catch (err) {
-    console.error("Error reading local equipment:", err);
     return MOCK_EQUIPMENT;
   }
 }
 
 export async function saveLocalEquipment(list: Equipment[]): Promise<void> {
-  const dir = path.dirname(EQUIPMENT_DATA_FILE);
-  await mkdir(dir, { recursive: true });
-  await writeFile(EQUIPMENT_DATA_FILE, JSON.stringify(list, null, 2), "utf-8");
+  try {
+    const dir = path.dirname(EQUIPMENT_DATA_FILE);
+    await mkdir(dir, { recursive: true });
+    await writeFile(EQUIPMENT_DATA_FILE, JSON.stringify(list, null, 2), "utf-8");
+  } catch (err) {
+    console.error("Error saving local equipment:", err);
+  }
 }
 
 export interface RentalRequestLead {

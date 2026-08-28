@@ -1,5 +1,6 @@
 import { createClient } from "@/lib/supabase/server";
 import { getLocalEquipment } from "@/lib/local-storage";
+import { MOCK_EQUIPMENT } from "@/lib/mock-data";
 import { Equipment } from "@/types/database";
 
 export interface EquipmentFilterOptions {
@@ -18,6 +19,7 @@ export async function getEquipmentList(options?: EquipmentFilterOptions): Promis
     // Fallback or Local Development Mode
     if (!supabase || !process.env.NEXT_PUBLIC_SUPABASE_URL) {
       let list = await getLocalEquipment();
+      if (!list || list.length === 0) list = MOCK_EQUIPMENT;
 
       if (options?.onlyActive !== false) {
         list = list.filter((e) => e.is_active);
@@ -82,7 +84,18 @@ export async function getEquipmentList(options?: EquipmentFilterOptions): Promis
 
     const { data, error } = await query;
     if (error || !data || data.length === 0) {
-      return getEquipmentList({ ...options });
+      let list = await getLocalEquipment();
+      if (!list || list.length === 0) list = MOCK_EQUIPMENT;
+
+      if (options?.onlyActive !== false) {
+        list = list.filter((e) => e.is_active);
+      }
+
+      if (options?.brand && options.brand !== "all") {
+        list = list.filter((e) => e.brand.toLowerCase() === options.brand?.toLowerCase());
+      }
+
+      return list;
     }
 
     let results = data as Equipment[];
@@ -106,7 +119,12 @@ export async function getEquipmentList(options?: EquipmentFilterOptions): Promis
     return results;
   } catch (err) {
     console.error("Error fetching equipment:", err);
-    return getLocalEquipment();
+    try {
+      const list = await getLocalEquipment();
+      return list && list.length > 0 ? list : MOCK_EQUIPMENT;
+    } catch (_) {
+      return MOCK_EQUIPMENT;
+    }
   }
 }
 
@@ -120,7 +138,8 @@ export async function getEquipmentBySlug(slug: string): Promise<Equipment | null
     const supabase = await createClient();
     if (!supabase || !process.env.NEXT_PUBLIC_SUPABASE_URL) {
       const list = await getLocalEquipment();
-      return list.find((e) => e.slug === slug || e.id === slug) || null;
+      const all = list && list.length > 0 ? list : MOCK_EQUIPMENT;
+      return all.find((e) => e.slug === slug || e.id === slug) || null;
     }
 
     const { data, error } = await supabase
@@ -131,13 +150,19 @@ export async function getEquipmentBySlug(slug: string): Promise<Equipment | null
 
     if (error || !data) {
       const list = await getLocalEquipment();
-      return list.find((e) => e.slug === slug || e.id === slug) || null;
+      const all = list && list.length > 0 ? list : MOCK_EQUIPMENT;
+      return all.find((e) => e.slug === slug || e.id === slug) || null;
     }
 
     return data as Equipment;
   } catch (err) {
-    const list = await getLocalEquipment();
-    return list.find((e) => e.slug === slug || e.id === slug) || null;
+    try {
+      const list = await getLocalEquipment();
+      const all = list && list.length > 0 ? list : MOCK_EQUIPMENT;
+      return all.find((e) => e.slug === slug || e.id === slug) || null;
+    } catch (_) {
+      return MOCK_EQUIPMENT.find((e) => e.slug === slug || e.id === slug) || null;
+    }
   }
 }
 

@@ -23,8 +23,8 @@ export function AdminSidebar() {
       if (supabase) {
         await supabase.auth.signOut();
       }
-      localStorage.removeItem("kiho_admin_session");
       router.push("/admin/login");
+      router.refresh();
     } catch (err) {
       router.push("/admin/login");
     }

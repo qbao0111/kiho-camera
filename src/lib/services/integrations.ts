@@ -1,7 +1,8 @@
-import { createClient } from "@/lib/supabase/server";
 import { readFile, writeFile, mkdir } from "fs/promises";
 import { existsSync } from "fs";
 import path from "path";
+import { createAdminClient } from "@/lib/supabase/admin";
+import { isLocalDataFallbackEnabled } from "@/lib/environment";
 import {
   encryptSecret,
   decryptSecret,
@@ -36,47 +37,32 @@ const DEFAULT_SETTINGS: GoogleSheetsIntegrationConfig = {
   google_sheet_name: "Rental Requests",
   notification_email: "kihocameradonghoi@gmail.com",
   apps_script_url: "",
-  encrypted_webhook_secret: encryptSecret(generateSecureWebhookSecret()),
   last_test_status: "untested",
   updated_at: new Date().toISOString(),
 };
 
-function isSupabaseConfigured(): boolean {
-  const url = process.env.NEXT_PUBLIC_SUPABASE_URL;
-  const key = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
-  return Boolean(
-    url &&
-    key &&
-    !url.includes("your-project-id") &&
-    !key.includes("your-anon-public-key")
-  );
-}
-
 /**
- * Get Integration Settings from Supabase or local storage fallback (No recursive calls)
+ * Read integration settings from Supabase. Local JSON is opt-in development only.
  */
 export async function getIntegrationSettings(): Promise<GoogleSheetsIntegrationConfig> {
-  try {
-    if (isSupabaseConfigured()) {
-      const supabase = await createClient();
-      if (supabase) {
-        const { data, error } = await supabase
-          .from("integration_settings")
-          .select("*")
-          .eq("provider", "google_sheets")
-          .maybeSingle();
+  const supabase = createAdminClient();
+  if (supabase) {
+    const { data, error } = await supabase
+      .from("integration_settings")
+      .select("*")
+      .eq("provider", "google_sheets")
+      .maybeSingle();
 
-        if (!error && data) {
-          return {
-            ...DEFAULT_SETTINGS,
-            ...data,
-            enabled: Boolean(data.enabled),
-          };
-        }
-      }
+    if (error) {
+      throw new Error("Unable to read integration settings from Supabase.");
     }
 
-    // Local JSON storage fallback
+    return data
+      ? { ...DEFAULT_SETTINGS, ...data, enabled: Boolean(data.enabled) }
+      : { ...DEFAULT_SETTINGS };
+  }
+
+  if (isLocalDataFallbackEnabled()) {
     if (existsSync(SETTINGS_FILE)) {
       const content = await readFile(SETTINGS_FILE, "utf-8");
       const parsed = JSON.parse(content) as GoogleSheetsIntegrationConfig;
@@ -87,27 +73,20 @@ export async function getIntegrationSettings(): Promise<GoogleSheetsIntegrationC
       };
     }
 
-    return DEFAULT_SETTINGS;
-  } catch (err) {
-    console.error("[Integrations] Error getting settings:", err);
-    return DEFAULT_SETTINGS;
+    return { ...DEFAULT_SETTINGS };
   }
+
+  throw new Error("Supabase integration settings storage is not configured.");
 }
 
 /**
- * Save Integration Settings to Supabase and local storage fallback (No recursion)
+ * Save integration settings to Supabase. Local JSON is opt-in development only.
  */
 export async function saveIntegrationSettings(
   settings: Partial<GoogleSheetsIntegrationConfig>
 ): Promise<{ success: boolean; data?: GoogleSheetsIntegrationConfig; error?: string }> {
   try {
-    let current = DEFAULT_SETTINGS;
-    if (existsSync(SETTINGS_FILE)) {
-      try {
-        const content = await readFile(SETTINGS_FILE, "utf-8");
-        current = { ...DEFAULT_SETTINGS, ...JSON.parse(content) };
-      } catch (_) {}
-    }
+    const current = await getIntegrationSettings();
 
     const updated: GoogleSheetsIntegrationConfig = {
       ...current,
@@ -116,29 +95,46 @@ export async function saveIntegrationSettings(
       updated_at: new Date().toISOString(),
     };
 
-    // 1. Save to local fallback file
-    const dir = path.dirname(SETTINGS_FILE);
-    await mkdir(dir, { recursive: true });
-    await writeFile(SETTINGS_FILE, JSON.stringify(updated, null, 2), "utf-8");
+    const supabase = createAdminClient();
+    if (supabase) {
+      const { error } = await supabase
+        .from("integration_settings")
+        .upsert(updated, { onConflict: "provider" });
 
-    // 2. Save to Supabase if configured
-    if (isSupabaseConfigured()) {
-      try {
-        const supabase = await createClient();
-        if (supabase) {
-          await supabase
-            .from("integration_settings")
-            .upsert(updated, { onConflict: "provider" });
-        }
-      } catch (dbErr) {
-        console.warn("[Integrations] Supabase save warning (using local):", dbErr);
+      if (error) {
+        throw new Error("Unable to save integration settings to Supabase.");
       }
+      return { success: true, data: updated };
     }
 
-    return { success: true, data: updated };
-  } catch (err: any) {
-    console.error("[Integrations] Error saving settings:", err);
-    return { success: false, error: err?.message || "Lỗi lưu cấu hình tích hợp" };
+    if (isLocalDataFallbackEnabled()) {
+      const dir = path.dirname(SETTINGS_FILE);
+      await mkdir(dir, { recursive: true });
+      await writeFile(SETTINGS_FILE, JSON.stringify(updated, null, 2), "utf-8");
+      return { success: true, data: updated };
+    }
+
+    throw new Error("Supabase integration settings storage is not configured.");
+  } catch (err) {
+    console.error(
+      "[Integrations] Failed to save settings:",
+      err instanceof Error ? err.message : "Unknown error"
+    );
+    return { success: false, error: "Không thể lưu cấu hình tích hợp." };
+  }
+}
+
+export function isValidAppsScriptUrl(value: string): boolean {
+  try {
+    const url = new URL(value);
+    return (
+      url.protocol === "https:" &&
+      url.hostname === "script.google.com" &&
+      url.pathname.startsWith("/macros/s/") &&
+      url.pathname.endsWith("/exec")
+    );
+  } catch {
+    return false;
   }
 }
 
@@ -164,12 +160,9 @@ export async function getDecryptedWebhookSecret(): Promise<string> {
 export function generateAppsScriptCode(params: {
   sheetId?: string;
   sheetName?: string;
-  notificationEmail?: string;
-  secret?: string;
 }): string {
-  const sheetName = params.sheetName || "Rental Requests";
-  const secret = params.secret || "kiho_secret_lead_2026_xyz";
-  const sheetId = params.sheetId || "";
+  const sheetName = JSON.stringify(params.sheetName || "Rental Requests");
+  const sheetId = JSON.stringify(params.sheetId || "");
 
   return `/**
  * ============================================================================
@@ -181,7 +174,7 @@ export function generateAppsScriptCode(params: {
  * 2. Vào Tiện ích mở rộng (Extensions) -> Apps Script.
  * 3. Xóa code cũ và dán toàn bộ đoạn mã này vào.
  * 4. Vào Cài đặt dự án (Bánh răng) -> Thuộc tính tập lệnh (Script Properties) -> Thêm:
- *    - RENTAL_REQUEST_WEBHOOK_SECRET = "${secret}"
+ *    - RENTAL_REQUEST_WEBHOOK_SECRET = "Dán secret từ Admin Kiho Camera"
  *    (Lưu ý: Email nhận thông báo được điều khiển 100% từ Admin Kiho Camera)
  * 5. Bấm Triển khai (Deploy) -> Tùy chọn triển khai mới (New deployment):
  *    - Loại: Ứng dụng web (Web App)
@@ -198,7 +191,7 @@ function doPost(e) {
 
     var data = JSON.parse(e.postData.contents);
     var scriptProperties = PropertiesService.getScriptProperties();
-    var expectedSecret = scriptProperties.getProperty("RENTAL_REQUEST_WEBHOOK_SECRET") || "${secret}";
+    var expectedSecret = scriptProperties.getProperty("RENTAL_REQUEST_WEBHOOK_SECRET");
 
     // 1. Xác thực Shared Secret (Bắt buộc xác thực trước khi làm bất kỳ thao tác nào)
     if (!expectedSecret || data.secret !== expectedSecret) {
@@ -207,7 +200,7 @@ function doPost(e) {
 
     // 2. Mở Spreadsheet & Sheet
     var spreadsheet;
-    var targetSheetId = "${sheetId}";
+    var targetSheetId = ${sheetId};
     if (targetSheetId && targetSheetId.trim() !== "") {
       try {
         spreadsheet = SpreadsheetApp.openById(targetSheetId.trim());
@@ -222,7 +215,7 @@ function doPost(e) {
       return createJsonResponse({ success: false, code: "SPREADSHEET_ERROR", error: "Không thể mở Google Spreadsheet (Kiểm tra lại Sheet ID)." });
     }
 
-    var sheetName = "${sheetName}" || "Rental Requests";
+    var sheetName = ${sheetName} || "Rental Requests";
     var sheet = spreadsheet.getSheetByName(sheetName);
 
     if (!sheet) {
@@ -257,7 +250,7 @@ function doPost(e) {
     }
 
     // 4. Lấy Email nhận thông báo từ Server Payload (Admin là Single Source of Truth)
-    var notificationEmail = (data.notificationEmail || scriptProperties.getProperty("NOTIFICATION_EMAIL") || "").trim();
+    var notificationEmail = (data.notificationEmail || "").trim();
     var emailRegex = /^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$/;
     if (!notificationEmail || !emailRegex.test(notificationEmail)) {
       return createJsonResponse({
@@ -285,6 +278,20 @@ function doPost(e) {
       return dStr;
     }
 
+    function sanitizeSheetCell(value) {
+      var text = String(value == null ? "" : value);
+      return /^[=+\-@]/.test(text) ? "'" + text : text;
+    }
+
+    function escapeHtml(value) {
+      return String(value == null ? "" : value)
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#39;");
+    }
+
     var rentalDateVn = formatVnDate(rentalDate);
     var returnDateVn = formatVnDate(returnDate);
 
@@ -293,13 +300,13 @@ function doPost(e) {
     try {
       sheet.appendRow([
         timestamp,
-        customerName,
-        "'" + phone,
-        equipmentName,
+        sanitizeSheetCell(customerName),
+        "'" + sanitizeSheetCell(phone),
+        sanitizeSheetCell(equipmentName),
         rentalDateVn,
         returnDateVn,
-        note,
-        source,
+        sanitizeSheetCell(note),
+        sanitizeSheetCell(source),
         status
       ]);
       sheetSaved = true;
@@ -307,13 +314,18 @@ function doPost(e) {
       return createJsonResponse({
         success: false,
         code: "SHEET_APPEND_ERROR",
-        error: "Lỗi ghi dữ liệu vào Sheet: " + sheetErr.toString()
+        error: "Không thể ghi dữ liệu vào Google Sheet."
       });
     }
 
     // 6. Gửi Email thông báo tức thì tới email được cấu hình trong Admin
     var isTest = data.isTest ? "[TEST TỪ ADMIN] " : "";
     var emailSubject = isTest + "📸 Lead mới — " + equipmentName + " — " + customerName;
+    var safeCustomerName = escapeHtml(customerName);
+    var safePhone = escapeHtml(phone);
+    var safeEquipmentName = escapeHtml(equipmentName);
+    var safeNote = escapeHtml(note);
+    var safeSource = escapeHtml(source);
 
     var emailHtml = \`
       <div style="font-family: Arial, sans-serif; max-width: 560px; margin: 0 auto; background: #faf8f4; border: 1px solid #e8e2d7; border-radius: 16px; padding: 24px; color: #171716;">
@@ -325,18 +337,18 @@ function doPost(e) {
         <table style="width: 100%; border-collapse: collapse; font-size: 14px;">
           <tr>
             <td style="padding: 8px 0; color: #78716c; width: 130px;">Họ tên khách:</td>
-            <td style="padding: 8px 0; font-weight: bold; font-size: 15px; color: #171716;">\${customerName}</td>
+            <td style="padding: 8px 0; font-weight: bold; font-size: 15px; color: #171716;">\${safeCustomerName}</td>
           </tr>
           <tr>
             <td style="padding: 8px 0; color: #78716c;">Số điện thoại:</td>
             <td style="padding: 8px 0; font-weight: bold; font-size: 18px;">
-              <a href="tel:\${phone}" style="color: #b45309; text-decoration: none;">📞 \${phone}</a>
-              <a href="https://zalo.me/\${phone}" target="_blank" style="margin-left: 10px; font-size: 12px; color: #0284c7; text-decoration: none;">[Mở Zalo]</a>
+              <a href="tel:\${safePhone}" style="color: #b45309; text-decoration: none;">📞 \${safePhone}</a>
+              <a href="https://zalo.me/\${safePhone}" target="_blank" style="margin-left: 10px; font-size: 12px; color: #0284c7; text-decoration: none;">[Mở Zalo]</a>
             </td>
           </tr>
           <tr>
             <td style="padding: 8px 0; color: #78716c;">Dòng máy chọn:</td>
-            <td style="padding: 8px 0; font-weight: bold; color: #171716; text-transform: uppercase;">📷 \${equipmentName}</td>
+            <td style="padding: 8px 0; font-weight: bold; color: #171716; text-transform: uppercase;">📷 \${safeEquipmentName}</td>
           </tr>
           <tr>
             <td style="padding: 8px 0; color: #78716c;">Lịch thuê:</td>
@@ -345,17 +357,17 @@ function doPost(e) {
           \${note ? \`
           <tr>
             <td style="padding: 8px 0; color: #78716c; vertical-align: top;">Ghi chú của khách:</td>
-            <td style="padding: 8px 0; color: #44403c; font-style: italic;">"\${note}"</td>
+            <td style="padding: 8px 0; color: #44403c; font-style: italic;">"\${safeNote}"</td>
           </tr>
           \` : ""}
           <tr>
             <td style="padding: 8px 0; color: #78716c;">Thời gian gửi:</td>
-            <td style="padding: 8px 0; color: #78716c; font-size: 12px;">\${timestamp} (\${source})</td>
+            <td style="padding: 8px 0; color: #78716c; font-size: 12px;">\${timestamp} (\${safeSource})</td>
           </tr>
         </table>
 
         <div style="margin-top: 24px; padding-top: 16px; border-top: 1px solid #e8e2d7; text-align: center;">
-          <a href="tel:\${phone}" style="display: inline-block; background: #171716; color: #ffffff; padding: 12px 24px; border-radius: 10px; text-decoration: none; font-weight: bold; font-size: 13px;">
+          <a href="tel:\${safePhone}" style="display: inline-block; background: #171716; color: #ffffff; padding: 12px 24px; border-radius: 10px; text-decoration: none; font-weight: bold; font-size: 13px;">
             GỌI LẠI CHO KHÁCH NGAY
           </a>
         </div>
@@ -377,7 +389,7 @@ function doPost(e) {
         sheetSaved: true,
         emailSent: false,
         code: "EMAIL_ERROR",
-        error: "Đã lưu vào Sheet nhưng gửi email thất bại: " + mailErr.toString(),
+        error: "Đã lưu vào Sheet nhưng gửi email thất bại.",
         notificationEmail: notificationEmail
       });
     }
@@ -391,7 +403,7 @@ function doPost(e) {
     });
 
   } catch (err) {
-    return createJsonResponse({ success: false, code: "UNKNOWN_ERROR", error: err.toString() });
+    return createJsonResponse({ success: false, code: "UNKNOWN_ERROR", error: "Apps Script gặp lỗi không xác định." });
   }
 }
 
@@ -408,7 +420,7 @@ export async function testAppsScriptConnection(
   appsScriptUrl: string,
   secret: string
 ): Promise<{ success: boolean; spreadsheetName?: string; sheetName?: string; message?: string; error?: string }> {
-  if (!appsScriptUrl || !appsScriptUrl.startsWith("http")) {
+  if (!isValidAppsScriptUrl(appsScriptUrl)) {
     return { success: false, error: "Vui lòng nhập URL Web App hợp lệ (bắt đầu bằng https://script.google.com/...)." };
   }
 
@@ -476,7 +488,7 @@ export async function sendTestLeadToAppsScript(
   emailSent?: boolean;
   error?: string;
 }> {
-  if (!appsScriptUrl || !appsScriptUrl.startsWith("http")) {
+  if (!isValidAppsScriptUrl(appsScriptUrl)) {
     return { success: false, error: "Vui lòng nhập URL Web App hợp lệ." };
   }
 

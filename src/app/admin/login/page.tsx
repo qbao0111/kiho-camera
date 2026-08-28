@@ -32,19 +32,14 @@ export default function AdminLoginPage() {
         }
 
         if (data.session) {
-          localStorage.setItem("kiho_admin_session", "true");
           router.push("/admin");
+          router.refresh();
           return;
         }
       } else {
-        // Mock demo login bypass khi chưa cấu hình Supabase
-        if (email && password) {
-          localStorage.setItem("kiho_admin_session", "true");
-          router.push("/admin");
-          return;
-        } else {
-          setErrorMsg("Vui lòng nhập đầy đủ email và mật khẩu.");
-        }
+        setErrorMsg(
+          "Supabase Auth chưa được cấu hình. Vui lòng kiểm tra biến môi trường trước khi đăng nhập."
+        );
       }
     } catch (err: any) {
       setErrorMsg(err.message || "Lỗi đăng nhập.");

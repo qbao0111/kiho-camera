@@ -33,3 +33,8 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# private development persistence (Supabase is production source of truth)
+/src/data/integration-settings.json
+/src/data/rental-requests.json
+/public/uploads/

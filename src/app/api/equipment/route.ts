@@ -2,8 +2,17 @@ import { NextRequest, NextResponse } from "next/server";
 import { createClient } from "@/lib/supabase/server";
 import { getLocalEquipment, saveLocalEquipment } from "@/lib/local-storage";
 import { Equipment } from "@/types/database";
+import { getAuthenticatedAdmin } from "@/lib/auth/admin";
+import { isLocalDataFallbackEnabled } from "@/lib/environment";
 
 export async function POST(req: NextRequest) {
+  if (!(await getAuthenticatedAdmin())) {
+    return NextResponse.json(
+      { success: false, error: "Unauthorized" },
+      { status: 401 }
+    );
+  }
+
   try {
     const body = await req.json();
     const { id, payload, productImages, samplePhotos } = body;
@@ -53,7 +62,14 @@ export async function POST(req: NextRequest) {
       console.warn("Supabase not available, using local JSON store:", supabaseErr);
     }
 
-    // 2. Local Fallback Persistence
+    if (!isLocalDataFallbackEnabled()) {
+      return NextResponse.json(
+        { success: false, error: "Supabase storage is unavailable." },
+        { status: 503 }
+      );
+    }
+
+    // 2. Explicit development-only local fallback
     const list = await getLocalEquipment();
     const equipmentId = id || `e${Date.now()}`;
 
@@ -94,8 +110,14 @@ export async function POST(req: NextRequest) {
     await saveLocalEquipment(list);
 
     return NextResponse.json({ success: true, id: equipmentId });
-  } catch (error: any) {
-    console.error("Save equipment API error:", error);
-    return NextResponse.json({ error: error.message || "Failed to save equipment" }, { status: 500 });
+  } catch (error) {
+    console.error(
+      "Save equipment API error:",
+      error instanceof Error ? error.message : "Unknown error"
+    );
+    return NextResponse.json(
+      { success: false, error: "Failed to save equipment." },
+      { status: 500 }
+    );
   }
 }
