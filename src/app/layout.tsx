@@ -6,24 +6,25 @@ import "./globals.css";
 
 const playfairDisplay = Playfair_Display({
   subsets: ["latin", "vietnamese"],
-  weight: ["400", "600", "700", "800", "900"],
+  weight: ["400", "700"],
   variable: "--font-display",
   display: "swap",
 });
 
 const beVietnamPro = Be_Vietnam_Pro({
   subsets: ["latin", "vietnamese"],
-  weight: ["300", "400", "500", "600", "700", "800"],
+  weight: ["400", "500", "600", "700"],
   variable: "--font-sans",
   display: "swap",
 });
 
 const jetbrainsMono = JetBrains_Mono({
   subsets: ["latin", "vietnamese"],
-  weight: ["400", "500", "600", "700"],
+  weight: ["500", "600"],
   variable: "--font-mono",
   display: "swap",
 });
+
 
 export const viewport: Viewport = {
   themeColor: "#faf8f5",

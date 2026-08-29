@@ -1,5 +1,3 @@
-"use client";
-
 import React from "react";
 import Link from "next/link";
 import Image from "next/image";
@@ -11,6 +9,7 @@ interface ProductCardProps {
   equipment: Equipment;
   priority?: boolean;
 }
+
 
 export function ProductCard({ equipment, priority = false }: ProductCardProps) {
   const coverImage = getEquipmentCoverImage(equipment);

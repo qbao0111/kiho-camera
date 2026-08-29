@@ -1,11 +1,10 @@
-"use client";
-
 import React from "react";
 import { ShieldCheck, HelpCircle, FileCheck } from "lucide-react";
 
 interface RentalProcessProps {
   messengerUrl?: string;
 }
+
 
 export function RentalProcess({}: RentalProcessProps = {}) {
   const steps = [

@@ -1,5 +1,3 @@
-"use client";
-
 import React from "react";
 import Image from "next/image";
 import Link from "next/link";
@@ -8,6 +6,7 @@ import { ArrowRight, Camera } from "lucide-react";
 interface CanonR50SpotlightProps {
   messengerUrl?: string;
 }
+
 
 export function CanonR50Spotlight({}: CanonR50SpotlightProps = {}) {
   return (

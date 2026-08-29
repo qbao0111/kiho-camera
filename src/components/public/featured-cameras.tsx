@@ -1,5 +1,3 @@
-"use client";
-
 import React from "react";
 import Link from "next/link";
 import { ArrowRight, Camera } from "lucide-react";
@@ -50,10 +48,11 @@ export function FeaturedCameras({ equipment }: FeaturedCamerasProps) {
 
         {/* 6 Curated Cards Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-7">
-          {displayList.map((camera, idx) => (
-            <ProductCard key={camera.id} equipment={camera} priority={idx < 3} />
+          {displayList.map((camera) => (
+            <ProductCard key={camera.id} equipment={camera} priority={false} />
           ))}
         </div>
+
 
         {/* Bottom Callout */}
         <div className="text-center pt-2">

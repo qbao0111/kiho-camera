@@ -17,9 +17,23 @@ export function Header({ settings }: HeaderProps) {
   const pathname = usePathname();
 
   useEffect(() => {
+    let ticking = false;
+    let lastScrolled = false;
+
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 15);
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          const scrolled = window.scrollY > 15;
+          if (scrolled !== lastScrolled) {
+            lastScrolled = scrolled;
+            setIsScrolled(scrolled);
+          }
+          ticking = false;
+        });
+        ticking = true;
+      }
     };
+
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
@@ -67,10 +81,10 @@ export function Header({ settings }: HeaderProps) {
               alt="Kiho Camera"
               width={160}
               height={128}
-              priority
               className="h-10 sm:h-12 w-auto object-contain transition-transform group-hover:scale-[1.02]"
             />
           </Link>
+
 
 
           {/* Desktop Navigation */}

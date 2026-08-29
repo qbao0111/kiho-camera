@@ -1,5 +1,3 @@
-"use client";
-
 import React from "react";
 import Image from "next/image";
 import Link from "next/link";
@@ -105,7 +103,7 @@ export function UseCaseSection() {
                   src={theme.image}
                   alt={theme.title}
                   fill
-                  quality={90}
+                  quality={82}
                   sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
                   className="object-cover group-hover:scale-[1.02] transition-transform duration-500 ease-out"
                 />

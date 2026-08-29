@@ -4,13 +4,21 @@ import React, { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowUpRight, Camera, Check } from "lucide-react";
-import { Equipment } from "@/types/database";
+import { Equipment, PricingEquipmentDTO } from "@/types/database";
 import { getEquipmentCoverImage } from "@/lib/equipment-images";
 
 interface RentalPriceIndexProps {
-  equipment?: Equipment[];
+  equipment?: (Equipment | PricingEquipmentDTO)[];
   messengerUrl?: string;
 }
+
+function getItemCoverImage(item: Equipment | PricingEquipmentDTO): string {
+  if ("cover_image" in item && typeof item.cover_image === "string") {
+    return item.cover_image;
+  }
+  return getEquipmentCoverImage(item as Equipment);
+}
+
 
 export function RentalPriceIndex({
   equipment = [],
@@ -159,7 +167,7 @@ export function RentalPriceIndex({
             {/* Mobile Compact Rows with Dividers */}
             <div className="sm:hidden divide-y divide-ink-200">
               {filteredCameras.map((item, idx) => {
-                const coverImg = getEquipmentCoverImage(item);
+                const coverImg = getItemCoverImage(item);
                 const numStr = String(idx + 1).padStart(2, "0");
 
                 return (
@@ -237,12 +245,13 @@ export function RentalPriceIndex({
                 {/* Camera Image */}
                 <div className="relative aspect-square w-full rounded-lg bg-canvas-100 border border-ink-100 p-4 flex items-center justify-center">
                   <Image
-                    src={getEquipmentCoverImage(activeCamera)}
+                    src={getItemCoverImage(activeCamera)}
                     alt={activeCamera.name}
                     fill
                     sizes="340px"
                     className="object-contain p-2 filter drop-shadow-[0_10px_20px_rgba(20,15,10,0.15)] transition-all duration-300"
                   />
+
                   {activeCamera.is_featured && (
                     <div className="absolute top-2.5 left-2.5">
                       <span className="bg-ink-900 text-white text-[9px] font-mono px-2 py-0.5 rounded-sm">

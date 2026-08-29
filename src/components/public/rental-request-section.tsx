@@ -1,5 +1,3 @@
-"use client";
-
 import React from "react";
 import { CheckCircle2, MessageSquare } from "lucide-react";
 import { RentalRequestForm, EquipmentOption } from "@/components/public/rental-request-form";
@@ -8,6 +6,7 @@ interface RentalRequestSectionProps {
   equipmentList?: EquipmentOption[];
   messengerUrl?: string;
 }
+
 
 export function RentalRequestSection({
   equipmentList = [],

@@ -61,6 +61,28 @@ export interface Equipment {
   updated_at?: string;
 }
 
+export interface PricingEquipmentDTO {
+  id: string;
+  slug: string;
+  name: string;
+  brand: string;
+  price_session: number;
+  price_per_day: number;
+  price_three_days: number;
+  short_description?: string | null;
+  use_cases?: string[];
+  is_featured?: boolean;
+  cover_image: string;
+}
+
+export interface RentalFormEquipmentDTO {
+  id: string;
+  slug: string;
+  name: string;
+  brand: string;
+}
+
+
 export interface Feedback {
   id: string;
   customer_name: string;
