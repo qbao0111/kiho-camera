@@ -107,7 +107,7 @@ export function CatalogFilterBar({
               name="search"
               defaultValue={currentSearch || ""}
               placeholder="Tìm Canon R50, X100V..."
-              className="w-full pl-8 pr-3 py-1.5 bg-white border border-ink-200 rounded-lg text-xs text-ink-900 focus:outline-hidden focus:border-accent focus:ring-1 focus:ring-accent transition-all placeholder:text-ink-500 font-sans"
+              className="w-full pl-8 pr-3 py-1.5 bg-white border border-ink-200 rounded-lg text-base sm:text-xs text-ink-900 focus:outline-hidden focus:border-accent focus:ring-1 focus:ring-accent transition-all placeholder:text-ink-500 font-sans"
             />
             <Search className="w-3.5 h-3.5 text-ink-600 absolute left-2.5 top-1/2 -translate-y-1/2" />
             {currentBrand !== "all" && <input type="hidden" name="brand" value={currentBrand} />}
@@ -122,7 +122,7 @@ export function CatalogFilterBar({
               value={currentSort}
               onChange={(e) => handleSortChange(e.target.value)}
               aria-label="Sắp xếp danh sách máy ảnh"
-              className="bg-white border border-ink-200 rounded-lg px-2.5 py-1.5 text-xs text-ink-900 focus:outline-hidden focus:border-accent focus:ring-1 focus:ring-accent cursor-pointer font-sans"
+              className="bg-white border border-ink-200 rounded-lg px-2.5 py-1.5 text-base sm:text-xs text-ink-900 focus:outline-hidden focus:border-accent focus:ring-1 focus:ring-accent cursor-pointer font-sans"
             >
               <option value="featured">Kiho đề xuất</option>
               <option value="price_asc">Giá: Thấp → Cao</option>
@@ -131,6 +131,7 @@ export function CatalogFilterBar({
             </select>
           </div>
         </div>
+
 
       </div>
     </div>

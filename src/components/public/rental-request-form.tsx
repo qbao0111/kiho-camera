@@ -289,7 +289,7 @@ export function RentalRequestForm({
           value={customerName}
           onChange={(e) => setCustomerName(e.target.value)}
           placeholder="Ví dụ: Nguyễn Minh Anh"
-          className="w-full px-3.5 py-2.5 rounded-lg bg-canvas-50 border border-ink-200 text-sm text-ink-900 placeholder:text-ink-500 focus:outline-hidden focus:border-accent focus:ring-1 focus:ring-accent focus:bg-white transition-all font-sans"
+          className="w-full px-3.5 py-2.5 rounded-lg bg-canvas-50 border border-ink-200 text-base sm:text-sm text-ink-900 placeholder:text-ink-500 focus:outline-hidden focus:border-accent focus:ring-1 focus:ring-accent focus:bg-white transition-all font-sans"
         />
       </div>
 
@@ -307,7 +307,7 @@ export function RentalRequestForm({
             disabled={isSubmitting}
             value={rentalDate}
             onChange={(e) => handleRentalDateChange(e.target.value)}
-            className="w-full px-3.5 py-2.5 rounded-lg bg-canvas-50 border border-ink-200 text-sm text-ink-900 focus:outline-hidden focus:border-accent focus:ring-1 focus:ring-accent focus:bg-white transition-all font-mono"
+            className="w-full px-3.5 py-2.5 rounded-lg bg-canvas-50 border border-ink-200 text-base sm:text-sm text-ink-900 focus:outline-hidden focus:border-accent focus:ring-1 focus:ring-accent focus:bg-white transition-all font-mono"
           />
         </div>
 
@@ -323,7 +323,7 @@ export function RentalRequestForm({
             disabled={isSubmitting}
             value={returnDate}
             onChange={(e) => setReturnDate(e.target.value)}
-            className="w-full px-3.5 py-2.5 rounded-lg bg-canvas-50 border border-ink-200 text-sm text-ink-900 focus:outline-hidden focus:border-accent focus:ring-1 focus:ring-accent focus:bg-white transition-all font-mono"
+            className="w-full px-3.5 py-2.5 rounded-lg bg-canvas-50 border border-ink-200 text-base sm:text-sm text-ink-900 focus:outline-hidden focus:border-accent focus:ring-1 focus:ring-accent focus:bg-white transition-all font-mono"
           />
         </div>
       </div>
@@ -338,7 +338,7 @@ export function RentalRequestForm({
           disabled={isSubmitting}
           value={equipmentName}
           onChange={(e) => handleEquipmentChange(e.target.value)}
-          className="w-full px-3.5 py-2.5 rounded-lg bg-canvas-50 border border-ink-200 text-sm text-ink-900 focus:outline-hidden focus:border-accent focus:ring-1 focus:ring-accent focus:bg-white transition-all font-sans cursor-pointer"
+          className="w-full px-3.5 py-2.5 rounded-lg bg-canvas-50 border border-ink-200 text-base sm:text-sm text-ink-900 focus:outline-hidden focus:border-accent focus:ring-1 focus:ring-accent focus:bg-white transition-all font-sans cursor-pointer"
         >
           {variant !== "drawer" && (
             <option value="Chưa biết — nhờ Kiho tư vấn">
@@ -369,7 +369,7 @@ export function RentalRequestForm({
           value={phone}
           onChange={(e) => setPhone(e.target.value)}
           placeholder="0912 345 678"
-          className="w-full px-3.5 py-2.5 rounded-lg bg-canvas-50 border border-ink-200 text-sm text-ink-900 placeholder:text-ink-500 focus:outline-hidden focus:border-accent focus:ring-1 focus:ring-accent focus:bg-white transition-all font-mono"
+          className="w-full px-3.5 py-2.5 rounded-lg bg-canvas-50 border border-ink-200 text-base sm:text-sm text-ink-900 placeholder:text-ink-500 focus:outline-hidden focus:border-accent focus:ring-1 focus:ring-accent focus:bg-white transition-all font-mono"
         />
       </div>
 
@@ -385,9 +385,10 @@ export function RentalRequestForm({
           value={note}
           onChange={(e) => setNote(e.target.value)}
           placeholder="Bạn định đi Phong Nha, check-in biển hay quay vlog..."
-          className="w-full px-3.5 py-2 rounded-lg bg-canvas-50 border border-ink-200 text-sm text-ink-900 placeholder:text-ink-500 focus:outline-hidden focus:border-accent focus:ring-1 focus:ring-accent focus:bg-white transition-all resize-none font-sans"
+          className="w-full px-3.5 py-2 rounded-lg bg-canvas-50 border border-ink-200 text-base sm:text-sm text-ink-900 placeholder:text-ink-500 focus:outline-hidden focus:border-accent focus:ring-1 focus:ring-accent focus:bg-white transition-all resize-none font-sans"
         />
       </div>
+
 
       {/* Submit Button */}
       <div className="pt-2 space-y-2">
