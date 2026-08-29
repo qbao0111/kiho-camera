@@ -5,6 +5,7 @@ import { LandingHero } from "@/components/public/landing-hero";
 import { TrustStrip } from "@/components/public/trust-strip";
 import { RentalPriceIndex } from "@/components/public/rental-price-index";
 import { FeaturedCameras } from "@/components/public/featured-cameras";
+import { HomepageMixedSampleGallery } from "@/components/public/homepage-mixed-sample-gallery";
 import { CanonR50Spotlight } from "@/components/public/canon-r50-spotlight";
 import { Interactive3dAperture } from "@/components/public/interactive-3d-aperture";
 import { UseCaseSection } from "@/components/public/use-case-section";
@@ -41,8 +42,12 @@ export default async function HomePage() {
       {/* 4. MÁY ĐANG CÓ TẠI KIHO (Server-rendered camera cards preview) */}
       <FeaturedCameras equipment={equipmentList} />
 
-      {/* 5. CANON R50 SPOTLIGHT (Server-rendered Editorial Feature Band) */}
+      {/* 5. ẢNH CHỤP THỰC TẾ (Unified mixed real sample photos gallery) */}
+      <HomepageMixedSampleGallery equipmentList={equipmentList} />
+
+      {/* 6. CANON R50 SPOTLIGHT (Server-rendered Editorial Feature Band) */}
       <CanonR50Spotlight messengerUrl={settings.messenger_url} />
+
 
       {/* 6. OPTICAL BOKEH / APERTURE SIMULATOR (Dark Optical Lab Experience) */}
       <Interactive3dAperture />
