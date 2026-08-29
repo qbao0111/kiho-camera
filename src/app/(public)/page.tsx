@@ -6,6 +6,7 @@ import { TrustStrip } from "@/components/public/trust-strip";
 import { RentalPriceIndex } from "@/components/public/rental-price-index";
 import { FeaturedCameras } from "@/components/public/featured-cameras";
 import { CanonR50Spotlight } from "@/components/public/canon-r50-spotlight";
+import { Interactive3dAperture } from "@/components/public/interactive-3d-aperture";
 import { UseCaseSection } from "@/components/public/use-case-section";
 import { RentalRequestSection } from "@/components/public/rental-request-section";
 import { RentalProcess } from "@/components/public/rental-process";
@@ -43,8 +44,12 @@ export default async function HomePage() {
       {/* 5. CANON R50 SPOTLIGHT (Server-rendered Editorial Feature Band) */}
       <CanonR50Spotlight messengerUrl={settings.messenger_url} />
 
-      {/* 6. CHỌN VIBE CHUYẾN ĐI (Server-rendered High-Sharpness 4:5 Photographic Grid) */}
+      {/* 6. OPTICAL BOKEH / APERTURE SIMULATOR (Dark Optical Lab Experience) */}
+      <Interactive3dAperture />
+
+      {/* 7. CHỌN VIBE CHUYẾN ĐI (Server-rendered High-Sharpness 4:5 Photographic Grid) */}
       <UseCaseSection />
+
 
       {/* 7. LEAD CONVERSION FORM (Server wrapper + lightweight form client component) */}
       <RentalRequestSection
