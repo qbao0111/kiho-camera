@@ -21,9 +21,9 @@ export function LocalBusinessJsonLd({ settings, siteUrl }: LocalBusinessProps) {
     "hasMap": settings.maps_url || "https://maps.app.goo.gl/3Hh3G8uLymxQn6r98",
     "address": {
       "@type": "PostalAddress",
-      "streetAddress": "48 Ngô Quyền",
+      "streetAddress": settings.address || "48 Ngô Quyền, TP. Đồng Hới, Tỉnh Quảng Bình",
       "addressLocality": "Đồng Hới",
-      "addressRegion": "Quảng Trị",
+      "addressRegion": "Quảng Bình",
       "addressCountry": "VN",
     },
     "geo": {

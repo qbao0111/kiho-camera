@@ -12,20 +12,21 @@ import {
   MessageCircle,
 } from "lucide-react";
 import { getSiteSettings } from "@/lib/services/settings";
+import { getEquipmentList } from "@/lib/services/equipment";
 import { BreadcrumbJsonLd } from "@/components/public/json-ld";
 import { FadeIn } from "@/components/ui/motion";
 
 export const metadata: Metadata = {
   title: "Thuê máy ảnh đi Phong Nha: Gợi ý chọn máy & Kinh nghiệm",
   description:
-    "Kinh nghiệm thuê máy ảnh du lịch đi Phong Nha - Kẻ Bàng: Gợi ý chọn dòng máy phù hợp cho Động Thiên Đường, Sông Son, Suối Moọc. Đầy đủ 2 pin, thẻ nhớ và đầu đọc OTG.",
+    "Kinh nghiệm thuê máy ảnh du lịch đi Phong Nha - Kẻ Bàng: Gợi ý chọn dòng máy phù hợp cho Động Thiên Đường, Sông Son, Suối Moọc. Kèm 2 pin, thẻ nhớ và đầu đọc OTG.",
   alternates: {
     canonical: "/thue-may-anh-phong-nha",
   },
   openGraph: {
     title: "Thuê máy ảnh đi Phong Nha: Gợi ý chọn máy & Kinh nghiệm | Kiho Camera",
     description:
-      "Gợi ý chọn dòng máy ảnh du lịch Canon, Fujifilm, Sony phù hợp cho chuyến đi Phong Nha - Kẻ Bàng. Nhận máy tại Đồng Hới, đầy đủ pin phụ và thẻ nhớ.",
+      "Gợi ý chọn dòng máy ảnh du lịch Canon, Fujifilm, Sony phù hợp cho chuyến đi Phong Nha - Kẻ Bàng. Nhận máy tại Đồng Hới, kèm 2 pin, sạc và thẻ nhớ.",
     url: "/thue-may-anh-phong-nha",
     type: "article",
     images: [
@@ -41,80 +42,85 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Thuê máy ảnh đi Phong Nha: Gợi ý chọn máy & Kinh nghiệm",
     description:
-      "Kinh nghiệm chọn máy ảnh du lịch Canon, Fujifilm, Sony chụp đẹp tại Phong Nha, Động Thiên Đường, Suối Moọc.",
+      "Kinh nghiệm chọn máy ảnh du lịch Canon, Fujifilm, Sony cho chuyến đi Phong Nha, Động Thiên Đường, Suối Moọc.",
   },
 };
 
-const RECOMMENDED_MODELS = [
+interface RecommendedModelMeta {
+  slug: string;
+  name: string;
+  brand: string;
+  tagline: string;
+  badge: string;
+  highlights: string[];
+  bestFor: string;
+}
+
+const RECOMMENDED_MODELS: RecommendedModelMeta[] = [
   {
     slug: "canon-eos-r50",
     name: "Canon EOS R50",
     brand: "Canon",
-    tagline: "Đa năng toàn diện cho người mới",
+    tagline: "Thân máy mirrorless nhỏ gọn, thao tác cảm ứng trực quan",
     badge: "Phổ biến nhất",
     highlights: [
-      "Lấy nét tự động Dual Pixel AF II nhận diện mắt cực nhạy",
-      "Màu da sáng hồng tự nhiên, khó bị nhòe nét",
-      "Kèm lens zoom 18-45mm IS STM chống rung",
+      "Lấy nét tự động Dual Pixel CMOS AF II nhận diện người, khuôn mặt và mắt",
+      "Tông màu ảnh tươi tắn, thân thiện và dễ làm quen cho người mới",
+      "Kèm ống kính zoom Canon RF-S 18-45mm IS STM hỗ trợ chống rung quang học",
     ],
     bestFor: "Chụp gia đình, cặp đôi, nhóm bạn đi Động Thiên Đường, Phong Nha",
-    priceText: "Từ 150K / buổi",
   },
   {
     slug: "fujifilm-x100v",
     name: "Fujifilm X100V",
     brand: "Fujifilm",
-    tagline: "Màu film hoài niệm Classic Negative",
+    tagline: "Thiết kế rangefinder gọn nhẹ, màu ảnh JPEG và Film Simulation đặc trưng",
     badge: "Màu Film",
     highlights: [
-      "Bộ giả lập màu film Classic Negative giàu cảm xúc",
-      "Thiết kế rangefinder kim loại sang trọng, gọn nhẹ",
-      "Ống kính 23mm f/2 sắc nét, chụp cafe và hoàng hôn",
+      "Bộ giả lập màu Film Simulation của Fujifilm, nổi bật với Classic Negative",
+      "Thiết kế rangefinder kim loại cổ điển, kính ngắm lai OVF/EVF",
+      "Ống kính cố định Fujinon 23mm f/2 (tương đương 35mm trên Full-Frame)",
     ],
-    bestFor: "Dạo chơi làng quê Phong Nha, cafe ngắm Sông Son, ảnh nghệ thuật",
-    priceText: "Từ 220K / buổi",
+    bestFor: "Dạo chơi Phong Nha, cafe ngắm Sông Son, ảnh đời thường và streetlife",
   },
   {
     slug: "canon-g7x-mark-iii",
     name: "Canon G7 X Mark III",
     brand: "Canon",
-    tagline: "Siêu nhỏ gọn đút vừa túi áo",
+    tagline: "Máy compact bỏ túi, zoom linh hoạt cho ảnh check-in và clip ngắn",
     badge: "Bỏ túi",
     highlights: [
-      "Ống kính zoom 24-100mm f/1.8-2.8 linh hoạt",
-      "Màn hình cảm ứng lật 180 độ chụp selfie tiện lợi",
-      "Quay video 4K sắc nét, màu da rạng rỡ",
+      "Ống kính zoom 24-100mm f/1.8-2.8 tích hợp chống rung quang học",
+      "Màn hình cảm ứng lật 180 độ hỗ trợ selfie và bố cục linh hoạt",
+      "Thiết kế bỏ túi gọn nhẹ (khoảng 304g), hỗ trợ quay video 4K",
     ],
-    bestFor: "Người thích máy nhỏ gọn, chụp check-in nhanh, quay clip ngắn",
-    priceText: "Từ 130K / buổi",
+    bestFor: "Người thích máy nhỏ gọn, chụp check-in nhanh, quay clip du lịch ngắn",
   },
   {
     slug: "sony-zv1-mark-ii",
     name: "Sony ZV-1 Mark II",
     brand: "Sony",
-    tagline: "Góc siêu rộng 18mm chuyên Travel Vlog",
+    tagline: "Máy quay vlog nhỏ gọn với góc rộng 18mm và micro 3 capsule kèm windscreen",
     badge: "Quay Vlog",
     highlights: [
-      "Góc siêu rộng 18-50mm tự quay vlog không bị to mặt",
-      "Micro 3 đầu thu kèm bông lọc gió át tiếng gió sông",
-      "Màn hình xoay lật đa góc, lấy nét nhận diện mặt nhanh",
+      "Ống kính góc rộng 18-50mm thuận tiện tự quay vlog cầm tay",
+      "Micro 3 capsule định hướng kèm bông lọc gió (windscreen) hỗ trợ ngoài trời",
+      "Màn hình xoay lật đa góc và tính năng Creative Look tùy chỉnh tông màu",
     ],
     bestFor: "Quay vlog hành trình trên thuyền Sông Son, review du lịch",
-    priceText: "Từ 170K / buổi",
   },
   {
     slug: "fujifilm-xs10",
     name: "Fujifilm X-S10",
     brand: "Fujifilm",
-    tagline: "Báng cầm chắc chắn & Chống rung IBIS",
+    tagline: "Báng cầm chắc chắn, chống rung IBIS và 18 Film Simulation",
     badge: "Trekking & Cảnh quan",
     highlights: [
-      "Chống rung cảm biến IBIS 5 trục hỗ trợ chụp thiếu sáng",
+      "Hệ thống chống rung cảm biến IBIS 5 trục hỗ trợ chụp thiếu sáng",
       "Báng cầm tay sâu công thái học đầm chắc khi di chuyển",
-      "Màn hình xoay lật và trọn bộ 18 màu film Fujifilm",
+      "Màn hình xoay lật đa góc và 18 chế độ Film Simulation của Fujifilm",
     ],
     bestFor: "Tour khám phá thiên nhiên, trekking Vườn quốc gia Phong Nha",
-    priceText: "Từ 200K / buổi",
   },
 ];
 
@@ -125,25 +131,29 @@ const FAQS = [
   },
   {
     q: "Chụp ảnh trong Động Thiên Đường hoặc Động Phong Nha có bị tối không?",
-    a: "Bên trong các hang động có hệ thống đèn chiếu sáng điểm nhưng tổng thể vẫn là môi trường thiếu sáng. Để có ảnh đẹp, bạn nên giữ chắc tay khi bấm chụp, tăng nhẹ ISO (lên 800 - 1600) hoặc chọn các dòng máy có chống rung tốt như Canon R50 hay Fujifilm X-S10. Đội ngũ Kiho sẽ hướng dẫn bạn cài đặt thông số tối ưu trước khi nhận máy.",
+    a: "Bên trong các hang động có hệ thống đèn chiếu sáng điểm nhưng tổng thể vẫn là môi trường thiếu sáng. Để có ảnh rõ nét, bạn nên giữ chắc tay khi bấm chụp, tăng nhẹ ISO (lên 800 - 1600) hoặc chọn các dòng máy có chống rung cảm biến như Fujifilm X-S10 hay ống kính chống rung quang học như Canon R50 (RF-S 18-45mm IS STM). Đội ngũ Kiho sẽ hướng dẫn bạn cài đặt thông số cơ bản trước khi nhận máy.",
   },
   {
     q: "Đi Suối Nước Moọc hoặc Sông Chày - Hang Tối cần lưu ý gì để bảo quản máy?",
     a: "Các dòng máy ảnh du lịch không chống nước ngâm chìm. Khi tham gia các hoạt động chèo thuyền kayak, đu zipline hoặc tắm suối, bạn hãy cất máy trong túi chống sốc kèm túi chống nước chuyên dụng, chỉ mang máy ra chụp khi đã đứng vững ở vị trí khô ráo an toàn trên bờ.",
   },
   {
-    q: "Thủ tục thuê máy tại Kiho Camera có cần đặt cọc nhiều tiền không?",
-    a: "Kiho áp dụng chính sách thuê máy nhanh gọn, không cần cọc tiền giá trị máy đối với khách du lịch có thông tin xác minh (CCCD/Hộ chiếu và thông tin vé máy bay/khách sạn tại Quảng Bình).",
+    q: "Thủ tục thuê máy tại Kiho Camera có cần đặt cọc tiền không?",
+    a: "Kiho áp dụng chính sách không yêu cầu đặt cọc tiền máy. Khi thuê, bạn chỉ cần liên hệ và xác minh thông tin qua ảnh CCCD gắn chip chính chủ hoặc tài khoản định danh điện tử VNeID.",
   },
   {
     q: "Làm thế nào để lấy ảnh từ máy ảnh sang điện thoại ngay trong chuyến đi?",
-    a: "Trọn bộ thuê máy tại Kiho luôn đi kèm đầu đọc thẻ nhớ OTG tốc độ cao hỗ trợ cả cổng Lightning (iPhone) và Type-C (Android/iPhone 15+). Bạn chỉ cần cắm thẻ nhớ vào đầu đọc và kết nối với điện thoại là có thể xem và tải ảnh gốc sắc nét về máy chỉ sau vài giây.",
+    a: "Trọn bộ thuê máy tại Kiho luôn đi kèm đầu đọc thẻ nhớ OTG hỗ trợ kết nối trực tiếp với điện thoại (cổng Lightning cho iPhone và cổng Type-C cho Android / iPhone 15 trở lên). Bạn chỉ cần cắm thẻ nhớ vào đầu đọc và kết nối với điện thoại là có thể xem và lưu ảnh về máy nhanh chóng.",
   },
 ];
 
 export default async function PhongNhaGuidePage() {
   const settings = await getSiteSettings();
+  const allEquipment = await getEquipmentList({ onlyActive: true });
   const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://kihocamera.com";
+
+  // Map database equipment by slug for dynamic pricing
+  const equipmentMap = new Map(allEquipment.map((e) => [e.slug, e]));
 
   return (
     <div className="bg-[#faf8f5] text-ink-900 min-h-screen py-8 pb-24 md:pb-16">
@@ -177,7 +187,7 @@ export default async function PhongNhaGuidePage() {
           </h1>
 
           <p className="font-sans text-base sm:text-lg text-ink-600 leading-relaxed">
-            Vườn quốc gia Phong Nha - Kẻ Bàng với những hang động kỳ vĩ, dòng sông Son xanh ngọc bích và rừng nguyên sinh bạt ngàn là điểm đến không thể bỏ qua khi tới Quảng Bình. Để lưu giữ trọn vẹn vẻ đẹp này, một chiếc máy ảnh du lịch chuyên dụng sẽ giúp bạn bắt trọn từng khoảnh khắc với độ chi tiết và màu sắc mà điện thoại khó có thể tái hiện đầy đủ.
+            Vườn quốc gia Phong Nha - Kẻ Bàng với những hang động kỳ vĩ, dòng sông Son xanh ngọc bích và rừng nguyên sinh bạt ngàn là điểm đến không thể bỏ qua khi tới Quảng Bình. Để lưu giữ trọn vẹn vẻ đẹp này, một chiếc máy ảnh du lịch chuyên dụng sẽ giúp bạn bắt trọn từng khoảnh khắc với độ chi tiết và màu sắc tự nhiên cho chuyến đi.
           </p>
         </div>
 
@@ -201,7 +211,7 @@ export default async function PhongNhaGuidePage() {
             </li>
             <li className="flex items-start gap-2.5">
               <CheckCircle2 className="w-4 h-4 text-forest-600 mt-1 flex-shrink-0" />
-              <span><strong>Được test máy và hướng dẫn kỹ lưỡng:</strong> Nhân viên Kiho sẽ kiểm tra pin, thẻ nhớ và hướng dẫn bạn các chế độ chụp thực tế trước khi lên đường.</span>
+              <span><strong>Được kiểm tra máy và hướng dẫn chu đáo:</strong> Nhân viên Kiho sẽ kiểm tra pin, thẻ nhớ và hướng dẫn bạn các thao tác cơ bản trước khi lên đường.</span>
             </li>
             <li className="flex items-start gap-2.5">
               <CheckCircle2 className="w-4 h-4 text-forest-600 mt-1 flex-shrink-0" />
@@ -222,55 +232,66 @@ export default async function PhongNhaGuidePage() {
           </div>
 
           <div className="grid grid-cols-1 gap-5">
-            {RECOMMENDED_MODELS.map((model) => (
-              <div
-                key={model.slug}
-                className="bg-white rounded-2xl p-6 border border-sand-200 shadow-sm hover:border-sand-300 transition-all space-y-4"
-              >
-                <div className="flex flex-wrap items-start justify-between gap-3">
-                  <div>
-                    <div className="flex items-center gap-2.5">
-                      <h3 className="font-display text-lg sm:text-xl font-bold text-ink-950">
-                        {model.name}
-                      </h3>
-                      <span className="px-2.5 py-0.5 rounded-full bg-sand-100 text-ink-700 text-xs font-medium">
-                        {model.badge}
-                      </span>
+            {RECOMMENDED_MODELS.map((model) => {
+              const eq = equipmentMap.get(model.slug);
+              const priceText = eq?.price_session
+                ? `Từ ${Math.round(eq.price_session / 1000)}K / buổi`
+                : eq?.price_per_day
+                ? `Từ ${Math.round(eq.price_per_day / 1000)}K / ngày`
+                : null;
+
+              return (
+                <div
+                  key={model.slug}
+                  className="bg-white rounded-2xl p-6 border border-sand-200 shadow-sm hover:border-sand-300 transition-all space-y-4"
+                >
+                  <div className="flex flex-wrap items-start justify-between gap-3">
+                    <div>
+                      <div className="flex items-center gap-2.5">
+                        <h3 className="font-display text-lg sm:text-xl font-bold text-ink-950">
+                          {model.name}
+                        </h3>
+                        <span className="px-2.5 py-0.5 rounded-full bg-sand-100 text-ink-700 text-xs font-medium">
+                          {model.badge}
+                        </span>
+                      </div>
+                      <p className="font-sans text-xs sm:text-sm text-ink-500 mt-0.5">
+                        {model.tagline}
+                      </p>
                     </div>
-                    <p className="font-sans text-xs sm:text-sm text-ink-500 mt-0.5">
-                      {model.tagline}
+                    {priceText && (
+                      <div className="text-right">
+                        <span className="font-mono text-sm font-semibold text-accent">
+                          {priceText}
+                        </span>
+                      </div>
+                    )}
+                  </div>
+
+                  <ul className="space-y-1.5 font-sans text-xs sm:text-sm text-ink-600">
+                    {model.highlights.map((item, idx) => (
+                      <li key={idx} className="flex items-center gap-2">
+                        <span className="w-1.5 h-1.5 rounded-full bg-accent flex-shrink-0" />
+                        <span>{item}</span>
+                      </li>
+                    ))}
+                  </ul>
+
+                  <div className="pt-3 border-t border-sand-100 flex flex-wrap items-center justify-between gap-3">
+                    <p className="font-sans text-xs text-ink-500 italic">
+                      <strong>Phù hợp nhất:</strong> {model.bestFor}
                     </p>
-                  </div>
-                  <div className="text-right">
-                    <span className="font-mono text-sm font-semibold text-accent">
-                      {model.priceText}
-                    </span>
+                    <Link
+                      href={`/thiet-bi/${model.slug}`}
+                      className="inline-flex items-center gap-1.5 text-xs font-semibold text-accent hover:text-accent-hover transition-colors"
+                    >
+                      <span>Xem chi tiết máy</span>
+                      <ArrowRight className="w-3.5 h-3.5" />
+                    </Link>
                   </div>
                 </div>
-
-                <ul className="space-y-1.5 font-sans text-xs sm:text-sm text-ink-600">
-                  {model.highlights.map((item, idx) => (
-                    <li key={idx} className="flex items-center gap-2">
-                      <span className="w-1.5 h-1.5 rounded-full bg-accent flex-shrink-0" />
-                      <span>{item}</span>
-                    </li>
-                  ))}
-                </ul>
-
-                <div className="pt-3 border-t border-sand-100 flex flex-wrap items-center justify-between gap-3">
-                  <p className="font-sans text-xs text-ink-500 italic">
-                    <strong>Phù hợp nhất:</strong> {model.bestFor}
-                  </p>
-                  <Link
-                    href={`/thiet-bi/${model.slug}`}
-                    className="inline-flex items-center gap-1.5 text-xs font-semibold text-accent hover:text-accent-hover transition-colors"
-                  >
-                    <span>Xem chi tiết máy</span>
-                    <ArrowRight className="w-3.5 h-3.5" />
-                  </Link>
-                </div>
-              </div>
-            ))}
+              );
+            })}
           </div>
         </section>
 
@@ -292,7 +313,7 @@ export default async function PhongNhaGuidePage() {
                 Chụp trong Hang Động (Thiên Đường, Phong Nha)
               </h3>
               <p className="font-sans text-xs sm:text-sm text-ink-600 leading-relaxed">
-                Độ ẩm trong hang rất cao. Bạn <strong>không nên tháo đổi ống kính</strong> khi đang ở bên trong hang để tránh hơi ẩm bám vào cảm biến. Hãy giữ chắc hai tay khi chụp hoặc tựa nhẹ vào lan can gỗ để giảm thiểu rung nhòe.
+                Độ ẩm trong hang rất cao. Bạn <strong>không nên tháo đổi ống kính</strong> khi đang ở bên trong hang để tránh hơi ẩm bám vào cảm biến. Hãy giữ chắc hai tay khi chụp hoặc tựa nhẹ vào lan can gỗ để giảm thiểu rung máy.
               </p>
             </div>
 
@@ -309,20 +330,20 @@ export default async function PhongNhaGuidePage() {
             <div className="bg-white p-5 rounded-xl border border-sand-200/80 space-y-2">
               <h3 className="font-sans text-sm font-bold text-ink-900 flex items-center gap-2">
                 <span className="w-2 h-2 rounded-full bg-forest-600" />
-                Chuẩn bị Pin dự phòng
+                Chuẩn bị Pin và Sạc
               </h3>
               <p className="font-sans text-xs sm:text-sm text-ink-600 leading-relaxed">
-                Chuyến đi Phong Nha thường kéo dài từ 8 đến 10 tiếng. Kiho luôn chuẩn bị sẵn <strong>2 viên pin dung lượng cao kèm dock sạc đôi</strong> để bạn thoải mái chụp 500–800 tấm ảnh mà không lo hết pin giữa chừng.
+                Chuyến đi Phong Nha thường kéo dài cả ngày. Kiho luôn chuẩn bị sẵn <strong>2 pin kèm sạc</strong> để bạn yên tâm sử dụng trong suốt chuyến tham quan trong ngày.
               </p>
             </div>
 
             <div className="bg-white p-5 rounded-xl border border-sand-200/80 space-y-2">
               <h3 className="font-sans text-sm font-bold text-ink-900 flex items-center gap-2">
                 <span className="w-2 h-2 rounded-full bg-accent" />
-                Lấy ảnh sang điện thoại tức thì
+                Lấy ảnh sang điện thoại tiện lợi
               </h3>
               <p className="font-sans text-xs sm:text-sm text-ink-600 leading-relaxed">
-                Sau khi kết thúc buổi tham quan, bạn có thể ghé một quán cafe ven Sông Son, dùng đầu đọc thẻ OTG tặng kèm cắm vào điện thoại để xem và chia sẻ ngay những bức ảnh sắc nét lên mạng xã hội.
+                Sau khi kết thúc buổi tham quan, bạn có thể dùng đầu đọc thẻ OTG kèm theo túi máy cắm trực tiếp vào điện thoại để xem và lưu ảnh về máy nhanh chóng.
               </p>
             </div>
           </div>
@@ -380,7 +401,7 @@ export default async function PhongNhaGuidePage() {
             </Link>
 
             <a
-              href={settings.messenger_url || "https://m.me/kihocamera"}
+              href={settings.messenger_url || "https://m.me/kihocameradonghoi"}
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-white/10 text-sand-100 font-sans text-sm font-semibold hover:bg-white/20 transition-all border border-white/15"
