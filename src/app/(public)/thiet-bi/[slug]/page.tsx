@@ -261,14 +261,6 @@ export default async function ProductDetailPage({ params }: PageProps) {
           </div>
         )}
       </div>
-
-      {/* Sticky Mobile Messenger Bar */}
-      <StickyMessengerBar
-        productName={equipment.name}
-        pricePerDay={equipment.price_per_day}
-        messengerUrl={settings.messenger_url}
-        phone={settings.phone}
-      />
     </div>
   );
 }

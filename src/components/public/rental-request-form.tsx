@@ -1,12 +1,26 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
-import { CheckCircle2, AlertCircle, ArrowRight, RefreshCw, MessageSquare } from "lucide-react";
+import React, { useState, useEffect, useMemo } from "react";
+import {
+  CheckCircle2,
+  AlertCircle,
+  ArrowRight,
+  RefreshCw,
+  MessageSquare,
+  Calculator,
+  ShieldCheck,
+  BadgePercent,
+} from "lucide-react";
 
 export interface EquipmentOption {
   id: string;
   name: string;
   brand: string;
+  slug?: string;
+  price_session?: number;
+  price_per_day?: number;
+  price_three_days?: number;
+  included_items?: string[];
 }
 
 interface RentalRequestFormProps {
@@ -43,11 +57,15 @@ export function RentalRequestForm({
   const [customerName, setCustomerName] = useState("");
   const [phone, setPhone] = useState("");
   const [equipmentName, setEquipmentName] = useState(
-    initialEquipmentName || (variant === "drawer" && equipmentList.length > 0 ? equipmentList[0].name : "Chưa biết — nhờ Kiho tư vấn")
+    initialEquipmentName ||
+      (variant === "drawer" && equipmentList.length > 0
+        ? equipmentList[0].name
+        : "Chưa biết — nhờ Kiho tư vấn")
   );
   const [equipmentId, setEquipmentId] = useState(initialEquipmentId || "");
   const [rentalDate, setRentalDate] = useState("");
   const [returnDate, setReturnDate] = useState("");
+  const [isSingleSession, setIsSingleSession] = useState(false);
   const [note, setNote] = useState("");
   const [hpWebsite, setHpWebsite] = useState("");
 
@@ -59,6 +77,7 @@ export function RentalRequestForm({
     equipmentName: string;
     rentalDate: string;
     returnDate: string;
+    estimatedPrice?: number;
   } | null>(null);
 
   useEffect(() => {
@@ -72,7 +91,7 @@ export function RentalRequestForm({
 
   const handleRentalDateChange = (val: string) => {
     setRentalDate(val);
-    if (returnDate && returnDate < val) {
+    if (!returnDate || returnDate < val) {
       setReturnDate(val);
     }
   };
@@ -82,6 +101,80 @@ export function RentalRequestForm({
     const matched = equipmentList.find((e) => e.name === selectedName);
     setEquipmentId(matched ? matched.id : "");
   };
+
+  // Phone auto-format: 0912 345 678
+  const handlePhoneChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const raw = e.target.value.replace(/[^\d+]/g, "");
+    if (raw.length <= 11) {
+      if (raw.length <= 4) {
+        setPhone(raw);
+      } else if (raw.length <= 7) {
+        setPhone(`${raw.slice(0, 4)} ${raw.slice(4)}`);
+      } else {
+        setPhone(`${raw.slice(0, 4)} ${raw.slice(4, 7)} ${raw.slice(7, 11)}`);
+      }
+    }
+  };
+
+  // Selected Equipment Entity
+  const selectedEquipment = useMemo(() => {
+    return (
+      equipmentList.find((e) => e.id === equipmentId || e.name === equipmentName) ||
+      (equipmentList.length === 1 ? equipmentList[0] : null)
+    );
+  }, [equipmentList, equipmentId, equipmentName]);
+
+  // Live Price Calculation
+  const priceEstimation = useMemo(() => {
+    if (!rentalDate || !returnDate || !selectedEquipment || !selectedEquipment.price_per_day) {
+      return null;
+    }
+
+    const d1 = new Date(rentalDate);
+    const d2 = new Date(returnDate);
+    const diffTime = d2.getTime() - d1.getTime();
+    const days = Math.max(1, Math.round(diffTime / (1000 * 60 * 60 * 24)) + 1);
+
+    const isSameDay = rentalDate === returnDate;
+
+    if (isSameDay && isSingleSession && selectedEquipment.price_session) {
+      return {
+        days: 1,
+        isSession: true,
+        isTierDiscount: false,
+        unitPrice: selectedEquipment.price_session,
+        total: selectedEquipment.price_session,
+        savings: (selectedEquipment.price_per_day || 0) - selectedEquipment.price_session,
+        label: "1 buổi (4 – 5 tiếng)",
+      };
+    }
+
+    if (days >= 3 && selectedEquipment.price_three_days) {
+      const standardTotal = days * selectedEquipment.price_per_day;
+      const discountedTotal = days * selectedEquipment.price_three_days;
+      const savings = standardTotal - discountedTotal;
+
+      return {
+        days,
+        isSession: false,
+        isTierDiscount: true,
+        unitPrice: selectedEquipment.price_three_days,
+        total: discountedTotal,
+        savings,
+        label: `${days} ngày (Giá ưu đãi từ 3 ngày)`,
+      };
+    }
+
+    return {
+      days,
+      isSession: false,
+      isTierDiscount: false,
+      unitPrice: selectedEquipment.price_per_day,
+      total: days * selectedEquipment.price_per_day,
+      savings: 0,
+      label: `${days} ngày (24 tiếng / ngày)`,
+    };
+  }, [rentalDate, returnDate, selectedEquipment, isSingleSession]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -128,7 +221,11 @@ export function RentalRequestForm({
           equipmentName: equipmentName || "Chưa biết — nhờ Kiho tư vấn",
           rentalDate,
           returnDate,
-          note: note.trim(),
+          note: `${note.trim()}${
+            priceEstimation
+              ? ` [Tạm tính: ${priceEstimation.total.toLocaleString("vi-VN")}₫ · ${priceEstimation.label}]`
+              : ""
+          }`,
           source: source || (variant === "drawer" ? "product_detail" : "homepage_section"),
           hp_website: hpWebsite,
         }),
@@ -146,6 +243,7 @@ export function RentalRequestForm({
         equipmentName: equipmentName || "Chưa biết — nhờ Kiho tư vấn",
         rentalDate,
         returnDate,
+        estimatedPrice: priceEstimation?.total,
       });
 
       if (onSuccess) {
@@ -165,6 +263,7 @@ export function RentalRequestForm({
     setPhone("");
     setRentalDate("");
     setReturnDate("");
+    setIsSingleSession(false);
     setNote("");
     setErrorMessage(null);
   };
@@ -196,17 +295,25 @@ export function RentalRequestForm({
         </div>
 
         {/* Summary Card */}
-        <div className="p-3.5 rounded-lg bg-canvas-100 border border-ink-200 max-w-md mx-auto text-left space-y-1.5 font-mono text-xs">
+        <div className="p-4 rounded-lg bg-canvas-100 border border-ink-200 max-w-md mx-auto text-left space-y-2 font-mono text-xs">
           <div className="flex justify-between items-center py-1 border-b border-ink-200">
             <span className="text-ink-500 font-normal">Dòng máy:</span>
             <span className="font-semibold text-ink-900">{successData.equipmentName}</span>
           </div>
-          <div className="flex justify-between items-center py-1">
+          <div className="flex justify-between items-center py-1 border-b border-ink-200">
             <span className="text-ink-500 font-normal">Thời gian:</span>
             <span className="font-semibold text-ink-900">
               {formatDateDisplay(successData.rentalDate)} → {formatDateDisplay(successData.returnDate)}
             </span>
           </div>
+          {successData.estimatedPrice ? (
+            <div className="flex justify-between items-center py-1 text-ink-900 font-bold">
+              <span className="text-ink-600 font-normal">Tạm tính:</span>
+              <span className="text-accent text-sm">
+                {successData.estimatedPrice.toLocaleString("vi-VN")}₫
+              </span>
+            </div>
+          ) : null}
         </div>
 
         {/* Action Buttons */}
@@ -224,14 +331,14 @@ export function RentalRequestForm({
           {variant === "drawer" && onClose ? (
             <button
               onClick={onClose}
-              className="inline-flex items-center gap-1.5 bg-canvas-200 hover:bg-canvas-300 text-ink-800 text-xs font-sans font-medium px-4 py-3 rounded-lg transition-colors"
+              className="inline-flex items-center gap-1.5 bg-canvas-200 hover:bg-canvas-300 text-ink-800 text-xs font-sans font-medium px-4 py-3 rounded-lg transition-colors cursor-pointer"
             >
               <span>Đóng</span>
             </button>
           ) : (
             <button
               onClick={handleReset}
-              className="inline-flex items-center gap-1.5 bg-canvas-200 hover:bg-canvas-300 text-ink-800 text-xs font-sans font-medium px-4 py-3 rounded-lg transition-colors"
+              className="inline-flex items-center gap-1.5 bg-canvas-200 hover:bg-canvas-300 text-ink-800 text-xs font-sans font-medium px-4 py-3 rounded-lg transition-colors cursor-pointer"
             >
               <RefreshCw className="w-3.5 h-3.5" />
               <span>Gửi yêu cầu khác</span>
@@ -293,40 +400,116 @@ export function RentalRequestForm({
         />
       </div>
 
-      {/* 2. Date Range */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-        <div className="space-y-1">
-          <label htmlFor="rentalDate" className="block text-xs font-sans font-medium text-ink-800">
-            Ngày nhận máy <span className="text-accent">*</span>
+      {/* 2. Date Range & Quick Presets */}
+      <div className="space-y-2">
+        <div className="flex items-center justify-between">
+          <label className="block text-xs font-sans font-medium text-ink-800">
+            Thời gian thuê máy <span className="text-accent">*</span>
           </label>
-          <input
-            id="rentalDate"
-            type="date"
-            required
-            min={todayStr}
-            disabled={isSubmitting}
-            value={rentalDate}
-            onChange={(e) => handleRentalDateChange(e.target.value)}
-            className="w-full px-3.5 py-2.5 rounded-lg bg-canvas-50 border border-ink-200 text-sm text-ink-900 focus:outline-hidden focus:border-ink-900 focus:bg-white transition-all font-mono"
-          />
+          <span className="text-[10px] text-ink-400 font-mono">Nhận 07:30 · Trả 21:00</span>
         </div>
 
-        <div className="space-y-1">
-          <label htmlFor="returnDate" className="block text-xs font-sans font-medium text-ink-800">
-            Ngày trả máy <span className="text-accent">*</span>
-          </label>
-          <input
-            id="returnDate"
-            type="date"
-            required
-            min={rentalDate || todayStr}
-            disabled={isSubmitting}
-            value={returnDate}
-            onChange={(e) => setReturnDate(e.target.value)}
-            className="w-full px-3.5 py-2.5 rounded-lg bg-canvas-50 border border-ink-200 text-sm text-ink-900 focus:outline-hidden focus:border-ink-900 focus:bg-white transition-all font-mono"
-          />
+        {/* Quick Presets for Tourist Itineraries */}
+        <div className="flex flex-wrap items-center gap-1.5 pb-1">
+          <span className="text-[11px] font-sans text-ink-500 mr-0.5">Chọn nhanh:</span>
+          {[
+            { label: "1 Buổi (4-5h)", days: 1, isSession: true },
+            { label: "1 Ngày (24h)", days: 1, isSession: false },
+            { label: "2N1Đ (Cuối tuần)", days: 2, isSession: false },
+            { label: "3N2Đ (Tour Phong Nha)", days: 3, isSession: false },
+          ].map((preset, idx) => (
+            <button
+              key={idx}
+              type="button"
+              onClick={() => {
+                const now = new Date();
+                // If past 17:00, default starting tomorrow, otherwise today
+                const start = new Date();
+                if (now.getHours() >= 17) {
+                  start.setDate(start.getDate() + 1);
+                }
+                const end = new Date(start);
+                end.setDate(start.getDate() + (preset.days - 1));
+
+                const startStr = start.toISOString().split("T")[0];
+                const endStr = end.toISOString().split("T")[0];
+
+                setRentalDate(startStr);
+                setReturnDate(endStr);
+                setIsSingleSession(preset.isSession);
+              }}
+              className="px-2.5 py-1 rounded-md text-[11px] font-sans font-medium bg-canvas-100 hover:bg-ink-900 hover:text-white text-ink-700 border border-ink-200 transition-all cursor-pointer shadow-2xs"
+            >
+              {preset.label}
+            </button>
+          ))}
+        </div>
+
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+          <div className="space-y-1">
+            <label htmlFor="rentalDate" className="block text-[11px] font-sans text-ink-600">
+              Ngày nhận máy
+            </label>
+            <input
+              id="rentalDate"
+              type="date"
+              required
+              min={todayStr}
+              disabled={isSubmitting}
+              value={rentalDate}
+              onChange={(e) => handleRentalDateChange(e.target.value)}
+              className="w-full px-3.5 py-2.5 rounded-lg bg-canvas-50 border border-ink-200 text-sm text-ink-900 focus:outline-hidden focus:border-ink-900 focus:bg-white transition-all font-mono cursor-pointer"
+            />
+          </div>
+
+          <div className="space-y-1">
+            <label htmlFor="returnDate" className="block text-[11px] font-sans text-ink-600">
+              Ngày trả máy
+            </label>
+            <input
+              id="returnDate"
+              type="date"
+              required
+              min={rentalDate || todayStr}
+              disabled={isSubmitting}
+              value={returnDate}
+              onChange={(e) => setReturnDate(e.target.value)}
+              className="w-full px-3.5 py-2.5 rounded-lg bg-canvas-50 border border-ink-200 text-sm text-ink-900 focus:outline-hidden focus:border-ink-900 focus:bg-white transition-all font-mono cursor-pointer"
+            />
+          </div>
         </div>
       </div>
+
+      {/* Same-day Option Toggle (Buổi vs Ngày) */}
+      {rentalDate && returnDate && rentalDate === returnDate && selectedEquipment?.price_session ? (
+        <div className="flex items-center gap-2 p-2.5 bg-canvas-100 rounded-lg border border-ink-200 text-xs font-sans">
+          <span className="text-ink-500 font-medium shrink-0">Hình thức thuê:</span>
+          <div className="flex items-center gap-1.5">
+            <button
+              type="button"
+              onClick={() => setIsSingleSession(false)}
+              className={`px-2.5 py-1 rounded text-xs font-medium transition-all cursor-pointer ${
+                !isSingleSession
+                  ? "bg-ink-900 text-white shadow-2xs"
+                  : "bg-white text-ink-700 border border-ink-200 hover:bg-canvas-200"
+              }`}
+            >
+              1 Ngày (24h) · {selectedEquipment.price_per_day ? `${Math.round(selectedEquipment.price_per_day / 1000)}K` : ""}
+            </button>
+            <button
+              type="button"
+              onClick={() => setIsSingleSession(true)}
+              className={`px-2.5 py-1 rounded text-xs font-medium transition-all cursor-pointer ${
+                isSingleSession
+                  ? "bg-ink-900 text-white shadow-2xs"
+                  : "bg-white text-ink-700 border border-ink-200 hover:bg-canvas-200"
+              }`}
+            >
+              1 Buổi (4-5h) · {selectedEquipment.price_session ? `${Math.round(selectedEquipment.price_session / 1000)}K` : ""}
+            </button>
+          </div>
+        </div>
+      ) : null}
 
       {/* 3. Camera Selection Dropdown */}
       <div className="space-y-1">
@@ -347,7 +530,7 @@ export function RentalRequestForm({
           )}
           {equipmentList.map((eq) => (
             <option key={eq.id} value={eq.name}>
-              {eq.brand} · {eq.name}
+              {eq.brand} · {eq.name} {eq.price_per_day ? `(${Math.round(eq.price_per_day / 1000)}K/ngày)` : ""}
             </option>
           ))}
           {equipmentList.length === 0 && initialEquipmentName && (
@@ -356,7 +539,66 @@ export function RentalRequestForm({
         </select>
       </div>
 
-      {/* 4. Phone Number */}
+      {/* 4. LIVE PRICE ESTIMATOR & SUMMARY CARD */}
+      {priceEstimation && (
+        <div className="p-3.5 sm:p-4 rounded-xl bg-canvas-100 border border-ink-200 shadow-2xs space-y-2.5 animate-in fade-in duration-200">
+          <div className="flex items-center justify-between border-b border-ink-200/80 pb-2">
+            <div className="flex items-center gap-1.5 text-xs font-mono font-medium text-ink-600 uppercase tracking-wider">
+              <Calculator className="w-3.5 h-3.5 text-accent" />
+              <span>TẠM TÍNH CHI PHÍ</span>
+            </div>
+            {priceEstimation.isTierDiscount && (
+              <span className="inline-flex items-center gap-1 text-[10px] font-mono font-bold bg-rose-100 text-rose-800 px-2 py-0.5 rounded-full border border-rose-200">
+                <BadgePercent className="w-3 h-3" />
+                Tiết kiệm {priceEstimation.savings.toLocaleString("vi-VN")}₫
+              </span>
+            )}
+          </div>
+
+          <div className="flex items-baseline justify-between gap-2">
+            <div>
+              <span className="text-xs text-ink-500 font-sans block">
+                {selectedEquipment?.name} · {priceEstimation.label}
+              </span>
+              <span className="text-[11px] text-ink-400 font-mono">
+                {formatDateDisplay(rentalDate)} → {formatDateDisplay(returnDate)}
+              </span>
+            </div>
+            <div className="text-right">
+              <span className="text-xl sm:text-2xl font-bold font-mono text-accent">
+                {priceEstimation.total.toLocaleString("vi-VN")}₫
+              </span>
+            </div>
+          </div>
+
+          {/* Included Free Items Reminder */}
+          <div className="pt-2 border-t border-ink-200/70 grid grid-cols-2 gap-1.5 text-[11px] font-sans text-ink-600">
+            <div className="flex items-center gap-1.5">
+              <CheckCircle2 className="w-3 h-3 text-emerald-600 shrink-0" />
+              <span>2 Pin + Sạc nhanh đôi</span>
+            </div>
+            <div className="flex items-center gap-1.5">
+              <CheckCircle2 className="w-3 h-3 text-emerald-600 shrink-0" />
+              <span>Thẻ nhớ 64GB tốc độ cao</span>
+            </div>
+            <div className="flex items-center gap-1.5">
+              <CheckCircle2 className="w-3 h-3 text-emerald-600 shrink-0" />
+              <span>Đầu đọc thẻ OTG (iPhone/Type-C)</span>
+            </div>
+            <div className="flex items-center gap-1.5">
+              <CheckCircle2 className="w-3 h-3 text-emerald-600 shrink-0" />
+              <span>Túi chống sốc du lịch</span>
+            </div>
+          </div>
+
+          <div className="flex items-center gap-1.5 text-[11px] font-sans text-emerald-700 bg-emerald-50/80 px-2.5 py-1.5 rounded-md border border-emerald-200">
+            <ShieldCheck className="w-3.5 h-3.5 shrink-0" />
+            <span><strong>Không cần cọc tiền máy</strong> · Chỉ thanh toán khi nhận máy</span>
+          </div>
+        </div>
+      )}
+
+      {/* 5. Phone Number with inputmode=tel */}
       <div className="space-y-1">
         <label htmlFor="phone" className="block text-xs font-sans font-medium text-ink-800">
           Số điện thoại (Zalo) <span className="text-accent">*</span>
@@ -364,16 +606,18 @@ export function RentalRequestForm({
         <input
           id="phone"
           type="tel"
+          inputMode="tel"
+          autoComplete="tel"
           required
           disabled={isSubmitting}
           value={phone}
-          onChange={(e) => setPhone(e.target.value)}
+          onChange={handlePhoneChange}
           placeholder="0912 345 678"
           className="w-full px-3.5 py-2.5 rounded-lg bg-canvas-50 border border-ink-200 text-sm text-ink-900 placeholder:text-ink-400 focus:outline-hidden focus:border-ink-900 focus:bg-white transition-all font-mono"
         />
       </div>
 
-      {/* 5. Note (Optional) */}
+      {/* 6. Note (Optional) */}
       <div className="space-y-1">
         <label htmlFor="note" className="block text-xs font-sans font-medium text-ink-600">
           Ghi chú thêm <span className="text-ink-400 font-normal">(không bắt buộc)</span>
@@ -403,14 +647,16 @@ export function RentalRequestForm({
             </>
           ) : (
             <>
-              <span>Gửi yêu cầu thuê máy</span>
+              <span>
+                {priceEstimation ? `Gửi yêu cầu thuê máy (${priceEstimation.total.toLocaleString("vi-VN")}₫)` : "Gửi yêu cầu thuê máy"}
+              </span>
               <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
             </>
           )}
         </button>
 
         <p className="text-[11px] font-sans text-ink-400 text-center leading-relaxed">
-          Kiho chỉ dùng thông tin này để kiểm tra lịch máy và phản hồi cho bạn.
+          Kiho sẽ gọi hoặc nhắn Zalo xác nhận lịch máy cho bạn trong vòng 5 – 10 phút.
         </p>
       </div>
     </form>

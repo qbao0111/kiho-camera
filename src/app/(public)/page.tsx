@@ -6,6 +6,7 @@ import { TrustStrip } from "@/components/public/trust-strip";
 import { RentalPriceIndex } from "@/components/public/rental-price-index";
 import { FeaturedCameras } from "@/components/public/featured-cameras";
 import { CanonR50Spotlight } from "@/components/public/canon-r50-spotlight";
+import { Interactive3dAperture } from "@/components/public/interactive-3d-aperture";
 import { UseCaseSection } from "@/components/public/use-case-section";
 import { RentalRequestSection } from "@/components/public/rental-request-section";
 import { RentalProcess } from "@/components/public/rental-process";
@@ -38,6 +39,9 @@ export default async function HomePage() {
 
       {/* 5. CANON R50 SPOTLIGHT (Editorial Feature Band) */}
       <CanonR50Spotlight messengerUrl={settings.messenger_url} />
+
+      {/* 5b. 3D THREE.JS OPTICAL LENS & BOKEH SIMULATOR */}
+      <Interactive3dAperture />
 
       {/* 6. CHỌN VIBE CHUYẾN ĐI (High-Sharpness Native 4:5 Photographic Grid) */}
       <UseCaseSection />

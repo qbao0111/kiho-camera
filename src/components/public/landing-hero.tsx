@@ -288,16 +288,38 @@ export function LandingHero({}: LandingHeroProps = {}) {
               })}
             </div>
 
-            {/* Photographic Editorial Caption (Magazine / Contact sheet caption, no floating bubble) */}
-            <div className="w-full max-w-[500px] mt-2.5 pt-2 border-t border-ink-200/80 flex items-center justify-between text-xs">
+            {/* Photographic Editorial Caption & Interactive Camera Selector */}
+            <div className="w-full max-w-[500px] mt-3 pt-2.5 border-t border-ink-200/80 flex flex-col sm:flex-row sm:items-center justify-between gap-2.5 text-xs">
               <div className="flex items-center gap-2">
                 <span className="font-mono text-accent font-medium">0{activeIdx + 1}</span>
                 <span className="text-ink-300 font-mono">/</span>
                 <span className="font-sans font-semibold text-ink-900 tracking-tight">{activeCamera.name}</span>
+                <span className="font-mono text-[10px] text-ink-500 uppercase tracking-wider hidden sm:inline">
+                  · {activeCamera.spec}
+                </span>
               </div>
-              <span className="font-mono text-[10px] text-ink-500 uppercase tracking-wider">
-                {activeCamera.spec}
-              </span>
+
+              {/* Interactive Camera Tabs */}
+              <div className="flex items-center gap-1 bg-white p-1 rounded-lg border border-ink-200 shadow-2xs self-start sm:self-auto">
+                {HERO_CAMERAS.map((cam, idx) => (
+                  <button
+                    key={cam.id}
+                    onClick={() => handleSelectCamera(idx)}
+                    className={`px-2.5 py-1 rounded-md text-[11px] font-sans font-medium transition-all cursor-pointer flex items-center gap-1.5 ${
+                      activeIdx === idx
+                        ? "bg-ink-900 text-white shadow-2xs font-semibold"
+                        : "text-ink-600 hover:text-ink-900 hover:bg-canvas-100"
+                    }`}
+                  >
+                    <span
+                      className={`w-1.5 h-1.5 rounded-full ${
+                        activeIdx === idx ? "bg-accent" : "bg-ink-300"
+                      }`}
+                    />
+                    <span>{cam.name.split(" ")[1] || cam.name}</span>
+                  </button>
+                ))}
+              </div>
             </div>
 
           </div>

@@ -161,55 +161,81 @@ export function Header({ settings }: HeaderProps) {
             <div className="font-mono text-[10px] font-medium text-ink-400 uppercase tracking-wider">
               ĐIỀU HƯỚNG
             </div>
-            <div className="flex flex-col space-y-4">
+            <div className="flex flex-col space-y-3">
               <Link
                 href="/"
-                className="font-display text-2xl font-bold text-ink-900 hover:text-accent transition-colors py-1 flex items-center justify-between"
+                className={`font-display text-2xl font-bold transition-colors py-2 flex items-center justify-between ${
+                  pathname === "/" ? "text-accent" : "text-ink-900 hover:text-accent"
+                }`}
               >
-                <span>Trang chủ</span>
+                <div className="flex items-center gap-2">
+                  {pathname === "/" && <span className="w-2 h-2 rounded-full bg-accent" />}
+                  <span>Trang chủ</span>
+                </div>
                 <span className="font-sans text-xs font-normal text-ink-400">→</span>
               </Link>
-              {navLinks.map((link) => (
-                <Link
-                  key={link.href}
-                  href={link.href}
-                  className="font-display text-2xl font-bold text-ink-900 hover:text-accent transition-colors py-1 flex items-center justify-between"
-                >
-                  <span>{link.label}</span>
-                  <span className="font-sans text-xs font-normal text-ink-400">→</span>
-                </Link>
-              ))}
+              {navLinks.map((link) => {
+                const isActive = pathname === link.href || (link.href !== "/" && pathname.startsWith(link.href));
+                return (
+                  <Link
+                    key={link.href}
+                    href={link.href}
+                    className={`font-display text-2xl font-bold transition-colors py-2 flex items-center justify-between ${
+                      isActive ? "text-accent" : "text-ink-900 hover:text-accent"
+                    }`}
+                  >
+                    <div className="flex items-center gap-2">
+                      {isActive && <span className="w-2 h-2 rounded-full bg-accent" />}
+                      <span>{link.label}</span>
+                    </div>
+                    <span className="font-sans text-xs font-normal text-ink-400">→</span>
+                  </Link>
+                );
+              })}
             </div>
           </nav>
 
-          <div className="pt-8 border-t border-ink-200 space-y-4">
-            <div>
-              <span className="font-mono text-[10px] font-medium text-ink-400 uppercase tracking-wider block mb-2">
-                LIÊN HỆ TRỰC TIẾP
-              </span>
+          <div className="pt-6 border-t border-ink-200 space-y-3">
+            <span className="font-mono text-[10px] font-medium text-ink-400 uppercase tracking-wider block">
+              LIÊN HỆ TRỰC TIẾP
+            </span>
+
+            <div className="grid grid-cols-2 gap-2">
               <a
                 href={settings.messenger_url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-full inline-flex items-center justify-between py-3 px-4 bg-ink-900 text-white rounded-md font-sans font-semibold text-sm hover:bg-black transition-colors shadow-xs"
+                className="inline-flex items-center justify-center gap-2 min-h-[48px] py-3 px-3 bg-ink-900 text-white rounded-lg font-sans font-semibold text-xs hover:bg-black transition-colors shadow-xs"
               >
-                <div className="flex items-center gap-2">
-                  <MessageCircle className="w-4 h-4 text-accent" />
-                  <span>Nhắn tư vấn qua Messenger</span>
-                </div>
-                <ArrowUpRight className="w-4 h-4" />
+                <MessageCircle className="w-4 h-4 text-accent shrink-0" />
+                <span>Messenger</span>
+              </a>
+
+              <a
+                href="https://zalo.me/0387274669"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center justify-center gap-2 min-h-[48px] py-3 px-3 bg-white text-ink-900 border border-ink-300 rounded-lg font-sans font-semibold text-xs hover:bg-canvas-100 transition-colors shadow-2xs"
+              >
+                <span className="w-2 h-2 rounded-full bg-blue-500" />
+                <span>Chat Zalo</span>
               </a>
             </div>
 
-            <div className="flex flex-col gap-2 text-xs text-ink-600 bg-canvas-200/70 p-3.5 rounded-md border border-ink-200">
-              <a href="tel:0387274669" className="flex items-center gap-2 font-sans font-medium text-ink-900 hover:text-accent transition-colors">
-                <Phone className="w-3.5 h-3.5 text-accent shrink-0" />
-                <span>Hotline: <strong className="font-mono">0387 274 669</strong></span>
-              </a>
-              <div className="flex items-center gap-2 text-ink-500 font-sans">
-                <MapPin className="w-3.5 h-3.5 text-accent shrink-0" />
-                <span>48 Ngô Quyền, TP. Đồng Hới, Quảng Bình</span>
+            <a
+              href="tel:0387274669"
+              className="w-full inline-flex items-center justify-between min-h-[48px] p-3 rounded-lg bg-canvas-200/90 border border-ink-200 text-ink-900 font-sans text-xs font-semibold hover:border-ink-400 transition-colors"
+            >
+              <div className="flex items-center gap-2">
+                <Phone className="w-4 h-4 text-accent" />
+                <span>Gọi Hotline: <strong className="font-mono text-sm">0387 274 669</strong></span>
               </div>
+              <span className="text-[11px] text-emerald-700 font-mono">07:30 - 21:30</span>
+            </a>
+
+            <div className="flex items-center gap-2 text-[11px] text-ink-500 font-sans pt-1">
+              <MapPin className="w-3.5 h-3.5 text-accent shrink-0" />
+              <span>48 Ngô Quyền, TP. Đồng Hới, Quảng Bình</span>
             </div>
           </div>
         </div>

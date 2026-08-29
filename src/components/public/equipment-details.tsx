@@ -2,13 +2,41 @@
 
 import React, { useState } from "react";
 import Link from "next/link";
-import { CheckCircle2, ChevronDown, ChevronUp, Package, Sliders, FileText, ShieldCheck, ArrowRight } from "lucide-react";
+import {
+  CheckCircle2,
+  ChevronDown,
+  ChevronUp,
+  Package,
+  Sliders,
+  FileText,
+  ShieldCheck,
+  ArrowRight,
+  BatteryCharging,
+  Zap,
+  HardDrive,
+  Smartphone,
+  Camera,
+  Shield,
+} from "lucide-react";
 import { Equipment } from "@/types/database";
 
 interface EquipmentDetailsProps {
   equipment: Equipment;
   messengerChatUrl?: string;
 }
+
+const getAccessoryIcon = (text: string) => {
+  const lower = text.toLowerCase();
+  if (lower.includes("pin")) return BatteryCharging;
+  if (lower.includes("sạc")) return Zap;
+  if (lower.includes("thẻ") || lower.includes("sd") || lower.includes("gb")) return HardDrive;
+  if (lower.includes("otg") || lower.includes("iphone") || lower.includes("type-c") || lower.includes("điện thoại"))
+    return Smartphone;
+  if (lower.includes("túi") || lower.includes("chống sốc") || lower.includes("case")) return Shield;
+  if (lower.includes("lens") || lower.includes("ống kính") || lower.includes("body") || lower.includes("máy"))
+    return Camera;
+  return CheckCircle2;
+};
 
 export function EquipmentDetails({ equipment, messengerChatUrl }: EquipmentDetailsProps) {
   const [openSections, setOpenSections] = useState<Record<string, boolean>>({
@@ -44,29 +72,41 @@ export function EquipmentDetails({ equipment, messengerChatUrl }: EquipmentDetai
 
       {/* DESKTOP 2-COLUMN GRID */}
       <div className="hidden md:grid md:grid-cols-2 gap-6 lg:gap-8">
-        
         {/* Column 1 */}
         <div className="space-y-6">
           {hasIncluded && (
-            <div className="p-5 sm:p-6 rounded-xl bg-white border border-ink-200 shadow-xs space-y-3.5">
-              <div className="flex items-center gap-2 text-xs font-mono font-medium tracking-wider text-ink-900 uppercase">
-                <Package className="w-4 h-4 text-accent" />
-                <span>BỘ THUÊ ĐÃ BAO GỒM (NHẬN MÁY LÀ CHỤP)</span>
+            <div className="p-5 sm:p-6 rounded-xl bg-white border border-ink-200 shadow-xs space-y-4">
+              <div className="flex items-center justify-between border-b border-ink-200/80 pb-3">
+                <div className="flex items-center gap-2 text-xs font-mono font-medium tracking-wider text-ink-900 uppercase">
+                  <Package className="w-4 h-4 text-accent" />
+                  <span>BỘ THUÊ ĐÃ BAO GỒM (NHẬN MÁY LÀ CHỤP)</span>
+                </div>
+                <span className="text-[10px] font-mono font-medium text-emerald-700 bg-emerald-50 border border-emerald-200 px-2 py-0.5 rounded-sm">
+                  TRỌN BỘ MIỄN PHÍ
+                </span>
               </div>
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 text-xs sm:text-sm text-ink-800 font-sans font-medium">
-                {equipment.included_items!.map((item, idx) => (
-                  <div key={idx} className="flex items-center gap-2">
-                    <CheckCircle2 className="w-4 h-4 text-accent shrink-0" />
-                    <span>{item}</span>
-                  </div>
-                ))}
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+                {equipment.included_items!.map((item, idx) => {
+                  const IconComponent = getAccessoryIcon(item);
+                  return (
+                    <div
+                      key={idx}
+                      className="flex items-center gap-2.5 p-3 rounded-lg bg-canvas-100/80 border border-ink-100/90 text-xs sm:text-sm text-ink-900 font-sans font-medium hover:border-ink-300 transition-colors"
+                    >
+                      <div className="w-7 h-7 rounded-md bg-white border border-ink-200 flex items-center justify-center text-accent shrink-0 shadow-2xs">
+                        <IconComponent className="w-3.5 h-3.5" />
+                      </div>
+                      <span className="leading-snug">{item}</span>
+                    </div>
+                  );
+                })}
               </div>
             </div>
           )}
 
           {hasDesc && (
             <div className="p-5 sm:p-6 rounded-xl bg-white border border-ink-200 shadow-xs space-y-3">
-              <div className="flex items-center gap-2 text-xs font-mono font-medium tracking-wider text-ink-900 uppercase">
+              <div className="flex items-center gap-2 text-xs font-mono font-medium tracking-wider text-ink-900 uppercase border-b border-ink-200/80 pb-2.5">
                 <FileText className="w-4 h-4 text-accent" />
                 <span>CHI TIẾT TRẢI NGHIỆM</span>
               </div>
@@ -83,13 +123,13 @@ export function EquipmentDetails({ equipment, messengerChatUrl }: EquipmentDetai
         <div className="space-y-6">
           {hasSpecs && (
             <div className="p-5 sm:p-6 rounded-xl bg-white border border-ink-200 shadow-xs space-y-3.5">
-              <div className="flex items-center gap-2 text-xs font-mono font-medium tracking-wider text-ink-900 uppercase">
+              <div className="flex items-center gap-2 text-xs font-mono font-medium tracking-wider text-ink-900 uppercase border-b border-ink-200/80 pb-2.5">
                 <Sliders className="w-4 h-4 text-accent" />
                 <span>THÔNG SỐ KỸ THUẬT HỮU ÍCH</span>
               </div>
               <div className="divide-y divide-ink-200 text-xs">
                 {Object.entries(equipment.specifications!).map(([key, val], idx) => (
-                  <div key={idx} className="py-2 flex justify-between gap-4">
+                  <div key={idx} className="py-2.5 flex justify-between gap-4">
                     <span className="text-ink-500 font-normal capitalize font-sans">
                       {key.replace(/_/g, " ")}
                     </span>
@@ -123,7 +163,6 @@ export function EquipmentDetails({ equipment, messengerChatUrl }: EquipmentDetai
             </div>
           </div>
         </div>
-
       </div>
 
       {/* MOBILE ACCORDIONS */}
@@ -132,22 +171,34 @@ export function EquipmentDetails({ equipment, messengerChatUrl }: EquipmentDetai
           <div className="rounded-lg bg-white border border-ink-200 overflow-hidden">
             <button
               onClick={() => toggleSection("included")}
-              className="w-full p-3.5 flex items-center justify-between text-left font-sans font-semibold text-xs text-ink-900"
+              className="w-full p-4 flex items-center justify-between text-left font-sans font-semibold text-xs text-ink-900 cursor-pointer"
             >
               <span className="flex items-center gap-2">
                 <Package className="w-4 h-4 text-accent" />
-                Bộ thuê đã bao gồm
+                Bộ thuê đã bao gồm (Nhận máy là chụp)
               </span>
-              {openSections.included ? <ChevronUp className="w-4 h-4 text-ink-400" /> : <ChevronDown className="w-4 h-4 text-ink-400" />}
+              {openSections.included ? (
+                <ChevronUp className="w-4 h-4 text-ink-400" />
+              ) : (
+                <ChevronDown className="w-4 h-4 text-ink-400" />
+              )}
             </button>
             {openSections.included && (
-              <div className="p-3.5 pt-0 border-t border-ink-200 grid grid-cols-1 gap-2 text-xs text-ink-800 font-sans">
-                {equipment.included_items!.map((item, idx) => (
-                  <div key={idx} className="flex items-center gap-2">
-                    <CheckCircle2 className="w-4 h-4 text-accent shrink-0" />
-                    <span>{item}</span>
-                  </div>
-                ))}
+              <div className="p-4 pt-0 border-t border-ink-200 grid grid-cols-1 gap-2 text-xs text-ink-800 font-sans">
+                {equipment.included_items!.map((item, idx) => {
+                  const IconComponent = getAccessoryIcon(item);
+                  return (
+                    <div
+                      key={idx}
+                      className="flex items-center gap-2.5 p-2.5 rounded-md bg-canvas-100 border border-ink-100"
+                    >
+                      <div className="w-6 h-6 rounded bg-white border border-ink-200 flex items-center justify-center text-accent shrink-0">
+                        <IconComponent className="w-3 h-3" />
+                      </div>
+                      <span className="font-medium text-ink-900">{item}</span>
+                    </div>
+                  );
+                })}
               </div>
             )}
           </div>
@@ -157,18 +208,22 @@ export function EquipmentDetails({ equipment, messengerChatUrl }: EquipmentDetai
           <div className="rounded-lg bg-white border border-ink-200 overflow-hidden">
             <button
               onClick={() => toggleSection("specs")}
-              className="w-full p-3.5 flex items-center justify-between text-left font-sans font-semibold text-xs text-ink-900"
+              className="w-full p-4 flex items-center justify-between text-left font-sans font-semibold text-xs text-ink-900 cursor-pointer"
             >
               <span className="flex items-center gap-2">
                 <Sliders className="w-4 h-4 text-accent" />
-                Thông số kỹ thuật
+                Thông số kỹ thuật hữu ích
               </span>
-              {openSections.specs ? <ChevronUp className="w-4 h-4 text-ink-400" /> : <ChevronDown className="w-4 h-4 text-ink-400" />}
+              {openSections.specs ? (
+                <ChevronUp className="w-4 h-4 text-ink-400" />
+              ) : (
+                <ChevronDown className="w-4 h-4 text-ink-400" />
+              )}
             </button>
             {openSections.specs && (
-              <div className="p-3.5 pt-0 border-t border-ink-200 divide-y divide-ink-200 text-xs">
+              <div className="p-4 pt-0 border-t border-ink-200 divide-y divide-ink-200 text-xs">
                 {Object.entries(equipment.specifications!).map(([key, val], idx) => (
-                  <div key={idx} className="py-2 flex justify-between gap-4">
+                  <div key={idx} className="py-2.5 flex justify-between gap-4">
                     <span className="text-ink-500 font-sans capitalize">
                       {key.replace(/_/g, " ")}
                     </span>
@@ -186,16 +241,20 @@ export function EquipmentDetails({ equipment, messengerChatUrl }: EquipmentDetai
           <div className="rounded-lg bg-white border border-ink-200 overflow-hidden">
             <button
               onClick={() => toggleSection("description")}
-              className="w-full p-3.5 flex items-center justify-between text-left font-sans font-semibold text-xs text-ink-900"
+              className="w-full p-4 flex items-center justify-between text-left font-sans font-semibold text-xs text-ink-900 cursor-pointer"
             >
               <span className="flex items-center gap-2">
                 <FileText className="w-4 h-4 text-accent" />
                 Chi tiết trải nghiệm
               </span>
-              {openSections.description ? <ChevronUp className="w-4 h-4 text-ink-400" /> : <ChevronDown className="w-4 h-4 text-ink-400" />}
+              {openSections.description ? (
+                <ChevronUp className="w-4 h-4 text-ink-400" />
+              ) : (
+                <ChevronDown className="w-4 h-4 text-ink-400" />
+              )}
             </button>
             {openSections.description && (
-              <div className="p-3.5 pt-0 border-t border-ink-200 text-xs text-ink-600 leading-relaxed space-y-2 font-sans">
+              <div className="p-4 pt-0 border-t border-ink-200 text-xs text-ink-600 leading-relaxed space-y-2 font-sans">
                 {equipment.description!.split("\n\n").map((para, idx) => (
                   <p key={idx}>{para}</p>
                 ))}
@@ -208,16 +267,20 @@ export function EquipmentDetails({ equipment, messengerChatUrl }: EquipmentDetai
         <div className="rounded-lg bg-canvas-200/80 border border-ink-200 overflow-hidden">
           <button
             onClick={() => toggleSection("policy")}
-            className="w-full p-3.5 flex items-center justify-between text-left font-sans font-semibold text-xs text-ink-900"
+            className="w-full p-4 flex items-center justify-between text-left font-sans font-semibold text-xs text-ink-900 cursor-pointer"
           >
             <span className="flex items-center gap-2">
               <ShieldCheck className="w-4 h-4 text-emerald-700" />
               Thủ tục xác minh & nhận máy
             </span>
-            {openSections.policy ? <ChevronUp className="w-4 h-4 text-ink-400" /> : <ChevronDown className="w-4 h-4 text-ink-400" />}
+            {openSections.policy ? (
+              <ChevronUp className="w-4 h-4 text-ink-400" />
+            ) : (
+              <ChevronDown className="w-4 h-4 text-ink-400" />
+            )}
           </button>
           {openSections.policy && (
-            <div className="p-3.5 pt-0 border-t border-ink-200 space-y-2 text-xs text-ink-700 font-sans">
+            <div className="p-4 pt-0 border-t border-ink-200 space-y-2 text-xs text-ink-700 font-sans">
               <p className="leading-relaxed">
                 {equipment.deposit_note ||
                   "Kiho Camera không yêu cầu cọc tiền máy. Bạn chỉ cần cung cấp ảnh CCCD gắn chip chính chủ hoặc tài khoản VNeID để xác minh khi nhận máy tại 48 Ngô Quyền hoặc giao tận nơi khách sạn."}

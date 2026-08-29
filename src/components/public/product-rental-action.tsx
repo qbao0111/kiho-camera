@@ -84,6 +84,31 @@ export function ProductRentalAction({
         </div>
       )}
 
+      {/* Mobile Floating Sticky Split Action Bar */}
+      <div className="md:hidden fixed bottom-0 left-0 right-0 z-40 bg-[#faf8f5]/95 backdrop-blur-md border-t border-ink-200 px-3 py-2.5 shadow-[0_-4px_16px_rgba(0,0,0,0.06)]">
+        <div className="flex items-center gap-2 max-w-lg mx-auto">
+          {/* Secondary Action: Messenger Chat */}
+          <a
+            href={messengerChatUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex-1 inline-flex items-center justify-center gap-1.5 bg-white hover:bg-canvas-200 border border-ink-300 text-ink-900 font-sans font-medium py-3 px-3 rounded-lg text-xs transition-colors shadow-2xs"
+          >
+            <MessageCircle className="w-4 h-4 text-accent shrink-0" />
+            <span className="truncate">Nhắn tư vấn</span>
+          </a>
+
+          {/* Primary Action: Open Booking Drawer */}
+          <button
+            onClick={() => setIsDrawerOpen(true)}
+            className="flex-1 inline-flex items-center justify-center gap-1.5 bg-ink-900 active:bg-black text-white font-sans font-semibold py-3 px-3 rounded-lg text-xs transition-colors shadow-xs cursor-pointer"
+          >
+            <Send className="w-3.5 h-3.5 text-accent shrink-0" />
+            <span className="truncate">Đặt giữ máy</span>
+          </button>
+        </div>
+      </div>
+
       {/* Drawer */}
       <RentalRequestDrawer
         isOpen={isDrawerOpen}
@@ -92,6 +117,11 @@ export function ProductRentalAction({
           id: equipment.id,
           name: equipment.name,
           brand: equipment.brand,
+          slug: equipment.slug,
+          price_session: equipment.price_session,
+          price_per_day: equipment.price_per_day,
+          price_three_days: equipment.price_three_days,
+          included_items: equipment.included_items,
         }}
         messengerUrl={messengerChatUrl}
       />

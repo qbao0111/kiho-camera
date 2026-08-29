@@ -8,11 +8,7 @@ import { RentalRequestForm, EquipmentOption } from "@/components/public/rental-r
 interface RentalRequestDrawerProps {
   isOpen: boolean;
   onClose: () => void;
-  equipment?: {
-    id: string;
-    name: string;
-    brand: string;
-  };
+  equipment?: EquipmentOption;
   equipmentList?: EquipmentOption[];
   messengerUrl?: string;
 }
@@ -67,10 +63,10 @@ export function RentalRequestDrawer({
         aria-labelledby="rental-drawer-title"
         className="relative w-full max-w-lg bg-white rounded-xl p-6 sm:p-7 shadow-2xl border border-ink-200 z-10 my-auto animate-scaleUp text-left"
       >
-        {/* Close Button */}
+        {/* Close Button (44px touch target) */}
         <button
           onClick={onClose}
-          className="absolute top-4 right-4 w-8 h-8 rounded-lg bg-canvas-200 hover:bg-ink-900 hover:text-white text-ink-700 flex items-center justify-center transition-colors shadow-2xs cursor-pointer"
+          className="absolute top-3.5 right-3.5 w-11 h-11 rounded-lg bg-canvas-200 hover:bg-ink-900 hover:text-white text-ink-700 flex items-center justify-center transition-colors shadow-2xs cursor-pointer focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-accent"
           aria-label="Đóng bảng yêu cầu"
         >
           <X className="w-4 h-4" />
