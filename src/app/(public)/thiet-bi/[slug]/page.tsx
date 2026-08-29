@@ -13,7 +13,7 @@ import { CameraEditorialGuide } from "@/components/public/camera-editorial-guide
 import { ProductRentalAction } from "@/components/public/product-rental-action";
 import { ProductCard } from "@/components/public/product-card";
 import { StickyMessengerBar } from "@/components/public/sticky-messenger-bar";
-import { ProductJsonLd } from "@/components/public/json-ld";
+import { ProductJsonLd, BreadcrumbJsonLd } from "@/components/public/json-ld";
 import { buildMessengerUrl } from "@/lib/utils";
 import { getEquipmentCoverImage } from "@/lib/equipment-images";
 import { FadeIn, StaggerContainer, StaggerItem } from "@/components/ui/motion";
@@ -37,7 +37,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const title =
     editorialContent?.seoTitle ||
     equipment.seo_title ||
-    `Thuê máy ảnh ${equipment.name} tại Quảng Bình | Kiho Camera`;
+    `Thuê máy ảnh ${equipment.name} tại Quảng Bình, Đồng Hới`;
 
   const description =
     editorialContent?.seoDescription ||
@@ -101,6 +101,15 @@ export default async function ProductDetailPage({ params }: PageProps) {
   return (
     <div className="bg-[#faf8f5] min-h-screen py-8 pb-24 md:pb-16">
       <ProductJsonLd equipment={equipment} siteUrl={siteUrl} />
+      <BreadcrumbJsonLd
+        items={[
+          { name: "Trang chủ", url: "/" },
+          { name: "Máy ảnh", url: "/thiet-bi" },
+          { name: equipment.name, url: `/thiet-bi/${equipment.slug}` },
+        ]}
+        siteUrl={siteUrl}
+      />
+
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-10 sm:space-y-12">
         

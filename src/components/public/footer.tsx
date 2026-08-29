@@ -44,7 +44,7 @@ export function Footer({ settings }: FooterProps) {
           {/* 2. Quick Links (3 cols) */}
           <div className="md:col-span-3 space-y-2.5">
             <span className="text-[11px] font-mono font-medium tracking-wider text-ink-500 uppercase block">
-              Máy ảnh theo hãng
+              Máy ảnh & Cẩm nang
             </span>
             <ul className="space-y-1.5 text-xs sm:text-sm font-sans">
               <li>
@@ -54,6 +54,15 @@ export function Footer({ settings }: FooterProps) {
                 >
                   <Camera className="w-3.5 h-3.5 text-accent shrink-0" />
                   <span>Tất cả 12 dòng máy</span>
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/thue-may-anh-phong-nha"
+                  className="text-ink-600 hover:text-accent transition-colors inline-flex items-center gap-1.5 font-medium"
+                >
+                  <Camera className="w-3.5 h-3.5 text-accent shrink-0" />
+                  <span>Thuê máy đi Phong Nha</span>
                 </Link>
               </li>
               <li>
@@ -80,7 +89,7 @@ export function Footer({ settings }: FooterProps) {
                   className="text-ink-600 hover:text-accent transition-colors inline-flex items-center gap-1.5"
                 >
                   <Camera className="w-3.5 h-3.5 text-accent shrink-0" />
-                  <span>Sony (ZV1 II, ZV1F)</span>
+                  <span>Sony (ZV-1 II, ZV-1F)</span>
                 </Link>
               </li>
             </ul>

@@ -2,10 +2,11 @@ import React from "react";
 import { Metadata } from "next";
 import { ArrowUpRight, MapPin, Phone, Clock, MessageSquare } from "lucide-react";
 import { getSiteSettings } from "@/lib/services/settings";
+import { BreadcrumbJsonLd } from "@/components/public/json-ld";
 import { FadeIn } from "@/components/ui/motion";
 
 export const metadata: Metadata = {
-  title: "Liên hệ & Địa chỉ cửa hàng",
+  title: "Liên hệ & Địa chỉ cửa hàng tại Đồng Hới",
   description:
     "Thông tin liên hệ cửa hàng Kiho Camera tại TP. Đồng Hới, Quảng Bình. Hotline tư vấn thuê máy ảnh, fanpage và chỉ đường Google Maps.",
   alternates: {
@@ -15,6 +16,7 @@ export const metadata: Metadata = {
 
 export default async function ContactPage() {
   const settings = await getSiteSettings();
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://kihocamera.com";
 
   // 1. External Google Maps URL (for the button)
   const externalMapUrl =
@@ -39,6 +41,14 @@ export default async function ContactPage() {
 
   return (
     <div className="bg-[#faf8f5] min-h-screen py-10 sm:py-16">
+      <BreadcrumbJsonLd
+        items={[
+          { name: "Trang chủ", url: "/" },
+          { name: "Liên hệ", url: "/lien-he" },
+        ]}
+        siteUrl={siteUrl}
+      />
+
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12 sm:space-y-14">
         {/* Page Header */}
         <FadeIn className="space-y-2 pb-6 border-b border-ink-200">

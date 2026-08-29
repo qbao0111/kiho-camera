@@ -5,10 +5,11 @@ import { Camera } from "lucide-react";
 import { getEquipmentList } from "@/lib/services/equipment";
 import { ProductCard } from "@/components/public/product-card";
 import { CatalogFilterBar } from "@/components/public/catalog-filter-bar";
+import { BreadcrumbJsonLd } from "@/components/public/json-ld";
 import { FadeIn, StaggerContainer, StaggerItem } from "@/components/ui/motion";
 
 export const metadata: Metadata = {
-  title: "Danh sách máy ảnh cho thuê tại Quảng Bình",
+  title: "Danh sách máy ảnh cho thuê tại Quảng Bình, Đồng Hới",
   description:
     "Bảng giá cho thuê 12 dòng máy ảnh du lịch Canon, Fujifilm, Sony chính hãng tại TP. Đồng Hới, Quảng Bình. Đầy đủ pin, sạc, thẻ nhớ, nhận máy chụp đẹp ngay.",
   alternates: {
@@ -32,6 +33,7 @@ export default async function EquipmentListPage({ searchParams }: EquipmentPageP
   const currentSort = searchParams.sort || "featured";
 
   const allEquipment = await getEquipmentList({ onlyActive: true });
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://kihocamera.com";
 
   const totalCount = allEquipment.length;
   const fujiCount = allEquipment.filter((e) => e.brand.toLowerCase() === "fujifilm").length;
@@ -80,9 +82,16 @@ export default async function EquipmentListPage({ searchParams }: EquipmentPageP
     { key: "sony", label: `Sony (${sonyCount})` },
   ];
 
-
   return (
     <div className="bg-[#faf8f5] min-h-screen py-10 sm:py-16">
+      <BreadcrumbJsonLd
+        items={[
+          { name: "Trang chủ", url: "/" },
+          { name: "Danh sách máy ảnh", url: "/thiet-bi" },
+        ]}
+        siteUrl={siteUrl}
+      />
+
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8 sm:space-y-10">
         
         {/* Editorial Heading */}

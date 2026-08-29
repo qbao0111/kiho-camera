@@ -97,7 +97,27 @@ export function RentalProcess({}: RentalProcessProps = {}) {
           </div>
         </div>
 
+        {/* Contextual Link to Phong Nha Guide */}
+        <div className="mt-6 flex flex-col sm:flex-row sm:items-center justify-between gap-3 p-4 sm:p-5 rounded-xl bg-forest-50/70 border border-forest-200/80">
+          <div className="flex items-center gap-3">
+            <span className="font-mono text-[11px] font-semibold uppercase px-2.5 py-1 rounded bg-forest-100 text-forest-800 tracking-wide shrink-0">
+              Điểm đến
+            </span>
+            <p className="font-sans text-xs sm:text-sm text-forest-900 font-medium">
+              Bạn đang lên lịch trình khám phá Động Thiên Đường, Sông Son hay Suối Moọc?
+            </p>
+          </div>
+          <a
+            href="/thue-may-anh-phong-nha"
+            className="inline-flex items-center gap-1.5 text-xs sm:text-sm font-semibold text-forest-700 hover:text-forest-900 transition-colors whitespace-nowrap"
+          >
+            <span>Xem cẩm nang thuê máy đi Phong Nha</span>
+            <span aria-hidden="true">&rarr;</span>
+          </a>
+        </div>
+
       </div>
     </section>
   );
 }
+
