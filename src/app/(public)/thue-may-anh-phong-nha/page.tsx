@@ -167,7 +167,7 @@ export default async function PhongNhaGuidePage() {
 
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
         {/* Breadcrumb Bar */}
-        <FadeIn direction="none" className="flex items-center gap-2 text-xs font-sans text-ink-400">
+        <FadeIn direction="none" className="flex items-center gap-2 text-xs font-sans text-ink-600">
           <Link href="/" className="hover:text-ink-900 transition-colors">
             Trang chủ
           </Link>
@@ -177,7 +177,7 @@ export default async function PhongNhaGuidePage() {
 
         {/* HERO SECTION */}
         <div className="space-y-6">
-          <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-forest-50 border border-forest-200 text-forest-700 text-xs font-medium tracking-wide">
+          <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-forest-50 border border-forest-200 text-forest-700 text-xs font-semibold tracking-wide">
             <Compass className="w-3.5 h-3.5" />
             <span>Cẩm nang du lịch & thiết bị Quảng Bình</span>
           </div>
@@ -226,7 +226,7 @@ export default async function PhongNhaGuidePage() {
             <h2 className="font-display text-2xl sm:text-3xl font-bold text-ink-900">
               Gợi ý các dòng máy ảnh phù hợp cho chuyến đi Phong Nha
             </h2>
-            <p className="font-sans text-sm sm:text-base text-ink-500">
+            <p className="font-sans text-sm sm:text-base text-ink-600">
               Dưới đây là các mẫu máy ảnh thực tế đang có sẵn tại Kiho Camera, được phân loại theo từng nhu cầu trải nghiệm:
             </p>
           </div>
@@ -255,7 +255,7 @@ export default async function PhongNhaGuidePage() {
                           {model.badge}
                         </span>
                       </div>
-                      <p className="font-sans text-xs sm:text-sm text-ink-500 mt-0.5">
+                      <p className="font-sans text-xs sm:text-sm text-ink-600 mt-0.5">
                         {model.tagline}
                       </p>
                     </div>
@@ -278,12 +278,12 @@ export default async function PhongNhaGuidePage() {
                   </ul>
 
                   <div className="pt-3 border-t border-sand-100 flex flex-wrap items-center justify-between gap-3">
-                    <p className="font-sans text-xs text-ink-500 italic">
+                    <p className="font-sans text-xs text-ink-600 italic">
                       <strong>Phù hợp nhất:</strong> {model.bestFor}
                     </p>
                     <Link
                       href={`/thiet-bi/${model.slug}`}
-                      className="inline-flex items-center gap-1.5 text-xs font-semibold text-accent hover:text-accent-hover transition-colors"
+                      className="inline-flex items-center gap-1.5 text-xs font-semibold text-accent hover:text-accent-hover transition-colors focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-accent"
                     >
                       <span>Xem chi tiết máy</span>
                       <ArrowRight className="w-3.5 h-3.5" />
@@ -294,6 +294,7 @@ export default async function PhongNhaGuidePage() {
             })}
           </div>
         </section>
+
 
         {/* SECTION 3: KINH NGHIỆM CHỤP & BẢO QUẢN MÁY TẠI PHONG NHA */}
         <section className="bg-sand-50 rounded-2xl p-6 sm:p-8 border border-sand-200 space-y-6">

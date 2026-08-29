@@ -114,7 +114,7 @@ export default async function ProductDetailPage({ params }: PageProps) {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-10 sm:space-y-12">
         
         {/* Minimal Breadcrumb */}
-        <FadeIn direction="none" className="flex items-center gap-2 text-xs font-sans text-ink-400">
+        <FadeIn direction="none" className="flex items-center gap-2 text-xs font-sans text-ink-600">
           <Link href="/" className="hover:text-ink-900 transition-colors">
             Trang chủ
           </Link>
@@ -145,7 +145,7 @@ export default async function ProductDetailPage({ params }: PageProps) {
             {/* Header / Title */}
             <div className="space-y-2 pb-5 border-b border-ink-200">
               <div className="flex items-center justify-between">
-                <span className="text-xs font-mono font-medium tracking-widest text-ink-500 uppercase">
+                <span className="text-xs font-mono font-semibold tracking-widest text-ink-600 uppercase">
                   {equipment.brand} · MÁY ẢNH CHO THUÊ
                 </span>
                 {equipment.is_featured && (
@@ -160,7 +160,7 @@ export default async function ProductDetailPage({ params }: PageProps) {
               </h1>
 
               {equipment.use_cases?.length > 0 && (
-                <div className="text-xs text-ink-500 font-sans font-medium">
+                <div className="text-xs text-ink-700 font-sans font-medium">
                   Phù hợp: {equipment.use_cases.join(" · ")}
                 </div>
               )}
@@ -168,48 +168,49 @@ export default async function ProductDetailPage({ params }: PageProps) {
 
             {/* 3-Tier Price Block */}
             <div className="bg-white rounded-xl p-4 sm:p-5 border border-ink-200 shadow-xs space-y-3">
-              <span className="text-[10px] font-mono font-medium tracking-widest text-ink-400 uppercase block">
+              <span className="text-[10px] font-mono font-semibold tracking-widest text-ink-600 uppercase block">
                 BẢNG GIÁ THUÊ NIÊM YẾT
               </span>
 
               <div className="grid grid-cols-3 gap-2 text-center divide-x divide-ink-200 font-mono">
                 {/* Tier 1: 1 Buổi */}
                 <div className="px-2">
-                  <span className="text-[11px] text-ink-500 font-sans block mb-1 flex items-center justify-center gap-1">
-                    <Clock className="w-3 h-3 text-ink-400" />
+                  <span className="text-[11px] text-ink-600 font-sans font-medium mb-1 flex items-center justify-center gap-1">
+                    <Clock className="w-3 h-3 text-ink-600" />
                     1 buổi
                   </span>
                   <span className="text-xl sm:text-2xl font-bold text-ink-900 font-mono">
                     {formatK(equipment.price_session)}
                   </span>
-                  <span className="text-[10px] text-ink-400 font-sans block mt-0.5">4 – 5 tiếng</span>
+                  <span className="text-[10px] text-ink-600 font-sans block mt-0.5">4 – 5 tiếng</span>
                 </div>
 
                 {/* Tier 2: 1 Ngày */}
                 <div className="px-2">
-                  <span className="text-[11px] text-ink-500 font-sans block mb-1 flex items-center justify-center gap-1">
-                    <Calendar className="w-3 h-3 text-ink-400" />
+                  <span className="text-[11px] text-ink-600 font-sans font-medium mb-1 flex items-center justify-center gap-1">
+                    <Calendar className="w-3 h-3 text-ink-600" />
                     1 ngày
                   </span>
-                  <span className="text-xl sm:text-2xl font-bold text-accent font-mono">
+                  <span className="text-xl sm:text-2xl font-bold text-ink-900 font-mono">
                     {formatK(equipment.price_per_day)}
                   </span>
-                  <span className="text-[10px] text-ink-400 font-sans block mt-0.5">24 tiếng</span>
+                  <span className="text-[10px] text-ink-600 font-sans block mt-0.5">24 tiếng</span>
                 </div>
 
                 {/* Tier 3: 3 Ngày + */}
-                <div className="px-2 bg-rose-50/60 rounded-lg py-1 text-rose-700">
-                  <span className="text-[11px] font-sans font-medium block mb-1 flex items-center justify-center gap-1">
+                <div className="px-2 bg-accent-soft rounded-lg py-1 text-accent border border-accent-border">
+                  <span className="text-[11px] font-sans font-semibold mb-1 flex items-center justify-center gap-1">
                     <Tag className="w-3 h-3" />
                     Từ 3 ngày
                   </span>
                   <span className="text-xl sm:text-2xl font-bold font-mono">
                     {formatK(equipment.price_three_days)}
                   </span>
-                  <span className="text-[10px] font-sans block mt-0.5">/ ngày</span>
+                  <span className="text-[10px] font-sans font-medium block mt-0.5">/ ngày</span>
                 </div>
               </div>
             </div>
+
 
             {/* Short Description */}
             {equipment.short_description && (
@@ -245,7 +246,7 @@ export default async function ProductDetailPage({ params }: PageProps) {
           <div className="pt-12 sm:pt-16 border-t border-ink-200 space-y-6">
             <div className="flex items-baseline justify-between">
               <div>
-                <span className="text-[11px] font-mono font-medium tracking-widest text-ink-400 uppercase block mb-0.5">
+                <span className="text-[11px] font-mono font-semibold tracking-widest text-ink-600 uppercase block mb-0.5">
                   GỢI Ý THÊM
                 </span>
                 <h2 className="font-display text-2xl sm:text-3xl font-bold text-ink-900 tracking-tight">
@@ -254,10 +255,11 @@ export default async function ProductDetailPage({ params }: PageProps) {
               </div>
               <Link
                 href="/thiet-bi"
-                className="text-xs font-sans font-semibold text-ink-900 hover:text-accent hidden sm:block"
+                className="text-xs font-sans font-semibold text-ink-900 hover:text-accent hidden sm:block focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-accent"
               >
                 Xem tất cả 12 máy →
               </Link>
+
             </div>
 
             <StaggerContainer className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">

@@ -31,7 +31,7 @@ export function RentalProcess({}: RentalProcessProps = {}) {
         
         {/* Section Header */}
         <div className="mb-10 sm:mb-14 max-w-2xl">
-          <div className="flex items-center gap-1.5 text-xs font-mono font-medium tracking-widest text-ink-500 uppercase mb-2">
+          <div className="flex items-center gap-1.5 text-xs font-mono font-semibold tracking-widest text-ink-600 uppercase mb-2">
             <FileCheck className="w-3.5 h-3.5 text-accent" />
             <span>QUY TRÌNH TINH GỌN</span>
           </div>
@@ -63,13 +63,14 @@ export function RentalProcess({}: RentalProcessProps = {}) {
               </div>
 
               {/* Bottom Step Status */}
-              <div className="pt-3 border-t border-ink-200 flex items-center justify-between text-[11px] font-mono text-ink-400">
+              <div className="pt-3 border-t border-ink-200 flex items-center justify-between text-[11px] font-mono text-ink-600 font-semibold">
                 <span>BƯỚC {idx + 1} / 3</span>
                 <span>NHANH GỌN</span>
               </div>
             </div>
           ))}
         </div>
+
 
         {/* FAQ / Rental Notes */}
         <div className="mt-10 sm:mt-14 p-6 sm:p-8 rounded-xl bg-white border border-ink-200 shadow-xs">

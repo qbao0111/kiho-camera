@@ -56,7 +56,7 @@ export function ProductCard({ equipment, priority = false }: ProductCardProps) {
         {/* Model & Metadata */}
         <div className="space-y-1 px-0.5">
           {equipment.use_cases?.length > 0 && (
-            <div className="text-[11px] font-mono font-medium text-ink-400 uppercase tracking-wide">
+            <div className="text-[11px] font-mono font-semibold text-ink-600 uppercase tracking-wide">
               {equipment.use_cases.slice(0, 2).join(" · ")}
             </div>
           )}
@@ -70,7 +70,7 @@ export function ProductCard({ equipment, priority = false }: ProductCardProps) {
             </h3>
           </Link>
 
-          <p className="font-sans text-xs text-ink-500 line-clamp-2 leading-relaxed font-normal">
+          <p className="font-sans text-xs text-ink-600 line-clamp-2 leading-relaxed font-normal">
             {equipment.short_description || "Kèm trọn bộ 2 pin, sạc, thẻ nhớ 64GB và túi chống sốc"}
           </p>
         </div>
@@ -84,16 +84,16 @@ export function ProductCard({ equipment, priority = false }: ProductCardProps) {
               <span className="text-lg font-bold font-mono text-ink-900">
                 {formatK(equipment.price_per_day)}
               </span>
-              <span className="text-xs text-ink-400 font-mono">/ ngày</span>
+              <span className="text-xs text-ink-600 font-mono font-medium">/ ngày</span>
             </div>
-            <div className="text-[11px] text-ink-500 font-mono">
-              {formatK(equipment.price_session)} / buổi · {formatK(equipment.price_three_days)} / 3 ngày+
+            <div className="text-[11px] text-ink-600 font-mono font-medium">
+              {formatK(equipment.price_session)} / buổi · <span className="text-accent font-semibold">{formatK(equipment.price_three_days)}</span> / 3 ngày+
             </div>
           </div>
 
           <Link
             href={`/thiet-bi/${equipment.slug}`}
-            className="inline-flex items-center gap-1.5 bg-canvas-200 group-hover:bg-ink-900 text-ink-900 group-hover:text-white text-xs font-sans font-semibold px-3 py-2 rounded-lg transition-all duration-200 shadow-xs shrink-0 focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-accent"
+            className="inline-flex items-center gap-1.5 bg-canvas-200 hover:bg-ink-900 group-hover:bg-ink-900 text-ink-900 hover:text-white group-hover:text-white text-xs font-sans font-semibold px-3 py-2 rounded-lg transition-all duration-200 shadow-xs shrink-0 focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-accent"
             aria-label={`Xem máy ${equipment.name}`}
           >
             <span>Xem máy</span>
@@ -104,3 +104,4 @@ export function ProductCard({ equipment, priority = false }: ProductCardProps) {
     </article>
   );
 }
+

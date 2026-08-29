@@ -54,7 +54,7 @@ export default async function RentalGuidePage() {
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12 sm:space-y-14">
         {/* Page Header */}
         <FadeIn className="space-y-2 pb-6 border-b border-ink-200">
-          <div className="flex items-center gap-1.5 text-xs font-mono font-medium tracking-widest text-ink-500 uppercase">
+          <div className="flex items-center gap-1.5 text-xs font-mono font-semibold tracking-widest text-ink-600 uppercase">
             <FileText className="w-3.5 h-3.5 text-accent" />
             <span>QUY TRÌNH & CHÍNH SÁCH</span>
           </div>
@@ -147,19 +147,20 @@ export default async function RentalGuidePage() {
 
         {/* Bottom CTA */}
         <FadeIn className="pt-4 text-center space-y-3">
-          <p className="text-xs sm:text-sm text-ink-500 font-sans">
+          <p className="text-xs sm:text-sm text-ink-600 font-sans">
             Bạn cần tư vấn chọn máy cho chuyến đi tới? Nhắn Kiho ngay nhé!
           </p>
           <a
             href={settings.messenger_url || "https://m.me/kihocameradonghoi"}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-1.5 bg-ink-900 hover:bg-black text-white font-sans font-semibold text-xs px-6 py-3 rounded-lg transition-colors shadow-xs"
+            className="inline-flex items-center gap-1.5 bg-ink-900 hover:bg-black text-white font-sans font-semibold text-xs px-6 py-3 rounded-lg transition-colors shadow-xs focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-accent"
           >
             <span>Nhắn Kiho Camera</span>
             <ArrowUpRight className="w-3.5 h-3.5" />
           </a>
         </FadeIn>
+
       </div>
     </div>
   );

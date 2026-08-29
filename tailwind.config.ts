@@ -18,27 +18,30 @@ const config: Config = {
           300: "#e9e4dc",
           400: "#dcd4c8",
           800: "#1e1e1c",
-          900: "#141413", // Main editorial dark
+          900: "#111827", // Main editorial dark
           950: "#0c0c0b",
         },
         ink: {
-          900: "#141413", // Primary deep ink text
-          800: "#222220",
-          700: "#3d3c39",
-          600: "#55534e",
-          500: "#6e6c67",
-          400: "#94928d",
-          300: "#bfbcb5",
-          200: "#e4e1d9",
-          100: "#f0eee8",
-          50: "#f7f6f2",
+          900: "#111827", // Primary deep ink text
+          800: "#1f2937",
+          700: "#374151", // Primary body & subheads
+          600: "#4b5563", // Secondary editorial text
+          500: "#525d6e", // Metadata labels & captions (contrast >= 6.2:1)
+          400: "#667085", // Supporting text / subtle labels (contrast >= 4.7:1)
+          300: "#d8d5cd", // Decorative borders & separators
+          200: "#e5e2da", // Card & table border hairlines
+          100: "#f0eee8", // Subtle card inner fill
+          50: "#f7f6f2",  // Lightest warm wash
         },
         accent: {
-          DEFAULT: "#d95d39", // Restrained warm terracotta/burnt orange
-          hover: "#c14c29",
-          light: "#fbf0ec",
-          muted: "#f4ded7",
+          DEFAULT: "#2563eb", // Coastal Blue (contrast 4.88:1 on #FAF8F5, 5.17:1 on #FFF)
+          hover: "#1d4ed8",   // Deep coastal blue
+          soft: "#eaf2ff",    // Soft coastal blue background
+          border: "#c9dbff",  // Coastal blue hairline border
+          light: "#eaf2ff",
+          muted: "#d8e5ff",
         },
+
       },
       fontFamily: {
         display: [

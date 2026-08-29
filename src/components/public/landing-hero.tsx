@@ -21,7 +21,7 @@ export function LandingHero({}: LandingHeroProps = {}) {
           <div className="lg:col-span-6 space-y-5 sm:space-y-6">
             
             {/* Metadata Eyebrow */}
-            <div className="flex items-center gap-2 text-xs font-mono font-medium tracking-wider text-ink-500 uppercase">
+            <div className="flex items-center gap-2 text-xs font-mono font-semibold tracking-wider text-ink-600 uppercase">
               <span className="w-1.5 h-1.5 rounded-full bg-accent" />
               <span>KIHO CAMERA · ĐỒNG HỚI, QUẢNG BÌNH</span>
             </div>
@@ -64,22 +64,22 @@ export function LandingHero({}: LandingHeroProps = {}) {
 
               <Link
                 href="/thiet-bi"
-                className="bg-white hover:bg-canvas-200 text-ink-900 border border-ink-300 px-5 py-3 rounded-lg text-sm font-sans font-medium transition-colors duration-200 flex items-center gap-2 group cursor-pointer shadow-xs focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-accent"
+                className="bg-white hover:bg-canvas-200 text-ink-900 hover:text-accent border border-ink-300 px-5 py-3 rounded-lg text-sm font-sans font-medium transition-colors duration-200 flex items-center gap-2 group cursor-pointer shadow-xs focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-accent"
               >
                 <span>Khám phá 12 dòng máy</span>
-                <ArrowRight className="w-4 h-4 text-ink-400 group-hover:text-ink-900 group-hover:translate-x-0.5 transition-all" />
+                <ArrowRight className="w-4 h-4 text-ink-600 group-hover:text-accent group-hover:translate-x-0.5 transition-all" />
               </Link>
             </div>
 
             {/* Clean Editorial Metadata Line */}
-            <div className="flex flex-wrap items-center gap-y-1.5 gap-x-3 text-xs text-ink-500 font-sans pt-1 border-t border-ink-200/70">
+            <div className="flex flex-wrap items-center gap-y-1.5 gap-x-3 text-xs text-ink-600 font-sans pt-1 border-t border-ink-200/80">
               <span className="flex items-center gap-1.5">
                 <Camera className="w-3.5 h-3.5 text-accent" />
-                <span>Từ <strong className="font-mono font-bold text-ink-800">80.000₫</strong> / buổi</span>
+                <span>Từ <strong className="font-mono font-bold text-ink-900">80.000₫</strong> / buổi</span>
               </span>
               <span className="text-ink-300">·</span>
               <span className="flex items-center gap-1.5">
-                <MapPin className="w-3.5 h-3.5 text-ink-400" />
+                <MapPin className="w-3.5 h-3.5 text-ink-600" />
                 <span>48 Ngô Quyền, Đồng Hới</span>
               </span>
               <span className="text-ink-300">·</span>
@@ -88,6 +88,7 @@ export function LandingHero({}: LandingHeroProps = {}) {
                 <span>Kèm 2 pin · sạc · thẻ 64GB</span>
               </span>
             </div>
+
           </div>
 
           {/* RIGHT VISUAL COLUMN (Client interactive showcase) */}

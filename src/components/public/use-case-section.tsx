@@ -65,7 +65,7 @@ export function UseCaseSection() {
         {/* Section Header */}
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-10 sm:mb-14 gap-6">
           <div className="space-y-1.5 max-w-2xl">
-            <div className="flex items-center gap-1.5 text-xs font-mono font-medium tracking-wider text-ink-500 uppercase">
+            <div className="flex items-center gap-1.5 text-xs font-mono font-semibold tracking-wider text-ink-600 uppercase">
               <Camera className="w-3.5 h-3.5 text-accent" />
               <span>GỢI Ý THEO GU DU LỊCH</span>
             </div>
@@ -82,10 +82,10 @@ export function UseCaseSection() {
 
           <Link
             href="/thiet-bi"
-            className="group inline-flex items-center gap-1.5 text-xs font-sans font-semibold text-ink-900 hover:text-accent bg-white hover:bg-canvas-200 border border-ink-300 px-4 py-2.5 rounded-lg transition-colors shadow-xs shrink-0 self-start md:self-end"
+            className="group inline-flex items-center gap-1.5 text-xs font-sans font-semibold text-ink-900 hover:text-accent bg-white hover:bg-canvas-200 border border-ink-300 px-4 py-2.5 rounded-lg transition-colors shadow-xs shrink-0 self-start md:self-end focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-accent"
           >
             <span>Xem tất cả 12 dòng máy</span>
-            <ArrowUpRight className="w-3.5 h-3.5 text-ink-400 group-hover:text-accent group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+            <ArrowUpRight className="w-3.5 h-3.5 text-ink-600 group-hover:text-accent group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
           </Link>
         </div>
 
@@ -95,7 +95,7 @@ export function UseCaseSection() {
             <Link
               key={theme.id}
               href={theme.href}
-              className="group flex flex-col justify-between rounded-xl bg-white border border-ink-200 p-3.5 sm:p-4 shadow-2xs hover:shadow-md hover:border-ink-300 transition-all duration-200"
+              className="group flex flex-col justify-between rounded-xl bg-white border border-ink-200 p-3.5 sm:p-4 shadow-2xs hover:shadow-md hover:border-ink-300 transition-all duration-200 focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-accent"
             >
               {/* Photo Viewport: Fixed 4:5 native aspect ratio */}
               <div className="relative aspect-[4/5] w-full rounded-lg overflow-hidden bg-canvas-200 border border-ink-100">
@@ -113,7 +113,7 @@ export function UseCaseSection() {
 
                 {/* Minimal Top Corner Tag */}
                 <div className="absolute top-2.5 left-2.5">
-                  <span className="font-mono text-[9px] text-white bg-ink-900/80 px-2 py-0.5 rounded-sm uppercase tracking-wider">
+                  <span className="font-mono text-[9px] text-white bg-ink-900/90 px-2 py-0.5 rounded-sm uppercase tracking-wider font-medium">
                     {theme.num} · {theme.tag}
                   </span>
                 </div>
@@ -126,7 +126,7 @@ export function UseCaseSection() {
                     <h3 className="font-sans text-base sm:text-lg font-bold text-ink-900 group-hover:text-accent tracking-tight transition-colors">
                       {theme.title}
                     </h3>
-                    <ArrowUpRight className="w-3.5 h-3.5 text-ink-400 group-hover:text-accent group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform shrink-0" />
+                    <ArrowUpRight className="w-3.5 h-3.5 text-ink-600 group-hover:text-accent group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform shrink-0" />
                   </div>
                   <p className="font-sans text-xs text-ink-600 font-normal leading-relaxed line-clamp-2">
                     {theme.emotionalLine}
@@ -134,14 +134,15 @@ export function UseCaseSection() {
                 </div>
 
                 {/* Subtle Camera Metadata */}
-                <div className="pt-2 border-t border-ink-200/70 text-[11px] font-mono text-ink-700 truncate">
-                  <span className="text-ink-400 font-sans text-[10px]">Máy gợi ý: </span>
+                <div className="pt-2 border-t border-ink-200/80 text-[11px] font-mono text-ink-700 truncate">
+                  <span className="text-ink-600 font-sans text-[10px]">Máy gợi ý: </span>
                   <span className="font-medium">{theme.recommended}</span>
                 </div>
               </div>
             </Link>
           ))}
         </div>
+
 
       </div>
     </section>

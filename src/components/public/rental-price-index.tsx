@@ -54,7 +54,7 @@ export function RentalPriceIndex({
         {/* Section Header */}
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-8 sm:mb-12 gap-6">
           <div className="space-y-1.5">
-            <div className="flex items-center gap-1.5 text-xs font-mono font-medium tracking-wider text-ink-500 uppercase">
+            <div className="flex items-center gap-1.5 text-xs font-mono font-semibold tracking-wider text-ink-600 uppercase">
               <Camera className="w-3.5 h-3.5 text-accent" />
               <span>BẢNG GIÁ NIÊM YẾT · ĐỒNG HỚI</span>
             </div>
@@ -77,10 +77,10 @@ export function RentalPriceIndex({
               <button
                 key={tab.key}
                 onClick={() => setSelectedBrand(tab.key)}
-                className={`px-3 py-1.5 rounded-md text-xs font-sans font-medium transition-all cursor-pointer focus-visible:outline-hidden focus-visible:ring-1 focus-visible:ring-accent ${
+                className={`px-3 py-1.5 rounded-md text-xs font-sans transition-all cursor-pointer focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-accent ${
                   selectedBrand === tab.key
-                    ? "bg-white text-ink-900 shadow-xs font-semibold"
-                    : "text-ink-600 hover:text-ink-900"
+                    ? "bg-white text-ink-900 shadow-xs font-bold border border-ink-200"
+                    : "text-ink-600 hover:text-ink-900 font-medium"
                 }`}
               >
                 {tab.label}
@@ -99,7 +99,7 @@ export function RentalPriceIndex({
             <div className="hidden sm:block overflow-x-auto">
               <table className="w-full text-left border-collapse">
                 <thead>
-                  <tr className="border-b border-ink-200 bg-canvas-100/80 text-[11px] font-mono text-ink-500 uppercase tracking-wider">
+                  <tr className="border-b border-ink-200 bg-canvas-100/90 text-[11px] font-mono text-ink-600 font-semibold uppercase tracking-wider">
                     <th className="py-3 px-4 w-12 text-center">STT</th>
                     <th className="py-3 px-4">DÒNG MÁY</th>
                     <th className="py-3 px-3 text-right">1 BUỔI</th>
@@ -119,22 +119,22 @@ export function RentalPriceIndex({
                         onMouseEnter={() => setHoveredCameraId(item.id)}
                         className={`transition-colors cursor-pointer group ${
                           isSelected
-                            ? "bg-canvas-200/90 font-medium"
-                            : "hover:bg-canvas-100/60"
+                            ? "bg-accent-soft/40 font-medium"
+                            : "hover:bg-canvas-100/70"
                         }`}
                       >
-                        <td className="py-3.5 px-4 text-center font-mono text-xs text-ink-400">
+                        <td className="py-3.5 px-4 text-center font-mono text-xs text-ink-600 font-medium">
                           {numStr}
                         </td>
                         <td className="py-3.5 px-4">
                           <Link
                             href={`/thiet-bi/${item.slug}`}
-                            className="flex flex-col group-hover:text-accent transition-colors"
+                            className="flex flex-col group-hover:text-accent transition-colors focus-visible:outline-hidden focus-visible:ring-1 focus-visible:ring-accent rounded-sm"
                           >
                             <span className="font-semibold text-ink-900 tracking-tight">
                               {item.name}
                             </span>
-                            <span className="text-xs text-ink-500 font-normal line-clamp-1">
+                            <span className="text-xs text-ink-600 font-normal line-clamp-1">
                               {item.brand} · {item.use_cases?.[0] || "Du lịch & Check-in"}
                             </span>
                           </Link>
@@ -151,7 +151,7 @@ export function RentalPriceIndex({
                         <td className="py-3.5 px-4 text-center">
                           <Link
                             href={`/thiet-bi/${item.slug}`}
-                            className="inline-flex items-center justify-center w-7 h-7 rounded-md border border-ink-200 bg-white group-hover:bg-ink-900 group-hover:text-white text-ink-700 transition-colors shadow-2xs"
+                            className="inline-flex items-center justify-center w-7 h-7 rounded-md border border-ink-200 bg-white group-hover:bg-ink-900 group-hover:text-white text-ink-700 transition-colors shadow-2xs focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-accent"
                             title={`Xem ${item.name}`}
                           >
                             <ArrowUpRight className="w-3.5 h-3.5" />
@@ -187,7 +187,7 @@ export function RentalPriceIndex({
                           />
                         </div>
                         <div>
-                          <div className="flex items-center gap-1.5 text-[10px] font-mono text-ink-400">
+                          <div className="flex items-center gap-1.5 text-[10px] font-mono text-ink-600 font-semibold">
                             <span>{numStr}</span>
                             <span>·</span>
                             <span>{item.brand}</span>
@@ -200,25 +200,25 @@ export function RentalPriceIndex({
 
                       <Link
                         href={`/thiet-bi/${item.slug}`}
-                        className="inline-flex items-center gap-1 text-xs font-sans font-semibold text-ink-900 hover:text-accent px-2.5 py-1 rounded bg-canvas-100 border border-ink-200"
+                        className="inline-flex items-center gap-1 text-xs font-sans font-semibold text-ink-900 hover:text-accent px-2.5 py-1 rounded bg-canvas-100 border border-ink-200 focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-accent"
                       >
                         <span>Xem máy</span>
-                        <ArrowUpRight className="w-3 h-3" />
+                        <ArrowUpRight className="w-3 h-3 text-ink-600" />
                       </Link>
                     </div>
 
                     {/* Compact Price Tier Strip */}
-                    <div className="grid grid-cols-3 gap-2 py-2 px-3 bg-canvas-100/70 rounded-md border border-ink-100 text-center font-mono text-xs">
+                    <div className="grid grid-cols-3 gap-2 py-2 px-3 bg-canvas-100/90 rounded-md border border-ink-200 text-center font-mono text-xs">
                       <div>
-                        <span className="text-[10px] text-ink-400 block font-sans">Buổi</span>
-                        <span className="font-medium text-ink-700">{formatK(item.price_session)}</span>
+                        <span className="text-[10px] text-ink-600 font-semibold block font-sans">Buổi</span>
+                        <span className="font-semibold text-ink-800">{formatK(item.price_session)}</span>
                       </div>
                       <div className="border-x border-ink-200">
-                        <span className="text-[10px] text-ink-400 block font-sans">1 Ngày</span>
+                        <span className="text-[10px] text-ink-600 font-semibold block font-sans">1 Ngày</span>
                         <span className="font-bold text-ink-900">{formatK(item.price_per_day)}</span>
                       </div>
                       <div>
-                        <span className="text-[10px] text-accent block font-sans">3 Ngày+</span>
+                        <span className="text-[10px] text-accent font-semibold block font-sans">3 Ngày+</span>
                         <span className="font-bold text-accent">{formatK(item.price_three_days)}</span>
                       </div>
                     </div>
@@ -234,10 +234,10 @@ export function RentalPriceIndex({
             {activeCamera ? (
               <>
                 <div className="flex items-center justify-between border-b border-ink-200/80 pb-2.5 text-xs">
-                  <span className="font-mono text-ink-400 uppercase text-[10px] tracking-wider">
+                  <span className="font-mono text-ink-600 uppercase text-[10px] font-semibold tracking-wider">
                     PREVIEW DÒNG MÁY
                   </span>
-                  <span className="font-mono text-xs font-medium text-accent">
+                  <span className="font-mono text-xs font-bold text-accent">
                     {activeCamera.brand}
                   </span>
                 </div>
@@ -273,21 +273,21 @@ export function RentalPriceIndex({
                 </div>
 
                 {/* Price Breakdown */}
-                <div className="p-3 bg-canvas-100 rounded-lg border border-ink-200 grid grid-cols-3 gap-2 text-center font-mono">
+                <div className="p-3 bg-canvas-100/90 rounded-lg border border-ink-200 grid grid-cols-3 gap-2 text-center font-mono">
                   <div>
-                    <span className="text-[10px] text-ink-400 block uppercase">1 Buổi</span>
+                    <span className="text-[10px] text-ink-600 font-semibold block uppercase">1 Buổi</span>
                     <span className="text-xs font-bold text-ink-800">
                       {formatK(activeCamera.price_session)}
                     </span>
                   </div>
                   <div className="border-x border-ink-200">
-                    <span className="text-[10px] text-ink-400 block uppercase">1 Ngày</span>
+                    <span className="text-[10px] text-ink-600 font-semibold block uppercase">1 Ngày</span>
                     <span className="text-sm font-extrabold text-ink-900">
                       {formatK(activeCamera.price_per_day)}
                     </span>
                   </div>
                   <div>
-                    <span className="text-[10px] text-accent block uppercase">Từ 3N</span>
+                    <span className="text-[10px] text-accent font-semibold block uppercase">Từ 3N</span>
                     <span className="text-xs font-bold text-accent">
                       {formatK(activeCamera.price_three_days)}
                     </span>
@@ -295,7 +295,7 @@ export function RentalPriceIndex({
                 </div>
 
                 {/* Quick Guarantees */}
-                <div className="space-y-1.5 text-xs font-sans text-ink-600 pt-1">
+                <div className="space-y-1.5 text-xs font-sans text-ink-700 pt-1">
                   <div className="flex items-center gap-2">
                     <Check className="w-3.5 h-3.5 text-emerald-600 shrink-0" />
                     <span>Không cần cọc tiền máy</span>
@@ -310,7 +310,7 @@ export function RentalPriceIndex({
                 <div className="pt-2 grid grid-cols-2 gap-2">
                   <Link
                     href={`/thiet-bi/${activeCamera.slug}`}
-                    className="w-full text-center bg-ink-900 hover:bg-black text-white text-xs font-sans font-semibold py-2.5 rounded-lg transition-colors shadow-xs"
+                    className="w-full text-center bg-ink-900 hover:bg-black text-white text-xs font-sans font-semibold py-2.5 rounded-lg transition-colors shadow-xs focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-accent"
                   >
                     Xem chi tiết máy
                   </Link>
@@ -319,7 +319,7 @@ export function RentalPriceIndex({
                     href={messengerUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="w-full text-center bg-white hover:bg-canvas-200 text-ink-900 border border-ink-300 text-xs font-sans font-medium py-2.5 rounded-lg transition-colors"
+                    className="w-full text-center bg-white hover:bg-canvas-200 text-ink-900 border border-ink-300 text-xs font-sans font-medium py-2.5 rounded-lg transition-colors focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-accent"
                   >
                     Nhắn tư vấn
                   </a>
@@ -334,3 +334,4 @@ export function RentalPriceIndex({
     </section>
   );
 }
+

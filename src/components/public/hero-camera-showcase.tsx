@@ -197,16 +197,17 @@ export function HeroCameraShowcase() {
       {/* Photographic Editorial Caption */}
       <div className="w-full max-w-[500px] mt-2.5 pt-2 border-t border-ink-200/80 flex items-center justify-between text-xs">
         <div className="flex items-center gap-2">
-          <span className="font-mono text-accent font-medium">0{activeIdx + 1}</span>
-          <span className="text-ink-300 font-mono">/</span>
+          <span className="font-mono text-accent font-bold">0{activeIdx + 1}</span>
+          <span className="text-ink-400 font-mono">/</span>
           <span className="font-sans font-semibold text-ink-900 tracking-tight">
             {activeCamera.name}
           </span>
         </div>
-        <span className="font-mono text-[10px] text-ink-500 uppercase tracking-wider">
+        <span className="font-mono text-[10px] text-ink-600 font-semibold uppercase tracking-wider">
           {activeCamera.spec}
         </span>
       </div>
     </div>
   );
 }
+

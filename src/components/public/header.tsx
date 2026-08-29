@@ -172,7 +172,7 @@ export function Header({ settings }: HeaderProps) {
       {isOpen && (
         <div className="md:hidden fixed inset-x-0 top-[57px] sm:top-[65px] bottom-0 bg-[#faf8f5] z-40 px-6 py-8 flex flex-col justify-between overflow-y-auto animate-in fade-in duration-150 border-t border-ink-200">
           <nav className="space-y-6">
-            <div className="font-mono text-[10px] font-medium text-ink-400 uppercase tracking-wider">
+            <div className="font-mono text-[10px] font-semibold text-ink-600 uppercase tracking-wider">
               ĐIỀU HƯỚNG
             </div>
             <div className="flex flex-col space-y-4">
@@ -181,7 +181,7 @@ export function Header({ settings }: HeaderProps) {
                 className="font-display text-2xl font-bold text-ink-900 hover:text-accent transition-colors py-1 flex items-center justify-between"
               >
                 <span>Trang chủ</span>
-                <span className="font-sans text-xs font-normal text-ink-400">→</span>
+                <span className="font-sans text-xs font-semibold text-ink-600">→</span>
               </Link>
               {navLinks.map((link) => (
                 <Link
@@ -190,7 +190,7 @@ export function Header({ settings }: HeaderProps) {
                   className="font-display text-2xl font-bold text-ink-900 hover:text-accent transition-colors py-1 flex items-center justify-between"
                 >
                   <span>{link.label}</span>
-                  <span className="font-sans text-xs font-normal text-ink-400">→</span>
+                  <span className="font-sans text-xs font-semibold text-ink-600">→</span>
                 </Link>
               ))}
             </div>
@@ -198,14 +198,14 @@ export function Header({ settings }: HeaderProps) {
 
           <div className="pt-8 border-t border-ink-200 space-y-4">
             <div>
-              <span className="font-mono text-[10px] font-medium text-ink-400 uppercase tracking-wider block mb-2">
+              <span className="font-mono text-[10px] font-semibold text-ink-600 uppercase tracking-wider block mb-2">
                 LIÊN HỆ TRỰC TIẾP
               </span>
               <a
                 href={settings.messenger_url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-full inline-flex items-center justify-between py-3 px-4 bg-ink-900 text-white rounded-md font-sans font-semibold text-sm hover:bg-black transition-colors shadow-xs"
+                className="w-full inline-flex items-center justify-between py-3 px-4 bg-ink-900 text-white rounded-md font-sans font-semibold text-sm hover:bg-black transition-colors shadow-xs focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-accent"
               >
                 <div className="flex items-center gap-2">
                   <MessageCircle className="w-4 h-4 text-accent" />
@@ -215,12 +215,12 @@ export function Header({ settings }: HeaderProps) {
               </a>
             </div>
 
-            <div className="flex flex-col gap-2 text-xs text-ink-600 bg-canvas-200/70 p-3.5 rounded-md border border-ink-200">
+            <div className="flex flex-col gap-2 text-xs text-ink-700 bg-canvas-200/70 p-3.5 rounded-md border border-ink-200">
               <a href="tel:0387274669" className="flex items-center gap-2 font-sans font-medium text-ink-900 hover:text-accent transition-colors">
                 <Phone className="w-3.5 h-3.5 text-accent shrink-0" />
-                <span>Hotline: <strong className="font-mono">0387 274 669</strong></span>
+                <span>Hotline: <strong className="font-mono text-ink-900">0387 274 669</strong></span>
               </a>
-              <div className="flex items-center gap-2 text-ink-500 font-sans">
+              <div className="flex items-center gap-2 text-ink-600 font-sans">
                 <MapPin className="w-3.5 h-3.5 text-accent shrink-0" />
                 <span>48 Ngô Quyền, TP. Đồng Hới, Quảng Bình</span>
               </div>
@@ -231,3 +231,4 @@ export function Header({ settings }: HeaderProps) {
     </header>
   );
 }
+

@@ -33,7 +33,7 @@ export function FeedbackCard({ feedback }: FeedbackCardProps) {
           <span className="text-xs font-sans font-semibold text-ink-900">
             {feedback.customer_name.replace(/^Khách hàng demo – /, "")}
           </span>
-          <span className="text-[11px] font-mono text-ink-400">
+          <span className="text-[11px] font-mono text-ink-600 font-medium">
             {feedback.feedback_date}
           </span>
         </div>
@@ -41,3 +41,4 @@ export function FeedbackCard({ feedback }: FeedbackCardProps) {
     </div>
   );
 }
+

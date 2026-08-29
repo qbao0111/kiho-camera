@@ -38,7 +38,7 @@ export function CanonR50Spotlight({}: CanonR50SpotlightProps = {}) {
           <div className="lg:col-span-6 space-y-5 sm:space-y-6">
             
             {/* Eyebrow */}
-            <div className="flex items-center gap-2 text-xs font-mono font-medium text-ink-500 uppercase tracking-widest">
+            <div className="flex items-center gap-2 text-xs font-mono font-semibold text-ink-600 uppercase tracking-widest">
               <span className="w-1.5 h-1.5 rounded-full bg-accent" />
               <span>KIHO PICK · KHUYÊN DÙNG CHO NGƯỜI MỚI</span>
             </div>
@@ -55,29 +55,29 @@ export function CanonR50Spotlight({}: CanonR50SpotlightProps = {}) {
 
             {/* 3 Key Specs */}
             <div className="grid grid-cols-3 gap-3 pt-1">
-              <div className="p-3 rounded-lg bg-canvas-100 border border-ink-200">
+              <div className="p-3 rounded-lg bg-canvas-100/90 border border-ink-200">
                 <span className="text-xl sm:text-2xl font-bold font-mono text-ink-900 block">
                   24.2 MP
                 </span>
-                <span className="text-[11px] text-ink-500 font-sans block mt-0.5">
+                <span className="text-[11px] text-ink-600 font-sans block mt-0.5 font-medium">
                   Cảm biến chi tiết cao
                 </span>
               </div>
 
-              <div className="p-3 rounded-lg bg-canvas-100 border border-ink-200">
+              <div className="p-3 rounded-lg bg-canvas-100/90 border border-ink-200">
                 <span className="text-xl sm:text-2xl font-bold font-mono text-accent block">
                   375g
                 </span>
-                <span className="text-[11px] text-ink-500 font-sans block mt-0.5">
+                <span className="text-[11px] text-ink-600 font-sans block mt-0.5 font-medium">
                   Siêu nhẹ bỏ túi
                 </span>
               </div>
 
-              <div className="p-3 rounded-lg bg-canvas-100 border border-ink-200">
+              <div className="p-3 rounded-lg bg-canvas-100/90 border border-ink-200">
                 <span className="text-xl sm:text-2xl font-bold font-mono text-ink-900 block">
                   Dual Pixel
                 </span>
-                <span className="text-[11px] text-ink-500 font-sans block mt-0.5">
+                <span className="text-[11px] text-ink-600 font-sans block mt-0.5 font-medium">
                   Lấy nét nhận diện mắt
                 </span>
               </div>
@@ -86,32 +86,33 @@ export function CanonR50Spotlight({}: CanonR50SpotlightProps = {}) {
             {/* Price Row & Action */}
             <div className="pt-4 border-t border-ink-200 flex flex-wrap items-center justify-between gap-4">
               <div>
-                <span className="text-[11px] font-mono uppercase text-ink-400 font-medium block">
+                <span className="text-[11px] font-mono uppercase text-ink-600 font-semibold block">
                   GIÁ THUÊ NIÊM YẾT
                 </span>
                 <div className="flex items-baseline gap-2 mt-0.5">
                   <span className="text-2xl font-bold font-mono text-ink-900">
                     150K
                   </span>
-                  <span className="text-xs text-ink-500 font-mono">/ buổi</span>
+                  <span className="text-xs text-ink-600 font-mono font-medium">/ buổi</span>
                   <span className="text-xs text-ink-300">·</span>
                   <span className="text-lg font-bold font-mono text-accent">
                     250K
                   </span>
-                  <span className="text-xs text-ink-500 font-mono">/ ngày</span>
+                  <span className="text-xs text-ink-600 font-mono font-medium">/ ngày</span>
                 </div>
               </div>
 
               <div>
                 <Link
                   href="/thiet-bi/canon-eos-r50"
-                  className="bg-ink-900 hover:bg-black text-white px-5 py-3 rounded-lg text-xs font-sans font-semibold transition-all shadow-xs flex items-center gap-2 group"
+                  className="bg-ink-900 hover:bg-black text-white px-5 py-3 rounded-lg text-xs font-sans font-semibold transition-all shadow-xs flex items-center gap-2 group focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-accent"
                 >
                   <span>Xem máy Canon R50</span>
                   <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" />
                 </Link>
               </div>
             </div>
+
 
           </div>
 

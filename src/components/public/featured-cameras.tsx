@@ -25,7 +25,7 @@ export function FeaturedCameras({ equipment }: FeaturedCamerasProps) {
         {/* Header */}
         <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-6 pb-6 border-b border-ink-200">
           <div>
-            <div className="flex items-center gap-1.5 text-xs font-mono font-medium tracking-widest text-ink-500 uppercase mb-2">
+            <div className="flex items-center gap-1.5 text-xs font-mono font-semibold tracking-widest text-ink-600 uppercase mb-2">
               <Camera className="w-3.5 h-3.5 text-accent" />
               <span>GỢI Ý DU LỊCH</span>
             </div>
@@ -39,10 +39,10 @@ export function FeaturedCameras({ equipment }: FeaturedCamerasProps) {
 
           <Link
             href="/thiet-bi"
-            className="inline-flex items-center gap-1.5 text-sm font-sans font-semibold text-ink-900 hover:text-accent transition-colors shrink-0"
+            className="inline-flex items-center gap-1.5 text-sm font-sans font-semibold text-ink-900 hover:text-accent transition-colors shrink-0 focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-accent"
           >
             <span>Xem cả 12 máy ảnh</span>
-            <ArrowRight className="w-4 h-4" />
+            <ArrowRight className="w-4 h-4 text-ink-600 hover:text-accent" />
           </Link>
         </div>
 
@@ -53,17 +53,17 @@ export function FeaturedCameras({ equipment }: FeaturedCamerasProps) {
           ))}
         </div>
 
-
         {/* Bottom Callout */}
         <div className="text-center pt-2">
           <Link
             href="/thiet-bi"
-            className="inline-flex items-center gap-2 bg-white hover:bg-canvas-200 text-ink-900 border border-ink-300 px-6 py-3.5 rounded-lg text-xs font-sans font-semibold transition-all duration-200 shadow-xs group"
+            className="inline-flex items-center gap-2 bg-white hover:bg-canvas-200 text-ink-900 hover:text-accent border border-ink-300 px-6 py-3.5 rounded-lg text-xs font-sans font-semibold transition-all duration-200 shadow-xs group focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-accent"
           >
             <span>Khám phá toàn bộ 12 dòng máy tại shop</span>
-            <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
+            <ArrowRight className="w-4 h-4 text-ink-600 group-hover:text-accent group-hover:translate-x-0.5 transition-transform" />
           </Link>
         </div>
+
 
       </div>
     </section>

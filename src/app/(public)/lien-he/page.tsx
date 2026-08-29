@@ -52,7 +52,7 @@ export default async function ContactPage() {
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12 sm:space-y-14">
         {/* Page Header */}
         <FadeIn className="space-y-2 pb-6 border-b border-ink-200">
-          <div className="flex items-center gap-1.5 text-xs font-mono font-medium tracking-widest text-ink-500 uppercase">
+          <div className="flex items-center gap-1.5 text-xs font-mono font-semibold tracking-widest text-ink-600 uppercase">
             <MapPin className="w-3.5 h-3.5 text-accent" />
             <span>LIÊN HỆ & ĐỊA CHỈ</span>
           </div>
@@ -70,19 +70,19 @@ export default async function ContactPage() {
           <FadeIn className="lg:col-span-5 space-y-6">
             <div className="space-y-5">
               <div className="space-y-1 pt-3 border-t border-ink-200">
-                <span className="text-[11px] font-mono font-medium tracking-widest text-ink-400 uppercase">
+                <span className="text-[11px] font-mono font-semibold tracking-widest text-ink-600 uppercase">
                   ĐỊA CHỈ CỬA HÀNG
                 </span>
                 <p className="text-base font-sans font-bold text-ink-900 leading-snug">
                   {settings.address}
                 </p>
-                <span className="text-xs text-ink-500 font-sans block">
+                <span className="text-xs text-ink-600 font-sans block">
                   Hỗ trợ giao máy tại ga tàu, sân bay Đồng Hới & homestay
                 </span>
               </div>
 
               <div className="space-y-1 pt-3 border-t border-ink-200">
-                <span className="text-[11px] font-mono font-medium tracking-widest text-ink-400 uppercase">
+                <span className="text-[11px] font-mono font-semibold tracking-widest text-ink-600 uppercase">
                   HOTLINE / ZALO
                 </span>
                 <a
@@ -94,10 +94,10 @@ export default async function ContactPage() {
               </div>
 
               <div className="space-y-1 pt-3 border-t border-ink-200">
-                <span className="text-[11px] font-mono font-medium tracking-widest text-ink-400 uppercase">
+                <span className="text-[11px] font-mono font-semibold tracking-widest text-ink-600 uppercase">
                   GIỜ MỞ CỬA
                 </span>
-                <p className="text-sm font-sans font-medium text-ink-900">
+                <p className="text-sm font-sans font-semibold text-ink-900">
                   {settings.opening_hours}
                 </p>
               </div>
@@ -109,7 +109,7 @@ export default async function ContactPage() {
                 href={settings.messenger_url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-full inline-flex items-center justify-between py-3.5 px-5 bg-ink-900 hover:bg-black text-white font-sans font-semibold text-sm rounded-lg transition-colors shadow-xs"
+                className="w-full inline-flex items-center justify-between py-3.5 px-5 bg-ink-900 hover:bg-black text-white font-sans font-semibold text-sm rounded-lg transition-colors shadow-xs focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-accent"
               >
                 <span>Nhắn tin tư vấn qua Messenger</span>
                 <ArrowUpRight className="w-4 h-4" />
@@ -119,10 +119,10 @@ export default async function ContactPage() {
                 href={settings.facebook_url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-full inline-flex items-center justify-between py-3 px-5 bg-white hover:bg-canvas-200 border border-ink-300 text-ink-900 font-sans font-medium text-xs rounded-lg transition-colors shadow-xs"
+                className="w-full inline-flex items-center justify-between py-3 px-5 bg-white hover:bg-canvas-200 border border-ink-300 text-ink-900 hover:text-accent font-sans font-medium text-xs rounded-lg transition-colors shadow-xs focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-accent"
               >
                 <span>Ghé thăm Facebook Fanpage</span>
-                <ArrowUpRight className="w-3.5 h-3.5 text-ink-400" />
+                <ArrowUpRight className="w-3.5 h-3.5 text-ink-600 group-hover:text-accent" />
               </a>
             </div>
           </FadeIn>
@@ -130,19 +130,20 @@ export default async function ContactPage() {
           {/* Right: Map Embed */}
           <FadeIn delay={0.2} className="lg:col-span-7 space-y-2.5">
             <div className="flex items-center justify-between">
-              <span className="text-[11px] font-mono font-medium tracking-widest text-ink-400 uppercase">
+              <span className="text-[11px] font-mono font-semibold tracking-widest text-ink-600 uppercase">
                 BẢN ĐỒ GOOGLE MAPS
               </span>
               <a
                 href={externalMapUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-xs font-sans font-medium text-ink-900 hover:text-accent flex items-center gap-1"
+                className="text-xs font-sans font-semibold text-ink-900 hover:text-accent flex items-center gap-1 focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-accent"
               >
                 <span>Mở trong Google Maps</span>
                 <ArrowUpRight className="w-3.5 h-3.5" />
               </a>
             </div>
+
 
             <div className="relative aspect-[16/11] w-full rounded-xl overflow-hidden bg-canvas-200 border border-ink-200 shadow-xs">
               <iframe

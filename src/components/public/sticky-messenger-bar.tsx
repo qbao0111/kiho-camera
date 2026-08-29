@@ -23,13 +23,14 @@ export function StickyMessengerBar({
       <div className="flex items-center justify-between gap-4 max-w-md mx-auto">
         {pricePerDay ? (
           <div>
-            <span className="text-[10px] text-ink-400 block uppercase font-mono">Giá thuê</span>
+            <span className="text-[10px] text-ink-600 block uppercase font-mono font-semibold">Giá thuê</span>
             <span className="text-base font-bold font-mono text-ink-900">
               {formatCurrency(pricePerDay)}
-              <span className="text-[10px] font-normal text-ink-500 font-sans">/ngày</span>
+              <span className="text-[10px] font-medium text-ink-600 font-sans">/ngày</span>
             </span>
           </div>
         ) : null}
+
 
         <a
           href={targetUrl}

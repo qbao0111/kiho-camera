@@ -62,8 +62,8 @@ export function CatalogFilterBar({
       {/* Use Case Tags & Search & Sort */}
       <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-3 pt-3 border-t border-ink-200">
         {/* Use Case Tags */}
-        <div className="flex items-center gap-1.5 overflow-x-auto text-xs text-ink-500 w-full md:w-auto font-sans">
-          <span className="font-medium text-ink-900 shrink-0">Nhu cầu:</span>
+        <div className="flex items-center gap-1.5 overflow-x-auto text-xs text-ink-600 w-full md:w-auto font-sans">
+          <span className="font-semibold text-ink-900 shrink-0">Nhu cầu:</span>
           {USE_CASE_LIST.map((uc, idx) => {
             const isSelected = currentUseCase === uc.tag;
             const params = new URLSearchParams(searchParams.toString());
@@ -77,10 +77,10 @@ export function CatalogFilterBar({
               <Link
                 key={idx}
                 href={`/thiet-bi?${params.toString()}`}
-                className={`px-2.5 py-1 rounded-md whitespace-nowrap transition-colors font-medium ${
+                className={`px-2.5 py-1 rounded-md whitespace-nowrap transition-colors font-medium focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-accent ${
                   isSelected
-                    ? "bg-accent text-white"
-                    : "bg-white border border-ink-200 text-ink-700 hover:bg-canvas-200"
+                    ? "bg-accent text-white font-semibold shadow-xs"
+                    : "bg-white border border-ink-200 text-ink-700 hover:bg-canvas-200 hover:text-ink-900"
                 }`}
               >
                 {uc.title}
@@ -91,7 +91,7 @@ export function CatalogFilterBar({
           {(currentBrand !== "all" || currentUseCase || currentSearch) && (
             <Link
               href="/thiet-bi"
-              className="inline-flex items-center gap-1 text-xs text-accent font-medium hover:underline shrink-0 ml-1.5"
+              className="inline-flex items-center gap-1 text-xs text-accent font-semibold hover:underline shrink-0 ml-1.5 focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-accent"
             >
               <X className="w-3 h-3" />
               <span>Xoá lọc</span>
@@ -107,22 +107,22 @@ export function CatalogFilterBar({
               name="search"
               defaultValue={currentSearch || ""}
               placeholder="Tìm Canon R50, X100V..."
-              className="w-full pl-8 pr-3 py-1.5 bg-white border border-ink-200 rounded-lg text-xs text-ink-900 focus:outline-none focus:border-ink-900 transition-all placeholder:text-ink-400 font-sans"
+              className="w-full pl-8 pr-3 py-1.5 bg-white border border-ink-200 rounded-lg text-xs text-ink-900 focus:outline-hidden focus:border-accent focus:ring-1 focus:ring-accent transition-all placeholder:text-ink-500 font-sans"
             />
-            <Search className="w-3.5 h-3.5 text-ink-400 absolute left-2.5 top-1/2 -translate-y-1/2" />
+            <Search className="w-3.5 h-3.5 text-ink-600 absolute left-2.5 top-1/2 -translate-y-1/2" />
             {currentBrand !== "all" && <input type="hidden" name="brand" value={currentBrand} />}
             {currentUseCase && <input type="hidden" name="useCase" value={currentUseCase} />}
             {currentSort && <input type="hidden" name="sort" value={currentSort} />}
           </form>
 
           {/* Sort Selection */}
-          <div className="flex items-center gap-1.5 text-xs text-ink-600 shrink-0 font-sans">
-            <ArrowUpDown className="w-3.5 h-3.5 text-ink-400" />
+          <div className="flex items-center gap-1.5 text-xs text-ink-700 shrink-0 font-sans">
+            <ArrowUpDown className="w-3.5 h-3.5 text-ink-600" />
             <select
               value={currentSort}
               onChange={(e) => handleSortChange(e.target.value)}
               aria-label="Sắp xếp danh sách máy ảnh"
-              className="bg-white border border-ink-200 rounded-lg px-2.5 py-1.5 text-xs text-ink-900 focus:outline-none cursor-pointer font-sans"
+              className="bg-white border border-ink-200 rounded-lg px-2.5 py-1.5 text-xs text-ink-900 focus:outline-hidden focus:border-accent focus:ring-1 focus:ring-accent cursor-pointer font-sans"
             >
               <option value="featured">Kiho đề xuất</option>
               <option value="price_asc">Giá: Thấp → Cao</option>
@@ -131,6 +131,7 @@ export function CatalogFilterBar({
             </select>
           </div>
         </div>
+
       </div>
     </div>
   );

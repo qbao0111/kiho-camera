@@ -21,7 +21,7 @@ export function RentalRequestSection({
           <div className="lg:col-span-5 space-y-6">
             
             {/* Eyebrow */}
-            <div className="flex items-center gap-1.5 text-xs font-mono font-medium tracking-widest text-ink-500 uppercase">
+            <div className="flex items-center gap-1.5 text-xs font-mono font-semibold tracking-widest text-ink-600 uppercase">
               <MessageSquare className="w-3.5 h-3.5 text-accent" />
               <span>TƯ VẤN THUÊ MÁY</span>
             </div>
@@ -38,7 +38,7 @@ export function RentalRequestSection({
             </div>
 
             {/* 3 Core Trust Points */}
-            <div className="space-y-2.5 pt-1 font-sans text-xs text-ink-700 font-medium">
+            <div className="space-y-2.5 pt-1 font-sans text-xs text-ink-800 font-medium">
               <div className="flex items-center gap-2.5 p-3 rounded-lg bg-white border border-ink-200 shadow-2xs">
                 <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0" />
                 <span>Không cần cọc tiền máy</span>
@@ -56,19 +56,20 @@ export function RentalRequestSection({
             </div>
 
             {/* Secondary Direct Contact Hint */}
-            <div className="pt-2 text-xs font-sans text-ink-500">
+            <div className="pt-2 text-xs font-sans text-ink-600">
               <span>Cần hỗ trợ gấp? </span>
               <a
                 href={messengerUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-ink-900 font-semibold underline underline-offset-4 hover:text-accent transition-colors"
+                className="text-ink-900 font-semibold underline underline-offset-4 hover:text-accent transition-colors focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-accent"
               >
                 Nhắn trực tiếp qua Messenger ↗
               </a>
             </div>
 
           </div>
+
 
           {/* RIGHT FORM COLUMN */}
           <div className="lg:col-span-7">
