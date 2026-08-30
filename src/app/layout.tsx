@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { Playfair_Display, Be_Vietnam_Pro, JetBrains_Mono } from "next/font/google";
 import { Analytics } from "@vercel/analytics/next";
+import { GoogleAnalytics } from "@next/third-parties/google";
 import "./globals.css";
 
 
@@ -113,6 +114,9 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
+  const rawGaId = process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID?.trim();
+  const isValidGaId = !!rawGaId && /^G-[A-Z0-9]+$/i.test(rawGaId);
+
   return (
     <html
       lang="vi"
@@ -121,8 +125,8 @@ export default function RootLayout({
       <body className="min-h-screen flex flex-col font-sans bg-[#faf8f5] text-ink-900 antialiased selection:bg-ink-900 selection:text-[#faf8f5]">
         {children}
         <Analytics />
+        {isValidGaId && <GoogleAnalytics gaId={rawGaId} />}
       </body>
-
     </html>
   );
 }

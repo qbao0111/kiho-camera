@@ -6,6 +6,7 @@ import Link from "next/link";
 import { ArrowUpRight, Camera, Check } from "lucide-react";
 import { Equipment, PricingEquipmentDTO } from "@/types/database";
 import { getEquipmentCoverImage } from "@/lib/equipment-images";
+import { trackMessengerContact } from "@/lib/analytics";
 
 interface RentalPriceIndexProps {
   equipment?: (Equipment | PricingEquipmentDTO)[];
@@ -319,6 +320,13 @@ export function RentalPriceIndex({
                     href={messengerUrl}
                     target="_blank"
                     rel="noopener noreferrer"
+                    onClick={() => {
+                      trackMessengerContact({
+                        placement: "pricing_table",
+                        camera_slug: activeCamera?.slug,
+                        camera_name: activeCamera?.name,
+                      });
+                    }}
                     className="w-full text-center bg-white hover:bg-canvas-200 text-ink-900 border border-ink-300 text-xs font-sans font-medium py-2.5 rounded-lg transition-colors focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-accent"
                   >
                     Nhắn tư vấn

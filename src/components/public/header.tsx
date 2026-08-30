@@ -7,6 +7,12 @@ import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { ArrowUpRight, Menu, X, Phone, MessageCircle, MapPin } from "lucide-react";
 import { SiteSettings } from "@/types/database";
+import { normalizePhoneNumber, buildZaloUrl } from "@/lib/utils";
+import {
+  trackMessengerContact,
+  trackZaloContact,
+  trackHotlineContact,
+} from "@/lib/analytics";
 
 interface HeaderProps {
   settings: SiteSettings;
@@ -153,19 +159,31 @@ export function Header({ settings }: HeaderProps) {
             </nav>
 
             {/* Desktop Right CTA & Contact Info */}
-            <div className="hidden md:flex items-center gap-4">
+            <div className="hidden md:flex items-center gap-3">
               <a
-                href="tel:0387274669"
-                className="inline-flex items-center gap-1.5 text-xs font-sans text-ink-700 hover:text-accent transition-colors py-1"
+                href={`tel:${normalizePhoneNumber(settings.phone)}`}
+                onClick={() => trackHotlineContact({ placement: "header_desktop" })}
+                className="inline-flex items-center gap-1.5 text-xs font-sans text-ink-700 hover:text-accent transition-colors py-1 focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-accent rounded-sm"
               >
                 <Phone className="w-3.5 h-3.5 text-accent" />
-                <span className="font-mono font-medium">0387 274 669</span>
+                <span className="font-mono font-medium">{settings.phone}</span>
+              </a>
+
+              <a
+                href={buildZaloUrl(settings.phone)}
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={() => trackZaloContact({ placement: "header_desktop" })}
+                className="inline-flex items-center gap-1.5 text-xs font-sans font-semibold text-ink-800 hover:text-accent bg-white hover:bg-canvas-100 border border-ink-300 hover:border-accent px-3 py-2 rounded-md transition-colors shadow-2xs focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-accent"
+              >
+                <span>Chat Zalo</span>
               </a>
 
               <a
                 href={settings.messenger_url}
                 target="_blank"
                 rel="noopener noreferrer"
+                onClick={() => trackMessengerContact({ placement: "header_desktop" })}
                 className="group inline-flex items-center gap-1.5 text-xs font-sans font-semibold bg-ink-900 hover:bg-black text-white px-3.5 py-2 rounded-md transition-colors shadow-xs focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-accent"
               >
                 <MessageCircle className="w-3.5 h-3.5 text-accent group-hover:text-white transition-colors" />
@@ -177,9 +195,10 @@ export function Header({ settings }: HeaderProps) {
             {/* Mobile Right Action & Menu Button (All touch targets >= 40-44px) */}
             <div className="flex items-center gap-1.5 sm:gap-2 md:hidden">
               <a
-                href="tel:0387274669"
+                href={`tel:${normalizePhoneNumber(settings.phone)}`}
+                onClick={() => trackHotlineContact({ placement: "header_mobile" })}
                 className="min-w-[40px] min-h-[40px] flex items-center justify-center text-ink-700 hover:text-accent rounded-md border border-ink-200 bg-white transition-colors focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-accent"
-                aria-label="Gọi hotline 0387 274 669"
+                aria-label={`Gọi hotline ${settings.phone}`}
               >
                 <Phone className="w-4 h-4 text-accent" />
               </a>
@@ -188,6 +207,7 @@ export function Header({ settings }: HeaderProps) {
                 href={settings.messenger_url}
                 target="_blank"
                 rel="noopener noreferrer"
+                onClick={() => trackMessengerContact({ placement: "header_mobile" })}
                 className="min-h-[40px] inline-flex items-center gap-1.5 text-xs font-sans font-semibold text-white bg-ink-900 hover:bg-black px-3 sm:px-3.5 rounded-md transition-colors shadow-xs"
               >
                 <MessageCircle className="w-3.5 h-3.5 text-accent" />
@@ -322,11 +342,16 @@ export function Header({ settings }: HeaderProps) {
                 <span className="font-mono text-[10px] font-semibold text-ink-600 uppercase tracking-wider block mb-2">
                   LIÊN HỆ TRỰC TIẾP
                 </span>
+
+                {/* Primary Messenger Action (Full Width, >=48px) */}
                 <a
                   href={settings.messenger_url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  onClick={() => setIsOpen(false)}
+                  onClick={() => {
+                    setIsOpen(false);
+                    trackMessengerContact({ placement: "header_mobile_drawer" });
+                  }}
                   className="w-full inline-flex items-center justify-between min-h-[48px] py-3 px-4 bg-ink-900 text-white rounded-lg font-sans font-semibold text-sm hover:bg-black transition-colors shadow-xs focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-accent active:scale-[0.99]"
                 >
                   <div className="flex items-center gap-2.5">
@@ -337,20 +362,39 @@ export function Header({ settings }: HeaderProps) {
                 </a>
               </div>
 
-              <div className="flex flex-col gap-2 text-xs text-ink-700 bg-canvas-200/80 p-3.5 rounded-lg border border-ink-200">
+              {/* 2-Column Direct Zalo and Hotline Actions (>=48px touch targets) */}
+              <div className="grid grid-cols-2 gap-2.5">
                 <a
-                  href="tel:0387274669"
-                  className="flex items-center gap-2 font-sans font-medium text-ink-900 hover:text-accent transition-colors min-h-[30px]"
+                  href={buildZaloUrl(settings.phone)}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  onClick={() => {
+                    setIsOpen(false);
+                    trackZaloContact({ placement: "header_mobile_drawer" });
+                  }}
+                  className="min-h-[48px] py-2.5 px-3 bg-white border border-ink-300 hover:border-accent text-ink-900 hover:text-accent rounded-lg font-sans font-semibold text-xs flex items-center justify-center gap-1.5 transition-colors shadow-2xs text-center"
+                >
+                  <span>Chat Zalo</span>
+                  <ArrowUpRight className="w-3.5 h-3.5 text-ink-400 shrink-0" />
+                </a>
+
+                <a
+                  href={`tel:${normalizePhoneNumber(settings.phone)}`}
+                  onClick={() => {
+                    setIsOpen(false);
+                    trackHotlineContact({ placement: "header_mobile_drawer" });
+                  }}
+                  className="min-h-[48px] py-2.5 px-3 bg-white border border-ink-300 hover:border-accent text-ink-900 hover:text-accent rounded-lg font-sans font-semibold text-xs flex items-center justify-center gap-1.5 transition-colors shadow-2xs text-center"
                 >
                   <Phone className="w-3.5 h-3.5 text-accent shrink-0" />
-                  <span>
-                    Hotline / Zalo: <strong className="font-mono text-ink-900 text-sm">0387 274 669</strong>
-                  </span>
+                  <span className="font-mono">{settings.phone}</span>
                 </a>
-                <div className="flex items-start gap-2 text-ink-600 font-sans">
-                  <MapPin className="w-3.5 h-3.5 text-accent shrink-0 mt-0.5" />
-                  <span className="leading-snug">48 Ngô Quyền, TP. Đồng Hới, Quảng Bình</span>
-                </div>
+              </div>
+
+              {/* Address & Store Info */}
+              <div className="flex items-start gap-2 text-xs text-ink-600 bg-canvas-200/80 p-3 rounded-lg border border-ink-200 font-sans">
+                <MapPin className="w-3.5 h-3.5 text-accent shrink-0 mt-0.5" />
+                <span className="leading-snug">{settings.address || "48 Ngô Quyền, TP. Đồng Hới, Quảng Bình"}</span>
               </div>
             </div>
           </div>

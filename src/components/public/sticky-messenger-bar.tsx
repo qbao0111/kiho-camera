@@ -3,6 +3,7 @@
 import React from "react";
 import { ArrowUpRight } from "lucide-react";
 import { formatCurrency, buildMessengerUrl } from "@/lib/utils";
+import { trackMessengerContact } from "@/lib/analytics";
 
 interface StickyMessengerBarProps {
   productName?: string;
@@ -31,11 +32,16 @@ export function StickyMessengerBar({
           </div>
         ) : null}
 
-
         <a
           href={targetUrl}
           target="_blank"
           rel="noopener noreferrer"
+          onClick={() => {
+            trackMessengerContact({
+              placement: "product_sticky_bar",
+              camera_name: productName,
+            });
+          }}
           className="flex-grow inline-flex items-center justify-center gap-1.5 bg-ink-900 active:bg-black text-white font-sans font-semibold py-3 px-5 rounded-lg transition-colors text-xs"
         >
           <span>Nhắn để thuê máy này</span>

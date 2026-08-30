@@ -1,6 +1,7 @@
 import React from "react";
 import { CheckCircle2, MessageSquare } from "lucide-react";
 import { RentalRequestForm, EquipmentOption } from "@/components/public/rental-request-form";
+import { TrackedOutboundLink } from "@/components/analytics/tracked-outbound-link";
 
 interface RentalRequestSectionProps {
   equipmentList?: EquipmentOption[];
@@ -58,14 +59,16 @@ export function RentalRequestSection({
             {/* Secondary Direct Contact Hint */}
             <div className="pt-2 text-xs font-sans text-ink-600">
               <span>Cần hỗ trợ gấp? </span>
-              <a
+              <TrackedOutboundLink
                 href={messengerUrl}
+                eventName="contact_messenger"
+                placement="rental_section"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-ink-900 font-semibold underline underline-offset-4 hover:text-accent transition-colors focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-accent"
               >
                 Nhắn trực tiếp qua Messenger ↗
-              </a>
+              </TrackedOutboundLink>
             </div>
 
           </div>

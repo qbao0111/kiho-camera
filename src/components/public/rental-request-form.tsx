@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect } from "react";
 import { CheckCircle2, AlertCircle, ArrowRight, RefreshCw, MessageSquare } from "lucide-react";
+import { trackRentalRequestSubmit } from "@/lib/analytics";
 
 export interface EquipmentOption {
   id: string;
@@ -146,6 +147,12 @@ export function RentalRequestForm({
         equipmentName: equipmentName || "Chưa biết — nhờ Kiho tư vấn",
         rentalDate,
         returnDate,
+      });
+
+      // GA4 Conversion Event: Strictly safe business parameters without PII
+      trackRentalRequestSubmit({
+        placement: source || (variant === "drawer" ? "product_detail" : "homepage_section"),
+        camera_name: equipmentName && equipmentName !== "Chưa biết — nhờ Kiho tư vấn" ? equipmentName : undefined,
       });
 
       if (onSuccess) {

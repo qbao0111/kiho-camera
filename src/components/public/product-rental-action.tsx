@@ -10,6 +10,7 @@ import {
 } from "lucide-react";
 import { Equipment } from "@/types/database";
 import { RentalRequestDrawer } from "@/components/public/rental-request-drawer";
+import { trackRentalRequestOpen, trackMessengerContact } from "@/lib/analytics";
 
 interface ProductRentalActionProps {
   equipment: Equipment;
@@ -26,13 +27,22 @@ export function ProductRentalAction({
 }: ProductRentalActionProps) {
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
 
+  const handleOpenDrawer = () => {
+    trackRentalRequestOpen({
+      placement: "product_primary_action",
+      camera_slug: equipment.slug,
+      camera_name: equipment.name,
+    });
+    setIsDrawerOpen(true);
+  };
+
   return (
     <div className="space-y-4 pt-1">
       {/* Dual-CTA Container */}
       <div className="bg-canvas-100 p-4 sm:p-5 rounded-xl border border-ink-200 shadow-xs space-y-3">
         {/* Button 1: Primary Lead Request Drawer */}
         <button
-          onClick={() => setIsDrawerOpen(true)}
+          onClick={handleOpenDrawer}
           className="w-full inline-flex items-center justify-center gap-2 bg-ink-900 hover:bg-black text-white font-sans font-semibold py-3.5 px-5 rounded-lg shadow-xs transition-all text-sm group cursor-pointer focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-accent"
         >
           <Send className="w-4 h-4 text-accent group-hover:text-white transition-colors shrink-0" />
@@ -54,13 +64,19 @@ export function ProductRentalAction({
           href={messengerChatUrl}
           target="_blank"
           rel="noopener noreferrer"
+          onClick={() => {
+            trackMessengerContact({
+              placement: "product_primary_action",
+              camera_slug: equipment.slug,
+              camera_name: equipment.name,
+            });
+          }}
           className="w-full inline-flex items-center justify-center gap-2 bg-white hover:bg-canvas-200 border border-ink-300 text-ink-900 hover:text-accent font-sans font-medium py-3 px-5 rounded-lg transition-all text-sm shadow-xs group cursor-pointer focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-accent"
         >
           <MessageCircle className="w-4 h-4 text-accent shrink-0" />
           <span className="truncate">Nhắn Kiho tư vấn ngay</span>
           <ArrowUpRight className="w-4 h-4 text-ink-600 group-hover:text-accent group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all shrink-0" />
         </a>
-
       </div>
 
       {/* Support Note */}

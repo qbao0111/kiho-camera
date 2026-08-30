@@ -1,9 +1,11 @@
 import React from "react";
 import { Metadata } from "next";
-import { ArrowUpRight, MapPin, Phone, Clock, MessageSquare } from "lucide-react";
+import { ArrowUpRight, MapPin, Phone, Clock, MessageSquare, MessageCircle } from "lucide-react";
 import { getSiteSettings } from "@/lib/services/settings";
 import { BreadcrumbJsonLd } from "@/components/public/json-ld";
 import { FadeIn } from "@/components/ui/motion";
+import { normalizePhoneNumber, buildZaloUrl } from "@/lib/utils";
+import { TrackedOutboundLink } from "@/components/analytics/tracked-outbound-link";
 
 export const metadata: Metadata = {
   title: "Liên hệ & Địa chỉ cửa hàng tại Đồng Hới",
@@ -85,12 +87,14 @@ export default async function ContactPage() {
                 <span className="text-[11px] font-mono font-semibold tracking-widest text-ink-600 uppercase">
                   HOTLINE / ZALO
                 </span>
-                <a
-                  href={`tel:${settings.phone.replace(/\s+/g, "")}`}
+                <TrackedOutboundLink
+                  href={`tel:${normalizePhoneNumber(settings.phone)}`}
+                  eventName="contact_hotline"
+                  placement="contact_page"
                   className="text-xl font-bold font-mono text-ink-900 hover:text-accent transition-colors block"
                 >
                   {settings.phone}
-                </a>
+                </TrackedOutboundLink>
               </div>
 
               <div className="space-y-1 pt-3 border-t border-ink-200">
@@ -105,15 +109,35 @@ export default async function ContactPage() {
 
             {/* Direct Link CTAs */}
             <div className="pt-2 space-y-2.5">
-              <a
+              <TrackedOutboundLink
                 href={settings.messenger_url}
+                eventName="contact_messenger"
+                placement="contact_page"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-full inline-flex items-center justify-between py-3.5 px-5 bg-ink-900 hover:bg-black text-white font-sans font-semibold text-sm rounded-lg transition-colors shadow-xs focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-accent"
               >
-                <span>Nhắn tin tư vấn qua Messenger</span>
+                <div className="flex items-center gap-2">
+                  <MessageCircle className="w-4 h-4 text-accent shrink-0" />
+                  <span>Nhắn tin tư vấn qua Messenger</span>
+                </div>
                 <ArrowUpRight className="w-4 h-4" />
-              </a>
+              </TrackedOutboundLink>
+
+              <TrackedOutboundLink
+                href={buildZaloUrl(settings.phone)}
+                eventName="contact_zalo"
+                placement="contact_page"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-full inline-flex items-center justify-between py-3 px-5 bg-white hover:bg-canvas-200 border border-ink-300 hover:border-accent text-ink-900 hover:text-accent font-sans font-semibold text-xs rounded-lg transition-colors shadow-xs focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-accent"
+              >
+                <div className="flex items-center gap-2">
+                  <MessageSquare className="w-4 h-4 text-accent shrink-0" />
+                  <span>Chat tư vấn qua Zalo</span>
+                </div>
+                <ArrowUpRight className="w-3.5 h-3.5 text-ink-400 group-hover:text-accent" />
+              </TrackedOutboundLink>
 
               <a
                 href={settings.facebook_url}

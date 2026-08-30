@@ -5,6 +5,7 @@ import { getFeedbackList } from "@/lib/services/feedback";
 import { getSiteSettings } from "@/lib/services/settings";
 import { FeedbackCard } from "@/components/public/feedback-card";
 import { FadeIn, StaggerContainer, StaggerItem } from "@/components/ui/motion";
+import { TrackedOutboundLink } from "@/components/analytics/tracked-outbound-link";
 
 export const metadata: Metadata = {
   title: "Feedback & Cảm nhận khách hàng | Kiho Camera",
@@ -52,15 +53,17 @@ export default async function FeedbackPage() {
 
         {/* Bottom Link */}
         <FadeIn className="pt-8 text-center">
-          <a
+          <TrackedOutboundLink
             href={settings.messenger_url}
+            eventName="contact_messenger"
+            placement="feedback_page"
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center gap-2 text-xs font-sans font-semibold text-ink-900 hover:text-accent bg-white border border-ink-300 px-6 py-3.5 rounded-lg transition-all shadow-xs"
           >
             <span>Nhắn Kiho tư vấn dòng máy phù hợp</span>
             <ArrowUpRight className="w-4 h-4" />
-          </a>
+          </TrackedOutboundLink>
         </FadeIn>
       </div>
     </div>

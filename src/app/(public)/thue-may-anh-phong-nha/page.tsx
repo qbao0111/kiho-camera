@@ -14,6 +14,7 @@ import {
 import { getSiteSettings } from "@/lib/services/settings";
 import { getEquipmentList } from "@/lib/services/equipment";
 import { BreadcrumbJsonLd } from "@/components/public/json-ld";
+import { TrackedOutboundLink } from "@/components/analytics/tracked-outbound-link";
 import { FadeIn } from "@/components/ui/motion";
 
 export const metadata: Metadata = {
@@ -401,15 +402,17 @@ export default async function PhongNhaGuidePage() {
               <span>Xem danh sách 12 máy ảnh</span>
             </Link>
 
-            <a
+            <TrackedOutboundLink
               href={settings.messenger_url || "https://m.me/kihocameradonghoi"}
+              eventName="contact_messenger"
+              placement="phong_nha_guide"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-white/10 text-sand-100 font-sans text-sm font-semibold hover:bg-white/20 transition-all border border-white/15"
             >
               <MessageCircle className="w-4 h-4" />
               <span>Nhắn tin tư vấn giữ máy</span>
-            </a>
+            </TrackedOutboundLink>
           </div>
         </section>
       </div>

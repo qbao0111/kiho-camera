@@ -30,6 +30,26 @@ export function buildMessengerUrl(messengerUrl: string, productName?: string): s
 }
 
 /**
+ * Chuẩn hóa số điện thoại thành chuỗi số liền (ví dụ: "0387 274 669" -> "0387274669")
+ */
+export function normalizePhoneNumber(phone?: string): string {
+  if (!phone) return "0387274669";
+  const digitsOnly = phone.replace(/[^0-9+]/g, "");
+  if (digitsOnly.startsWith("+84")) {
+    return "0" + digitsOnly.slice(3);
+  }
+  return digitsOnly;
+}
+
+/**
+ * Tạo URL Zalo dẫn thẳng tới khung chat với số điện thoại
+ */
+export function buildZaloUrl(phone?: string): string {
+  const normalized = normalizePhoneNumber(phone);
+  return `https://zalo.me/${normalized}`;
+}
+
+/**
  * Chuyển đổi chuỗi tiếng Việt thành slug URL
  */
 export function slugify(text: string): string {

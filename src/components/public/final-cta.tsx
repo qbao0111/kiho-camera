@@ -3,6 +3,8 @@
 import React from "react";
 import Image from "next/image";
 import { ArrowRight, ArrowDown, Phone, Instagram, MapPin, Camera } from "lucide-react";
+import { trackMessengerContact, trackHotlineContact } from "@/lib/analytics";
+import { normalizePhoneNumber } from "@/lib/utils";
 
 interface FinalCtaProps {
   messengerUrl?: string;
@@ -62,6 +64,7 @@ export function FinalCta({
               href={messengerUrl}
               target="_blank"
               rel="noopener noreferrer"
+              onClick={() => trackMessengerContact({ placement: "final_cta" })}
               className="inline-flex items-center gap-2 bg-ink-900 hover:bg-black text-white text-xs sm:text-sm font-sans font-semibold px-6 py-3.5 rounded-lg shadow-xs transition-all group cursor-pointer focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-accent"
             >
               <span>Nhắn Kiho tư vấn ngay</span>
@@ -87,7 +90,11 @@ export function FinalCta({
 
             <div className="flex items-center gap-2.5">
               <Phone className="w-4 h-4 text-accent shrink-0" />
-              <a href="tel:0387274669" className="text-ink-900 hover:text-accent font-semibold transition-colors font-mono">
+              <a
+                href={`tel:${normalizePhoneNumber(phone)}`}
+                onClick={() => trackHotlineContact({ placement: "final_cta" })}
+                className="text-ink-900 hover:text-accent font-semibold transition-colors font-mono"
+              >
                 {phone}
               </a>
             </div>

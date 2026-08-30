@@ -4,6 +4,7 @@ import { ArrowUpRight, ShieldCheck, CheckCircle2, FileText } from "lucide-react"
 import { getSiteSettings } from "@/lib/services/settings";
 import { BreadcrumbJsonLd } from "@/components/public/json-ld";
 import { FadeIn } from "@/components/ui/motion";
+import { TrackedOutboundLink } from "@/components/analytics/tracked-outbound-link";
 
 export const metadata: Metadata = {
   title: "Hướng dẫn & Thủ tục thuê máy ảnh tại Quảng Bình, Đồng Hới",
@@ -150,15 +151,17 @@ export default async function RentalGuidePage() {
           <p className="text-xs sm:text-sm text-ink-600 font-sans">
             Bạn cần tư vấn chọn máy cho chuyến đi tới? Nhắn Kiho ngay nhé!
           </p>
-          <a
+          <TrackedOutboundLink
             href={settings.messenger_url || "https://m.me/kihocameradonghoi"}
+            eventName="contact_messenger"
+            placement="rental_guide"
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center gap-1.5 bg-ink-900 hover:bg-black text-white font-sans font-semibold text-xs px-6 py-3 rounded-lg transition-colors shadow-xs focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-accent"
           >
             <span>Nhắn Kiho Camera</span>
             <ArrowUpRight className="w-3.5 h-3.5" />
-          </a>
+          </TrackedOutboundLink>
         </FadeIn>
 
       </div>
