@@ -27,6 +27,11 @@ export function FadeIn({
   const domRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+    if (typeof window !== "undefined" && window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      setIsVisible(true);
+      return;
+    }
+
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
@@ -79,7 +84,7 @@ export function FadeIn({
         opacity: isVisible ? 1 : 0,
         transform: getTransform(),
         transition: `opacity ${duration}s cubic-bezier(0.21, 0.47, 0.32, 0.98) ${delay}s, transform ${duration}s cubic-bezier(0.21, 0.47, 0.32, 0.98) ${delay}s`,
-        willChange: "opacity, transform",
+        willChange: isVisible ? "auto" : "opacity, transform",
         ...style,
       }}
       {...props}
@@ -126,6 +131,11 @@ export function ImageReveal({
   const domRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+    if (typeof window !== "undefined" && window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      setIsVisible(true);
+      return;
+    }
+
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
@@ -152,13 +162,14 @@ export function ImageReveal({
         opacity: isVisible ? 1 : 0,
         transform: isVisible ? "scale(1)" : "scale(1.03)",
         transition: `opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1) ${delay}s, transform 0.8s cubic-bezier(0.16, 1, 0.3, 1) ${delay}s`,
-        willChange: "opacity, transform",
+        willChange: isVisible ? "auto" : "opacity, transform",
       }}
     >
       {children}
     </div>
   );
 }
+
 
 export function PageTransition({ children }: { children: React.ReactNode }) {
   return (

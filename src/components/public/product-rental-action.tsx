@@ -43,7 +43,7 @@ export function ProductRentalAction({
         {/* Divider */}
         <div className="relative flex items-center justify-center py-0.5">
           <div className="border-t border-ink-200 w-full" />
-          <span className="bg-canvas-100 px-3 text-[11px] font-mono text-ink-400 uppercase tracking-wider shrink-0">
+          <span className="bg-canvas-100 px-3 text-[11px] font-mono text-ink-600 font-semibold uppercase tracking-wider shrink-0">
             hoặc
           </span>
           <div className="border-t border-ink-200 w-full" />
@@ -58,8 +58,9 @@ export function ProductRentalAction({
         >
           <MessageCircle className="w-4 h-4 text-accent shrink-0" />
           <span className="truncate">Nhắn Kiho tư vấn ngay</span>
-          <ArrowUpRight className="w-4 h-4 text-ink-400 group-hover:text-accent group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all shrink-0" />
+          <ArrowUpRight className="w-4 h-4 text-ink-600 group-hover:text-accent group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all shrink-0" />
         </a>
+
       </div>
 
       {/* Support Note */}

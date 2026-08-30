@@ -283,7 +283,7 @@ export function RentalRequestForm({
         </div>
 
         <div className="space-y-1.5">
-          <span className="font-mono text-xs font-medium tracking-wider text-emerald-700 uppercase block">
+          <span className="font-mono text-xs font-semibold tracking-wider text-emerald-700 uppercase block">
             GỬI YÊU CẦU THÀNH CÔNG
           </span>
           <h3 className="font-display text-2xl font-bold text-ink-900 tracking-tight">
@@ -385,7 +385,7 @@ export function RentalRequestForm({
 
       {/* 1. Customer Name */}
       <div className="space-y-1">
-        <label htmlFor="customerName" className="block text-xs font-sans font-medium text-ink-800">
+        <label htmlFor="customerName" className="block text-xs font-sans font-semibold text-ink-900">
           Họ và tên <span className="text-accent">*</span>
         </label>
         <input
@@ -396,22 +396,22 @@ export function RentalRequestForm({
           value={customerName}
           onChange={(e) => setCustomerName(e.target.value)}
           placeholder="Ví dụ: Nguyễn Minh Anh"
-          className="w-full px-3.5 py-2.5 rounded-lg bg-canvas-50 border border-ink-200 text-sm text-ink-900 placeholder:text-ink-400 focus:outline-hidden focus:border-ink-900 focus:bg-white transition-all font-sans"
+          className="w-full px-3.5 py-2.5 rounded-lg bg-canvas-50 border border-ink-200 text-base sm:text-sm text-ink-900 placeholder:text-ink-500 focus:outline-hidden focus:border-accent focus:ring-1 focus:ring-accent focus:bg-white transition-all font-sans"
         />
       </div>
 
       {/* 2. Date Range & Quick Presets */}
       <div className="space-y-2">
         <div className="flex items-center justify-between">
-          <label className="block text-xs font-sans font-medium text-ink-800">
+          <label className="block text-xs font-sans font-semibold text-ink-900">
             Thời gian thuê máy <span className="text-accent">*</span>
           </label>
-          <span className="text-[10px] text-ink-400 font-mono">Nhận 07:30 · Trả 21:00</span>
+          <span className="text-[10px] text-ink-500 font-mono">Nhận 07:30 · Trả 21:00</span>
         </div>
 
         {/* Quick Presets for Tourist Itineraries */}
         <div className="flex flex-wrap items-center gap-1.5 pb-1">
-          <span className="text-[11px] font-sans text-ink-500 mr-0.5">Chọn nhanh:</span>
+          <span className="text-[11px] font-sans text-ink-600 mr-0.5 font-medium">Chọn nhanh:</span>
           {[
             { label: "1 Buổi (4-5h)", days: 1, isSession: true },
             { label: "1 Ngày (24h)", days: 1, isSession: false },
@@ -423,7 +423,6 @@ export function RentalRequestForm({
               type="button"
               onClick={() => {
                 const now = new Date();
-                // If past 17:00, default starting tomorrow, otherwise today
                 const start = new Date();
                 if (now.getHours() >= 17) {
                   start.setDate(start.getDate() + 1);
@@ -447,7 +446,7 @@ export function RentalRequestForm({
 
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
           <div className="space-y-1">
-            <label htmlFor="rentalDate" className="block text-[11px] font-sans text-ink-600">
+            <label htmlFor="rentalDate" className="block text-[11px] font-sans font-medium text-ink-700">
               Ngày nhận máy
             </label>
             <input
@@ -458,12 +457,12 @@ export function RentalRequestForm({
               disabled={isSubmitting}
               value={rentalDate}
               onChange={(e) => handleRentalDateChange(e.target.value)}
-              className="w-full px-3.5 py-2.5 rounded-lg bg-canvas-50 border border-ink-200 text-sm text-ink-900 focus:outline-hidden focus:border-ink-900 focus:bg-white transition-all font-mono cursor-pointer"
+              className="w-full px-3.5 py-2.5 rounded-lg bg-canvas-50 border border-ink-200 text-base sm:text-sm text-ink-900 focus:outline-hidden focus:border-accent focus:ring-1 focus:ring-accent focus:bg-white transition-all font-mono cursor-pointer"
             />
           </div>
 
           <div className="space-y-1">
-            <label htmlFor="returnDate" className="block text-[11px] font-sans text-ink-600">
+            <label htmlFor="returnDate" className="block text-[11px] font-sans font-medium text-ink-700">
               Ngày trả máy
             </label>
             <input
@@ -474,7 +473,7 @@ export function RentalRequestForm({
               disabled={isSubmitting}
               value={returnDate}
               onChange={(e) => setReturnDate(e.target.value)}
-              className="w-full px-3.5 py-2.5 rounded-lg bg-canvas-50 border border-ink-200 text-sm text-ink-900 focus:outline-hidden focus:border-ink-900 focus:bg-white transition-all font-mono cursor-pointer"
+              className="w-full px-3.5 py-2.5 rounded-lg bg-canvas-50 border border-ink-200 text-base sm:text-sm text-ink-900 focus:outline-hidden focus:border-accent focus:ring-1 focus:ring-accent focus:bg-white transition-all font-mono cursor-pointer"
             />
           </div>
         </div>
@@ -483,7 +482,7 @@ export function RentalRequestForm({
       {/* Same-day Option Toggle (Buổi vs Ngày) */}
       {rentalDate && returnDate && rentalDate === returnDate && selectedEquipment?.price_session ? (
         <div className="flex items-center gap-2 p-2.5 bg-canvas-100 rounded-lg border border-ink-200 text-xs font-sans">
-          <span className="text-ink-500 font-medium shrink-0">Hình thức thuê:</span>
+          <span className="text-ink-600 font-medium shrink-0">Hình thức thuê:</span>
           <div className="flex items-center gap-1.5">
             <button
               type="button"
@@ -513,7 +512,7 @@ export function RentalRequestForm({
 
       {/* 3. Camera Selection Dropdown */}
       <div className="space-y-1">
-        <label htmlFor="equipmentSelect" className="block text-xs font-sans font-medium text-ink-800">
+        <label htmlFor="equipmentSelect" className="block text-xs font-sans font-semibold text-ink-900">
           Dòng máy quan tâm <span className="text-accent">*</span>
         </label>
         <select
@@ -521,7 +520,7 @@ export function RentalRequestForm({
           disabled={isSubmitting}
           value={equipmentName}
           onChange={(e) => handleEquipmentChange(e.target.value)}
-          className="w-full px-3.5 py-2.5 rounded-lg bg-canvas-50 border border-ink-200 text-sm text-ink-900 focus:outline-hidden focus:border-ink-900 focus:bg-white transition-all font-sans cursor-pointer"
+          className="w-full px-3.5 py-2.5 rounded-lg bg-canvas-50 border border-ink-200 text-base sm:text-sm text-ink-900 focus:outline-hidden focus:border-accent focus:ring-1 focus:ring-accent focus:bg-white transition-all font-sans cursor-pointer"
         >
           {variant !== "drawer" && (
             <option value="Chưa biết — nhờ Kiho tư vấn">
@@ -543,7 +542,7 @@ export function RentalRequestForm({
       {priceEstimation && (
         <div className="p-3.5 sm:p-4 rounded-xl bg-canvas-100 border border-ink-200 shadow-2xs space-y-2.5 animate-in fade-in duration-200">
           <div className="flex items-center justify-between border-b border-ink-200/80 pb-2">
-            <div className="flex items-center gap-1.5 text-xs font-mono font-medium text-ink-600 uppercase tracking-wider">
+            <div className="flex items-center gap-1.5 text-xs font-mono font-semibold text-ink-700 uppercase tracking-wider">
               <Calculator className="w-3.5 h-3.5 text-accent" />
               <span>TẠM TÍNH CHI PHÍ</span>
             </div>
@@ -557,10 +556,10 @@ export function RentalRequestForm({
 
           <div className="flex items-baseline justify-between gap-2">
             <div>
-              <span className="text-xs text-ink-500 font-sans block">
+              <span className="text-xs text-ink-700 font-sans block font-medium">
                 {selectedEquipment?.name} · {priceEstimation.label}
               </span>
-              <span className="text-[11px] text-ink-400 font-mono">
+              <span className="text-[11px] text-ink-500 font-mono">
                 {formatDateDisplay(rentalDate)} → {formatDateDisplay(returnDate)}
               </span>
             </div>
@@ -572,7 +571,7 @@ export function RentalRequestForm({
           </div>
 
           {/* Included Free Items Reminder */}
-          <div className="pt-2 border-t border-ink-200/70 grid grid-cols-2 gap-1.5 text-[11px] font-sans text-ink-600">
+          <div className="pt-2 border-t border-ink-200/70 grid grid-cols-2 gap-1.5 text-[11px] font-sans text-ink-700">
             <div className="flex items-center gap-1.5">
               <CheckCircle2 className="w-3 h-3 text-emerald-600 shrink-0" />
               <span>2 Pin + Sạc nhanh đôi</span>
@@ -600,7 +599,7 @@ export function RentalRequestForm({
 
       {/* 5. Phone Number with inputmode=tel */}
       <div className="space-y-1">
-        <label htmlFor="phone" className="block text-xs font-sans font-medium text-ink-800">
+        <label htmlFor="phone" className="block text-xs font-sans font-semibold text-ink-900">
           Số điện thoại (Zalo) <span className="text-accent">*</span>
         </label>
         <input
@@ -613,14 +612,14 @@ export function RentalRequestForm({
           value={phone}
           onChange={handlePhoneChange}
           placeholder="0912 345 678"
-          className="w-full px-3.5 py-2.5 rounded-lg bg-canvas-50 border border-ink-200 text-sm text-ink-900 placeholder:text-ink-400 focus:outline-hidden focus:border-ink-900 focus:bg-white transition-all font-mono"
+          className="w-full px-3.5 py-2.5 rounded-lg bg-canvas-50 border border-ink-200 text-base sm:text-sm text-ink-900 placeholder:text-ink-500 focus:outline-hidden focus:border-accent focus:ring-1 focus:ring-accent focus:bg-white transition-all font-mono"
         />
       </div>
 
       {/* 6. Note (Optional) */}
       <div className="space-y-1">
-        <label htmlFor="note" className="block text-xs font-sans font-medium text-ink-600">
-          Ghi chú thêm <span className="text-ink-400 font-normal">(không bắt buộc)</span>
+        <label htmlFor="note" className="block text-xs font-sans font-semibold text-ink-900">
+          Ghi chú thêm <span className="text-ink-600 font-normal">(không bắt buộc)</span>
         </label>
         <textarea
           id="note"
@@ -629,7 +628,7 @@ export function RentalRequestForm({
           value={note}
           onChange={(e) => setNote(e.target.value)}
           placeholder="Bạn định đi Phong Nha, check-in biển hay quay vlog..."
-          className="w-full px-3.5 py-2 rounded-lg bg-canvas-50 border border-ink-200 text-sm text-ink-900 placeholder:text-ink-400 focus:outline-hidden focus:border-ink-900 focus:bg-white transition-all resize-none font-sans"
+          className="w-full px-3.5 py-2 rounded-lg bg-canvas-50 border border-ink-200 text-base sm:text-sm text-ink-900 placeholder:text-ink-500 focus:outline-hidden focus:border-accent focus:ring-1 focus:ring-accent focus:bg-white transition-all resize-none font-sans"
         />
       </div>
 
@@ -655,7 +654,7 @@ export function RentalRequestForm({
           )}
         </button>
 
-        <p className="text-[11px] font-sans text-ink-400 text-center leading-relaxed">
+        <p className="text-[11px] font-sans text-ink-600 text-center leading-relaxed">
           Kiho sẽ gọi hoặc nhắn Zalo xác nhận lịch máy cho bạn trong vòng 5 – 10 phút.
         </p>
       </div>

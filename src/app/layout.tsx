@@ -6,24 +6,25 @@ import "./globals.css";
 
 const playfairDisplay = Playfair_Display({
   subsets: ["latin", "vietnamese"],
-  weight: ["400", "600", "700", "800", "900"],
+  weight: ["400", "700"],
   variable: "--font-display",
   display: "swap",
 });
 
 const beVietnamPro = Be_Vietnam_Pro({
   subsets: ["latin", "vietnamese"],
-  weight: ["300", "400", "500", "600", "700", "800"],
+  weight: ["400", "500", "600", "700"],
   variable: "--font-sans",
   display: "swap",
 });
 
 const jetbrainsMono = JetBrains_Mono({
   subsets: ["latin", "vietnamese"],
-  weight: ["400", "500", "600", "700"],
+  weight: ["500", "600"],
   variable: "--font-mono",
   display: "swap",
 });
+
 
 export const viewport: Viewport = {
   themeColor: "#faf8f5",
@@ -36,26 +37,27 @@ const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://kihocamera.com";
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   title: {
-    default: "Kiho Camera - Cho thuê máy ảnh tại Quảng Bình",
-    template: "%s | Kiho Camera Quảng Bình",
+    default: "Thuê máy ảnh Quảng Bình, Đồng Hới | Kiho Camera",
+    template: "%s | Kiho Camera",
   },
   description:
-    "Dịch vụ cho thuê máy ảnh du lịch Canon, Fujifilm, Sony chính hãng tại TP. Đồng Hới, Quảng Bình. Đầy đủ phụ kiện pin sạc thẻ nhớ, hỗ trợ giao nhận tận nơi, thủ tục nhanh gọn không cần cọc tiền máy.",
+    "Dịch vụ cho thuê máy ảnh du lịch Canon, Fujifilm, Sony chính hãng tại TP. Đồng Hới, Quảng Bình. Đầy đủ phụ kiện pin, sạc, thẻ nhớ, hỗ trợ giao nhận tận nơi không cần cọc tiền máy.",
   keywords: [
     "thuê máy ảnh Quảng Bình",
     "cho thuê máy ảnh Quảng Bình",
     "thuê máy ảnh Đồng Hới",
+    "thuê máy ảnh Phong Nha",
     "máy ảnh du lịch Quảng Bình",
-    "Canon R50",
-    "Canon G7X Mark III",
-    "Fujifilm X100V",
-    "Fujifilm X100VI",
-    "Sony ZV1",
-    "Sony ZV1F",
+    "thuê Canon R50 Quảng Bình",
+    "thuê Canon G7X Mark III Quảng Bình",
+    "thuê Fujifilm X100V Quảng Bình",
+    "thuê Fujifilm X100VI Quảng Bình",
+    "thuê Sony ZV-1 Mark II Quảng Bình",
   ],
   authors: [{ name: "Kiho Camera" }],
   creator: "Kiho Camera",
   publisher: "Kiho Camera",
+
   icons: {
     icon: [
       { url: "/favicon-48.png", sizes: "48x48", type: "image/png" },

@@ -2,12 +2,13 @@ import React from "react";
 import { Metadata } from "next";
 import { ArrowUpRight, ShieldCheck, CheckCircle2, FileText } from "lucide-react";
 import { getSiteSettings } from "@/lib/services/settings";
+import { BreadcrumbJsonLd } from "@/components/public/json-ld";
 import { FadeIn } from "@/components/ui/motion";
 
 export const metadata: Metadata = {
-  title: "Hướng dẫn & Thủ tục thuê máy ảnh tại Quảng Bình",
+  title: "Hướng dẫn & Thủ tục thuê máy ảnh tại Quảng Bình, Đồng Hới",
   description:
-    "Quy trình thuê máy ảnh du lịch đơn giản tại TP. Đồng Hới Quảng Bình. Không cần cọc tiền máy, xác minh nhanh qua ảnh CCCD hoặc VNeID.",
+    "Quy trình thuê máy ảnh du lịch đơn giản tại TP. Đồng Hới, Quảng Bình. Không cần cọc tiền máy, xác minh nhanh qua ảnh CCCD hoặc VNeID.",
   alternates: {
     canonical: "/huong-dan-thue",
   },
@@ -15,6 +16,7 @@ export const metadata: Metadata = {
 
 export default async function RentalGuidePage() {
   const settings = await getSiteSettings();
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://kihocamera.com";
 
   const faqs = [
     {
@@ -41,10 +43,18 @@ export default async function RentalGuidePage() {
 
   return (
     <div className="bg-[#faf8f5] min-h-screen py-10 sm:py-16">
+      <BreadcrumbJsonLd
+        items={[
+          { name: "Trang chủ", url: "/" },
+          { name: "Hướng dẫn thuê máy", url: "/huong-dan-thue" },
+        ]}
+        siteUrl={siteUrl}
+      />
+
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12 sm:space-y-14">
         {/* Page Header */}
         <FadeIn className="space-y-2 pb-6 border-b border-ink-200">
-          <div className="flex items-center gap-1.5 text-xs font-mono font-medium tracking-widest text-ink-500 uppercase">
+          <div className="flex items-center gap-1.5 text-xs font-mono font-semibold tracking-widest text-ink-600 uppercase">
             <FileText className="w-3.5 h-3.5 text-accent" />
             <span>QUY TRÌNH & CHÍNH SÁCH</span>
           </div>
@@ -137,19 +147,20 @@ export default async function RentalGuidePage() {
 
         {/* Bottom CTA */}
         <FadeIn className="pt-4 text-center space-y-3">
-          <p className="text-xs sm:text-sm text-ink-500 font-sans">
+          <p className="text-xs sm:text-sm text-ink-600 font-sans">
             Bạn cần tư vấn chọn máy cho chuyến đi tới? Nhắn Kiho ngay nhé!
           </p>
           <a
             href={settings.messenger_url || "https://m.me/kihocameradonghoi"}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-1.5 bg-ink-900 hover:bg-black text-white font-sans font-semibold text-xs px-6 py-3 rounded-lg transition-colors shadow-xs"
+            className="inline-flex items-center gap-1.5 bg-ink-900 hover:bg-black text-white font-sans font-semibold text-xs px-6 py-3 rounded-lg transition-colors shadow-xs focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-accent"
           >
             <span>Nhắn Kiho Camera</span>
             <ArrowUpRight className="w-3.5 h-3.5" />
           </a>
         </FadeIn>
+
       </div>
     </div>
   );

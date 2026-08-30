@@ -1,11 +1,10 @@
-"use client";
-
 import React from "react";
 import { ShieldCheck, HelpCircle, FileCheck } from "lucide-react";
 
 interface RentalProcessProps {
   messengerUrl?: string;
 }
+
 
 export function RentalProcess({}: RentalProcessProps = {}) {
   const steps = [
@@ -32,7 +31,7 @@ export function RentalProcess({}: RentalProcessProps = {}) {
         
         {/* Section Header */}
         <div className="mb-10 sm:mb-14 max-w-2xl">
-          <div className="flex items-center gap-1.5 text-xs font-mono font-medium tracking-widest text-ink-500 uppercase mb-2">
+          <div className="flex items-center gap-1.5 text-xs font-mono font-semibold tracking-widest text-ink-600 uppercase mb-2">
             <FileCheck className="w-3.5 h-3.5 text-accent" />
             <span>QUY TRÌNH TINH GỌN</span>
           </div>
@@ -64,13 +63,14 @@ export function RentalProcess({}: RentalProcessProps = {}) {
               </div>
 
               {/* Bottom Step Status */}
-              <div className="pt-3 border-t border-ink-200 flex items-center justify-between text-[11px] font-mono text-ink-400">
+              <div className="pt-3 border-t border-ink-200 flex items-center justify-between text-[11px] font-mono text-ink-600 font-semibold">
                 <span>BƯỚC {idx + 1} / 3</span>
                 <span>NHANH GỌN</span>
               </div>
             </div>
           ))}
         </div>
+
 
         {/* FAQ / Rental Notes */}
         <div className="mt-10 sm:mt-14 p-6 sm:p-8 rounded-xl bg-white border border-ink-200 shadow-xs">
@@ -97,7 +97,27 @@ export function RentalProcess({}: RentalProcessProps = {}) {
           </div>
         </div>
 
+        {/* Contextual Link to Phong Nha Guide */}
+        <div className="mt-6 flex flex-col sm:flex-row sm:items-center justify-between gap-3 p-4 sm:p-5 rounded-xl bg-forest-50/70 border border-forest-200/80">
+          <div className="flex items-center gap-3">
+            <span className="font-mono text-[11px] font-semibold uppercase px-2.5 py-1 rounded bg-forest-100 text-forest-800 tracking-wide shrink-0">
+              Điểm đến
+            </span>
+            <p className="font-sans text-xs sm:text-sm text-forest-900 font-medium">
+              Bạn đang lên lịch trình khám phá Động Thiên Đường, Sông Son hay Suối Moọc?
+            </p>
+          </div>
+          <a
+            href="/thue-may-anh-phong-nha"
+            className="inline-flex items-center gap-1.5 text-xs sm:text-sm font-semibold text-forest-700 hover:text-forest-900 transition-colors whitespace-nowrap"
+          >
+            <span>Xem cẩm nang thuê máy đi Phong Nha</span>
+            <span aria-hidden="true">&rarr;</span>
+          </a>
+        </div>
+
       </div>
     </section>
   );
 }
+

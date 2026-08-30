@@ -38,15 +38,15 @@ export const CAMERA_SEO_CONTENT: Record<string, CameraSeoContent> = {
     slug: "fujifilm-x100vi",
     modelName: "Fujifilm X100VI",
     brand: "Fujifilm",
-    seoTitle: "Thuê Fujifilm X100VI tại Đồng Hới",
-    seoDescription: "Thuê máy ảnh Fujifilm X100VI tại Đồng Hới Quảng Bình. Cảm biến 40.2MP, chống rung IBIS, màu film Reala Ace. Xem ảnh mẫu và giữ máy tại Kiho.",
-    tagline: "Trải nghiệm chụp ảnh đường phố & du lịch cao cấp nhất của hệ máy compact Fujifilm.",
+    seoTitle: "Thuê máy ảnh Fujifilm X100VI tại Quảng Bình, Đồng Hới",
+    seoDescription: "Dịch vụ thuê máy ảnh Fujifilm X100VI tại Đồng Hới, Quảng Bình. Cảm biến 40.2MP, chống rung IBIS, bộ màu film Reala Ace. Kèm trọn bộ pin sạc, thẻ nhớ.",
+    tagline: "Trải nghiệm chụp ảnh đường phố & du lịch cao cấp của hệ máy compact Fujifilm.",
 
-    intro: "Fujifilm X100VI mang đến cảm giác cầm một chiếc máy ảnh cơ rangefinder cổ điển nhưng bên trong là công nghệ hình ảnh mới nhất. Với cảm biến 40.2MP sắc nét, hệ thống chống rung cảm biến IBIS 6 stops và bộ lọc màu film Reala Ace độc quyền, chiếc máy này sinh ra cho những ai xem việc bấm máy là một phần thưởng của chuyến đi — từ từng góc phố nhỏ Đồng Hới đến những bãi cát lộng gió tại Quảng Bình.",
+    intro: "Fujifilm X100VI mang đến cảm giác cầm một chiếc máy ảnh rangefinder cổ điển nhưng bên trong là công nghệ hình ảnh thế hệ mới. Với cảm biến 40.2MP sắc nét, hệ thống chống rung cảm biến IBIS 6 stops và bộ lọc màu film Reala Ace, chiếc máy này phù hợp cho những ai yêu thích trải nghiệm ngắm chụp trực quan khi dạo quanh Đồng Hới hay khám phá các cung đường ven biển Quảng Bình.",
     whoIsItFor: [
       "Những bạn yêu thích trải nghiệm chụp máy cơ cổ điển và ngắm khung hình qua kính ngắm hybrid.",
-      "Người đam mê tone màu film hoài niệm đặc trưng của Fuji mà không muốn tốn công hậu kỳ.",
-      "Khách du lịch muốn một thân máy compact nguyên khối cao cấp, đầm tay và không phải mang theo balo ống kính rườm rà.",
+      "Người đam mê tông màu Film Simulation đặc trưng của Fujifilm để có ảnh dùng ngay từ máy.",
+      "Khách du lịch muốn một thân máy compact nguyên khối cao cấp, đầm tay và không phải mang theo nhiều ống kính.",
       "Các cặp đôi tìm kiếm chất ảnh có chiều sâu cảm xúc cho bộ ảnh du lịch Quảng Bình."
     ],
     recommendedScenes: [
@@ -58,7 +58,7 @@ export const CAMERA_SEO_CONTENT: Record<string, CameraSeoContent> = {
       {
         title: "Gió lộng & cát trắng",
         location: "Đồi cát Quang Phú & Bãi Đá Nhảy",
-        description: "Màu film Reala Ace và Classic Chrome tái tạo hạt cát mịn, bầu trời xanh ngắt và độ tương phản tự nhiên tuyệt đẹp."
+        description: "Màu film Reala Ace và Classic Chrome tái tạo hạt cát mịn, bầu trời xanh ngắt và độ tương phản tự nhiên."
       },
       {
         title: "Ký sự đường phố & đời thường",
@@ -67,9 +67,9 @@ export const CAMERA_SEO_CONTENT: Record<string, CameraSeoContent> = {
       }
     ],
     whyRentThis: [
-      "Độ phân giải 40.2MP vượt trội: Cho phép bạn crop ảnh linh hoạt sau chuyến đi mà độ chi tiết vẫn sắc nét đáng kinh ngạc.",
-      "Chống rung cảm biến IBIS 6 stops: Giúp việc chụp đêm, chụp trong hang động hoặc lúc ánh sáng yếu trở nên dễ dàng và ổn định hơn hẳn thế hệ trước.",
-      "20 chế độ Film Simulation nguyên bản: Tích hợp đầy đủ các giả lập màu mới nhất như Reala Ace, Nostalgic Neg và Classic Neg."
+      "Độ phân giải 40.2MP sắc nét: Cho phép bạn crop ảnh linh hoạt sau chuyến đi mà độ chi tiết vẫn rõ ràng.",
+      "Chống rung cảm biến IBIS 6 stops: Giúp việc chụp đêm, chụp trong hang động hoặc lúc ánh sáng yếu trở nên dễ dàng và ổn định hơn.",
+      "20 chế độ Film Simulation tích hợp sẵn: Bao gồm các giả lập màu như Reala Ace, Nostalgic Neg và Classic Neg."
     ],
     whenToConsiderOthers: [
       {
@@ -92,14 +92,14 @@ export const CAMERA_SEO_CONTENT: Record<string, CameraSeoContent> = {
       }
     ],
     experienceTips: [
-      "Ống kính 23mm tương đương tiêu cự 35mm trên Full-Frame — đây là góc nhìn vàng cho ảnh đời thường, bạn chỉ cần bước tới hoặc lùi lại một chút là có ngay góc chụp ưng ý.",
+      "Ống kính 23mm tương đương tiêu cự 35mm trên Full-Frame — góc nhìn tự nhiên cho ảnh đời thường, bạn chỉ cần bước tới hoặc lùi lại một chút là có ngay góc chụp ưng ý.",
       "Hãy thử chuyển đổi giữa kính ngắm quang học (OVF) và kính ngắm điện tử (EVF) bằng cần gạt phía trước thân máy để cảm nhận sự thú vị.",
-      "Tụi mình luôn chuẩn bị sẵn đầu đọc thẻ OTG tốc độ cao trong túi máy, bạn có thể cắm trực tiếp vào iPhone/Type-C để nhận ảnh ngay tại quán cafe."
+      "Tụi mình luôn chuẩn bị sẵn đầu đọc thẻ OTG trong túi máy, bạn có thể cắm trực tiếp vào điện thoại để nhận ảnh nhanh chóng."
     ],
     faqs: [
       {
         question: "Fujifilm X100VI có khó sử dụng cho người chưa từng cầm máy ảnh không?",
-        answer: "X100VI có các vòng xoay khẩu độ, tốc độ và ISO vật lý trực quan. Nếu bạn là người mới, tụi mình sẽ hướng dẫn chuyển máy về chế độ tự động hoàn toàn (Auto) và cài sẵn các công thức màu film đẹp nhất, bạn chỉ cần ngắm và bấm chụp."
+        answer: "X100VI có các vòng xoay khẩu độ, tốc độ và ISO vật lý trực quan. Nếu bạn là người mới, tụi mình sẽ hướng dẫn chuyển máy về chế độ tự động hoàn toàn (Auto) và cài sẵn các công thức màu film đẹp, bạn chỉ cần ngắm và bấm chụp."
       },
       {
         question: "X100VI khác biệt lớn nhất gì so với X100V khi đi du lịch Quảng Bình?",
@@ -107,7 +107,7 @@ export const CAMERA_SEO_CONTENT: Record<string, CameraSeoContent> = {
       },
       {
         question: "Thuê máy Fujifilm X100VI tại Kiho có kèm theo thẻ nhớ và pin phụ không?",
-        answer: "Có. Bộ máy X100VI tại Kiho Camera luôn bao gồm: thân máy, 2 pin dung lượng cao, dock sạc đôi, thẻ nhớ tốc độ cao, túi chống sốc thời trang và đầu đọc thẻ OTG cho điện thoại."
+        answer: "Có. Bộ máy X100VI tại Kiho Camera luôn bao gồm: thân máy, 2 pin, sạc, thẻ nhớ, túi chống sốc thời trang và đầu đọc thẻ OTG cho điện thoại."
       },
       {
         question: "Mình muốn chụp ảnh hoàng hôn biển Nhật Lệ nên dùng chế độ màu film nào trên X100VI?",
@@ -121,17 +121,18 @@ export const CAMERA_SEO_CONTENT: Record<string, CameraSeoContent> = {
     slug: "fujifilm-x100v",
     modelName: "Fujifilm X100V",
     brand: "Fujifilm",
-    seoTitle: "Thuê Fujifilm X100V màu film tại Đồng Hới",
-    seoDescription: "Dịch vụ cho thuê Fujifilm X100V màu film Classic Negative tại Đồng Hới, Quảng Bình. Máy đẹp, gọn nhẹ, kèm 2 pin và thẻ nhớ. Xem giá tại Kiho.",
+    seoTitle: "Thuê máy ảnh Fujifilm X100V tại Quảng Bình, Đồng Hới",
+    seoDescription: "Dịch vụ cho thuê Fujifilm X100V màu film Classic Negative tại Đồng Hới, Quảng Bình. Máy gọn nhẹ, kèm trọn bộ 2 pin, sạc và thẻ nhớ.",
     tagline: "Chiếc máy ảnh film kỹ thuật số định hình phong cách sống và những khung hình hoài niệm.",
 
-    intro: "Fujifilm X100V là chiếc máy ảnh tạo nên làn sóng yêu thích màu film trên khắp các mạng xã hội. Thân máy rangefinder hợp kim nhôm sang trọng, ống kính 23mm f/2 thế hệ mới và tone màu Classic Negative giàu cảm xúc khiến mỗi bức ảnh bạn chụp trông như một thước phim điện ảnh quay chậm giữa lòng Đồng Hới.",
+    intro: "Fujifilm X100V là chiếc máy ảnh compact rangefinder được yêu thích rộng rãi nhờ thiết kế hợp kim nhôm sang trọng, ống kính 23mm f/2 sắc nét và tone màu Classic Negative giàu cảm xúc. Mỗi bức ảnh mang lại cảm giác hoài niệm ấm áp giữa lòng Đồng Hới.",
     whoIsItFor: [
       "Những bạn trẻ yêu thích phong cách ảnh du lịch nghệ thuật, hoài niệm và đậm chất thơ.",
       "Cặp đôi muốn lưu giữ kỷ niệm chuyến đi Quảng Bình với những bức ảnh tone màu ấm áp, giàu cảm xúc.",
-      "Người đi cafe, dạo phố, chụp ảnh OOTD cần một chiếc máy nhỏ gọn làm phụ kiện thời trang sành điệu.",
-      "Những ai muốn có ảnh đẹp xuất sắc gửi sang điện thoại ngay mà không muốn tốn hàng giờ chỉnh sửa Lightroom."
+      "Người đi cafe, dạo phố, chụp ảnh OOTD cần một chiếc máy nhỏ gọn, thanh lịch.",
+      "Những ai muốn có ảnh chất lượng gửi sang điện thoại nhanh chóng qua đầu đọc thẻ OTG."
     ],
+
     recommendedScenes: [
       {
         title: "Quán cafe & không gian vintage",
@@ -150,7 +151,7 @@ export const CAMERA_SEO_CONTENT: Record<string, CameraSeoContent> = {
       }
     ],
     whyRentThis: [
-      "Tone màu Classic Negative độc bản: Tạo độ tương phản sâu ở vùng tối và màu da hơi ngả ấm, tái hiện hoàn hảo cảm giác chụp film 35mm.",
+      "Tone màu Classic Negative đặc trưng: Tạo độ tương phản sâu ở vùng tối và màu da hơi ngả ấm, mang lại cảm giác màu film 35mm hoài niệm.",
       "Thiết kế rangefinder gọn gàng: Dễ dàng mang theo cả ngày dài dạo chơi mà không cảm thấy cồng kềnh hay nặng nề.",
       "Màn hình cảm ứng lật mỏng nhẹ: Giúp bạn thoải mái sáng tạo các góc chụp độc đáo từ trên cao hoặc ngang thắt lưng."
     ],
@@ -162,10 +163,10 @@ export const CAMERA_SEO_CONTENT: Record<string, CameraSeoContent> = {
         reason: "X100VI là phiên bản nâng cấp mạnh mẽ về độ chi tiết và khả năng chống rung cầm tay."
       },
       {
-        condition: "Ưu tiên màu da trắng hồng kiểu Hàn Quốc và lấy nét tự động siêu nhanh",
+        condition: "Ưu tiên tông màu ảnh tươi tắn và lấy nét tự động nhận diện người/mắt",
         targetCameraName: "Canon EOS R50",
         targetCameraSlug: "canon-eos-r50",
-        reason: "Canon R50 có màu da sáng hồng tự nhiên và ống kính zoom tiện lợi cho mọi thành viên trong nhóm."
+        reason: "Canon R50 có tông màu tươi tắn và ống kính zoom tiện lợi cho người mới."
       },
       {
         condition: "Cần máy siêu nhỏ đút vừa túi áo khoác cho chuyến đi năng động",
@@ -190,7 +191,7 @@ export const CAMERA_SEO_CONTENT: Record<string, CameraSeoContent> = {
       },
       {
         question: "Làm thế nào để lấy ảnh từ máy X100V sang iPhone hoặc điện thoại Android?",
-        answer: "Bộ thuê máy tại Kiho luôn đi kèm đầu đọc thẻ nhớ OTG hỗ trợ cả cổng Lightning và Type-C. Bạn chỉ cần rút thẻ nhớ cắm qua đầu đọc vào điện thoại là ảnh hiện ra trong mục Ảnh chỉ sau vài giây."
+        answer: "Bộ thuê máy tại Kiho luôn đi kèm đầu đọc thẻ nhớ OTG hỗ trợ kết nối trực tiếp với điện thoại. Bạn chỉ cần rút thẻ nhớ cắm qua đầu đọc vào điện thoại là có thể xem và lưu ảnh về máy nhanh chóng."
       }
     ]
   },
@@ -200,11 +201,11 @@ export const CAMERA_SEO_CONTENT: Record<string, CameraSeoContent> = {
     slug: "fujifilm-xs10",
     modelName: "Fujifilm X-S10",
     brand: "Fujifilm",
-    seoTitle: "Thuê Fujifilm X-S10 quay chụp tại Đồng Hới",
-    seoDescription: "Cho thuê máy ảnh Fujifilm X-S10 kèm lens tại Đồng Hới Quảng Bình. Chống rung IBIS 5 trục, màn xoay lật 180 độ, màu film Fuji. Xem giá thuê tại Kiho.",
-    tagline: "Sự kết hợp hoàn hảo giữa màu film quyến rũ và báng cầm công thái học đầm chắc.",
+    seoTitle: "Thuê máy ảnh Fujifilm X-S10 tại Quảng Bình, Đồng Hới",
+    seoDescription: "Cho thuê máy ảnh Fujifilm X-S10 kèm lens tại Đồng Hới, Quảng Bình. Chống rung IBIS 5 trục, màn xoay lật đa góc, màu film Fuji. Kèm pin và thẻ nhớ.",
+    tagline: "Sự kết hợp giữa màu film Fuji và báng cầm công thái học đầm chắc.",
 
-    intro: "Nếu bạn mê đắm màu ảnh của Fujifilm nhưng muốn một chiếc máy có báng cầm tay sâu, chống rung cảm biến IBIS 5 trục và màn hình xoay lật đa góc linh hoạt để vừa chụp vừa quay vlog, Fujifilm X-S10 chính là câu trả lời. Chiếc máy này cân bằng xuất sắc giữa nhu cầu chụp ảnh nghệ thuật và sáng tạo nội dung video khi khám phá Quảng Bình.",
+    intro: "Nếu bạn thích màu ảnh của Fujifilm nhưng muốn một chiếc máy có báng cầm tay sâu, chống rung cảm biến IBIS 5 trục và màn hình xoay lật đa góc linh hoạt để vừa chụp vừa quay vlog, Fujifilm X-S10 chính là lựa chọn thích hợp. Chiếc máy này cân bằng tốt giữa nhu cầu chụp ảnh phong cảnh du lịch và quay video khi khám phá Quảng Bình, Phong Nha.",
     whoIsItFor: [
       "Những ai thích màu film Fuji nhưng muốn ống kính zoom để thay đổi góc chụp linh hoạt theo địa hình.",
       "Người thích quay video ngắn, travel vlog với màn hình xoay lật 180 độ ra phía trước.",
@@ -229,9 +230,9 @@ export const CAMERA_SEO_CONTENT: Record<string, CameraSeoContent> = {
       }
     ],
     whyRentThis: [
-      "Chống rung cảm biến IBIS 5 trục: Giúp bạn quay video cầm tay mượt mà và chụp ảnh thiếu sáng sắc nét mà không cần mang theo gimbal cồng kềnh.",
+      "Chống rung cảm biến IBIS 5 trục: Giúp bạn quay video cầm tay mượt mà và chụp ảnh thiếu sáng sắc nét hơn.",
       "Màn hình xoay lật đa góc (Vari-angle): Linh hoạt tối đa cho cả góc chụp đứng, góc thấp sát đất và quay selfie trực diện.",
-      "Bộ sưu tập 18 giả lập film trứ danh: Tận hưởng trọn vẹn Classic Neg, Classic Chrome, Eterna và Pro Neg."
+      "18 chế độ Film Simulation: Tận hưởng các giả lập màu như Classic Neg, Classic Chrome, Eterna và Pro Neg."
     ],
     whenToConsiderOthers: [
       {
@@ -241,13 +242,13 @@ export const CAMERA_SEO_CONTENT: Record<string, CameraSeoContent> = {
         reason: "X100V có thân máy mỏng gọn hơn và mang lại trải nghiệm hoài cổ đậm nét hơn."
       },
       {
-        condition: "Ưu tiên máy lấy nét bám đối tượng tự động nhanh nhất cho gia đình có trẻ nhỏ",
+        condition: "Ưu tiên máy lấy nét nhận diện người/mắt thân thiện cho người mới",
         targetCameraName: "Canon EOS R50",
         targetCameraSlug: "canon-eos-r50",
-        reason: "Canon R50 nhẹ hơn và có hệ thống bắt nét nhận diện mắt AI Dual Pixel II cực kỳ thông minh."
+        reason: "Canon R50 nhẹ hơn và có hệ thống lấy nét Dual Pixel CMOS AF II nhận diện người/mắt nhanh chóng."
       },
       {
-        condition: "Muốn máy nhỏ gọn tối đa chuyên quay video vlog bỏ túi",
+        condition: "Muốn máy compact nhỏ gọn chuyên quay vlog",
         targetCameraName: "Sony ZV-1 Mark II",
         targetCameraSlug: "sony-zv1-mark-ii",
         reason: "Sony ZV-1 II có trọng lượng siêu nhẹ 292g và ống kính góc rộng 18mm chuyên biệt cho vlog."
@@ -255,7 +256,7 @@ export const CAMERA_SEO_CONTENT: Record<string, CameraSeoContent> = {
     ],
     experienceTips: [
       "Khi quay vlog ngoài trời, bạn có thể chọn giả lập màu Eterna để video có độ tương phản dịu mắt chuẩn điện ảnh.",
-      "Báng tay cầm của X-S10 rất sâu, bạn có thể thoải mái cầm một tay khi đi bộ dọc bờ biển mà không sợ mỏi.",
+      "Báng tay cầm của X-S10 sâu và đầm, bạn có thể thoải mái cầm một tay khi di chuyển mà không bị mỏi.",
       "Tận dụng vòng xoay chế độ trên đỉnh máy để lưu nhanh các bộ tùy chỉnh màu film yêu thích vào các vị trí C1, C2, C3, C4."
     ],
     faqs: [
@@ -269,7 +270,7 @@ export const CAMERA_SEO_CONTENT: Record<string, CameraSeoContent> = {
       },
       {
         question: "Pin của Fujifilm X-S10 có đủ dùng cho một ngày tham quan Phong Nha không?",
-        answer: "Bộ thuê tại Kiho luôn đi kèm 2 pin dung lượng cao và dock sạc, đủ cho bạn chụp từ 600 đến 800 tấm ảnh và quay các đoạn video ngắn xuyên suốt cả ngày dài khám phá."
+        answer: "Bộ thuê tại Kiho luôn đi kèm 2 pin kèm sạc để bạn yên tâm sử dụng trong suốt chuyến tham quan trong ngày."
       }
     ]
   },
@@ -279,15 +280,15 @@ export const CAMERA_SEO_CONTENT: Record<string, CameraSeoContent> = {
     slug: "canon-m100",
     modelName: "Canon EOS M100",
     brand: "Canon",
-    seoTitle: "Thuê Canon M100 màu trắng tại Đồng Hới",
-    seoDescription: "Cho thuê máy ảnh Canon M100 màu trắng xinh xắn tại Đồng Hới Quảng Bình. Màn lật selfie, màu da trắng hồng, giá thuê tiết kiệm. Xem tại Kiho.",
-    tagline: "Chiếc máy ảnh nhỏ xinh, màu da trắng hồng nịnh mắt và cực kỳ dễ làm quen.",
+    seoTitle: "Thuê máy ảnh Canon EOS M100 tại Quảng Bình, Đồng Hới",
+    seoDescription: "Cho thuê máy ảnh Canon M100 màu trắng tại Đồng Hới, Quảng Bình. Màn hình lật selfie 180 độ, màu da sáng tự nhiên, giá thuê tiết kiệm.",
+    tagline: "Chiếc máy ảnh nhỏ xinh, màu da sáng tự nhiên và cực kỳ dễ làm quen.",
 
-    intro: "Canon EOS M100 phiên bản màu trắng thanh lịch là người bạn đồng hành quen thuộc của các bạn nữ trong những chuyến du lịch check-in. Thiết kế nhỏ gọn chỉ khoảng 302g, màn hình cảm ứng lật 180 độ chuyên selfie và tone màu da trắng sáng tự nhiên đặc trưng của Canon giúp bạn có ngay những khung hình rạng rỡ mà không cần thao tác chỉnh ảnh phức tạp.",
+    intro: "Canon EOS M100 phiên bản màu trắng thanh lịch là lựa chọn thân thiện cho các bạn trẻ và bạn nữ trong những chuyến du lịch check-in. Thiết kế nhỏ gọn chỉ khoảng 302g, màn hình cảm ứng lật 180 độ chuyên selfie và tone màu da sáng tự nhiên đặc trưng của Canon giúp bạn có ngay những khung hình tươi tắn.",
     whoIsItFor: [
       "Các bạn học sinh, sinh viên hoặc người mới lần đầu trải nghiệm máy ảnh du lịch.",
-      "Những bạn nữ tìm kiếm chiếc máy ảnh màu trắng xinh xắn, nhẹ nhàng vừa vặn trong túi xách.",
-      "Cặp đôi hoặc nhóm bạn muốn chụp selfie, check-in quán cafe và dạo biển với chi phí thuê rất tiết kiệm.",
+      "Những bạn nữ tìm kiếm chiếc máy ảnh màu trắng nhỏ gọn, nhẹ nhàng vừa vặn trong túi xách.",
+      "Cặp đôi hoặc nhóm bạn muốn chụp selfie, check-in quán cafe và dạo biển với chi phí thuê tiết kiệm.",
       "Người muốn chất lượng ảnh vượt trội hơn điện thoại nhưng vẫn giữ thao tác chạm chụp đơn giản."
     ],
     recommendedScenes: [
@@ -299,7 +300,7 @@ export const CAMERA_SEO_CONTENT: Record<string, CameraSeoContent> = {
       {
         title: "Chụp ảnh phong cách nàng thơ",
         location: "Bờ biển Nhật Lệ & đồi cỏ",
-        description: "Ống kính 15-45mm IS STM cho góc chụp linh hoạt, tái hiện làn da hồng hào dưới ánh nắng tự nhiên."
+        description: "Ống kính 15-45mm IS STM cho góc chụp linh hoạt, tái hiện làn da sáng dưới ánh nắng tự nhiên."
       },
       {
         title: "Dạo chơi cuối tuần",
@@ -308,7 +309,7 @@ export const CAMERA_SEO_CONTENT: Record<string, CameraSeoContent> = {
       }
     ],
     whyRentThis: [
-      "Màu da trắng hồng nịnh mắt: Thuật toán xử lý màu da chân dung của Canon giúp gương mặt luôn sáng rạng rỡ và tươi tắn.",
+      "Màu da sáng tự nhiên: Thuật toán xử lý màu da chân dung của Canon giúp gương mặt luôn sáng rạng rỡ và tươi tắn.",
       "Giao diện cảm ứng chạm chụp thông minh: Dễ sử dụng như màn hình smartphone, chỉ cần chạm vào điểm muốn lấy nét trên màn hình là máy tự chụp.",
       "Chi phí thuê cực kỳ tiết kiệm: Lựa chọn lý tưởng cho các chuyến đi ngắn ngày hoặc buổi hẹn hò cuối tuần."
     ],
@@ -317,7 +318,7 @@ export const CAMERA_SEO_CONTENT: Record<string, CameraSeoContent> = {
         condition: "Muốn lấy nét bám mắt thông minh hơn và quay video 4K sắc nét",
         targetCameraName: "Canon EOS R50",
         targetCameraSlug: "canon-eos-r50",
-        reason: "Canon R50 thuộc thế hệ ngàm R mới nhất với cảm biến DIGIC X và khả năng bắt nét mắt cực nhanh."
+        reason: "Canon R50 thuộc thế hệ ngàm R mới nhất với cảm biến DIGIC X và khả năng bắt nét mắt nhanh chóng."
       },
       {
         condition: "Muốn máy compact đút túi áo không cần ống kính rời",
@@ -358,12 +359,12 @@ export const CAMERA_SEO_CONTENT: Record<string, CameraSeoContent> = {
     slug: "canon-eos-rp",
     modelName: "Canon EOS RP",
     brand: "Canon",
-    seoTitle: "Thuê Canon EOS RP Full-Frame tại Đồng Hới",
-    seoDescription: "Cho thuê máy ảnh Full-Frame Canon EOS RP tại Đồng Hới Quảng Bình. Xóa phông mượt mà, cảm biến 26.2MP, màu ảnh trong trẻo. Xem giá tại Kiho.",
-    tagline: "Chiếc máy ảnh Full-Frame gọn nhẹ mang lại độ sâu trường ảnh và độ xóa phông vượt trội.",
-    intro: "Canon EOS RP là lựa chọn hàng đầu cho những ai tìm kiếm chất lượng hình ảnh vượt bậc từ cảm biến Full-Frame 26.2MP. Khả năng xóa phông mượt mà, dải tương phản rộng và khả năng khử nhiễu tuyệt vời trong điều kiện ánh sáng yếu giúp những bộ ảnh chân dung, ảnh cưới, ảnh kỷ niệm couple tại Quảng Bình đạt độ trong trẻo và chiều sâu chuẩn chuyên nghiệp.",
+    seoTitle: "Thuê máy ảnh Canon EOS RP Full-Frame tại Quảng Bình, Đồng Hới",
+    seoDescription: "Cho thuê máy ảnh Full-Frame Canon EOS RP tại Đồng Hới, Quảng Bình. Cảm biến Full-Frame 26.2MP xóa phông mượt mà, màu ảnh trong trẻo.",
+    tagline: "Chiếc máy ảnh Full-Frame gọn nhẹ mang lại độ sâu trường ảnh và độ xóa phông ấn tượng.",
+    intro: "Canon EOS RP là lựa chọn hàng đầu cho những ai tìm kiếm chất lượng hình ảnh từ cảm biến Full-Frame 26.2MP. Khả năng xóa phông mượt mà, dải tương phản rộng và khử nhiễu tốt trong điều kiện ánh sáng yếu giúp những bộ ảnh chân dung, ảnh kỷ niệm couple tại Quảng Bình đạt độ trong trẻo và chiều sâu rõ rệt.",
     whoIsItFor: [
-      "Những bạn muốn trải nghiệm chất lượng ảnh vượt trội của cảm biến Full-Frame lớn.",
+      "Những bạn muốn trải nghiệm chất lượng ảnh của cảm biến Full-Frame lớn.",
       "Cặp đôi chụp ảnh pre-wedding, kỷ niệm tình yêu cần độ xóa phông mịn màng và làm nổi bật chủ thể.",
       "Người chụp ảnh chân dung ngoại cảnh tại bờ biển, đồi cát hoặc rừng thông.",
       "Nhiếp ảnh gia nghiệp dư hoặc du khách muốn những khung hình có chiều sâu quang học rõ rệt."
@@ -372,7 +373,7 @@ export const CAMERA_SEO_CONTENT: Record<string, CameraSeoContent> = {
       {
         title: "Bộ ảnh đôi & Chân dung xóa phông",
         location: "Biển Nhật Lệ & bãi đá Bảo Ninh",
-        description: "Cảm biến Full-Frame tách bạch chủ thể hoàn hảo khỏi hậu cảnh, tạo hiệu ứng bokeh mịn màng."
+        description: "Cảm biến Full-Frame tách bạch chủ thể khỏi hậu cảnh, tạo hiệu ứng bokeh mịn màng."
       },
       {
         title: "Khoảnh khắc hoàng hôn & chạng vạng",
@@ -386,22 +387,22 @@ export const CAMERA_SEO_CONTENT: Record<string, CameraSeoContent> = {
       }
     ],
     whyRentThis: [
-      "Cảm biến Full-Frame 26.2MP: Mang lại độ chuyển vùng sáng - tối mượt mà và khả năng xóa mờ phông nền có chiều sâu mà cảm biến nhỏ không thể sánh được.",
+      "Cảm biến Full-Frame 26.2MP: Mang lại độ chuyển vùng sáng - tối mượt mà và khả năng xóa mờ phông nền có chiều sâu.",
       "Hệ thống lấy nét Dual Pixel AF với 4.779 điểm: Bắt nét chính xác vào mắt chủ thể kể cả khi đang mở khẩu lớn.",
-      "Thân máy Full-Frame siêu nhẹ 485g: Cực kỳ cơ động khi di chuyển giữa các điểm tham quan tại Quảng Bình."
+      "Thân máy Full-Frame gọn nhẹ 485g: Cơ động khi di chuyển giữa các điểm tham quan tại Quảng Bình."
     ],
     whenToConsiderOthers: [
       {
-        condition: "Muốn máy thế hệ mới hơn với chip xử lý DIGIC X và nhận diện chủ thể AI nhanh nhẹn",
+        condition: "Muốn máy nhỏ gọn hơn với chip DIGIC X và nhận diện người/mắt nhanh nhẹn",
         targetCameraName: "Canon EOS R50",
         targetCameraSlug: "canon-eos-r50",
-        reason: "Canon R50 nhỏ nhẹ hơn và có hệ thống theo dõi chuyển động mắt thế hệ mới nhất."
+        reason: "Canon R50 nhỏ nhẹ hơn và có hệ thống lấy nét Dual Pixel CMOS AF II thế hệ mới."
       },
       {
         condition: "Yêu thích màu film hoài niệm cổ điển không cần chỉnh sửa",
         targetCameraName: "Fujifilm X100V",
         targetCameraSlug: "fujifilm-x100v",
-        reason: "X100V có sẵn 17 giả lập màu film Fuji đặc trưng và kích thước compact hơn."
+        reason: "X100V có sẵn các giả lập màu film Fuji đặc trưng và kích thước compact hơn."
       },
       {
         condition: "Cần máy siêu gọn nhẹ bỏ túi áo chuyên quay vlog hàng ngày",
@@ -411,14 +412,14 @@ export const CAMERA_SEO_CONTENT: Record<string, CameraSeoContent> = {
       }
     ],
     experienceTips: [
-      "Tận dụng màn hình xoay lật của EOS RP để chụp những góc thấp sát mặt đất — hiệu ứng xóa phông Full-Frame ở góc này sẽ cực kỳ ấn tượng.",
+      "Tận dụng màn hình xoay lật của EOS RP để chụp những góc thấp sát mặt đất — hiệu ứng xóa phông Full-Frame ở góc này sẽ rất ấn tượng.",
       "Khi chụp chân dung ngược sáng lúc hoàng hôn, hãy bật tính năng lấy nét nhận diện mắt (Eye AF) để máy tự khóa nét vào ánh mắt người mẫu.",
-      "Tụi mình luôn chuẩn bị trọn bộ pin phụ và dock sạc để bạn yên tâm tác nghiệp suốt buổi chụp."
+      "Tụi mình luôn chuẩn bị trọn bộ pin phụ và sạc để bạn yên tâm tác nghiệp suốt buổi chụp."
     ],
     faqs: [
       {
         question: "Cảm biến Full-Frame trên Canon RP có gì khác biệt so với máy ảnh thông thường?",
-        answer: "Cảm biến Full-Frame có diện tích thu nhận ánh sáng lớn hơn nhiều so với cảm biến APS-C hoặc điện thoại. Điều này giúp ảnh có độ chuyển màu mượt mà hơn, xóa phông mịn màng hơn và chụp trong điều kiện ánh sáng yếu ít bị nhiễu hạt hơn."
+        answer: "Cảm biến Full-Frame có diện tích thu nhận ánh sáng lớn hơn so với cảm biến APS-C hoặc điện thoại. Điều này giúp ảnh có độ chuyển màu mượt mà hơn, xóa phông mịn màng hơn và kiểm soát nhiễu hạt tốt hơn khi chụp thiếu sáng."
       },
       {
         question: "Canon EOS RP có phù hợp cho người mới lần đầu chụp không?",
@@ -426,7 +427,7 @@ export const CAMERA_SEO_CONTENT: Record<string, CameraSeoContent> = {
       },
       {
         question: "Bộ thuê Canon EOS RP tại Kiho Camera bao gồm những phụ kiện gì?",
-        answer: "Bộ thuê Canon RP gồm có: thân máy Canon EOS RP, ống kính Canon chất lượng cao, 2 pin dung lượng cao, dock sạc, thẻ nhớ SanDisk tốc độ cao, túi chống sốc và đầu đọc thẻ OTG."
+        answer: "Bộ thuê Canon RP gồm có: thân máy Canon EOS RP, ống kính Canon, 2 pin, sạc, thẻ nhớ, túi chống sốc và đầu đọc thẻ OTG."
       }
     ]
   },
@@ -436,16 +437,17 @@ export const CAMERA_SEO_CONTENT: Record<string, CameraSeoContent> = {
     slug: "canon-g7x-mark-iii",
     modelName: "Canon G7 X Mark III",
     brand: "Canon",
-    seoTitle: "Thuê Canon G7 X Mark III tại Đồng Hới",
-    seoDescription: "Cho thuê máy ảnh compact du lịch Canon G7 X Mark III tại Đồng Hới Quảng Bình. Màn lật selfie, màu da tươi tắn, quay 4K. Xem giá tại Kiho Camera.",
-    tagline: "Chiếc máy ảnh compact du lịch toàn năng, bỏ túi áo và sinh ra cho các thước phim ngắn.",
+    seoTitle: "Thuê máy ảnh Canon G7 X Mark III tại Quảng Bình, Đồng Hới",
+    seoDescription: "Cho thuê máy ảnh compact du lịch Canon G7 X Mark III tại Đồng Hới, Quảng Bình. Màn lật selfie, màu da tươi sáng, quay video 4K sắc nét.",
+    tagline: "Chiếc máy ảnh compact du lịch bỏ túi áo, sinh ra cho các thước phim ngắn và ảnh check-in.",
     intro: "Canon PowerShot G7 X Mark III là cái tên quen thuộc trong cộng đồng du lịch và sáng tạo nội dung. Nhờ ống kính zoom quang học 24-100mm f/1.8-2.8 sắc nét, cảm biến 1.0-inch 20.1MP và màn hình lật 180 độ hỗ trợ selfie, chiếc máy này vừa đủ nhỏ gọn để bỏ vào túi áo khoác, vừa đủ mạnh mẽ để mang lại những khung hình rạng rỡ suốt chuyến đi Quảng Bình.",
     whoIsItFor: [
       "Khách du lịch muốn một chiếc máy nhỏ gọn tối đa, không cần thay đổi ống kính phức tạp.",
       "Những bạn đam mê quay travel vlog, TikTok, Instagram Reels với màu da sáng tự nhiên.",
       "Các bạn nữ thích chụp ảnh selfie, chụp đồ ăn, cafe check-in và khoảnh khắc dạo phố.",
-      "Người muốn một chiếc máy chất lượng cao hơn hẳn smartphone nhưng thao tác bấm máy nhanh chóng trong chớp mắt."
+      "Người muốn một chiếc máy chất lượng cao hơn hẳn smartphone nhưng thao tác bấm máy nhanh chóng."
     ],
+
     recommendedScenes: [
       {
         title: "Dạo biển & Bể bơi resort",
@@ -464,16 +466,16 @@ export const CAMERA_SEO_CONTENT: Record<string, CameraSeoContent> = {
       }
     ],
     whyRentThis: [
-      "Ống kính khẩu lớn f/1.8 - f/2.8 với dải zoom 24-100mm: Đa năng từ góc rộng chụp phong cảnh đến zoom xa chụp chân dung bán thân.",
-      "Màu da tươi tắn không cần chỉnh sửa: Giữ trọn vẻ rạng rỡ của khuôn mặt dưới mọi điều kiện ánh sáng.",
+      "Ống kính khẩu lớn f/1.8 - f/2.8 với dải zoom 24-100mm: Đa năng từ góc rộng chụp phong cảnh đến zoom chụp chân dung bán thân.",
+      "Tông màu ảnh tươi tắn và nịnh mắt: Phù hợp cho ảnh selfie, cafe và dạo phố.",
       "Thiết kế bỏ túi siêu gọn 304g: Sẵn sàng rút ra chụp bất cứ khoảnh khắc nào trong tích tắc."
     ],
     whenToConsiderOthers: [
       {
-        condition: "Cần góc quay siêu rộng 18mm để quay vlog nhóm từ cự ly gần",
+        condition: "Cần góc quay rộng 18mm để quay vlog nhóm từ cự ly gần",
         targetCameraName: "Sony ZV-1 Mark II",
         targetCameraSlug: "sony-zv1-mark-ii",
-        reason: "Sony ZV-1 II có góc siêu rộng 18mm và micro thu âm đa hướng chống gió ngoài trời."
+        reason: "Sony ZV-1 II có góc rộng 18mm và micro 3 capsule kèm bông lọc gió ngoài trời."
       },
       {
         condition: "Muốn trải nghiệm máy ảnh ống kính rời có thể xóa phông sâu hơn",
@@ -514,27 +516,27 @@ export const CAMERA_SEO_CONTENT: Record<string, CameraSeoContent> = {
     slug: "canon-eos-r50",
     modelName: "Canon EOS R50",
     brand: "Canon",
-    seoTitle: "Thuê Canon EOS R50 tại Đồng Hới",
-    seoDescription: "Dịch vụ cho thuê máy ảnh Canon EOS R50 chính hãng tại Đồng Hới, Quảng Bình. Bắt nét mắt AI, màu da hồng hào, quay 4K sắc nét. Xem giá tại Kiho.",
-    tagline: "Chiếc máy ảnh mirrorless quốc dân cho người mới — dễ dùng, bắt nét mắt siêu tốc và màu da rạng rỡ.",
+    seoTitle: "Thuê máy ảnh Canon EOS R50 tại Quảng Bình, Đồng Hới",
+    seoDescription: "Dịch vụ cho thuê máy ảnh Canon EOS R50 chính hãng tại Đồng Hới, Quảng Bình. Lấy nét mắt Dual Pixel AF II, màu da sáng tự nhiên, quay video 4K sắc nét.",
+    tagline: "Chiếc máy ảnh mirrorless thân thiện cho người mới — dễ dùng, bắt nét mắt nhanh và màu ảnh tươi sáng.",
 
-    intro: "Canon EOS R50 là chiếc máy ảnh được Kiho Camera gợi ý nhiều nhất cho những ai chuẩn bị có chuyến du lịch đến Quảng Bình. Nhờ cảm biến APS-C 24.2MP, bộ xử lý DIGIC X thế hệ mới và thuật toán lấy nét Dual Pixel AF II nhận diện người/mắt cực nhạy, R50 giúp bạn có những bức ảnh sắc nét không tì vết mà chẳng cần phải là một nhiếp ảnh gia chuyên nghiệp.",
+    intro: "Canon EOS R50 là chiếc máy ảnh được nhiều khách du lịch lựa chọn khi ghé thăm Quảng Bình. Nhờ cảm biến APS-C 24.2MP, bộ xử lý DIGIC X và hệ thống lấy nét Dual Pixel AF II nhận diện người/mắt chính xác, R50 giúp bạn dễ dàng lưu lại những khoảnh khắc đẹp trong suốt hành trình từ Đồng Hới đến Phong Nha.",
     whoIsItFor: [
-      "Người lần đầu tiên thuê hoặc sử dụng máy ảnh, muốn một thiết bị dễ chụp và khó bị nhòe nét.",
+      "Người lần đầu tiên thuê hoặc sử dụng máy ảnh, muốn một thiết bị dễ chụp và bắt nét nhanh.",
       "Cặp đôi và nhóm bạn muốn lưu giữ trọn vẹn từng khoảnh khắc du lịch tại Đồng Hới, Phong Nha.",
-      "Người sáng tạo nội dung, làm vlog, quay clip TikTok với chất lượng video 4K sắc nét.",
-      "Những ai tìm kiếm một chiếc máy cân bằng hoàn hảo giữa trọng lượng nhẹ (375g), tính năng hiện đại và mức giá thuê hợp lý."
+      "Người sáng tạo nội dung, làm vlog, quay clip ngắn với chất lượng video 4K sắc nét.",
+      "Những ai tìm kiếm một chiếc máy gọn nhẹ (khoảng 375g), tính năng hiện đại và mức giá thuê hợp lý."
     ],
     recommendedScenes: [
       {
         title: "Khám phá động Phong Nha & Thiên Đường",
         location: "Vườn quốc gia Phong Nha - Kẻ Bàng",
-        description: "Khả năng lấy nét trong điều kiện thiếu sáng và màu ảnh trong trẻo bắt trọn vẻ tráng lệ của thạch nhũ nghìn năm."
+        description: "Khả năng lấy nét trong điều kiện ánh sáng yếu và màu ảnh trong trẻo bắt trọn vẻ đẹp của thạch nhũ nghìn năm."
       },
       {
         title: "Dạo biển hoàng hôn & Cát trắng",
         location: "Biển Nhật Lệ & đồi cát Quang Phú",
-        description: "Màu da người hồng hào đặc trưng của Canon kết hợp với màu trời chiều rực rỡ tạo nên khung hình kỷ niệm đắt giá."
+        description: "Tông màu da tươi sáng đặc trưng của Canon kết hợp với màu trời chiều tạo nên khung hình kỷ niệm đáng nhớ."
       },
       {
         title: "Hẹn hò cafe & Dạo phố đêm",
@@ -543,9 +545,9 @@ export const CAMERA_SEO_CONTENT: Record<string, CameraSeoContent> = {
       }
     ],
     whyRentThis: [
-      "Lấy nét tự động Dual Pixel AF II nhận diện mắt AI: Bạn chỉ cần hướng máy về phía người chụp, máy sẽ tự động khóa nét vào mắt và bắt dính từng bước chuyển động.",
-      "Trọng lượng siêu nhẹ chỉ 375g: Cầm trên tay cả ngày dài leo núi hay lội suối mà không thấy nặng nhọc.",
-      "Quay video 4K 30p không crop oversampled từ 6K: Mang lại độ chi tiết vượt trội cho các thước phim du lịch chất lượng cao."
+      "Lấy nét tự động Dual Pixel AF II nhận diện mắt: Bạn chỉ cần hướng máy về phía người chụp, máy sẽ tự động theo dõi và khóa nét vào khuôn mặt/mắt.",
+      "Trọng lượng gọn nhẹ khoảng 375g: Cầm trên tay thoải mái khi di chuyển tham quan cả ngày dài.",
+      "Quay video 4K 30p sắc nét: Mang lại độ chi tiết cao cho các thước phim du lịch chất lượng."
     ],
     whenToConsiderOthers: [
       {
@@ -568,18 +570,18 @@ export const CAMERA_SEO_CONTENT: Record<string, CameraSeoContent> = {
       }
     ],
     experienceTips: [
-      "Hãy bật chế độ Auto Focus nhận diện khuôn mặt/mắt — bạn chỉ cần lo phần tạo dáng, chuyện nét để R50 lo!",
-      "Màn hình xoay lật có thể mở sang bên cạnh và xoay 180 độ ra phía trước, cực kỳ tiện khi cả nhóm muốn tự chụp chung mà không cần nhờ người khác.",
-      "Tụi mình luôn chuẩn bị sẵn dây đeo cổ, túi chống sốc và đầu đọc thẻ OTG cắm thẳng vào iPhone/Type-C để bạn lấy ảnh ngay lập tức."
+      "Hãy bật chế độ Auto Focus nhận diện khuôn mặt/mắt để máy tự động bám nét vào chủ thể trong khung hình.",
+      "Màn hình xoay lật có thể mở sang bên cạnh và xoay 180 độ ra phía trước, tiện khi cả nhóm muốn tự chụp chung.",
+      "Tụi mình luôn chuẩn bị sẵn dây đeo cổ, túi chống sốc và đầu đọc thẻ OTG cắm thẳng vào điện thoại để bạn lấy ảnh nhanh chóng."
     ],
     faqs: [
       {
         question: "Canon EOS R50 có khó dùng đối với người chưa từng cầm máy ảnh không?",
-        answer: "Hoàn toàn không. Canon R50 được thiết kế cực kỳ thân thiện với người mới. Giao diện cảm ứng trực quan giống hệt điện thoại thông minh, kèm chế độ Hướng dẫn sáng tạo (Creative Assist) giúp bạn chỉnh độ sáng, độ mờ nền chỉ bằng một thao tác chạm gạt."
+        answer: "Hoàn toàn không. Canon R50 được thiết kế thân thiện với người mới. Giao diện cảm ứng trực quan giống điện thoại thông minh, kèm chế độ Hướng dẫn sáng tạo (Creative Assist) giúp bạn chỉnh độ sáng, độ mờ nền bằng thao tác chạm gạt."
       },
       {
         question: "Thuê Canon R50 tại Kiho đã có ống kính kèm theo chưa?",
-        answer: "Bộ thuê Canon R50 tại Kiho Camera đã bao gồm sẵn thân máy và ống kính zoom Canon RF-S 18-45mm IS STM có chống rung quang học, kèm 2 pin dung lượng cao, dock sạc đôi, thẻ nhớ và túi đựng máy."
+        answer: "Bộ thuê Canon R50 tại Kiho Camera đã bao gồm sẵn thân máy và ống kính zoom Canon RF-S 18-45mm IS STM có chống rung quang học, kèm 2 pin, sạc, thẻ nhớ, túi chống sốc và đầu đọc thẻ OTG."
       },
       {
         question: "Đi Quảng Bình 1 ngày nên thuê Canon R50 theo buổi hay theo ngày?",
@@ -587,7 +589,7 @@ export const CAMERA_SEO_CONTENT: Record<string, CameraSeoContent> = {
       },
       {
         question: "Canon R50 hay Canon G7 X Mark III phù hợp hơn cho chuyến du lịch?",
-        answer: "Nếu bạn ưu tiên chất lượng ảnh tối đa, khả năng bắt nét mắt chuyển động và có thể thay đổi ống kính thì Canon R50 là lựa chọn vượt trội. Nếu bạn ưu tiên máy siêu nhỏ đút vừa túi xách mini thì G7 X Mark III sẽ tiện lợi hơn."
+        answer: "Nếu bạn ưu tiên chất lượng ảnh cảm biến APS-C lớn, khả năng bắt nét mắt chuyển động và thay đổi được ống kính thì Canon R50 là lựa chọn thích hợp. Nếu bạn ưu tiên máy siêu nhỏ gọn đút vừa túi xách thì G7 X Mark III sẽ tiện lợi hơn."
       }
     ]
   },
@@ -597,12 +599,12 @@ export const CAMERA_SEO_CONTENT: Record<string, CameraSeoContent> = {
     slug: "canon-m3",
     modelName: "Canon EOS M3",
     brand: "Canon",
-    seoTitle: "Thuê Canon M3 giá tốt tại Đồng Hới",
-    seoDescription: "Cho thuê máy ảnh Canon EOS M3 giá rẻ tại Đồng Hới Quảng Bình. Cảm biến 24.2MP, báng cầm đầm tay, màn lật selfie. Xem giá tại Kiho.",
-    tagline: "Chiếc máy ảnh mirrorless đầm tay, bền bỉ và mức chi phí thuê cực kỳ dễ chịu.",
+    seoTitle: "Thuê máy ảnh Canon EOS M3 tại Quảng Bình, Đồng Hới",
+    seoDescription: "Cho thuê máy ảnh Canon EOS M3 tại Đồng Hới, Quảng Bình. Cảm biến APS-C 24.2MP, báng cầm đầm tay, màn hình lật selfie, giá thuê tiết kiệm.",
+    tagline: "Chiếc máy ảnh mirrorless đầm tay, bền bỉ và mức chi phí thuê tiết kiệm.",
     intro: "Canon EOS M3 mang lại cảm giác cầm nắm chắc chắn nhờ báng tay cầm sâu và hệ thống vòng xoay chỉnh thông số vật lý rõ ràng. Được trang bị cảm biến APS-C 24.2MP và màn hình lật 180 độ, EOS M3 là sự lựa chọn hợp lý cho các bạn học sinh, sinh viên hoặc du khách cần một chiếc máy ảnh chụp đẹp, giá thuê tiết kiệm cho chuyến đi khám phá Đồng Hới.",
     whoIsItFor: [
-      "Học sinh, sinh viên cần thuê máy ảnh với chi phí tiết kiệm nhất nhưng chất lượng ảnh vẫn đảm bảo sắc nét.",
+      "Học sinh, sinh viên cần thuê máy ảnh với chi phí tiết kiệm nhưng chất lượng ảnh vẫn đảm bảo sắc nét.",
       "Người thích cảm giác cầm máy đầm tay, có báng nắm sâu và các nút xoay cơ học.",
       "Khách du lịch chụp ảnh gia đình, bạn bè trong các chuyến tham quan ngắn ngày.",
       "Người mới muốn tập làm quen với các thao tác nhiếp ảnh cơ bản trước khi nâng cấp lên dòng máy cao cấp."
@@ -611,17 +613,17 @@ export const CAMERA_SEO_CONTENT: Record<string, CameraSeoContent> = {
       {
         title: "Dạo chơi công viên & bờ sông",
         location: "Sông Nhật Lệ & Tượng đài Mẹ Suốt",
-        description: "Màu ảnh trong trẻo, tự nhiên ghi lại những kỷ niệm bình dị trong chuyến ghé thăm Quảng Bình."
+        description: "Màu ảnh Canon chân thực, ấm áp ghi lại những nụ cười rạng rỡ của bạn bè."
       },
       {
-        title: "Chụp ảnh lưu niệm nhóm bạn bè",
-        location: "Quảng Bình Quan & Thành cổ Đồng Hới",
-        description: "Cảm biến 24.2MP cho chi tiết sắc nét, dễ dàng in ấn hoặc lưu trữ lâu dài."
+        title: "Chụp ảnh phong cảnh & Đời thường",
+        location: "Làng chài Bảo Ninh & chợ cá Đồng Hới",
+        description: "Cảm biến APS-C tái hiện chi tiết sắc nét và độ tương phản tự nhiên của cuộc sống địa phương."
       },
       {
-        title: "Selfie & check-in dã ngoại",
-        location: "Bờ biển Bảo Ninh & cồn cát",
-        description: "Màn hình lật linh hoạt giúp căn chỉnh góc chụp dễ dàng cùng bạn bè."
+        title: "Buổi dã ngoại ngắn ngày",
+        location: "Bãi biển Quang Phú & rừng phi lao",
+        description: "Thiết kế nhỏ gọn dễ dàng mang theo trong balo mà không tốn diện tích."
       }
     ],
     whyRentThis: [
@@ -637,10 +639,10 @@ export const CAMERA_SEO_CONTENT: Record<string, CameraSeoContent> = {
         reason: "Canon M100 có thân máy siêu nhẹ màu trắng và lấy nét Dual Pixel nhanh hơn."
       },
       {
-        condition: "Cần khả năng bắt nét mắt AI siêu tốc và quay video 4K thế hệ mới",
+        condition: "Cần khả năng nhận diện người/mắt nhanh nhẹn và quay video 4K thế hệ mới",
         targetCameraName: "Canon EOS R50",
         targetCameraSlug: "canon-eos-r50",
-        reason: "Canon R50 là thế hệ mới nhất với chip DIGIC X và hệ thống bắt nét mắt thông minh."
+        reason: "Canon R50 là thế hệ mới hơn với chip DIGIC X và hệ thống lấy nét Dual Pixel CMOS AF II."
       },
       {
         condition: "Cần mức giá thuê thấp nhất có thể cho một buổi dạo chơi ngắn",
@@ -651,7 +653,7 @@ export const CAMERA_SEO_CONTENT: Record<string, CameraSeoContent> = {
     ],
     experienceTips: [
       "Màn hình của M3 có thể lật lên 180 độ để chụp selfie và lật xuống 45 độ để chụp góc cao qua đầu đám đông.",
-      "Khi chụp ngoài trời nắng gắt, bạn có thể xoay vòng bù trừ sáng trên đỉnh máy sang nấc +0.3 hoặc +0.7 để làn da luôn sáng rạng ngời.",
+      "Khi chụp ngoài trời nắng, bạn có thể xoay vòng bù trừ sáng trên đỉnh máy sang nấc +0.3 hoặc +0.7 để khung hình luôn đủ sáng và rõ nét.",
       "Đừng quên mang theo đầu đọc thẻ OTG đi kèm trong túi máy để lấy ảnh sang điện thoại ngay trong chuyến đi nhé."
     ],
     faqs: [
@@ -665,7 +667,7 @@ export const CAMERA_SEO_CONTENT: Record<string, CameraSeoContent> = {
       },
       {
         question: "Canon M3 có chụp ban đêm tốt không?",
-        answer: "Canon M3 trang bị cảm biến APS-C thu sáng tốt và có tích hợp đèn flash cóc pop-up. Khi chụp buổi tối tại quán cafe hay dạo phố, bạn có thể bật nhẹ đèn flash để tạo điểm nhấn cho khuôn mặt."
+        answer: "Canon M3 trang bị cảm biến APS-C thu sáng tốt và có tích hợp đèn flash pop-up. Khi chụp buổi tối tại quán cafe hay dạo phố, bạn có thể bật nhẹ đèn flash để tạo điểm nhấn cho khuôn mặt."
       }
     ]
   },
@@ -675,44 +677,44 @@ export const CAMERA_SEO_CONTENT: Record<string, CameraSeoContent> = {
     slug: "sony-zv1-mark-ii",
     modelName: "Sony ZV-1 Mark II",
     brand: "Sony",
-    seoTitle: "Thuê Sony ZV-1 II quay vlog tại Đồng Hới",
-    seoDescription: "Cho thuê máy quay vlog Sony ZV-1 Mark II góc siêu rộng 18-50mm tại Đồng Hới Quảng Bình. Âm thanh rõ nét, màn xoay lật. Xem giá tại Kiho.",
-    tagline: "Chiếc máy quay vlog thế hệ mới với ống kính góc siêu rộng 18mm và âm thanh chuẩn phòng thu.",
-    intro: "Sony ZV-1 Mark II (ZV-1 II) là chiếc máy quay nhỏ gọn được sinh ra để định nghĩa lại trải nghiệm làm vlog du lịch. Điểm nâng cấp sáng giá nhất là ống kính góc siêu rộng ZEISS 18-50mm f/1.8-4.0, cho phép bạn tự quay video một mình hoặc cùng cả nhóm bạn ở cự ly cầm tay mà vẫn lấy trọn vẹn cảnh sắc thiên nhiên hùng vĩ của Quảng Bình mà không cần dùng thêm gậy selfie.",
+    seoTitle: "Thuê máy ảnh vlog Sony ZV-1 Mark II tại Quảng Bình, Đồng Hới",
+    seoDescription: "Cho thuê máy quay vlog Sony ZV-1 Mark II góc siêu rộng 18-50mm tại Đồng Hới, Quảng Bình. Âm thanh rõ nét, màn hình xoay lật, quay 4K sắc nét.",
+    tagline: "Chiếc máy quay vlog nhỏ gọn với góc rộng 18mm và micro 3 capsule kèm windscreen.",
+    intro: "Sony ZV-1 Mark II (ZV-1 II) là chiếc máy quay nhỏ gọn được thiết kế tối ưu cho trải nghiệm làm vlog du lịch. Điểm nâng cấp nổi bật là ống kính góc siêu rộng 18-50mm f/1.8-4.0, cho phép bạn tự quay video một mình hoặc cùng nhóm bạn ở cự ly cầm tay mà vẫn lấy trọn cảnh sắc thiên nhiên của Quảng Bình mà không cần dùng thêm gậy nối dài.",
     whoIsItFor: [
-      "Travel vlogger, content creator và các bạn đam mê quay video ngắn TikTok, YouTube Shorts, Reels.",
-      "Cặp đôi hoặc nhóm bạn muốn lưu giữ chuyến đi qua những đoạn phim sống động, âm thanh trong trẻo.",
-      "Khách du lịch cần chiếc máy quay siêu nhẹ chỉ 292g, thao tác bật máy quay chỉ với một nút bấm đỏ lớn.",
-      "Người muốn có làn da tươi sáng tự nhiên khi lên hình cùng tính năng làm mờ hậu cảnh chỉ bằng một phím bấm."
+      "Travel vlogger, content creator và các bạn thích quay video ngắn TikTok, YouTube Shorts, Reels.",
+      "Cặp đôi hoặc nhóm bạn muốn lưu giữ chuyến đi qua những đoạn phim sống động, âm thanh rõ ràng.",
+      "Khách du lịch cần chiếc máy quay siêu nhẹ chỉ 292g, thao tác bấm quay nhanh chóng.",
+      "Người muốn có màu da tự nhiên khi lên hình cùng tính năng làm mờ hậu cảnh chỉ bằng một phím bấm."
     ],
     recommendedScenes: [
       {
         title: "Quay Vlog hành trình trên xe & dạo bộ",
         location: "Đường ven biển Đồng Hới & đường mòn Hồ Chí Minh",
-        description: "Góc rộng 18mm bắt trọn cả khuôn mặt người nói lẫn cung đường tuyệt đẹp phía sau mà không bị bí khung hình."
+        description: "Góc rộng 18mm bắt trọn cả khuôn mặt người nói lẫn cung đường phía sau mà không bị hẹp khung hình."
       },
       {
         title: "Bờ biển lộng gió & Thác nước",
         location: "Biển Nhật Lệ & Thác Gió - Vườn thực vật Phong Nha",
-        description: "Micro 3 đầu thu thông minh kèm bông lọc gió chuyên dụng giúp giọng nói của bạn luôn rõ ràng, át tiếng gió biển."
+        description: "Micro 3 đầu thu định hướng kèm bông lọc gió chuyên dụng giúp giọng nói luôn rõ ràng."
       },
       {
         title: "Review ẩm thực & Khám phá địa phương",
         location: "Chợ Đồng Hới & các quán cafe địa phương",
-        description: "Tính năng Product Showcase tự động chuyển nét mượt mà từ gương mặt sang món ăn chỉ trong tích tắc."
+        description: "Tính năng Product Showcase tự động chuyển nét mượt mà từ gương mặt sang món ăn nhanh chóng."
       }
     ],
     whyRentThis: [
-      "Ống kính góc siêu rộng ZEISS 18-50mm: Góc 18mm lý tưởng nhất cho việc cầm tay tự quay vlog mà không bị to mặt.",
-      "Micro 3 đầu thu định hướng thông minh: Tự động nhận diện hướng nguồn âm thanh (phía trước, phía sau hoặc toàn cảnh) kết hợp bông lọc gió lọc tạp âm cực tốt.",
-      "Chế độ Cinematic Vlog Setting: Đem lại tỉ lệ khung hình điện ảnh 2.35:1 và các tone màu phim nghệ thuật chỉ bằng một nút chạm."
+      "Ống kính góc siêu rộng 18-50mm: Góc 18mm thích hợp cho việc cầm tay tự quay vlog du lịch.",
+      "Micro 3 đầu thu định hướng thông minh: Nhận diện hướng nguồn âm thanh kết hợp bông lọc gió hỗ trợ giảm tiếng gió ngoài trời.",
+      "Chế độ Cinematic Vlog Setting: Cung cấp tỉ lệ khung hình 2.35:1 và các tùy chọn phong cách hình ảnh Creative Look."
     ],
     whenToConsiderOthers: [
       {
         condition: "Cần ống kính zoom xa hơn (đến 100mm) để chụp chân dung xóa phông và chụp phong cảnh",
         targetCameraName: "Canon G7 X Mark III",
         targetCameraSlug: "canon-g7x-mark-iii",
-        reason: "Canon G7 X Mark III có dải zoom dài hơn 24-100mm và màu da hồng ấm của Canon."
+        reason: "Canon G7 X Mark III có dải zoom dài hơn 24-100mm và tông màu da ấm áp của Canon."
       },
       {
         condition: "Ưu tiên máy ảnh ống kính rời chuyên nghiệp để chụp ảnh tĩnh",
@@ -721,29 +723,29 @@ export const CAMERA_SEO_CONTENT: Record<string, CameraSeoContent> = {
         reason: "Canon R50 trang bị cảm biến APS-C lớn hơn và khả năng thay đổi linh hoạt các ống kính chuyên dụng."
       },
       {
-        condition: "Cần một lựa chọn quay video góc rộng với chi phí thuê tiết kiệm hơn nữa",
+        condition: "Cần một lựa chọn quay video góc rộng với chi phí thuê tiết kiệm hơn",
         targetCameraName: "Sony ZV-1F",
         targetCameraSlug: "sony-zv1f",
         reason: "Sony ZV-1F có mức giá thuê mềm hơn với ống kính cố định 20mm chuyên cho video dọc."
       }
     ],
     experienceTips: [
-      "Hãy luôn gắn chiếc bông lọc gió (deadcat) đi kèm vào hotshoe trên đỉnh máy khi quay ngoài trời biển hoặc đi cano để âm thanh luôn trong trẻo.",
-      "Nút Bokeh Switch ở góc trên thân máy cho phép bạn chuyển đổi tức thì giữa chế độ phông nền mờ ảo và phông nền rõ nét mà không cần chỉnh khẩu độ phức tạp.",
-      "Tụi mình luôn chuẩn bị sẵn cáp sạc Type-C nhanh và 2 viên pin dự phòng để bạn thoải mái ghi lại mọi khoảnh khắc suốt chuyến đi."
+      "Hãy luôn gắn chiếc bông lọc gió (deadcat) đi kèm vào hotshoe trên đỉnh máy khi quay ngoài trời biển hoặc đi cano để âm thanh rõ ràng hơn.",
+      "Nút Bokeh Switch ở góc trên thân máy cho phép bạn chuyển đổi tức thì giữa chế độ phông nền mờ và phông nền rõ nét.",
+      "Tụi mình luôn chuẩn bị sẵn cáp sạc và 2 pin để bạn sử dụng trong suốt chuyến đi."
     ],
     faqs: [
       {
         question: "Sony ZV-1 Mark II có góc quay rộng hơn ZV-1 đời đầu như thế nào?",
-        answer: "ZV-1 Mark II sở hữu ống kính góc siêu rộng bắt đầu từ 18mm (so với 24mm của thế hệ trước). Góc nhìn rộng hơn rất nhiều giúp bạn dễ dàng tự quay bản thân cùng nhóm bạn mà cánh tay không bị mỏi."
+        answer: "ZV-1 Mark II sở hữu ống kính góc rộng bắt đầu từ 18mm (so với 24mm của thế hệ trước). Góc nhìn rộng hơn giúp bạn dễ dàng tự quay bản thân cùng nhóm bạn mà cánh tay không bị mỏi."
       },
       {
         question: "Máy Sony ZV-1 II chụp ảnh tĩnh có đẹp không hay chỉ chuyên quay phim?",
-        answer: "Mặc dù được tối ưu cho video, ZV-1 II vẫn sở hữu cảm biến 1.0-inch 20.1MP sắc nét và thuật toán xử lý màu da thế hệ mới, cho ra những bức ảnh chụp tĩnh du lịch sắc nét và màu sắc rất chân thực."
+        answer: "Mặc dù được tối ưu cho video, ZV-1 II vẫn sở hữu cảm biến 1.0-inch 20.1MP sắc nét và thuật toán xử lý màu da của Sony, cho ra những bức ảnh chụp tĩnh du lịch chi tiết và màu sắc tự nhiên."
       },
       {
-        question: "Khi thuê ZV-1 II tại Kiho có được tặng kèm đầu đọc thẻ để lấy video vào điện thoại không?",
-        answer: "Có. Bộ thuê luôn kèm đầu đọc thẻ OTG tốc độ cao hỗ trợ cả iPhone và điện thoại Android cổng Type-C, giúp bạn copy những đoạn video 4K sắc nét sang điện thoại chỉ sau vài phút."
+        question: "Khi thuê ZV-1 II tại Kiho có được kèm đầu đọc thẻ để lấy video vào điện thoại không?",
+        answer: "Có. Bộ thuê luôn kèm đầu đọc thẻ OTG cắm trực tiếp vào điện thoại để chuyển video và hình ảnh nhanh chóng."
       }
     ]
   },
@@ -753,15 +755,15 @@ export const CAMERA_SEO_CONTENT: Record<string, CameraSeoContent> = {
     slug: "sony-zv1f",
     modelName: "Sony ZV-1F",
     brand: "Sony",
-    seoTitle: "Thuê Sony ZV-1F màu trắng tại Đồng Hới",
-    seoDescription: "Cho thuê máy quay vlog Sony ZV-1F màu trắng xinh xắn tại Đồng Hới Quảng Bình. Góc rộng 20mm, tối ưu video TikTok & Reels. Xem tại Kiho.",
-    tagline: "Chiếc máy quay màu trắng siêu xinh, góc rộng 20mm sinh ra cho video ngắn TikTok và Reels.",
-    intro: "Sony ZV-1F khoác lên mình lớp vỏ màu trắng tinh khôi và trọng lượng siêu nhẹ chỉ 256g. Với ống kính góc rộng cố định 20mm f/2.0 và giao diện cảm ứng trực quan, chiếc máy này là công cụ hoàn hảo cho các bạn trẻ muốn bước chân vào thế giới sáng tạo video ngắn TikTok, Instagram Reels mà không muốn bị bối rối bởi các cài đặt kỹ thuật phức tạp.",
+    seoTitle: "Thuê máy ảnh Sony ZV-1F tại Quảng Bình, Đồng Hới",
+    seoDescription: "Cho thuê máy quay vlog Sony ZV-1F màu trắng tại Đồng Hới, Quảng Bình. Ống kính góc rộng 20mm f/2.0, tối ưu video ngắn TikTok & Reels.",
+    tagline: "Chiếc máy quay màu trắng nhỏ xinh, góc rộng 20mm phù hợp cho video ngắn TikTok và Reels.",
+    intro: "Sony ZV-1F sở hữu thiết kế màu trắng trang nhã và trọng lượng siêu nhẹ chỉ 256g. Với ống kính góc rộng cố định 20mm f/2.0 và giao diện cảm ứng trực quan, chiếc máy này là công cụ phù hợp cho các bạn trẻ muốn quay video ngắn TikTok, Instagram Reels khi đi du lịch mà không cần thao tác cài đặt phức tạp.",
     whoIsItFor: [
       "Các bạn trẻ sáng tạo nội dung trên TikTok, Reels, Shorts cần một chiếc máy nhỏ gọn và lên màu da đẹp.",
-      "Khách du lịch muốn một thiết bị quay video sắc nét hơn hẳn điện thoại nhưng cực kỳ gọn nhẹ.",
+      "Khách du lịch muốn một thiết bị quay video sắc nét hơn điện thoại nhưng cực kỳ gọn nhẹ.",
       "Những bạn yêu thích thiết kế máy ảnh màu trắng hiện đại, thời trang.",
-      "Người tìm kiếm chiếc máy quay vlog thương hiệu Sony chất lượng cao với chi phí thuê rất dễ tiếp cận."
+      "Người tìm kiếm chiếc máy quay vlog thương hiệu Sony chất lượng với chi phí thuê dễ tiếp cận."
     ],
     recommendedScenes: [
       {
@@ -772,7 +774,7 @@ export const CAMERA_SEO_CONTENT: Record<string, CameraSeoContent> = {
       {
         title: "Dạo biển & Thưởng thức hải sản",
         location: "Bờ biển Nhật Lệ & làng chài Bảo Ninh",
-        description: "Bông lọc gió chuyên dụng giúp thu giọng nói rõ ràng giữa tiếng gió biển rì rào."
+        description: "Bông lọc gió chuyên dụng giúp thu giọng nói rõ ràng giữa tiếng gió biển."
       },
       {
         title: "Vlog một ngày khám phá Quảng Bình",
@@ -781,9 +783,9 @@ export const CAMERA_SEO_CONTENT: Record<string, CameraSeoContent> = {
       }
     ],
     whyRentThis: [
-      "Ống kính góc cố định 20mm f/2.0: Góc nhìn tự nhiên, độ mở khẩu lớn cho khả năng thu sáng tốt và xóa mờ nhẹ hậu cảnh.",
-      "Trọng lượng siêu nhẹ chỉ 256g: Nhẹ hơn cả nhiều dòng smartphone cỡ lớn khi gắn ốp lưng, không hề mỏi tay khi quay lâu.",
-      "Tối ưu hoàn hảo cho video khung dọc: Giao diện chuyển đổi khung hình quay đứng nhanh chóng và trực quan."
+      "Ống kính góc cố định 20mm f/2.0: Góc nhìn tự nhiên, khẩu độ lớn cho khả năng thu sáng tốt và xóa mờ nhẹ hậu cảnh.",
+      "Trọng lượng siêu nhẹ chỉ 256g: Gọn gàng khi cầm tay quay video trong thời gian dài.",
+      "Tối ưu cho video khung dọc: Giao diện chuyển đổi khung hình quay đứng nhanh chóng và trực quan."
     ],
     whenToConsiderOthers: [
       {
@@ -793,7 +795,7 @@ export const CAMERA_SEO_CONTENT: Record<string, CameraSeoContent> = {
         reason: "Sony ZV-1 II có ống kính zoom 18-50mm và hệ thống micro thu âm cao cấp hơn."
       },
       {
-        condition: "Ưu tiên chụp ảnh chân dung xóa phông với màu da trắng hồng của Canon",
+        condition: "Ưu tiên chụp ảnh chân dung xóa phông với màu da sáng của Canon",
         targetCameraName: "Canon M100",
         targetCameraSlug: "canon-m100",
         reason: "Canon M100 sử dụng cảm biến APS-C lớn hơn và ống kính zoom quang học rời."
@@ -802,13 +804,13 @@ export const CAMERA_SEO_CONTENT: Record<string, CameraSeoContent> = {
         condition: "Muốn chiếc máy ảnh toàn năng vừa chụp ảnh xuất sắc vừa quay 4K chuyên nghiệp",
         targetCameraName: "Canon EOS R50",
         targetCameraSlug: "canon-eos-r50",
-        reason: "Canon R50 trang bị hệ thống lấy nét Dual Pixel II đỉnh cao và cảm biến ảnh lớn hơn."
+        reason: "Canon R50 trang bị hệ thống lấy nét Dual Pixel II và cảm biến ảnh APS-C lớn hơn."
       }
     ],
     experienceTips: [
-      "Nút Bokeh Switch màu cam trên đỉnh máy sẽ giúp bạn làm mờ hậu cảnh phía sau chỉ với một cú chạm duy nhất.",
-      "Khi quay ngoài trời, bạn hãy bật chế độ Active SteadyShot để video luôn giữ được độ mượt mà khi bạn vừa đi vừa nói.",
-      "Tụi mình luôn chuẩn bị sẵn túi đựng thời trang và đầu đọc thẻ nhớ để bạn cắm sang điện thoại chỉnh clip đăng ngay."
+      "Nút Bokeh Switch trên đỉnh máy sẽ giúp bạn làm mờ hậu cảnh phía sau chỉ với một cú chạm.",
+      "Khi quay ngoài trời, bạn hãy bật chế độ chống rung để video giữ được độ ổn định khi di chuyển.",
+      "Tụi mình luôn chuẩn bị sẵn túi đựng và đầu đọc thẻ nhớ để bạn cắm sang điện thoại chỉnh clip đăng ngay."
     ],
     faqs: [
       {
@@ -821,7 +823,7 @@ export const CAMERA_SEO_CONTENT: Record<string, CameraSeoContent> = {
       },
       {
         question: "Bộ thuê Sony ZV-1F tại Kiho Camera có kèm bông lọc gió không?",
-        answer: "Có. Trọn bộ thuê Sony ZV-1F luôn có sẵn bông lọc gió chính hãng gắn trên thân máy, 2 pin dung lượng cao, cáp sạc, thẻ nhớ 64GB và túi chống sốc."
+        answer: "Có. Trọn bộ thuê Sony ZV-1F luôn có sẵn bông lọc gió gắn trên thân máy, 2 pin, sạc, thẻ nhớ và túi chống sốc."
       }
     ]
   },
@@ -831,13 +833,13 @@ export const CAMERA_SEO_CONTENT: Record<string, CameraSeoContent> = {
     slug: "canon-m",
     modelName: "Canon EOS M",
     brand: "Canon",
-    seoTitle: "Thuê Canon EOS M giá rẻ tại Đồng Hới",
-    seoDescription: "Dịch vụ cho thuê máy ảnh Canon EOS M tại Đồng Hới Quảng Bình. Cảm biến APS-C 18MP, thân kim loại đầm chắc, giá thuê siêu hạt dẻ. Xem tại Kiho.",
+    seoTitle: "Thuê máy ảnh Canon EOS M tại Quảng Bình, Đồng Hới",
+    seoDescription: "Dịch vụ cho thuê máy ảnh Canon EOS M tại Đồng Hới, Quảng Bình. Cảm biến APS-C 18MP, thân kim loại đầm chắc, giá thuê siêu tiết kiệm.",
     tagline: "Chiếc máy ảnh mirrorless kim loại nguyên khối cổ điển với chi phí thuê tiết kiệm nhất.",
-    intro: "Canon EOS M là chiếc máy ảnh không gương lật nguyên bản đặt nền móng cho hệ thống mirrorless của Canon. Thân máy bằng hợp kim magie nguyên khối đầm tay, cảm biến APS-C 18.0MP và màu sắc chân thực của Canon khiến EOS M trở thành lựa chọn tuyệt vời cho các bạn học sinh, sinh viên muốn trải nghiệm chất lượng ảnh máy cơ với ngân sách thuê tiết kiệm nhất tại Đồng Hới.",
+    intro: "Canon EOS M là chiếc máy ảnh không gương lật nguyên bản của Canon với thân máy bằng hợp kim nguyên khối đầm tay, cảm biến APS-C 18.0MP và màu sắc chân thực. EOS M là lựa chọn hợp lý cho các bạn học sinh, sinh viên muốn trải nghiệm chất lượng ảnh máy cơ với ngân sách thuê tiết kiệm nhất tại Đồng Hới.",
     whoIsItFor: [
-      "Học sinh, sinh viên hoặc du khách có ngân sách tiết kiệm nhưng muốn ảnh đẹp vượt trội hơn điện thoại.",
-      "Người yêu thích cảm giác cầm máy kim loại mát lạnh, đầm tay và chắc chắn.",
+      "Học sinh, sinh viên hoặc du khách có ngân sách tiết kiệm nhưng muốn ảnh đẹp hơn điện thoại.",
+      "Người yêu thích cảm giác cầm máy kim loại đầm tay và chắc chắn.",
       "Những ai cần một chiếc máy ảnh dự phòng hoặc máy phụ trong chuyến đi khám phá Quảng Bình.",
       "Người mới bắt đầu tìm hiểu về nhiếp ảnh và các nguyên lý chụp hình cơ bản."
     ],
@@ -860,7 +862,7 @@ export const CAMERA_SEO_CONTENT: Record<string, CameraSeoContent> = {
     ],
     whyRentThis: [
       "Chi phí thuê thấp nhất phân khúc: Giúp bạn thoải mái trải nghiệm máy ảnh chuyên dụng mà không lo về giá.",
-      "Cảm biến APS-C 18.0MP: Kích thước cảm biến lớn hơn nhiều so với điện thoại thông thường, cho chất lượng ảnh sạch và trong trẻo.",
+      "Cảm biến APS-C 18.0MP: Kích thước cảm biến lớn hơn so với điện thoại thông thường, cho chất lượng ảnh sạch và trong trẻo.",
       "Thân máy kim loại nguyên khối: Bền bỉ, đầm chắc và mang nét thẩm mỹ hoài cổ độc đáo."
     ],
     whenToConsiderOthers: [
@@ -899,7 +901,7 @@ export const CAMERA_SEO_CONTENT: Record<string, CameraSeoContent> = {
       },
       {
         question: "Lấy ảnh từ Canon EOS M sang điện thoại như thế nào?",
-        answer: "Bạn chỉ cần rút thẻ nhớ cắm vào đầu đọc thẻ OTG do Kiho chuẩn bị sẵn trong túi máy và cắm trực tiếp vào điện thoại, toàn bộ ảnh sẽ được chuyển sang chỉ trong chớp mắt."
+        answer: "Bạn chỉ cần rút thẻ nhớ cắm vào đầu đọc thẻ OTG do Kiho chuẩn bị sẵn trong túi máy và cắm trực tiếp vào điện thoại, toàn bộ ảnh sẽ được chuyển sang nhanh chóng."
       }
     ]
   },
@@ -909,10 +911,10 @@ export const CAMERA_SEO_CONTENT: Record<string, CameraSeoContent> = {
     slug: "canon-ixy-640",
     modelName: "Canon IXY 640",
     brand: "Canon",
-    seoTitle: "Thuê Canon IXY 640 Digicam Y2K tại Đồng Hới",
-    seoDescription: "Cho thuê máy ảnh kỹ thuật số cổ điển Canon IXY 640 tại Đồng Hới Quảng Bình. Đèn flash đêm vibe Y2K hoài niệm, máy mini đút túi áo. Xem tại Kiho.",
+    seoTitle: "Thuê máy ảnh compact Canon IXY 640 tại Quảng Bình, Đồng Hới",
+    seoDescription: "Cho thuê máy ảnh kỹ thuật số cổ điển Canon IXY 640 tại Đồng Hới, Quảng Bình. Đèn flash đêm vibe Y2K hoài niệm, máy mini bỏ túi áo.",
     tagline: "Chiếc digicam mini cổ điển, đèn flash đêm nghệ thuật và trọn vẹn phong cách hoài niệm Y2K.",
-    intro: "Canon IXY 640 mang đến trải nghiệm chụp ảnh kỹ thuật số cổ điển (digicam) đang làm mưa làm gió trong giới trẻ. Thân máy hợp kim siêu mỏng nhẹ chỉ 147g bỏ gọn trong túi áo, zoom quang học 12x và đặc biệt là cụm đèn flash tích hợp đánh sáng tạo hạt noise retro đặc trưng, biến mỗi bức ảnh đêm dạo phố Đồng Hới hay tiệc sinh nhật thành một thước phim ký ức đậm chất vintage.",
+    intro: "Canon IXY 640 mang đến trải nghiệm chụp ảnh kỹ thuật số cổ điển (digicam) được nhiều bạn trẻ yêu thích. Thân máy mỏng nhẹ chỉ 147g bỏ gọn trong túi áo, zoom quang học 12x và cụm đèn flash tích hợp đánh sáng tạo hạt noise retro đặc trưng, biến mỗi bức ảnh đêm dạo phố Đồng Hới hay tiệc sinh nhật thành một thước phim kỷ niệm đậm chất vintage.",
     whoIsItFor: [
       "Những bạn trẻ yêu thích trào lưu ảnh Y2K, phong cách retro thập niên 2000s với ánh flash đêm độc lạ.",
       "Người đi cafe, hẹn hò buổi tối, đi tiệc sinh nhật, bar/pub hoặc dạo phố đêm Đồng Hới.",
@@ -923,22 +925,22 @@ export const CAMERA_SEO_CONTENT: Record<string, CameraSeoContent> = {
       {
         title: "Chụp Flash đêm dạo phố & Quán pub",
         location: "Khu phố đêm Đồng Hới & ven sông Nhật Lệ",
-        description: "Đèn flash trực diện làm nổi bật chủ thể trên nền tối, tạo chất ảnh hoài niệm đặc trưng không thể nhầm lẫn."
+        description: "Đèn flash trực diện làm nổi bật chủ thể trên nền tối, tạo chất ảnh hoài niệm đặc trưng."
       },
       {
         title: "Tiệc sinh nhật & Hẹn hò lãng mạn",
         location: "Các quán cafe ấm cúng tại Đồng Hới",
-        description: "Ghi lại những khoảnh khắc cười đùa tự nhiên cùng bạn bè với tone màu vintage ấm áp."
+        description: "Ghi lại những khoảnh khắc tự nhiên cùng bạn bè với tone màu vintage ấm áp."
       },
       {
         title: "Bắt trọn chi tiết từ xa",
         location: "Bờ biển & các điểm tham quan",
-        description: "Ống kính zoom quang học 12x mạnh mẽ giúp bạn chụp cận cảnh các chi tiết ở xa một cách dễ dàng."
+        description: "Ống kính zoom quang học 12x giúp bạn chụp cận cảnh các chi tiết ở xa một cách dễ dàng."
       }
     ],
     whyRentThis: [
-      "Hiệu ứng ánh sáng Flash Y2K kinh điển: Đèn flash đánh thẳng tạo nên vệt bóng đổ nghệ thuật và tone da retro cực kỳ nịnh mắt.",
-      "Thiết kế siêu nhỏ gọn 147g: Mỏng nhẹ đến mức bạn có thể đút vừa trong túi áo sơ mi hoặc túi quần jeans.",
+      "Hiệu ứng ánh sáng Flash Y2K: Đèn flash đánh thẳng tạo nên vệt bóng đổ nghệ thuật và tone da retro nịnh mắt.",
+      "Thiết kế siêu nhỏ gọn 147g: Mỏng nhẹ đến mức bạn có thể đút vừa trong túi áo hoặc túi xách nhỏ.",
       "Zoom quang học 12x trong thân máy tí hon: Vừa có góc rộng chụp nhóm vừa có thể zoom xa bắt trọn mọi chi tiết."
     ],
     whenToConsiderOthers: [
@@ -952,7 +954,7 @@ export const CAMERA_SEO_CONTENT: Record<string, CameraSeoContent> = {
         condition: "Thích màu ảnh film cổ điển cao cấp với hệ thống giả lập màu trứ danh của Fuji",
         targetCameraName: "Fujifilm X100V",
         targetCameraSlug: "fujifilm-x100v",
-        reason: "Fujifilm X100V là dòng máy rangefinder cao cấp với các bộ lọc màu film huyền thoại."
+        reason: "Fujifilm X100V là dòng máy rangefinder cao cấp với các bộ lọc màu film nổi tiếng."
       },
       {
         condition: "Muốn máy ảnh ống kính rời để chụp chân dung xóa phông rõ nét",
@@ -962,14 +964,14 @@ export const CAMERA_SEO_CONTENT: Record<string, CameraSeoContent> = {
       }
     ],
     experienceTips: [
-      "Bí quyết để có ảnh vibe Y2K đẹp nhất với IXY 640 là luôn bật chế độ Flash On (luôn đánh đèn flash) khi chụp trong nhà hoặc buổi tối.",
+      "Bí quyết để có ảnh vibe Y2K đẹp nhất với IXY 640 là bật chế độ Flash On khi chụp trong nhà hoặc buổi tối.",
       "Đứng cách chủ thể khoảng 1 đến 2 mét khi chụp flash để ánh sáng phủ đều gương mặt mà không bị quá chói.",
-      "Tụi mình luôn chuẩn bị sẵn bao da mini vintage, dây đeo tay và đầu đọc thẻ nhớ OTG để bạn đăng ảnh check-in ngay sau buổi tiệc."
+      "Tụi mình luôn chuẩn bị sẵn bao da mini vintage, dây đeo tay và đầu đọc thẻ nhớ OTG để bạn lấy ảnh check-in nhanh chóng."
     ],
     faqs: [
       {
         question: "Canon IXY 640 chụp ảnh có giống điện thoại không?",
-        answer: "Khác biệt rất rõ rệt. Ảnh từ IXY 640 mang chất ảnh kỹ thuật số đầu những năm 2000 với độ tương phản đặc trưng của đèn flash trực diện và hạt grain mịn cổ điển — điều mà các bộ lọc điện thoại khó có thể tái tạo tự nhiên bằng phần cứng thật."
+        answer: "Khác biệt rõ rệt. Ảnh từ IXY 640 mang chất ảnh kỹ thuật số đầu những năm 2000 với độ tương phản đặc trưng của đèn flash trực diện và hạt grain mịn cổ điển — tạo cảm xúc hoài niệm rất riêng."
       },
       {
         question: "Máy Canon IXY 640 có dễ sử dụng cho người chưa biết chụp ảnh không?",
@@ -977,7 +979,7 @@ export const CAMERA_SEO_CONTENT: Record<string, CameraSeoContent> = {
       },
       {
         question: "Bộ thuê máy ảnh Canon IXY 640 tại Kiho gồm những gì?",
-        answer: "Bộ thuê máy IXY 640 tại Kiho gồm: thân máy Canon IXY 640 màu bạc, 2 viên pin dung lượng cao, củ sạc, thẻ nhớ tốc độ cao, bao da mini vintage, dây đeo tay và đầu đọc thẻ OTG cho điện thoại."
+        answer: "Bộ thuê máy IXY 640 tại Kiho gồm: thân máy Canon IXY 640 màu bạc, 2 pin, sạc, thẻ nhớ, bao da mini vintage, dây đeo tay và đầu đọc thẻ OTG cho điện thoại."
       }
     ]
   }
@@ -987,3 +989,4 @@ export const CAMERA_SEO_CONTENT: Record<string, CameraSeoContent> = {
 export function getCameraSeoContent(slug: string): CameraSeoContent | null {
   return CAMERA_SEO_CONTENT[slug] || null;
 }
+

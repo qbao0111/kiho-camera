@@ -2,14 +2,14 @@
 
 import React, { useState, useRef, useEffect } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import {
   Aperture,
   Camera,
   Sparkles,
   Rotate3d,
-  CheckCircle2,
-  Layers,
-  ChevronRight,
+  ArrowRight,
+  HelpCircle,
 } from "lucide-react";
 
 interface FStopConfig {
@@ -17,7 +17,7 @@ interface FStopConfig {
   label: string;
   shutter: string;
   iso: string;
-  apertureSizePercent: number; // 85% at f/1.4 down to 15% at f/16
+  apertureSizePercent: number; // 82% at f/1.4 down to 18% at f/11
   bladeRotationDeg: number;
   bokehRadiusPx: number;
   blurClass: string;
@@ -38,9 +38,9 @@ const F_STOPS: FStopConfig[] = [
     bladeRotationDeg: 0,
     bokehRadiusPx: 28,
     blurClass: "blur-xl",
-    badge: "Chân dung Xoá Phông Mù Mịt",
+    badge: "Xóa phông mạnh & Bokeh lớn",
     badgeColor: "bg-rose-500/20 text-rose-300 border-rose-500/30",
-    sceneTitle: "Chân Dung Hoàng Hôn",
+    sceneTitle: "Chân dung & Thiếu sáng",
     desc: "Khẩu độ mở cực đại thu nhận lượng ánh sáng tối đa, tạo quầng bokeh tròn lung linh, tách chủ thể hoàn toàn khỏi hậu cảnh.",
     recommendedSubject: "Chân dung đơn, couple, biển Nhật Lệ, chụp đêm thiếu sáng",
   },
@@ -53,7 +53,7 @@ const F_STOPS: FStopConfig[] = [
     bladeRotationDeg: 12,
     bokehRadiusPx: 20,
     blurClass: "blur-lg",
-    badge: "Cafe Chill & Streetstyle",
+    badge: "Tách chủ thể & Không gian",
     badgeColor: "bg-amber-500/20 text-amber-300 border-amber-500/30",
     sceneTitle: "Quán Cafe & Check-in",
     desc: "Độ nét tại tâm sắc sảo vượt trội, hậu cảnh xoá dịu dàng giữ lại đường nét không gian ấm áp.",
@@ -68,7 +68,7 @@ const F_STOPS: FStopConfig[] = [
     bladeRotationDeg: 24,
     bokehRadiusPx: 14,
     blurClass: "blur-md",
-    badge: "Tiêu Chuẩn Du Lịch",
+    badge: "Cân bằng Du lịch & Check-in",
     badgeColor: "bg-emerald-500/20 text-emerald-300 border-emerald-500/30",
     sceneTitle: "Du Lịch & Phố Xá",
     desc: "Khẩu độ vàng cho ảnh du lịch. Chủ thể nổi bật rõ ràng trong khi hậu cảnh địa danh vẫn nhận diện được.",
@@ -83,11 +83,11 @@ const F_STOPS: FStopConfig[] = [
     bladeRotationDeg: 40,
     bokehRadiusPx: 6,
     blurClass: "blur-xs",
-    badge: "Ảnh Nhóm & Kỷ Yếu",
+    badge: "Ảnh nhóm & Gia đình",
     badgeColor: "bg-blue-500/20 text-blue-300 border-blue-500/30",
     sceneTitle: "Nhóm Bạn & Gia Đình",
     desc: "Độ sâu trường ảnh đủ dày để mọi người trong nhóm từ hàng trước đến hàng sau đều nét căng.",
-    recommendedSubject: "Nhóm 3–8 người, gia đình, teambuilding",
+    recommendedSubject: "Nhóm bạn 3–8 người, gia đình, teambuilding",
   },
   {
     value: 11,
@@ -109,18 +109,30 @@ const F_STOPS: FStopConfig[] = [
 export function Interactive3dAperture() {
   const [activeFStopIdx, setActiveFStopIdx] = useState(0);
   const [isShutterActive, setIsShutterActive] = useState(false);
+  const [isReticlePulsing, setIsReticlePulsing] = useState(false);
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
   const [isHoveringLens, setIsHoveringLens] = useState(false);
 
   const containerRef = useRef<HTMLDivElement>(null);
+  const animFrameRef = useRef<number | null>(null);
+  const targetPosRef = useRef({ x: 0, y: 0 });
   const current = F_STOPS[activeFStopIdx];
 
+  // Throttled Parallax for fine pointer devices (desktop)
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
     if (!containerRef.current) return;
     const rect = containerRef.current.getBoundingClientRect();
-    const x = ((e.clientX - rect.left) / rect.width - 0.5) * 2;
-    const y = ((e.clientY - rect.top) / rect.height - 0.5) * 2;
-    setMousePos({ x, y });
+    targetPosRef.current = {
+      x: ((e.clientX - rect.left) / rect.width - 0.5) * 2,
+      y: ((e.clientY - rect.top) / rect.height - 0.5) * 2,
+    };
+
+    if (!animFrameRef.current) {
+      animFrameRef.current = requestAnimationFrame(() => {
+        setMousePos(targetPosRef.current);
+        animFrameRef.current = null;
+      });
+    }
   };
 
   const handleMouseLeave = () => {
@@ -128,10 +140,29 @@ export function Interactive3dAperture() {
     setMousePos({ x: 0, y: 0 });
   };
 
+  const triggerReticlePulse = () => {
+    setIsReticlePulsing(true);
+    setTimeout(() => setIsReticlePulsing(false), 220);
+  };
+
+  const handleSelectFStop = (idx: number) => {
+    setActiveFStopIdx(idx);
+    triggerReticlePulse();
+  };
+
   const handleShutterClick = () => {
     setIsShutterActive(true);
-    setTimeout(() => setIsShutterActive(false), 180);
+    triggerReticlePulse();
+    setTimeout(() => setIsShutterActive(false), 140);
   };
+
+  useEffect(() => {
+    return () => {
+      if (animFrameRef.current) {
+        cancelAnimationFrame(animFrameRef.current);
+      }
+    };
+  }, []);
 
   // Generate 8 realistic iris blades with precise curved SVG geometry
   const numBlades = 8;
@@ -149,13 +180,16 @@ export function Interactive3dAperture() {
 
       {/* Screen Shutter Flash Burst Overlay */}
       {isShutterActive && (
-        <div className="fixed inset-0 z-[9999] bg-white opacity-95 pointer-events-none transition-opacity duration-150 animate-out fade-out" />
+        <div
+          className="fixed inset-0 z-[9999] bg-white opacity-90 pointer-events-none transition-opacity duration-100 animate-out fade-out motion-reduce:hidden"
+          aria-hidden="true"
+        />
       )}
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         {/* Section Header */}
-        <div className="max-w-3xl mb-12 sm:mb-16">
-          <div className="flex items-center gap-2 text-xs font-mono font-medium tracking-widest text-accent uppercase mb-2">
+        <div className="max-w-3xl mb-12 sm:mb-16 space-y-3">
+          <div className="flex items-center gap-2 text-xs font-mono font-medium tracking-widest text-accent uppercase">
             <Aperture className="w-4 h-4 animate-spin-slow text-accent" />
             <span>MÔ PHỎNG ỐNG KÍNH QUANG HỌC · OPTICAL BOKEH SIMULATOR</span>
           </div>
@@ -165,26 +199,24 @@ export function Interactive3dAperture() {
             <span className="italic text-accent font-normal">với khẩu độ ống kính thật</span>
           </h2>
 
-          <p className="mt-3 text-sm sm:text-base text-ink-300 font-sans font-normal leading-relaxed max-w-2xl">
-            Kéo các nấc khẩu độ bên dưới để xem hệ thống lá khẩu kim loại co giãn và cảm nhận sự khác biệt vượt trội giữa ống kính máy ảnh và xoá phông phần mềm của điện thoại.
+          <p className="text-sm sm:text-base text-ink-300 font-sans font-normal leading-relaxed max-w-2xl pt-1">
+            Khám phá cách đường kính mở lá khẩu (f-stop) thay đổi độ sâu trường ảnh (depth of field) và tạo bokeh quang học tự nhiên — khác biệt với thuật toán làm mờ hậu kỳ trên smartphone.
           </p>
         </div>
 
         {/* MAIN SIMULATOR 2-COLUMN DISPLAY */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
-          
-          {/* 1. LEFT: AUTHENTIC LUXURY 3D LENS BARREL (CANON RF 50MM F/1.4 REPLICA) */}
+          {/* 1. LEFT: AUTHENTIC 3D OPTICAL LENS BARREL (CANON RF 50MM F/1.4 REPLICA) */}
           <div className="lg:col-span-5 flex flex-col items-center justify-center">
-            
             {/* The Lens Chassis Container */}
             <div
               ref={containerRef}
               onMouseMove={handleMouseMove}
               onMouseEnter={() => setIsHoveringLens(true)}
               onMouseLeave={handleMouseLeave}
-              className="relative w-full max-w-[340px] aspect-square flex items-center justify-center p-3 rounded-full bg-gradient-to-br from-[#1b1a1c] via-[#0f0e10] to-[#080809] border-2 border-white/10 shadow-[0_25px_60px_rgba(0,0,0,0.95)] cursor-crosshair group transition-transform duration-300 ease-out"
+              className="relative w-full max-w-[320px] sm:max-w-[340px] aspect-square flex items-center justify-center p-3 rounded-full bg-gradient-to-br from-[#1b1a1c] via-[#0f0e10] to-[#080809] border-2 border-white/10 shadow-[0_25px_60px_rgba(0,0,0,0.95)] cursor-crosshair group transition-transform duration-300 ease-out"
               style={{
-                transform: `perspective(900px) rotateY(${mousePos.x * 12}deg) rotateX(${-mousePos.y * 12}deg) scale(${
+                transform: `perspective(900px) rotateY(${mousePos.x * 10}deg) rotateX(${-mousePos.y * 10}deg) scale(${
                   isHoveringLens ? 1.02 : 1
                 })`,
               }}
@@ -203,16 +235,15 @@ export function Interactive3dAperture() {
                     d="M 158, 158 m -134, 0 a 134,134 0 1,1 268,0 a 134,134 0 1,1 -268,0"
                   />
                 </defs>
-                <text className="text-[9.5px] font-mono tracking-[0.22em] fill-white/60 uppercase font-semibold">
+                <text className="text-[9px] font-mono tracking-[0.22em] fill-white/60 uppercase font-semibold">
                   <textPath href="#lensTextPath" startOffset="0%">
                     CANON LENS RF 50mm F1.4 STM · Ø 58mm · KIHO OPTICAL LAB ·
                   </textPath>
                 </text>
               </svg>
 
-              {/* Inner Optical Glass Cavity (Multi-coated Elements) */}
+              {/* Inner Optical Glass Cavity */}
               <div className="relative w-[76%] h-[76%] rounded-full bg-gradient-to-br from-[#060b14] via-[#090d16] to-[#04060a] border border-white/20 overflow-hidden shadow-[inset_0_0_40px_rgba(0,0,0,0.9)] flex items-center justify-center">
-                
                 {/* Dynamic Multi-coating Glare Sheen (Cyan + Magenta Reflection) */}
                 <div
                   className="absolute inset-0 pointer-events-none transition-opacity duration-500 opacity-60 group-hover:opacity-90"
@@ -231,7 +262,7 @@ export function Interactive3dAperture() {
                 <div
                   className="relative w-full h-full flex items-center justify-center transition-all duration-500 ease-out"
                   style={{
-                    clipPath: "circle(48% at 50% 50%)", // Strictly contains blades inside barrel
+                    clipPath: "circle(48% at 50% 50%)",
                   }}
                 >
                   {/* Central Light Opening (Through-the-lens illumination) */}
@@ -263,9 +294,8 @@ export function Interactive3dAperture() {
                     </defs>
 
                     {blades.map((blade) => {
-                      // Radius distance of blade pivot from center
-                      const t = activeFStopIdx / (F_STOPS.length - 1); // 0 (open) to 1 (closed)
-                      const pivotDist = 70 - t * 38; // moves inward as stopped down
+                      const t = activeFStopIdx / (F_STOPS.length - 1);
+                      const pivotDist = 70 - t * 38;
 
                       return (
                         <g
@@ -276,9 +306,8 @@ export function Interactive3dAperture() {
                             transition: "transform 0.5s cubic-bezier(0.16, 1, 0.3, 1)",
                           }}
                         >
-                          {/* Curved Iris Blade Shape */}
                           <path
-                            d={`M 130,${130 - pivotDist} Q 190,${80 - pivotDist * 0.5} 240,${130} Q 180,${180} 130,${130 - pivotDist}`}
+                            d={`M 130,${130 - pivotDist} Q 190,${80 - pivotDist * 0.5} 240,130 Q 180,180 130,${130 - pivotDist}`}
                             fill="url(#bladeGrad)"
                             stroke="url(#bladeEdge)"
                             strokeWidth="1.2"
@@ -301,7 +330,7 @@ export function Interactive3dAperture() {
               {/* Status HUD Tags */}
               <div className="absolute top-3.5 right-4 bg-black/70 backdrop-blur-xs text-ink-300 text-[10px] font-mono font-medium px-2.5 py-0.5 rounded-full border border-white/10 flex items-center gap-1.5 shadow-md">
                 <Rotate3d className="w-3 h-3 text-accent" />
-                <span>3D TILT VIEW</span>
+                <span>3D OPTICAL VIEW</span>
               </div>
 
               <div className="absolute bottom-3.5 left-4 flex items-center gap-2 font-mono text-xs">
@@ -317,16 +346,22 @@ export function Interactive3dAperture() {
             {/* F-STOP SELECTOR BUTTONS */}
             <div className="mt-6 w-full max-w-[340px] space-y-2">
               <div className="flex items-center justify-between text-xs font-mono text-ink-400 px-1">
-                <span>VÒNG KHẨU ĐỘ (APERTURE)</span>
+                <span>VÒNG KHẨU ĐỘ (F-STOP)</span>
                 <span className="text-accent font-bold">{current.label}</span>
               </div>
 
-              <div className="grid grid-cols-5 gap-1.5 p-1.5 rounded-xl bg-ink-900/90 border border-white/15 backdrop-blur-xs shadow-inner">
+              <div
+                role="radiogroup"
+                aria-label="Chọn nấc khẩu độ thử nghiệm"
+                className="grid grid-cols-5 gap-1.5 p-1.5 rounded-xl bg-ink-900/90 border border-white/15 backdrop-blur-xs shadow-inner"
+              >
                 {F_STOPS.map((stop, idx) => (
                   <button
                     key={stop.value}
-                    onClick={() => setActiveFStopIdx(idx)}
-                    className={`py-2 px-1 rounded-lg text-xs font-mono font-bold transition-all duration-200 cursor-pointer ${
+                    role="radio"
+                    aria-checked={activeFStopIdx === idx}
+                    onClick={() => handleSelectFStop(idx)}
+                    className={`py-2 px-1 min-h-[44px] rounded-lg text-xs font-mono font-bold transition-all duration-200 cursor-pointer focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-accent ${
                       activeFStopIdx === idx
                         ? "bg-accent text-white shadow-md scale-105"
                         : "text-ink-400 hover:text-white hover:bg-white/5"
@@ -342,7 +377,8 @@ export function Interactive3dAperture() {
             <div className="mt-4">
               <button
                 onClick={handleShutterClick}
-                className="bg-accent hover:bg-accent-hover text-white text-xs font-sans font-semibold py-2.5 px-6 rounded-lg shadow-md flex items-center gap-2 transition-all hover:scale-105 active:scale-95 cursor-pointer group border border-white/20"
+                aria-label="Chụp thử để xem hiệu ứng bắt nét và phơi sáng"
+                className="bg-accent hover:bg-accent-hover text-white text-xs font-sans font-semibold py-2.5 px-6 min-h-[44px] rounded-lg shadow-md flex items-center gap-2 transition-all hover:scale-105 active:scale-95 cursor-pointer group border border-white/20 focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-accent"
               >
                 <Camera className="w-4 h-4 group-hover:rotate-12 transition-transform" />
                 <span>Bấm chụp thử khoảnh khắc này</span>
@@ -352,36 +388,21 @@ export function Interactive3dAperture() {
 
           {/* 2. RIGHT: PHOTOGRAPHIC VIEWFINDER SIMULATOR */}
           <div className="lg:col-span-7 space-y-4">
-            
             {/* Viewfinder Monitor Screen */}
             <div className="relative aspect-[16/10] w-full rounded-2xl overflow-hidden border-2 border-white/20 bg-black shadow-[0_25px_60px_rgba(0,0,0,0.9)] group">
-              
-              {/* Background Photo (Biển Nhật Lệ) with Dynamic Optical Depth of Field */}
+              {/* Background Photo with Dynamic Optical Depth of Field */}
               <div className="relative w-full h-full">
                 <Image
                   src="/images/landing/hero-quang-binh.webp"
-                  alt="Mô phỏng chụp tại Quảng Bình"
+                  alt="Mô phỏng độ sâu trường ảnh tại Quảng Bình"
                   fill
                   sizes="(max-width: 1024px) 100vw, 55vw"
-                  className={`object-cover transition-all duration-500 ease-out filter ${current.blurClass} brightness-[0.88] contrast-[1.05]`}
+                  className={`object-cover transition-all duration-500 ease-out filter ${current.blurClass} brightness-[0.88] contrast-[1.05] pointer-events-none`}
                 />
 
-                {/* Foreground Sharp Model / Subject (Canon R50) */}
-                <div className="absolute inset-0 flex items-center justify-center">
-                  <div className="relative w-64 h-64 sm:w-72 sm:h-72">
-                    <Image
-                      src="/images/landing/cutouts/canon-r50.png"
-                      alt="Chủ thể lấy nét nét căng"
-                      fill
-                      sizes="300px"
-                      className="object-contain filter drop-shadow-[0_20px_40px_rgba(0,0,0,0.6)]"
-                    />
-                  </div>
-                </div>
-
-                {/* Circular Bokeh Highlight Orbs (Rendered at Wide Aperture f/1.4 & f/2.0) */}
+                {/* Circular Bokeh Highlight Orbs */}
                 {current.bokehRadiusPx > 10 && (
-                  <div className="absolute inset-0 pointer-events-none overflow-hidden">
+                  <div className="absolute inset-0 pointer-events-none overflow-hidden" aria-hidden="true">
                     <div
                       className="absolute top-10 left-16 rounded-full bg-amber-300/35 blur-[1.5px] border border-amber-200/50 animate-pulse"
                       style={{
@@ -406,14 +427,51 @@ export function Interactive3dAperture() {
                   </div>
                 )}
 
-                {/* Professional Camera Viewfinder HUD Overlay */}
-                <div className="absolute inset-0 p-4 sm:p-6 flex flex-col justify-between pointer-events-none select-none">
-                  
+                {/* Foreground Subject Layer with Strictly Centered Lens Reticle */}
+                <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+                  <div className="relative aspect-[783/628] w-60 sm:w-72 max-w-full">
+                    <Image
+                      src="/images/landing/cutouts/canon-r50.png"
+                      alt="Canon EOS R50 trong mô phỏng độ sâu trường ảnh"
+                      fill
+                      sizes="(max-width: 640px) 240px, 288px"
+                      className="object-contain filter drop-shadow-[0_20px_40px_rgba(0,0,0,0.6)] pointer-events-none"
+                    />
+
+                    {/* FIXED AF RETICLE */}
+                    <div
+                      className="absolute pointer-events-none transition-all duration-200 ease-out"
+                      style={{
+                        left: "54.3%",
+                        top: "61.3%",
+                        transform: "translate(-50%, -50%)",
+                      }}
+                      aria-hidden="true"
+                    >
+                      <div
+                        className={`w-14 h-14 sm:w-16 sm:h-16 border border-emerald-400/90 rounded-md flex items-center justify-center transition-all duration-200 ${
+                          isReticlePulsing
+                            ? "scale-105 opacity-100 shadow-[0_0_12px_rgba(52,211,153,0.6)]"
+                            : "scale-100 opacity-85"
+                        }`}
+                      >
+                        <div className="w-1.5 h-1.5 bg-emerald-400 rounded-full shadow-[0_0_8px_#34d399]" />
+                        <div className="absolute -top-1 w-2.5 h-0.5 bg-emerald-400" />
+                        <div className="absolute -bottom-1 w-2.5 h-0.5 bg-emerald-400" />
+                        <div className="absolute -left-1 w-0.5 h-2.5 bg-emerald-400" />
+                        <div className="absolute -right-1 w-0.5 h-2.5 bg-emerald-400" />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Camera Viewfinder HUD Overlay */}
+                <div className="absolute inset-0 p-3 sm:p-5 flex flex-col justify-between pointer-events-none select-none">
                   {/* Top Bar */}
-                  <div className="flex items-center justify-between font-mono text-[11px] text-emerald-400 bg-black/40 backdrop-blur-xs px-3 py-1.5 rounded-lg border border-white/10">
-                    <div className="flex items-center gap-2">
+                  <div className="flex items-center justify-between font-mono text-[10px] sm:text-[11px] text-emerald-400 bg-black/50 backdrop-blur-xs px-2.5 sm:px-3 py-1.5 rounded-lg border border-white/10">
+                    <div className="flex items-center gap-1.5 sm:gap-2">
                       <span className="w-2 h-2 rounded-full bg-emerald-400 animate-ping" />
-                      <span>[ AF-ON ] [ DUAL PIXEL EYE AF ]</span>
+                      <span>[ DUAL PIXEL AF ] [ EYE TRACKING ]</span>
                     </div>
                     <span
                       className={`px-2 py-0.5 rounded text-[10px] font-bold uppercase border ${current.badgeColor}`}
@@ -423,63 +481,89 @@ export function Interactive3dAperture() {
                     <span className="text-white font-medium">{current.iso}</span>
                   </div>
 
-                  {/* Center Target Eye Focus Reticle */}
-                  <div className="relative flex items-center justify-center">
-                    <div className="w-20 h-20 border border-emerald-400/80 rounded-lg flex items-center justify-center">
-                      <div className="w-1.5 h-1.5 bg-emerald-400 rounded-full shadow-[0_0_8px_#34d399]" />
-                      <div className="absolute -top-1 w-2 h-0.5 bg-emerald-400" />
-                      <div className="absolute -bottom-1 w-2 h-0.5 bg-emerald-400" />
-                      <div className="absolute -left-1 w-0.5 h-2 bg-emerald-400" />
-                      <div className="absolute -right-1 w-0.5 h-2 bg-emerald-400" />
-                    </div>
-                  </div>
-
-                  {/* Bottom Bar: Exposure Triangle */}
-                  <div className="flex items-center justify-between font-mono text-xs text-white bg-black/60 backdrop-blur-md px-3.5 py-2 rounded-lg border border-white/15">
-                    <div className="flex items-center gap-3">
+                  {/* Bottom Bar: Exposure Indicator */}
+                  <div className="flex items-center justify-between font-mono text-xs text-white bg-black/60 backdrop-blur-md px-3 sm:px-3.5 py-2 rounded-lg border border-white/15">
+                    <div className="flex items-center gap-2 sm:gap-3 text-[11px] sm:text-xs">
                       <span>
-                        Tốc độ: <strong className="text-white">{current.shutter}</strong>
+                        Tốc: <strong className="text-white">{current.shutter}</strong>
                       </span>
                       <span className="text-ink-400">·</span>
                       <span>
-                        Khẩu độ: <strong className="text-accent font-bold">{current.label}</strong>
+                        Khẩu: <strong className="text-accent font-bold">{current.label}</strong>
                       </span>
                     </div>
-                    <div className="text-emerald-400 text-[11px] font-semibold">
-                      ● ĐÃ KHOÁ NÉT MẮT
+                    <div className="text-emerald-400 text-[10px] sm:text-[11px] font-semibold">
+                      ● KHOÁ NÉT QUANG HỌC
                     </div>
                   </div>
-
                 </div>
-
               </div>
-
             </div>
 
-            {/* Lens Context & Advice Box */}
+            {/* Dynamic Lens Context & Advice Box */}
             <div className="p-4 sm:p-5 rounded-xl bg-ink-900/90 border border-white/10 space-y-2">
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-2 text-xs font-sans font-bold text-white">
                   <Sparkles className="w-4 h-4 text-accent" />
                   <span>Đặc tính quang học tại {current.label}:</span>
                 </div>
-                <span className="text-[11px] font-mono text-ink-400">CANON RF 50MM F/1.4</span>
+                <span className="text-[11px] font-mono text-ink-400 uppercase">
+                  {current.sceneTitle}
+                </span>
               </div>
 
               <p className="text-xs sm:text-sm text-ink-300 font-sans font-normal leading-relaxed">
                 {current.desc}
               </p>
 
-              <div className="pt-1.5 flex flex-wrap items-center gap-1.5 text-xs text-ink-400 font-sans border-t border-white/10">
-                <span className="text-ink-500 font-medium">Khuyên dùng cho:</span>
-                <span className="text-amber-300 font-medium">{current.recommendedSubject}</span>
+              <div className="pt-2 flex flex-wrap items-center justify-between gap-2 text-xs font-sans border-t border-white/10">
+                <div className="flex items-center gap-1.5">
+                  <span className="text-ink-400 font-medium">Gợi ý bối cảnh:</span>
+                  <span className="text-amber-300 font-medium">{current.recommendedSubject}</span>
+                </div>
+
+                <Link
+                  href="/thiet-bi/canon-eos-r50"
+                  className="inline-flex items-center gap-1 text-xs text-accent hover:underline font-semibold focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-accent"
+                >
+                  <span>Xem Canon R50 tại Kiho</span>
+                  <ArrowRight className="w-3.5 h-3.5" />
+                </Link>
               </div>
             </div>
-
           </div>
-
         </div>
 
+        {/* 3. COMPACT EDUCATIONAL SEO CONTENT & INTERNAL LINKS */}
+        <div className="mt-12 pt-8 border-t border-white/10 grid grid-cols-1 md:grid-cols-12 gap-6 items-center">
+          <div className="md:col-span-8 space-y-2">
+            <div className="flex items-center gap-2 text-xs font-mono text-ink-400 uppercase">
+              <HelpCircle className="w-3.5 h-3.5 text-accent" />
+              <span>KIẾN THỨC NHIẾP ẢNH CĂN BẢN</span>
+            </div>
+            <p className="text-xs sm:text-sm text-ink-300 font-sans leading-relaxed">
+              Khẩu độ máy ảnh (ký hiệu bằng f-stop như f/1.4, f/2.8, f/5.6...) biểu thị độ mở của các lá khẩu kim loại bên trong ống kính. Số f càng nhỏ thì khẩu độ mở càng lớn, cho phép ánh sáng đi vào cảm biến nhiều hơn và tạo ra <strong>độ sâu trường ảnh (depth of field)</strong> mỏng hơn, giúp tách biệt chủ thể nổi bật trên nền <strong>bokeh xóa phông</strong> quang học tự nhiên. Khi khép khẩu lên số f lớn (f/8, f/11), vùng nét dày hơn, rất phù hợp chụp phong cảnh sông Son, động Phong Nha hay ảnh nhóm bạn.
+            </p>
+          </div>
+
+          <div className="md:col-span-4 flex flex-col sm:flex-row md:flex-col gap-2.5 justify-end">
+            <Link
+              href="/thiet-bi/canon-eos-r50"
+              className="inline-flex items-center justify-between px-4 py-2.5 rounded-lg bg-white/5 hover:bg-white/10 border border-white/10 text-xs font-sans font-semibold text-white transition-colors group"
+            >
+              <span>Xem chi tiết Canon R50</span>
+              <ArrowRight className="w-3.5 h-3.5 text-accent group-hover:translate-x-0.5 transition-transform" />
+            </Link>
+
+            <Link
+              href="/#bang-gia"
+              className="inline-flex items-center justify-between px-4 py-2.5 rounded-lg bg-white/5 hover:bg-white/10 border border-white/10 text-xs font-sans font-semibold text-white transition-colors group"
+            >
+              <span>Xem bảng giá 12 dòng máy</span>
+              <ArrowRight className="w-3.5 h-3.5 text-accent group-hover:translate-x-0.5 transition-transform" />
+            </Link>
+          </div>
+        </div>
       </div>
     </section>
   );

@@ -20,7 +20,7 @@ export function EditorialFeedback({ feedbacks }: EditorialFeedbackProps) {
         {/* Header */}
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-8 sm:mb-12 gap-6">
           <div>
-            <div className="flex items-center gap-1.5 text-xs font-mono font-medium tracking-widest text-ink-500 uppercase mb-2">
+            <div className="flex items-center gap-1.5 text-xs font-mono font-semibold tracking-widest text-ink-600 uppercase mb-2">
               <Camera className="w-3.5 h-3.5 text-accent" />
               <span>KHOẢNH KHẮC THỰC TẾ</span>
             </div>
@@ -34,10 +34,10 @@ export function EditorialFeedback({ feedbacks }: EditorialFeedbackProps) {
 
           <Link
             href="/feedback"
-            className="inline-flex items-center gap-1.5 text-xs font-sans font-semibold text-ink-900 hover:text-accent transition-colors shrink-0"
+            className="inline-flex items-center gap-1.5 text-xs font-sans font-semibold text-ink-900 hover:text-accent transition-colors shrink-0 focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-accent"
           >
             <span>Xem thêm album & feedback</span>
-            <ArrowUpRight className="w-4 h-4" />
+            <ArrowUpRight className="w-4 h-4 text-ink-600 hover:text-accent" />
           </Link>
         </div>
 
@@ -59,13 +59,13 @@ export function EditorialFeedback({ feedbacks }: EditorialFeedbackProps) {
                     className="object-cover group-hover:scale-[1.03] transition-transform duration-300 ease-out"
                   />
                 ) : (
-                  <div className="w-full h-full flex items-center justify-center text-ink-400">
+                  <div className="w-full h-full flex items-center justify-center text-ink-500">
                     <Camera className="w-6 h-6" />
                   </div>
                 )}
                 
                 {/* 5-Star Tag */}
-                <div className="absolute top-2 right-2 bg-ink-900/80 px-2 py-0.5 rounded-sm flex items-center gap-1 text-[10px] text-amber-400 font-mono">
+                <div className="absolute top-2 right-2 bg-ink-900/90 px-2 py-0.5 rounded-sm flex items-center gap-1 text-[10px] text-amber-400 font-mono">
                   <Star className="w-3 h-3 fill-current" />
                   <span className="text-white font-medium">5.0</span>
                 </div>
@@ -80,15 +80,15 @@ export function EditorialFeedback({ feedbacks }: EditorialFeedbackProps) {
                 {/* Customer Meta */}
                 <div className="pt-3 border-t border-ink-200 flex items-center justify-between text-[11px] font-mono">
                   <div>
-                    <span className="font-medium text-ink-900 block truncate max-w-[140px]">
+                    <span className="font-semibold text-ink-900 block truncate max-w-[140px]">
                       {fb.customer_name.replace(/^Khách hàng demo – /, "")}
                     </span>
-                    <span className="text-ink-400 text-[10px]">
+                    <span className="text-ink-600 text-[10px] font-medium">
                       {fb.feedback_date}
                     </span>
                   </div>
 
-                  <span className="text-[10px] bg-canvas-200 text-ink-800 font-medium px-2 py-0.5 rounded-sm border border-ink-200">
+                  <span className="text-[10px] bg-canvas-200 text-ink-800 font-semibold px-2 py-0.5 rounded-sm border border-ink-200">
                     {fb.equipment ? fb.equipment.name.split(" ")[1] || "Máy ảnh" : "Đã thuê"}
                   </span>
                 </div>
@@ -96,6 +96,7 @@ export function EditorialFeedback({ feedbacks }: EditorialFeedbackProps) {
             </div>
           ))}
         </div>
+
 
       </div>
     </section>

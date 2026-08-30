@@ -3,7 +3,9 @@ import { unstable_cache } from "next/cache";
 import { createPublicClient } from "@/lib/supabase/public";
 import { getLocalEquipment } from "@/lib/local-storage";
 import { MOCK_EQUIPMENT } from "@/lib/mock-data";
-import { Equipment } from "@/types/database";
+import { getEquipmentCoverImage } from "@/lib/equipment-images";
+import { Equipment, PricingEquipmentDTO, RentalFormEquipmentDTO } from "@/types/database";
+
 
 export interface EquipmentFilterOptions {
   categorySlug?: string;
@@ -170,3 +172,29 @@ export const getRelatedEquipment = cache(
       .slice(0, limit);
   }
 );
+
+export function toPricingEquipmentDTO(e: Equipment): PricingEquipmentDTO {
+  return {
+    id: e.id,
+    slug: e.slug,
+    name: e.name,
+    brand: e.brand,
+    price_session: e.price_session,
+    price_per_day: e.price_per_day,
+    price_three_days: e.price_three_days,
+    short_description: e.short_description,
+    use_cases: e.use_cases || [],
+    is_featured: e.is_featured,
+    cover_image: getEquipmentCoverImage(e),
+  };
+}
+
+export function toRentalFormEquipmentDTO(e: Equipment): RentalFormEquipmentDTO {
+  return {
+    id: e.id,
+    slug: e.slug,
+    name: e.name,
+    brand: e.brand,
+  };
+}
+

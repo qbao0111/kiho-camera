@@ -43,14 +43,14 @@ export function Footer({ settings }: FooterProps) {
 
           {/* 2. Quick Links (3 cols) */}
           <div className="md:col-span-3 space-y-2.5">
-            <span className="text-[11px] font-mono font-medium tracking-wider text-ink-500 uppercase block">
-              Máy ảnh theo hãng
+            <span className="text-[11px] font-mono font-semibold tracking-wider text-ink-600 uppercase block">
+              Máy ảnh & Cẩm nang
             </span>
             <ul className="space-y-1.5 text-xs sm:text-sm font-sans">
               <li>
                 <Link
                   href="/thiet-bi"
-                  className="text-ink-600 hover:text-accent transition-colors inline-flex items-center gap-1.5"
+                  className="text-ink-600 hover:text-accent transition-colors inline-flex items-center gap-1.5 focus-visible:outline-hidden focus-visible:ring-1 focus-visible:ring-accent rounded-xs"
                 >
                   <Camera className="w-3.5 h-3.5 text-accent shrink-0" />
                   <span>Tất cả 12 dòng máy</span>
@@ -58,8 +58,17 @@ export function Footer({ settings }: FooterProps) {
               </li>
               <li>
                 <Link
+                  href="/thue-may-anh-phong-nha"
+                  className="text-ink-600 hover:text-accent transition-colors inline-flex items-center gap-1.5 font-medium focus-visible:outline-hidden focus-visible:ring-1 focus-visible:ring-accent rounded-xs"
+                >
+                  <Camera className="w-3.5 h-3.5 text-accent shrink-0" />
+                  <span>Thuê máy đi Phong Nha</span>
+                </Link>
+              </li>
+              <li>
+                <Link
                   href="/thiet-bi?brand=Fujifilm"
-                  className="text-ink-600 hover:text-accent transition-colors inline-flex items-center gap-1.5"
+                  className="text-ink-600 hover:text-accent transition-colors inline-flex items-center gap-1.5 focus-visible:outline-hidden focus-visible:ring-1 focus-visible:ring-accent rounded-xs"
                 >
                   <Camera className="w-3.5 h-3.5 text-accent shrink-0" />
                   <span>Fujifilm (X100VI, X100V, XS10)</span>
@@ -68,7 +77,7 @@ export function Footer({ settings }: FooterProps) {
               <li>
                 <Link
                   href="/thiet-bi?brand=Canon"
-                  className="text-ink-600 hover:text-accent transition-colors inline-flex items-center gap-1.5"
+                  className="text-ink-600 hover:text-accent transition-colors inline-flex items-center gap-1.5 focus-visible:outline-hidden focus-visible:ring-1 focus-visible:ring-accent rounded-xs"
                 >
                   <Camera className="w-3.5 h-3.5 text-accent shrink-0" />
                   <span>Canon (R50, RP, G7X III...)</span>
@@ -77,10 +86,10 @@ export function Footer({ settings }: FooterProps) {
               <li>
                 <Link
                   href="/thiet-bi?brand=Sony"
-                  className="text-ink-600 hover:text-accent transition-colors inline-flex items-center gap-1.5"
+                  className="text-ink-600 hover:text-accent transition-colors inline-flex items-center gap-1.5 focus-visible:outline-hidden focus-visible:ring-1 focus-visible:ring-accent rounded-xs"
                 >
                   <Camera className="w-3.5 h-3.5 text-accent shrink-0" />
-                  <span>Sony (ZV1 II, ZV1F)</span>
+                  <span>Sony (ZV-1 II, ZV-1F)</span>
                 </Link>
               </li>
             </ul>
@@ -88,7 +97,7 @@ export function Footer({ settings }: FooterProps) {
 
           {/* 3. Contact Column (4 cols) */}
           <div className="md:col-span-4 space-y-3 font-sans">
-            <span className="text-[11px] font-mono font-medium tracking-wider text-ink-500 uppercase block">
+            <span className="text-[11px] font-mono font-semibold tracking-wider text-ink-600 uppercase block">
               Liên hệ trực tiếp
             </span>
 
@@ -128,7 +137,7 @@ export function Footer({ settings }: FooterProps) {
                 </span>
               </div>
 
-              <div className="flex items-center gap-2 text-xs text-ink-500">
+              <div className="flex items-center gap-2 text-xs text-ink-600">
                 <Clock className="w-4 h-4 text-accent shrink-0" />
                 <span>Mở cửa: 07:30 – 21:00 (Tất cả các ngày)</span>
               </div>
@@ -140,7 +149,7 @@ export function Footer({ settings }: FooterProps) {
                 href={settings.messenger_url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group inline-flex items-center gap-1.5 text-xs font-semibold text-ink-900 hover:text-accent bg-white hover:bg-canvas-100 border border-ink-300 px-3.5 py-2 rounded-md transition-colors shadow-xs"
+                className="group inline-flex items-center gap-1.5 text-xs font-semibold text-ink-900 hover:text-accent bg-white hover:bg-canvas-100 border border-ink-300 px-3.5 py-2 rounded-md transition-colors shadow-xs focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-accent"
               >
                 <MessageCircle className="w-3.5 h-3.5 text-accent" />
                 <span>Nhắn tin tư vấn qua Messenger</span>
@@ -151,12 +160,13 @@ export function Footer({ settings }: FooterProps) {
       </div>
 
       {/* Grounding Bottom Bar */}
-      <div className="bg-ink-900 text-ink-400 py-3.5 px-4 sm:px-6 lg:px-8 text-xs font-mono">
+      <div className="bg-ink-900 text-slate-300 py-3.5 px-4 sm:px-6 lg:px-8 text-xs font-mono">
         <div className="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-2">
           <p>© 2026 Kiho Camera · Cho thuê máy ảnh du lịch tại Đồng Hới, Quảng Bình.</p>
-          <p className="text-ink-500">ĐỒNG HỚI · QUẢNG BÌNH</p>
+          <p className="text-slate-400">ĐỒNG HỚI · QUẢNG BÌNH</p>
         </div>
       </div>
     </footer>
   );
 }
+

@@ -40,7 +40,7 @@ export function FinalCta({
         <div className="max-w-3xl space-y-6">
           
           {/* Eyebrow */}
-          <div className="flex items-center gap-1.5 text-xs font-mono font-medium tracking-widest text-ink-500 uppercase">
+          <div className="flex items-center gap-1.5 text-xs font-mono font-semibold tracking-widest text-ink-600 uppercase">
             <Camera className="w-3.5 h-3.5 text-accent" />
             <span>KIHO CAMERA · ĐỒNG HÀNH CÙNG CHUYẾN ĐI</span>
           </div>
@@ -62,7 +62,7 @@ export function FinalCta({
               href={messengerUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 bg-ink-900 hover:bg-black text-white text-xs sm:text-sm font-sans font-semibold px-6 py-3.5 rounded-lg shadow-xs transition-all group cursor-pointer"
+              className="inline-flex items-center gap-2 bg-ink-900 hover:bg-black text-white text-xs sm:text-sm font-sans font-semibold px-6 py-3.5 rounded-lg shadow-xs transition-all group cursor-pointer focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-accent"
             >
               <span>Nhắn Kiho tư vấn ngay</span>
               <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
@@ -70,12 +70,13 @@ export function FinalCta({
 
             <button
               onClick={scrollToPricing}
-              className="inline-flex items-center gap-2 bg-white hover:bg-canvas-200 text-ink-900 text-xs sm:text-sm font-sans font-medium px-5 py-3.5 rounded-lg border border-ink-300 shadow-xs transition-all cursor-pointer"
+              className="inline-flex items-center gap-2 bg-white hover:bg-canvas-200 text-ink-900 hover:text-accent text-xs sm:text-sm font-sans font-medium px-5 py-3.5 rounded-lg border border-ink-300 shadow-xs transition-all cursor-pointer focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-accent"
             >
               <span>Xem bảng giá</span>
-              <ArrowDown className="w-4 h-4 text-ink-400" />
+              <ArrowDown className="w-4 h-4 text-ink-600 group-hover:text-accent" />
             </button>
           </div>
+
 
           {/* Store Quick Info Row */}
           <div className="pt-8 border-t border-ink-200 grid grid-cols-1 sm:grid-cols-3 gap-5 text-xs font-sans text-ink-600">

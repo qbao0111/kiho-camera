@@ -37,7 +37,7 @@ export function CameraEditorialGuide({ content }: CameraEditorialGuideProps) {
       
       {/* 1. INTRO & IDENTITY */}
       <FadeIn className="space-y-4">
-        <div className="flex items-center gap-1.5 text-xs font-mono font-medium tracking-widest text-ink-500 uppercase">
+        <div className="flex items-center gap-1.5 text-xs font-mono font-semibold tracking-widest text-ink-600 uppercase">
           <Compass className="w-3.5 h-3.5 text-accent" />
           <span>GÓC NHÌN & TRẢI NGHIỆM</span>
         </div>
@@ -61,7 +61,7 @@ export function CameraEditorialGuide({ content }: CameraEditorialGuideProps) {
         {/* Left: Who is it for */}
         <FadeIn className="p-5 sm:p-6 rounded-xl bg-white border border-ink-200 shadow-2xs space-y-4 h-full flex flex-col justify-between">
           <div className="space-y-3">
-            <div className="flex items-center gap-2 text-xs font-mono font-medium tracking-wider text-ink-900 uppercase">
+            <div className="flex items-center gap-2 text-xs font-mono font-semibold tracking-wider text-ink-900 uppercase">
               <CheckCircle2 className="w-4 h-4 text-accent" />
               <span>CHIẾC MÁY NÀY HỢP VỚI AI?</span>
             </div>
@@ -80,7 +80,7 @@ export function CameraEditorialGuide({ content }: CameraEditorialGuideProps) {
         {/* Right: Why rent this model */}
         <FadeIn delay={0.1} className="p-5 sm:p-6 rounded-xl bg-white border border-ink-200 shadow-2xs space-y-4 h-full flex flex-col justify-between">
           <div className="space-y-3">
-            <div className="flex items-center gap-2 text-xs font-mono font-medium tracking-wider text-ink-900 uppercase">
+            <div className="flex items-center gap-2 text-xs font-mono font-semibold tracking-wider text-ink-900 uppercase">
               <Sparkles className="w-4 h-4 text-accent" />
               <span>ĐIỂM NỔI BẬT ĐÁNG THUÊ</span>
             </div>
@@ -100,7 +100,7 @@ export function CameraEditorialGuide({ content }: CameraEditorialGuideProps) {
 
       {/* 3. RECOMMENDED SCENES IN QUANG BINH */}
       <FadeIn className="space-y-5">
-        <div className="flex items-center gap-1.5 text-xs font-mono font-medium tracking-widest text-ink-500 uppercase">
+        <div className="flex items-center gap-1.5 text-xs font-mono font-semibold tracking-widest text-ink-600 uppercase">
           <MapPin className="w-3.5 h-3.5 text-accent" />
           <span>GỢI Ý BỐI CẢNH CHỤP TẠI QUẢNG BÌNH</span>
         </div>
@@ -130,14 +130,14 @@ export function CameraEditorialGuide({ content }: CameraEditorialGuideProps) {
       {/* 4. DECISION HELPER & INTERNAL LINKING */}
       <FadeIn className="space-y-4">
         <div className="space-y-1">
-          <div className="flex items-center gap-1.5 text-xs font-mono font-medium tracking-widest text-ink-500 uppercase">
+          <div className="flex items-center gap-1.5 text-xs font-mono font-semibold tracking-widest text-ink-600 uppercase">
             <Compass className="w-3.5 h-3.5 text-accent" />
             <span>SO SÁNH & CÂN NHẮC</span>
           </div>
           <h3 className="font-display text-xl sm:text-2xl font-bold text-ink-900 tracking-tight">
             Khi nào bạn nên chọn máy khác?
           </h3>
-          <p className="text-xs sm:text-sm text-ink-500 font-sans">
+          <p className="text-xs sm:text-sm text-ink-600 font-sans">
             Mỗi chuyến đi có một nhu cầu riêng. Dưới đây là những gợi ý đổi máy phù hợp hơn nếu tiêu chí của bạn thay đổi:
           </p>
         </div>
@@ -149,7 +149,7 @@ export function CameraEditorialGuide({ content }: CameraEditorialGuideProps) {
               className="p-4 sm:p-5 rounded-xl bg-canvas-200/70 border border-ink-200 space-y-3 flex flex-col justify-between"
             >
               <div className="space-y-1.5">
-                <span className="text-[11px] font-mono text-ink-500 block">
+                <span className="text-[11px] font-mono font-semibold text-ink-600 block">
                   NẾU BẠN:
                 </span>
                 <p className="text-xs sm:text-sm font-sans font-semibold text-ink-900 leading-snug">
@@ -163,7 +163,7 @@ export function CameraEditorialGuide({ content }: CameraEditorialGuideProps) {
               <div className="pt-2 border-t border-ink-200/60">
                 <Link
                   href={`/thiet-bi/${item.targetCameraSlug}`}
-                  className="inline-flex items-center gap-1.5 text-xs font-sans font-semibold text-ink-900 hover:text-accent transition-colors group"
+                  className="inline-flex items-center gap-1.5 text-xs font-sans font-semibold text-ink-900 hover:text-accent transition-colors group focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-accent"
                 >
                   <span>Xem {item.targetCameraName}</span>
                   <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" />
@@ -176,7 +176,7 @@ export function CameraEditorialGuide({ content }: CameraEditorialGuideProps) {
 
       {/* 5. EXPERIENCE & PRACTICAL TIPS */}
       <FadeIn className="p-5 sm:p-6 rounded-xl bg-canvas-100/90 border border-ink-200 space-y-3">
-        <div className="flex items-center gap-2 text-xs font-mono font-medium tracking-wider text-ink-900 uppercase">
+        <div className="flex items-center gap-2 text-xs font-mono font-semibold tracking-wider text-ink-900 uppercase">
           <Lightbulb className="w-4 h-4 text-accent" />
           <span>MẸO NHỎ TỪ KIHO CAMERA</span>
         </div>
@@ -194,7 +194,7 @@ export function CameraEditorialGuide({ content }: CameraEditorialGuideProps) {
       {/* 6. UNIQUE FAQs */}
       <FadeIn className="space-y-4 pt-2">
         <div className="space-y-1">
-          <div className="flex items-center gap-1.5 text-xs font-mono font-medium tracking-widest text-ink-500 uppercase">
+          <div className="flex items-center gap-1.5 text-xs font-mono font-semibold tracking-widest text-ink-600 uppercase">
             <HelpCircle className="w-3.5 h-3.5 text-accent" />
             <span>HỎI ĐÁP VỀ DÒNG MÁY</span>
           </div>
@@ -211,13 +211,13 @@ export function CameraEditorialGuide({ content }: CameraEditorialGuideProps) {
               <div key={idx} className="py-3.5 sm:py-4">
                 <button
                   onClick={() => toggleFaq(idx)}
-                  className="w-full flex items-center justify-between text-left gap-4 font-sans font-semibold text-sm sm:text-base text-ink-900 hover:text-accent transition-colors"
+                  className="w-full flex items-center justify-between text-left gap-4 font-sans font-semibold text-sm sm:text-base text-ink-900 hover:text-accent transition-colors focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-accent cursor-pointer"
                 >
                   <span>{faq.question}</span>
                   {isOpen ? (
-                    <ChevronUp className="w-4 h-4 text-ink-400 shrink-0" />
+                    <ChevronUp className="w-4 h-4 text-ink-600 shrink-0" />
                   ) : (
-                    <ChevronDown className="w-4 h-4 text-ink-400 shrink-0" />
+                    <ChevronDown className="w-4 h-4 text-ink-600 shrink-0" />
                   )}
                 </button>
 
@@ -231,6 +231,7 @@ export function CameraEditorialGuide({ content }: CameraEditorialGuideProps) {
           })}
         </div>
       </FadeIn>
+
 
     </section>
   );

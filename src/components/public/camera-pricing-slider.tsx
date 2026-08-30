@@ -301,7 +301,7 @@ export function CameraPricingSlider({
               >
                 {/* Card Top: Number & Badges */}
                 <div className="flex items-start justify-between gap-2 mb-2">
-                  <span className="font-mono text-[11px] font-medium text-ink-400">
+                  <span className="font-mono text-[11px] font-semibold text-ink-600">
                     No. {numStr}
                   </span>
 
@@ -342,30 +342,30 @@ export function CameraPricingSlider({
                       {item.name}
                     </h3>
                   </Link>
-                  <p className="font-sans text-xs text-ink-500 line-clamp-1 mt-0.5 font-normal">
+                  <p className="font-sans text-xs text-ink-600 line-clamp-1 mt-0.5 font-normal">
                     {item.short_description || "Kèm trọn bộ phụ kiện pin sạc thẻ nhớ"}
                   </p>
                 </div>
 
                 {/* Price Grid */}
                 <div className="space-y-1.5 pt-3 border-t border-ink-200 font-mono text-xs">
-                  <div className="flex items-center justify-between text-ink-600">
-                    <span className="flex items-center gap-1 text-[11px]">
-                      <Clock className="w-3 h-3 text-ink-400" />
+                  <div className="flex items-center justify-between text-ink-700">
+                    <span className="flex items-center gap-1 text-[11px] text-ink-600">
+                      <Clock className="w-3 h-3 text-ink-600" />
                       1 buổi:
                     </span>
                     <span className="font-semibold text-ink-900">{formatK(item.price_session)}</span>
                   </div>
 
-                  <div className="flex items-center justify-between text-ink-600">
-                    <span className="flex items-center gap-1 text-[11px]">
-                      <Calendar className="w-3 h-3 text-ink-400" />
+                  <div className="flex items-center justify-between text-ink-700">
+                    <span className="flex items-center gap-1 text-[11px] text-ink-600">
+                      <Calendar className="w-3 h-3 text-ink-600" />
                       1 ngày:
                     </span>
                     <span className="font-bold text-ink-900 text-sm">{formatK(item.price_per_day)}</span>
                   </div>
 
-                  <div className="flex items-center justify-between bg-accent-light text-accent px-2 py-0.5 rounded-sm font-medium mt-1 border border-accent-muted/60">
+                  <div className="flex items-center justify-between bg-accent-soft text-accent px-2 py-1 rounded-md font-semibold mt-1 border border-accent-border">
                     <span className="flex items-center gap-1 text-[11px]">
                       <Tag className="w-3 h-3" />
                       Từ 3 ngày:
@@ -395,11 +395,12 @@ export function CameraPricingSlider({
         <div className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-4 text-center">
           <Link
             href="/thiet-bi"
-            className="inline-flex items-center gap-2 px-6 py-3 rounded-lg bg-white hover:bg-canvas-200 text-ink-900 border border-ink-300 text-xs font-sans font-semibold transition-all duration-200 shadow-xs group focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-accent"
+            className="inline-flex items-center gap-2 px-6 py-3 rounded-lg bg-white hover:bg-canvas-200 text-ink-900 hover:text-accent border border-ink-300 text-xs font-sans font-semibold transition-all duration-200 shadow-xs group focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-accent"
           >
             <span>Xem toàn bộ 12 dòng máy ảnh</span>
-            <ArrowUpRight className="w-3.5 h-3.5 text-ink-400 group-hover:text-ink-900 transition-colors" />
+            <ArrowUpRight className="w-3.5 h-3.5 text-ink-600 group-hover:text-accent transition-colors" />
           </Link>
+
 
           <div className="inline-flex items-center gap-2 px-3.5 py-2 rounded-lg bg-canvas-200/80 border border-ink-200 text-xs font-sans text-ink-700">
             <ShieldCheck className="w-3.5 h-3.5 text-accent" />

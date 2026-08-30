@@ -58,7 +58,7 @@ export function EquipmentDetails({ equipment, messengerChatUrl }: EquipmentDetai
     <section className="pt-10 sm:pt-14 border-t border-ink-200 space-y-6">
       {/* Section Header */}
       <div className="space-y-1.5">
-        <div className="flex items-center gap-1.5 text-xs font-mono font-medium tracking-widest text-ink-500 uppercase">
+        <div className="flex items-center gap-1.5 text-xs font-mono font-semibold tracking-widest text-ink-600 uppercase">
           <Package className="w-3.5 h-3.5 text-accent" />
           <span>CHI TIẾT MÁY & DỊCH VỤ</span>
         </div>
@@ -77,7 +77,7 @@ export function EquipmentDetails({ equipment, messengerChatUrl }: EquipmentDetai
           {hasIncluded && (
             <div className="p-5 sm:p-6 rounded-xl bg-white border border-ink-200 shadow-xs space-y-4">
               <div className="flex items-center justify-between border-b border-ink-200/80 pb-3">
-                <div className="flex items-center gap-2 text-xs font-mono font-medium tracking-wider text-ink-900 uppercase">
+                <div className="flex items-center gap-2 text-xs font-mono font-semibold tracking-wider text-ink-900 uppercase">
                   <Package className="w-4 h-4 text-accent" />
                   <span>BỘ THUÊ ĐÃ BAO GỒM (NHẬN MÁY LÀ CHỤP)</span>
                 </div>
@@ -106,7 +106,7 @@ export function EquipmentDetails({ equipment, messengerChatUrl }: EquipmentDetai
 
           {hasDesc && (
             <div className="p-5 sm:p-6 rounded-xl bg-white border border-ink-200 shadow-xs space-y-3">
-              <div className="flex items-center gap-2 text-xs font-mono font-medium tracking-wider text-ink-900 uppercase border-b border-ink-200/80 pb-2.5">
+              <div className="flex items-center gap-2 text-xs font-mono font-semibold tracking-wider text-ink-900 uppercase border-b border-ink-200/80 pb-2.5">
                 <FileText className="w-4 h-4 text-accent" />
                 <span>CHI TIẾT TRẢI NGHIỆM</span>
               </div>
@@ -123,14 +123,14 @@ export function EquipmentDetails({ equipment, messengerChatUrl }: EquipmentDetai
         <div className="space-y-6">
           {hasSpecs && (
             <div className="p-5 sm:p-6 rounded-xl bg-white border border-ink-200 shadow-xs space-y-3.5">
-              <div className="flex items-center gap-2 text-xs font-mono font-medium tracking-wider text-ink-900 uppercase border-b border-ink-200/80 pb-2.5">
+              <div className="flex items-center gap-2 text-xs font-mono font-semibold tracking-wider text-ink-900 uppercase border-b border-ink-200/80 pb-2.5">
                 <Sliders className="w-4 h-4 text-accent" />
                 <span>THÔNG SỐ KỸ THUẬT HỮU ÍCH</span>
               </div>
               <div className="divide-y divide-ink-200 text-xs">
                 {Object.entries(equipment.specifications!).map(([key, val], idx) => (
                   <div key={idx} className="py-2.5 flex justify-between gap-4">
-                    <span className="text-ink-500 font-normal capitalize font-sans">
+                    <span className="text-ink-600 font-medium capitalize font-sans">
                       {key.replace(/_/g, " ")}
                     </span>
                     <span className="text-ink-900 font-semibold text-right font-mono">
@@ -144,7 +144,7 @@ export function EquipmentDetails({ equipment, messengerChatUrl }: EquipmentDetai
 
           {/* Rental Policy */}
           <div className="p-5 sm:p-6 rounded-xl bg-canvas-200/80 border border-ink-200 space-y-2.5">
-            <div className="flex items-center gap-2 text-xs font-mono font-medium tracking-wider text-ink-900 uppercase">
+            <div className="flex items-center gap-2 text-xs font-mono font-semibold tracking-wider text-ink-900 uppercase">
               <ShieldCheck className="w-4 h-4 text-emerald-700" />
               <span>THỦ TỤC XÁC MINH & NHẬN MÁY</span>
             </div>
@@ -155,7 +155,7 @@ export function EquipmentDetails({ equipment, messengerChatUrl }: EquipmentDetai
             <div className="pt-1">
               <Link
                 href="/huong-dan-thue"
-                className="inline-flex items-center gap-1.5 text-xs font-sans font-semibold text-ink-900 hover:text-accent transition-colors underline underline-offset-4"
+                className="inline-flex items-center gap-1.5 text-xs font-sans font-semibold text-ink-900 hover:text-accent transition-colors underline underline-offset-4 focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-accent"
               >
                 <span>Xem chi tiết quy trình thuê máy</span>
                 <ArrowRight className="w-3.5 h-3.5" />
@@ -171,16 +171,16 @@ export function EquipmentDetails({ equipment, messengerChatUrl }: EquipmentDetai
           <div className="rounded-lg bg-white border border-ink-200 overflow-hidden">
             <button
               onClick={() => toggleSection("included")}
-              className="w-full p-4 flex items-center justify-between text-left font-sans font-semibold text-xs text-ink-900 cursor-pointer"
+              className="w-full p-3.5 flex items-center justify-between text-left font-sans font-semibold text-xs text-ink-900 cursor-pointer focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-accent"
             >
               <span className="flex items-center gap-2">
                 <Package className="w-4 h-4 text-accent" />
                 Bộ thuê đã bao gồm (Nhận máy là chụp)
               </span>
               {openSections.included ? (
-                <ChevronUp className="w-4 h-4 text-ink-400" />
+                <ChevronUp className="w-4 h-4 text-ink-600" />
               ) : (
-                <ChevronDown className="w-4 h-4 text-ink-400" />
+                <ChevronDown className="w-4 h-4 text-ink-600" />
               )}
             </button>
             {openSections.included && (
@@ -208,23 +208,23 @@ export function EquipmentDetails({ equipment, messengerChatUrl }: EquipmentDetai
           <div className="rounded-lg bg-white border border-ink-200 overflow-hidden">
             <button
               onClick={() => toggleSection("specs")}
-              className="w-full p-4 flex items-center justify-between text-left font-sans font-semibold text-xs text-ink-900 cursor-pointer"
+              className="w-full p-3.5 flex items-center justify-between text-left font-sans font-semibold text-xs text-ink-900 cursor-pointer focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-accent"
             >
               <span className="flex items-center gap-2">
                 <Sliders className="w-4 h-4 text-accent" />
                 Thông số kỹ thuật hữu ích
               </span>
               {openSections.specs ? (
-                <ChevronUp className="w-4 h-4 text-ink-400" />
+                <ChevronUp className="w-4 h-4 text-ink-600" />
               ) : (
-                <ChevronDown className="w-4 h-4 text-ink-400" />
+                <ChevronDown className="w-4 h-4 text-ink-600" />
               )}
             </button>
             {openSections.specs && (
               <div className="p-4 pt-0 border-t border-ink-200 divide-y divide-ink-200 text-xs">
                 {Object.entries(equipment.specifications!).map(([key, val], idx) => (
                   <div key={idx} className="py-2.5 flex justify-between gap-4">
-                    <span className="text-ink-500 font-sans capitalize">
+                    <span className="text-ink-600 font-sans capitalize font-medium">
                       {key.replace(/_/g, " ")}
                     </span>
                     <span className="text-ink-900 font-semibold font-mono text-right">
@@ -241,16 +241,16 @@ export function EquipmentDetails({ equipment, messengerChatUrl }: EquipmentDetai
           <div className="rounded-lg bg-white border border-ink-200 overflow-hidden">
             <button
               onClick={() => toggleSection("description")}
-              className="w-full p-4 flex items-center justify-between text-left font-sans font-semibold text-xs text-ink-900 cursor-pointer"
+              className="w-full p-3.5 flex items-center justify-between text-left font-sans font-semibold text-xs text-ink-900 cursor-pointer focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-accent"
             >
               <span className="flex items-center gap-2">
                 <FileText className="w-4 h-4 text-accent" />
                 Chi tiết trải nghiệm
               </span>
               {openSections.description ? (
-                <ChevronUp className="w-4 h-4 text-ink-400" />
+                <ChevronUp className="w-4 h-4 text-ink-600" />
               ) : (
-                <ChevronDown className="w-4 h-4 text-ink-400" />
+                <ChevronDown className="w-4 h-4 text-ink-600" />
               )}
             </button>
             {openSections.description && (
@@ -267,16 +267,16 @@ export function EquipmentDetails({ equipment, messengerChatUrl }: EquipmentDetai
         <div className="rounded-lg bg-canvas-200/80 border border-ink-200 overflow-hidden">
           <button
             onClick={() => toggleSection("policy")}
-            className="w-full p-4 flex items-center justify-between text-left font-sans font-semibold text-xs text-ink-900 cursor-pointer"
+            className="w-full p-3.5 flex items-center justify-between text-left font-sans font-semibold text-xs text-ink-900 cursor-pointer focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-accent"
           >
             <span className="flex items-center gap-2">
               <ShieldCheck className="w-4 h-4 text-emerald-700" />
               Thủ tục xác minh & nhận máy
             </span>
             {openSections.policy ? (
-              <ChevronUp className="w-4 h-4 text-ink-400" />
+              <ChevronUp className="w-4 h-4 text-ink-600" />
             ) : (
-              <ChevronDown className="w-4 h-4 text-ink-400" />
+              <ChevronDown className="w-4 h-4 text-ink-600" />
             )}
           </button>
           {openSections.policy && (
@@ -288,7 +288,7 @@ export function EquipmentDetails({ equipment, messengerChatUrl }: EquipmentDetai
               <div className="pt-1">
                 <Link
                   href="/huong-dan-thue"
-                  className="text-xs font-sans font-semibold text-ink-900 underline underline-offset-4"
+                  className="text-xs font-sans font-semibold text-ink-900 underline underline-offset-4 hover:text-accent transition-colors focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-accent"
                 >
                   Xem chi tiết quy trình thuê máy →
                 </Link>
@@ -305,7 +305,7 @@ export function EquipmentDetails({ equipment, messengerChatUrl }: EquipmentDetai
             <h4 className="text-sm sm:text-base font-bold font-sans text-ink-900">
               Ưng chiếc {equipment.name} này cho chuyến đi?
             </h4>
-            <p className="text-xs text-ink-500 font-sans">
+            <p className="text-xs text-ink-600 font-sans">
               Nhắn Kiho trước để giữ máy và được cài đặt profile màu chụp đẹp nhất.
             </p>
           </div>
@@ -314,7 +314,7 @@ export function EquipmentDetails({ equipment, messengerChatUrl }: EquipmentDetai
             href={messengerChatUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 bg-ink-900 hover:bg-black text-white text-xs font-sans font-semibold px-5 py-2.5 rounded-lg transition-colors shadow-xs shrink-0 cursor-pointer"
+            className="inline-flex items-center gap-2 bg-ink-900 hover:bg-black text-white text-xs font-sans font-semibold px-5 py-2.5 rounded-lg transition-colors shadow-xs shrink-0 cursor-pointer focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-accent"
           >
             <span>Nhắn Kiho giữ máy</span>
             <ArrowRight className="w-3.5 h-3.5" />
