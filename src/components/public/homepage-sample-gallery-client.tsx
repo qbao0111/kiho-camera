@@ -34,8 +34,13 @@ export function HomepageSampleGalleryClient({
   const [currentIndex, setCurrentIndex] = useState(0);
   const [canScrollLeft, setCanScrollLeft] = useState(false);
   const [canScrollRight, setCanScrollRight] = useState(true);
+  const [isDragging, setIsDragging] = useState(false);
 
   const railRef = useRef<HTMLDivElement>(null);
+  const isMouseDownRef = useRef(false);
+  const startXRef = useRef(0);
+  const scrollLeftRef = useRef(0);
+  const hasDraggedRef = useRef(false);
 
   // Update scroll indicator and active index on scroll
   const handleScroll = useCallback(() => {
@@ -59,7 +64,42 @@ export function HomepageSampleGalleryClient({
     return () => rail.removeEventListener("scroll", handleScroll);
   }, [handleScroll]);
 
-  // Desktop manual navigation
+  // Desktop mouse drag-to-scroll handlers
+  const handleMouseDown = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (e.button !== 0 || !railRef.current) return;
+    isMouseDownRef.current = true;
+    hasDraggedRef.current = false;
+    startXRef.current = e.pageX - railRef.current.offsetLeft;
+    scrollLeftRef.current = railRef.current.scrollLeft;
+    setIsDragging(true);
+  };
+
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (!isMouseDownRef.current || !railRef.current) return;
+    e.preventDefault();
+    const x = e.pageX - railRef.current.offsetLeft;
+    const distance = x - startXRef.current;
+    if (Math.abs(distance) > 6) {
+      hasDraggedRef.current = true;
+    }
+    railRef.current.scrollLeft = scrollLeftRef.current - distance;
+  };
+
+  const handleMouseUpOrLeave = () => {
+    if (!isMouseDownRef.current) return;
+    isMouseDownRef.current = false;
+    setIsDragging(false);
+    setTimeout(() => {
+      hasDraggedRef.current = false;
+    }, 60);
+  };
+
+  const handleCardClick = (idx: number) => {
+    if (hasDraggedRef.current) return;
+    setSelectedIdx(idx);
+  };
+
+  // Desktop manual navigation buttons
   const scrollPrev = () => {
     if (!railRef.current) return;
     const firstChild = railRef.current.firstElementChild as HTMLElement | null;
@@ -103,7 +143,7 @@ export function HomepageSampleGalleryClient({
             </span>
           </span>
           <span className="text-xs text-ink-500 font-sans hidden sm:inline">
-            · Vuốt hoặc bấm vào ảnh để phóng to
+            · Kéo chuột hoặc vuốt để xem ảnh · Bấm để phóng to
           </span>
         </div>
 
@@ -138,10 +178,18 @@ export function HomepageSampleGalleryClient({
         </div>
       </div>
 
-      {/* Main Horizontal Photo Rail */}
+      {/* Main Horizontal Photo Rail with Mouse Drag and Touch Support */}
       <div
         ref={railRef}
-        className="flex gap-4 sm:gap-5 overflow-x-auto snap-x snap-mandatory scrollbar-none px-4 sm:px-6 lg:px-8 pb-4 pt-1 -mx-0 scroll-smooth overscroll-x-contain"
+        onMouseDown={handleMouseDown}
+        onMouseMove={handleMouseMove}
+        onMouseUp={handleMouseUpOrLeave}
+        onMouseLeave={handleMouseUpOrLeave}
+        className={`flex gap-4 sm:gap-5 overflow-x-auto scrollbar-none px-4 sm:px-6 lg:px-8 pb-4 pt-1 -mx-0 overscroll-x-contain select-none cursor-grab ${
+          isDragging
+            ? "snap-none cursor-grabbing"
+            : "snap-x snap-mandatory scroll-smooth"
+        }`}
         style={{
           WebkitOverflowScrolling: "touch",
         }}
@@ -149,23 +197,23 @@ export function HomepageSampleGalleryClient({
         {items.map((item, idx) => (
           <figure
             key={item.id || idx}
-            className="w-[82vw] xs:w-[75vw] sm:w-[320px] md:w-[300px] lg:w-[280px] shrink-0 snap-start flex flex-col group"
+            className="w-[82vw] xs:w-[75vw] sm:w-[320px] md:w-[300px] lg:w-[280px] shrink-0 snap-start flex flex-col group select-none"
           >
             {/* Clickable Image Box with Zoom Interaction */}
             <div
               role="button"
               tabIndex={0}
-              onClick={() => setSelectedIdx(idx)}
+              onClick={() => handleCardClick(idx)}
               onKeyDown={(e) => {
                 if (e.key === "Enter" || e.key === " ") {
                   e.preventDefault();
-                  setSelectedIdx(idx);
+                  handleCardClick(idx);
                 }
               }}
               aria-label={`Xem ảnh chụp từ ${item.cameraName}: ${
                 item.caption || item.altText
               }`}
-              className="relative aspect-[4/5] w-full rounded-xl overflow-hidden bg-canvas-200 border border-ink-200/80 shadow-2xs hover:shadow-md transition-all duration-300 cursor-zoom-in group focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-accent"
+              className="relative aspect-[4/5] w-full rounded-xl overflow-hidden bg-canvas-200 border border-ink-200/80 shadow-2xs hover:shadow-md transition-all duration-300 group focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-accent select-none"
             >
               <Image
                 src={item.imageUrl}
@@ -173,7 +221,8 @@ export function HomepageSampleGalleryClient({
                 fill
                 sizes="(max-width: 640px) 82vw, (max-width: 1024px) 320px, 280px"
                 quality={80}
-                className="object-cover group-hover:scale-[1.03] transition-transform duration-500 ease-out pointer-events-none"
+                draggable={false}
+                className="object-cover group-hover:scale-[1.03] transition-transform duration-500 ease-out pointer-events-none select-none"
               />
 
               {/* Camera Model Badge Overlay (Top-Left) */}
