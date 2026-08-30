@@ -70,3 +70,31 @@ Tài liệu này hướng dẫn cách kết nối hệ thống **Lead / Yêu C�
 2. Dán **Google Sheet ID**, **Apps Script Web App URL** và nhập **Email nhận thông báo**.
 3. Bấm **Lưu tất cả cấu hình**.
 4. Bấm **Kiểm tra kết nối** và **Gửi lead thử nghiệm** để xác nhận email thông báo được nhận chính xác!
+
+---
+
+## 3. Tính Năng Ghi Nhận Lượt Bấm Mở Kênh Liên Hệ (Contact Click Notifications)
+
+Ngoài các đơn đặt thuê máy chính thức (`Rental Requests`), hệ thống tự động ghi nhận mọi lượt bấm mở **Messenger** hoặc **Zalo** có chủ đích từ khách truy cập:
+
+- **Bảng tính riêng biệt:** Các lượt bấm được tự động lưu vào trang tính (tab) **`Contact Clicks`** trong cùng file Google Spreadsheet.
+- **Cột ghi nhận:** `Thời gian`, `Kênh` (Messenger/Zalo), `Vị trí nút` (placement), `Trang`, `Dòng máy`, `Nguồn giới thiệu`, `UTM Source`, `UTM Medium`, `UTM Campaign`.
+- **Thông báo Email tức thì:** Gửi email thông báo cho nhân viên tư vấn với tiêu đề `💬 Khách vừa bấm [Kênh] — [Dòng máy / Kiho Camera]`.
+- **Bảo mật tuyệt đối (Strict No-PII):** Không thu thập bất kỳ thông tin cá nhân nào của khách (không lưu tên, số điện thoại, cookie hay IP).
+- **Phân biệt ngữ nghĩa:** Email và bảng tính luôn kèm lưu ý rõ ràng: *"Đây là lượt bấm mở kênh liên hệ từ website, không đồng nghĩa khách đã gửi tin nhắn."*
+
+---
+
+## 4. Cách Cập Nhật Google Apps Script Khi Có Phiên Bản Mới
+
+Khi có bản cập nhật Apps Script (như tính năng Contact Clicks):
+1. Vào **Admin Kiho Camera** -> **Tích hợp** -> **Google Sheets**.
+2. Sao chép toàn bộ mã nguồn Apps Script mới nhất được sinh sẵn.
+3. Mở Google Sheet của bạn -> **Tiện ích mở rộng** -> **Apps Script**.
+4. Dán đè mã nguồn mới vào `Code.gs` và nhấn **Lưu** (`Ctrl + S`).
+5. Nhấn **Triển khai** (Deploy) -> **Quản lý các bản triển khai** (Manage deployments):
+   - Chọn bản triển khai Web App hiện tại -> nhấn biểu tượng **Chỉnh sửa** (bút chì).
+   - Mục **Phiên bản** (Version): chọn **Phiên bản mới** (New version).
+   - Nhấn **Triển khai** (Deploy).
+*(Lưu ý: URL Web App và Webhook Secret được giữ nguyên vẹn, không cần cấu hình lại trong Admin).*
+

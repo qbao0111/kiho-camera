@@ -26,9 +26,84 @@ declare global {
   }
 }
 
+function getReferrerHostname(): string {
+  if (typeof document === "undefined" || !document.referrer) return "direct";
+  try {
+    const url = new URL(document.referrer);
+    if (typeof window !== "undefined" && url.hostname === window.location.hostname) {
+      return "direct";
+    }
+    return url.hostname || "direct";
+  } catch {
+    return "direct";
+  }
+}
+
+function getUtmParams(): { utmSource?: string; utmMedium?: string; utmCampaign?: string } {
+  if (typeof window === "undefined") return {};
+  try {
+    const params = new URLSearchParams(window.location.search);
+    return {
+      utmSource: params.get("utm_source") || undefined,
+      utmMedium: params.get("utm_medium") || undefined,
+      utmCampaign: params.get("utm_campaign") || undefined,
+    };
+  } catch {
+    return {};
+  }
+}
+
+function getCoarseDeviceType(): "mobile" | "tablet" | "desktop" {
+  if (typeof window === "undefined") return "desktop";
+  const width = window.innerWidth;
+  if (width < 768) return "mobile";
+  if (width <= 1024) return "tablet";
+  return "desktop";
+}
+
 /**
- * Safely dispatches a GA4 conversion event.
- * Never throws errors and never blocks navigation if GA is absent or blocked.
+ * Non-blocking, fire-and-forget notification to Kiho server to record
+ * intentional Messenger/Zalo clicks in Google Sheets & send an email.
+ */
+export function sendContactClickNotification(params: {
+  channel: "messenger" | "zalo";
+  placement: string;
+  cameraSlug?: string;
+  cameraName?: string;
+}): void {
+  if (typeof window === "undefined") return;
+
+  try {
+    const utm = getUtmParams();
+    const payload = {
+      channel: params.channel,
+      placement: params.placement,
+      pagePath: window.location.pathname,
+      cameraSlug: params.cameraSlug,
+      cameraName: params.cameraName,
+      referrer: getReferrerHostname(),
+      utmSource: utm.utmSource,
+      utmMedium: utm.utmMedium,
+      utmCampaign: utm.utmCampaign,
+      deviceType: getCoarseDeviceType(),
+    };
+
+    fetch("/api/contact-click", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(payload),
+      keepalive: true,
+    }).catch(() => {
+      // Fail silently to never block customer interactions
+    });
+  } catch {
+    // Fail silently
+  }
+}
+
+/**
+ * Safely dispatches a GA4 conversion event and operational notifications.
+ * Never throws errors and never blocks navigation if GA or backend is absent.
  */
 export function trackEvent(name: GAEventName, params: GAEventParams): void {
   if (typeof window === "undefined") return;
@@ -53,6 +128,23 @@ export function trackEvent(name: GAEventName, params: GAEventParams): void {
       window.dataLayer.push({
         event: name,
         ...payload,
+      });
+    }
+
+    // 3. Operational Sheets + Email Notification for Messenger and Zalo Clicks
+    if (name === "contact_messenger") {
+      sendContactClickNotification({
+        channel: "messenger",
+        placement: params.placement,
+        cameraSlug: params.camera_slug,
+        cameraName: params.camera_name,
+      });
+    } else if (name === "contact_zalo") {
+      sendContactClickNotification({
+        channel: "zalo",
+        placement: params.placement,
+        cameraSlug: params.camera_slug,
+        cameraName: params.camera_name,
       });
     }
   } catch (err) {

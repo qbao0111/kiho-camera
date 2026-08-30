@@ -190,15 +190,27 @@ function doPost(e) {
     }
 
     var data = JSON.parse(e.postData.contents);
-    var scriptProperties = PropertiesService.getScriptProperties();
-    var expectedSecret = scriptProperties.getProperty("RENTAL_REQUEST_WEBHOOK_SECRET");
-
-    // 1. Xác thực Shared Secret (Bắt buộc xác thực trước khi làm bất kỳ thao tác nào)
+    var scriptProperties = Properties    // 1. Xác thực Shared Secret (Bắt buộc xác thực trước khi làm bất kỳ thao tác nào)
     if (!expectedSecret || data.secret !== expectedSecret) {
       return createJsonResponse({ success: false, code: "INVALID_SECRET", error: "Mã bảo mật secret không khớp." });
     }
 
-    // 2. Mở Spreadsheet & Sheet
+    // Shared sanitization helpers
+    function sanitizeSheetCell(value) {
+      var text = String(value == null ? "" : value);
+      return /^[=+\-@]/.test(text) ? "'" + text : text;
+    }
+
+    function escapeHtml(value) {
+      return String(value == null ? "" : value)
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#39;");
+    }
+
+    // 2. Mở Spreadsheet
     var spreadsheet;
     var targetSheetId = ${sheetId};
     if (targetSheetId && targetSheetId.trim() !== "") {
@@ -215,6 +227,182 @@ function doPost(e) {
       return createJsonResponse({ success: false, code: "SPREADSHEET_ERROR", error: "Không thể mở Google Spreadsheet (Kiểm tra lại Sheet ID)." });
     }
 
+    // 3. Xử lý Connection Test từ Admin (Không gửi mail, không ghi dòng)
+    if (data.type === "connection_test") {
+      var defaultSheetName = ${sheetName} || "Rental Requests";
+      var testSheet = spreadsheet.getSheetByName(defaultSheetName) || spreadsheet.getSheets()[0];
+      return createJsonResponse({
+        success: true,
+        message: "Kết nối thành công tới Google Sheets!",
+        spreadsheetName: spreadsheet.getName(),
+        sheetName: testSheet ? testSheet.getName() : defaultSheetName,
+        testedAt: Utilities.formatDate(new Date(), "Asia/Ho_Chi_Minh", "dd/MM/yyyy HH:mm:ss")
+      });
+    }
+
+    // 4. Lấy Email nhận thông báo từ Server Payload (Admin là Single Source of Truth)
+    var notificationEmail = (data.notificationEmail || "").trim();
+    var emailRegex = /^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$/;
+    if (!notificationEmail || !emailRegex.test(notificationEmail)) {
+      return createJsonResponse({
+        success: false,
+        code: "INVALID_NOTIFICATION_EMAIL",
+        error: "Email nhận thông báo (" + notificationEmail + ") không hợp lệ."
+      });
+    }
+
+    // ========================================================================
+    // 5. XỬ LÝ SỰ KIỆN: KHÁCH BẤM MỞ MESSENGER / ZALO (Contact Click Intent)
+    // ========================================================================
+    if (data.type === "contact_click") {
+      var clickSheetName = "Contact Clicks";
+      var clickSheet = spreadsheet.getSheetByName(clickSheetName);
+      if (!clickSheet) {
+        clickSheet = spreadsheet.insertSheet(clickSheetName);
+      }
+
+      if (clickSheet.getLastRow() === 0) {
+        clickSheet.appendRow([
+          "Thời gian",
+          "Kênh",
+          "Vị trí nút",
+          "Trang",
+          "Dòng máy",
+          "Nguồn giới thiệu",
+          "UTM Source",
+          "UTM Medium",
+          "UTM Campaign"
+        ]);
+        clickSheet.getRange(1, 1, 1, 9).setFontWeight("bold").setBackground("#f0eae1");
+      }
+
+      var clickTimestamp = data.timestamp || Utilities.formatDate(new Date(), "Asia/Ho_Chi_Minh", "dd/MM/yyyy HH:mm:ss");
+      var channelRaw = String(data.channel || "").toLowerCase();
+      var channelDisplay = channelRaw === "zalo" ? "Zalo" : "Messenger";
+      var placement = String(data.placement || "unknown");
+      var pagePath = String(data.pagePath || "/");
+      var cameraSlug = String(data.cameraSlug || "");
+      var cameraName = String(data.cameraName || "");
+      var referrer = String(data.referrer || "direct");
+      var utmSource = String(data.utmSource || "");
+      var utmMedium = String(data.utmMedium || "");
+      var utmCampaign = String(data.utmCampaign || "");
+
+      var clickSaved = false;
+      try {
+        clickSheet.appendRow([
+          clickTimestamp,
+          channelDisplay,
+          sanitizeSheetCell(placement),
+          sanitizeSheetCell(pagePath),
+          sanitizeSheetCell(cameraName),
+          sanitizeSheetCell(referrer),
+          sanitizeSheetCell(utmSource),
+          sanitizeSheetCell(utmMedium),
+          sanitizeSheetCell(utmCampaign)
+        ]);
+        clickSaved = true;
+      } catch (clickErr) {
+        return createJsonResponse({
+          success: false,
+          code: "SHEET_APPEND_ERROR",
+          error: "Không thể ghi click vào Google Sheet: " + clickErr.message
+        });
+      }
+
+      // Gửi Email thông báo Click Intent
+      var isTestClick = data.isTest ? "[TEST TỪ ADMIN] " : "";
+      var emailSubject = isTestClick + "💬 Khách vừa bấm " + channelDisplay + (cameraName ? " — " + cameraName : " — Kiho Camera");
+      var safeChannel = escapeHtml(channelDisplay);
+      var safePlacement = escapeHtml(placement);
+      var safePagePath = escapeHtml(pagePath);
+      var safeCameraName = escapeHtml(cameraName);
+      var safeReferrer = escapeHtml(referrer);
+      var safeUtm = [utmSource, utmMedium, utmCampaign].filter(Boolean).map(escapeHtml).join(" / ");
+      var fullPageUrl = "https://kihocamera.com" + (pagePath.indexOf("/") === 0 ? pagePath : "/" + pagePath);
+
+      var clickEmailHtml = \`
+        <div style="font-family: Arial, sans-serif; max-width: 560px; margin: 0 auto; background: #faf8f4; border: 1px solid #e8e2d7; border-radius: 16px; padding: 24px; color: #171716;">
+          <div style="text-align: center; border-bottom: 1px solid #e8e2d7; padding-bottom: 16px; margin-bottom: 20px;">
+            <span style="font-size: 11px; font-weight: bold; color: #0284c7; text-transform: uppercase; letter-spacing: 1px;">KIHO CAMERA · CONTACT INTENT</span>
+            <h2 style="margin: 6px 0 0 0; font-size: 20px; font-weight: 900;">Khách vừa bấm mở \${safeChannel}</h2>
+          </div>
+
+          <table style="width: 100%; border-collapse: collapse; font-size: 14px;">
+            <tr>
+              <td style="padding: 8px 0; color: #78716c; width: 140px;">Kênh liên hệ:</td>
+              <td style="padding: 8px 0; font-weight: bold; font-size: 15px; color: #0284c7;">\${safeChannel}</td>
+            </tr>
+            \${cameraName ? \`
+            <tr>
+              <td style="padding: 8px 0; color: #78716c;">Dòng máy đang xem:</td>
+              <td style="padding: 8px 0; font-weight: bold; color: #171716; text-transform: uppercase;">📷 \${safeCameraName}</td>
+            </tr>
+            \` : ""}
+            <tr>
+              <td style="padding: 8px 0; color: #78716c;">Trang thực hiện:</td>
+              <td style="padding: 8px 0; color: #171716;">
+                <a href="\${escapeHtml(fullPageUrl)}" target="_blank" style="color: #0284c7; text-decoration: none;">\${safePagePath} &nearr;</a>
+              </td>
+            </tr>
+            <tr>
+              <td style="padding: 8px 0; color: #78716c;">Vị trí nút (CTA):</td>
+              <td style="padding: 8px 0; font-family: monospace; font-size: 13px; color: #44403c;">\${safePlacement}</td>
+            </tr>
+            <tr>
+              <td style="padding: 8px 0; color: #78716c;">Nguồn giới thiệu:</td>
+              <td style="padding: 8px 0; color: #171716;">\${safeReferrer}</td>
+            </tr>
+            \${safeUtm ? \`
+            <tr>
+              <td style="padding: 8px 0; color: #78716c;">Chiến dịch UTM:</td>
+              <td style="padding: 8px 0; font-family: monospace; font-size: 13px; color: #171716;">\${safeUtm}</td>
+            </tr>
+            \` : ""}
+            <tr>
+              <td style="padding: 8px 0; color: #78716c;">Thời gian:</td>
+              <td style="padding: 8px 0; color: #78716c; font-size: 12px;">\${clickTimestamp}</td>
+            </tr>
+          </table>
+
+          <div style="margin-top: 20px; padding: 12px 16px; background: #f1f5f9; border-radius: 8px; border: 1px solid #cbd5e1; font-size: 12px; color: #475569; line-height: 1.5;">
+            ℹ️ <strong>Lưu ý:</strong> Đây là lượt bấm mở kênh liên hệ từ website, không đồng nghĩa khách đã gửi tin nhắn.
+          </div>
+        </div>
+      \`;
+
+      var clickEmailSent = false;
+      try {
+        MailApp.sendEmail({
+          to: notificationEmail,
+          subject: emailSubject,
+          htmlBody: clickEmailHtml
+        });
+        clickEmailSent = true;
+      } catch (mailErr) {
+        return createJsonResponse({
+          success: false,
+          partialSuccess: true,
+          sheetSaved: true,
+          emailSent: false,
+          code: "EMAIL_ERROR",
+          error: "Đã lưu vào Sheet Contact Clicks nhưng gửi email thất bại: " + mailErr.message,
+          notificationEmail: notificationEmail
+        });
+      }
+
+      return createJsonResponse({
+        success: true,
+        sheetSaved: true,
+        emailSent: true,
+        notificationEmail: notificationEmail,
+        message: "Lượt bấm " + channelDisplay + " đã được ghi vào Sheet Contact Clicks và gửi email thành công!"
+      });
+    }
+
+    // ========================================================================
+    // 6. XỬ LÝ LEAD THUÊ MÁY (Rental Request Lead)
+    // ========================================================================
     var sheetName = ${sheetName} || "Rental Requests";
     var sheet = spreadsheet.getSheetByName(sheetName);
 
@@ -238,29 +426,6 @@ function doPost(e) {
       sheet.getRange(1, 1, 1, 9).setFontWeight("bold").setBackground("#f0eae1");
     }
 
-    // 3. Xử lý Connection Test từ Admin (Không gửi mail, không ghi dòng)
-    if (data.type === "connection_test") {
-      return createJsonResponse({
-        success: true,
-        message: "Kết nối thành công tới Google Sheets!",
-        spreadsheetName: spreadsheet.getName(),
-        sheetName: sheet.getName(),
-        testedAt: Utilities.formatDate(new Date(), "Asia/Ho_Chi_Minh", "dd/MM/yyyy HH:mm:ss")
-      });
-    }
-
-    // 4. Lấy Email nhận thông báo từ Server Payload (Admin là Single Source of Truth)
-    var notificationEmail = (data.notificationEmail || "").trim();
-    var emailRegex = /^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$/;
-    if (!notificationEmail || !emailRegex.test(notificationEmail)) {
-      return createJsonResponse({
-        success: false,
-        code: "INVALID_NOTIFICATION_EMAIL",
-        error: "Email nhận thông báo (" + notificationEmail + ") không hợp lệ."
-      });
-    }
-
-    // 5. Xử lý Lead thuê máy thực tế
     var timestamp = data.timestamp || Utilities.formatDate(new Date(), "Asia/Ho_Chi_Minh", "dd/MM/yyyy HH:mm:ss");
     var customerName = data.customerName || "Khách thuê";
     var phone = data.phone || "";
@@ -278,24 +443,10 @@ function doPost(e) {
       return dStr;
     }
 
-    function sanitizeSheetCell(value) {
-      var text = String(value == null ? "" : value);
-      return /^[=+\-@]/.test(text) ? "'" + text : text;
-    }
-
-    function escapeHtml(value) {
-      return String(value == null ? "" : value)
-        .replace(/&/g, "&amp;")
-        .replace(/</g, "&lt;")
-        .replace(/>/g, "&gt;")
-        .replace(/"/g, "&quot;")
-        .replace(/'/g, "&#39;");
-    }
-
     var rentalDateVn = formatVnDate(rentalDate);
     var returnDateVn = formatVnDate(returnDate);
 
-    // Ghi hàng mới vào Sheet
+    // Ghi hàng mới vào Sheet Rental Requests
     var sheetSaved = false;
     try {
       sheet.appendRow([
@@ -318,7 +469,7 @@ function doPost(e) {
       });
     }
 
-    // 6. Gửi Email thông báo tức thì tới email được cấu hình trong Admin
+    // 7. Gửi Email thông báo tức thì tới email được cấu hình trong Admin
     var isTest = data.isTest ? "[TEST TỪ ADMIN] " : "";
     var emailSubject = isTest + "📸 Lead mới — " + equipmentName + " — " + customerName;
     var safeCustomerName = escapeHtml(customerName);
@@ -556,3 +707,85 @@ export async function sendTestLeadToAppsScript(
     return { success: false, error: err?.message || "Lỗi khi gửi lead thử nghiệm." };
   }
 }
+
+export interface ContactClickPayload {
+  channel: "messenger" | "zalo";
+  placement: string;
+  pagePath: string;
+  cameraSlug?: string;
+  cameraName?: string;
+  referrer?: string;
+  utmSource?: string;
+  utmMedium?: string;
+  utmCampaign?: string;
+  deviceType?: "mobile" | "desktop" | "tablet";
+}
+
+/**
+ * Forward a Contact Click Event to Google Apps Script
+ */
+export async function sendContactClickToAppsScript(
+  appsScriptUrl: string,
+  secret: string,
+  notificationEmail: string,
+  payload: ContactClickPayload
+): Promise<{
+  success: boolean;
+  sheetSaved?: boolean;
+  emailSent?: boolean;
+  error?: string;
+}> {
+  if (!isValidAppsScriptUrl(appsScriptUrl)) {
+    return { success: false, error: "Apps Script URL không hợp lệ." };
+  }
+
+  try {
+    const formattedTimestamp = new Intl.DateTimeFormat("vi-VN", {
+      timeZone: "Asia/Ho_Chi_Minh",
+      dateStyle: "short",
+      timeStyle: "medium",
+    }).format(new Date());
+
+    const body = {
+      type: "contact_click",
+      secret,
+      notificationEmail: notificationEmail.trim(),
+      timestamp: formattedTimestamp,
+      channel: payload.channel,
+      placement: payload.placement,
+      pagePath: payload.pagePath,
+      cameraSlug: payload.cameraSlug,
+      cameraName: payload.cameraName,
+      referrer: payload.referrer,
+      utmSource: payload.utmSource,
+      utmMedium: payload.utmMedium,
+      utmCampaign: payload.utmCampaign,
+      deviceType: payload.deviceType,
+    };
+
+    const response = await fetch(appsScriptUrl, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(body),
+      signal: AbortSignal.timeout(8000),
+    });
+
+    if (!response.ok) {
+      return { success: false, error: `Apps Script HTTP ${response.status}` };
+    }
+
+    const data = await response.json();
+    return {
+      success: !!data.success,
+      sheetSaved: data.sheetSaved,
+      emailSent: data.emailSent,
+      error: data.error,
+    };
+  } catch (err: any) {
+    return {
+      success: false,
+      error: err?.message || "Lỗi khi gửi contact click tới Apps Script.",
+    };
+  }
+}
+
