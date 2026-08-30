@@ -114,21 +114,20 @@ export function trackEvent(name: GAEventName, params: GAEventParams): void {
       page_path: params.page_path || window.location.pathname,
     };
 
-    // 1. Try @next/third-parties sendGAEvent
-    try {
-      sendGAEvent("event", name, payload);
-    } catch {
-      // Fallback below
-    }
-
-    // 2. Direct gtag fallback
+    // 1. Dispatch GA4 event exactly once
     if (typeof window.gtag === "function") {
       window.gtag("event", name, payload);
-    } else if (Array.isArray(window.dataLayer)) {
-      window.dataLayer.push({
-        event: name,
-        ...payload,
-      });
+    } else {
+      try {
+        sendGAEvent("event", name, payload);
+      } catch {
+        if (Array.isArray(window.dataLayer)) {
+          window.dataLayer.push({
+            event: name,
+            ...payload,
+          });
+        }
+      }
     }
 
     // 3. Operational Sheets + Email Notification for Messenger and Zalo Clicks
