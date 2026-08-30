@@ -190,7 +190,10 @@ function doPost(e) {
     }
 
     var data = JSON.parse(e.postData.contents);
-    var scriptProperties = Properties    // 1. Xác thực Shared Secret (Bắt buộc xác thực trước khi làm bất kỳ thao tác nào)
+    var scriptProperties = PropertiesService.getScriptProperties();
+    var expectedSecret = scriptProperties.getProperty("RENTAL_REQUEST_WEBHOOK_SECRET");
+
+    // 1. Xác thực Shared Secret (Bắt buộc xác thực trước khi làm bất kỳ thao tác nào)
     if (!expectedSecret || data.secret !== expectedSecret) {
       return createJsonResponse({ success: false, code: "INVALID_SECRET", error: "Mã bảo mật secret không khớp." });
     }
@@ -554,7 +557,7 @@ function doPost(e) {
     });
 
   } catch (err) {
-    return createJsonResponse({ success: false, code: "UNKNOWN_ERROR", error: "Apps Script gặp lỗi không xác định." });
+    return createJsonResponse({ success: false, code: "UNKNOWN_ERROR", error: "Apps Script gặp lỗi: " + (err ? err.message : "không xác định") });
   }
 }
 
