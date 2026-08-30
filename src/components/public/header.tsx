@@ -192,15 +192,17 @@ export function Header({ settings }: HeaderProps) {
               </a>
             </div>
 
-            {/* Mobile Right Action & Menu Button (All touch targets >= 40-44px) */}
+            {/* Mobile Right Action & Menu Button */}
             <div className="flex items-center gap-1.5 sm:gap-2 md:hidden">
               <a
-                href={`tel:${normalizePhoneNumber(settings.phone)}`}
-                onClick={() => trackHotlineContact({ placement: "header_mobile" })}
-                className="min-w-[40px] min-h-[40px] flex items-center justify-center text-ink-700 hover:text-accent rounded-md border border-ink-200 bg-white transition-colors focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-accent"
-                aria-label={`Gọi hotline ${settings.phone}`}
+                href={buildZaloUrl(settings.phone)}
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={() => trackZaloContact({ placement: "header_mobile" })}
+                className="min-h-[38px] px-2.5 sm:px-3 inline-flex items-center justify-center text-xs font-sans font-semibold text-ink-800 hover:text-accent bg-white hover:bg-canvas-100 border border-ink-300 rounded-md transition-colors shadow-2xs focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-accent"
+                aria-label="Chat Zalo"
               >
-                <Phone className="w-4 h-4 text-accent" />
+                <span>Zalo</span>
               </a>
 
               <a
@@ -208,7 +210,8 @@ export function Header({ settings }: HeaderProps) {
                 target="_blank"
                 rel="noopener noreferrer"
                 onClick={() => trackMessengerContact({ placement: "header_mobile" })}
-                className="min-h-[40px] inline-flex items-center gap-1.5 text-xs font-sans font-semibold text-white bg-ink-900 hover:bg-black px-3 sm:px-3.5 rounded-md transition-colors shadow-xs"
+                className="min-h-[38px] inline-flex items-center gap-1.5 text-xs font-sans font-semibold text-white bg-ink-900 hover:bg-black px-2.5 sm:px-3.5 rounded-md transition-colors shadow-xs focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-accent"
+                aria-label="Nhắn Messenger"
               >
                 <MessageCircle className="w-3.5 h-3.5 text-accent" />
                 <span>Nhắn tin</span>
@@ -216,7 +219,7 @@ export function Header({ settings }: HeaderProps) {
 
               <button
                 onClick={() => setIsOpen(!isOpen)}
-                className="min-w-[40px] min-h-[40px] flex items-center justify-center text-ink-900 hover:text-accent transition-colors rounded-md border border-ink-200 bg-white focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-accent cursor-pointer"
+                className="min-w-[38px] min-h-[38px] flex items-center justify-center text-ink-900 hover:text-accent transition-colors rounded-md border border-ink-200 bg-white focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-accent cursor-pointer"
                 aria-label={isOpen ? "Đóng menu điều hướng" : "Mở menu điều hướng"}
                 aria-expanded={isOpen}
                 aria-controls="mobile-nav-drawer"
