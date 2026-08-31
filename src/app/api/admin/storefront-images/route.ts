@@ -47,7 +47,12 @@ export async function POST(req: NextRequest) {
     });
 
     if (!result.success) {
-      return NextResponse.json({ success: false, error: result.error }, { status: 400 });
+      return NextResponse.json({
+        success: false,
+        error: result.error,
+        sqlRequired: result.sqlRequired,
+        sql: result.sql,
+      }, { status: 400 });
     }
 
     return NextResponse.json({ success: true, image: result.data });

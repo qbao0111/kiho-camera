@@ -13,17 +13,59 @@ import {
   Loader2,
   CheckCircle2,
   AlertCircle,
+  AlertTriangle,
+  Copy,
+  Check,
   Camera,
-  Sparkles,
+  Link as LinkIcon,
+  Plus,
 } from "lucide-react";
 import { StorefrontImage } from "@/types/database";
+
+const DEFAULT_SQL_MIGRATION = `-- Chạy câu lệnh này trong Supabase Dashboard -> SQL Editor để tạo bảng storefront_images:
+CREATE TABLE IF NOT EXISTS public.storefront_images (
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    image_url TEXT NOT NULL,
+    alt_text TEXT,
+    caption TEXT,
+    sort_order INTEGER NOT NULL DEFAULT 0,
+    is_cover BOOLEAN NOT NULL DEFAULT false,
+    is_active BOOLEAN NOT NULL DEFAULT true,
+    created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
+    updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
+);
+
+ALTER TABLE public.storefront_images ENABLE ROW LEVEL SECURITY;
+
+DROP POLICY IF EXISTS "Public can view active storefront images" ON public.storefront_images;
+CREATE POLICY "Public can view active storefront images"
+    ON public.storefront_images
+    FOR SELECT
+    USING (is_active = true);
+
+DROP POLICY IF EXISTS "Admin full access storefront images" ON public.storefront_images;
+CREATE POLICY "Admin full access storefront images"
+    ON public.storefront_images
+    FOR ALL
+    USING (true)
+    WITH CHECK (true);
+`;
 
 export function StorefrontImagesManager() {
   const [images, setImages] = useState<StorefrontImage[]>([]);
   const [loading, setLoading] = useState(true);
   const [uploading, setUploading] = useState(false);
   const [savingId, setSavingId] = useState<string | null>(null);
-  const [feedback, setFeedback] = useState<{ type: "success" | "error"; text: string } | null>(null);
+  const [feedback, setFeedback] = useState<{ type: "success" | "warning" | "error"; text: string } | null>(null);
+  const [sqlGuide, setSqlGuide] = useState<string | null>(null);
+  const [copiedSql, setCopiedSql] = useState(false);
+
+  // Manual URL modal / input toggle
+  const [showUrlInput, setShowUrlInput] = useState(false);
+  const [manualUrl, setManualUrl] = useState("");
+  const [manualAlt, setManualAlt] = useState("");
+  const [submittingUrl, setSubmittingUrl] = useState(false);
+
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   const fetchImages = async () => {
@@ -47,9 +89,19 @@ export function StorefrontImagesManager() {
     fetchImages();
   }, []);
 
-  const showFeedback = (type: "success" | "error", text: string) => {
+  const showFeedback = (type: "success" | "warning" | "error", text: string, sql?: string) => {
     setFeedback({ type, text });
-    setTimeout(() => setFeedback(null), 4000);
+    if (sql) setSqlGuide(sql);
+    if (type !== "error") {
+      setTimeout(() => setFeedback(null), 5000);
+    }
+  };
+
+  const handleCopySql = () => {
+    const textToCopy = sqlGuide || DEFAULT_SQL_MIGRATION;
+    navigator.clipboard.writeText(textToCopy);
+    setCopiedSql(true);
+    setTimeout(() => setCopiedSql(false), 3000);
   };
 
   // Upload handler (multi-file support)
@@ -58,6 +110,7 @@ export function StorefrontImagesManager() {
     if (!files || files.length === 0) return;
 
     setUploading(true);
+    setFeedback(null);
     let successCount = 0;
 
     for (let i = 0; i < files.length; i++) {
@@ -74,7 +127,7 @@ export function StorefrontImagesManager() {
 
         const uploadData = await uploadRes.json();
         if (!uploadRes.ok || !uploadData.success) {
-          throw new Error(uploadData.error || "Upload ảnh thất bại");
+          throw new Error(uploadData.error || `Upload ảnh "${file.name}" thất bại`);
         }
 
         // Add to storefront_images table
@@ -91,9 +144,20 @@ export function StorefrontImagesManager() {
           }),
         });
 
-        if (addRes.ok) {
-          successCount++;
+        const addData = await addRes.json();
+        if (!addRes.ok || !addData.success) {
+          if (addData.sqlRequired || addData.error?.includes("storefront_images") || addData.error?.includes("schema cache")) {
+            showFeedback(
+              "warning",
+              "Ảnh đã upload lên Storage thành công, nhưng bảng database 'storefront_images' chưa được tạo trong Supabase. Vui lòng bấm sao chép câu lệnh SQL bên dưới và chạy trong Supabase SQL Editor.",
+              addData.sql || DEFAULT_SQL_MIGRATION
+            );
+            return;
+          }
+          throw new Error(addData.error || `Không thể lưu thông tin ảnh "${file.name}" vào database`);
         }
+
+        successCount++;
       } catch (err: any) {
         showFeedback("error", err.message || `Lỗi tải lên ảnh ${file.name}`);
       }
@@ -106,6 +170,53 @@ export function StorefrontImagesManager() {
 
     setUploading(false);
     if (fileInputRef.current) fileInputRef.current.value = "";
+  };
+
+  // Manual URL Add Handler
+  const handleAddManualUrl = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!manualUrl.trim()) return;
+
+    setSubmittingUrl(true);
+    setFeedback(null);
+
+    try {
+      const isFirst = images.length === 0;
+      const addRes = await fetch("/api/admin/storefront-images", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          image_url: manualUrl.trim(),
+          alt_text: manualAlt.trim() || "Mặt tiền Kiho Camera tại 48 Ngô Quyền, Đồng Hới",
+          sort_order: images.length,
+          is_cover: isFirst,
+          is_active: true,
+        }),
+      });
+
+      const addData = await addRes.json();
+      if (!addRes.ok || !addData.success) {
+        if (addData.sqlRequired || addData.error?.includes("storefront_images") || addData.error?.includes("schema cache")) {
+          showFeedback(
+            "warning",
+            "Bảng database 'storefront_images' chưa được tạo trong Supabase. Vui lòng bấm sao chép câu lệnh SQL bên dưới và dán vào Supabase SQL Editor.",
+            addData.sql || DEFAULT_SQL_MIGRATION
+          );
+          return;
+        }
+        throw new Error(addData.error || "Không thể lưu thông tin ảnh");
+      }
+
+      showFeedback("success", "Đã thêm ảnh cửa hàng thành công!");
+      setManualUrl("");
+      setManualAlt("");
+      setShowUrlInput(false);
+      await fetchImages();
+    } catch (err: any) {
+      showFeedback("error", err.message || "Lỗi thêm ảnh qua URL");
+    } finally {
+      setSubmittingUrl(false);
+    }
   };
 
   // Update single field
@@ -197,7 +308,7 @@ export function StorefrontImagesManager() {
   return (
     <div className="bg-white rounded-xl border border-slate-200 shadow-xs overflow-hidden">
       {/* Header */}
-      <div className="p-5 sm:p-6 border-b border-slate-100 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+      <div className="p-5 sm:p-6 border-b border-slate-100 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
           <div className="flex items-center gap-2">
             <Camera className="w-5 h-5 text-orange-500" />
@@ -210,8 +321,17 @@ export function StorefrontImagesManager() {
           </p>
         </div>
 
-        {/* Upload Button */}
-        <div>
+        {/* Upload & Manual Actions */}
+        <div className="flex items-center gap-2">
+          <button
+            type="button"
+            onClick={() => setShowUrlInput(!showUrlInput)}
+            className="inline-flex items-center gap-1.5 px-3 py-2 rounded-lg text-xs font-semibold text-slate-700 bg-slate-100 hover:bg-slate-200 border border-slate-300 transition-colors min-h-[40px]"
+          >
+            <LinkIcon className="w-3.5 h-3.5" />
+            <span>Thêm bằng URL</span>
+          </button>
+
           <input
             ref={fileInputRef}
             type="file"
@@ -223,7 +343,7 @@ export function StorefrontImagesManager() {
           />
           <label
             htmlFor="storefront-upload-input"
-            className={`inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-lg text-xs font-semibold text-white bg-slate-900 hover:bg-black transition-colors cursor-pointer shadow-xs min-h-[42px] ${
+            className={`inline-flex items-center justify-center gap-2 px-4 py-2 rounded-lg text-xs font-semibold text-white bg-slate-900 hover:bg-black transition-colors cursor-pointer shadow-xs min-h-[40px] ${
               uploading ? "opacity-70 pointer-events-none" : ""
             }`}
           >
@@ -235,12 +355,99 @@ export function StorefrontImagesManager() {
             ) : (
               <>
                 <Upload className="w-4 h-4" />
-                <span>Thêm ảnh cửa hàng</span>
+                <span>Tải ảnh từ máy tính</span>
               </>
             )}
           </label>
         </div>
       </div>
+
+      {/* Manual URL Form */}
+      {showUrlInput && (
+        <form onSubmit={handleAddManualUrl} className="p-4 sm:p-5 bg-slate-50 border-b border-slate-200 space-y-3">
+          <div className="flex items-center justify-between">
+            <span className="text-xs font-bold text-slate-800 flex items-center gap-1.5">
+              <LinkIcon className="w-3.5 h-3.5 text-orange-500" />
+              Thêm ảnh bằng đường dẫn URL trực tiếp
+            </span>
+            <button
+              type="button"
+              onClick={() => setShowUrlInput(false)}
+              className="text-xs text-slate-500 hover:text-slate-700"
+            >
+              Đóng
+            </button>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+            <div>
+              <label className="block text-[11px] font-semibold text-slate-700 mb-1">
+                URL hình ảnh <span className="text-rose-500">*</span>
+              </label>
+              <input
+                type="url"
+                required
+                value={manualUrl}
+                onChange={(e) => setManualUrl(e.target.value)}
+                placeholder="https://example.com/storefront.webp"
+                className="w-full text-xs px-3 py-2 bg-white border border-slate-200 rounded-lg focus:outline-hidden focus:border-orange-500"
+              />
+            </div>
+            <div>
+              <label className="block text-[11px] font-semibold text-slate-700 mb-1">
+                Mô tả ảnh (Alt text)
+              </label>
+              <input
+                type="text"
+                value={manualAlt}
+                onChange={(e) => setManualAlt(e.target.value)}
+                placeholder="Ví dụ: Mặt tiền Kiho Camera tại 48 Ngô Quyền"
+                className="w-full text-xs px-3 py-2 bg-white border border-slate-200 rounded-lg focus:outline-hidden focus:border-orange-500"
+              />
+            </div>
+          </div>
+
+          <div className="flex justify-end">
+            <button
+              type="submit"
+              disabled={submittingUrl || !manualUrl.trim()}
+              className="inline-flex items-center gap-1.5 px-4 py-2 rounded-lg text-xs font-semibold text-white bg-orange-500 hover:bg-orange-600 disabled:opacity-50 transition-colors shadow-xs cursor-pointer"
+            >
+              {submittingUrl ? <Loader2 className="w-3.5 h-3.5 animate-spin" /> : <Plus className="w-3.5 h-3.5" />}
+              <span>{submittingUrl ? "Đang thêm..." : "Lưu ảnh vào danh sách"}</span>
+            </button>
+          </div>
+        </form>
+      )}
+
+      {/* SQL Missing Table Helper Banner */}
+      {sqlGuide && (
+        <div className="mx-5 sm:mx-6 mt-4 p-4 rounded-xl bg-amber-50 border border-amber-200 space-y-3">
+          <div className="flex items-start gap-2.5 text-amber-900">
+            <AlertTriangle className="w-5 h-5 text-amber-600 shrink-0 mt-0.5" />
+            <div className="space-y-1">
+              <p className="text-xs font-bold">Database Supabase chưa có bảng `storefront_images`</p>
+              <p className="text-xs text-amber-800 leading-relaxed">
+                Để lưu ảnh vào database, bạn chỉ cần mở <strong>Supabase Dashboard → SQL Editor</strong>, dán câu lệnh bên dưới và nhấn <strong>Run</strong>:
+              </p>
+            </div>
+          </div>
+
+          <div className="relative">
+            <pre className="p-3 bg-slate-900 text-slate-200 rounded-lg text-[11px] font-mono overflow-x-auto max-h-36 scrollbar-thin">
+              {sqlGuide}
+            </pre>
+            <button
+              type="button"
+              onClick={handleCopySql}
+              className="absolute top-2 right-2 inline-flex items-center gap-1 px-2.5 py-1 rounded bg-orange-500 hover:bg-orange-600 text-white text-[11px] font-bold shadow-xs transition-all cursor-pointer"
+            >
+              {copiedSql ? <Check className="w-3.5 h-3.5" /> : <Copy className="w-3.5 h-3.5" />}
+              <span>{copiedSql ? "Đã sao chép SQL!" : "Sao chép SQL"}</span>
+            </button>
+          </div>
+        </div>
+      )}
 
       {/* Feedback message */}
       {feedback && (
@@ -248,11 +455,15 @@ export function StorefrontImagesManager() {
           className={`mx-5 sm:mx-6 mt-4 p-3 rounded-lg flex items-center gap-2 text-xs ${
             feedback.type === "success"
               ? "bg-emerald-50 text-emerald-800 border border-emerald-200"
+              : feedback.type === "warning"
+              ? "bg-amber-50 text-amber-800 border border-amber-200"
               : "bg-rose-50 text-rose-800 border border-rose-200"
           }`}
         >
           {feedback.type === "success" ? (
             <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0" />
+          ) : feedback.type === "warning" ? (
+            <AlertTriangle className="w-4 h-4 text-amber-600 shrink-0" />
           ) : (
             <AlertCircle className="w-4 h-4 text-rose-600 shrink-0" />
           )}

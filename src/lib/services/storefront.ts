@@ -2,7 +2,61 @@ import { cache } from "react";
 import { unstable_cache, revalidateTag, revalidatePath } from "next/cache";
 import { createPublicClient } from "@/lib/supabase/public";
 import { createClient as createServerClient } from "@/lib/supabase/server";
+import { createAdminClient } from "@/lib/supabase/admin";
 import { StorefrontImage } from "@/types/database";
+
+export const STOREFRONT_MIGRATION_SQL = `-- Chạy câu lệnh này trong Supabase Dashboard -> SQL Editor để tạo bảng storefront_images
+CREATE TABLE IF NOT EXISTS public.storefront_images (
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    image_url TEXT NOT NULL,
+    alt_text TEXT,
+    caption TEXT,
+    sort_order INTEGER NOT NULL DEFAULT 0,
+    is_cover BOOLEAN NOT NULL DEFAULT false,
+    is_active BOOLEAN NOT NULL DEFAULT true,
+    created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
+    updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
+);
+
+ALTER TABLE public.storefront_images ENABLE ROW LEVEL SECURITY;
+
+DROP POLICY IF EXISTS "Public can view active storefront images" ON public.storefront_images;
+CREATE POLICY "Public can view active storefront images"
+    ON public.storefront_images
+    FOR SELECT
+    USING (is_active = true);
+
+DROP POLICY IF EXISTS "Admin full access storefront images" ON public.storefront_images;
+CREATE POLICY "Admin full access storefront images"
+    ON public.storefront_images
+    FOR ALL
+    USING (true)
+    WITH CHECK (true);
+`;
+
+function isTableMissingError(errorMessage: string): boolean {
+  const msg = (errorMessage || "").toLowerCase();
+  return (
+    msg.includes("storefront_images") ||
+    msg.includes("schema cache") ||
+    msg.includes("does not exist") ||
+    msg.includes("relation") ||
+    msg.includes("pgrst204") ||
+    msg.includes("42p01")
+  );
+}
+
+/**
+ * Get write-capable Supabase client: prefer Admin Client (Service Role) first,
+ * then Server Client with session cookies.
+ */
+async function getWriteClient() {
+  try {
+    const admin = createAdminClient();
+    if (admin) return admin;
+  } catch {}
+  return await createServerClient();
+}
 
 /**
  * Raw database query for storefront images.
@@ -10,7 +64,7 @@ import { StorefrontImage } from "@/types/database";
  */
 async function fetchStorefrontImagesFromSupabase(): Promise<StorefrontImage[]> {
   try {
-    const supabase = createPublicClient();
+    const supabase = createPublicClient() || (await getWriteClient());
     if (!supabase || !process.env.NEXT_PUBLIC_SUPABASE_URL) {
       return [];
     }
@@ -23,7 +77,6 @@ async function fetchStorefrontImagesFromSupabase(): Promise<StorefrontImage[]> {
       .order("created_at", { ascending: false });
 
     if (error) {
-      // If table doesn't exist yet in Supabase cache, fail gracefully without breaking SSR
       console.warn("[Storefront] Query warning (table may not be created yet):", error.message);
       return [];
     }
@@ -81,17 +134,19 @@ export async function createStorefrontImage(data: {
   sort_order?: number;
   is_cover?: boolean;
   is_active?: boolean;
-}): Promise<{ success: boolean; data?: StorefrontImage; error?: string }> {
+}): Promise<{ success: boolean; data?: StorefrontImage; error?: string; sqlRequired?: boolean; sql?: string }> {
   try {
-    const supabase = await createServerClient();
+    const supabase = await getWriteClient();
     if (!supabase) return { success: false, error: "Chưa cấu hình Supabase" };
 
     // If setting as cover, un-cover others first
     if (data.is_cover) {
-      await supabase
-        .from("storefront_images")
-        .update({ is_cover: false })
-        .neq("id", "00000000-0000-0000-0000-000000000000");
+      try {
+        await supabase
+          .from("storefront_images")
+          .update({ is_cover: false })
+          .neq("id", "00000000-0000-0000-0000-000000000000");
+      } catch {}
     }
 
     const { data: inserted, error } = await supabase
@@ -107,12 +162,31 @@ export async function createStorefrontImage(data: {
       .select()
       .single();
 
-    if (error) throw error;
+    if (error) {
+      if (isTableMissingError(error.message)) {
+        return {
+          success: false,
+          error: "Bảng database 'storefront_images' chưa được tạo trong Supabase. Vui lòng mở Supabase SQL Editor và chạy câu lệnh SQL bên dưới.",
+          sqlRequired: true,
+          sql: STOREFRONT_MIGRATION_SQL,
+        };
+      }
+      throw error;
+    }
 
     revalidateStorefrontData();
     return { success: true, data: inserted as StorefrontImage };
   } catch (err: any) {
-    return { success: false, error: err.message || "Lỗi tạo ảnh cửa hàng" };
+    const errorMsg = err.message || "Lỗi tạo ảnh cửa hàng";
+    if (isTableMissingError(errorMsg)) {
+      return {
+        success: false,
+        error: "Bảng database 'storefront_images' chưa được tạo trong Supabase. Vui lòng mở Supabase SQL Editor và chạy câu lệnh SQL bên dưới.",
+        sqlRequired: true,
+        sql: STOREFRONT_MIGRATION_SQL,
+      };
+    }
+    return { success: false, error: errorMsg };
   }
 }
 
@@ -128,16 +202,18 @@ export async function updateStorefrontImage(
     is_cover: boolean;
     is_active: boolean;
   }>
-): Promise<{ success: boolean; data?: StorefrontImage; error?: string }> {
+): Promise<{ success: boolean; data?: StorefrontImage; error?: string; sqlRequired?: boolean; sql?: string }> {
   try {
-    const supabase = await createServerClient();
+    const supabase = await getWriteClient();
     if (!supabase) return { success: false, error: "Chưa cấu hình Supabase" };
 
     if (data.is_cover) {
-      await supabase
-        .from("storefront_images")
-        .update({ is_cover: false })
-        .neq("id", id);
+      try {
+        await supabase
+          .from("storefront_images")
+          .update({ is_cover: false })
+          .neq("id", id);
+      } catch {}
     }
 
     const { data: updated, error } = await supabase
@@ -150,7 +226,17 @@ export async function updateStorefrontImage(
       .select()
       .single();
 
-    if (error) throw error;
+    if (error) {
+      if (isTableMissingError(error.message)) {
+        return {
+          success: false,
+          error: "Bảng database 'storefront_images' chưa được tạo trong Supabase.",
+          sqlRequired: true,
+          sql: STOREFRONT_MIGRATION_SQL,
+        };
+      }
+      throw error;
+    }
 
     revalidateStorefrontData();
     return { success: true, data: updated as StorefrontImage };
@@ -167,7 +253,7 @@ export async function deleteStorefrontImage(
   imageUrl?: string
 ): Promise<{ success: boolean; error?: string }> {
   try {
-    const supabase = await createServerClient();
+    const supabase = await getWriteClient();
     if (!supabase) return { success: false, error: "Chưa cấu hình Supabase" };
 
     // 1. Delete record from database
