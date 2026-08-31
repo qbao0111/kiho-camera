@@ -3,6 +3,7 @@ import Image from "next/image";
 import { MapPin, Clock, Phone, Navigation, CheckCircle2, ShieldCheck, ArrowUpRight, Sparkles } from "lucide-react";
 import { SiteSettings, StorefrontImage } from "@/types/database";
 import { normalizePhoneNumber } from "@/lib/utils";
+import { DEFAULT_MAPS_URL } from "@/lib/constants";
 import { TrackedOutboundLink } from "@/components/analytics/tracked-outbound-link";
 
 interface LocalStoreTrustSectionProps {
@@ -17,7 +18,7 @@ export function LocalStoreTrustSection({
   const address = settings.address || "48 Ngô Quyền, TP. Đồng Hới, Quảng Bình";
   const phone = settings.phone || "0387 274 669";
   const openingHours = settings.opening_hours || "07:30 – 21:00 (Tất cả các ngày trong tuần)";
-  const mapUrl = settings.maps_url || "https://maps.app.goo.gl/3Hh3G8uLymxQn6r98";
+  const mapUrl = settings.maps_url || DEFAULT_MAPS_URL;
 
   // Take up to 4 active storefront images
   const displayImages = storefrontImages.slice(0, 4);

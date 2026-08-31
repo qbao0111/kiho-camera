@@ -1,6 +1,7 @@
 import React from "react";
 import { SiteSettings, Equipment, StorefrontImage } from "@/types/database";
 import { getEquipmentCoverImage } from "@/lib/equipment-images";
+import { DEFAULT_MAPS_URL } from "@/lib/constants";
 
 interface LocalBusinessProps {
   settings: SiteSettings;
@@ -26,7 +27,7 @@ export function LocalBusinessJsonLd({ settings, siteUrl, storefrontImages = [] }
       "Dịch vụ cho thuê máy ảnh du lịch Canon, Fujifilm, Sony chính hãng tại TP. Đồng Hới, Quảng Bình. Đầy đủ pin sạc, thẻ nhớ, hỗ trợ giao nhận tận nơi.",
     "url": siteUrl,
     "telephone": settings.phone || "0387 274 669",
-    "hasMap": settings.maps_url || "https://maps.app.goo.gl/3Hh3G8uLymxQn6r98",
+    "hasMap": settings.maps_url || DEFAULT_MAPS_URL,
     "address": {
       "@type": "PostalAddress",
       "streetAddress": settings.address || "48 Ngô Quyền, TP. Đồng Hới, Tỉnh Quảng Bình",
@@ -214,3 +215,39 @@ export function ArticleJsonLd({
     />
   );
 }
+
+export function AboutPageJsonLd({
+  siteUrl,
+  name = "Giới thiệu Kiho Camera — Cửa hàng thuê máy ảnh tại Đồng Hới",
+  description = "Kiho Camera là dịch vụ cho thuê máy ảnh du lịch tại 48 Ngô Quyền, Đồng Hới, Quảng Bình. Cung cấp Canon, Fujifilm, Sony kèm 2 pin, sạc và thẻ nhớ 64GB.",
+}: {
+  siteUrl: string;
+  name?: string;
+  description?: string;
+}) {
+  const schema = {
+    "@context": "https://schema.org",
+    "@type": "AboutPage",
+    "@id": `${siteUrl}/gioi-thieu#webpage`,
+    "url": `${siteUrl}/gioi-thieu`,
+    "name": name,
+    "description": description,
+    "isPartOf": {
+      "@id": `${siteUrl}/#website`,
+    },
+    "about": {
+      "@id": `${siteUrl}/#business`,
+    },
+    "mainEntity": {
+      "@id": `${siteUrl}/#business`,
+    },
+  };
+
+  return (
+    <script
+      type="application/ld+json"
+      dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
+    />
+  );
+}
+

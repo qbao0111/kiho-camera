@@ -1,4 +1,5 @@
 import { Category, Equipment, Feedback, SiteSettings } from "@/types/database";
+import { DEFAULT_MAPS_URL } from "@/lib/constants";
 
 export const MOCK_SITE_SETTINGS: SiteSettings = {
   id: 1,
@@ -10,7 +11,7 @@ export const MOCK_SITE_SETTINGS: SiteSettings = {
   messenger_url: "https://m.me/kihocameradonghoi",
   tiktok_url: "https://tiktok.com/@kihocamera",
   instagram_url: "https://www.instagram.com/thuemayanhqbb/",
-  maps_url: "https://maps.google.com/?q=48+Ngo+Quyen+Dong+Hoi+Quang+Binh",
+  maps_url: DEFAULT_MAPS_URL,
   maps_embed_url: "",
   opening_hours: "07:30 - 21:00 (Tất cả các ngày trong tuần)",
 

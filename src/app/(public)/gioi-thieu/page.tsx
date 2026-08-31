@@ -18,8 +18,9 @@ import {
 } from "lucide-react";
 import { getSiteSettings } from "@/lib/services/settings";
 import { getStorefrontImages } from "@/lib/services/storefront";
-import { BreadcrumbJsonLd, ArticleJsonLd } from "@/components/public/json-ld";
+import { BreadcrumbJsonLd, AboutPageJsonLd } from "@/components/public/json-ld";
 import { normalizePhoneNumber, buildZaloUrl } from "@/lib/utils";
+import { DEFAULT_MAPS_URL } from "@/lib/constants";
 import { TrackedOutboundLink } from "@/components/analytics/tracked-outbound-link";
 
 export const revalidate = 120;
@@ -41,7 +42,7 @@ export default async function AboutPage() {
   const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://kihocamera.com";
   const address = settings.address || "48 Ngô Quyền, TP. Đồng Hới, Tỉnh Quảng Bình";
   const phone = settings.phone || "0387 274 669";
-  const mapUrl = settings.maps_url || "https://maps.app.goo.gl/3Hh3G8uLymxQn6r98";
+  const mapUrl = settings.maps_url || DEFAULT_MAPS_URL;
 
   const primaryCover = storefrontImages.find((img) => img.is_cover) || storefrontImages[0];
 
@@ -54,12 +55,7 @@ export default async function AboutPage() {
         ]}
         siteUrl={siteUrl}
       />
-      <ArticleJsonLd
-        title="Giới thiệu Kiho Camera — Cửa hàng thuê máy ảnh tại Đồng Hới"
-        description="Kiho Camera là dịch vụ cho thuê máy ảnh du lịch tại 48 Ngô Quyền, TP. Đồng Hới, Quảng Bình."
-        url="/gioi-thieu"
-        siteUrl={siteUrl}
-      />
+      <AboutPageJsonLd siteUrl={siteUrl} />
 
       <article className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12 sm:space-y-16">
         

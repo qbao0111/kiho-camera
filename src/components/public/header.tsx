@@ -8,6 +8,7 @@ import { usePathname } from "next/navigation";
 import { ArrowUpRight, Menu, X, Phone, MessageCircle, MapPin } from "lucide-react";
 import { SiteSettings } from "@/types/database";
 import { normalizePhoneNumber, buildZaloUrl } from "@/lib/utils";
+import { GUIDE_LINKS } from "@/lib/constants";
 import {
   trackMessengerContact,
   trackZaloContact,
@@ -108,8 +109,8 @@ export function Header({ settings }: HeaderProps) {
       <header
         className={`sticky top-0 z-[110] transition-all duration-200 ${
           isScrolled
-            ? "bg-[#faf8f5]/95 backdrop-blur-md border-b border-ink-200 py-2.5 sm:py-3 shadow-[0_2px_12px_rgba(0,0,0,0.03)]"
-            : "bg-[#faf8f5] border-b border-ink-200/80 py-3 sm:py-3.5"
+            ? "bg-[#faf8f5]/95 backdrop-blur-md border-b border-ink-200 py-2 sm:py-2.5 shadow-[0_2px_12px_rgba(0,0,0,0.03)]"
+            : "bg-[#faf8f5] border-b border-ink-200/80 py-2.5 sm:py-3"
         }`}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -131,8 +132,8 @@ export function Header({ settings }: HeaderProps) {
               />
             </Link>
 
-            {/* Desktop Navigation */}
-            <nav className="hidden md:flex items-center space-x-7 text-sm font-sans font-medium">
+            {/* Desktop Primary Navigation */}
+            <nav className="hidden md:flex items-center space-x-7 text-sm font-sans font-medium" aria-label="Điều hướng chính">
               {navLinks.map((link) => {
                 const isActive =
                   link.href === "/thiet-bi"
@@ -143,6 +144,7 @@ export function Header({ settings }: HeaderProps) {
                   <Link
                     key={link.href}
                     href={link.href}
+                    aria-current={isActive ? "page" : undefined}
                     className={`link-underline transition-colors focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-accent rounded-sm py-1 ${
                       isActive
                         ? "text-ink-900 font-semibold"
@@ -229,6 +231,43 @@ export function Header({ settings }: HeaderProps) {
             </div>
           </div>
         </div>
+
+        {/* Desktop Secondary "Cẩm nang" Row (md+) */}
+        <div className="hidden md:block border-t border-ink-200/60 bg-canvas-100/50">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <nav
+              aria-label="Cẩm nang Kiho Camera"
+              className="flex items-center gap-2.5 text-xs font-sans py-1.5 overflow-x-auto scrollbar-none"
+            >
+              <span className="font-mono text-[10px] font-bold text-ink-500 uppercase tracking-widest shrink-0">
+                CẨM NANG
+              </span>
+              <span className="text-ink-300 select-none shrink-0" aria-hidden="true">·</span>
+
+              {GUIDE_LINKS.map((guide, idx) => {
+                const isActive = pathname === guide.href;
+                return (
+                  <React.Fragment key={guide.href}>
+                    {idx > 0 && (
+                      <span className="text-ink-300 select-none shrink-0" aria-hidden="true">·</span>
+                    )}
+                    <Link
+                      href={guide.href}
+                      aria-current={isActive ? "page" : undefined}
+                      className={`whitespace-nowrap transition-colors rounded-xs py-0.5 px-1 focus-visible:outline-hidden focus-visible:ring-1 focus-visible:ring-accent ${
+                        isActive
+                          ? "text-accent font-semibold"
+                          : "text-ink-600 hover:text-ink-900"
+                      }`}
+                    >
+                      {guide.label}
+                    </Link>
+                  </React.Fragment>
+                );
+              })}
+            </nav>
+          </div>
+        </div>
       </header>
 
       {/* Viewport-Anchored React Portal Mobile Navigation Drawer */}
@@ -237,7 +276,7 @@ export function Header({ settings }: HeaderProps) {
           id="mobile-nav-drawer"
           role="dialog"
           aria-modal="true"
-          aria-label="Điều hướng chính"
+          aria-label="Điều hướng di động"
           className="md:hidden fixed inset-0 z-[100] pointer-events-none"
         >
           {/* Semi-transparent Backdrop (tap to close) */}
@@ -265,6 +304,7 @@ export function Header({ settings }: HeaderProps) {
                 </span>
               </div>
 
+              {/* Primary Links */}
               <div className="flex flex-col divide-y divide-ink-200/60">
                 <Link
                   href="/"
@@ -305,25 +345,6 @@ export function Header({ settings }: HeaderProps) {
                   );
                 })}
 
-                {/* Contextual Tourism Link */}
-                <Link
-                  href="/thue-may-anh-phong-nha"
-                  onClick={() => setIsOpen(false)}
-                  className={`font-display text-2xl font-bold py-3 flex items-center justify-between min-h-[48px] transition-colors ${
-                    pathname === "/thue-may-anh-phong-nha"
-                      ? "text-accent"
-                      : "text-ink-900 hover:text-accent"
-                  }`}
-                >
-                  <div className="flex items-center gap-2">
-                    <span>Thuê máy đi Phong Nha</span>
-                    <span className="text-[10px] font-mono font-semibold px-2 py-0.5 bg-forest-100 text-forest-800 rounded-sm">
-                      Cẩm nang
-                    </span>
-                  </div>
-                  <span className="font-sans text-xs font-semibold text-ink-600">→</span>
-                </Link>
-
                 <Link
                   href="/feedback"
                   onClick={() => setIsOpen(false)}
@@ -337,10 +358,38 @@ export function Header({ settings }: HeaderProps) {
                   <span className="font-sans text-xs font-semibold text-ink-600">→</span>
                 </Link>
               </div>
+
+              {/* Secondary Group: CẨM NANG */}
+              <div className="pt-3 pb-1 border-t border-ink-200/60 space-y-2">
+                <span className="font-mono text-[10px] font-bold text-ink-500 uppercase tracking-widest block">
+                  CẨM NANG
+                </span>
+                <div className="grid grid-cols-1 divide-y divide-ink-100 font-sans text-sm">
+                  {GUIDE_LINKS.map((guide) => {
+                    const isActive = pathname === guide.href;
+                    return (
+                      <Link
+                        key={guide.href}
+                        href={guide.href}
+                        onClick={() => setIsOpen(false)}
+                        aria-current={isActive ? "page" : undefined}
+                        className={`py-2.5 flex items-center justify-between min-h-[40px] transition-colors ${
+                          isActive
+                            ? "text-accent font-semibold"
+                            : "text-ink-700 hover:text-accent font-medium"
+                        }`}
+                      >
+                        <span>{guide.fullLabel}</span>
+                        <span className="text-xs text-ink-400">→</span>
+                      </Link>
+                    );
+                  })}
+                </div>
+              </div>
             </nav>
 
             {/* Direct Contact & Address Section */}
-            <div className="pt-5 border-t border-ink-200 space-y-3 mt-4">
+            <div className="pt-4 border-t border-ink-200 space-y-3 mt-4">
               <div>
                 <span className="font-mono text-[10px] font-semibold text-ink-600 uppercase tracking-wider block mb-2">
                   LIÊN HỆ TRỰC TIẾP
