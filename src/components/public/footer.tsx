@@ -47,16 +47,34 @@ export function Footer({ settings }: FooterProps) {
           {/* 2. Quick Links (3 cols) */}
           <div className="md:col-span-3 space-y-2.5">
             <span className="text-[11px] font-mono font-semibold tracking-wider text-ink-600 uppercase block">
-              Máy ảnh & Cẩm nang
+              Thông tin & Cẩm nang
             </span>
             <ul className="space-y-1.5 text-xs sm:text-sm font-sans">
               <li>
                 <Link
-                  href="/thiet-bi"
+                  href="/gioi-thieu"
                   className="text-ink-600 hover:text-accent transition-colors inline-flex items-center gap-1.5 focus-visible:outline-hidden focus-visible:ring-1 focus-visible:ring-accent rounded-xs"
                 >
                   <Camera className="w-3.5 h-3.5 text-accent shrink-0" />
-                  <span>Tất cả 12 dòng máy</span>
+                  <span>Về Kiho Camera</span>
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/chinh-sach-thue"
+                  className="text-ink-600 hover:text-accent transition-colors inline-flex items-center gap-1.5 focus-visible:outline-hidden focus-visible:ring-1 focus-visible:ring-accent rounded-xs"
+                >
+                  <Camera className="w-3.5 h-3.5 text-accent shrink-0" />
+                  <span>Chính sách & Thủ tục thuê</span>
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/gia-thue-may-anh-dong-hoi"
+                  className="text-ink-600 hover:text-accent transition-colors inline-flex items-center gap-1.5 focus-visible:outline-hidden focus-visible:ring-1 focus-visible:ring-accent rounded-xs"
+                >
+                  <Camera className="w-3.5 h-3.5 text-accent shrink-0" />
+                  <span>Bảng giá thuê tại Đồng Hới</span>
                 </Link>
               </li>
               <li>
@@ -70,29 +88,20 @@ export function Footer({ settings }: FooterProps) {
               </li>
               <li>
                 <Link
-                  href="/thiet-bi?brand=Fujifilm"
+                  href="/so-sanh/canon-r50-vs-canon-g7x-mark-iii"
                   className="text-ink-600 hover:text-accent transition-colors inline-flex items-center gap-1.5 focus-visible:outline-hidden focus-visible:ring-1 focus-visible:ring-accent rounded-xs"
                 >
                   <Camera className="w-3.5 h-3.5 text-accent shrink-0" />
-                  <span>Fujifilm (X100VI, X100V, XS10)</span>
+                  <span>So sánh R50 vs G7X III</span>
                 </Link>
               </li>
               <li>
                 <Link
-                  href="/thiet-bi?brand=Canon"
+                  href="/so-sanh/fujifilm-x100v-vs-x100vi"
                   className="text-ink-600 hover:text-accent transition-colors inline-flex items-center gap-1.5 focus-visible:outline-hidden focus-visible:ring-1 focus-visible:ring-accent rounded-xs"
                 >
                   <Camera className="w-3.5 h-3.5 text-accent shrink-0" />
-                  <span>Canon (R50, RP, G7X III...)</span>
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/thiet-bi?brand=Sony"
-                  className="text-ink-600 hover:text-accent transition-colors inline-flex items-center gap-1.5 focus-visible:outline-hidden focus-visible:ring-1 focus-visible:ring-accent rounded-xs"
-                >
-                  <Camera className="w-3.5 h-3.5 text-accent shrink-0" />
-                  <span>Sony (ZV-1 II, ZV-1F)</span>
+                  <span>So sánh X100V vs X100VI</span>
                 </Link>
               </li>
             </ul>

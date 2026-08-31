@@ -37,9 +37,9 @@ export function LandingHero({}: LandingHeroProps = {}) {
               </h1>
             </div>
 
-            {/* Contextual Editorial Description */}
+            {/* Contextual Editorial Description (Answer-first for users & SEO/GEO) */}
             <p className="font-sans text-base sm:text-lg text-ink-600 leading-relaxed max-w-xl font-normal">
-              Dịch vụ cho thuê máy ảnh du lịch tại TP. Đồng Hới — <strong className="text-ink-900 font-semibold">Canon, Fujifilm, Sony</strong> trọn bộ pin sạc thẻ nhớ, hỗ trợ bạn ghi lại từng khoảnh khắc đẹp nhất tại Quảng Bình.
+              Kiho Camera là dịch vụ cho thuê máy ảnh tại TP. Đồng Hới, Quảng Bình, cung cấp các dòng <strong className="text-ink-900 font-semibold">Canon, Fujifilm và Sony</strong> trọn bộ pin sạc thẻ nhớ, hỗ trợ bạn ghi lại từng khoảnh khắc đẹp nhất cho chuyến du lịch, check-in và vlog.
             </p>
 
             {/* Editorial Trust Line */}

@@ -105,6 +105,7 @@ export function CatalogFilterBar({
             <input
               type="text"
               name="search"
+              aria-label="Tìm kiếm máy ảnh theo tên hoặc dòng máy"
               defaultValue={currentSearch || ""}
               placeholder="Tìm Canon R50, X100V..."
               className="w-full pl-8 pr-3 py-1.5 bg-white border border-ink-200 rounded-lg text-base sm:text-xs text-ink-900 focus:outline-hidden focus:border-accent focus:ring-1 focus:ring-accent transition-all placeholder:text-ink-500 font-sans"

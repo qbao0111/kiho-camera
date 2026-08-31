@@ -1,0 +1,156 @@
+<svg width="1080" height="1350" viewBox="0 0 1080 1350" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <!-- Mask punches transparent photo hole -->
+      <mask id="cutout-hole">
+        <rect width="1080" height="1350" fill="white"/>
+        <rect x="70" y="230" width="940" height="810" rx="24" ry="24" fill="black"/>
+      </mask>
+      <!-- Topo line pattern -->
+      <pattern id="topo-lines" width="200" height="200" patternUnits="userSpaceOnUse">
+        <path d="M 0 50 Q 50 20 100 60 T 200 40 M 0 120 Q 60 160 120 110 T 200 130 M 0 180 Q 70 140 140 190 T 200 170" fill="none" stroke="#2E7D73" stroke-width="1.2" stroke-opacity="0.12"/>
+      </pattern>
+      <!-- Linear gradient for badge -->
+      <linearGradient id="stamp-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" stop-color="#D95D39"/>
+        <stop offset="100%" stop-color="#BF4622"/>
+      </linearGradient>
+    </defs>
+
+    <!-- Base Canvas with Cutout -->
+    <rect width="1080" height="1350" fill="#F8F5EE" mask="url(#cutout-hole)"/>
+    <!-- Topo background accent on outer area -->
+    <rect width="1080" height="1350" fill="url(#topo-lines)" mask="url(#cutout-hole)"/>
+
+    <!-- Decorative Top Edge Border -->
+    <rect x="30" y="30" width="1020" height="1290" rx="32" ry="32" fill="none" stroke="#1B3B2B" stroke-width="3" stroke-opacity="0.85" mask="url(#cutout-hole)"/>
+    <rect x="38" y="38" width="1004" height="1274" rx="26" ry="26" fill="none" stroke="#D95D39" stroke-width="1" stroke-dasharray="8 6" stroke-opacity="0.6" mask="url(#cutout-hole)"/>
+
+    <!-- Corner Accents for Outer Card -->
+    <circle cx="50" cy="50" r="4" fill="#1B3B2B"/>
+    <circle cx="1030" cy="50" r="4" fill="#1B3B2B"/>
+    <circle cx="50" cy="1300" r="4" fill="#1B3B2B"/>
+    <circle cx="1030" cy="1300" r="4" fill="#1B3B2B"/>
+
+    <!-- ================= HEADER SECTION ================= -->
+    <g transform="translate(0, 25)">
+      <!-- Top Tag / Pill -->
+      <g transform="translate(540, 35)">
+        <rect x="-240" y="0" width="480" height="34" rx="17" fill="#1B3B2B"/>
+        <text x="0" y="22" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="12.5" font-weight="700" fill="#F8F5EE" letter-spacing="3.5">QUẢNG BÌNH // VIỆT NAM • UNESCO SITE</text>
+      </g>
+
+      <!-- Main Display Title -->
+      <g transform="translate(540, 130)">
+        <text x="0" y="0" text-anchor="middle" font-family="'Playfair Display', serif" font-size="62" font-weight="900" fill="#1B3B2B" letter-spacing="6">PHONG NHA</text>
+        <text x="240" y="-12" font-family="'Playfair Display', serif" font-style="italic" font-size="34" font-weight="700" fill="#D95D39">Adventure</text>
+      </g>
+
+      <!-- Subtitle -->
+      <g transform="translate(540, 180)">
+        <text x="0" y="0" text-anchor="middle" font-family="'Be Vietnam Pro', sans-serif" font-size="14" font-weight="700" fill="#4B6354" letter-spacing="4">HÀNH TRÌNH CHẠM VÀO KỲ QUAN TRIỆU NĂM</text>
+        <!-- Mountain Doodle Line under subtitle -->
+        <path d="M -160 16 L -100 16 L -70 4 L -40 16 L 0 8 L 40 16 L 70 4 L 100 16 L 160 16" fill="none" stroke="#D95D39" stroke-width="2" stroke-linecap="round"/>
+      </g>
+
+      <!-- Expedition Stamp (Top Right) -->
+      <g transform="translate(930, 85) rotate(12)">
+        <circle cx="0" cy="0" r="48" fill="none" stroke="#D95D39" stroke-width="2.5" stroke-dasharray="5 3"/>
+        <circle cx="0" cy="0" r="41" fill="none" stroke="#D95D39" stroke-width="1.2"/>
+        <path id="curve-pn" d="M -34,0 A 34,34 0 0,1 34,0" fill="none"/>
+        <text font-family="'JetBrains Mono', monospace" font-size="7.5" font-weight="700" fill="#D95D39" letter-spacing="2">
+          <textPath href="#curve-pn" startOffset="50%" text-anchor="middle">KIHO EXPEDITION</textPath>
+        </text>
+        <text x="0" y="4" text-anchor="middle" font-family="'Playfair Display', serif" font-size="14" font-weight="900" fill="#D95D39">17°32'N</text>
+        <text x="0" y="18" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="8" font-weight="700" fill="#D95D39">QUẢNG BÌNH</text>
+      </g>
+
+      <!-- Postcard Airmail Hatching Accent (Top Left) -->
+      <g transform="translate(65, 55)">
+        <line x1="0" y1="0" x2="20" y2="40" stroke="#D95D39" stroke-width="4"/>
+        <line x1="16" y1="0" x2="36" y2="40" stroke="#1B3B2B" stroke-width="4"/>
+        <line x1="32" y1="0" x2="52" y2="40" stroke="#D95D39" stroke-width="4"/>
+        <line x1="48" y1="0" x2="68" y2="40" stroke="#1B3B2B" stroke-width="4"/>
+      </g>
+    </g>
+
+    <!-- ================= PHOTO WINDOW FRAMING ================= -->
+    <!-- Outer Border of Photo Cutout -->
+    <rect x="70" y="230" width="940" height="810" rx="24" ry="24" fill="none" stroke="#1B3B2B" stroke-width="4"/>
+    <rect x="76" y="236" width="928" height="798" rx="18" ry="18" fill="none" stroke="#E5A93C" stroke-width="1.5" stroke-opacity="0.7"/>
+
+    <!-- Photo Corner Mounting Brackets -->
+    <!-- Top-Left -->
+    <path d="M 66 264 L 66 226 L 104 226" fill="none" stroke="#D95D39" stroke-width="5" stroke-linecap="round"/>
+    <!-- Top-Right -->
+    <path d="M 1014 264 L 1014 226 L 976 226" fill="none" stroke="#D95D39" stroke-width="5" stroke-linecap="round"/>
+    <!-- Bottom-Left -->
+    <path d="M 66 1006 L 66 1044 L 104 1044" fill="none" stroke="#D95D39" stroke-width="5" stroke-linecap="round"/>
+    <!-- Bottom-Right -->
+    <path d="M 1014 1006 L 1014 1044 L 976 1044" fill="none" stroke="#D95D39" stroke-width="5" stroke-linecap="round"/>
+
+    <!-- Ticket Notches on Left and Right of Photo Window -->
+    <circle cx="70" cy="635" r="14" fill="#F8F5EE" stroke="#1B3B2B" stroke-width="3"/>
+    <circle cx="1010" cy="635" r="14" fill="#F8F5EE" stroke="#1B3B2B" stroke-width="3"/>
+
+    <!-- Small Film Frame Label on Photo Edge -->
+    <g transform="translate(95, 255)">
+      <rect x="0" y="0" width="130" height="22" rx="4" fill="#1B3B2B" fill-opacity="0.85"/>
+      <text x="65" y="15" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="10" font-weight="700" fill="#F8F5EE" letter-spacing="2">FRAME #01-PN</text>
+    </g>
+
+    <!-- ================= FOOTER SECTION ================= -->
+    <g transform="translate(0, 1060)">
+      <!-- 3 Story Highlight Pills (Modernized from reference) -->
+      <g transform="translate(540, 0)">
+        <!-- Badge 1: Sông Son -->
+        <g transform="translate(-300, 0)">
+          <rect x="-135" y="0" width="270" height="48" rx="12" fill="#FFFFFF" stroke="#1B3B2B" stroke-width="1.5"/>
+          <circle cx="-100" cy="24" r="14" fill="#2E7D73"/>
+          <text x="-100" y="28" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="11" font-weight="700" fill="#FFFFFF">01</text>
+          <text x="-70" y="21" font-family="'Be Vietnam Pro', sans-serif" font-size="13" font-weight="800" fill="#1B3B2B">SÔNG SON</text>
+          <text x="-70" y="37" font-family="'Be Vietnam Pro', sans-serif" font-size="9.5" font-weight="600" fill="#2E7D73">Dòng xanh ngọc bích</text>
+        </g>
+
+        <!-- Badge 2: Kỳ Quan Động -->
+        <g transform="translate(0, 0)">
+          <rect x="-135" y="0" width="270" height="48" rx="12" fill="#FFFFFF" stroke="#1B3B2B" stroke-width="1.5"/>
+          <circle cx="-100" cy="24" r="14" fill="#D95D39"/>
+          <text x="-100" y="28" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="11" font-weight="700" fill="#FFFFFF">02</text>
+          <text x="-70" y="21" font-family="'Be Vietnam Pro', sans-serif" font-size="13" font-weight="800" fill="#1B3B2B">KỲ QUAN ĐỘNG</text>
+          <text x="-70" y="37" font-family="'Be Vietnam Pro', sans-serif" font-size="9.5" font-weight="600" fill="#D95D39">Thạch nhũ triệu năm</text>
+        </g>
+
+        <!-- Badge 3: Tuổi Trẻ -->
+        <g transform="translate(300, 0)">
+          <rect x="-135" y="0" width="270" height="48" rx="12" fill="#FFFFFF" stroke="#1B3B2B" stroke-width="1.5"/>
+          <circle cx="-100" cy="24" r="14" fill="#1B3B2B"/>
+          <text x="-100" y="28" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="11" font-weight="700" fill="#FFFFFF">03</text>
+          <text x="-70" y="21" font-family="'Be Vietnam Pro', sans-serif" font-size="13" font-weight="800" fill="#1B3B2B">DẤU ẤN BẠN BÈ</text>
+          <text x="-70" y="37" font-family="'Be Vietnam Pro', sans-serif" font-size="9.5" font-weight="600" fill="#1B3B2B">Thanh xuân ghi dấu</text>
+        </g>
+      </g>
+
+      <!-- Subtle Divider Line -->
+      <line x1="80" y1="68" x2="1000" y2="68" stroke="#1B3B2B" stroke-width="1.2" stroke-dasharray="6 4" stroke-opacity="0.4"/>
+
+      <!-- Brand Footer Row -->
+      <g transform="translate(0, 80)">
+        <!-- Kiho Logo (Left) -->
+        <g transform="translate(75, 5)">
+          
+    <svg viewBox="0 0 355 175" width="195.25000000000003" height="96.25000000000001">
+      <g transform="translate(-10, 0)">
+        <rect x="28" y="20" width="22" height="100" rx="4" fill="#1B3B2B"/>
+        <path d="M 48 72 L 87 21 C 89 18.5 92 18.5 94.5 20.5 L 104 27.5 C 106.5 29.5 106.5 32.5 104.5 35 L 68 76 Z" fill="#1B3B2B"/>
+        <path d="M 58 68 L 97 113.5 C 99 116 102 116.5 104.5 114.5 L 112 108 C 114.5 106 114.5 103 112.5 100.5 L 75 58 Z" fill="#1B3B2B"/>
+        <circle cx="131" cy="30" r="11" fill="#1B3B2B"/>
+        <rect x="120" y="50" width="22" height="70" rx="4" fill="#1B3B2B"/>
+        <rect x="156" y="20" width="22" height="100" rx="4" fill="#1B3B2B"/>
+        <path d="M 178 72 C 188 56 203 50 217 50 C 232 50 239 60 239 76 L 239 120 L 217 120 L 217 78 C 217 70 212 67 204 67 C 194 67 178 74 178 88 L 178 120 L 156 120" fill="#1B3B2B"/>
+        <circle cx="290" cy="85" r="37" fill="#1B3B2B"/>
+        <circle cx="290" cy="85" r="21.5" fill="#F8F5EE"/>
+        <circle cx="290" cy="85" r="14" fill="#1B3B2B"/>
+        <circle cx="285" cy="80" r="4.5" fill="#F8F5EE"/>
+        <text x="178" y="156" font-family="'Be Vietnam Pro', sans-serif" font-size="14" font-weight="700" fill="#1B3B2B" letter-spacing="8" text-anchor="middle">CAMERA</text>
+      </g>
+    </svg>

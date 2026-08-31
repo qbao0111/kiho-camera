@@ -13,7 +13,7 @@ import {
 } from "lucide-react";
 import { getSiteSettings } from "@/lib/services/settings";
 import { getEquipmentList } from "@/lib/services/equipment";
-import { BreadcrumbJsonLd } from "@/components/public/json-ld";
+import { BreadcrumbJsonLd, ArticleJsonLd } from "@/components/public/json-ld";
 import { TrackedOutboundLink } from "@/components/analytics/tracked-outbound-link";
 import { FadeIn } from "@/components/ui/motion";
 
@@ -165,6 +165,12 @@ export default async function PhongNhaGuidePage() {
         ]}
         siteUrl={siteUrl}
       />
+      <ArticleJsonLd
+        title="Thuê máy ảnh đi Phong Nha: Chọn máy nào phù hợp cho chuyến đi?"
+        description="Kinh nghiệm thuê máy ảnh du lịch đi Phong Nha - Kẻ Bàng: Gợi ý chọn dòng máy phù hợp cho Động Thiên Đường, Sông Son, Suối Moọc."
+        url="/thue-may-anh-phong-nha"
+        siteUrl={siteUrl}
+      />
 
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
         {/* Breadcrumb Bar */}
@@ -188,7 +194,7 @@ export default async function PhongNhaGuidePage() {
           </h1>
 
           <p className="font-sans text-base sm:text-lg text-ink-600 leading-relaxed">
-            Vườn quốc gia Phong Nha - Kẻ Bàng với những hang động kỳ vĩ, dòng sông Son xanh ngọc bích và rừng nguyên sinh bạt ngàn là điểm đến không thể bỏ qua khi tới Quảng Bình. Để lưu giữ trọn vẹn vẻ đẹp này, một chiếc máy ảnh du lịch chuyên dụng sẽ giúp bạn bắt trọn từng khoảnh khắc với độ chi tiết và màu sắc tự nhiên cho chuyến đi.
+            Thuê máy ảnh đi Phong Nha — Kẻ Bàng tại TP. Đồng Hới là giải pháp tối ưu giúp bạn chuẩn bị thiết bị chụp ảnh thiếu sáng trong hang động, ghi lại dòng sông Son xanh ngọc và thiên nhiên Suối Nước Moọc với trọn bộ 2 pin sạc, thẻ nhớ 64GB tốc độ cao và túi chống sốc.
           </p>
         </div>
 

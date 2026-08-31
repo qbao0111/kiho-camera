@@ -1,13 +1,21 @@
 import React from "react";
-import { SiteSettings, Equipment } from "@/types/database";
+import { SiteSettings, Equipment, StorefrontImage } from "@/types/database";
 import { getEquipmentCoverImage } from "@/lib/equipment-images";
 
 interface LocalBusinessProps {
   settings: SiteSettings;
   siteUrl: string;
+  storefrontImages?: StorefrontImage[];
 }
 
-export function LocalBusinessJsonLd({ settings, siteUrl }: LocalBusinessProps) {
+export function LocalBusinessJsonLd({ settings, siteUrl, storefrontImages = [] }: LocalBusinessProps) {
+  // Collect genuine images for the business (primary storefront images first)
+  const imagesList = [
+    ...storefrontImages.map((img) => img.image_url),
+    `${siteUrl}/images/landing/hero-quang-binh.webp`,
+    `${siteUrl}/brand/kiho-logo-social.webp`,
+  ].filter(Boolean);
+
   const schema = {
     "@context": "https://schema.org",
     "@type": "LocalBusiness",
@@ -15,7 +23,7 @@ export function LocalBusinessJsonLd({ settings, siteUrl }: LocalBusinessProps) {
     "name": settings.shop_name || "Kiho Camera",
     "description":
       settings.hero_subtitle ||
-      "Dịch vụ cho thuê máy ảnh du lịch Canon, Fujifilm, Sony chính hãng tại TP. Đồng Hới, khu vực Quảng Bình. Đầy đủ pin, sạc, thẻ nhớ đi kèm, hỗ trợ giao nhận tận nơi.",
+      "Dịch vụ cho thuê máy ảnh du lịch Canon, Fujifilm, Sony chính hãng tại TP. Đồng Hới, Quảng Bình. Đầy đủ pin sạc, thẻ nhớ, hỗ trợ giao nhận tận nơi.",
     "url": siteUrl,
     "telephone": settings.phone || "0387 274 669",
     "hasMap": settings.maps_url || "https://maps.app.goo.gl/3Hh3G8uLymxQn6r98",
@@ -54,7 +62,7 @@ export function LocalBusinessJsonLd({ settings, siteUrl }: LocalBusinessProps) {
     ],
     "priceRange": "80.000₫ - 450.000₫",
     "logo": `${siteUrl}/brand/kiho-logo-social.webp`,
-    "image": `${siteUrl}/images/landing/hero-quang-binh.webp`,
+    "image": imagesList.length > 0 ? (imagesList.length === 1 ? imagesList[0] : imagesList) : `${siteUrl}/brand/kiho-logo-social.webp`,
     "sameAs": [
       settings.facebook_url,
       settings.tiktok_url,
@@ -156,3 +164,53 @@ export function ProductJsonLd({ equipment, siteUrl }: { equipment: Equipment; si
   );
 }
 
+export function ArticleJsonLd({
+  title,
+  description,
+  url,
+  siteUrl,
+  datePublished,
+  dateModified,
+}: {
+  title: string;
+  description: string;
+  url: string;
+  siteUrl: string;
+  datePublished?: string;
+  dateModified?: string;
+}) {
+  const fullUrl = url.startsWith("http") ? url : `${siteUrl}${url}`;
+
+  const schema = {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": fullUrl,
+    },
+    "headline": title,
+    "description": description,
+    "author": {
+      "@type": "Organization",
+      "name": "Kiho Camera",
+      "url": siteUrl,
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Kiho Camera",
+      "logo": {
+        "@type": "ImageObject",
+        "url": `${siteUrl}/brand/kiho-logo-social.webp`,
+      },
+    },
+    ...(datePublished ? { "datePublished": datePublished } : {}),
+    ...(dateModified ? { "dateModified": dateModified } : {}),
+  };
+
+  return (
+    <script
+      type="application/ld+json"
+      dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
+    />
+  );
+}

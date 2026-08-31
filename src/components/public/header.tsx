@@ -222,7 +222,7 @@ export function Header({ settings }: HeaderProps) {
                 className="min-w-[38px] min-h-[38px] flex items-center justify-center text-ink-900 hover:text-accent transition-colors rounded-md border border-ink-200 bg-white focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-accent cursor-pointer"
                 aria-label={isOpen ? "Đóng menu điều hướng" : "Mở menu điều hướng"}
                 aria-expanded={isOpen}
-                aria-controls="mobile-nav-drawer"
+                aria-controls={isOpen ? "mobile-nav-drawer" : undefined}
               >
                 {isOpen ? <X className="w-4 h-4" /> : <Menu className="w-4 h-4 text-ink-900" />}
               </button>

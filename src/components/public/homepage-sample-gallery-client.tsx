@@ -9,6 +9,8 @@ import {
   ZoomIn,
   Camera,
   ArrowRight,
+  Sparkles,
+  Layers,
 } from "lucide-react";
 import { ImageLightbox, LightboxImage } from "@/components/ui/image-lightbox";
 
@@ -24,17 +26,23 @@ export interface HomepageSampleItem {
 }
 
 interface HomepageSampleGalleryClientProps {
-  items: HomepageSampleItem[];
+  initialItems: HomepageSampleItem[];
+  allItems: HomepageSampleItem[];
 }
 
 export function HomepageSampleGalleryClient({
-  items,
+  initialItems,
+  allItems,
 }: HomepageSampleGalleryClientProps) {
+  // State: whether user expanded to all items in rail
+  const [isExpanded, setIsExpanded] = useState(false);
   const [selectedIdx, setSelectedIdx] = useState<number | null>(null);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [canScrollLeft, setCanScrollLeft] = useState(false);
   const [canScrollRight, setCanScrollRight] = useState(true);
   const [isDragging, setIsDragging] = useState(false);
+
+  const displayedItems = isExpanded ? allItems : initialItems;
 
   const railRef = useRef<HTMLDivElement>(null);
   const isMouseDownRef = useRef(false);
@@ -49,12 +57,11 @@ export function HomepageSampleGalleryClient({
     setCanScrollLeft(scrollLeft > 10);
     setCanScrollRight(scrollLeft < scrollWidth - clientWidth - 10);
 
-    // Approximate current visible index
     const firstChild = railRef.current.firstElementChild as HTMLElement | null;
     const cardWidth = firstChild ? firstChild.offsetWidth + 16 : 300;
     const activeIdx = Math.round(scrollLeft / cardWidth);
-    setCurrentIndex(Math.min(Math.max(0, activeIdx), items.length - 1));
-  }, [items.length]);
+    setCurrentIndex(Math.min(Math.max(0, activeIdx), displayedItems.length - 1));
+  }, [displayedItems.length]);
 
   useEffect(() => {
     const rail = railRef.current;
@@ -114,8 +121,8 @@ export function HomepageSampleGalleryClient({
     railRef.current.scrollBy({ left: cardWidth * 1.5, behavior: "smooth" });
   };
 
-  // Prepare lightbox data
-  const lightboxImages: LightboxImage[] = items.map((item) => ({
+  // Prepare full lightbox data (allows browsing all available photos)
+  const lightboxImages: LightboxImage[] = allItems.map((item) => ({
     url: item.imageUrl,
     alt: item.altText,
     caption: item.caption
@@ -123,27 +130,40 @@ export function HomepageSampleGalleryClient({
       : `Ảnh chụp thực tế từ ${item.cameraName} tại Kiho Camera`,
   }));
 
-  if (!items || items.length === 0) {
+  if (!displayedItems || displayedItems.length === 0) {
     return null;
   }
 
   return (
     <div className="space-y-6">
-      {/* Top Controls Bar: Counter & Desktop Prev/Next Buttons */}
+      {/* Top Controls Bar: Counter, Expand Action & Desktop Prev/Next Buttons */}
       <div className="flex items-center justify-between px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
-        <div className="flex items-center gap-2">
+        <div className="flex flex-wrap items-center gap-2.5">
           <span className="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-mono font-medium bg-canvas-200 text-ink-700 border border-ink-300/80 shadow-2xs">
             <span className="text-ink-900 font-bold">
               {String(currentIndex + 1).padStart(2, "0")}
             </span>
             <span className="mx-1 text-ink-400">/</span>
-            <span>{String(items.length).padStart(2, "0")}</span>
+            <span>{String(displayedItems.length).padStart(2, "0")}</span>
             <span className="ml-1.5 text-[11px] text-ink-500 font-sans hidden xs:inline">
-              khoảnh khắc
+              ảnh nổi bật
             </span>
           </span>
+
+          {/* On-demand Expand Button if there are more photos */}
+          {!isExpanded && allItems.length > initialItems.length && (
+            <button
+              type="button"
+              onClick={() => setIsExpanded(true)}
+              className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-sans font-semibold text-accent hover:text-white bg-white hover:bg-accent border border-accent/40 transition-colors shadow-2xs cursor-pointer"
+            >
+              <Layers className="w-3 h-3" />
+              <span>Xem trọn bộ {allItems.length} ảnh</span>
+            </button>
+          )}
+
           <span className="text-xs text-ink-500 font-sans hidden sm:inline">
-            · Kéo chuột hoặc vuốt để xem ảnh · Bấm để phóng to
+            · Vuốt hoặc kéo chuột để xem · Bấm để phóng to
           </span>
         </div>
 
@@ -194,7 +214,7 @@ export function HomepageSampleGalleryClient({
           WebkitOverflowScrolling: "touch",
         }}
       >
-        {items.map((item, idx) => (
+        {displayedItems.map((item, idx) => (
           <figure
             key={item.id || idx}
             className="w-[82vw] xs:w-[75vw] sm:w-[320px] md:w-[300px] lg:w-[280px] shrink-0 snap-start flex flex-col group select-none"
@@ -210,8 +230,8 @@ export function HomepageSampleGalleryClient({
                   handleCardClick(idx);
                 }
               }}
-              aria-label={`Xem ảnh chụp từ ${item.cameraName}: ${
-                item.caption || item.altText
+              aria-label={`Xem ảnh chụp từ ${item.cameraName}${
+                item.caption ? `: ${item.caption}` : ""
               }`}
               className="relative aspect-[4/5] w-full rounded-xl overflow-hidden bg-canvas-200 border border-ink-200/80 shadow-2xs hover:shadow-md transition-all duration-300 group focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-accent select-none"
             >
@@ -244,29 +264,14 @@ export function HomepageSampleGalleryClient({
               <div className="absolute inset-x-0 bottom-0 h-16 bg-gradient-to-t from-black/40 via-transparent to-transparent pointer-events-none opacity-40 group-hover:opacity-70 transition-opacity" />
             </div>
 
-            {/* Figcaption & Metadata underneath */}
-            <figcaption className="mt-2.5 px-0.5 space-y-1 flex-1 flex flex-col justify-between">
-              {item.caption ? (
+            {/* Figcaption: Only display genuine custom caption if present */}
+            {item.caption && (
+              <figcaption className="mt-2 px-0.5">
                 <p className="text-xs font-sans text-ink-700 line-clamp-2 leading-relaxed font-normal">
                   {item.caption}
                 </p>
-              ) : (
-                <p className="text-xs font-sans text-ink-500 italic leading-relaxed">
-                  Ảnh chụp thực tế
-                </p>
-              )}
-
-              {/* Camera Product Link */}
-              <div className="pt-0.5">
-                <Link
-                  href={`/thiet-bi/${item.cameraSlug}`}
-                  className="inline-flex items-center gap-1 text-[11px] font-sans font-semibold text-accent hover:underline group-hover:text-accent-hover transition-colors"
-                >
-                  <span>Xem máy {item.cameraName}</span>
-                  <ArrowRight className="w-3 h-3 transition-transform group-hover:translate-x-0.5" />
-                </Link>
-              </div>
-            </figcaption>
+              </figcaption>
+            )}
           </figure>
         ))}
       </div>
@@ -281,13 +286,25 @@ export function HomepageSampleGalleryClient({
             </span>
           </div>
 
-          <Link
-            href="/thiet-bi"
-            className="inline-flex items-center gap-1.5 font-semibold text-ink-900 hover:text-accent bg-white hover:bg-canvas-200 border border-ink-300 px-4 py-2 rounded-lg transition-colors shadow-2xs shrink-0"
-          >
-            <span>Xem tất cả 12 dòng máy</span>
-            <ArrowRight className="w-3.5 h-3.5 text-accent" />
-          </Link>
+          <div className="flex items-center gap-2">
+            {!isExpanded && allItems.length > initialItems.length && (
+              <button
+                type="button"
+                onClick={() => setIsExpanded(true)}
+                className="inline-flex items-center gap-1.5 font-semibold text-accent hover:text-accent-hover bg-white hover:bg-canvas-200 border border-ink-300 px-3.5 py-2 rounded-lg transition-colors shadow-2xs cursor-pointer"
+              >
+                <span>Xem tất cả {allItems.length} ảnh thật</span>
+              </button>
+            )}
+
+            <Link
+              href="/thiet-bi"
+              className="inline-flex items-center gap-1.5 font-semibold text-ink-900 hover:text-accent bg-white hover:bg-canvas-200 border border-ink-300 px-4 py-2 rounded-lg transition-colors shadow-2xs shrink-0"
+            >
+              <span>Xem 12 dòng máy</span>
+              <ArrowRight className="w-3.5 h-3.5 text-accent" />
+            </Link>
+          </div>
         </div>
       </div>
 

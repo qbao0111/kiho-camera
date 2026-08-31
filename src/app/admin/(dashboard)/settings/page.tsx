@@ -4,6 +4,7 @@ import React, { useState, useEffect } from "react";
 import { Save, CheckCircle, AlertCircle, AlertTriangle, Copy, Check, Phone, MapPin, Globe, Image as ImageIcon, MessageCircle, Loader2 } from "lucide-react";
 import { SiteSettings } from "@/types/database";
 import { MOCK_SITE_SETTINGS } from "@/lib/mock-data";
+import { StorefrontImagesManager } from "@/components/admin/storefront-images-manager";
 
 export default function AdminSettingsPage() {
   const [settings, setSettings] = useState<SiteSettings>(MOCK_SITE_SETTINGS);
@@ -346,6 +347,9 @@ export default function AdminSettingsPage() {
           </button>
         </div>
       </form>
+
+      {/* Storefront Images & Physical Location Identification */}
+      <StorefrontImagesManager />
     </div>
   );
 }

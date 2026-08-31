@@ -1,0 +1,120 @@
+<svg width="1080" height="1350" viewBox="0 0 1080 1350" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <mask id="cutout-cafe">
+        <rect width="1080" height="1350" fill="white"/>
+        <rect x="70" y="230" width="940" height="810" rx="14" ry="14" fill="black"/>
+      </mask>
+      <pattern id="dot-grid" width="30" height="30" patternUnits="userSpaceOnUse">
+        <circle cx="2" cy="2" r="1.2" fill="#141414" fill-opacity="0.08"/>
+      </pattern>
+    </defs>
+
+    <!-- Canvas Background with Cutout -->
+    <rect width="1080" height="1350" fill="#F8F7F4" mask="url(#cutout-cafe)"/>
+    <!-- Subtle Dot Grid in Background -->
+    <rect width="1080" height="1350" fill="url(#dot-grid)" mask="url(#cutout-cafe)"/>
+
+    <!-- Editorial Outer Frame Rule -->
+    <rect x="35" y="35" width="1010" height="1280" rx="20" ry="20" fill="none" stroke="#141414" stroke-width="1.8" mask="url(#cutout-cafe)"/>
+
+    <!-- ================= HEADER SECTION ================= -->
+    <g transform="translate(0, 25)">
+      <!-- Editorial Issue & Vol Label -->
+      <g transform="translate(70, 30)">
+        <text x="0" y="0" font-family="'JetBrains Mono', monospace" font-size="12" font-weight="700" fill="#141414" letter-spacing="3">ISSUE 03 // CITY LIFESTYLE EDIT</text>
+      </g>
+      <g transform="translate(1010, 30)">
+        <text x="0" y="0" text-anchor="end" font-family="'JetBrains Mono', monospace" font-size="12" font-weight="700" fill="#A88B74" letter-spacing="2">ĐỒNG HỚI • 2026</text>
+      </g>
+
+      <!-- Main Headline -->
+      <g transform="translate(70, 115)">
+        <text x="0" y="0" font-family="'Plus Jakarta Sans', sans-serif" font-size="56" font-weight="800" fill="#141414" letter-spacing="-1">CITY CHILL</text>
+        <text x="360" y="-12" font-family="'Playfair Display', serif" font-style="italic" font-size="28" font-weight="600" fill="#D95D39">&amp; Cafe Hopping</text>
+      </g>
+
+      <!-- Subtitle -->
+      <g transform="translate(72, 150)">
+        <text x="0" y="0" font-family="'Be Vietnam Pro', sans-serif" font-size="13" font-weight="600" fill="#55534E" letter-spacing="2">
+          NHỮNG GÓC PHỐ ĐỒNG HỚI BÌNH YÊN • TÁCH CÀ PHÊ &amp; CUỐN PHIM THANH XUÂN
+        </text>
+      </g>
+
+      <!-- Washi Tape Accent on Top Right (Tilted 4deg) -->
+      <g transform="translate(870, 65) rotate(4)">
+        <rect x="0" y="0" width="145" height="38" rx="3" fill="#E5DCCE" fill-opacity="0.85" stroke="#C8BCAB" stroke-width="1"/>
+        <!-- Jagged tape edges -->
+        <line x1="0" y1="0" x2="0" y2="38" stroke="#FFFFFF" stroke-width="2" stroke-dasharray="3 3"/>
+        <line x1="145" y1="0" x2="145" y2="38" stroke="#FFFFFF" stroke-width="2" stroke-dasharray="3 3"/>
+        <text x="72.5" y="24" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="12" font-weight="700" fill="#141414" letter-spacing="2">KIHO CHECK-IN ☕</text>
+      </g>
+    </g>
+
+    <!-- ================= PHOTO WINDOW FRAMING ================= -->
+    <rect x="70" y="230" width="940" height="810" rx="14" ry="14" fill="none" stroke="#141414" stroke-width="2.5"/>
+    <rect x="76" y="236" width="928" height="798" rx="10" ry="10" fill="none" stroke="#A88B74" stroke-width="1" stroke-opacity="0.6"/>
+
+    <!-- Subtle Viewfinder Target Mark in Center -->
+    <g transform="translate(540, 635)" stroke="#FFFFFF" stroke-width="1.8" opacity="0.8">
+      <circle cx="0" cy="0" r="16" fill="none"/>
+      <circle cx="0" cy="0" r="3" fill="#FFFFFF"/>
+      <line x1="-24" y1="0" x2="-10" y2="0"/>
+      <line x1="10" y1="0" x2="24" y2="0"/>
+      <line x1="0" y1="-24" x2="0" y2="-10"/>
+      <line x1="0" y1="10" x2="0" y2="24"/>
+    </g>
+
+    <!-- Corner Tag: 1/250s f/2.0 -->
+    <g transform="translate(850, 255)">
+      <rect x="0" y="0" width="135" height="24" rx="4" fill="#141414" fill-opacity="0.8"/>
+      <text x="67.5" y="16" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="10" font-weight="700" fill="#FFFFFF" letter-spacing="1.5">FUJI X100V • 23MM</text>
+    </g>
+
+    <!-- ================= FOOTER SECTION ================= -->
+    <g transform="translate(0, 1058)">
+      <!-- Audio Track Player Bar (Chic Gen Z / Instagram trend element) -->
+      <g transform="translate(70, 0)">
+        <rect x="0" y="0" width="940" height="42" rx="10" fill="#FFFFFF" stroke="#141414" stroke-width="1.5"/>
+        <!-- Play icon -->
+        <polygon points="25,21 37,27 25,33" fill="#141414"/>
+        <text x="50" y="26" font-family="'Be Vietnam Pro', sans-serif" font-size="11.5" font-weight="700" fill="#141414">
+          Đồng Hới Chiều Mưa Bay — Acoustic Chill
+        </text>
+        <!-- Progress Bar -->
+        <g transform="translate(360, 21)">
+          <line x1="0" y1="0" x2="320" y2="0" stroke="#E5DCCE" stroke-width="4" stroke-linecap="round"/>
+          <line x1="0" y1="0" x2="120" y2="0" stroke="#D95D39" stroke-width="4" stroke-linecap="round"/>
+          <circle cx="120" cy="0" r="6" fill="#D95D39"/>
+        </g>
+        <text x="920" y="26" text-anchor="end" font-family="'JetBrains Mono', monospace" font-size="10" font-weight="700" fill="#55534E">
+          02:14 / 03:45
+        </text>
+      </g>
+
+      <!-- Memo Note & Date Blank -->
+      <g transform="translate(70, 52)">
+        <text x="0" y="16" font-family="'Playfair Display', serif" font-style="italic" font-size="14" font-weight="600" fill="#141414">
+          “Góc cà phê nhỏ, tiếng trò chuyện rôm rả và những khung hình không cần vội vã.”
+        </text>
+      </g>
+
+      <!-- Brand Footer Row -->
+      <g transform="translate(0, 80)">
+        <g transform="translate(70, 0)">
+          
+    <svg viewBox="0 0 355 175" width="195.25000000000003" height="96.25000000000001">
+      <g transform="translate(-10, 0)">
+        <rect x="28" y="20" width="22" height="100" rx="4" fill="#141414"/>
+        <path d="M 48 72 L 87 21 C 89 18.5 92 18.5 94.5 20.5 L 104 27.5 C 106.5 29.5 106.5 32.5 104.5 35 L 68 76 Z" fill="#141414"/>
+        <path d="M 58 68 L 97 113.5 C 99 116 102 116.5 104.5 114.5 L 112 108 C 114.5 106 114.5 103 112.5 100.5 L 75 58 Z" fill="#141414"/>
+        <circle cx="131" cy="30" r="11" fill="#141414"/>
+        <rect x="120" y="50" width="22" height="70" rx="4" fill="#141414"/>
+        <rect x="156" y="20" width="22" height="100" rx="4" fill="#141414"/>
+        <path d="M 178 72 C 188 56 203 50 217 50 C 232 50 239 60 239 76 L 239 120 L 217 120 L 217 78 C 217 70 212 67 204 67 C 194 67 178 74 178 88 L 178 120 L 156 120" fill="#141414"/>
+        <circle cx="290" cy="85" r="37" fill="#141414"/>
+        <circle cx="290" cy="85" r="21.5" fill="#F8F7F4"/>
+        <circle cx="290" cy="85" r="14" fill="#141414"/>
+        <circle cx="285" cy="80" r="4.5" fill="#F8F7F4"/>
+        <text x="178" y="156" font-family="'Be Vietnam Pro', sans-serif" font-size="14" font-weight="700" fill="#141414" letter-spacing="8" text-anchor="middle">CAMERA</text>
+      </g>
+    </svg>

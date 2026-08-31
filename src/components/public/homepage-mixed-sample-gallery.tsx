@@ -30,8 +30,7 @@ export function buildHomepageMixedSampleItems(
     const items: HomepageSampleItem[] = activeSamples.map((s) => ({
       id: s.id,
       imageUrl: s.image_url,
-      altText:
-        s.alt_text || `Ảnh chụp thực tế từ ${eq.name} tại Kiho Camera`,
+      altText: s.alt_text || `Ảnh chụp thực tế từ ${eq.name} tại Kiho Camera`,
       caption: s.caption || null,
       cameraName: eq.name,
       cameraSlug: eq.slug,
@@ -65,11 +64,15 @@ export function buildHomepageMixedSampleItems(
 export function HomepageMixedSampleGallery({
   equipmentList,
 }: HomepageMixedSampleGalleryProps) {
-  const sampleItems = buildHomepageMixedSampleItems(equipmentList);
+  const allSampleItems = buildHomepageMixedSampleItems(equipmentList);
 
-  if (!sampleItems || sampleItems.length === 0) {
+  if (!allSampleItems || allSampleItems.length === 0) {
     return null;
   }
+
+  // Cap initial SSR/hydration to 10 representative photos (1 per camera first, then 2nd round)
+  // to materially reduce DOM element count and initial HTML size
+  const initialItems = allSampleItems.slice(0, 10);
 
   return (
     <section
@@ -96,17 +99,15 @@ export function HomepageMixedSampleGallery({
 
         {/* Editorial Subtitle */}
         <p className="text-sm sm:text-base text-ink-600 font-sans font-normal max-w-3xl leading-relaxed pt-1">
-          Không chỉ xem tên máy hay thông số kỹ thuật. Đây là những khoảnh khắc thực tế được lưu lại theo từng dòng máy, giúp bạn dễ hình dung chất màu, độ nét và cảm giác ảnh trước khi quyết định chọn chiếc máy đồng hành.
-        </p>
-
-        {/* Transparency note */}
-        <p className="text-[11px] sm:text-xs text-ink-400 font-sans italic pt-0.5">
-          * Màu ảnh thực tế có thể thay đổi theo điều kiện ánh sáng, bối cảnh chuyến đi và thiết lập máy của người chụp.
+          Không chỉ xem thông số kỹ thuật. Đây là những khoảnh khắc thực tế được chụp từ các dòng máy Canon, Fujifilm và Sony tại Kiho Camera, giúp bạn dễ hình dung chất màu và độ nét trước chuyến đi.
         </p>
       </div>
 
-      {/* Interactive Photo Rail & Lightbox Showcase */}
-      <HomepageSampleGalleryClient items={sampleItems} />
+      {/* Optimized Client Gallery with Initial 10 items + On-demand Full View */}
+      <HomepageSampleGalleryClient
+        initialItems={initialItems}
+        allItems={allSampleItems}
+      />
     </section>
   );
 }

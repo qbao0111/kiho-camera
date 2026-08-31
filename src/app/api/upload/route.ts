@@ -54,6 +54,8 @@ export async function POST(req: NextRequest) {
       folder = "poster";
     } else if (rawFolder === "feedback") {
       folder = "feedback";
+    } else if (rawFolder === "storefront" || rawFolder === "store") {
+      folder = "storefront";
     }
 
     if (!file) {

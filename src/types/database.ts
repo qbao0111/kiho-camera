@@ -98,6 +98,18 @@ export interface Feedback {
   updated_at?: string;
 }
 
+export interface StorefrontImage {
+  id: string;
+  image_url: string;
+  alt_text: string | null;
+  caption: string | null;
+  sort_order: number;
+  is_cover: boolean;
+  is_active: boolean;
+  created_at?: string;
+  updated_at?: string;
+}
+
 export interface SiteSettings {
   id?: number;
   shop_name: string;
@@ -118,4 +130,5 @@ export interface SiteSettings {
   footer_text: string;
   updated_at?: string;
 }
+
 
