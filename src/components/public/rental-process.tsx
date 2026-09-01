@@ -31,10 +31,9 @@ export function RentalProcess({}: RentalProcessProps = {}) {
         
         {/* Section Header */}
         <div className="mb-10 sm:mb-14 max-w-2xl">
-          <div className="flex items-center gap-1.5 text-xs font-mono font-semibold tracking-widest text-ink-600 uppercase mb-2">
-            <FileCheck className="w-3.5 h-3.5 text-accent" />
-            <span>QUY TRÌNH TINH GỌN</span>
-          </div>
+          <span className="text-xs font-sans font-semibold text-accent uppercase tracking-wider block mb-2">
+            Thủ tục đơn giản
+          </span>
           <h2 className="font-display text-3xl sm:text-4xl lg:text-5xl font-bold text-ink-900 tracking-tight leading-tight">
             Thủ tục gọn nhẹ trong 3 bước
           </h2>
@@ -48,11 +47,11 @@ export function RentalProcess({}: RentalProcessProps = {}) {
           {steps.map((step, idx) => (
             <div
               key={step.num}
-              className="relative p-6 sm:p-7 rounded-xl bg-white border border-ink-200 shadow-xs flex flex-col justify-between space-y-5"
+              className="relative p-6 sm:p-7 rounded-xl bg-white border border-ink-200/80 shadow-xs flex flex-col justify-between"
             >
               <div className="space-y-3">
-                <span className="font-mono text-3xl sm:text-4xl font-bold text-accent block">
-                  {step.num}
+                <span className="font-display text-2xl sm:text-3xl font-bold text-accent block">
+                  0{idx + 1}
                 </span>
                 <h3 className="font-sans text-lg font-bold text-ink-900 tracking-tight">
                   {step.title}
@@ -60,12 +59,6 @@ export function RentalProcess({}: RentalProcessProps = {}) {
                 <p className="font-sans text-xs sm:text-sm text-ink-600 leading-relaxed font-normal">
                   {step.desc}
                 </p>
-              </div>
-
-              {/* Bottom Step Status */}
-              <div className="pt-3 border-t border-ink-200 flex items-center justify-between text-[11px] font-mono text-ink-600 font-semibold">
-                <span>BƯỚC {idx + 1} / 3</span>
-                <span>NHANH GỌN</span>
               </div>
             </div>
           ))}

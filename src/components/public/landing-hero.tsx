@@ -20,10 +20,9 @@ export function LandingHero({}: LandingHeroProps = {}) {
           {/* LEFT EDITORIAL COLUMN (Server-rendered, zero hydration cost) */}
           <div className="lg:col-span-6 space-y-5 sm:space-y-6">
             
-            {/* Metadata Eyebrow */}
-            <div className="flex items-center gap-2 text-xs font-mono font-semibold tracking-wider text-ink-600 uppercase">
-              <span className="w-1.5 h-1.5 rounded-full bg-accent" />
-              <span>KIHO CAMERA · ĐỒNG HỚI, QUẢNG BÌNH</span>
+            {/* Location Context Label */}
+            <div className="text-xs font-sans font-semibold tracking-wider text-ink-500 uppercase">
+              Kiho Camera · Đồng Hới, Quảng Bình
             </div>
 
             {/* Main Editorial H1 Headline */}
@@ -56,7 +55,7 @@ export function LandingHero({}: LandingHeroProps = {}) {
             <div className="pt-2 flex flex-wrap items-center gap-3">
               <a
                 href="#bang-gia"
-                className="bg-ink-900 hover:bg-black text-white px-5 py-3 rounded-lg text-sm font-sans font-semibold transition-colors duration-200 flex items-center gap-2 group cursor-pointer shadow-xs focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-accent"
+                className="bg-ink-900 hover:bg-black text-white px-5 py-3 rounded-lg text-sm font-sans font-semibold transition-colors duration-200 flex items-center gap-2 group cursor-pointer shadow-xs focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-accent min-h-[44px]"
               >
                 <span>Xem bảng giá thuê</span>
                 <ArrowDown className="w-4 h-4 group-hover:translate-y-0.5 transition-transform" />
@@ -64,7 +63,7 @@ export function LandingHero({}: LandingHeroProps = {}) {
 
               <Link
                 href="/thiet-bi"
-                className="bg-white hover:bg-canvas-200 text-ink-900 hover:text-accent border border-ink-300 px-5 py-3 rounded-lg text-sm font-sans font-medium transition-colors duration-200 flex items-center gap-2 group cursor-pointer shadow-xs focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-accent"
+                className="bg-white hover:bg-canvas-200 text-ink-900 hover:text-accent border border-ink-300 px-5 py-3 rounded-lg text-sm font-sans font-medium transition-colors duration-200 flex items-center gap-2 group cursor-pointer shadow-xs focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-accent min-h-[44px]"
               >
                 <span>Khám phá 12 dòng máy</span>
                 <ArrowRight className="w-4 h-4 text-ink-600 group-hover:text-accent group-hover:translate-x-0.5 transition-all" />
