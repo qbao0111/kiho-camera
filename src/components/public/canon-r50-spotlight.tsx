@@ -1,7 +1,7 @@
 import React from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowRight, Camera } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 
 interface CanonR50SpotlightProps {
   messengerUrl?: string;
@@ -48,15 +48,15 @@ export function CanonR50Spotlight({}: CanonR50SpotlightProps = {}) {
                 Canon EOS R50
               </h2>
               <p className="font-sans text-base text-ink-600 leading-relaxed font-normal">
-                Gọn nhẹ, lấy nét nhanh và dễ thao tác — chiếc máy được nhiều bạn trẻ và các cặp đôi lựa chọn nhất khi cần máy ảnh dễ chụp cho chuyến đi Quảng Bình.
+                Kiho thường gợi ý Canon R50 cho người mới, couple và khách cần một chiếc máy dễ làm quen khi đi du lịch Quảng Bình.
               </p>
             </div>
 
             {/* 3 Practical Benefits (Humanized, not SaaS metric cards) */}
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 pt-1 text-ink-800 text-xs sm:text-sm font-sans">
               <div className="p-3.5 rounded-lg bg-canvas-100/90 border border-ink-200/70">
-                <span className="font-semibold text-ink-900 block mb-1">Dễ chụp</span>
-                <span className="text-ink-600 text-xs leading-relaxed block">Dễ có ảnh đẹp ngay từ lần đầu cầm máy ảnh</span>
+                <span className="font-semibold text-ink-900 block mb-1">Dễ làm quen</span>
+                <span className="text-ink-600 text-xs leading-relaxed block">Dễ làm quen ngay từ lần đầu cầm máy</span>
               </div>
               <div className="p-3.5 rounded-lg bg-canvas-100/90 border border-ink-200/70">
                 <span className="font-semibold text-ink-900 block mb-1">Nhẹ 375g</span>

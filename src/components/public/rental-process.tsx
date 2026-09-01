@@ -1,5 +1,5 @@
 import React from "react";
-import { ShieldCheck, HelpCircle, FileCheck } from "lucide-react";
+import { ShieldCheck, HelpCircle } from "lucide-react";
 
 interface RentalProcessProps {
   messengerUrl?: string;

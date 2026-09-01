@@ -93,7 +93,7 @@ export function ProductCard({ equipment, priority = false }: ProductCardProps) {
 
           <Link
             href={`/thiet-bi/${equipment.slug}`}
-            className="inline-flex items-center gap-1.5 bg-canvas-200 hover:bg-ink-900 text-ink-900 hover:text-white text-xs font-sans font-semibold px-3 py-2 rounded-md transition-colors duration-200 shrink-0 focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-accent min-h-[36px]"
+            className="inline-flex items-center gap-1.5 bg-canvas-200 hover:bg-ink-900 text-ink-900 hover:text-white text-xs font-sans font-semibold px-3.5 py-2 rounded-md transition-colors duration-200 shrink-0 focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-accent min-h-[44px]"
             aria-label={`Xem máy ${equipment.name}`}
           >
             <span>Chi tiết</span>

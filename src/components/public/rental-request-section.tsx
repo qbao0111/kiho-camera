@@ -1,5 +1,4 @@
 import React from "react";
-import { CheckCircle2, MessageSquare } from "lucide-react";
 import { RentalRequestForm, EquipmentOption } from "@/components/public/rental-request-form";
 import { TrackedOutboundLink } from "@/components/analytics/tracked-outbound-link";
 

@@ -1,6 +1,6 @@
 import React from "react";
 import Image from "next/image";
-import { MapPin, Clock, Phone, Navigation, CheckCircle2, ShieldCheck, ArrowUpRight, Sparkles } from "lucide-react";
+import { MapPin, Phone, Navigation, ArrowUpRight } from "lucide-react";
 import { SiteSettings, StorefrontImage } from "@/types/database";
 import { normalizePhoneNumber } from "@/lib/utils";
 import { DEFAULT_MAPS_URL } from "@/lib/constants";

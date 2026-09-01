@@ -1,5 +1,4 @@
 import React from "react";
-import { Camera } from "lucide-react";
 import { Equipment } from "@/types/database";
 import {
   HomepageSampleGalleryClient,

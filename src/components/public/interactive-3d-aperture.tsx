@@ -4,13 +4,9 @@ import React, { useState, useRef, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import {
-  Aperture,
   Camera,
-  Sparkles,
-  Rotate3d,
   ArrowRight,
   HelpCircle,
-  CheckCircle2,
 } from "lucide-react";
 
 interface FStopConfig {
@@ -112,7 +108,6 @@ export function Interactive3dAperture() {
   const [isShutterActive, setIsShutterActive] = useState(false);
   const [isReticlePulsing, setIsReticlePulsing] = useState(false);
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
-  const [isHoveringLens, setIsHoveringLens] = useState(false);
 
   const containerRef = useRef<HTMLDivElement>(null);
   const animFrameRef = useRef<number | null>(null);
@@ -137,7 +132,6 @@ export function Interactive3dAperture() {
   };
 
   const handleMouseLeave = () => {
-    setIsHoveringLens(false);
     setMousePos({ x: 0, y: 0 });
   };
 
@@ -207,7 +201,6 @@ export function Interactive3dAperture() {
             <div
               ref={containerRef}
               onMouseMove={handleMouseMove}
-              onMouseEnter={() => setIsHoveringLens(true)}
               onMouseLeave={handleMouseLeave}
               className="relative w-full max-w-[320px] sm:max-w-[340px] aspect-square flex items-center justify-center p-3 rounded-full bg-gradient-to-br from-[#1b1a1c] via-[#141316] to-[#0a0a0c] border border-white/15 shadow-[0_20px_50px_rgba(0,0,0,0.7)] cursor-crosshair group transition-transform duration-300 ease-out"
               style={{

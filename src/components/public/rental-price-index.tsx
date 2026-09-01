@@ -3,7 +3,7 @@
 import React, { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowUpRight, Camera, Check } from "lucide-react";
+import { ArrowUpRight, Check } from "lucide-react";
 import { Equipment, PricingEquipmentDTO } from "@/types/database";
 import { getEquipmentCoverImage } from "@/lib/equipment-images";
 import { trackMessengerContact } from "@/lib/analytics";
@@ -77,7 +77,7 @@ export function RentalPriceIndex({
               <button
                 key={tab.key}
                 onClick={() => setSelectedBrand(tab.key)}
-                className={`px-3 py-1.5 rounded-md text-xs font-sans transition-all cursor-pointer focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-accent ${
+                className={`px-3 py-2 min-h-[44px] flex items-center justify-center rounded-md text-xs font-sans transition-all cursor-pointer focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-accent ${
                   selectedBrand === tab.key
                     ? "bg-white text-ink-900 shadow-xs font-bold border border-ink-200"
                     : "text-ink-600 hover:text-ink-900 font-medium"
@@ -200,10 +200,10 @@ export function RentalPriceIndex({
 
                       <Link
                         href={`/thiet-bi/${item.slug}`}
-                        className="inline-flex items-center gap-1 text-xs font-sans font-semibold text-ink-900 hover:text-accent px-2.5 py-1 rounded bg-canvas-100 border border-ink-200 focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-accent"
+                        className="inline-flex items-center justify-center gap-1 text-xs font-sans font-semibold text-ink-900 hover:text-accent px-3 py-2 rounded-md bg-canvas-100 border border-ink-200 min-h-[44px] shrink-0 focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-accent"
                       >
                         <span>Xem máy</span>
-                        <ArrowUpRight className="w-3 h-3 text-ink-600" />
+                        <ArrowUpRight className="w-3.5 h-3.5 text-ink-600" />
                       </Link>
                     </div>
 

@@ -1,11 +1,10 @@
 import React from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowUpRight, Camera } from "lucide-react";
+import { ArrowUpRight } from "lucide-react";
 
 interface VibeTheme {
   id: string;
-  num: string;
   tag: string;
   title: string;
   emotionalLine: string;
@@ -17,7 +16,6 @@ interface VibeTheme {
 const VIBE_THEMES: VibeTheme[] = [
   {
     id: "sunset-beach",
-    num: "01",
     tag: "BIỂN & HOÀNG HÔN",
     title: "Hoàng Hôn & Biển",
     emotionalLine: "Biển Nhật Lệ, outfit nhẹ và những buổi chiều vàng.",
@@ -27,7 +25,6 @@ const VIBE_THEMES: VibeTheme[] = [
   },
   {
     id: "cafe-street",
-    num: "02",
     tag: "CAFE & CHECK-IN",
     title: "Cafe & Check-in",
     emotionalLine: "Tone màu trong trẻo, nhỏ gọn bỏ túi cho những buổi cafe xinh.",
@@ -37,7 +34,6 @@ const VIBE_THEMES: VibeTheme[] = [
   },
   {
     id: "couple-dating",
-    num: "03",
     tag: "HẸN HÒ & KỶ NIỆM",
     title: "Hẹn Hò & Kỷ Niệm",
     emotionalLine: "Màu ảnh mềm mại, bắt trọn từng nụ cười tự nhiên của hai người.",
@@ -47,7 +43,6 @@ const VIBE_THEMES: VibeTheme[] = [
   },
   {
     id: "birthday-party",
-    num: "04",
     tag: "SINH NHẬT & PARTY",
     title: "Sinh Nhật & Party",
     emotionalLine: "Tone da trắng hồng, bắt sáng lung linh dưới ánh đèn tiệc.",
