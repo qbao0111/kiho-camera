@@ -20,12 +20,12 @@ export function ProductCard({ equipment, priority = false }: ProductCardProps) {
   };
 
   return (
-    <article className="group bg-white rounded-xl p-4 sm:p-5 border border-ink-200 shadow-xs hover:shadow-md hover:border-ink-300 transition-all duration-200 flex flex-col justify-between h-full">
+    <article className="group bg-white rounded-xl p-5 border border-ink-200/80 shadow-xs hover:border-ink-400/80 hover:shadow-sm transition-all duration-300 flex flex-col justify-between h-full">
       <div>
-        {/* Camera Photography Container */}
+        {/* Camera Photography Stage (De-boxed: seamless staging without double borders) */}
         <Link
           href={`/thiet-bi/${equipment.slug}`}
-          className="relative block aspect-[4/3] w-full bg-canvas-100 overflow-hidden rounded-lg p-3 mb-3.5 border border-ink-100 focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-accent"
+          className="relative block aspect-[4/3] w-full bg-canvas-50 rounded-lg p-3 mb-4 overflow-hidden focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-accent"
         >
           <Image
             src={coverImage}
@@ -33,21 +33,21 @@ export function ProductCard({ equipment, priority = false }: ProductCardProps) {
             fill
             priority={priority}
             sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-            className="object-contain filter drop-shadow-[0_6px_12px_rgba(0,0,0,0.1)] group-hover:scale-[1.03] transition-transform duration-200 ease-out"
+            className="object-contain filter drop-shadow-[0_8px_16px_rgba(0,0,0,0.08)] group-hover:scale-[1.03] transition-transform duration-300 ease-out"
           />
 
           {/* Discreet Kiho Pick Badge */}
           {equipment.is_featured && (
             <div className="absolute top-2.5 left-2.5 z-10">
-              <span className="bg-ink-900 text-white text-[10px] font-mono font-medium uppercase px-2 py-0.5 rounded-sm shadow-xs">
-                KIHO PICK
+              <span className="bg-ink-900 text-white text-[10px] font-sans font-medium uppercase px-2 py-0.5 rounded shadow-xs tracking-wider">
+                Gợi ý
               </span>
             </div>
           )}
 
           {/* Brand Tag Top Right */}
           <div className="absolute top-2.5 right-2.5 z-10">
-            <span className="bg-white/95 text-ink-700 text-[10px] font-mono font-medium uppercase px-2 py-0.5 rounded-sm border border-ink-200 shadow-xs">
+            <span className="bg-white/90 backdrop-blur-xs text-ink-700 text-[10px] font-sans font-medium px-2 py-0.5 rounded border border-ink-200/70">
               {equipment.brand}
             </span>
           </div>
@@ -56,7 +56,7 @@ export function ProductCard({ equipment, priority = false }: ProductCardProps) {
         {/* Model & Metadata */}
         <div className="space-y-1 px-0.5">
           {equipment.use_cases?.length > 0 && (
-            <div className="text-[11px] font-mono font-semibold text-ink-600 uppercase tracking-wide">
+            <div className="text-[11px] font-mono font-medium text-ink-500 uppercase tracking-wide">
               {equipment.use_cases.slice(0, 2).join(" · ")}
             </div>
           )}
@@ -77,7 +77,7 @@ export function ProductCard({ equipment, priority = false }: ProductCardProps) {
       </div>
 
       {/* Price Hierarchy & Button */}
-      <div className="pt-3.5 mt-3.5 border-t border-ink-200 px-0.5 space-y-2.5">
+      <div className="pt-3.5 mt-3.5 border-t border-ink-200/70 px-0.5 space-y-2.5">
         <div className="flex items-baseline justify-between gap-2">
           <div>
             <div className="flex items-baseline gap-1">
@@ -93,10 +93,10 @@ export function ProductCard({ equipment, priority = false }: ProductCardProps) {
 
           <Link
             href={`/thiet-bi/${equipment.slug}`}
-            className="inline-flex items-center gap-1.5 bg-canvas-200 hover:bg-ink-900 group-hover:bg-ink-900 text-ink-900 hover:text-white group-hover:text-white text-xs font-sans font-semibold px-3 py-2 rounded-lg transition-all duration-200 shadow-xs shrink-0 focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-accent"
+            className="inline-flex items-center gap-1.5 bg-canvas-200 hover:bg-ink-900 text-ink-900 hover:text-white text-xs font-sans font-semibold px-3.5 py-2 rounded-md transition-colors duration-200 shrink-0 focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-accent min-h-[44px]"
             aria-label={`Xem máy ${equipment.name}`}
           >
-            <span>Xem máy</span>
+            <span>Chi tiết</span>
             <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" />
           </Link>
         </div>

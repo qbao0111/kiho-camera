@@ -1,5 +1,4 @@
 import React from "react";
-import { CheckCircle2, MessageSquare } from "lucide-react";
 import { RentalRequestForm, EquipmentOption } from "@/components/public/rental-request-form";
 import { TrackedOutboundLink } from "@/components/analytics/tracked-outbound-link";
 
@@ -21,11 +20,10 @@ export function RentalRequestSection({
           {/* LEFT EDITORIAL COLUMN */}
           <div className="lg:col-span-5 space-y-6">
             
-            {/* Eyebrow */}
-            <div className="flex items-center gap-1.5 text-xs font-mono font-semibold tracking-widest text-ink-600 uppercase">
-              <MessageSquare className="w-3.5 h-3.5 text-accent" />
-              <span>TƯ VẤN THUÊ MÁY</span>
-            </div>
+            {/* Context Label */}
+            <span className="text-xs font-sans font-semibold text-accent uppercase tracking-wider">
+              Tư vấn giữ máy
+            </span>
 
             {/* Main Headline */}
             <div className="space-y-2">
@@ -34,27 +32,25 @@ export function RentalRequestSection({
                 <span className="italic text-accent font-normal">nên chọn máy nào?</span>
               </h2>
               <p className="font-sans text-sm sm:text-base text-ink-600 font-normal leading-relaxed">
-                Để lại lịch đi và số điện thoại. Kiho sẽ xem nhu cầu thực tế và tư vấn dòng máy phù hợp nhất cho chuyến đi của bạn.
+                Để lại lịch trình và số điện thoại, Kiho sẽ tư vấn dòng máy phù hợp nhất với chuyến đi của bạn tại Quảng Bình.
               </p>
             </div>
 
-            {/* 3 Core Trust Points */}
-            <div className="space-y-2.5 pt-1 font-sans text-xs text-ink-800 font-medium">
-              <div className="flex items-center gap-2.5 p-3 rounded-lg bg-white border border-ink-200 shadow-2xs">
-                <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0" />
+            {/* Reassurance list without boxing */}
+            <ul className="space-y-3 pt-1 font-sans text-xs sm:text-sm text-ink-700">
+              <li className="flex items-center gap-2.5">
+                <span className="w-1.5 h-1.5 rounded-full bg-emerald-600 shrink-0" />
                 <span>Không cần cọc tiền máy</span>
-              </div>
-
-              <div className="flex items-center gap-2.5 p-3 rounded-lg bg-white border border-ink-200 shadow-2xs">
-                <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0" />
-                <span>Chỉ cần CCCD hoặc VNeID khi nhận máy</span>
-              </div>
-
-              <div className="flex items-center gap-2.5 p-3 rounded-lg bg-white border border-ink-200 shadow-2xs">
-                <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0" />
-                <span>Kèm trọn bộ 2 pin, sạc đôi và thẻ nhớ 64GB</span>
-              </div>
-            </div>
+              </li>
+              <li className="flex items-center gap-2.5">
+                <span className="w-1.5 h-1.5 rounded-full bg-emerald-600 shrink-0" />
+                <span>Chỉ cần ảnh CCCD hoặc định danh VNeID</span>
+              </li>
+              <li className="flex items-center gap-2.5">
+                <span className="w-1.5 h-1.5 rounded-full bg-emerald-600 shrink-0" />
+                <span>Kèm trọn bộ 2 pin, sạc đôi, thẻ nhớ 64GB và túi chống sốc</span>
+              </li>
+            </ul>
 
             {/* Secondary Direct Contact Hint */}
             <div className="pt-2 text-xs font-sans text-ink-600">

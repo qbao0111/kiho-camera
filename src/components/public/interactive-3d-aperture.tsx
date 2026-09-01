@@ -4,13 +4,9 @@ import React, { useState, useRef, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import {
-  Aperture,
   Camera,
-  Sparkles,
-  Rotate3d,
   ArrowRight,
   HelpCircle,
-  CheckCircle2,
 } from "lucide-react";
 
 interface FStopConfig {
@@ -112,7 +108,6 @@ export function Interactive3dAperture() {
   const [isShutterActive, setIsShutterActive] = useState(false);
   const [isReticlePulsing, setIsReticlePulsing] = useState(false);
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
-  const [isHoveringLens, setIsHoveringLens] = useState(false);
 
   const containerRef = useRef<HTMLDivElement>(null);
   const animFrameRef = useRef<number | null>(null);
@@ -137,7 +132,6 @@ export function Interactive3dAperture() {
   };
 
   const handleMouseLeave = () => {
-    setIsHoveringLens(false);
     setMousePos({ x: 0, y: 0 });
   };
 
@@ -174,11 +168,7 @@ export function Interactive3dAperture() {
   });
 
   return (
-    <section className="py-16 sm:py-24 bg-[#0d0d0e] text-white relative overflow-hidden border-t border-b border-white/10 select-none">
-      {/* Optical Multi-coating Background Atmosphere */}
-      <div className="absolute top-1/4 -left-20 w-[500px] h-[500px] bg-sky-500/10 rounded-full blur-[140px] pointer-events-none" />
-      <div className="absolute bottom-1/4 -right-20 w-[500px] h-[500px] bg-accent/10 rounded-full blur-[140px] pointer-events-none" />
-
+    <section className="py-16 sm:py-24 bg-[#18181b] text-white relative overflow-hidden border-t border-b border-white/10 select-none">
       {/* Screen Shutter Flash Burst Overlay (Subtle & brief) */}
       {isShutterActive && (
         <div
@@ -190,45 +180,40 @@ export function Interactive3dAperture() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         {/* Section Header */}
         <div className="max-w-3xl mb-12 sm:mb-16 space-y-3">
-          <div className="flex items-center gap-2 text-xs font-mono font-medium tracking-widest text-accent uppercase">
-            <Aperture className="w-4 h-4 animate-spin-slow text-accent" />
-            <span>MÔ PHỎNG KHẨU ĐỘ QUANG HỌC · APERTURE SIMULATOR</span>
-          </div>
+          <span className="text-xs font-sans font-semibold text-accent uppercase tracking-wider block mb-2">
+            Góc tìm hiểu nhanh
+          </span>
 
           <h2 className="font-display text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-white leading-tight">
-            Thử khẩu độ máy ảnh và xem <br className="hidden sm:inline" />
-            <span className="italic text-accent font-normal">độ sâu trường ảnh thay đổi</span>
+            Hiểu nhanh khẩu độ để chọn kiểu ảnh bạn thích
           </h2>
 
           <p className="text-sm sm:text-base text-ink-300 font-sans font-normal leading-relaxed max-w-2xl pt-1">
-            Khám phá cách đường kính mở lá khẩu (f-stop) thay đổi độ sâu trường ảnh (depth of field) và tạo bokeh quang học tự nhiên — khác biệt với thuật toán làm mờ hậu kỳ trên smartphone.
+            Chọn các nấc f-stop bên dưới để xem sự khác biệt giữa xóa phông mịn màng khi chụp chân dung và lấy nét rõ toàn bộ khung cảnh du lịch tại Quảng Bình.
           </p>
         </div>
 
         {/* MAIN SIMULATOR 2-COLUMN DISPLAY */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
-          {/* 1. LEFT: AUTHENTIC 3D OPTICAL LENS BARREL */}
+          {/* 1. LEFT: OPTICAL LENS BARREL */}
           <div className="lg:col-span-5 flex flex-col items-center justify-center">
             {/* The Lens Chassis Container */}
             <div
               ref={containerRef}
               onMouseMove={handleMouseMove}
-              onMouseEnter={() => setIsHoveringLens(true)}
               onMouseLeave={handleMouseLeave}
-              className="relative w-full max-w-[320px] sm:max-w-[340px] aspect-square flex items-center justify-center p-3 rounded-full bg-gradient-to-br from-[#1b1a1c] via-[#0f0e10] to-[#080809] border-2 border-white/10 shadow-[0_25px_60px_rgba(0,0,0,0.95)] cursor-crosshair group transition-transform duration-300 ease-out"
+              className="relative w-full max-w-[320px] sm:max-w-[340px] aspect-square flex items-center justify-center p-3 rounded-full bg-gradient-to-br from-[#1b1a1c] via-[#141316] to-[#0a0a0c] border border-white/15 shadow-[0_20px_50px_rgba(0,0,0,0.7)] cursor-crosshair group transition-transform duration-300 ease-out"
               style={{
-                transform: `perspective(900px) rotateY(${mousePos.x * 10}deg) rotateX(${-mousePos.y * 10}deg) scale(${
-                  isHoveringLens ? 1.02 : 1
-                })`,
+                transform: `perspective(900px) rotateY(${mousePos.x * 5}deg) rotateX(${-mousePos.y * 5}deg)`,
               }}
             >
               {/* Outer Knurled Grip Ring (Mechanical Grooves) */}
               <div className="absolute inset-0 rounded-full border-[8px] border-[#222124] shadow-inner opacity-90 pointer-events-none" />
 
-              {/* Coastal Blue Multi-coating Accent Ring */}
-              <div className="absolute inset-2.5 rounded-full border-2 border-accent/80 shadow-[0_0_12px_rgba(37,99,235,0.35)] pointer-events-none" />
+              {/* Multi-coating Accent Ring */}
+              <div className="absolute inset-2.5 rounded-full border border-accent/60 shadow-[0_0_8px_rgba(37,99,235,0.2)] pointer-events-none" />
 
-              {/* Laser Engraving Text Ring (Educational neutral text) */}
+              {/* Laser Engraving Text Ring */}
               <svg className="absolute inset-3 w-[calc(100%-24px)] h-[calc(100%-24px)] pointer-events-none z-20">
                 <defs>
                   <path
@@ -236,22 +221,22 @@ export function Interactive3dAperture() {
                     d="M 158, 158 m -134, 0 a 134,134 0 1,1 268,0 a 134,134 0 1,1 -268,0"
                   />
                 </defs>
-                <text className="text-[9px] font-mono tracking-[0.22em] fill-white/60 uppercase font-semibold">
+                <text className="text-[9px] font-mono tracking-[0.22em] fill-white/50 uppercase font-semibold">
                   <textPath href="#lensTextPath" startOffset="0%">
-                    KIHO OPTICAL LAB · DEPTH OF FIELD SIMULATOR · Ø 58mm ·
+                    KIHO CAMERA · MÔ PHỎNG ĐỘ SÂU TRƯỜNG ẢNH · F-STOP GUIDE ·
                   </textPath>
                 </text>
               </svg>
 
               {/* Inner Optical Glass Cavity */}
               <div className="relative w-[76%] h-[76%] rounded-full bg-gradient-to-br from-[#060b14] via-[#090d16] to-[#04060a] border border-white/20 overflow-hidden shadow-[inset_0_0_40px_rgba(0,0,0,0.9)] flex items-center justify-center">
-                {/* Dynamic Multi-coating Glare Sheen */}
+                {/* Dynamic Optical Sheen */}
                 <div
-                  className="absolute inset-0 pointer-events-none transition-opacity duration-500 opacity-60 group-hover:opacity-90"
+                  className="absolute inset-0 pointer-events-none transition-opacity duration-500 opacity-50 group-hover:opacity-75"
                   style={{
-                    background: `radial-gradient(circle at ${50 + mousePos.x * 35}% ${
-                      50 + mousePos.y * 35
-                    }%, rgba(56, 189, 248, 0.25) 0%, rgba(217, 70, 239, 0.15) 45%, transparent 75%)`,
+                    background: `radial-gradient(circle at ${50 + mousePos.x * 25}% ${
+                      50 + mousePos.y * 25
+                    }%, rgba(56, 189, 248, 0.15) 0%, transparent 60%)`,
                   }}
                 />
 
@@ -324,14 +309,6 @@ export function Interactive3dAperture() {
                   </svg>
                 </div>
 
-                {/* Front Element Glass Highlight Arc */}
-                <div className="absolute top-2 left-6 w-28 h-12 rounded-[50%] border-t-2 border-white/30 -rotate-12 pointer-events-none blur-[0.5px]" />
-              </div>
-
-              {/* Status HUD Tags */}
-              <div className="absolute top-3.5 right-4 bg-black/70 backdrop-blur-xs text-ink-300 text-[10px] font-mono font-medium px-2.5 py-0.5 rounded-full border border-white/10 flex items-center gap-1.5 shadow-md">
-                <Rotate3d className="w-3 h-3 text-accent" />
-                <span>3D OPTICAL VIEW</span>
               </div>
 
               <div className="absolute bottom-3.5 left-4 flex items-center gap-2 font-mono text-xs">
@@ -346,15 +323,15 @@ export function Interactive3dAperture() {
 
             {/* F-STOP SELECTOR BUTTONS */}
             <div className="mt-6 w-full max-w-[340px] space-y-2">
-              <div className="flex items-center justify-between text-xs font-mono text-ink-400 px-1">
-                <span>VÒNG KHẨU ĐỘ (F-STOP)</span>
-                <span className="text-accent font-bold">{current.label}</span>
+              <div className="flex items-center justify-between text-xs font-sans text-ink-400 px-1">
+                <span>Nấc khẩu độ (f-stop)</span>
+                <span className="text-accent font-mono font-bold">{current.label}</span>
               </div>
 
               <div
                 role="radiogroup"
                 aria-label="Chọn nấc khẩu độ thử nghiệm"
-                className="grid grid-cols-5 gap-1.5 p-1.5 rounded-xl bg-ink-900/90 border border-white/15 backdrop-blur-xs shadow-inner"
+                className="grid grid-cols-5 gap-1.5 p-1.5 rounded-xl bg-black/40 border border-white/15 shadow-inner"
               >
                 {F_STOPS.map((stop, idx) => (
                   <button
@@ -364,7 +341,7 @@ export function Interactive3dAperture() {
                     onClick={() => handleSelectFStop(idx)}
                     className={`py-2 px-1 min-h-[44px] rounded-lg text-xs font-mono font-bold transition-all duration-200 cursor-pointer focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-accent ${
                       activeFStopIdx === idx
-                        ? "bg-accent text-white shadow-md scale-105"
+                        ? "bg-accent text-white shadow-md"
                         : "text-ink-400 hover:text-white hover:bg-white/5"
                     }`}
                   >
@@ -379,10 +356,10 @@ export function Interactive3dAperture() {
               <button
                 onClick={handleShutterClick}
                 aria-label="Chụp thử để xem hiệu ứng bắt nét và phơi sáng"
-                className="bg-accent hover:bg-accent-hover text-white text-xs font-sans font-semibold py-2.5 px-6 min-h-[44px] rounded-lg shadow-md flex items-center gap-2 transition-all hover:scale-105 active:scale-95 cursor-pointer group border border-white/20 focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-accent"
+                className="bg-black/60 hover:bg-black text-white text-xs font-sans font-semibold py-2.5 px-5 min-h-[44px] rounded-lg shadow-sm flex items-center gap-2 transition-colors cursor-pointer border border-white/20 focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-accent"
               >
-                <Camera className="w-4 h-4 group-hover:rotate-12 transition-transform" />
-                <span>Bấm chụp thử mô phỏng</span>
+                <Camera className="w-4 h-4 text-accent" />
+                <span>Bấm chụp thử</span>
               </button>
             </div>
           </div>
@@ -468,50 +445,43 @@ export function Interactive3dAperture() {
                   </div>
                 </div>
 
-                {/* Camera Viewfinder HUD Overlay */}
+                {/* Camera Viewfinder Overlay */}
                 <div className="absolute inset-0 p-3 sm:p-5 flex flex-col justify-between pointer-events-none select-none">
                   {/* Top Bar */}
-                  <div className="flex items-center justify-between font-mono text-[10px] sm:text-[11px] text-emerald-400 bg-black/50 backdrop-blur-xs px-2.5 sm:px-3 py-1.5 rounded-lg border border-white/10">
-                    <div className="flex items-center gap-1.5 sm:gap-2">
-                      <span className="w-2 h-2 rounded-full bg-emerald-400 animate-ping" />
-                      <span>[ DUAL PIXEL AF ] [ EYE TRACKING ]</span>
+                  <div className="flex items-center justify-between text-[11px] font-sans text-white/90 bg-black/60 backdrop-blur-xs px-3 py-1.5 rounded-lg border border-white/10">
+                    <div className="flex items-center gap-2">
+                      <span className="w-2 h-2 rounded-full bg-emerald-400" />
+                      <span>Lấy nét chủ thể</span>
                     </div>
-                    <span
-                      className={`px-2 py-0.5 rounded text-[10px] font-bold uppercase border ${current.badgeColor}`}
-                    >
-                      {current.badge}
+                    <span className="px-2 py-0.5 rounded text-[10px] font-medium bg-white/10 text-white border border-white/10">
+                      {current.sceneTitle}
                     </span>
-                    <span className="text-white font-medium">{current.iso}</span>
+                    <span className="font-mono text-white/70">{current.iso}</span>
                   </div>
 
-                  {/* Bottom Bar: Exposure Indicator */}
-                  <div className="flex items-center justify-between font-mono text-xs text-white bg-black/60 backdrop-blur-md px-3 sm:px-3.5 py-2 rounded-lg border border-white/15">
+                  {/* Bottom Bar: Settings */}
+                  <div className="flex items-center justify-between font-sans text-xs text-white bg-black/60 backdrop-blur-md px-3 sm:px-3.5 py-2 rounded-lg border border-white/15">
                     <div className="flex items-center gap-2 sm:gap-3 text-[11px] sm:text-xs">
-                      <span>
-                        Tốc: <strong className="text-white">{current.shutter.split(" ")[0]}</strong>
-                      </span>
-                      <span className="text-ink-400">·</span>
-                      <span>
-                        Khẩu: <strong className="text-accent font-bold">{current.label}</strong>
-                      </span>
+                      <span>Tốc độ: <strong className="font-mono text-white">{current.shutter.split(" ")[0]}</strong></span>
+                      <span className="text-white/30">·</span>
+                      <span>Khẩu độ: <strong className="font-mono text-accent font-bold">{current.label}</strong></span>
                     </div>
-                    <div className="text-emerald-400 text-[10px] sm:text-[11px] font-semibold">
-                      ● KHOÁ NÉT QUANG HỌC
+                    <div className="text-emerald-400 text-[11px] font-medium">
+                      Độ sâu trường ảnh
                     </div>
                   </div>
                 </div>
               </div>
             </div>
 
-            {/* Dynamic Lens Context & Advice Box */}
-            <div className="p-4 sm:p-5 rounded-xl bg-ink-900/90 border border-white/10 space-y-2">
+            {/* Dynamic Lens Guidance Box (Humanized photography advice) */}
+            <div className="p-4 sm:p-5 rounded-xl bg-white/5 border border-white/10 space-y-2.5">
               <div className="flex items-center justify-between">
-                <div className="flex items-center gap-2 text-xs font-sans font-bold text-white">
-                  <Sparkles className="w-4 h-4 text-accent" />
-                  <span>Đặc tính quang học tại {current.label}:</span>
-                </div>
-                <span className="text-[11px] font-mono text-ink-400 uppercase">
-                  {current.sceneTitle}
+                <span className="text-xs font-sans font-bold text-white">
+                  Gợi ý chụp tại {current.label}:
+                </span>
+                <span className="text-[11px] font-sans text-accent font-medium">
+                  {current.badge}
                 </span>
               </div>
 
@@ -521,15 +491,15 @@ export function Interactive3dAperture() {
 
               <div className="pt-2 flex flex-wrap items-center justify-between gap-2 text-xs font-sans border-t border-white/10">
                 <div className="flex items-center gap-1.5">
-                  <span className="text-ink-400 font-medium">Gợi ý bối cảnh:</span>
+                  <span className="text-ink-400 font-medium">Phù hợp:</span>
                   <span className="text-amber-300 font-medium">{current.recommendedSubject}</span>
                 </div>
 
                 <Link
                   href="/thiet-bi/canon-eos-r50"
-                  className="inline-flex items-center gap-1 text-xs text-accent hover:underline font-semibold focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-accent"
+                  className="inline-flex items-center gap-1 text-xs text-accent hover:underline font-semibold focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-accent min-h-[36px]"
                 >
-                  <span>Xem Canon R50 tại Kiho</span>
+                  <span>Xem máy phù hợp tại Kiho</span>
                   <ArrowRight className="w-3.5 h-3.5" />
                 </Link>
               </div>

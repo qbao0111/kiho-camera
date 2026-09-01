@@ -1,5 +1,4 @@
 import React from "react";
-import { Camera } from "lucide-react";
 import { Equipment } from "@/types/database";
 import {
   HomepageSampleGalleryClient,
@@ -81,11 +80,10 @@ export function HomepageMixedSampleGallery({
       className="py-14 sm:py-20 bg-canvas-100 border-t border-ink-200 overflow-hidden relative"
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-8 sm:mb-10 space-y-2.5">
-        {/* Eyebrow */}
-        <div className="flex items-center gap-2 text-xs font-mono font-semibold tracking-wider text-ink-600 uppercase">
-          <Camera className="w-3.5 h-3.5 text-accent" />
-          <span>ẢNH CHỤP THỰC TẾ · REAL SAMPLE SHOTS</span>
-        </div>
+        {/* Context Label */}
+        <span className="text-xs font-sans font-semibold text-accent uppercase tracking-wider">
+          Ảnh chụp thực tế
+        </span>
 
         {/* Heading */}
         <h2

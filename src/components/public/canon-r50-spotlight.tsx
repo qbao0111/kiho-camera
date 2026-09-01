@@ -1,7 +1,7 @@
 import React from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowRight, Camera } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 
 interface CanonR50SpotlightProps {
   messengerUrl?: string;
@@ -16,32 +16,31 @@ export function CanonR50Spotlight({}: CanonR50SpotlightProps = {}) {
           
           {/* LEFT: Cutout Canon R50 on Editorial Backdrop */}
           <div className="lg:col-span-6 relative flex items-center justify-center">
-            <div className="relative w-full aspect-square max-w-[420px] bg-canvas-100 rounded-lg p-6 flex items-center justify-center border border-ink-200">
+            <div className="relative w-full aspect-square max-w-[420px] bg-canvas-50 rounded-lg p-6 flex items-center justify-center">
               <div className="relative w-full h-full">
                 <Image
                   src="/images/landing/cutouts/canon-r50.png"
                   alt="Canon EOS R50 Showcase"
                   fill
                   sizes="(max-width: 1024px) 100vw, 420px"
-                  className="object-contain filter drop-shadow-[0_16px_24px_rgba(20,15,10,0.25)] hover:scale-105 transition-transform duration-500 ease-out"
+                  className="object-contain filter drop-shadow-[0_16px_24px_rgba(20,15,10,0.18)] hover:scale-105 transition-transform duration-500 ease-out"
                 />
               </div>
 
               {/* Lens Kit Tag */}
-              <div className="absolute bottom-3 left-3 bg-ink-900 text-white text-[10px] font-mono font-medium px-2.5 py-0.5 rounded-sm">
+              <div className="absolute bottom-3 left-3 bg-ink-900 text-white text-[10px] font-sans font-medium px-2.5 py-0.5 rounded shadow-xs tracking-wider">
                 KÈM LENS RF-S 18-45MM STM
               </div>
             </div>
           </div>
 
-          {/* RIGHT: Editorial Feature Story & Specs */}
+          {/* RIGHT: Editorial Feature Story & Practical Benefits */}
           <div className="lg:col-span-6 space-y-5 sm:space-y-6">
             
-            {/* Eyebrow */}
-            <div className="flex items-center gap-2 text-xs font-mono font-semibold text-ink-600 uppercase tracking-widest">
-              <span className="w-1.5 h-1.5 rounded-full bg-accent" />
-              <span>KIHO PICK · KHUYÊN DÙNG CHO NGƯỜI MỚI</span>
-            </div>
+            {/* Context Label */}
+            <span className="text-xs font-sans font-semibold text-accent uppercase tracking-wider">
+              Dòng máy gợi ý
+            </span>
 
             {/* Title & Copy */}
             <div className="space-y-2">
@@ -49,45 +48,31 @@ export function CanonR50Spotlight({}: CanonR50SpotlightProps = {}) {
                 Canon EOS R50
               </h2>
               <p className="font-sans text-base text-ink-600 leading-relaxed font-normal">
-                Nhẹ, dễ dùng, lên màu da trắng hồng đẹp tự nhiên — chiếc máy Kiho khuyên dùng nhất cho các bạn nữ, couple và người lần đầu cầm máy ảnh đi du lịch Quảng Bình.
+                Kiho thường gợi ý Canon R50 cho người mới, couple và khách cần một chiếc máy dễ làm quen khi đi du lịch Quảng Bình.
               </p>
             </div>
 
-            {/* 3 Key Specs */}
-            <div className="grid grid-cols-3 gap-3 pt-1">
-              <div className="p-3 rounded-lg bg-canvas-100/90 border border-ink-200">
-                <span className="text-xl sm:text-2xl font-bold font-mono text-ink-900 block">
-                  24.2 MP
-                </span>
-                <span className="text-[11px] text-ink-600 font-sans block mt-0.5 font-medium">
-                  Cảm biến chi tiết cao
-                </span>
+            {/* 3 Practical Benefits (Humanized, not SaaS metric cards) */}
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 pt-1 text-ink-800 text-xs sm:text-sm font-sans">
+              <div className="p-3.5 rounded-lg bg-canvas-100/90 border border-ink-200/70">
+                <span className="font-semibold text-ink-900 block mb-1">Dễ làm quen</span>
+                <span className="text-ink-600 text-xs leading-relaxed block">Dễ làm quen ngay từ lần đầu cầm máy</span>
               </div>
-
-              <div className="p-3 rounded-lg bg-canvas-100/90 border border-ink-200">
-                <span className="text-xl sm:text-2xl font-bold font-mono text-accent block">
-                  375g
-                </span>
-                <span className="text-[11px] text-ink-600 font-sans block mt-0.5 font-medium">
-                  Siêu nhẹ bỏ túi
-                </span>
+              <div className="p-3.5 rounded-lg bg-canvas-100/90 border border-ink-200/70">
+                <span className="font-semibold text-ink-900 block mb-1">Nhẹ 375g</span>
+                <span className="text-ink-600 text-xs leading-relaxed block">Tiện mang theo khi đi chơi cả ngày không mỏi</span>
               </div>
-
-              <div className="p-3 rounded-lg bg-canvas-100/90 border border-ink-200">
-                <span className="text-xl sm:text-2xl font-bold font-mono text-ink-900 block">
-                  Dual Pixel
-                </span>
-                <span className="text-[11px] text-ink-600 font-sans block mt-0.5 font-medium">
-                  Lấy nét nhận diện mắt
-                </span>
+              <div className="p-3.5 rounded-lg bg-canvas-100/90 border border-ink-200/70">
+                <span className="font-semibold text-ink-900 block mb-1">Màn hình lật</span>
+                <span className="text-ink-600 text-xs leading-relaxed block">Tiện chụp selfie, cặp đôi và quay vlog du lịch</span>
               </div>
             </div>
 
             {/* Price Row & Action */}
-            <div className="pt-4 border-t border-ink-200 flex flex-wrap items-center justify-between gap-4">
+            <div className="pt-4 border-t border-ink-200/70 flex flex-wrap items-center justify-between gap-4">
               <div>
-                <span className="text-[11px] font-mono uppercase text-ink-600 font-semibold block">
-                  GIÁ THUÊ NIÊM YẾT
+                <span className="text-[11px] font-sans uppercase text-ink-500 font-semibold block tracking-wider">
+                  Giá thuê niêm yết
                 </span>
                 <div className="flex items-baseline gap-2 mt-0.5">
                   <span className="text-2xl font-bold font-mono text-ink-900">
@@ -105,7 +90,7 @@ export function CanonR50Spotlight({}: CanonR50SpotlightProps = {}) {
               <div>
                 <Link
                   href="/thiet-bi/canon-eos-r50"
-                  className="bg-ink-900 hover:bg-black text-white px-5 py-3 rounded-lg text-xs font-sans font-semibold transition-all shadow-xs flex items-center gap-2 group focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-accent"
+                  className="bg-ink-900 hover:bg-black text-white px-5 py-3 rounded-lg text-xs font-sans font-semibold transition-all shadow-xs flex items-center gap-2 group focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-accent min-h-[44px]"
                 >
                   <span>Xem máy Canon R50</span>
                   <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" />

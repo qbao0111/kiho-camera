@@ -1,11 +1,10 @@
 import React from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowUpRight, Camera } from "lucide-react";
+import { ArrowUpRight } from "lucide-react";
 
 interface VibeTheme {
   id: string;
-  num: string;
   tag: string;
   title: string;
   emotionalLine: string;
@@ -17,7 +16,6 @@ interface VibeTheme {
 const VIBE_THEMES: VibeTheme[] = [
   {
     id: "sunset-beach",
-    num: "01",
     tag: "BIỂN & HOÀNG HÔN",
     title: "Hoàng Hôn & Biển",
     emotionalLine: "Biển Nhật Lệ, outfit nhẹ và những buổi chiều vàng.",
@@ -27,7 +25,6 @@ const VIBE_THEMES: VibeTheme[] = [
   },
   {
     id: "cafe-street",
-    num: "02",
     tag: "CAFE & CHECK-IN",
     title: "Cafe & Check-in",
     emotionalLine: "Tone màu trong trẻo, nhỏ gọn bỏ túi cho những buổi cafe xinh.",
@@ -37,7 +34,6 @@ const VIBE_THEMES: VibeTheme[] = [
   },
   {
     id: "couple-dating",
-    num: "03",
     tag: "HẸN HÒ & KỶ NIỆM",
     title: "Hẹn Hò & Kỷ Niệm",
     emotionalLine: "Màu ảnh mềm mại, bắt trọn từng nụ cười tự nhiên của hai người.",
@@ -47,7 +43,6 @@ const VIBE_THEMES: VibeTheme[] = [
   },
   {
     id: "birthday-party",
-    num: "04",
     tag: "SINH NHẬT & PARTY",
     title: "Sinh Nhật & Party",
     emotionalLine: "Tone da trắng hồng, bắt sáng lung linh dưới ánh đèn tiệc.",
@@ -65,10 +60,9 @@ export function UseCaseSection() {
         {/* Section Header */}
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-10 sm:mb-14 gap-6">
           <div className="space-y-1.5 max-w-2xl">
-            <div className="flex items-center gap-1.5 text-xs font-mono font-semibold tracking-wider text-ink-600 uppercase">
-              <Camera className="w-3.5 h-3.5 text-accent" />
-              <span>GỢI Ý THEO GU DU LỊCH</span>
-            </div>
+            <span className="text-xs font-sans font-semibold text-accent uppercase tracking-wider">
+              Gợi ý theo lịch trình
+            </span>
 
             <h2 className="font-display text-3xl sm:text-4xl lg:text-5xl font-bold text-ink-900 tracking-tight leading-tight">
               Chọn vibe chuyến đi <br className="hidden sm:inline" />
@@ -95,10 +89,10 @@ export function UseCaseSection() {
             <Link
               key={theme.id}
               href={theme.href}
-              className="group flex flex-col justify-between rounded-xl bg-white border border-ink-200 p-3.5 sm:p-4 shadow-2xs hover:shadow-md hover:border-ink-300 transition-all duration-200 focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-accent"
+              className="group flex flex-col justify-between rounded-xl bg-white border border-ink-200/80 p-3.5 sm:p-4 shadow-2xs hover:shadow-md hover:border-ink-300 transition-all duration-300 focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-accent"
             >
               {/* Photo Viewport: Fixed 4:5 native aspect ratio */}
-              <div className="relative aspect-[4/5] w-full rounded-lg overflow-hidden bg-canvas-200 border border-ink-100">
+              <div className="relative aspect-[4/5] w-full rounded-lg overflow-hidden bg-canvas-200">
                 <Image
                   src={theme.image}
                   alt={theme.title}
@@ -111,10 +105,10 @@ export function UseCaseSection() {
                 {/* Subtle Gradient for Bottom Legibility */}
                 <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent pointer-events-none" />
 
-                {/* Minimal Top Corner Tag */}
+                {/* Clean Corner Tag (No artificial 01/02 step numbers) */}
                 <div className="absolute top-2.5 left-2.5">
-                  <span className="font-mono text-[9px] text-white bg-ink-900/90 px-2 py-0.5 rounded-sm uppercase tracking-wider font-medium">
-                    {theme.num} · {theme.tag}
+                  <span className="font-sans text-[10px] text-white bg-ink-900/90 px-2 py-0.5 rounded uppercase tracking-wider font-medium shadow-xs">
+                    {theme.tag}
                   </span>
                 </div>
               </div>

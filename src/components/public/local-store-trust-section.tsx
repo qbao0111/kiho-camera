@@ -1,6 +1,6 @@
 import React from "react";
 import Image from "next/image";
-import { MapPin, Clock, Phone, Navigation, CheckCircle2, ShieldCheck, ArrowUpRight, Sparkles } from "lucide-react";
+import { MapPin, Phone, Navigation, ArrowUpRight } from "lucide-react";
 import { SiteSettings, StorefrontImage } from "@/types/database";
 import { normalizePhoneNumber } from "@/lib/utils";
 import { DEFAULT_MAPS_URL } from "@/lib/constants";
@@ -33,10 +33,9 @@ export function LocalStoreTrustSection({
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
-        {/* Editorial Eyebrow */}
-        <div className="flex items-center gap-2 text-xs font-mono font-semibold tracking-wider text-ink-600 uppercase mb-3">
-          <MapPin className="w-3.5 h-3.5 text-accent" />
-          <span>ĐỊA ĐIỂM THỰC TẾ · LOCAL STOREFRONT</span>
+        {/* Context Label */}
+        <div className="text-xs font-sans font-semibold tracking-wider text-ink-500 uppercase mb-3">
+          Cửa hàng tại Đồng Hới
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
@@ -57,59 +56,46 @@ export function LocalStoreTrustSection({
               Kiho Camera là cửa hàng cho thuê máy ảnh tại <strong className="text-ink-900 font-semibold">{address}</strong>. Bạn có thể ghé trực tiếp để nhận máy, kiểm tra thiết bị thực tế và được hướng dẫn sử dụng nhanh trước chuyến đi khám phá biển Nhật Lệ, cồn cát Quang Phú hay động Phong Nha.
             </p>
 
-            {/* NAP Info Card */}
-            <div className="bg-canvas-100 rounded-xl p-4 sm:p-5 border border-ink-200/80 space-y-3 shadow-2xs">
-              <address className="not-italic space-y-2.5 text-xs sm:text-sm font-sans text-ink-700">
-                <div className="flex items-start gap-2.5">
-                  <MapPin className="w-4 h-4 text-accent shrink-0 mt-0.5" />
-                  <div>
-                    <span className="font-semibold text-ink-900 block">Địa chỉ cửa hàng:</span>
-                    <span>{address}</span>
-                  </div>
-                </div>
-
-                <div className="flex items-start gap-2.5 pt-2 border-t border-ink-200/60">
-                  <Clock className="w-4 h-4 text-accent shrink-0 mt-0.5" />
-                  <div>
-                    <span className="font-semibold text-ink-900 block">Giờ mở cửa đón khách:</span>
-                    <span>{openingHours}</span>
-                  </div>
-                </div>
-
-                <div className="flex items-start gap-2.5 pt-2 border-t border-ink-200/60">
-                  <Phone className="w-4 h-4 text-accent shrink-0 mt-0.5" />
-                  <div>
-                    <span className="font-semibold text-ink-900 block">Hotline hỗ trợ:</span>
-                    <a
-                      href={`tel:${normalizePhoneNumber(phone)}`}
-                      className="font-mono font-bold text-accent hover:underline"
-                    >
-                      {phone}
-                    </a>
-                  </div>
-                </div>
-              </address>
+            {/* Store Information (Clean editorial layout, de-boxed) */}
+            <div className="py-3.5 px-4 sm:px-5 rounded-lg bg-canvas-100/80 border border-ink-200/70 space-y-2.5 text-xs sm:text-sm font-sans text-ink-700">
+              <div className="flex items-baseline gap-2">
+                <span className="font-semibold text-ink-900 shrink-0">Địa chỉ:</span>
+                <span>{address}</span>
+              </div>
+              <div className="flex items-baseline gap-2 pt-1.5 border-t border-ink-200/50">
+                <span className="font-semibold text-ink-900 shrink-0">Mở cửa:</span>
+                <span>{openingHours}</span>
+              </div>
+              <div className="flex items-baseline gap-2 pt-1.5 border-t border-ink-200/50">
+                <span className="font-semibold text-ink-900 shrink-0">Hotline:</span>
+                <a
+                  href={`tel:${normalizePhoneNumber(phone)}`}
+                  className="font-mono font-bold text-accent hover:underline"
+                >
+                  {phone}
+                </a>
+              </div>
             </div>
 
-            {/* Local Pickup Guarantees */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs font-sans text-ink-700 pt-1">
-              <div className="flex items-center gap-2">
-                <CheckCircle2 className="w-4 h-4 text-emerald-700 shrink-0" />
+            {/* Local Pickup Perks (Clean editorial bullet list) */}
+            <ul className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs font-sans text-ink-700 pt-1">
+              <li className="flex items-center gap-2">
+                <span className="w-1.5 h-1.5 rounded-full bg-emerald-600 shrink-0" />
                 <span>Test máy trực tiếp trước khi nhận</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <CheckCircle2 className="w-4 h-4 text-emerald-700 shrink-0" />
-                <span>Hỗ trợ giao tận nơi Đồng Hới</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <ShieldCheck className="w-4 h-4 text-accent shrink-0" />
+              </li>
+              <li className="flex items-center gap-2">
+                <span className="w-1.5 h-1.5 rounded-full bg-emerald-600 shrink-0" />
+                <span>Hỗ trợ giao tận nơi tại Đồng Hới</span>
+              </li>
+              <li className="flex items-center gap-2">
+                <span className="w-1.5 h-1.5 rounded-full bg-accent shrink-0" />
                 <span>Không giữ tiền cọc máy du lịch</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <CheckCircle2 className="w-4 h-4 text-emerald-700 shrink-0" />
-                <span>Đủ pin sạc, thẻ nhớ 64GB tốc độ cao</span>
-              </div>
-            </div>
+              </li>
+              <li className="flex items-center gap-2">
+                <span className="w-1.5 h-1.5 rounded-full bg-emerald-600 shrink-0" />
+                <span>Đủ pin sạc, thẻ 64GB tốc độ cao</span>
+              </li>
+            </ul>
 
             {/* Local Action CTAs */}
             <div className="pt-2 flex flex-wrap items-center gap-3">
