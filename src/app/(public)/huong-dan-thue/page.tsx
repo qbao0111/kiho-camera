@@ -5,15 +5,14 @@ import { getSiteSettings } from "@/lib/services/settings";
 import { BreadcrumbJsonLd } from "@/components/public/json-ld";
 import { FadeIn } from "@/components/ui/motion";
 import { TrackedOutboundLink } from "@/components/analytics/tracked-outbound-link";
+import { buildPageMetadata } from "@/lib/seo/metadata";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = buildPageMetadata({
   title: "Hướng dẫn & Thủ tục thuê máy ảnh tại Quảng Bình, Đồng Hới",
   description:
     "Quy trình thuê máy ảnh du lịch đơn giản tại TP. Đồng Hới, Quảng Bình. Không cần cọc tiền máy, xác minh nhanh qua ảnh CCCD hoặc VNeID.",
-  alternates: {
-    canonical: "/huong-dan-thue",
-  },
-};
+  pathname: "/huong-dan-thue",
+});
 
 export default async function RentalGuidePage() {
   const settings = await getSiteSettings();

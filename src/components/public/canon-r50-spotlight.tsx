@@ -5,10 +5,17 @@ import { ArrowRight } from "lucide-react";
 
 interface CanonR50SpotlightProps {
   messengerUrl?: string;
+  priceSession?: number;
+  pricePerDay?: number;
 }
 
 
-export function CanonR50Spotlight({}: CanonR50SpotlightProps = {}) {
+export function CanonR50Spotlight({
+  priceSession,
+  pricePerDay,
+}: CanonR50SpotlightProps = {}) {
+  const displaySession = priceSession ? `${Math.round(priceSession / 1000)}K` : "150K";
+  const displayDay = pricePerDay ? `${Math.round(pricePerDay / 1000)}K` : "250K";
   return (
     <section className="py-14 sm:py-20 bg-canvas-200/50 border-t border-b border-ink-200 overflow-hidden relative">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
@@ -76,12 +83,12 @@ export function CanonR50Spotlight({}: CanonR50SpotlightProps = {}) {
                 </span>
                 <div className="flex items-baseline gap-2 mt-0.5">
                   <span className="text-2xl font-bold font-mono text-ink-900">
-                    150K
+                    {displaySession}
                   </span>
                   <span className="text-xs text-ink-600 font-mono font-medium">/ buổi</span>
                   <span className="text-xs text-ink-300">·</span>
                   <span className="text-lg font-bold font-mono text-accent">
-                    250K
+                    {displayDay}
                   </span>
                   <span className="text-xs text-ink-600 font-mono font-medium">/ ngày</span>
                 </div>

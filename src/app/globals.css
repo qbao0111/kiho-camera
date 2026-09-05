@@ -207,4 +207,20 @@ body {
   .trust-strip-set + .trust-strip-set {
     display: none;
   }
+  [data-motion-fade],
+  [data-motion-reveal] {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+}
+
+/* Progressive enhancement for non-JS clients & crawlers */
+@media (scripting: none) {
+  [data-motion-fade],
+  [data-motion-reveal] {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
 }

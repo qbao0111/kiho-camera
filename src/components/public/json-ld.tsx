@@ -3,6 +3,16 @@ import { SiteSettings, Equipment, StorefrontImage } from "@/types/database";
 import { getEquipmentCoverImage } from "@/lib/equipment-images";
 import { DEFAULT_MAPS_URL } from "@/lib/constants";
 
+function parseOpeningHours(raw?: string): { opens: string; closes: string } {
+  if (!raw) return { opens: "07:30", closes: "21:00" };
+  const match = raw.match(/(\d{1,2}:\d{2})\s*[-–—]\s*(\d{1,2}:\d{2})/);
+  if (match) {
+    const formatTime = (t: string) => (t.length === 4 ? `0${t}` : t);
+    return { opens: formatTime(match[1]), closes: formatTime(match[2]) };
+  }
+  return { opens: "07:30", closes: "21:00" };
+}
+
 interface LocalBusinessProps {
   settings: SiteSettings;
   siteUrl: string;
@@ -16,6 +26,8 @@ export function LocalBusinessJsonLd({ settings, siteUrl, storefrontImages = [] }
     `${siteUrl}/images/landing/hero-quang-binh.webp`,
     `${siteUrl}/brand/kiho-logo-social.webp`,
   ].filter(Boolean);
+
+  const { opens, closes } = parseOpeningHours(settings.opening_hours);
 
   const schema = {
     "@context": "https://schema.org",
@@ -57,8 +69,8 @@ export function LocalBusinessJsonLd({ settings, siteUrl, storefrontImages = [] }
           "Saturday",
           "Sunday",
         ],
-        "opens": "07:30",
-        "closes": "21:00",
+        "opens": opens,
+        "closes": closes,
       },
     ],
     "priceRange": "80.000₫ - 450.000₫",
@@ -126,7 +138,15 @@ export function BreadcrumbJsonLd({
   );
 }
 
-export function ProductJsonLd({ equipment, siteUrl }: { equipment: Equipment; siteUrl: string }) {
+export function ProductJsonLd({
+  equipment,
+  siteUrl,
+  description,
+}: {
+  equipment: Equipment;
+  siteUrl: string;
+  description?: string;
+}) {
   const coverImage = getEquipmentCoverImage(equipment);
   const fullImageUrl = coverImage.startsWith("http") ? coverImage : `${siteUrl}${coverImage}`;
 
@@ -138,6 +158,7 @@ export function ProductJsonLd({ equipment, siteUrl }: { equipment: Equipment; si
     "image": fullImageUrl,
     "category": "Cameras & Camcorders > Digital Cameras",
     "description":
+      description ||
       equipment.seo_description ||
       equipment.short_description ||
       equipment.description ||

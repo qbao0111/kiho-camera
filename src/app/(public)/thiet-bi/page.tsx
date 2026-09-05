@@ -8,14 +8,14 @@ import { CatalogFilterBar } from "@/components/public/catalog-filter-bar";
 import { BreadcrumbJsonLd } from "@/components/public/json-ld";
 import { FadeIn, StaggerContainer, StaggerItem } from "@/components/ui/motion";
 
-export const metadata: Metadata = {
+import { buildPageMetadata } from "@/lib/seo/metadata";
+
+export const metadata: Metadata = buildPageMetadata({
   title: "Danh sách máy ảnh cho thuê tại Quảng Bình, Đồng Hới",
   description:
     "Bảng giá cho thuê 12 dòng máy ảnh du lịch Canon, Fujifilm, Sony chính hãng tại TP. Đồng Hới, Quảng Bình. Đầy đủ pin, sạc, thẻ nhớ, nhận máy chụp đẹp ngay.",
-  alternates: {
-    canonical: "/thiet-bi",
-  },
-};
+  pathname: "/thiet-bi",
+});
 
 interface EquipmentPageProps {
   searchParams: {

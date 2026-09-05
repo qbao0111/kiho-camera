@@ -23,16 +23,16 @@ import { normalizePhoneNumber, buildZaloUrl } from "@/lib/utils";
 import { DEFAULT_MAPS_URL } from "@/lib/constants";
 import { TrackedOutboundLink } from "@/components/analytics/tracked-outbound-link";
 
+import { buildPageMetadata } from "@/lib/seo/metadata";
+
 export const revalidate = 120;
 
-export const metadata: Metadata = {
-  title: "Giới thiệu Kiho Camera — Cửa hàng thuê máy ảnh tại Đồng Hới",
+export const metadata: Metadata = buildPageMetadata({
+  title: "Giới thiệu cửa hàng thuê máy ảnh tại Đồng Hới",
   description:
     "Kiho Camera là dịch vụ cho thuê máy ảnh du lịch tại 48 Ngô Quyền, Đồng Hới, Quảng Bình. Cung cấp Canon, Fujifilm, Sony kèm 2 pin, sạc và thẻ nhớ 64GB.",
-  alternates: {
-    canonical: "/gioi-thieu",
-  },
-};
+  pathname: "/gioi-thieu",
+});
 
 export default async function AboutPage() {
   const [settings, storefrontImages] = await Promise.all([

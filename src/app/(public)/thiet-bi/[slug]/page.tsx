@@ -17,6 +17,7 @@ import { ProductJsonLd, BreadcrumbJsonLd } from "@/components/public/json-ld";
 import { buildMessengerUrl } from "@/lib/utils";
 import { getEquipmentCoverImage } from "@/lib/equipment-images";
 import { FadeIn, StaggerContainer, StaggerItem } from "@/components/ui/motion";
+import { buildPageMetadata } from "@/lib/seo/metadata";
 
 interface PageProps {
   params: {
@@ -27,9 +28,12 @@ interface PageProps {
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const equipment = await getEquipmentBySlug(params.slug);
   if (!equipment) {
-    return {
+    return buildPageMetadata({
       title: "Máy ảnh không tồn tại",
-    };
+      description: "Không tìm thấy thông tin máy ảnh theo yêu cầu tại Kiho Camera.",
+      pathname: `/thiet-bi/${params.slug}`,
+      robots: { index: false, follow: true },
+    });
   }
 
   const editorialContent = getCameraSeoContent(params.slug);
@@ -47,32 +51,12 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 
   const coverImage = getEquipmentCoverImage(equipment);
 
-  return {
+  return buildPageMetadata({
     title,
     description,
-    alternates: {
-      canonical: `/thiet-bi/${equipment.slug}`,
-    },
-    openGraph: {
-      title,
-      description,
-      url: `/thiet-bi/${equipment.slug}`,
-      images: coverImage
-        ? [
-            {
-              url: coverImage,
-              alt: `Thuê máy ảnh ${equipment.name} tại Quảng Bình`,
-            },
-          ]
-        : [],
-    },
-    twitter: {
-      card: "summary_large_image",
-      title,
-      description,
-      images: coverImage ? [coverImage] : [],
-    },
-  };
+    pathname: `/thiet-bi/${equipment.slug}`,
+    image: coverImage || undefined,
+  });
 }
 
 export default async function ProductDetailPage({ params }: PageProps) {
@@ -88,6 +72,12 @@ export default async function ProductDetailPage({ params }: PageProps) {
   const editorialContent = getCameraSeoContent(params.slug);
   const relatedEquipment = await getRelatedEquipment(equipment.slug, equipment.brand, 4);
 
+  const resolvedDescription =
+    editorialContent?.seoDescription ||
+    equipment.seo_description ||
+    equipment.short_description ||
+    `Dịch vụ cho thuê máy ảnh ${equipment.brand} ${equipment.name} chính hãng tại TP. Đồng Hới, Quảng Bình. Đầy đủ trọn bộ 2 pin, sạc đôi, thẻ nhớ và túi chống sốc.`;
+
   const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://kihocamera.com";
   const messengerChatUrl = buildMessengerUrl(settings.messenger_url, equipment.name);
 
@@ -100,7 +90,7 @@ export default async function ProductDetailPage({ params }: PageProps) {
 
   return (
     <div className="bg-[#faf8f5] min-h-screen py-8 pb-24 md:pb-16">
-      <ProductJsonLd equipment={equipment} siteUrl={siteUrl} />
+      <ProductJsonLd equipment={equipment} siteUrl={siteUrl} description={resolvedDescription} />
       <BreadcrumbJsonLd
         items={[
           { name: "Trang chủ", url: "/" },

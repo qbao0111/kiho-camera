@@ -6,35 +6,34 @@ import { BreadcrumbJsonLd } from "@/components/public/json-ld";
 import { FadeIn } from "@/components/ui/motion";
 import { normalizePhoneNumber, buildZaloUrl } from "@/lib/utils";
 import { TrackedOutboundLink } from "@/components/analytics/tracked-outbound-link";
+import { isSafeExternalUrl, normalizeMapEmbedUrl } from "@/lib/security/validation";
+import { buildPageMetadata } from "@/lib/seo/metadata";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = buildPageMetadata({
   title: "Liên hệ & Địa chỉ cửa hàng tại Đồng Hới",
   description:
     "Thông tin liên hệ cửa hàng Kiho Camera tại TP. Đồng Hới, Quảng Bình. Hotline tư vấn thuê máy ảnh, fanpage và chỉ đường Google Maps.",
-  alternates: {
-    canonical: "/lien-he",
-  },
-};
+  pathname: "/lien-he",
+});
 
 export default async function ContactPage() {
   const settings = await getSiteSettings();
   const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://kihocamera.com";
 
   // 1. External Google Maps URL (for the button)
+  const configuredMapUrl = settings.maps_url?.trim();
   const externalMapUrl =
-    settings.maps_url?.trim() ||
+    (configuredMapUrl && isSafeExternalUrl(configuredMapUrl, ["maps.app.goo.gl", "maps.google.com", "google.com"]) ? configuredMapUrl : "") ||
     (settings.address?.trim()
       ? `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(settings.address.trim())}`
       : "https://www.google.com/maps");
 
   // 2. Embedded Google Maps URL (for the iframe)
-  const rawEmbedUrl = settings.maps_embed_url?.trim();
+  const rawEmbedUrl = normalizeMapEmbedUrl(settings.maps_embed_url);
   let mapEmbedUrl: string;
 
   if (rawEmbedUrl) {
-    // If user pasted a full <iframe src="..." ...> embed code, extract the URL inside src
-    const iframeSrcMatch = rawEmbedUrl.match(/src=["']([^"']+)["']/i);
-    mapEmbedUrl = iframeSrcMatch ? iframeSrcMatch[1] : rawEmbedUrl;
+    mapEmbedUrl = rawEmbedUrl;
   } else {
     // Fallback to address search embed only if maps_embed_url is empty
     const mapAddress = settings.address?.trim() || "Đồng Hới, Quảng Bình";

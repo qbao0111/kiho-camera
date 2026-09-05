@@ -17,16 +17,17 @@ import { BreadcrumbJsonLd, ArticleJsonLd } from "@/components/public/json-ld";
 import { normalizePhoneNumber } from "@/lib/utils";
 import { TrackedOutboundLink } from "@/components/analytics/tracked-outbound-link";
 
+import { buildPageMetadata } from "@/lib/seo/metadata";
+
 export const revalidate = 120;
 
-export const metadata: Metadata = {
-  title: "Chính sách & Thủ tục thuê máy ảnh — Kiho Camera",
+export const metadata: Metadata = buildPageMetadata({
+  title: "Chính sách & Thủ tục thuê máy ảnh",
   description:
-    "Chính sách thuê máy ảnh tại Kiho Camera Đồng Hới: Không cần cọc tiền mặt, thủ tục CCCD/VNeID đơn giản trong 5 phút, phụ kiện đầy đủ 2 pin sạc thẻ nhớ.",
-  alternates: {
-    canonical: "/chinh-sach-thue",
-  },
-};
+    "Chính sách thuê máy ảnh tại Kiho Camera Đồng Hới: Không cần cọc tiền máy, chỉ cần ảnh CCCD hoặc VNeID để xác minh, kèm trọn bộ 2 pin sạc thẻ nhớ.",
+  pathname: "/chinh-sach-thue",
+  type: "article",
+});
 
 export default async function RentalPolicyPage() {
   const settings = await getSiteSettings();

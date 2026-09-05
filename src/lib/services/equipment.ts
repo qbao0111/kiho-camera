@@ -1,3 +1,5 @@
+import "server-only";
+
 import { cache } from "react";
 import { unstable_cache } from "next/cache";
 import { createPublicClient } from "@/lib/supabase/public";
@@ -5,6 +7,20 @@ import { getLocalEquipment } from "@/lib/local-storage";
 import { MOCK_EQUIPMENT } from "@/lib/mock-data";
 import { getEquipmentCoverImage } from "@/lib/equipment-images";
 import { Equipment, PricingEquipmentDTO, RentalFormEquipmentDTO } from "@/types/database";
+import { isLocalDataFallbackEnabled } from "@/lib/environment";
+import { isSafeImageUrl } from "@/lib/security/validation";
+
+function sanitizeEquipment(equipment: Equipment): Equipment {
+  return {
+    ...equipment,
+    price_poster_url:
+      equipment.price_poster_url && isSafeImageUrl(equipment.price_poster_url)
+        ? equipment.price_poster_url
+        : null,
+    images: equipment.images?.filter((image) => isSafeImageUrl(image.image_url)),
+    sample_images: equipment.sample_images?.filter((image) => isSafeImageUrl(image.image_url)),
+  };
+}
 
 
 export interface EquipmentFilterOptions {
@@ -24,8 +40,9 @@ async function fetchRawEquipmentList(): Promise<Equipment[]> {
     const supabase = createPublicClient();
 
     if (!supabase || !process.env.NEXT_PUBLIC_SUPABASE_URL) {
+      if (!isLocalDataFallbackEnabled()) return [];
       const list = await getLocalEquipment();
-      return list && list.length > 0 ? list : MOCK_EQUIPMENT;
+      return (list && list.length > 0 ? list : MOCK_EQUIPMENT).map(sanitizeEquipment);
     }
 
     const { data, error } = await supabase
@@ -33,19 +50,32 @@ async function fetchRawEquipmentList(): Promise<Equipment[]> {
       .select("*, category:categories(*), images:equipment_images(*), sample_images:equipment_sample_images(*)")
       .order("sort_order", { ascending: true });
 
-    if (error || !data || data.length === 0) {
+    if (error) {
+      if (!isLocalDataFallbackEnabled()) {
+        console.error("Supabase equipment query error:", error);
+        throw new Error(`Database error fetching equipment: ${error.message}`);
+      }
       const list = await getLocalEquipment();
-      return list && list.length > 0 ? list : MOCK_EQUIPMENT;
+      return (list && list.length > 0 ? list : MOCK_EQUIPMENT).map(sanitizeEquipment);
     }
 
-    return data as Equipment[];
+    if (!data || data.length === 0) {
+      if (!isLocalDataFallbackEnabled()) return [];
+      const list = await getLocalEquipment();
+      return (list && list.length > 0 ? list : MOCK_EQUIPMENT).map(sanitizeEquipment);
+    }
+
+    return (data as Equipment[]).map(sanitizeEquipment);
   } catch (err) {
     console.error("Error fetching equipment list from Supabase:", err);
+    if (!isLocalDataFallbackEnabled()) {
+      throw err;
+    }
     try {
       const list = await getLocalEquipment();
-      return list && list.length > 0 ? list : MOCK_EQUIPMENT;
+      return (list && list.length > 0 ? list : MOCK_EQUIPMENT).map(sanitizeEquipment);
     } catch (_) {
-      return MOCK_EQUIPMENT;
+      return MOCK_EQUIPMENT.map(sanitizeEquipment);
     }
   }
 }
@@ -58,8 +88,9 @@ async function fetchRawEquipmentBySlug(slug: string): Promise<Equipment | null> 
     const supabase = createPublicClient();
 
     if (!supabase || !process.env.NEXT_PUBLIC_SUPABASE_URL) {
+      if (!isLocalDataFallbackEnabled()) return null;
       const list = await getLocalEquipment();
-      const all = list && list.length > 0 ? list : MOCK_EQUIPMENT;
+      const all = (list && list.length > 0 ? list : MOCK_EQUIPMENT).map(sanitizeEquipment);
       return all.find((e) => e.slug === slug || e.id === slug) || null;
     }
 
@@ -69,21 +100,40 @@ async function fetchRawEquipmentBySlug(slug: string): Promise<Equipment | null> 
       .eq("slug", slug)
       .single();
 
-    if (error || !data) {
+    if (error) {
+      // PGRST116 means 0 rows returned, which is a legitimate 404
+      if (error.code === "PGRST116") {
+        if (!isLocalDataFallbackEnabled()) return null;
+        const list = await getLocalEquipment();
+        const all = (list && list.length > 0 ? list : MOCK_EQUIPMENT).map(sanitizeEquipment);
+        return all.find((e) => e.slug === slug || e.id === slug) || null;
+      }
+
+      if (!isLocalDataFallbackEnabled()) {
+        console.error(`Database error fetching equipment slug "${slug}":`, error);
+        throw new Error(`Database error fetching equipment "${slug}": ${error.message}`);
+      }
       const list = await getLocalEquipment();
-      const all = list && list.length > 0 ? list : MOCK_EQUIPMENT;
+      const all = (list && list.length > 0 ? list : MOCK_EQUIPMENT).map(sanitizeEquipment);
       return all.find((e) => e.slug === slug || e.id === slug) || null;
     }
 
-    return data as Equipment;
+    if (!data) {
+      return null;
+    }
+
+    return sanitizeEquipment(data as Equipment);
   } catch (err) {
     console.error(`Error fetching equipment slug "${slug}":`, err);
+    if (!isLocalDataFallbackEnabled()) {
+      throw err;
+    }
     try {
       const list = await getLocalEquipment();
-      const all = list && list.length > 0 ? list : MOCK_EQUIPMENT;
+      const all = (list && list.length > 0 ? list : MOCK_EQUIPMENT).map(sanitizeEquipment);
       return all.find((e) => e.slug === slug || e.id === slug) || null;
     } catch (_) {
-      return MOCK_EQUIPMENT.find((e) => e.slug === slug || e.id === slug) || null;
+      return MOCK_EQUIPMENT.map(sanitizeEquipment).find((e) => e.slug === slug || e.id === slug) || null;
     }
   }
 }
@@ -161,6 +211,7 @@ export const getFeaturedEquipment = cache(async (): Promise<Equipment[]> => {
 
 // React per-request memoization for equipment by slug (deduplicates generateMetadata + Page)
 export const getEquipmentBySlug = cache(async (slug: string): Promise<Equipment | null> => {
+  if (!/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(slug) || slug.length > 255) return null;
   return getCachedEquipmentBySlug(slug);
 });
 

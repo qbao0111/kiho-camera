@@ -18,24 +18,25 @@ import { formatCurrency } from "@/lib/utils";
 
 export const revalidate = 120;
 
-export const metadata: Metadata = {
+import { buildPageMetadata } from "@/lib/seo/metadata";
+
+export const metadata: Metadata = buildPageMetadata({
   title: "So sánh Canon R50 vs Canon G7X Mark III — Nên thuê máy nào?",
   description:
     "So sánh chi tiết Canon EOS R50 và PowerShot G7 X Mark III khi đi du lịch: Cảm biến, khả năng xóa phông, độ tiện dụng bỏ túi và bảng giá thuê tại Kiho Đồng Hới.",
-  alternates: {
-    canonical: "/so-sanh/canon-r50-vs-canon-g7x-mark-iii",
-  },
-};
+  pathname: "/so-sanh/canon-r50-vs-canon-g7x-mark-iii",
+  type: "article",
+});
 
 export default async function CanonR50VsG7X3Page() {
   const equipmentList = await getEquipmentList({ onlyActive: true });
   const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://kihocamera.com";
 
-  const r50 = equipmentList.find((e) => e.slug.includes("canon-eos-r50") || e.name.toLowerCase().includes("r50"));
-  const g7x = equipmentList.find((e) => e.slug.includes("canon-powershot-g7x") || e.name.toLowerCase().includes("g7x"));
+  const r50 = equipmentList.find((e) => e.slug === "canon-eos-r50");
+  const g7x = equipmentList.find((e) => e.slug === "canon-g7x-mark-iii");
 
-  const r50Price = r50 ? r50.price_per_day : 200000;
-  const g7xPrice = g7x ? g7x.price_per_day : 150000;
+  const r50Price = r50 ? r50.price_per_day : null;
+  const g7xPrice = g7x ? g7x.price_per_day : null;
 
   return (
     <div className="bg-[#faf8f5] min-h-screen py-10 sm:py-16">
@@ -89,7 +90,7 @@ export default async function CanonR50VsG7X3Page() {
                 <li>· Muốn quay video 4K sắc nét không bị crop khung hình.</li>
               </ul>
               <div className="pt-2 text-xs font-mono font-bold text-accent">
-                Giá thuê: từ {formatCurrency(r50Price)} / ngày
+                Giá thuê: từ {r50Price ? `${formatCurrency(r50Price)} / ngày` : "Liên hệ báo giá"}
               </div>
             </div>
 
@@ -104,7 +105,7 @@ export default async function CanonR50VsG7X3Page() {
                 <li>· Chụp ảnh tự sướng (selfie) với màn hình lật 180 độ và tone màu da hồng hào nịnh mắt.</li>
               </ul>
               <div className="pt-2 text-xs font-mono font-bold text-accent">
-                Giá thuê: từ {formatCurrency(g7xPrice)} / ngày
+                Giá thuê: từ {g7xPrice ? `${formatCurrency(g7xPrice)} / ngày` : "Liên hệ báo giá"}
               </div>
             </div>
           </div>
@@ -163,8 +164,12 @@ export default async function CanonR50VsG7X3Page() {
                 </tr>
                 <tr className="bg-canvas-50/70 font-semibold">
                   <td className="py-3.5 px-4 text-ink-900">Giá thuê tại Kiho Camera</td>
-                  <td className="py-3.5 px-4 text-accent font-mono">{formatCurrency(r50Price)} / ngày</td>
-                  <td className="py-3.5 px-4 text-accent font-mono">{formatCurrency(g7xPrice)} / ngày</td>
+                  <td className="py-3.5 px-4 text-accent font-mono">
+                    {r50Price !== null ? `${formatCurrency(r50Price)} / ngày` : "Liên hệ báo giá"}
+                  </td>
+                  <td className="py-3.5 px-4 text-accent font-mono">
+                    {g7xPrice !== null ? `${formatCurrency(g7xPrice)} / ngày` : "Liên hệ báo giá"}
+                  </td>
                 </tr>
               </tbody>
             </table>

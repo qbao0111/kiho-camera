@@ -14,24 +14,25 @@ import { formatCurrency } from "@/lib/utils";
 
 export const revalidate = 120;
 
-export const metadata: Metadata = {
-  title: "So sánh Fujifilm X100V vs Fujifilm X100VI — Nên thuê dòng máy nào?",
+import { buildPageMetadata } from "@/lib/seo/metadata";
+
+export const metadata: Metadata = buildPageMetadata({
+  title: "So sánh Fujifilm X100V vs Fujifilm X100VI — Nên thuê máy nào?",
   description:
     "So sánh chi tiết Fujifilm X100V và Fujifilm X100VI: Cảm biến 40MP vs 26MP, chống rung IBIS 6-stop, giả lập màu Reala Ace và giá thuê tại Kiho Camera Đồng Hới.",
-  alternates: {
-    canonical: "/so-sanh/fujifilm-x100v-vs-x100vi",
-  },
-};
+  pathname: "/so-sanh/fujifilm-x100v-vs-x100vi",
+  type: "article",
+});
 
 export default async function FujifilmX100VVsX100VI() {
   const equipmentList = await getEquipmentList({ onlyActive: true });
   const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://kihocamera.com";
 
-  const x100vi = equipmentList.find((e) => e.slug.includes("x100vi") || e.name.toLowerCase().includes("x100vi"));
-  const x100v = equipmentList.find((e) => (e.slug.includes("x100v") && !e.slug.includes("x100vi")) || (e.name.toLowerCase().includes("x100v") && !e.name.toLowerCase().includes("x100vi")));
+  const x100vi = equipmentList.find((e) => e.slug === "fujifilm-x100vi");
+  const x100v = equipmentList.find((e) => e.slug === "fujifilm-x100v");
 
-  const x100viPrice = x100vi ? x100vi.price_per_day : 450000;
-  const x100vPrice = x100v ? x100v.price_per_day : 300000;
+  const x100viPrice = x100vi ? x100vi.price_per_day : null;
+  const x100vPrice = x100v ? x100v.price_per_day : null;
 
   return (
     <div className="bg-[#faf8f5] min-h-screen py-10 sm:py-16">
@@ -85,7 +86,7 @@ export default async function FujifilmX100VVsX100VI() {
                 <li>· Muốn trải nghiệm giả lập màu phim mới nhất: <strong>Reala Ace</strong>.</li>
               </ul>
               <div className="pt-2 text-xs font-mono font-bold text-accent">
-                Giá thuê: từ {formatCurrency(x100viPrice)} / ngày
+                Giá thuê: từ {x100viPrice ? `${formatCurrency(x100viPrice)} / ngày` : "Liên hệ báo giá"}
               </div>
             </div>
 
@@ -100,7 +101,7 @@ export default async function FujifilmX100VVsX100VI() {
                 <li>· Trọng lượng nhẹ hơn một chút, thao tác vòng xoay cơ học tương tự 100%.</li>
               </ul>
               <div className="pt-2 text-xs font-mono font-bold text-accent">
-                Giá thuê: từ {formatCurrency(x100vPrice)} / ngày
+                Giá thuê: từ {x100vPrice ? `${formatCurrency(x100vPrice)} / ngày` : "Liên hệ báo giá"}
               </div>
             </div>
           </div>
@@ -154,8 +155,12 @@ export default async function FujifilmX100VVsX100VI() {
                 </tr>
                 <tr className="bg-canvas-50/70 font-semibold">
                   <td className="py-3.5 px-4 text-ink-900">Giá thuê tại Kiho Camera</td>
-                  <td className="py-3.5 px-4 text-accent font-mono">{formatCurrency(x100viPrice)} / ngày</td>
-                  <td className="py-3.5 px-4 text-accent font-mono">{formatCurrency(x100vPrice)} / ngày</td>
+                  <td className="py-3.5 px-4 text-accent font-mono">
+                    {x100viPrice !== null ? `${formatCurrency(x100viPrice)} / ngày` : "Liên hệ báo giá"}
+                  </td>
+                  <td className="py-3.5 px-4 text-accent font-mono">
+                    {x100vPrice !== null ? `${formatCurrency(x100vPrice)} / ngày` : "Liên hệ báo giá"}
+                  </td>
                 </tr>
               </tbody>
             </table>

@@ -7,15 +7,18 @@ import { FeedbackCard } from "@/components/public/feedback-card";
 import { FadeIn, StaggerContainer, StaggerItem } from "@/components/ui/motion";
 import { TrackedOutboundLink } from "@/components/analytics/tracked-outbound-link";
 
-export const metadata: Metadata = {
-  title: "Feedback & Cảm nhận khách hàng | Kiho Camera",
+import { buildPageMetadata } from "@/lib/seo/metadata";
+
+export const metadata: Metadata = buildPageMetadata({
+  title: "Feedback & Cảm nhận khách hàng",
   description:
     "Cảm nhận và hình ảnh check-in thực tế của khách du lịch khi thuê máy ảnh Canon, Sony, Fujifilm tại Kiho Camera Đồng Hới.",
+  pathname: "/feedback",
   robots: {
     index: false,
     follow: true,
   },
-};
+});
 
 export default async function FeedbackPage() {
   const [feedbacks, settings] = await Promise.all([

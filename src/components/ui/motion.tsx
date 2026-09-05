@@ -23,13 +23,24 @@ export function FadeIn({
   style,
   ...props
 }: FadeInProps) {
-  const [isVisible, setIsVisible] = useState(false);
+  const [isVisible, setIsVisible] = useState(true);
   const domRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     if (typeof window !== "undefined" && window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-      setIsVisible(true);
       return;
+    }
+
+    const currentRef = domRef.current;
+    if (!currentRef) return;
+
+    // Check if element is already in the viewport on initial hydration
+    const rect = currentRef.getBoundingClientRect();
+    const isInViewport = rect.top < window.innerHeight && rect.bottom > 0;
+
+    if (!isInViewport) {
+      // Element is below/outside viewport: prime it for scroll entrance animation
+      setIsVisible(false);
     }
 
     const observer = new IntersectionObserver(
@@ -48,10 +59,7 @@ export function FadeIn({
       { threshold: 0.1, rootMargin: "0px 0px -40px 0px" }
     );
 
-    const currentRef = domRef.current;
-    if (currentRef) {
-      observer.observe(currentRef);
-    }
+    observer.observe(currentRef);
 
     return () => {
       if (currentRef) observer.unobserve(currentRef);
@@ -79,6 +87,7 @@ export function FadeIn({
   return (
     <div
       ref={domRef}
+      data-motion-fade=""
       className={className}
       style={{
         opacity: isVisible ? 1 : 0,
@@ -127,13 +136,22 @@ export function ImageReveal({
   className?: string;
   delay?: number;
 }) {
-  const [isVisible, setIsVisible] = useState(false);
+  const [isVisible, setIsVisible] = useState(true);
   const domRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     if (typeof window !== "undefined" && window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-      setIsVisible(true);
       return;
+    }
+
+    const currentRef = domRef.current;
+    if (!currentRef) return;
+
+    const rect = currentRef.getBoundingClientRect();
+    const isInViewport = rect.top < window.innerHeight && rect.bottom > 0;
+
+    if (!isInViewport) {
+      setIsVisible(false);
     }
 
     const observer = new IntersectionObserver(
@@ -146,8 +164,7 @@ export function ImageReveal({
       { threshold: 0.1 }
     );
 
-    const currentRef = domRef.current;
-    if (currentRef) observer.observe(currentRef);
+    observer.observe(currentRef);
 
     return () => {
       if (currentRef) observer.unobserve(currentRef);
@@ -157,6 +174,7 @@ export function ImageReveal({
   return (
     <div
       ref={domRef}
+      data-motion-reveal=""
       className={className}
       style={{
         opacity: isVisible ? 1 : 0,

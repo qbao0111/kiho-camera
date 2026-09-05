@@ -22,6 +22,7 @@ export default async function HomePage() {
   // Project lightweight DTOs for client-hydrated components to minimize RSC serialization payload
   const pricingEquipment = equipmentList.map(toPricingEquipmentDTO);
   const rentalFormEquipment = equipmentList.map(toRentalFormEquipmentDTO);
+  const r50Equipment = equipmentList.find((e) => e.slug === "canon-eos-r50");
 
   return (
     <div className="bg-[#faf8f5] text-ink-900 selection:bg-accent/20">
@@ -50,7 +51,11 @@ export default async function HomePage() {
       />
 
       {/* 6. GỢI Ý MÁY ĐIỂN HÌNH: CANON EOS R50 (Humanized Editorial Feature) */}
-      <CanonR50Spotlight messengerUrl={settings.messenger_url} />
+      <CanonR50Spotlight
+        messengerUrl={settings.messenger_url}
+        priceSession={r50Equipment?.price_session}
+        pricePerDay={r50Equipment?.price_per_day}
+      />
 
       {/* 7. HƯỚNG DẪN KHẨU ĐỘ & ĐỘ SÂU TRƯỜNG ẢNH (Aperture Visual Guide) */}
       <Interactive3dAperture />

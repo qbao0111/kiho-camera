@@ -17,17 +17,18 @@ import { getSiteSettings } from "@/lib/services/settings";
 import { BreadcrumbJsonLd, ArticleJsonLd } from "@/components/public/json-ld";
 import { formatCurrency, normalizePhoneNumber } from "@/lib/utils";
 import { TrackedOutboundLink } from "@/components/analytics/tracked-outbound-link";
+import { buildPageMetadata } from "@/lib/seo/metadata";
 
 export const revalidate = 120;
 
-export const metadata: Metadata = {
-  title: "Bảng giá thuê máy ảnh tại Đồng Hới mới nhất 2026 — Kiho Camera",
+export const metadata: Metadata = buildPageMetadata({
+  title: "Bảng giá thuê máy ảnh tại Đồng Hới mới nhất",
   description:
     "Bảng giá thuê máy ảnh du lịch tại TP. Đồng Hới, Quảng Bình từ 80.000₫/buổi đến 450.000₫/ngày. Trọn bộ Canon, Fujifilm, Sony kèm 2 pin, sạc, thẻ nhớ 64GB.",
-  alternates: {
-    canonical: "/gia-thue-may-anh-dong-hoi",
-  },
-};
+  pathname: "/gia-thue-may-anh-dong-hoi",
+  image: "/images/landing/hero-quang-binh.webp",
+  imageAlt: "Bảng giá thuê máy ảnh tại Đồng Hới, Quảng Bình - Kiho Camera",
+});
 
 export default async function PriceGuidePage() {
   const [equipmentList, settings] = await Promise.all([
@@ -36,6 +37,13 @@ export default async function PriceGuidePage() {
   ]);
   const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://kihocamera.com";
   const phone = settings.phone || "0387 274 669";
+
+  const minSessionPrice =
+    equipmentList.length > 0 ? Math.min(...equipmentList.map((e) => e.price_session)) : 80000;
+  const minDayPrice =
+    equipmentList.length > 0 ? Math.min(...equipmentList.map((e) => e.price_per_day)) : 120000;
+  const maxDayPrice =
+    equipmentList.length > 0 ? Math.max(...equipmentList.map((e) => e.price_per_day)) : 450000;
 
   return (
     <div className="bg-[#faf8f5] min-h-screen py-10 sm:py-16">
@@ -65,7 +73,7 @@ export default async function PriceGuidePage() {
             Giá thuê máy ảnh ở Đồng Hới, Quảng Bình bao nhiêu?
           </h1>
           <p className="font-sans text-base sm:text-lg text-ink-600 leading-relaxed font-normal pt-1">
-            Giá thuê máy ảnh tại TP. Đồng Hới dao động từ <strong className="text-ink-900 font-semibold">80.000₫/buổi</strong> đến <strong className="text-ink-900 font-semibold">450.000₫/ngày</strong> tùy theo thương hiệu (Canon, Fujifilm, Sony) và phân khúc thiết bị. Tất cả máy thuê tại Kiho Camera đều được trang bị sẵn 2 pin chính hãng, dock sạc, thẻ nhớ 64GB tốc độ cao và túi chống sốc mà không phát sinh thêm bất kỳ phụ phí nào.
+            Giá thuê máy ảnh tại TP. Đồng Hới dao động từ <strong className="text-ink-900 font-semibold">{formatCurrency(minSessionPrice)}/buổi</strong> đến <strong className="text-ink-900 font-semibold">{formatCurrency(maxDayPrice)}/ngày</strong> tùy theo thương hiệu (Canon, Fujifilm, Sony) và phân khúc thiết bị. Tất cả máy thuê tại Kiho Camera đều được trang bị sẵn 2 pin chính hãng, dock sạc, thẻ nhớ 64GB tốc độ cao và túi chống sốc mà không phát sinh thêm bất kỳ phụ phí nào.
           </p>
         </header>
 
@@ -77,7 +85,7 @@ export default async function PriceGuidePage() {
               <Clock className="w-4 h-4 text-ink-500" />
             </div>
             <p className="font-display text-2xl font-bold text-ink-900">
-              Từ 80.000₫ <span className="text-xs font-sans text-ink-500 font-normal">/ buổi</span>
+              Từ {formatCurrency(minSessionPrice)} <span className="text-xs font-sans text-ink-500 font-normal">/ buổi</span>
             </p>
             <p className="text-xs text-ink-600 leading-relaxed">
               Dành cho nhu cầu chụp ảnh nhanh theo buổi: Sáng (07:30 – 13:00) hoặc Chiều (13:30 – 19:30). Thích hợp chụp cồn cát, cà phê phố hoặc dạo biển chiều.
@@ -90,7 +98,7 @@ export default async function PriceGuidePage() {
               <Clock className="w-4 h-4 text-ink-500" />
             </div>
             <p className="font-display text-2xl font-bold text-ink-900">
-              Từ 150.000₫ <span className="text-xs font-sans text-ink-500 font-normal">/ ngày</span>
+              Từ {formatCurrency(minDayPrice)} <span className="text-xs font-sans text-ink-500 font-normal">/ ngày</span>
             </p>
             <p className="text-xs text-ink-600 leading-relaxed">
               Tính trọn vẹn 24h từ thời điểm nhận máy. Thoải mái đi tour Phong Nha — Suối Moọc — Động Thiên Đường mà không lo trễ giờ trả máy.
@@ -198,7 +206,7 @@ export default async function PriceGuidePage() {
             </div>
             <div className="flex items-center gap-2">
               <ShieldCheck className="w-4 h-4 text-accent shrink-0" />
-              <span>Không thu phí cọc tiền mặt cho khách du lịch</span>
+              <span>Không cần cọc tiền máy — chỉ cần ảnh CCCD hoặc VNeID để xác minh</span>
             </div>
             <div className="flex items-center gap-2">
               <CheckCircle2 className="w-4 h-4 text-emerald-700 shrink-0" />
