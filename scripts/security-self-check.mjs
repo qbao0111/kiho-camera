@@ -75,10 +75,11 @@ const rejected = context.doPost({
 });
 assert.equal(JSON.parse(rejected.body).code, "INVALID_SECRET");
 
-const integrationSource = await readFile(
+const rawIntegrationSource = await readFile(
   new URL("../src/lib/services/integrations.ts", import.meta.url),
   "utf8"
 );
+const integrationSource = rawIntegrationSource.replace(/\r\n/g, "\n");
 const functionStart = integrationSource.indexOf(
   "export function generateAppsScriptCode"
 );
