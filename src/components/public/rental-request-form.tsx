@@ -292,6 +292,7 @@ export function RentalRequestForm({
           id="customerName"
           type="text"
           required
+          maxLength={100}
           disabled={isSubmitting}
           value={customerName}
           onChange={(e) => setCustomerName(e.target.value)}
@@ -372,6 +373,8 @@ export function RentalRequestForm({
           id="phone"
           type="tel"
           required
+          maxLength={20}
+          inputMode="tel"
           disabled={isSubmitting}
           value={phone}
           onChange={(e) => setPhone(e.target.value)}
@@ -385,9 +388,10 @@ export function RentalRequestForm({
         <label htmlFor="note" className="block text-xs font-sans font-semibold text-ink-900">
           Ghi chú thêm <span className="text-ink-600 font-normal">(không bắt buộc)</span>
         </label>
-        <textarea
-          id="note"
-          rows={2}
+          <textarea
+            id="note"
+            rows={2}
+          maxLength={500}
           disabled={isSubmitting}
           value={note}
           onChange={(e) => setNote(e.target.value)}

@@ -1,3 +1,5 @@
+import "server-only";
+
 import { readFile, writeFile, mkdir } from "fs/promises";
 import { existsSync } from "fs";
 import path from "path";
@@ -41,6 +43,67 @@ const DEFAULT_SETTINGS: GoogleSheetsIntegrationConfig = {
   updated_at: new Date().toISOString(),
 };
 
+const INTEGRATION_SETTING_KEYS: (keyof GoogleSheetsIntegrationConfig)[] = [
+  "provider",
+  "enabled",
+  "google_sheet_id",
+  "google_sheet_name",
+  "notification_email",
+  "apps_script_url",
+  "encrypted_webhook_secret",
+  "last_tested_at",
+  "last_test_status",
+  "last_test_error",
+  "updated_at",
+];
+
+function pickIntegrationSettings(input: Partial<GoogleSheetsIntegrationConfig>) {
+  const picked: Partial<GoogleSheetsIntegrationConfig> = {};
+  for (const key of INTEGRATION_SETTING_KEYS) {
+    if (Object.prototype.hasOwnProperty.call(input, key)) {
+      (picked as Record<string, unknown>)[key] = input[key];
+    }
+  }
+  return picked;
+}
+
+function normalizeIntegrationSettings(input: Partial<GoogleSheetsIntegrationConfig>): GoogleSheetsIntegrationConfig {
+  const merged = {
+    ...DEFAULT_SETTINGS,
+    ...pickIntegrationSettings(input),
+    provider: "google_sheets" as const,
+  };
+  const normalized = {
+    ...merged,
+    enabled: merged.enabled === true,
+    google_sheet_id: typeof merged.google_sheet_id === "string" ? merged.google_sheet_id.trim() : "",
+    google_sheet_name: typeof merged.google_sheet_name === "string" ? merged.google_sheet_name.trim() : "",
+    notification_email: typeof merged.notification_email === "string" ? merged.notification_email.trim() : "",
+    apps_script_url: typeof merged.apps_script_url === "string" ? merged.apps_script_url.trim() : "",
+    encrypted_webhook_secret: typeof merged.encrypted_webhook_secret === "string" && merged.encrypted_webhook_secret.length <= 4096
+      ? merged.encrypted_webhook_secret
+      : undefined,
+    last_tested_at: typeof merged.last_tested_at === "string" ? merged.last_tested_at : undefined,
+    last_test_status: merged.last_test_status === "success" || merged.last_test_status === "error"
+      ? merged.last_test_status
+      : "untested" as GoogleSheetsIntegrationConfig["last_test_status"],
+    last_test_error: typeof merged.last_test_error === "string"
+      ? merged.last_test_error.replace(/[\u0000-\u001f\u007f]/g, " ").slice(0, 500)
+      : undefined,
+    updated_at: typeof merged.updated_at === "string" ? merged.updated_at : DEFAULT_SETTINGS.updated_at,
+  };
+  const validUrl = !normalized.apps_script_url || isValidAppsScriptUrl(normalized.apps_script_url);
+  const validEmail = !normalized.notification_email || /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(normalized.notification_email);
+  const validSheetId = !normalized.google_sheet_id || /^[A-Za-z0-9_-]{10,200}$/.test(normalized.google_sheet_id);
+  const validSheetName = !!normalized.google_sheet_name && normalized.google_sheet_name.length <= 100 && !/[\u0000-\u001f\u007f\u2028\u2029]/.test(normalized.google_sheet_name);
+
+  if (!validUrl || !validEmail || !validSheetId || !validSheetName) {
+    console.error("[Integrations] Ignoring invalid stored Google Sheets configuration.");
+    return { ...normalized, enabled: false, apps_script_url: "" };
+  }
+  return normalized;
+}
+
 /**
  * Read integration settings from Supabase. Local JSON is opt-in development only.
  */
@@ -57,20 +120,14 @@ export async function getIntegrationSettings(): Promise<GoogleSheetsIntegrationC
       throw new Error("Unable to read integration settings from Supabase.");
     }
 
-    return data
-      ? { ...DEFAULT_SETTINGS, ...data, enabled: Boolean(data.enabled) }
-      : { ...DEFAULT_SETTINGS };
+    return data ? normalizeIntegrationSettings(data) : { ...DEFAULT_SETTINGS };
   }
 
   if (isLocalDataFallbackEnabled()) {
     if (existsSync(SETTINGS_FILE)) {
       const content = await readFile(SETTINGS_FILE, "utf-8");
       const parsed = JSON.parse(content) as GoogleSheetsIntegrationConfig;
-      return {
-        ...DEFAULT_SETTINGS,
-        ...parsed,
-        enabled: Boolean(parsed.enabled),
-      };
+      return normalizeIntegrationSettings(parsed);
     }
 
     return { ...DEFAULT_SETTINGS };
@@ -86,14 +143,45 @@ export async function saveIntegrationSettings(
   settings: Partial<GoogleSheetsIntegrationConfig>
 ): Promise<{ success: boolean; data?: GoogleSheetsIntegrationConfig; error?: string }> {
   try {
+    if (settings.enabled !== undefined && typeof settings.enabled !== "boolean") {
+      return { success: false, error: "Invalid integration enabled flag." };
+    }
+    if (settings.apps_script_url !== undefined && typeof settings.apps_script_url !== "string") {
+      return { success: false, error: "Invalid Apps Script URL." };
+    }
+    if (settings.apps_script_url && !isValidAppsScriptUrl(settings.apps_script_url.trim())) {
+      return { success: false, error: "Apps Script URL không hợp lệ." };
+    }
+    if (settings.notification_email !== undefined && typeof settings.notification_email !== "string") {
+      return { success: false, error: "Invalid notification email." };
+    }
+    if (settings.notification_email && (settings.notification_email.length > 254 || /[\u0000-\u001f\u007f\u2028\u2029]/.test(settings.notification_email) || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(settings.notification_email.trim()))) {
+      return { success: false, error: "Email nhận thông báo không hợp lệ." };
+    }
+    if (settings.google_sheet_id !== undefined && typeof settings.google_sheet_id !== "string") {
+      return { success: false, error: "Invalid Google Sheet ID." };
+    }
+    if (settings.google_sheet_id && !/^[A-Za-z0-9_-]{10,200}$/.test(settings.google_sheet_id.trim())) {
+      return { success: false, error: "Google Sheet ID không hợp lệ." };
+    }
+    if (settings.google_sheet_name !== undefined && typeof settings.google_sheet_name !== "string") {
+      return { success: false, error: "Invalid Google Sheet name." };
+    }
+    if (settings.google_sheet_name !== undefined && (!settings.google_sheet_name.trim() || settings.google_sheet_name.length > 100 || /[\u0000-\u001f\u007f\u2028\u2029]/.test(settings.google_sheet_name))) {
+      return { success: false, error: "Tên sheet không hợp lệ." };
+    }
+    if (settings.encrypted_webhook_secret !== undefined && (typeof settings.encrypted_webhook_secret !== "string" || settings.encrypted_webhook_secret.length > 4096)) {
+      return { success: false, error: "Webhook secret không hợp lệ." };
+    }
+
     const current = await getIntegrationSettings();
 
-    const updated: GoogleSheetsIntegrationConfig = {
+    const updated: GoogleSheetsIntegrationConfig = normalizeIntegrationSettings({
       ...current,
       ...settings,
       provider: "google_sheets",
       updated_at: new Date().toISOString(),
-    };
+    });
 
     const supabase = createAdminClient();
     if (supabase) {
@@ -130,8 +218,9 @@ export function isValidAppsScriptUrl(value: string): boolean {
     return (
       url.protocol === "https:" &&
       url.hostname === "script.google.com" &&
-      url.pathname.startsWith("/macros/s/") &&
-      url.pathname.endsWith("/exec")
+      !url.username &&
+      !url.password &&
+      /^\/macros\/s\/[A-Za-z0-9_-]+\/exec$/.test(url.pathname)
     );
   } catch {
     return false;
@@ -791,4 +880,3 @@ export async function sendContactClickToAppsScript(
     };
   }
 }
-

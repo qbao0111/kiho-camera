@@ -7,9 +7,11 @@ const DEVELOPMENT_KEY_SEED = "kiho-camera-insecure-development-only-key";
 function getEncryptionKey(): Buffer {
   let masterSecret = process.env.INTEGRATION_ENCRYPTION_KEY;
 
+  const isProduction = process.env.NODE_ENV === "production" || process.env.VERCEL_ENV === "production";
+
   if (
     !masterSecret &&
-    process.env.NODE_ENV !== "production" &&
+    !isProduction &&
     process.env.ALLOW_INSECURE_DEV_ENCRYPTION_FALLBACK === "true"
   ) {
     masterSecret = DEVELOPMENT_KEY_SEED;
@@ -19,6 +21,10 @@ function getEncryptionKey(): Buffer {
     throw new Error(
       "INTEGRATION_ENCRYPTION_KEY is required to encrypt integration secrets."
     );
+  }
+
+  if (masterSecret.trim().length < 32) {
+    throw new Error("INTEGRATION_ENCRYPTION_KEY must contain at least 32 characters.");
   }
 
   return crypto.createHash("sha256").update(masterSecret).digest();

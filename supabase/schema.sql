@@ -97,6 +97,7 @@ CREATE TABLE IF NOT EXISTS public.site_settings (
     tiktok_url VARCHAR(500) DEFAULT 'https://tiktok.com/@kihocamera',
     instagram_url VARCHAR(500) DEFAULT 'https://www.instagram.com/thuemayanhqbb/',
     maps_url TEXT DEFAULT 'https://maps.google.com/?q=48+Ngo+Quyen+Dong+Hoi+Quang+Binh',
+    maps_embed_url TEXT DEFAULT '',
     opening_hours VARCHAR(255) DEFAULT '07:30 - 21:00 (Tất cả các ngày trong tuần)',
     hero_title VARCHAR(255) DEFAULT 'Cho thuê máy ảnh tại Quảng Bình',
     hero_subtitle TEXT DEFAULT 'Máy đẹp, dễ sử dụng, giá rõ ràng. Thuê máy ảnh du lịch chất lượng cao tại Kiho Camera Đồng Hới.',
@@ -131,61 +132,118 @@ ALTER TABLE public.equipment_sample_images ENABLE ROW LEVEL SECURITY;
 ALTER TABLE public.feedback ENABLE ROW LEVEL SECURITY;
 ALTER TABLE public.site_settings ENABLE ROW LEVEL SECURITY;
 
+CREATE OR REPLACE FUNCTION public.is_admin()
+RETURNS boolean
+LANGUAGE sql
+STABLE
+SET search_path = pg_catalog, public
+AS $$
+    SELECT COALESCE((auth.jwt() -> 'app_metadata' ->> 'role') = 'admin', false);
+$$;
+
+REVOKE ALL ON FUNCTION public.is_admin() FROM PUBLIC;
+GRANT EXECUTE ON FUNCTION public.is_admin() TO anon, authenticated, service_role;
+
 -- 9.1. Public Read Policies
-CREATE POLICY "Public can view active categories" 
+-- Drop historical policy names first so re-running this baseline cannot leave
+-- a permissive policy active or fail on a duplicate policy name.
+DROP POLICY IF EXISTS "Public can view active categories" ON public.categories;
+DROP POLICY IF EXISTS "Admin full access on categories" ON public.categories;
+DROP POLICY IF EXISTS "Public can view active equipment" ON public.equipment;
+DROP POLICY IF EXISTS "Admin full access on equipment" ON public.equipment;
+DROP POLICY IF EXISTS "Public can view equipment images" ON public.equipment_images;
+DROP POLICY IF EXISTS "Admin full access on equipment_images" ON public.equipment_images;
+DROP POLICY IF EXISTS "Public can view active sample images" ON public.equipment_sample_images;
+DROP POLICY IF EXISTS "Admin full access on equipment_sample_images" ON public.equipment_sample_images;
+DROP POLICY IF EXISTS "Public can view active feedback" ON public.feedback;
+DROP POLICY IF EXISTS "Admin full access on feedback" ON public.feedback;
+DROP POLICY IF EXISTS "Public can view site settings" ON public.site_settings;
+DROP POLICY IF EXISTS "Admin full access on site_settings" ON public.site_settings;
+DROP POLICY IF EXISTS "Public read active categories" ON public.categories;
+DROP POLICY IF EXISTS "Admins manage categories" ON public.categories;
+DROP POLICY IF EXISTS "Public read active equipment" ON public.equipment;
+DROP POLICY IF EXISTS "Admins manage equipment" ON public.equipment;
+DROP POLICY IF EXISTS "Public read visible equipment images" ON public.equipment_images;
+DROP POLICY IF EXISTS "Admins manage equipment images" ON public.equipment_images;
+DROP POLICY IF EXISTS "Public read active sample images" ON public.equipment_sample_images;
+DROP POLICY IF EXISTS "Admins manage equipment sample images" ON public.equipment_sample_images;
+DROP POLICY IF EXISTS "Public read active feedback" ON public.feedback;
+DROP POLICY IF EXISTS "Admins manage feedback" ON public.feedback;
+DROP POLICY IF EXISTS "Public read site settings" ON public.site_settings;
+DROP POLICY IF EXISTS "Admins manage site settings" ON public.site_settings;
+
+CREATE POLICY "Public read active categories" 
 ON public.categories FOR SELECT 
-USING (is_active = true);
+TO anon, authenticated
+USING (is_active = true OR (select public.is_admin()));
 
-CREATE POLICY "Public can view active equipment" 
+CREATE POLICY "Public read active equipment" 
 ON public.equipment FOR SELECT 
-USING (is_active = true);
+TO anon, authenticated
+USING (is_active = true OR (select public.is_admin()));
 
-CREATE POLICY "Public can view equipment images" 
+CREATE POLICY "Public read visible equipment images" 
 ON public.equipment_images FOR SELECT 
-USING (true);
+TO anon, authenticated
+USING (
+    (select public.is_admin()) OR EXISTS (
+        SELECT 1 FROM public.equipment e
+        WHERE e.id = equipment_images.equipment_id AND e.is_active = true
+    )
+);
 
-CREATE POLICY "Public can view active sample images" 
+CREATE POLICY "Public read active sample images" 
 ON public.equipment_sample_images FOR SELECT 
-USING (is_active = true);
+TO anon, authenticated
+USING (
+    (select public.is_admin()) OR (
+        is_active = true AND EXISTS (
+            SELECT 1 FROM public.equipment e
+            WHERE e.id = equipment_sample_images.equipment_id AND e.is_active = true
+        )
+    )
+);
 
-CREATE POLICY "Public can view active feedback" 
+CREATE POLICY "Public read active feedback" 
 ON public.feedback FOR SELECT 
-USING (is_active = true);
+TO anon, authenticated
+USING (is_active = true OR (select public.is_admin()));
 
-CREATE POLICY "Public can view site settings" 
+CREATE POLICY "Public read site settings" 
 ON public.site_settings FOR SELECT 
+TO anon, authenticated
 USING (true);
 
 -- 9.2. Authenticated Admin Policies (Full CRUD)
-CREATE POLICY "Admin full access on categories" 
+CREATE POLICY "Admins manage categories" 
 ON public.categories FOR ALL 
 TO authenticated 
-USING (true) WITH CHECK (true);
+USING ((select public.is_admin())) WITH CHECK ((select public.is_admin()));
 
-CREATE POLICY "Admin full access on equipment" 
+CREATE POLICY "Admins manage equipment" 
 ON public.equipment FOR ALL 
 TO authenticated 
-USING (true) WITH CHECK (true);
+USING ((select public.is_admin())) WITH CHECK ((select public.is_admin()));
 
-CREATE POLICY "Admin full access on equipment_images" 
+CREATE POLICY "Admins manage equipment images" 
 ON public.equipment_images FOR ALL 
 TO authenticated 
-USING (true) WITH CHECK (true);
+USING ((select public.is_admin())) WITH CHECK ((select public.is_admin()));
 
-CREATE POLICY "Admin full access on equipment_sample_images" 
+CREATE POLICY "Admins manage equipment sample images" 
 ON public.equipment_sample_images FOR ALL 
 TO authenticated 
-USING (true) WITH CHECK (true);
+USING ((select public.is_admin())) WITH CHECK ((select public.is_admin()));
 
-CREATE POLICY "Admin full access on feedback" 
+CREATE POLICY "Admins manage feedback" 
 ON public.feedback FOR ALL 
 TO authenticated 
-USING (true) WITH CHECK (true);
+USING ((select public.is_admin())) WITH CHECK ((select public.is_admin()));
 
-CREATE POLICY "Admin full access on site_settings" 
+CREATE POLICY "Admins manage site settings" 
 ON public.site_settings FOR ALL 
 TO authenticated 
-USING (true) WITH CHECK (true);
+USING ((select public.is_admin())) WITH CHECK ((select public.is_admin()));
 
 -- 10. Private integration configuration and rental leads
 CREATE TABLE IF NOT EXISTS public.integration_settings (
@@ -241,18 +299,22 @@ CREATE TABLE IF NOT EXISTS public.rental_request_rate_limits (
 
 CREATE OR REPLACE FUNCTION public.set_updated_at()
 RETURNS TRIGGER LANGUAGE plpgsql
-SET search_path = public, pg_temp
+SET search_path = pg_catalog, public, pg_temp
 AS $$
 BEGIN
-    NEW.updated_at = NOW();
+    NEW.updated_at = pg_catalog.now();
     RETURN NEW;
 END;
 $$;
 
+DROP TRIGGER IF EXISTS integration_settings_set_updated_at
+    ON public.integration_settings;
 CREATE TRIGGER integration_settings_set_updated_at
 BEFORE UPDATE ON public.integration_settings
 FOR EACH ROW EXECUTE FUNCTION public.set_updated_at();
 
+DROP TRIGGER IF EXISTS rental_requests_set_updated_at
+    ON public.rental_requests;
 CREATE TRIGGER rental_requests_set_updated_at
 BEFORE UPDATE ON public.rental_requests
 FOR EACH ROW EXECUTE FUNCTION public.set_updated_at();
@@ -261,16 +323,31 @@ ALTER TABLE public.integration_settings ENABLE ROW LEVEL SECURITY;
 ALTER TABLE public.rental_requests ENABLE ROW LEVEL SECURITY;
 ALTER TABLE public.rental_request_rate_limits ENABLE ROW LEVEL SECURITY;
 
-CREATE POLICY "Authenticated admins manage integration settings"
+DROP POLICY IF EXISTS "Authenticated admins manage integration settings"
+    ON public.integration_settings;
+DROP POLICY IF EXISTS "Admins manage integration settings"
+    ON public.integration_settings;
+CREATE POLICY "Admins manage integration settings"
 ON public.integration_settings FOR ALL TO authenticated
-USING (true) WITH CHECK (true);
+USING ((select public.is_admin())) WITH CHECK ((select public.is_admin()));
 
-CREATE POLICY "Authenticated admins read rental requests"
-ON public.rental_requests FOR SELECT TO authenticated USING (true);
+DROP POLICY IF EXISTS "Authenticated admins read rental requests"
+    ON public.rental_requests;
+DROP POLICY IF EXISTS "Admins read rental requests"
+    ON public.rental_requests;
+CREATE POLICY "Admins read rental requests"
+ON public.rental_requests FOR SELECT TO authenticated USING ((select public.is_admin()));
 
-CREATE POLICY "Authenticated admins update rental requests"
+DROP POLICY IF EXISTS "Authenticated admins update rental requests"
+    ON public.rental_requests;
+DROP POLICY IF EXISTS "Admins update rental requests"
+    ON public.rental_requests;
+CREATE POLICY "Admins update rental requests"
 ON public.rental_requests FOR UPDATE TO authenticated
-USING (true) WITH CHECK (true);
+USING ((select public.is_admin())) WITH CHECK ((select public.is_admin()));
+
+-- Deny client access to rate-limit state; only the service-role RPC may use it.
+REVOKE ALL ON TABLE public.rental_request_rate_limits FROM PUBLIC, anon, authenticated;
 
 CREATE OR REPLACE FUNCTION public.check_rental_request_rate_limit(
     p_fingerprint TEXT,
@@ -280,10 +357,10 @@ CREATE OR REPLACE FUNCTION public.check_rental_request_rate_limit(
 RETURNS BOOLEAN
 LANGUAGE plpgsql
 SECURITY DEFINER
-SET search_path = public, pg_temp
+SET search_path = pg_catalog, public, pg_temp
 AS $$
 DECLARE
-    v_now TIMESTAMPTZ := NOW();
+    v_now TIMESTAMPTZ := pg_catalog.now();
     v_count INTEGER;
 BEGIN
     IF p_fingerprint IS NULL OR p_fingerprint = '' OR p_limit < 1 OR p_window_seconds < 1 THEN
@@ -295,10 +372,10 @@ BEGIN
     VALUES (p_fingerprint, v_now, 1)
     ON CONFLICT (fingerprint) DO UPDATE SET
         window_started_at = CASE
-            WHEN limits.window_started_at <= v_now - make_interval(secs => p_window_seconds)
+            WHEN limits.window_started_at <= v_now - pg_catalog.make_interval(secs => p_window_seconds)
             THEN v_now ELSE limits.window_started_at END,
         request_count = CASE
-            WHEN limits.window_started_at <= v_now - make_interval(secs => p_window_seconds)
+            WHEN limits.window_started_at <= v_now - pg_catalog.make_interval(secs => p_window_seconds)
             THEN 1 ELSE limits.request_count + 1 END
     RETURNING request_count INTO v_count;
 
@@ -327,44 +404,34 @@ ON CONFLICT (id) DO UPDATE SET
 
 DO $$
 BEGIN
-    IF NOT EXISTS (
-        SELECT 1 FROM pg_policies 
-        WHERE schemaname = 'storage' AND tablename = 'objects' AND policyname = 'Public Access Equipment Images'
-    ) THEN
-        CREATE POLICY "Public Access Equipment Images"
-        ON storage.objects FOR SELECT
-        USING (bucket_id = 'equipment-images');
-    END IF;
+    -- Drop both historical and hardened names so this baseline remains safe
+    -- to re-run without leaving a permissive policy behind.
+    DROP POLICY IF EXISTS "Public Access Equipment Images" ON storage.objects;
+    DROP POLICY IF EXISTS "Authenticated Admin Insert Equipment Images" ON storage.objects;
+    DROP POLICY IF EXISTS "Authenticated Admin Update Equipment Images" ON storage.objects;
+    DROP POLICY IF EXISTS "Authenticated Admin Delete Equipment Images" ON storage.objects;
+    DROP POLICY IF EXISTS "Public read equipment images" ON storage.objects;
+    DROP POLICY IF EXISTS "Admins insert equipment images" ON storage.objects;
+    DROP POLICY IF EXISTS "Admins update equipment images" ON storage.objects;
+    DROP POLICY IF EXISTS "Admins delete equipment images" ON storage.objects;
 
-    IF NOT EXISTS (
-        SELECT 1 FROM pg_policies 
-        WHERE schemaname = 'storage' AND tablename = 'objects' AND policyname = 'Authenticated Admin Insert Equipment Images'
-    ) THEN
-        CREATE POLICY "Authenticated Admin Insert Equipment Images"
-        ON storage.objects FOR INSERT
-        TO authenticated
-        WITH CHECK (bucket_id = 'equipment-images');
-    END IF;
+    CREATE POLICY "Public read equipment images"
+    ON storage.objects FOR SELECT TO public
+    USING (bucket_id = 'equipment-images');
 
-    IF NOT EXISTS (
-        SELECT 1 FROM pg_policies 
-        WHERE schemaname = 'storage' AND tablename = 'objects' AND policyname = 'Authenticated Admin Update Equipment Images'
-    ) THEN
-        CREATE POLICY "Authenticated Admin Update Equipment Images"
-        ON storage.objects FOR UPDATE
-        TO authenticated
-        USING (bucket_id = 'equipment-images')
-        WITH CHECK (bucket_id = 'equipment-images');
-    END IF;
+    CREATE POLICY "Admins insert equipment images"
+    ON storage.objects FOR INSERT
+    TO authenticated
+    WITH CHECK (bucket_id = 'equipment-images' AND (select public.is_admin()));
 
-    IF NOT EXISTS (
-        SELECT 1 FROM pg_policies 
-        WHERE schemaname = 'storage' AND tablename = 'objects' AND policyname = 'Authenticated Admin Delete Equipment Images'
-    ) THEN
-        CREATE POLICY "Authenticated Admin Delete Equipment Images"
-        ON storage.objects FOR DELETE
-        TO authenticated
-        USING (bucket_id = 'equipment-images');
-    END IF;
+    CREATE POLICY "Admins update equipment images"
+    ON storage.objects FOR UPDATE
+    TO authenticated
+    USING (bucket_id = 'equipment-images' AND (select public.is_admin()))
+    WITH CHECK (bucket_id = 'equipment-images' AND (select public.is_admin()));
+
+    CREATE POLICY "Admins delete equipment images"
+    ON storage.objects FOR DELETE
+    TO authenticated
+    USING (bucket_id = 'equipment-images' AND (select public.is_admin()));
 END $$;
-

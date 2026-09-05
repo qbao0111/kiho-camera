@@ -1,9 +1,12 @@
+import "server-only";
+
 import { cache } from "react";
 import { unstable_cache, revalidateTag, revalidatePath } from "next/cache";
 import { createPublicClient } from "@/lib/supabase/public";
 import { createClient as createServerClient } from "@/lib/supabase/server";
 import { createAdminClient } from "@/lib/supabase/admin";
 import { StorefrontImage } from "@/types/database";
+import { optionalText, isSafeImageUrl, isSafeStoragePath, isUuid } from "@/lib/security/validation";
 
 export const STOREFRONT_MIGRATION_SQL = `-- Chạy câu lệnh này trong Supabase Dashboard -> SQL Editor để tạo bảng storefront_images
 CREATE TABLE IF NOT EXISTS public.storefront_images (
@@ -20,18 +23,31 @@ CREATE TABLE IF NOT EXISTS public.storefront_images (
 
 ALTER TABLE public.storefront_images ENABLE ROW LEVEL SECURITY;
 
+CREATE OR REPLACE FUNCTION public.is_admin()
+RETURNS boolean
+LANGUAGE sql
+STABLE
+SET search_path = pg_catalog, public
+AS $$
+  SELECT COALESCE((auth.jwt() -> 'app_metadata' ->> 'role') = 'admin', false);
+$$;
+REVOKE ALL ON FUNCTION public.is_admin() FROM PUBLIC;
+GRANT EXECUTE ON FUNCTION public.is_admin() TO anon, authenticated, service_role;
+
 DROP POLICY IF EXISTS "Public can view active storefront images" ON public.storefront_images;
 CREATE POLICY "Public can view active storefront images"
     ON public.storefront_images
     FOR SELECT
+    TO anon, authenticated
     USING (is_active = true);
 
 DROP POLICY IF EXISTS "Admin full access storefront images" ON public.storefront_images;
+DROP POLICY IF EXISTS "Authenticated admin full access to storefront images" ON public.storefront_images;
 CREATE POLICY "Admin full access storefront images"
     ON public.storefront_images
-    FOR ALL
-    USING (true)
-    WITH CHECK (true);
+    FOR ALL TO authenticated
+    USING ((select public.is_admin()))
+    WITH CHECK ((select public.is_admin()));
 `;
 
 function isTableMissingError(errorMessage: string): boolean {
@@ -58,13 +74,23 @@ async function getWriteClient() {
   return await createServerClient();
 }
 
+function validateStorefrontImageInput(data: Partial<StorefrontImage>): string | null {
+  if (data.image_url !== undefined && !isSafeImageUrl(data.image_url)) return "URL ảnh không hợp lệ.";
+  if (data.alt_text !== undefined && optionalText(data.alt_text, 255) === undefined) return "Alt text không hợp lệ.";
+  if (data.caption !== undefined && optionalText(data.caption, 1000) === undefined) return "Chú thích ảnh không hợp lệ.";
+  if (data.sort_order !== undefined && (!Number.isInteger(data.sort_order) || data.sort_order < 0 || data.sort_order > 10000)) return "Thứ tự ảnh không hợp lệ.";
+  if (data.is_cover !== undefined && typeof data.is_cover !== "boolean") return "Trạng thái ảnh không hợp lệ.";
+  if (data.is_active !== undefined && typeof data.is_active !== "boolean") return "Trạng thái ảnh không hợp lệ.";
+  return null;
+}
+
 /**
  * Raw database query for storefront images.
  * Ordered by: is_cover DESC, sort_order ASC, created_at DESC
  */
-async function fetchStorefrontImagesFromSupabase(): Promise<StorefrontImage[]> {
+async function fetchStorefrontImagesFromSupabase(clientOverride?: Awaited<ReturnType<typeof getWriteClient>>): Promise<StorefrontImage[]> {
   try {
-    const supabase = createPublicClient() || (await getWriteClient());
+    const supabase = clientOverride || createPublicClient() || (await getWriteClient());
     if (!supabase || !process.env.NEXT_PUBLIC_SUPABASE_URL) {
       return [];
     }
@@ -81,7 +107,7 @@ async function fetchStorefrontImagesFromSupabase(): Promise<StorefrontImage[]> {
       return [];
     }
 
-    return (data as StorefrontImage[]) || [];
+    return ((data as StorefrontImage[]) || []).filter((image) => isSafeImageUrl(image.image_url));
   } catch (err) {
     console.error("[Storefront] Error fetching storefront images:", err);
     return [];
@@ -101,7 +127,11 @@ const getCachedStorefrontImages = unstable_cache(
 // 2. React per-request deduplication
 export const getStorefrontImages = cache(
   async (options: { onlyActive?: boolean } = { onlyActive: true }): Promise<StorefrontImage[]> => {
-    const allImages = await getCachedStorefrontImages();
+    // Admin management needs inactive rows; use the authenticated server
+    // client for that path instead of the anonymous cached reader.
+    const allImages = options.onlyActive === false
+      ? await fetchStorefrontImagesFromSupabase(await getWriteClient())
+      : await getCachedStorefrontImages();
     if (options.onlyActive) {
       return allImages.filter((img) => img.is_active);
     }
@@ -136,6 +166,9 @@ export async function createStorefrontImage(data: {
   is_active?: boolean;
 }): Promise<{ success: boolean; data?: StorefrontImage; error?: string; sqlRequired?: boolean; sql?: string }> {
   try {
+    const validationError = validateStorefrontImageInput(data);
+    if (validationError) return { success: false, error: validationError };
+
     const supabase = await getWriteClient();
     if (!supabase) return { success: false, error: "Chưa cấu hình Supabase" };
 
@@ -153,8 +186,8 @@ export async function createStorefrontImage(data: {
       .from("storefront_images")
       .insert({
         image_url: data.image_url,
-        alt_text: data.alt_text || null,
-        caption: data.caption || null,
+        alt_text: optionalText(data.alt_text, 255),
+        caption: optionalText(data.caption, 1000),
         sort_order: data.sort_order ?? 0,
         is_cover: data.is_cover ?? false,
         is_active: data.is_active ?? true,
@@ -204,6 +237,17 @@ export async function updateStorefrontImage(
   }>
 ): Promise<{ success: boolean; data?: StorefrontImage; error?: string; sqlRequired?: boolean; sql?: string }> {
   try {
+    if (!isUuid(id)) return { success: false, error: "ID ảnh không hợp lệ." };
+    const validationError = validateStorefrontImageInput(data);
+    if (validationError) return { success: false, error: validationError };
+
+    const updatePayload: Record<string, unknown> = {};
+    if ("alt_text" in data) updatePayload.alt_text = optionalText(data.alt_text, 255);
+    if ("caption" in data) updatePayload.caption = optionalText(data.caption, 1000);
+    if ("sort_order" in data) updatePayload.sort_order = data.sort_order;
+    if ("is_cover" in data) updatePayload.is_cover = data.is_cover;
+    if ("is_active" in data) updatePayload.is_active = data.is_active;
+
     const supabase = await getWriteClient();
     if (!supabase) return { success: false, error: "Chưa cấu hình Supabase" };
 
@@ -219,7 +263,7 @@ export async function updateStorefrontImage(
     const { data: updated, error } = await supabase
       .from("storefront_images")
       .update({
-        ...data,
+        ...updatePayload,
         updated_at: new Date().toISOString(),
       })
       .eq("id", id)
@@ -249,14 +293,22 @@ export async function updateStorefrontImage(
  * Admin: Delete a storefront image
  */
 export async function deleteStorefrontImage(
-  id: string,
-  imageUrl?: string
+  id: string
 ): Promise<{ success: boolean; error?: string }> {
   try {
+    if (!isUuid(id)) return { success: false, error: "ID ảnh không hợp lệ." };
     const supabase = await getWriteClient();
     if (!supabase) return { success: false, error: "Chưa cấu hình Supabase" };
 
-    // 1. Delete record from database
+    const { data: existing, error: lookupError } = await supabase
+      .from("storefront_images")
+      .select("image_url")
+      .eq("id", id)
+      .maybeSingle();
+    if (lookupError) throw lookupError;
+
+    // 1. Delete record from database. The storage path is read from the row,
+    // never trusted from a client query parameter.
     const { error: dbError } = await supabase
       .from("storefront_images")
       .delete()
@@ -265,12 +317,13 @@ export async function deleteStorefrontImage(
     if (dbError) throw dbError;
 
     // 2. Safely remove storage file if it belongs to storefront/ folder in equipment-images
+    const imageUrl = existing?.image_url;
     if (imageUrl && imageUrl.includes("/equipment-images/storefront/")) {
       try {
         const parts = imageUrl.split("/equipment-images/");
         if (parts.length > 1) {
           const storagePath = decodeURIComponent(parts[1].split("?")[0]);
-          if (storagePath.startsWith("storefront/")) {
+          if (isSafeStoragePath(storagePath, ["storefront"])) {
             await supabase.storage.from("equipment-images").remove([storagePath]);
           }
         }

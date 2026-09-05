@@ -1,6 +1,8 @@
 import { NextRequest, NextResponse } from "next/server";
 import { getAuthenticatedAdmin } from "@/lib/auth/admin";
 import { updateStorefrontImage, deleteStorefrontImage } from "@/lib/services/storefront";
+import { isUuid } from "@/lib/security/validation";
+import { isRecord, isSameOriginRequest, InvalidRequestBodyError, RequestBodyLimitError, readJsonBody } from "@/lib/security/request";
 
 export const dynamic = "force-dynamic";
 export const revalidate = 0;
@@ -15,19 +17,25 @@ export async function PATCH(
 ) {
   if (!(await getAuthenticatedAdmin())) return unauthorized();
 
+  if (!isSameOriginRequest(req)) return NextResponse.json({ success: false, error: "Forbidden" }, { status: 403 });
+
   try {
     const { id } = params;
-    const body = await req.json();
+    if (!isUuid(id)) return NextResponse.json({ success: false, error: "ID ảnh không hợp lệ." }, { status: 400 });
+    const body = await readJsonBody<unknown>(req, 32 * 1024);
+    if (!isRecord(body)) throw new InvalidRequestBodyError();
 
     const result = await updateStorefrontImage(id, body);
     if (!result.success) {
       return NextResponse.json({ success: false, error: result.error }, { status: 400 });
     }
 
-    return NextResponse.json({ success: true, image: result.data });
-  } catch (err: any) {
+    return NextResponse.json({ success: true, image: result.data }, { headers: { "Cache-Control": "no-store" } });
+  } catch (err) {
+    if (err instanceof RequestBodyLimitError) return NextResponse.json({ success: false, error: "Dữ liệu gửi lên quá lớn." }, { status: 413 });
+    if (err instanceof InvalidRequestBodyError) return NextResponse.json({ success: false, error: "Dữ liệu JSON không hợp lệ." }, { status: 400 });
     return NextResponse.json(
-      { success: false, error: err.message || "Lỗi cập nhật ảnh cửa hàng" },
+      { success: false, error: "Không thể cập nhật ảnh cửa hàng." },
       { status: 500 }
     );
   }
@@ -39,20 +47,21 @@ export async function DELETE(
 ) {
   if (!(await getAuthenticatedAdmin())) return unauthorized();
 
+  if (!isSameOriginRequest(req)) return NextResponse.json({ success: false, error: "Forbidden" }, { status: 403 });
+
   try {
     const { id } = params;
-    const { searchParams } = new URL(req.url);
-    const imageUrl = searchParams.get("image_url") || undefined;
+    if (!isUuid(id)) return NextResponse.json({ success: false, error: "ID ảnh không hợp lệ." }, { status: 400 });
 
-    const result = await deleteStorefrontImage(id, imageUrl);
+    const result = await deleteStorefrontImage(id);
     if (!result.success) {
       return NextResponse.json({ success: false, error: result.error }, { status: 400 });
     }
 
-    return NextResponse.json({ success: true, message: "Đã xóa ảnh thành công" });
-  } catch (err: any) {
+    return NextResponse.json({ success: true, message: "Đã xóa ảnh thành công" }, { headers: { "Cache-Control": "no-store" } });
+  } catch (err) {
     return NextResponse.json(
-      { success: false, error: err.message || "Lỗi xóa ảnh" },
+      { success: false, error: "Không thể xóa ảnh cửa hàng." },
       { status: 500 }
     );
   }

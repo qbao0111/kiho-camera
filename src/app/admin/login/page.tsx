@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import { useRouter } from "next/navigation";
 import { Camera, Lock, Mail, AlertCircle, ArrowRight, ShieldCheck } from "lucide-react";
 import { createClient } from "@/lib/supabase/client";
+import { isAdminUser } from "@/lib/auth/roles";
 
 export default function AdminLoginPage() {
   const router = useRouter();
@@ -17,32 +18,42 @@ export default function AdminLoginPage() {
     setLoading(true);
     setErrorMsg("");
 
+    const normalizedEmail = email.trim().toLowerCase();
+    if (!normalizedEmail || normalizedEmail.length > 254 || password.length > 256) {
+      setErrorMsg("Email hoáº·c máº­t kháº©u khÃ´ng chÃ­nh xÃ¡c.");
+      setLoading(false);
+      return;
+    }
+
     try {
       const supabase = createClient();
       if (supabase) {
         const { data, error } = await supabase.auth.signInWithPassword({
-          email,
+          email: normalizedEmail,
           password,
         });
 
         if (error) {
-          setErrorMsg(error.message || "Email hoặc mật khẩu không chính xác.");
+          setErrorMsg("Email hoặc mật khẩu không chính xác.");
           setLoading(false);
           return;
         }
 
-        if (data.session) {
+        if (data.session && isAdminUser(data.user)) {
           router.push("/admin");
           router.refresh();
           return;
         }
+
+        await supabase.auth.signOut();
+        setErrorMsg("TÃ i khoáº£n khÃ´ng cÃ³ quyá»n truy cáº­p khu vá»±c nÃ y.");
       } else {
         setErrorMsg(
           "Supabase Auth chưa được cấu hình. Vui lòng kiểm tra biến môi trường trước khi đăng nhập."
         );
       }
-    } catch (err: any) {
-      setErrorMsg(err.message || "Lỗi đăng nhập.");
+    } catch {
+      setErrorMsg("Đăng nhập không thành công. Vui lòng thử lại sau.");
     } finally {
       setLoading(false);
     }
@@ -81,6 +92,7 @@ export default function AdminLoginPage() {
               <input
                 type="email"
                 required
+                maxLength={254}
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder="admin@kihocamera.com"
@@ -98,6 +110,7 @@ export default function AdminLoginPage() {
               <input
                 type="password"
                 required
+                maxLength={256}
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 placeholder="••••••••"

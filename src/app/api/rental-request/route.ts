@@ -9,6 +9,7 @@ import {
   updateRentalIntegrationStatus,
 } from "@/lib/services/rental-requests";
 import { checkRentalRequestRateLimit } from "@/lib/rate-limit";
+import { getClientIp, isRecord, isSameOriginRequest, InvalidRequestBodyError, RequestBodyLimitError, readJsonBody } from "@/lib/security/request";
 
 export const dynamic = "force-dynamic";
 export const revalidate = 0;
@@ -38,14 +39,6 @@ function todayInHoChiMinh() {
   return `${values.year}-${values.month}-${values.day}`;
 }
 
-function getClientIp(req: NextRequest) {
-  return (
-    req.headers.get("x-forwarded-for")?.split(",")[0]?.trim() ||
-    req.headers.get("x-real-ip") ||
-    "unknown"
-  );
-}
-
 async function recordIntegrationStatus(
   id: string,
   status: "sent" | "failed" | "disabled",
@@ -62,31 +55,66 @@ async function recordIntegrationStatus(
 }
 
 export async function POST(req: NextRequest) {
+  if (!isSameOriginRequest(req)) {
+    return NextResponse.json(
+      { success: false, error: "Yêu cầu không hợp lệ." },
+      { status: 403, headers: { "Cache-Control": "no-store" } }
+    );
+  }
+
   let body: Record<string, unknown>;
   try {
-    body = await req.json();
-  } catch {
+    const parsed = await readJsonBody<unknown>(req);
+    if (!isRecord(parsed)) throw new InvalidRequestBodyError();
+    body = parsed;
+  } catch (error) {
+    const status = error instanceof RequestBodyLimitError ? 413 : 400;
     return NextResponse.json(
       { success: false, error: "Dữ liệu gửi lên không hợp lệ." },
+      { status, headers: { "Cache-Control": "no-store" } }
+    );
+  }
+
+  if (typeof body.hp_website === "string" && body.hp_website.trim()) {
+    return NextResponse.json(
+      { success: true, message: "OK" },
+      { headers: { "Cache-Control": "no-store, max-age=0" } }
+    );
+  }
+
+  if (
+    typeof body.customerName !== "string" ||
+    typeof body.phone !== "string" ||
+    typeof body.rentalDate !== "string" ||
+    typeof body.returnDate !== "string" ||
+    (body.note !== undefined && typeof body.note !== "string") ||
+    (body.source !== undefined && typeof body.source !== "string") ||
+    (body.equipmentId !== undefined && body.equipmentId !== null && typeof body.equipmentId !== "string")
+  ) {
+    return NextResponse.json(
+      { success: false, error: "Dá»¯ liá»‡u yÃªu cáº§u khÃ´ng há»£p lá»‡." },
       { status: 400 }
     );
   }
 
-  if (String(body.hp_website || "").trim()) {
-    return NextResponse.json({ success: true, message: "OK" });
-  }
-
-  const customerName = String(body.customerName || "")
+  const customerName = body.customerName
     .trim()
     .replace(/\s+/g, " ");
-  const phone = String(body.phone || "").replace(/[\s.-]/g, "");
-  const rentalDate = String(body.rentalDate || "");
-  const returnDate = String(body.returnDate || "");
-  const note = String(body.note || "").trim();
-  const source = String(body.source || "website").trim().slice(0, 100);
-  const equipmentId = String(body.equipmentId || "").trim() || null;
+  const phone = body.phone.replace(/[\s.-]/g, "");
+  const rentalDate = body.rentalDate;
+  const returnDate = body.returnDate;
+  const note = (body.note || "").trim();
+  const source = (body.source || "website").trim().slice(0, 100);
+  const equipmentId = (body.equipmentId || "").trim() || null;
 
-  if (customerName.length < 2 || customerName.length > 100) {
+  if (equipmentId && equipmentId.length > 64) {
+    return NextResponse.json(
+      { success: false, error: "Thiết bị được chọn không hợp lệ." },
+      { status: 400 }
+    );
+  }
+
+  if (customerName.length < 2 || customerName.length > 100 || /[\u0000-\u001f\u007f\u2028\u2029]/.test(customerName)) {
     return NextResponse.json(
       { success: false, error: "Vui lòng nhập họ và tên từ 2 đến 100 ký tự." },
       { status: 400 }
@@ -116,7 +144,7 @@ export async function POST(req: NextRequest) {
       { status: 400 }
     );
   }
-  if (note.length > 500) {
+  if (note.length > 500 || /[\u0000-\u001f\u007f\u2028\u2029]/.test(note) || /[\u0000-\u001f\u007f\u2028\u2029]/.test(source)) {
     return NextResponse.json(
       { success: false, error: "Ghi chú không được vượt quá 500 ký tự." },
       { status: 400 }
@@ -124,7 +152,7 @@ export async function POST(req: NextRequest) {
   }
 
   try {
-    if (!(await checkRentalRequestRateLimit(getClientIp(req)))) {
+    if (!(await checkRentalRequestRateLimit(getClientIp(req), { scope: "rental" }))) {
       return NextResponse.json(
         { success: false, error: "Bạn gửi hơi nhanh. Vui lòng thử lại sau 10 phút nha." },
         { status: 429, headers: { "Retry-After": "600" } }
@@ -210,7 +238,7 @@ export async function POST(req: NextRequest) {
         rentalDate,
         returnDate,
       },
-    });
+    }, { headers: { "Cache-Control": "no-store, max-age=0" } });
   } catch (error) {
     console.error(
       "[RentalRequest] Request failed:",

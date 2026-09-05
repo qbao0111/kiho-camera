@@ -1,9 +1,12 @@
+import "server-only";
+
 import { cache } from "react";
 import { unstable_cache } from "next/cache";
 import { createPublicClient } from "@/lib/supabase/public";
 import { createClient as createServerClient } from "@/lib/supabase/server";
 import { MOCK_SITE_SETTINGS } from "@/lib/mock-data";
 import { SiteSettings } from "@/types/database";
+import { validateSiteSettingsInput } from "@/lib/security/validation";
 
 async function fetchSiteSettingsFromSupabase(): Promise<SiteSettings> {
   try {
@@ -20,7 +23,12 @@ async function fetchSiteSettingsFromSupabase(): Promise<SiteSettings> {
       return MOCK_SITE_SETTINGS;
     }
 
-    return data as SiteSettings;
+    const validation = validateSiteSettingsInput(data);
+    if (!validation.success) {
+      console.error("[Settings] Ignoring invalid site settings row.");
+      return MOCK_SITE_SETTINGS;
+    }
+    return { ...MOCK_SITE_SETTINGS, ...validation.data, id: 1 };
   } catch (err) {
     console.error("Error fetching site settings:", err);
     return MOCK_SITE_SETTINGS;
@@ -44,6 +52,9 @@ export const getSiteSettings = cache(async (): Promise<SiteSettings> => {
 
 export async function updateSiteSettings(settings: Partial<SiteSettings>): Promise<{ success: boolean; warning?: string; error?: string }> {
   try {
+    const validation = validateSiteSettingsInput(settings);
+    if (!validation.success) return validation;
+
     const supabase = await createServerClient();
     if (!supabase) {
       return { success: false, error: "Chưa cấu hình Supabase" };
@@ -52,7 +63,7 @@ export async function updateSiteSettings(settings: Partial<SiteSettings>): Promi
     // Attempt standard upsert with all fields
     const { error } = await supabase
       .from("site_settings")
-      .upsert({ id: 1, ...settings, updated_at: new Date().toISOString() });
+      .upsert({ id: 1, ...validation.data, updated_at: new Date().toISOString() });
 
     if (error) {
       // If error is specifically because maps_embed_url column is not yet in Supabase schema cache
@@ -65,7 +76,7 @@ export async function updateSiteSettings(settings: Partial<SiteSettings>): Promi
 
       if (isMapsEmbedColumnError) {
         // Fallback: strip maps_embed_url and save all other fields so user is never blocked
-        const { maps_embed_url, ...remainingSettings } = settings;
+        const { maps_embed_url, ...remainingSettings } = validation.data;
         const retry = await supabase
           .from("site_settings")
           .upsert({ id: 1, ...remainingSettings, updated_at: new Date().toISOString() });
@@ -79,12 +90,13 @@ export async function updateSiteSettings(settings: Partial<SiteSettings>): Promi
         }
       }
 
-      return { success: false, error: error.message };
+      console.error("[Settings] Supabase update failed:", error.message);
+      return { success: false, error: "Không thể lưu cài đặt website." };
     }
 
     return { success: true };
-  } catch (err: any) {
-    return { success: false, error: err.message || "Lỗi cập nhật cấu hình" };
+  } catch (err) {
+    console.error("[Settings] Update failed:", err instanceof Error ? err.message : "Unknown error");
+    return { success: false, error: "Không thể lưu cài đặt website." };
   }
 }
-

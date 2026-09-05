@@ -4,6 +4,14 @@ const remotePatterns = [
     protocol: 'https',
     hostname: 'images.unsplash.com',
   },
+  {
+    protocol: 'https',
+    hostname: 'images.pexels.com',
+  },
+  {
+    protocol: 'https',
+    hostname: '**.googleusercontent.com',
+  },
 ];
 
 try {
@@ -37,6 +45,7 @@ const cspDirectives = [
 const securityHeaders = [
   { key: 'X-Content-Type-Options', value: 'nosniff' },
   { key: 'X-Frame-Options', value: 'SAMEORIGIN' },
+  { key: 'Strict-Transport-Security', value: 'max-age=31536000; includeSubDomains' },
   { key: 'Referrer-Policy', value: 'strict-origin-when-cross-origin' },
   {
     key: 'Permissions-Policy',
@@ -50,9 +59,19 @@ const securityHeaders = [
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  poweredByHeader: false,
   images: { remotePatterns },
   async headers() {
-    return [{ source: '/(.*)', headers: securityHeaders }];
+    return [
+      { source: '/(.*)', headers: securityHeaders },
+      {
+        source: '/api/:path*',
+        headers: [
+          { key: 'Cache-Control', value: 'no-store, max-age=0' },
+          { key: 'X-Robots-Tag', value: 'noindex, nofollow' },
+        ],
+      },
+    ];
   },
 };
 

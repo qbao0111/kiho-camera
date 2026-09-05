@@ -5,6 +5,8 @@ import {
   sendContactClickToAppsScript,
   ContactClickPayload,
 } from "@/lib/services/integrations";
+import { checkRentalRequestRateLimit } from "@/lib/rate-limit";
+import { getClientIp, isRecord, isSameOriginRequest, InvalidRequestBodyError, RequestBodyLimitError, readJsonBody } from "@/lib/security/request";
 
 export const dynamic = "force-dynamic";
 export const revalidate = 0;
@@ -16,17 +18,42 @@ const SLUG_REGEX = /^[a-z0-9-]+$/;
 function sanitizeString(value: unknown, maxLength = 100): string | undefined {
   if (typeof value !== "string") return undefined;
   const clean = value.trim().slice(0, maxLength);
-  return clean || undefined;
+  return clean && !/[\u0000-\u001f\u007f\u2028\u2029]/.test(clean) ? clean : undefined;
 }
 
 export async function POST(req: NextRequest) {
+  if (!isSameOriginRequest(req)) {
+    return NextResponse.json(
+      { success: false, error: "YÃªu cáº§u khÃ´ng há»£p lá»‡." },
+      { status: 403, headers: { "Cache-Control": "no-store" } }
+    );
+  }
+
   let body: Record<string, unknown>;
   try {
-    body = await req.json();
-  } catch {
+    const parsed = await readJsonBody<unknown>(req);
+    if (!isRecord(parsed)) throw new InvalidRequestBodyError();
+    body = parsed;
+  } catch (error) {
+    const status = error instanceof RequestBodyLimitError ? 413 : 400;
     return NextResponse.json(
       { success: false, error: "Dữ liệu JSON không hợp lệ." },
-      { status: 400 }
+      { status, headers: { "Cache-Control": "no-store" } }
+    );
+  }
+
+  try {
+    if (!(await checkRentalRequestRateLimit(getClientIp(req), { scope: "contact", maxRequests: 30 }))) {
+      return NextResponse.json(
+        { success: false, error: "Bạn gửi hơi nhanh. Vui lòng thử lại sau." },
+        { status: 429, headers: { "Retry-After": "600", "Cache-Control": "no-store" } }
+      );
+    }
+  } catch (error) {
+    console.error("[ContactClick] Rate limiter failed:", error instanceof Error ? error.message : "Unknown error");
+    return NextResponse.json(
+      { success: false, error: "Hệ thống chưa sẵn sàng. Vui lòng thử lại sau." },
+      { status: 503, headers: { "Cache-Control": "no-store" } }
     );
   }
 
@@ -105,5 +132,5 @@ export async function POST(req: NextRequest) {
   return NextResponse.json({
     success: true,
     message: "Contact click recorded",
-  });
+  }, { headers: { "Cache-Control": "no-store" } });
 }

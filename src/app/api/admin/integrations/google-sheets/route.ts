@@ -11,6 +11,7 @@ import {
 } from "@/lib/services/integrations";
 import { generateSecureWebhookSecret, encryptSecret } from "@/lib/encryption";
 import { getAuthenticatedAdmin } from "@/lib/auth/admin";
+import { isRecord, isSameOriginRequest, InvalidRequestBodyError, RequestBodyLimitError, readJsonBody } from "@/lib/security/request";
 
 export const dynamic = "force-dynamic";
 export const revalidate = 0;
@@ -28,13 +29,13 @@ function toSafeSettings(settings: GoogleSheetsIntegrationConfig) {
 }
 
 function validateConfigFields(email: string, sheetId: string, sheetName: string) {
-  if (email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+  if (email.length > 254 || /[\u0000-\u001f\u007f\u2028\u2029]/.test(email) || email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
     return "Địa chỉ email nhận thông báo không hợp lệ.";
   }
   if (sheetId && !/^[A-Za-z0-9_-]{10,200}$/.test(sheetId)) {
     return "Google Sheet ID không hợp lệ.";
   }
-  if (!sheetName || sheetName.length > 100) {
+  if (!sheetName || sheetName.length > 100 || /[\u0000-\u001f\u007f\u2028\u2029]/.test(sheetName)) {
     return "Tên sheet phải có từ 1 đến 100 ký tự.";
   }
   return null;
@@ -47,11 +48,21 @@ export async function GET(req: NextRequest) {
     const { searchParams } = new URL(req.url);
     const action = searchParams.get("action");
 
+    // Revealing (or lazily generating) the webhook secret is a sensitive
+    // operation. Keep it same-origin so a cross-site request cannot trigger
+    // the side effect even though the response is protected by SOP.
+    if (action === "reveal_secret" && !isSameOriginRequest(req)) {
+      return NextResponse.json({ success: false, error: "Forbidden" }, { status: 403 });
+    }
+
     const settings = await getIntegrationSettings();
 
     if (action === "reveal_secret") {
       const plainSecret = await getDecryptedWebhookSecret();
-      return NextResponse.json({ success: true, secret: plainSecret });
+      return NextResponse.json(
+        { success: true, secret: plainSecret },
+        { headers: { "Cache-Control": "no-store, max-age=0" } }
+      );
     }
 
     if (action === "get_script") {
@@ -76,6 +87,12 @@ export async function GET(req: NextRequest) {
       },
     });
   } catch (err) {
+    if (err instanceof RequestBodyLimitError) {
+      return NextResponse.json({ success: false, error: "Dữ liệu gửi lên quá lớn." }, { status: 413 });
+    }
+    if (err instanceof InvalidRequestBodyError) {
+      return NextResponse.json({ success: false, error: "Dữ liệu JSON không hợp lệ." }, { status: 400 });
+    }
     console.error(
       "[Admin Integration API] GET failed:",
       err instanceof Error ? err.message : "Unknown error"
@@ -90,9 +107,30 @@ export async function GET(req: NextRequest) {
 export async function POST(req: NextRequest) {
   if (!(await getAuthenticatedAdmin())) return unauthorized();
 
+  if (!isSameOriginRequest(req)) {
+    return NextResponse.json({ success: false, error: "Forbidden" }, { status: 403 });
+  }
+
   try {
-    const body = await req.json();
+    const body = await readJsonBody<unknown>(req, 64 * 1024);
+    if (!isRecord(body)) throw new InvalidRequestBodyError();
     const { action } = body;
+    if (typeof action !== "string") {
+      return NextResponse.json({ success: false, error: "Action khÃ´ng há»£p lá»‡." }, { status: 400 });
+    }
+
+    const configStringFields = [
+      "google_sheet_id",
+      "google_sheet_name",
+      "notification_email",
+      "apps_script_url",
+    ] as const;
+    if (
+      configStringFields.some((field) => body[field] !== undefined && typeof body[field] !== "string") ||
+      (body.enabled !== undefined && typeof body.enabled !== "boolean")
+    ) {
+      return NextResponse.json({ success: false, error: "Dá»¯ liá»‡u cáº¥u hÃ¬nh khÃ´ng há»£p lá»‡." }, { status: 400 });
+    }
 
     const currentSettings = await getIntegrationSettings();
 
@@ -180,7 +218,7 @@ export async function POST(req: NextRequest) {
         secret: newSecret,
         masked_secret: `••••••••••••••••${newSecret.slice(-4)}`,
         generated_script: updatedScript,
-      });
+      }, { headers: { "Cache-Control": "no-store, max-age=0" } });
     }
 
     // 3. Action: Test Connection (without inserting rows or sending emails)

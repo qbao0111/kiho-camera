@@ -100,6 +100,6 @@ ALLOW_INSECURE_DEV_ENCRYPTION_FALLBACK=false
 ## 🔒 5. Bảo mật & Vận hành Production
 
 1. **Row Level Security (RLS)**: Bật trên toàn bộ các bảng trong Supabase. Khách truy cập chỉ có quyền `SELECT` thiết bị đang hoạt động (`is_active = true`).
-2. **API Authorization**: Tất cả các route trong `/api/admin/*` bắt buộc xác thực phiên đăng nhập admin qua server-side Supabase Auth.
+2. **API Authorization**: Các route quản trị yêu cầu Supabase Auth và claim server-controlled `app_metadata.role = "admin"`; không dùng `user_metadata` để phân quyền.
 3. **Mã hóa cấu hình**: Webhook secret của Google Apps Script được mã hóa bằng thuật toán `AES-256-GCM` trước khi lưu vào database.
-4. **Rate Limiting**: Form đặt thuê máy giới hạn số lượt gửi theo IP và thời gian qua PostgreSQL RPC function `check_rental_request_rate_limit`.
+4. **Rate Limiting**: Form đặt thuê và contact-click giới hạn số lượt gửi theo IP qua PostgreSQL RPC function `check_rental_request_rate_limit`.

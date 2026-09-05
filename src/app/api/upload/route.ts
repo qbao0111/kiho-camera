@@ -1,10 +1,13 @@
 import { NextRequest, NextResponse } from "next/server";
 import { writeFile, mkdir } from "fs/promises";
 import path from "path";
+import { randomUUID } from "crypto";
 import { createClient } from "@/lib/supabase/server";
 import { createAdminClient } from "@/lib/supabase/admin";
 import { getAuthenticatedAdmin } from "@/lib/auth/admin";
 import { isLocalDataFallbackEnabled } from "@/lib/environment";
+import { isSameOriginRequest, isRecord, InvalidRequestBodyError, RequestBodyLimitError, readJsonBody } from "@/lib/security/request";
+import { isSafeStoragePath } from "@/lib/security/validation";
 
 const ALLOWED_IMAGE_TYPES: Record<string, string> = {
   "image/jpeg": "jpg",
@@ -13,6 +16,14 @@ const ALLOWED_IMAGE_TYPES: Record<string, string> = {
   "image/gif": "gif",
 };
 const MAX_UPLOAD_BYTES = 10 * 1024 * 1024; // 10 MB
+
+function hasValidImageSignature(buffer: Buffer, mimeType: string): boolean {
+  if (mimeType === "image/jpeg") return buffer.length >= 3 && buffer[0] === 0xff && buffer[1] === 0xd8 && buffer[2] === 0xff;
+  if (mimeType === "image/png") return buffer.subarray(0, 8).equals(Buffer.from([0x89, 0x50, 0x4e, 0x47, 0x0d, 0x0a, 0x1a, 0x0a]));
+  if (mimeType === "image/webp") return buffer.length >= 12 && buffer.toString("ascii", 0, 4) === "RIFF" && buffer.toString("ascii", 8, 12) === "WEBP";
+  if (mimeType === "image/gif") return buffer.toString("ascii", 0, 6) === "GIF87a" || buffer.toString("ascii", 0, 6) === "GIF89a";
+  return false;
+}
 
 function mapStorageErrorMessage(errorMessage: string): string {
   const msg = errorMessage.toLowerCase();
@@ -41,10 +52,20 @@ export async function POST(req: NextRequest) {
     );
   }
 
+  if (!isSameOriginRequest(req)) {
+    return NextResponse.json({ success: false, error: "Forbidden" }, { status: 403 });
+  }
+
+  const declaredLength = Number(req.headers.get("content-length"));
+  if (Number.isFinite(declaredLength) && declaredLength > MAX_UPLOAD_BYTES + 256 * 1024) {
+    return NextResponse.json({ success: false, error: "Dung lượng yêu cầu vượt quá giới hạn." }, { status: 413 });
+  }
+
   try {
     const formData = await req.formData();
     const file = formData.get("file") as File | null;
-    const rawFolder = ((formData.get("folder") as string) || "product").toLowerCase().trim();
+    const folderValue = formData.get("folder");
+    const rawFolder = (typeof folderValue === "string" ? folderValue : "product").toLowerCase().trim();
     
     // Normalize folder name
     let folder = "product";
@@ -58,7 +79,7 @@ export async function POST(req: NextRequest) {
       folder = "storefront";
     }
 
-    if (!file) {
+    if (!file || typeof file.arrayBuffer !== "function" || typeof file.type !== "string") {
       return NextResponse.json(
         { success: false, error: "Vui lòng chọn file ảnh để tải lên." },
         { status: 400 }
@@ -82,7 +103,19 @@ export async function POST(req: NextRequest) {
 
     const bytes = await file.arrayBuffer();
     const buffer = Buffer.from(bytes);
-    const fileName = `${folder}/${Date.now()}-${Math.random().toString(36).substring(2, 8)}.${fileExt}`;
+    if (buffer.length > MAX_UPLOAD_BYTES) {
+      return NextResponse.json(
+        { success: false, error: "Dung lượng ảnh vượt quá giới hạn 10MB." },
+        { status: 413 }
+      );
+    }
+    if (!hasValidImageSignature(buffer, file.type)) {
+      return NextResponse.json(
+        { success: false, error: "Nội dung file không khớp định dạng ảnh." },
+        { status: 400 }
+      );
+    }
+    const fileName = `${folder}/${randomUUID()}.${fileExt}`;
 
     // 2. Try Supabase Storage
     try {
@@ -167,14 +200,16 @@ export async function POST(req: NextRequest) {
     const uploadDir = path.join(process.cwd(), "public", "uploads", folder);
     await mkdir(uploadDir, { recursive: true });
 
-    const cleanFileName = `${Date.now()}-${Math.random().toString(36).substring(2, 8)}.${fileExt}`;
+    const cleanFileName = `${randomUUID()}.${fileExt}`;
     const filePath = path.join(uploadDir, cleanFileName);
 
     await writeFile(filePath, buffer);
 
     const publicUrl = `/uploads/${folder}/${cleanFileName}`;
-    return NextResponse.json({ success: true, url: publicUrl });
+    return NextResponse.json({ success: true, url: publicUrl }, { headers: { "Cache-Control": "no-store" } });
   } catch (error) {
+    if (error instanceof RequestBodyLimitError) return NextResponse.json({ success: false, error: "Dữ liệu gửi lên quá lớn." }, { status: 413 });
+    if (error instanceof InvalidRequestBodyError) return NextResponse.json({ success: false, error: "Dữ liệu không hợp lệ." }, { status: 400 });
     console.error(
       "[Upload] Upload API error:",
       error instanceof Error ? error.message : "Unknown error"
@@ -195,18 +230,30 @@ export async function DELETE(req: NextRequest) {
     );
   }
 
+  if (!isSameOriginRequest(req)) {
+    return NextResponse.json({ success: false, error: "Forbidden" }, { status: 403 });
+  }
+
   try {
-    const { url, path: objectPath } = await req.json();
-    let targetPath = objectPath;
+    const body = await readJsonBody<unknown>(req, 32 * 1024);
+    if (!isRecord(body)) throw new InvalidRequestBodyError();
+    const { url, path: objectPath } = body;
+    let targetPath = typeof objectPath === "string" ? objectPath : undefined;
 
     if (!targetPath && url && typeof url === "string") {
-      const match = url.match(/\/storage\/v1\/object\/public\/equipment-images\/(.+)$/);
-      if (match) {
-        targetPath = match[1];
+      try {
+        const parsed = new URL(url);
+        const configuredHost = process.env.NEXT_PUBLIC_SUPABASE_URL ? new URL(process.env.NEXT_PUBLIC_SUPABASE_URL).hostname : "";
+        const prefix = "/storage/v1/object/public/equipment-images/";
+        if (parsed.protocol === "https:" && parsed.hostname === configuredHost && parsed.pathname.startsWith(prefix)) {
+          targetPath = decodeURIComponent(parsed.pathname.slice(prefix.length));
+        }
+      } catch {
+        targetPath = undefined;
       }
     }
 
-    if (!targetPath || typeof targetPath !== "string") {
+    if (!targetPath || !isSafeStoragePath(targetPath, ["product", "sample", "poster", "feedback", "storefront"])) {
       return NextResponse.json(
         { success: false, error: "Yêu cầu đường dẫn ảnh hợp lệ để xóa." },
         { status: 400 }
@@ -222,23 +269,30 @@ export async function DELETE(req: NextRequest) {
     }
 
     const client = createAdminClient() || (await createClient());
-    if (client) {
-      const { error } = await client.storage
-        .from("equipment-images")
-        .remove([targetPath]);
-
-      if (error) {
-        console.error("[Upload] Supabase Storage delete failed:", error.message);
-        return NextResponse.json(
-          { success: false, error: "Xóa ảnh từ Supabase Storage thất bại." },
-          { status: 500 }
-        );
-      }
+    if (!client) {
+      return NextResponse.json(
+        { success: false, error: "Supabase Storage chưa được cấu hình." },
+        { status: 503 }
+      );
     }
 
-    return NextResponse.json({ success: true });
-  } catch (err: any) {
-    console.error("[Upload] Delete API error:", err?.message || "Unknown error");
+    const { error } = await client.storage
+      .from("equipment-images")
+      .remove([targetPath]);
+
+    if (error) {
+      console.error("[Upload] Supabase Storage delete failed:", error.message);
+      return NextResponse.json(
+        { success: false, error: "Xóa ảnh từ Supabase Storage thất bại." },
+        { status: 500 }
+      );
+    }
+
+    return NextResponse.json({ success: true }, { headers: { "Cache-Control": "no-store" } });
+  } catch (err) {
+    if (err instanceof RequestBodyLimitError) return NextResponse.json({ success: false, error: "Dữ liệu gửi lên quá lớn." }, { status: 413 });
+    if (err instanceof InvalidRequestBodyError) return NextResponse.json({ success: false, error: "Dữ liệu JSON không hợp lệ." }, { status: 400 });
+    console.error("[Upload] Delete API error:", err instanceof Error ? err.message : "Unknown error");
     return NextResponse.json(
       { success: false, error: "Xảy ra lỗi khi xóa ảnh." },
       { status: 500 }

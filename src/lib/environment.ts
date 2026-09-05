@@ -11,8 +11,10 @@ export function isSupabaseConfigured(): boolean {
 }
 
 export function isLocalDataFallbackEnabled(): boolean {
-  if (process.env.ALLOW_LOCAL_DATA_FALLBACK === "false") {
+  // Local JSON is a development convenience only. A missing/invalid flag must
+  // never silently enable it in a production deployment.
+  if (process.env.NODE_ENV === "production" || process.env.VERCEL_ENV === "production") {
     return false;
   }
-  return true;
+  return process.env.ALLOW_LOCAL_DATA_FALLBACK === "true";
 }

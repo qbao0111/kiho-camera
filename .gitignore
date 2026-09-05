@@ -39,6 +39,7 @@ next-env.d.ts
 /src/data/rental-requests.json
 /public/uploads/
 /scratch/
+/supabase/.temp/
 
 .env*
 

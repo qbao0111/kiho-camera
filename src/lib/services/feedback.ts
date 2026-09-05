@@ -1,14 +1,26 @@
+import "server-only";
+
 import { cache } from "react";
 import { unstable_cache } from "next/cache";
 import { createPublicClient } from "@/lib/supabase/public";
 import { MOCK_FEEDBACK } from "@/lib/mock-data";
 import { Feedback } from "@/types/database";
+import { isLocalDataFallbackEnabled } from "@/lib/environment";
+import { isSafeImageUrl } from "@/lib/security/validation";
+
+function sanitizeFeedback(feedback: Feedback): Feedback {
+  return {
+    ...feedback,
+    image_url: feedback.image_url && isSafeImageUrl(feedback.image_url) ? feedback.image_url : null,
+  };
+}
 
 async function fetchRawFeedbackList(): Promise<Feedback[]> {
   try {
     const supabase = createPublicClient();
     if (!supabase) {
-      return MOCK_FEEDBACK;
+      if (!isLocalDataFallbackEnabled()) return [];
+      return MOCK_FEEDBACK.map(sanitizeFeedback);
     }
 
     const { data, error } = await supabase
@@ -18,13 +30,15 @@ async function fetchRawFeedbackList(): Promise<Feedback[]> {
       .order("feedback_date", { ascending: false });
 
     if (error || !data || data.length === 0) {
-      return MOCK_FEEDBACK;
+      if (!isLocalDataFallbackEnabled()) return [];
+      return MOCK_FEEDBACK.map(sanitizeFeedback);
     }
 
-    return data as Feedback[];
+    return (data as Feedback[]).map(sanitizeFeedback);
   } catch (err) {
     console.error("Error fetching feedback:", err);
-    return MOCK_FEEDBACK;
+    if (!isLocalDataFallbackEnabled()) return [];
+    return MOCK_FEEDBACK.map(sanitizeFeedback);
   }
 }
 

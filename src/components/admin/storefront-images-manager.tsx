@@ -37,18 +37,31 @@ CREATE TABLE IF NOT EXISTS public.storefront_images (
 
 ALTER TABLE public.storefront_images ENABLE ROW LEVEL SECURITY;
 
+CREATE OR REPLACE FUNCTION public.is_admin()
+RETURNS boolean
+LANGUAGE sql
+STABLE
+SET search_path = pg_catalog, public
+AS $$
+  SELECT COALESCE((auth.jwt() -> 'app_metadata' ->> 'role') = 'admin', false);
+$$;
+REVOKE ALL ON FUNCTION public.is_admin() FROM PUBLIC;
+GRANT EXECUTE ON FUNCTION public.is_admin() TO anon, authenticated, service_role;
+
 DROP POLICY IF EXISTS "Public can view active storefront images" ON public.storefront_images;
 CREATE POLICY "Public can view active storefront images"
     ON public.storefront_images
     FOR SELECT
+    TO anon, authenticated
     USING (is_active = true);
 
 DROP POLICY IF EXISTS "Admin full access storefront images" ON public.storefront_images;
+DROP POLICY IF EXISTS "Authenticated admin full access to storefront images" ON public.storefront_images;
 CREATE POLICY "Admin full access storefront images"
     ON public.storefront_images
-    FOR ALL
-    USING (true)
-    WITH CHECK (true);
+    FOR ALL TO authenticated
+    USING ((select public.is_admin()))
+    WITH CHECK ((select public.is_admin()));
 `;
 
 export function StorefrontImagesManager() {
@@ -285,11 +298,11 @@ export function StorefrontImagesManager() {
   };
 
   // Delete
-  const handleDelete = async (id: string, imageUrl: string) => {
+  const handleDelete = async (id: string) => {
     if (!confirm("Bạn có chắc muốn xóa ảnh cửa hàng này không?")) return;
 
     try {
-      const res = await fetch(`/api/admin/storefront-images/${id}?image_url=${encodeURIComponent(imageUrl)}`, {
+      const res = await fetch(`/api/admin/storefront-images/${id}`, {
         method: "DELETE",
       });
 
@@ -616,7 +629,7 @@ export function StorefrontImagesManager() {
                       </button>
                       <button
                         type="button"
-                        onClick={() => handleDelete(img.id, img.image_url)}
+                        onClick={() => handleDelete(img.id)}
                         aria-label="Xóa ảnh cửa hàng"
                         className="w-8 h-8 rounded border border-rose-200 text-rose-600 hover:bg-rose-50 flex items-center justify-center ml-1.5"
                       >

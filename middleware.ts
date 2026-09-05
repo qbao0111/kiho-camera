@@ -1,5 +1,7 @@
 import { createServerClient, type CookieOptions } from "@supabase/ssr";
 import { NextResponse, type NextRequest } from "next/server";
+import type { User } from "@supabase/supabase-js";
+import { isAdminUser } from "@/lib/auth/roles";
 
 const PROTECTED_MUTATION_ROUTES = new Set(["/api/equipment", "/api/upload"]);
 type CookieToSet = { name: string; value: string; options: CookieOptions };
@@ -7,8 +9,13 @@ type CookieToSet = { name: string; value: string; options: CookieOptions };
 function unauthorized() {
   return NextResponse.json(
     { success: false, error: "Unauthorized" },
-    { status: 401 }
+    { status: 401, headers: { "Cache-Control": "no-store, max-age=0" } }
   );
+}
+
+function noStore(response: NextResponse) {
+  response.headers.set("Cache-Control", "private, no-store, max-age=0");
+  return response;
 }
 
 export async function middleware(request: NextRequest) {
@@ -23,7 +30,7 @@ export async function middleware(request: NextRequest) {
   if (!supabaseUrl || !supabaseAnonKey) {
     if (isAdminApi || isProtectedMutation) return unauthorized();
     if (isAdminPage) {
-      return NextResponse.redirect(new URL("/admin/login", request.url));
+      return noStore(NextResponse.redirect(new URL("/admin/login", request.url)));
     }
     return NextResponse.next();
   }
@@ -44,21 +51,28 @@ export async function middleware(request: NextRequest) {
     },
   });
 
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
+  let user: User | null = null;
+  try {
+    const result = await supabase.auth.getUser();
+    user = result.data.user;
+  } catch {
+    // Fail closed when Auth is unavailable.
+    user = null;
+  }
 
-  if (!user && (isAdminApi || isProtectedMutation)) return unauthorized();
-  if (!user && isAdminPage) {
+  const isAdmin = isAdminUser(user);
+
+  if ((!user || !isAdmin) && (isAdminApi || isProtectedMutation)) return unauthorized();
+  if ((!user || !isAdmin) && isAdminPage) {
     const loginUrl = new URL("/admin/login", request.url);
     loginUrl.searchParams.set("next", pathname);
-    return NextResponse.redirect(loginUrl);
+    return noStore(NextResponse.redirect(loginUrl));
   }
-  if (user && isLogin) {
-    return NextResponse.redirect(new URL("/admin", request.url));
+  if (isAdmin && isLogin) {
+    return noStore(NextResponse.redirect(new URL("/admin", request.url)));
   }
 
-  return response;
+  return isAdminPage || isLogin ? noStore(response) : response;
 }
 
 export const config = {
