@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import Image from "next/image";
+import Image from "@/components/ui/source-image";
 import Link from "next/link";
 import { ArrowUpRight, Star, Camera } from "lucide-react";
 import { Feedback } from "@/types/database";

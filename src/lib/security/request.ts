@@ -119,6 +119,7 @@ export function isSameOriginRequest(request: Request): boolean {
 function allowedOrigins(): Set<string> {
   const origins = [
     process.env.NEXT_PUBLIC_SITE_URL,
+    process.env.STAGING_ORIGIN,
     "https://kihocamera.com",
     "https://www.kihocamera.com",
     ...(process.env.NODE_ENV === "production" || process.env.VERCEL_ENV === "production"

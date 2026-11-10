@@ -18,15 +18,16 @@ export const metadata: Metadata = buildPageMetadata({
 });
 
 interface EquipmentPageProps {
-  searchParams: {
+  searchParams: Promise<{
     brand?: string;
     useCase?: string;
     search?: string;
     sort?: "price_asc" | "price_desc" | "name_asc" | "newest" | "featured";
-  };
+  }>;
 }
 
-export default async function EquipmentListPage({ searchParams }: EquipmentPageProps) {
+export default async function EquipmentListPage({ searchParams: pendingSearchParams }: EquipmentPageProps) {
+  const searchParams = await pendingSearchParams;
   const currentBrand = searchParams.brand || "all";
   const currentUseCase = searchParams.useCase;
   const currentSearch = searchParams.search;
@@ -129,7 +130,7 @@ export default async function EquipmentListPage({ searchParams }: EquipmentPageP
           <StaggerContainer className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 pt-2">
             {filteredList.map((item, idx) => (
               <StaggerItem key={item.id}>
-                <ProductCard equipment={item} priority={idx < 4} />
+                <ProductCard equipment={item} priority={idx === 0} />
               </StaggerItem>
             ))}
           </StaggerContainer>

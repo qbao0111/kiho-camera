@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
-import Image from "next/image";
+import Image from "@/components/ui/source-image";
 import { Plus, Edit2, Trash2, Star, Sparkles, CheckCircle, AlertCircle, Save } from "lucide-react";
 import { Feedback } from "@/types/database";
 import { MOCK_FEEDBACK } from "@/lib/mock-data";

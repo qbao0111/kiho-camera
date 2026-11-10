@@ -1,7 +1,8 @@
 "use client";
 
 import React, { useState, useEffect, useRef } from "react";
-import Image from "next/image";
+import Image from "@/components/ui/source-image";
+import { prepareImageUpload } from "@/lib/prepare-image-upload";
 import {
   Upload,
   Trash2,
@@ -130,7 +131,7 @@ export function StorefrontImagesManager() {
       const file = files[i];
       try {
         const formData = new FormData();
-        formData.append("file", file);
+        formData.append("file", await prepareImageUpload(file, "storefront"));
         formData.append("folder", "storefront");
 
         const uploadRes = await fetch("/api/upload", {

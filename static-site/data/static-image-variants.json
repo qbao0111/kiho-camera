@@ -1,0 +1,161 @@
+[
+  {
+    "source": "/brand/kiho-logo-header-transparent.png",
+    "width": 708,
+    "height": 567,
+    "originalBytes": 122666,
+    "variants": [
+      {
+        "src": "/image-variants/8666e974d0d1bc81-80.webp",
+        "width": 80,
+        "height": 64
+      },
+      {
+        "src": "/image-variants/baba4ffc5eb1df0a-96.webp",
+        "width": 96,
+        "height": 77,
+        "bytes": 4266
+      },
+      {
+        "src": "/image-variants/3b968bc04857d44a-160.webp",
+        "width": 160,
+        "height": 128
+      },
+      {
+        "src": "/image-variants/baba4ffc5eb1df0a-320.webp",
+        "width": 320,
+        "height": 256,
+        "bytes": 29238
+      },
+      {
+        "src": "/image-variants/baba4ffc5eb1df0a-640.webp",
+        "width": 640,
+        "height": 513,
+        "bytes": 91268
+      },
+      {
+        "src": "/image-variants/baba4ffc5eb1df0a-708.webp",
+        "width": 708,
+        "height": 567,
+        "bytes": 74506
+      }
+    ]
+  },
+  {
+    "source": "/images/landing/cutouts/canon-r50.png",
+    "width": 783,
+    "height": 628,
+    "originalBytes": 724585,
+    "variants": [
+      {
+        "src": "/image-variants/68762e836d9ba1ff-96.webp",
+        "width": 96,
+        "height": 77,
+        "bytes": 3434
+      },
+      {
+        "src": "/image-variants/68762e836d9ba1ff-320.webp",
+        "width": 320,
+        "height": 257,
+        "bytes": 18546
+      },
+      {
+        "src": "/image-variants/69166a9cba99d769-480.webp",
+        "width": 480,
+        "height": 385
+      },
+      {
+        "src": "/image-variants/68762e836d9ba1ff-640.webp",
+        "width": 640,
+        "height": 513,
+        "bytes": 53474
+      },
+      {
+        "src": "/image-variants/68762e836d9ba1ff-783.webp",
+        "width": 783,
+        "height": 628,
+        "bytes": 65324
+      }
+    ]
+  },
+  {
+    "source": "/images/landing/cutouts/fujifilm-x100v.png",
+    "width": 982,
+    "height": 606,
+    "originalBytes": 1009740,
+    "variants": [
+      {
+        "src": "/image-variants/19b3638669216132-96.webp",
+        "width": 96,
+        "height": 59,
+        "bytes": 4266
+      },
+      {
+        "src": "/image-variants/19b3638669216132-320.webp",
+        "width": 320,
+        "height": 197,
+        "bytes": 24936
+      },
+      {
+        "src": "/image-variants/ee255cd5645cc838-480.webp",
+        "width": 480,
+        "height": 296
+      },
+      {
+        "src": "/image-variants/19b3638669216132-640.webp",
+        "width": 640,
+        "height": 395,
+        "bytes": 70156
+      },
+      {
+        "src": "/image-variants/19b3638669216132-960.webp",
+        "width": 960,
+        "height": 592,
+        "bytes": 122118
+      },
+      {
+        "src": "/image-variants/19b3638669216132-982.webp",
+        "width": 982,
+        "height": 606,
+        "bytes": 122022
+      }
+    ]
+  },
+  {
+    "source": "/images/landing/cutouts/canon-g7x-mark3.png",
+    "width": 749,
+    "height": 653,
+    "originalBytes": 673519,
+    "variants": [
+      {
+        "src": "/image-variants/49bee69921bb42c2-96.webp",
+        "width": 96,
+        "height": 84,
+        "bytes": 3468
+      },
+      {
+        "src": "/image-variants/49bee69921bb42c2-320.webp",
+        "width": 320,
+        "height": 279,
+        "bytes": 18142
+      },
+      {
+        "src": "/image-variants/853f13758d7080e6-480.webp",
+        "width": 480,
+        "height": 418
+      },
+      {
+        "src": "/image-variants/49bee69921bb42c2-640.webp",
+        "width": 640,
+        "height": 558,
+        "bytes": 51394
+      },
+      {
+        "src": "/image-variants/49bee69921bb42c2-749.webp",
+        "width": 749,
+        "height": 653,
+        "bytes": 60534
+      }
+    ]
+  }
+]

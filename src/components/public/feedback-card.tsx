@@ -1,5 +1,5 @@
 import React from "react";
-import Image from "next/image";
+import Image from "@/components/ui/source-image";
 import { Feedback } from "@/types/database";
 
 interface FeedbackCardProps {

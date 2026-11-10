@@ -20,12 +20,13 @@ import { FadeIn, StaggerContainer, StaggerItem } from "@/components/ui/motion";
 import { buildPageMetadata } from "@/lib/seo/metadata";
 
 interface PageProps {
-  params: {
+  params: Promise<{
     slug: string;
-  };
+  }>;
 }
 
-export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
+export async function generateMetadata({ params: pendingParams }: PageProps): Promise<Metadata> {
+  const params = await pendingParams;
   const equipment = await getEquipmentBySlug(params.slug);
   if (!equipment) {
     return buildPageMetadata({
@@ -59,7 +60,8 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   });
 }
 
-export default async function ProductDetailPage({ params }: PageProps) {
+export default async function ProductDetailPage({ params: pendingParams }: PageProps) {
+  const params = await pendingParams;
   const [equipment, settings] = await Promise.all([
     getEquipmentBySlug(params.slug),
     getSiteSettings(),

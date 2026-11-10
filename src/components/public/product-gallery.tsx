@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
-import Image from "next/image";
+import Image from "@/components/ui/source-image";
 import { ZoomIn } from "lucide-react";
 import { EquipmentImage } from "@/types/database";
 import { ImageLightbox, LightboxImage } from "@/components/ui/image-lightbox";
@@ -41,7 +41,7 @@ export function ProductGallery({ images = [], productName }: ProductGalleryProps
           src={imageList[activeIndex]?.url || imageList[0].url}
           alt={`${productName} - ảnh ${activeIndex + 1}`}
           fill
-          priority
+          priority={activeIndex === 0}
           sizes="(max-width: 1024px) 100vw, 50vw"
           className="object-contain p-4 filter drop-shadow-[0_8px_16px_rgba(0,0,0,0.08)] cursor-zoom-in group-hover:scale-[1.01] transition-transform duration-200"
           onClick={() => setIsLightboxOpen(true)}

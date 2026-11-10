@@ -3,7 +3,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import { createPortal } from "react-dom";
 import Link from "next/link";
-import Image from "next/image";
+import Image from "@/components/ui/source-image";
 import { usePathname } from "next/navigation";
 import { ArrowUpRight, Menu, X, Phone, MessageCircle, MapPin } from "lucide-react";
 import { SiteSettings } from "@/types/database";
@@ -127,7 +127,6 @@ export function Header({ settings }: HeaderProps) {
                 alt="Kiho Camera"
                 width={160}
                 height={128}
-                priority
                 className="h-10 sm:h-12 w-auto object-contain transition-transform group-hover:scale-[1.02]"
               />
             </Link>

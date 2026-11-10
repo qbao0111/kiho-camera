@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import Image from "next/image";
+import Image from "@/components/ui/source-image";
 import { ArrowRight, ArrowDown, Phone, Instagram, MapPin, Camera } from "lucide-react";
 import { trackMessengerContact, trackHotlineContact } from "@/lib/analytics";
 import { normalizePhoneNumber } from "@/lib/utils";

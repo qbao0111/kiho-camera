@@ -125,7 +125,7 @@ export default function RootLayout({
     >
       <body className="min-h-screen flex flex-col font-sans bg-[#faf8f5] text-ink-900 antialiased selection:bg-ink-900 selection:text-[#faf8f5]">
         {children}
-        <Analytics />
+        {process.env.VERCEL === "1" && <Analytics />}
         {isValidGaId && <GoogleAnalytics gaId={rawGaId} />}
       </body>
     </html>

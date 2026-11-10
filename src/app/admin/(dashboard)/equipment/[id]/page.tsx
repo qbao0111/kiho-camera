@@ -5,12 +5,13 @@ import { EquipmentForm } from "@/components/admin/equipment-form";
 import { notFound } from "next/navigation";
 
 interface PageProps {
-  params: {
+  params: Promise<{
     id: string;
-  };
+  }>;
 }
 
-export default async function EditEquipmentPage({ params }: PageProps) {
+export default async function EditEquipmentPage({ params: pendingParams }: PageProps) {
+  const params = await pendingParams;
   const [allEquipment, categories] = await Promise.all([
     getEquipmentList({ onlyActive: false }),
     getCategories(false),

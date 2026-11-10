@@ -1,5 +1,5 @@
 import React from "react";
-import Image from "next/image";
+import Image from "@/components/ui/source-image";
 import { MapPin, Phone, Navigation, ArrowUpRight } from "lucide-react";
 import { SiteSettings, StorefrontImage } from "@/types/database";
 import { normalizePhoneNumber } from "@/lib/utils";

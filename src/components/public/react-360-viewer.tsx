@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useRef, useEffect } from "react";
-import Image from "next/image";
+import Image from "@/components/ui/source-image";
 import { Rotate3d, Play, Pause, ZoomIn, ChevronLeft, ChevronRight, Check } from "lucide-react";
 
 interface Hotspot {
@@ -252,7 +252,6 @@ export function React360Viewer({ className = "" }: { className?: string }) {
               src={currentView.src}
               alt={currentView.name}
               fill
-              priority
               sizes="(max-width: 768px) 100vw, 45vw"
               className="object-contain filter drop-shadow-[0_12px_24px_rgba(0,0,0,0.35)] transition-all duration-500 ease-out"
             />

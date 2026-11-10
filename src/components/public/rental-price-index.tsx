@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
-import Image from "next/image";
+import Image from "@/components/ui/source-image";
 import Link from "next/link";
 import { ArrowUpRight, Check } from "lucide-react";
 import { Equipment, PricingEquipmentDTO } from "@/types/database";

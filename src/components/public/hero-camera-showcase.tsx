@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useEffect, useRef } from "react";
-import Image from "next/image";
+import Image from "@/components/ui/source-image";
 
 const HERO_CAMERAS = [
   {
