@@ -2,7 +2,8 @@
 
 import React, { useState } from "react";
 import { useRouter } from "next/navigation";
-import Image from "next/image";
+import Image from "@/components/ui/source-image";
+import { prepareImageUpload } from "@/lib/prepare-image-upload";
 import {
   Save,
   ArrowLeft,
@@ -121,7 +122,7 @@ export function EquipmentForm({ initialData, categories }: EquipmentFormProps) {
   const uploadFileToStorage = async (file: File, folder: "product" | "poster" | "samples"): Promise<string | null> => {
     try {
       const formData = new FormData();
-      formData.append("file", file);
+      formData.append("file", await prepareImageUpload(file, folder));
       formData.append("folder", folder);
 
       const res = await fetch("/api/upload", {

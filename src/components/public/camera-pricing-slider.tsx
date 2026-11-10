@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useRef, useEffect, useCallback } from "react";
-import Image from "next/image";
+import Image from "@/components/ui/source-image";
 import Link from "next/link";
 import { ArrowRight, ChevronLeft, ChevronRight, Clock, Calendar, Tag, ArrowUpRight, ShieldCheck, Camera } from "lucide-react";
 import { Equipment } from "@/types/database";

@@ -7,10 +7,24 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "test:security": "node scripts/security-self-check.mjs"
+    "test:security": "node scripts/security-self-check.mjs",
+    "typecheck": "tsc --noEmit",
+    "test:images": "node scripts/image-pipeline-self-check.mjs",
+    "test:booking": "node scripts/booking-self-check.mjs",
+    "test:upload": "node scripts/upload-self-check.mjs",
+    "test:worker": "node scripts/worker-cache-self-check.mjs",
+    "cf:build": "opennextjs-cloudflare build",
+    "cf:preview": "opennextjs-cloudflare preview",
+    "cf:dry-run": "wrangler deploy --dry-run --outdir .open-next/dry-run",
+    "cf:deploy:staging": "node scripts/deploy-staging.mjs",
+    "static:snapshot": "node scripts/export-public-snapshot.mjs",
+    "static:build": "node scripts/build-static.mjs",
+    "static:check": "node scripts/check-static-export.mjs",
+    "static:deploy:staging": "node scripts/deploy-pages-staging.mjs"
   },
   "dependencies": {
-    "@next/third-parties": "14.2.24",
+    "@next/third-parties": "15.5.27",
+    "@opennextjs/cloudflare": "1.20.9",
     "@supabase/ssr": "^0.5.2",
     "@supabase/supabase-js": "^2.48.1",
     "@types/three": "^0.185.4",
@@ -18,7 +32,7 @@
     "clsx": "^2.1.1",
     "framer-motion": "^11.18.2",
     "lucide-react": "^0.475.0",
-    "next": "^14.2.24",
+    "next": "15.5.27",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "tailwind-merge": "^2.6.0",
@@ -30,10 +44,11 @@
     "@types/react-dom": "^18.3.5",
     "autoprefixer": "^10.4.20",
     "eslint": "^8.57.1",
-    "eslint-config-next": "14.2.24",
+    "eslint-config-next": "15.5.27",
     "postcss": "^8.5.2",
     "supabase": "^2.116.0",
     "tailwindcss": "^3.4.17",
-    "typescript": "^5.7.3"
+    "typescript": "^5.7.3",
+    "wrangler": "4.149.0"
   }
 }

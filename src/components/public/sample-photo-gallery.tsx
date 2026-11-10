@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
-import Image from "next/image";
+import Image from "@/components/ui/source-image";
 import { Camera, ZoomIn } from "lucide-react";
 import { EquipmentSampleImage } from "@/types/database";
 import { ImageLightbox, LightboxImage } from "@/components/ui/image-lightbox";

@@ -109,7 +109,7 @@ export function InteractiveCatalog({ initialEquipment, categories }: Interactive
           <StaggerContainer className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 sm:gap-10">
             {filteredEquipment.map((item, idx) => (
               <StaggerItem key={item.id}>
-                <ProductCard equipment={item} priority={idx < 4} />
+                <ProductCard equipment={item} priority={idx === 0} />
               </StaggerItem>
             ))}
           </StaggerContainer>

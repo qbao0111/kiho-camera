@@ -90,7 +90,8 @@ function validateStorefrontImageInput(data: Partial<StorefrontImage>): string | 
  */
 async function fetchStorefrontImagesFromSupabase(clientOverride?: Awaited<ReturnType<typeof getWriteClient>>): Promise<StorefrontImage[]> {
   try {
-    const supabase = clientOverride || createPublicClient() || (await getWriteClient());
+    // The cached public reader must never access session cookies.
+    const supabase = clientOverride || createPublicClient();
     if (!supabase || !process.env.NEXT_PUBLIC_SUPABASE_URL) {
       return [];
     }

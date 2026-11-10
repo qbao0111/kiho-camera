@@ -1,6 +1,6 @@
 import React from "react";
 import Link from "next/link";
-import Image from "next/image";
+import Image from "@/components/ui/source-image";
 import { Plus, Edit, Sparkles, Eye, EyeOff, ExternalLink } from "lucide-react";
 import { getEquipmentList } from "@/lib/services/equipment";
 import { getEquipmentCoverImage } from "@/lib/equipment-images";

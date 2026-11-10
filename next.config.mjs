@@ -60,7 +60,7 @@ const securityHeaders = [
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   poweredByHeader: false,
-  images: { remotePatterns },
+  images: { remotePatterns, unoptimized: true },
   async headers() {
     return [
       { source: '/(.*)', headers: securityHeaders },

@@ -2,7 +2,7 @@
 
 import React, { useState } from "react";
 import Link from "next/link";
-import Image from "next/image";
+import Image from "@/components/ui/source-image";
 import { Search, ShoppingBag, Menu, Play, ArrowUpRight, Camera, Film, Sliders, Aperture, Sun, Sparkles } from "lucide-react";
 import { VideoModal } from "./video-modal";
 

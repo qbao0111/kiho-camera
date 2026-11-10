@@ -15,7 +15,7 @@ const ALLOWED_IMAGE_TYPES: Record<string, string> = {
   "image/webp": "webp",
   "image/gif": "gif",
 };
-const MAX_UPLOAD_BYTES = 10 * 1024 * 1024; // 10 MB
+const MAX_UPLOAD_BYTES = 2 * 1024 * 1024; // 2 MB prepared source asset
 
 function hasValidImageSignature(buffer: Buffer, mimeType: string): boolean {
   if (mimeType === "image/jpeg") return buffer.length >= 3 && buffer[0] === 0xff && buffer[1] === 0xd8 && buffer[2] === 0xff;
@@ -34,7 +34,7 @@ function mapStorageErrorMessage(errorMessage: string): string {
     return "Không có quyền upload vào Supabase Storage.";
   }
   if (msg.includes("payload too large") || msg.includes("file size") || msg.includes("too large")) {
-    return "Dung lượng ảnh vượt quá giới hạn 10MB.";
+    return "Dung lượng ảnh vượt quá giới hạn 2MB.";
   }
   if (msg.includes("mime") || msg.includes("invalidmimetype") || msg.includes("type")) {
     return "Định dạng ảnh không được hỗ trợ (chỉ nhận JPG, PNG, WebP, GIF).";
@@ -96,7 +96,7 @@ export async function POST(req: NextRequest) {
 
     if (file.size > MAX_UPLOAD_BYTES) {
       return NextResponse.json(
-        { success: false, error: "Dung lượng ảnh vượt quá giới hạn 10MB." },
+        { success: false, error: "Dung lượng ảnh vượt quá giới hạn 2MB." },
         { status: 400 }
       );
     }
@@ -105,7 +105,7 @@ export async function POST(req: NextRequest) {
     const buffer = Buffer.from(bytes);
     if (buffer.length > MAX_UPLOAD_BYTES) {
       return NextResponse.json(
-        { success: false, error: "Dung lượng ảnh vượt quá giới hạn 10MB." },
+        { success: false, error: "Dung lượng ảnh vượt quá giới hạn 2MB." },
         { status: 413 }
       );
     }

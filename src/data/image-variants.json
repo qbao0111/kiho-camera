@@ -1,0 +1,3788 @@
+{
+  "/images/cameras/canon-g7x-mark3.jpg": {
+    "width": 1024,
+    "height": 1024,
+    "originalBytes": 512265,
+    "variants": [
+      {
+        "src": "/image-variants/ced1d2049fcd0e58-96.webp",
+        "width": 96,
+        "height": 96,
+        "bytes": 1146
+      },
+      {
+        "src": "/image-variants/ced1d2049fcd0e58-320.webp",
+        "width": 320,
+        "height": 320,
+        "bytes": 6994
+      },
+      {
+        "src": "/image-variants/ced1d2049fcd0e58-640.webp",
+        "width": 640,
+        "height": 640,
+        "bytes": 21946
+      },
+      {
+        "src": "/image-variants/ced1d2049fcd0e58-960.webp",
+        "width": 960,
+        "height": 960,
+        "bytes": 41276
+      },
+      {
+        "src": "/image-variants/ced1d2049fcd0e58-1024.webp",
+        "width": 1024,
+        "height": 1024,
+        "bytes": 46552
+      }
+    ]
+  },
+  "/images/cameras/canon-ixy640.jpg": {
+    "width": 1024,
+    "height": 1024,
+    "originalBytes": 533462,
+    "variants": [
+      {
+        "src": "/image-variants/e66dc04cc4eea3bb-96.webp",
+        "width": 96,
+        "height": 96,
+        "bytes": 1200
+      },
+      {
+        "src": "/image-variants/e66dc04cc4eea3bb-320.webp",
+        "width": 320,
+        "height": 320,
+        "bytes": 7744
+      },
+      {
+        "src": "/image-variants/e66dc04cc4eea3bb-640.webp",
+        "width": 640,
+        "height": 640,
+        "bytes": 23578
+      },
+      {
+        "src": "/image-variants/e66dc04cc4eea3bb-960.webp",
+        "width": 960,
+        "height": 960,
+        "bytes": 42924
+      },
+      {
+        "src": "/image-variants/e66dc04cc4eea3bb-1024.webp",
+        "width": 1024,
+        "height": 1024,
+        "bytes": 48078
+      }
+    ]
+  },
+  "/images/cameras/canon-m.jpg": {
+    "width": 1024,
+    "height": 1024,
+    "originalBytes": 565805,
+    "variants": [
+      {
+        "src": "/image-variants/3d295a7fbc2ed760-96.webp",
+        "width": 96,
+        "height": 96,
+        "bytes": 1314
+      },
+      {
+        "src": "/image-variants/3d295a7fbc2ed760-320.webp",
+        "width": 320,
+        "height": 320,
+        "bytes": 9062
+      },
+      {
+        "src": "/image-variants/3d295a7fbc2ed760-640.webp",
+        "width": 640,
+        "height": 640,
+        "bytes": 29896
+      },
+      {
+        "src": "/image-variants/3d295a7fbc2ed760-960.webp",
+        "width": 960,
+        "height": 960,
+        "bytes": 56862
+      },
+      {
+        "src": "/image-variants/3d295a7fbc2ed760-1024.webp",
+        "width": 1024,
+        "height": 1024,
+        "bytes": 63974
+      }
+    ]
+  },
+  "/images/cameras/canon-m100.jpg": {
+    "width": 1024,
+    "height": 1024,
+    "originalBytes": 532478,
+    "variants": [
+      {
+        "src": "/image-variants/e02b10a016997623-96.webp",
+        "width": 96,
+        "height": 96,
+        "bytes": 1256
+      },
+      {
+        "src": "/image-variants/e02b10a016997623-320.webp",
+        "width": 320,
+        "height": 320,
+        "bytes": 8208
+      },
+      {
+        "src": "/image-variants/e02b10a016997623-640.webp",
+        "width": 640,
+        "height": 640,
+        "bytes": 26290
+      },
+      {
+        "src": "/image-variants/e02b10a016997623-960.webp",
+        "width": 960,
+        "height": 960,
+        "bytes": 49054
+      },
+      {
+        "src": "/image-variants/e02b10a016997623-1024.webp",
+        "width": 1024,
+        "height": 1024,
+        "bytes": 54866
+      }
+    ]
+  },
+  "/images/cameras/canon-m3.jpg": {
+    "width": 1024,
+    "height": 1024,
+    "originalBytes": 596334,
+    "variants": [
+      {
+        "src": "/image-variants/5e110e8fef10c12d-96.webp",
+        "width": 96,
+        "height": 96,
+        "bytes": 1716
+      },
+      {
+        "src": "/image-variants/5e110e8fef10c12d-320.webp",
+        "width": 320,
+        "height": 320,
+        "bytes": 10134
+      },
+      {
+        "src": "/image-variants/5e110e8fef10c12d-640.webp",
+        "width": 640,
+        "height": 640,
+        "bytes": 33988
+      },
+      {
+        "src": "/image-variants/5e110e8fef10c12d-960.webp",
+        "width": 960,
+        "height": 960,
+        "bytes": 66696
+      },
+      {
+        "src": "/image-variants/5e110e8fef10c12d-1024.webp",
+        "width": 1024,
+        "height": 1024,
+        "bytes": 75718
+      }
+    ]
+  },
+  "/images/cameras/canon-r50.jpg": {
+    "width": 1024,
+    "height": 1024,
+    "originalBytes": 526048,
+    "variants": [
+      {
+        "src": "/image-variants/81683d1a7323f7e1-96.webp",
+        "width": 96,
+        "height": 96,
+        "bytes": 1106
+      },
+      {
+        "src": "/image-variants/81683d1a7323f7e1-320.webp",
+        "width": 320,
+        "height": 320,
+        "bytes": 6638
+      },
+      {
+        "src": "/image-variants/81683d1a7323f7e1-640.webp",
+        "width": 640,
+        "height": 640,
+        "bytes": 23386
+      },
+      {
+        "src": "/image-variants/81683d1a7323f7e1-960.webp",
+        "width": 960,
+        "height": 960,
+        "bytes": 44198
+      },
+      {
+        "src": "/image-variants/81683d1a7323f7e1-1024.webp",
+        "width": 1024,
+        "height": 1024,
+        "bytes": 50722
+      }
+    ]
+  },
+  "/images/cameras/canon-rp.jpg": {
+    "width": 1024,
+    "height": 1024,
+    "originalBytes": 613358,
+    "variants": [
+      {
+        "src": "/image-variants/5118b85e79415fd2-96.webp",
+        "width": 96,
+        "height": 96,
+        "bytes": 1654
+      },
+      {
+        "src": "/image-variants/5118b85e79415fd2-320.webp",
+        "width": 320,
+        "height": 320,
+        "bytes": 11384
+      },
+      {
+        "src": "/image-variants/5118b85e79415fd2-640.webp",
+        "width": 640,
+        "height": 640,
+        "bytes": 39028
+      },
+      {
+        "src": "/image-variants/5118b85e79415fd2-960.webp",
+        "width": 960,
+        "height": 960,
+        "bytes": 76762
+      },
+      {
+        "src": "/image-variants/5118b85e79415fd2-1024.webp",
+        "width": 1024,
+        "height": 1024,
+        "bytes": 88266
+      }
+    ]
+  },
+  "/images/cameras/fujifilm-x100v.jpg": {
+    "width": 1024,
+    "height": 1024,
+    "originalBytes": 618628,
+    "variants": [
+      {
+        "src": "/image-variants/008a690c2b95dca5-96.webp",
+        "width": 96,
+        "height": 96,
+        "bytes": 1600
+      },
+      {
+        "src": "/image-variants/008a690c2b95dca5-320.webp",
+        "width": 320,
+        "height": 320,
+        "bytes": 12092
+      },
+      {
+        "src": "/image-variants/008a690c2b95dca5-640.webp",
+        "width": 640,
+        "height": 640,
+        "bytes": 39414
+      },
+      {
+        "src": "/image-variants/008a690c2b95dca5-960.webp",
+        "width": 960,
+        "height": 960,
+        "bytes": 74188
+      },
+      {
+        "src": "/image-variants/008a690c2b95dca5-1024.webp",
+        "width": 1024,
+        "height": 1024,
+        "bytes": 83374
+      }
+    ]
+  },
+  "/images/cameras/fujifilm-x100vi.jpg": {
+    "width": 1024,
+    "height": 1024,
+    "originalBytes": 618628,
+    "variants": [
+      {
+        "src": "/image-variants/008a690c2b95dca5-96.webp",
+        "width": 96,
+        "height": 96,
+        "bytes": 1600
+      },
+      {
+        "src": "/image-variants/008a690c2b95dca5-320.webp",
+        "width": 320,
+        "height": 320,
+        "bytes": 12092
+      },
+      {
+        "src": "/image-variants/008a690c2b95dca5-640.webp",
+        "width": 640,
+        "height": 640,
+        "bytes": 39414
+      },
+      {
+        "src": "/image-variants/008a690c2b95dca5-960.webp",
+        "width": 960,
+        "height": 960,
+        "bytes": 74188
+      },
+      {
+        "src": "/image-variants/008a690c2b95dca5-1024.webp",
+        "width": 1024,
+        "height": 1024,
+        "bytes": 83374
+      }
+    ]
+  },
+  "/images/cameras/fujifilm-xs10.jpg": {
+    "width": 1024,
+    "height": 1024,
+    "originalBytes": 551181,
+    "variants": [
+      {
+        "src": "/image-variants/d7050bc4c438b82f-96.webp",
+        "width": 96,
+        "height": 96,
+        "bytes": 1488
+      },
+      {
+        "src": "/image-variants/d7050bc4c438b82f-320.webp",
+        "width": 320,
+        "height": 320,
+        "bytes": 9540
+      },
+      {
+        "src": "/image-variants/d7050bc4c438b82f-640.webp",
+        "width": 640,
+        "height": 640,
+        "bytes": 31472
+      },
+      {
+        "src": "/image-variants/d7050bc4c438b82f-960.webp",
+        "width": 960,
+        "height": 960,
+        "bytes": 58122
+      },
+      {
+        "src": "/image-variants/d7050bc4c438b82f-1024.webp",
+        "width": 1024,
+        "height": 1024,
+        "bytes": 65904
+      }
+    ]
+  },
+  "/images/cameras/sony-zv1-mark2.jpg": {
+    "width": 1024,
+    "height": 1024,
+    "originalBytes": 471149,
+    "variants": [
+      {
+        "src": "/image-variants/289f4df3a6c68a5d-96.webp",
+        "width": 96,
+        "height": 96,
+        "bytes": 916
+      },
+      {
+        "src": "/image-variants/289f4df3a6c68a5d-320.webp",
+        "width": 320,
+        "height": 320,
+        "bytes": 4944
+      },
+      {
+        "src": "/image-variants/289f4df3a6c68a5d-640.webp",
+        "width": 640,
+        "height": 640,
+        "bytes": 16524
+      },
+      {
+        "src": "/image-variants/289f4df3a6c68a5d-960.webp",
+        "width": 960,
+        "height": 960,
+        "bytes": 33730
+      },
+      {
+        "src": "/image-variants/289f4df3a6c68a5d-1024.webp",
+        "width": 1024,
+        "height": 1024,
+        "bytes": 39700
+      }
+    ]
+  },
+  "/images/cameras/sony-zv1f.jpg": {
+    "width": 1024,
+    "height": 1024,
+    "originalBytes": 480885,
+    "variants": [
+      {
+        "src": "/image-variants/85d44a17641097ad-96.webp",
+        "width": 96,
+        "height": 96,
+        "bytes": 930
+      },
+      {
+        "src": "/image-variants/85d44a17641097ad-320.webp",
+        "width": 320,
+        "height": 320,
+        "bytes": 5148
+      },
+      {
+        "src": "/image-variants/85d44a17641097ad-640.webp",
+        "width": 640,
+        "height": 640,
+        "bytes": 16262
+      },
+      {
+        "src": "/image-variants/85d44a17641097ad-960.webp",
+        "width": 960,
+        "height": 960,
+        "bytes": 31778
+      },
+      {
+        "src": "/image-variants/85d44a17641097ad-1024.webp",
+        "width": 1024,
+        "height": 1024,
+        "bytes": 35708
+      }
+    ]
+  },
+  "/images/canon-r50/canon-r50-back.webp": {
+    "width": 624,
+    "height": 460,
+    "originalBytes": 12744,
+    "variants": [
+      {
+        "src": "/image-variants/ea8f8d2673aaa1c9-96.webp",
+        "width": 96,
+        "height": 71,
+        "bytes": 886
+      },
+      {
+        "src": "/image-variants/ea8f8d2673aaa1c9-320.webp",
+        "width": 320,
+        "height": 236,
+        "bytes": 4386
+      },
+      {
+        "src": "/image-variants/ea8f8d2673aaa1c9-624.webp",
+        "width": 624,
+        "height": 460,
+        "bytes": 13362
+      }
+    ]
+  },
+  "/images/canon-r50/canon-r50-front.jpg": {
+    "width": 800,
+    "height": 800,
+    "originalBytes": 55133,
+    "variants": [
+      {
+        "src": "/image-variants/c40d728d8ce59dd9-96.webp",
+        "width": 96,
+        "height": 96,
+        "bytes": 846
+      },
+      {
+        "src": "/image-variants/c40d728d8ce59dd9-320.webp",
+        "width": 320,
+        "height": 320,
+        "bytes": 4728
+      },
+      {
+        "src": "/image-variants/c40d728d8ce59dd9-640.webp",
+        "width": 640,
+        "height": 640,
+        "bytes": 17746
+      },
+      {
+        "src": "/image-variants/c40d728d8ce59dd9-800.webp",
+        "width": 800,
+        "height": 800,
+        "bytes": 27822
+      }
+    ]
+  },
+  "/images/canon-r50/canon-r50-top.jpg": {
+    "width": 1000,
+    "height": 1000,
+    "originalBytes": 88987,
+    "variants": [
+      {
+        "src": "/image-variants/f6ff344bdf7331e6-96.webp",
+        "width": 96,
+        "height": 96,
+        "bytes": 1356
+      },
+      {
+        "src": "/image-variants/f6ff344bdf7331e6-320.webp",
+        "width": 320,
+        "height": 320,
+        "bytes": 6898
+      },
+      {
+        "src": "/image-variants/f6ff344bdf7331e6-640.webp",
+        "width": 640,
+        "height": 640,
+        "bytes": 24066
+      },
+      {
+        "src": "/image-variants/f6ff344bdf7331e6-960.webp",
+        "width": 960,
+        "height": 960,
+        "bytes": 49886
+      },
+      {
+        "src": "/image-variants/f6ff344bdf7331e6-1000.webp",
+        "width": 1000,
+        "height": 1000,
+        "bytes": 55104
+      }
+    ]
+  },
+  "/images/landing/cutouts/canon-g7x-mark3.png": {
+    "width": 749,
+    "height": 653,
+    "originalBytes": 673519,
+    "variants": [
+      {
+        "src": "/image-variants/49bee69921bb42c2-96.webp",
+        "width": 96,
+        "height": 84,
+        "bytes": 3468
+      },
+      {
+        "src": "/image-variants/49bee69921bb42c2-320.webp",
+        "width": 320,
+        "height": 279,
+        "bytes": 18142
+      },
+      {
+        "src": "/image-variants/49bee69921bb42c2-640.webp",
+        "width": 640,
+        "height": 558,
+        "bytes": 51394
+      },
+      {
+        "src": "/image-variants/49bee69921bb42c2-749.webp",
+        "width": 749,
+        "height": 653,
+        "bytes": 60534
+      }
+    ]
+  },
+  "/images/landing/cutouts/canon-r50.png": {
+    "width": 783,
+    "height": 628,
+    "originalBytes": 724585,
+    "variants": [
+      {
+        "src": "/image-variants/68762e836d9ba1ff-96.webp",
+        "width": 96,
+        "height": 77,
+        "bytes": 3434
+      },
+      {
+        "src": "/image-variants/68762e836d9ba1ff-320.webp",
+        "width": 320,
+        "height": 257,
+        "bytes": 18546
+      },
+      {
+        "src": "/image-variants/68762e836d9ba1ff-640.webp",
+        "width": 640,
+        "height": 513,
+        "bytes": 53474
+      },
+      {
+        "src": "/image-variants/68762e836d9ba1ff-783.webp",
+        "width": 783,
+        "height": 628,
+        "bytes": 65324
+      }
+    ]
+  },
+  "/images/landing/cutouts/fujifilm-x100v.png": {
+    "width": 982,
+    "height": 606,
+    "originalBytes": 1009740,
+    "variants": [
+      {
+        "src": "/image-variants/19b3638669216132-96.webp",
+        "width": 96,
+        "height": 59,
+        "bytes": 4266
+      },
+      {
+        "src": "/image-variants/19b3638669216132-320.webp",
+        "width": 320,
+        "height": 197,
+        "bytes": 24936
+      },
+      {
+        "src": "/image-variants/19b3638669216132-640.webp",
+        "width": 640,
+        "height": 395,
+        "bytes": 70156
+      },
+      {
+        "src": "/image-variants/19b3638669216132-960.webp",
+        "width": 960,
+        "height": 592,
+        "bytes": 122118
+      },
+      {
+        "src": "/image-variants/19b3638669216132-982.webp",
+        "width": 982,
+        "height": 606,
+        "bytes": 122022
+      }
+    ]
+  },
+  "/images/landing/hero-quang-binh.webp": {
+    "width": 1376,
+    "height": 768,
+    "originalBytes": 126776,
+    "variants": [
+      {
+        "src": "/image-variants/f6e14aa607457e58-96.webp",
+        "width": 96,
+        "height": 54,
+        "bytes": 1312
+      },
+      {
+        "src": "/image-variants/f6e14aa607457e58-320.webp",
+        "width": 320,
+        "height": 179,
+        "bytes": 9552
+      },
+      {
+        "src": "/image-variants/f6e14aa607457e58-640.webp",
+        "width": 640,
+        "height": 357,
+        "bytes": 29088
+      },
+      {
+        "src": "/image-variants/f6e14aa607457e58-960.webp",
+        "width": 960,
+        "height": 536,
+        "bytes": 54728
+      },
+      {
+        "src": "/image-variants/f6e14aa607457e58-1376.webp",
+        "width": 1376,
+        "height": 768,
+        "bytes": 106442
+      }
+    ]
+  },
+  "/images/landing/themes/theme-01-sunset-beach.webp": {
+    "width": 960,
+    "height": 1200,
+    "originalBytes": 126824,
+    "variants": [
+      {
+        "src": "/image-variants/6787e0c68c604a17-96.webp",
+        "width": 96,
+        "height": 120,
+        "bytes": 3220
+      },
+      {
+        "src": "/image-variants/6787e0c68c604a17-320.webp",
+        "width": 320,
+        "height": 400,
+        "bytes": 18858
+      },
+      {
+        "src": "/image-variants/6787e0c68c604a17-640.webp",
+        "width": 640,
+        "height": 800,
+        "bytes": 42124
+      },
+      {
+        "src": "/image-variants/6787e0c68c604a17-960.webp",
+        "width": 960,
+        "height": 1200,
+        "bytes": 68646
+      }
+    ]
+  },
+  "/images/landing/themes/theme-02-cafe-street.webp": {
+    "width": 960,
+    "height": 1200,
+    "originalBytes": 128234,
+    "variants": [
+      {
+        "src": "/image-variants/edee0f08c668ca35-96.webp",
+        "width": 96,
+        "height": 120,
+        "bytes": 3826
+      },
+      {
+        "src": "/image-variants/edee0f08c668ca35-320.webp",
+        "width": 320,
+        "height": 400,
+        "bytes": 20568
+      },
+      {
+        "src": "/image-variants/edee0f08c668ca35-640.webp",
+        "width": 640,
+        "height": 800,
+        "bytes": 45188
+      },
+      {
+        "src": "/image-variants/edee0f08c668ca35-960.webp",
+        "width": 960,
+        "height": 1200,
+        "bytes": 70058
+      }
+    ]
+  },
+  "/images/landing/themes/theme-03-couple-dating.webp": {
+    "width": 960,
+    "height": 1200,
+    "originalBytes": 105752,
+    "variants": [
+      {
+        "src": "/image-variants/57950b59fed760f7-96.webp",
+        "width": 96,
+        "height": 120,
+        "bytes": 3006
+      },
+      {
+        "src": "/image-variants/57950b59fed760f7-320.webp",
+        "width": 320,
+        "height": 400,
+        "bytes": 15244
+      },
+      {
+        "src": "/image-variants/57950b59fed760f7-640.webp",
+        "width": 640,
+        "height": 800,
+        "bytes": 33370
+      },
+      {
+        "src": "/image-variants/57950b59fed760f7-960.webp",
+        "width": 960,
+        "height": 1200,
+        "bytes": 52416
+      }
+    ]
+  },
+  "/images/landing/themes/theme-04-vlog-content.webp": {
+    "width": 960,
+    "height": 1200,
+    "originalBytes": 189758,
+    "variants": [
+      {
+        "src": "/image-variants/b32433d04a4d2963-96.webp",
+        "width": 96,
+        "height": 120,
+        "bytes": 3826
+      },
+      {
+        "src": "/image-variants/b32433d04a4d2963-320.webp",
+        "width": 320,
+        "height": 400,
+        "bytes": 23606
+      },
+      {
+        "src": "/image-variants/b32433d04a4d2963-640.webp",
+        "width": 640,
+        "height": 800,
+        "bytes": 59688
+      },
+      {
+        "src": "/image-variants/b32433d04a4d2963-960.webp",
+        "width": 960,
+        "height": 1200,
+        "bytes": 97618
+      }
+    ]
+  },
+  "/images/landing/use-cases/usecase-couple.webp": {
+    "width": 1200,
+    "height": 1800,
+    "originalBytes": 88098,
+    "variants": [
+      {
+        "src": "/image-variants/c1c882ba9f8d0281-96.webp",
+        "width": 96,
+        "height": 144,
+        "bytes": 2668
+      },
+      {
+        "src": "/image-variants/c1c882ba9f8d0281-320.webp",
+        "width": 320,
+        "height": 480,
+        "bytes": 10690
+      },
+      {
+        "src": "/image-variants/c1c882ba9f8d0281-640.webp",
+        "width": 640,
+        "height": 960,
+        "bytes": 24722
+      },
+      {
+        "src": "/image-variants/c1c882ba9f8d0281-960.webp",
+        "width": 960,
+        "height": 1440,
+        "bytes": 43224
+      },
+      {
+        "src": "/image-variants/c1c882ba9f8d0281-1067.webp",
+        "width": 1067,
+        "height": 1600,
+        "bytes": 52568
+      }
+    ]
+  },
+  "/images/landing/use-cases/usecase-travel.webp": {
+    "width": 1200,
+    "height": 798,
+    "originalBytes": 75562,
+    "variants": [
+      {
+        "src": "/image-variants/11c9af4247b9a7c8-96.webp",
+        "width": 96,
+        "height": 64,
+        "bytes": 1130
+      },
+      {
+        "src": "/image-variants/11c9af4247b9a7c8-320.webp",
+        "width": 320,
+        "height": 213,
+        "bytes": 8254
+      },
+      {
+        "src": "/image-variants/11c9af4247b9a7c8-640.webp",
+        "width": 640,
+        "height": 426,
+        "bytes": 26626
+      },
+      {
+        "src": "/image-variants/11c9af4247b9a7c8-960.webp",
+        "width": 960,
+        "height": 638,
+        "bytes": 49490
+      },
+      {
+        "src": "/image-variants/11c9af4247b9a7c8-1200.webp",
+        "width": 1200,
+        "height": 798,
+        "bytes": 70480
+      }
+    ]
+  },
+  "/images/landing/use-cases/usecase-vlog.webp": {
+    "width": 1200,
+    "height": 1800,
+    "originalBytes": 244604,
+    "variants": [
+      {
+        "src": "/image-variants/6d8e0c5b1e3d51a0-96.webp",
+        "width": 96,
+        "height": 144,
+        "bytes": 4168
+      },
+      {
+        "src": "/image-variants/6d8e0c5b1e3d51a0-320.webp",
+        "width": 320,
+        "height": 480,
+        "bytes": 25072
+      },
+      {
+        "src": "/image-variants/6d8e0c5b1e3d51a0-640.webp",
+        "width": 640,
+        "height": 960,
+        "bytes": 69946
+      },
+      {
+        "src": "/image-variants/6d8e0c5b1e3d51a0-960.webp",
+        "width": 960,
+        "height": 1440,
+        "bytes": 147842
+      },
+      {
+        "src": "/image-variants/6d8e0c5b1e3d51a0-1067.webp",
+        "width": 1067,
+        "height": 1600,
+        "bytes": 178026
+      }
+    ]
+  },
+  "/images/landing/use-cases/usecase-y2k.webp": {
+    "width": 1200,
+    "height": 1500,
+    "originalBytes": 83916,
+    "variants": [
+      {
+        "src": "/image-variants/0b968c3d3c121338-96.webp",
+        "width": 96,
+        "height": 120,
+        "bytes": 1554
+      },
+      {
+        "src": "/image-variants/0b968c3d3c121338-320.webp",
+        "width": 320,
+        "height": 400,
+        "bytes": 6770
+      },
+      {
+        "src": "/image-variants/0b968c3d3c121338-640.webp",
+        "width": 640,
+        "height": 800,
+        "bytes": 19312
+      },
+      {
+        "src": "/image-variants/0b968c3d3c121338-960.webp",
+        "width": 960,
+        "height": 1200,
+        "bytes": 41210
+      },
+      {
+        "src": "/image-variants/0b968c3d3c121338-1200.webp",
+        "width": 1200,
+        "height": 1500,
+        "bytes": 71580
+      }
+    ]
+  },
+  "/images/price-posters/canon-eos-r50.webp": {
+    "width": 1200,
+    "height": 1200,
+    "originalBytes": 95102,
+    "variants": [
+      {
+        "src": "/image-variants/3680d08bca2acf4c-96.webp",
+        "width": 96,
+        "height": 96,
+        "bytes": 2224
+      },
+      {
+        "src": "/image-variants/3680d08bca2acf4c-320.webp",
+        "width": 320,
+        "height": 320,
+        "bytes": 13598
+      },
+      {
+        "src": "/image-variants/3680d08bca2acf4c-640.webp",
+        "width": 640,
+        "height": 640,
+        "bytes": 36050
+      },
+      {
+        "src": "/image-variants/3680d08bca2acf4c-960.webp",
+        "width": 960,
+        "height": 960,
+        "bytes": 59968
+      },
+      {
+        "src": "/image-variants/3680d08bca2acf4c-1200.webp",
+        "width": 1200,
+        "height": 1200,
+        "bytes": 79988
+      }
+    ]
+  },
+  "/images/price-posters/canon-eos-rp.webp": {
+    "width": 1200,
+    "height": 1200,
+    "originalBytes": 107638,
+    "variants": [
+      {
+        "src": "/image-variants/50f9fcc189131fed-96.webp",
+        "width": 96,
+        "height": 96,
+        "bytes": 2314
+      },
+      {
+        "src": "/image-variants/50f9fcc189131fed-320.webp",
+        "width": 320,
+        "height": 320,
+        "bytes": 14354
+      },
+      {
+        "src": "/image-variants/50f9fcc189131fed-640.webp",
+        "width": 640,
+        "height": 640,
+        "bytes": 39058
+      },
+      {
+        "src": "/image-variants/50f9fcc189131fed-960.webp",
+        "width": 960,
+        "height": 960,
+        "bytes": 66704
+      },
+      {
+        "src": "/image-variants/50f9fcc189131fed-1200.webp",
+        "width": 1200,
+        "height": 1200,
+        "bytes": 90592
+      }
+    ]
+  },
+  "/images/price-posters/canon-g7x-mark-iii.webp": {
+    "width": 1200,
+    "height": 1200,
+    "originalBytes": 94128,
+    "variants": [
+      {
+        "src": "/image-variants/9b2fead41e396f0e-96.webp",
+        "width": 96,
+        "height": 96,
+        "bytes": 2314
+      },
+      {
+        "src": "/image-variants/9b2fead41e396f0e-320.webp",
+        "width": 320,
+        "height": 320,
+        "bytes": 13858
+      },
+      {
+        "src": "/image-variants/9b2fead41e396f0e-640.webp",
+        "width": 640,
+        "height": 640,
+        "bytes": 36264
+      },
+      {
+        "src": "/image-variants/9b2fead41e396f0e-960.webp",
+        "width": 960,
+        "height": 960,
+        "bytes": 60112
+      },
+      {
+        "src": "/image-variants/9b2fead41e396f0e-1200.webp",
+        "width": 1200,
+        "height": 1200,
+        "bytes": 79904
+      }
+    ]
+  },
+  "/images/price-posters/canon-ixy-640.webp": {
+    "width": 1200,
+    "height": 1200,
+    "originalBytes": 92910,
+    "variants": [
+      {
+        "src": "/image-variants/30a5c277695640ac-96.webp",
+        "width": 96,
+        "height": 96,
+        "bytes": 2210
+      },
+      {
+        "src": "/image-variants/30a5c277695640ac-320.webp",
+        "width": 320,
+        "height": 320,
+        "bytes": 13510
+      },
+      {
+        "src": "/image-variants/30a5c277695640ac-640.webp",
+        "width": 640,
+        "height": 640,
+        "bytes": 36320
+      },
+      {
+        "src": "/image-variants/30a5c277695640ac-960.webp",
+        "width": 960,
+        "height": 960,
+        "bytes": 59814
+      },
+      {
+        "src": "/image-variants/30a5c277695640ac-1200.webp",
+        "width": 1200,
+        "height": 1200,
+        "bytes": 79130
+      }
+    ]
+  },
+  "/images/price-posters/canon-m.webp": {
+    "width": 1200,
+    "height": 1200,
+    "originalBytes": 99034,
+    "variants": [
+      {
+        "src": "/image-variants/05223caa70f52d7f-96.webp",
+        "width": 96,
+        "height": 96,
+        "bytes": 2202
+      },
+      {
+        "src": "/image-variants/05223caa70f52d7f-320.webp",
+        "width": 320,
+        "height": 320,
+        "bytes": 13664
+      },
+      {
+        "src": "/image-variants/05223caa70f52d7f-640.webp",
+        "width": 640,
+        "height": 640,
+        "bytes": 36864
+      },
+      {
+        "src": "/image-variants/05223caa70f52d7f-960.webp",
+        "width": 960,
+        "height": 960,
+        "bytes": 62426
+      },
+      {
+        "src": "/image-variants/05223caa70f52d7f-1200.webp",
+        "width": 1200,
+        "height": 1200,
+        "bytes": 83620
+      }
+    ]
+  },
+  "/images/price-posters/canon-m100.webp": {
+    "width": 1200,
+    "height": 1200,
+    "originalBytes": 96682,
+    "variants": [
+      {
+        "src": "/image-variants/e2291562cc77c236-96.webp",
+        "width": 96,
+        "height": 96,
+        "bytes": 2226
+      },
+      {
+        "src": "/image-variants/e2291562cc77c236-320.webp",
+        "width": 320,
+        "height": 320,
+        "bytes": 13514
+      },
+      {
+        "src": "/image-variants/e2291562cc77c236-640.webp",
+        "width": 640,
+        "height": 640,
+        "bytes": 36772
+      },
+      {
+        "src": "/image-variants/e2291562cc77c236-960.webp",
+        "width": 960,
+        "height": 960,
+        "bytes": 61566
+      },
+      {
+        "src": "/image-variants/e2291562cc77c236-1200.webp",
+        "width": 1200,
+        "height": 1200,
+        "bytes": 81242
+      }
+    ]
+  },
+  "/images/price-posters/canon-m3.webp": {
+    "width": 1200,
+    "height": 1200,
+    "originalBytes": 101628,
+    "variants": [
+      {
+        "src": "/image-variants/ad0811045b7d6a10-96.webp",
+        "width": 96,
+        "height": 96,
+        "bytes": 2338
+      },
+      {
+        "src": "/image-variants/ad0811045b7d6a10-320.webp",
+        "width": 320,
+        "height": 320,
+        "bytes": 14268
+      },
+      {
+        "src": "/image-variants/ad0811045b7d6a10-640.webp",
+        "width": 640,
+        "height": 640,
+        "bytes": 37636
+      },
+      {
+        "src": "/image-variants/ad0811045b7d6a10-960.webp",
+        "width": 960,
+        "height": 960,
+        "bytes": 63454
+      },
+      {
+        "src": "/image-variants/ad0811045b7d6a10-1200.webp",
+        "width": 1200,
+        "height": 1200,
+        "bytes": 85330
+      }
+    ]
+  },
+  "/images/price-posters/fujifilm-x100v.webp": {
+    "width": 1200,
+    "height": 1200,
+    "originalBytes": 108010,
+    "variants": [
+      {
+        "src": "/image-variants/9afb6067c7f890b8-96.webp",
+        "width": 96,
+        "height": 96,
+        "bytes": 2344
+      },
+      {
+        "src": "/image-variants/9afb6067c7f890b8-320.webp",
+        "width": 320,
+        "height": 320,
+        "bytes": 14494
+      },
+      {
+        "src": "/image-variants/9afb6067c7f890b8-640.webp",
+        "width": 640,
+        "height": 640,
+        "bytes": 39890
+      },
+      {
+        "src": "/image-variants/9afb6067c7f890b8-960.webp",
+        "width": 960,
+        "height": 960,
+        "bytes": 68504
+      },
+      {
+        "src": "/image-variants/9afb6067c7f890b8-1200.webp",
+        "width": 1200,
+        "height": 1200,
+        "bytes": 93406
+      }
+    ]
+  },
+  "/images/price-posters/fujifilm-x100vi.webp": {
+    "width": 1200,
+    "height": 1200,
+    "originalBytes": 108126,
+    "variants": [
+      {
+        "src": "/image-variants/fc9695c518ebd7a1-96.webp",
+        "width": 96,
+        "height": 96,
+        "bytes": 2358
+      },
+      {
+        "src": "/image-variants/fc9695c518ebd7a1-320.webp",
+        "width": 320,
+        "height": 320,
+        "bytes": 14506
+      },
+      {
+        "src": "/image-variants/fc9695c518ebd7a1-640.webp",
+        "width": 640,
+        "height": 640,
+        "bytes": 39830
+      },
+      {
+        "src": "/image-variants/fc9695c518ebd7a1-960.webp",
+        "width": 960,
+        "height": 960,
+        "bytes": 68592
+      },
+      {
+        "src": "/image-variants/fc9695c518ebd7a1-1200.webp",
+        "width": 1200,
+        "height": 1200,
+        "bytes": 92072
+      }
+    ]
+  },
+  "/images/price-posters/fujifilm-xs10.webp": {
+    "width": 1200,
+    "height": 1200,
+    "originalBytes": 100634,
+    "variants": [
+      {
+        "src": "/image-variants/b59570d22d6a6e2e-96.webp",
+        "width": 96,
+        "height": 96,
+        "bytes": 2354
+      },
+      {
+        "src": "/image-variants/b59570d22d6a6e2e-320.webp",
+        "width": 320,
+        "height": 320,
+        "bytes": 14028
+      },
+      {
+        "src": "/image-variants/b59570d22d6a6e2e-640.webp",
+        "width": 640,
+        "height": 640,
+        "bytes": 37504
+      },
+      {
+        "src": "/image-variants/b59570d22d6a6e2e-960.webp",
+        "width": 960,
+        "height": 960,
+        "bytes": 63380
+      },
+      {
+        "src": "/image-variants/b59570d22d6a6e2e-1200.webp",
+        "width": 1200,
+        "height": 1200,
+        "bytes": 85812
+      }
+    ]
+  },
+  "/images/price-posters/sony-zv1-mark-ii.webp": {
+    "width": 1200,
+    "height": 1200,
+    "originalBytes": 87574,
+    "variants": [
+      {
+        "src": "/image-variants/ca1c1c822d22da45-96.webp",
+        "width": 96,
+        "height": 96,
+        "bytes": 2196
+      },
+      {
+        "src": "/image-variants/ca1c1c822d22da45-320.webp",
+        "width": 320,
+        "height": 320,
+        "bytes": 13084
+      },
+      {
+        "src": "/image-variants/ca1c1c822d22da45-640.webp",
+        "width": 640,
+        "height": 640,
+        "bytes": 34072
+      },
+      {
+        "src": "/image-variants/ca1c1c822d22da45-960.webp",
+        "width": 960,
+        "height": 960,
+        "bytes": 55622
+      },
+      {
+        "src": "/image-variants/ca1c1c822d22da45-1200.webp",
+        "width": 1200,
+        "height": 1200,
+        "bytes": 73808
+      }
+    ]
+  },
+  "/images/price-posters/sony-zv1f.webp": {
+    "width": 1200,
+    "height": 1200,
+    "originalBytes": 84966,
+    "variants": [
+      {
+        "src": "/image-variants/36adf63c67fec3ec-96.webp",
+        "width": 96,
+        "height": 96,
+        "bytes": 2160
+      },
+      {
+        "src": "/image-variants/36adf63c67fec3ec-320.webp",
+        "width": 320,
+        "height": 320,
+        "bytes": 12596
+      },
+      {
+        "src": "/image-variants/36adf63c67fec3ec-640.webp",
+        "width": 640,
+        "height": 640,
+        "bytes": 33376
+      },
+      {
+        "src": "/image-variants/36adf63c67fec3ec-960.webp",
+        "width": 960,
+        "height": 960,
+        "bytes": 55190
+      },
+      {
+        "src": "/image-variants/36adf63c67fec3ec-1200.webp",
+        "width": 1200,
+        "height": 1200,
+        "bytes": 72210
+      }
+    ]
+  },
+  "/images/samples/sample-fuji-1.webp": {
+    "width": 1000,
+    "height": 667,
+    "originalBytes": 60380,
+    "variants": [
+      {
+        "src": "/image-variants/c4e674f02fe1b99f-96.webp",
+        "width": 96,
+        "height": 64,
+        "bytes": 1466
+      },
+      {
+        "src": "/image-variants/c4e674f02fe1b99f-320.webp",
+        "width": 320,
+        "height": 213,
+        "bytes": 10450
+      },
+      {
+        "src": "/image-variants/c4e674f02fe1b99f-640.webp",
+        "width": 640,
+        "height": 427,
+        "bytes": 33108
+      },
+      {
+        "src": "/image-variants/c4e674f02fe1b99f-960.webp",
+        "width": 960,
+        "height": 640,
+        "bytes": 61042
+      },
+      {
+        "src": "/image-variants/c4e674f02fe1b99f-1000.webp",
+        "width": 1000,
+        "height": 667,
+        "bytes": 62786
+      }
+    ]
+  },
+  "/images/samples/sample-fuji-2.webp": {
+    "width": 1000,
+    "height": 1500,
+    "originalBytes": 145278,
+    "variants": [
+      {
+        "src": "/image-variants/b9dc3814542b4ff1-96.webp",
+        "width": 96,
+        "height": 144,
+        "bytes": 3158
+      },
+      {
+        "src": "/image-variants/b9dc3814542b4ff1-320.webp",
+        "width": 320,
+        "height": 480,
+        "bytes": 22398
+      },
+      {
+        "src": "/image-variants/b9dc3814542b4ff1-640.webp",
+        "width": 640,
+        "height": 960,
+        "bytes": 69644
+      },
+      {
+        "src": "/image-variants/b9dc3814542b4ff1-960.webp",
+        "width": 960,
+        "height": 1440,
+        "bytes": 136126
+      },
+      {
+        "src": "/image-variants/b9dc3814542b4ff1-1000.webp",
+        "width": 1000,
+        "height": 1500,
+        "bytes": 147844
+      }
+    ]
+  },
+  "/images/samples/sample-fuji-3.webp": {
+    "width": 1000,
+    "height": 596,
+    "originalBytes": 72828,
+    "variants": [
+      {
+        "src": "/image-variants/c0f76b08ffa35c0b-96.webp",
+        "width": 96,
+        "height": 57,
+        "bytes": 1654
+      },
+      {
+        "src": "/image-variants/c0f76b08ffa35c0b-320.webp",
+        "width": 320,
+        "height": 191,
+        "bytes": 11372
+      },
+      {
+        "src": "/image-variants/c0f76b08ffa35c0b-640.webp",
+        "width": 640,
+        "height": 381,
+        "bytes": 37548
+      },
+      {
+        "src": "/image-variants/c0f76b08ffa35c0b-960.webp",
+        "width": 960,
+        "height": 572,
+        "bytes": 72448
+      },
+      {
+        "src": "/image-variants/c0f76b08ffa35c0b-1000.webp",
+        "width": 1000,
+        "height": 596,
+        "bytes": 75074
+      }
+    ]
+  },
+  "/images/samples/sample-g7x-1.webp": {
+    "width": 1000,
+    "height": 1500,
+    "originalBytes": 40930,
+    "variants": [
+      {
+        "src": "/image-variants/a3e07af9f38d96ba-96.webp",
+        "width": 96,
+        "height": 144,
+        "bytes": 1524
+      },
+      {
+        "src": "/image-variants/a3e07af9f38d96ba-320.webp",
+        "width": 320,
+        "height": 480,
+        "bytes": 7144
+      },
+      {
+        "src": "/image-variants/a3e07af9f38d96ba-640.webp",
+        "width": 640,
+        "height": 960,
+        "bytes": 19650
+      },
+      {
+        "src": "/image-variants/a3e07af9f38d96ba-960.webp",
+        "width": 960,
+        "height": 1440,
+        "bytes": 36794
+      },
+      {
+        "src": "/image-variants/a3e07af9f38d96ba-1000.webp",
+        "width": 1000,
+        "height": 1500,
+        "bytes": 40822
+      }
+    ]
+  },
+  "/images/samples/sample-g7x-2.webp": {
+    "width": 1000,
+    "height": 1500,
+    "originalBytes": 133892,
+    "variants": [
+      {
+        "src": "/image-variants/0b08cbd1beaa5957-96.webp",
+        "width": 96,
+        "height": 144,
+        "bytes": 4188
+      },
+      {
+        "src": "/image-variants/0b08cbd1beaa5957-320.webp",
+        "width": 320,
+        "height": 480,
+        "bytes": 24876
+      },
+      {
+        "src": "/image-variants/0b08cbd1beaa5957-640.webp",
+        "width": 640,
+        "height": 960,
+        "bytes": 67946
+      },
+      {
+        "src": "/image-variants/0b08cbd1beaa5957-960.webp",
+        "width": 960,
+        "height": 1440,
+        "bytes": 133444
+      },
+      {
+        "src": "/image-variants/0b08cbd1beaa5957-1000.webp",
+        "width": 1000,
+        "height": 1500,
+        "bytes": 138554
+      }
+    ]
+  },
+  "/images/samples/sample-r50-1.webp": {
+    "width": 1000,
+    "height": 1250,
+    "originalBytes": 42922,
+    "variants": [
+      {
+        "src": "/image-variants/44d9b45fe8cf5015-96.webp",
+        "width": 96,
+        "height": 120,
+        "bytes": 1562
+      },
+      {
+        "src": "/image-variants/44d9b45fe8cf5015-320.webp",
+        "width": 320,
+        "height": 400,
+        "bytes": 6672
+      },
+      {
+        "src": "/image-variants/44d9b45fe8cf5015-640.webp",
+        "width": 640,
+        "height": 800,
+        "bytes": 18222
+      },
+      {
+        "src": "/image-variants/44d9b45fe8cf5015-960.webp",
+        "width": 960,
+        "height": 1200,
+        "bytes": 37582
+      },
+      {
+        "src": "/image-variants/44d9b45fe8cf5015-1000.webp",
+        "width": 1000,
+        "height": 1250,
+        "bytes": 41924
+      }
+    ]
+  },
+  "/images/samples/sample-r50-2.webp": {
+    "width": 1000,
+    "height": 665,
+    "originalBytes": 47684,
+    "variants": [
+      {
+        "src": "/image-variants/f9cfe31c5475e458-96.webp",
+        "width": 96,
+        "height": 64,
+        "bytes": 1136
+      },
+      {
+        "src": "/image-variants/f9cfe31c5475e458-320.webp",
+        "width": 320,
+        "height": 213,
+        "bytes": 7960
+      },
+      {
+        "src": "/image-variants/f9cfe31c5475e458-640.webp",
+        "width": 640,
+        "height": 426,
+        "bytes": 25324
+      },
+      {
+        "src": "/image-variants/f9cfe31c5475e458-960.webp",
+        "width": 960,
+        "height": 638,
+        "bytes": 46462
+      },
+      {
+        "src": "/image-variants/f9cfe31c5475e458-1000.webp",
+        "width": 1000,
+        "height": 665,
+        "bytes": 47998
+      }
+    ]
+  },
+  "/images/samples/sample-r50-3.webp": {
+    "width": 1000,
+    "height": 1500,
+    "originalBytes": 43752,
+    "variants": [
+      {
+        "src": "/image-variants/9c4aad2e5bc4eef2-96.webp",
+        "width": 96,
+        "height": 144,
+        "bytes": 2660
+      },
+      {
+        "src": "/image-variants/9c4aad2e5bc4eef2-320.webp",
+        "width": 320,
+        "height": 480,
+        "bytes": 10536
+      },
+      {
+        "src": "/image-variants/9c4aad2e5bc4eef2-640.webp",
+        "width": 640,
+        "height": 960,
+        "bytes": 24054
+      },
+      {
+        "src": "/image-variants/9c4aad2e5bc4eef2-960.webp",
+        "width": 960,
+        "height": 1440,
+        "bytes": 39978
+      },
+      {
+        "src": "/image-variants/9c4aad2e5bc4eef2-1000.webp",
+        "width": 1000,
+        "height": 1500,
+        "bytes": 42414
+      }
+    ]
+  },
+  "/images/samples/sample-r50-4.webp": {
+    "width": 1000,
+    "height": 667,
+    "originalBytes": 69762,
+    "variants": [
+      {
+        "src": "/image-variants/4fc055488df68c1c-96.webp",
+        "width": 96,
+        "height": 64,
+        "bytes": 1574
+      },
+      {
+        "src": "/image-variants/4fc055488df68c1c-320.webp",
+        "width": 320,
+        "height": 213,
+        "bytes": 11328
+      },
+      {
+        "src": "/image-variants/4fc055488df68c1c-640.webp",
+        "width": 640,
+        "height": 427,
+        "bytes": 37328
+      },
+      {
+        "src": "/image-variants/4fc055488df68c1c-960.webp",
+        "width": 960,
+        "height": 640,
+        "bytes": 71668
+      },
+      {
+        "src": "/image-variants/4fc055488df68c1c-1000.webp",
+        "width": 1000,
+        "height": 667,
+        "bytes": 72208
+      }
+    ]
+  },
+  "/images/samples/sample-sony-1.webp": {
+    "width": 1000,
+    "height": 1500,
+    "originalBytes": 62676,
+    "variants": [
+      {
+        "src": "/image-variants/2cc8f46a527174ac-96.webp",
+        "width": 96,
+        "height": 144,
+        "bytes": 2288
+      },
+      {
+        "src": "/image-variants/2cc8f46a527174ac-320.webp",
+        "width": 320,
+        "height": 480,
+        "bytes": 10736
+      },
+      {
+        "src": "/image-variants/2cc8f46a527174ac-640.webp",
+        "width": 640,
+        "height": 960,
+        "bytes": 30218
+      },
+      {
+        "src": "/image-variants/2cc8f46a527174ac-960.webp",
+        "width": 960,
+        "height": 1440,
+        "bytes": 57618
+      },
+      {
+        "src": "/image-variants/2cc8f46a527174ac-1000.webp",
+        "width": 1000,
+        "height": 1500,
+        "bytes": 62128
+      }
+    ]
+  },
+  "/images/samples/sample-sony-2.webp": {
+    "width": 1000,
+    "height": 1500,
+    "originalBytes": 37826,
+    "variants": [
+      {
+        "src": "/image-variants/4357f5e3dd1a0714-96.webp",
+        "width": 96,
+        "height": 144,
+        "bytes": 2476
+      },
+      {
+        "src": "/image-variants/4357f5e3dd1a0714-320.webp",
+        "width": 320,
+        "height": 480,
+        "bytes": 10590
+      },
+      {
+        "src": "/image-variants/4357f5e3dd1a0714-640.webp",
+        "width": 640,
+        "height": 960,
+        "bytes": 23766
+      },
+      {
+        "src": "/image-variants/4357f5e3dd1a0714-960.webp",
+        "width": 960,
+        "height": 1440,
+        "bytes": 39558
+      },
+      {
+        "src": "/image-variants/4357f5e3dd1a0714-1000.webp",
+        "width": 1000,
+        "height": 1500,
+        "bytes": 40308
+      }
+    ]
+  },
+  "/images/samples/sample-y2k-1.webp": {
+    "width": 1000,
+    "height": 1500,
+    "originalBytes": 56230,
+    "variants": [
+      {
+        "src": "/image-variants/9c8534dddc1be5c6-96.webp",
+        "width": 96,
+        "height": 144,
+        "bytes": 2384
+      },
+      {
+        "src": "/image-variants/9c8534dddc1be5c6-320.webp",
+        "width": 320,
+        "height": 480,
+        "bytes": 11926
+      },
+      {
+        "src": "/image-variants/9c8534dddc1be5c6-640.webp",
+        "width": 640,
+        "height": 960,
+        "bytes": 30408
+      },
+      {
+        "src": "/image-variants/9c8534dddc1be5c6-960.webp",
+        "width": 960,
+        "height": 1440,
+        "bytes": 54184
+      },
+      {
+        "src": "/image-variants/9c8534dddc1be5c6-1000.webp",
+        "width": 1000,
+        "height": 1500,
+        "bytes": 56408
+      }
+    ]
+  },
+  "/images/samples/sample-y2k-2.webp": {
+    "width": 1000,
+    "height": 1500,
+    "originalBytes": 145278,
+    "variants": [
+      {
+        "src": "/image-variants/b9dc3814542b4ff1-96.webp",
+        "width": 96,
+        "height": 144,
+        "bytes": 3158
+      },
+      {
+        "src": "/image-variants/b9dc3814542b4ff1-320.webp",
+        "width": 320,
+        "height": 480,
+        "bytes": 22398
+      },
+      {
+        "src": "/image-variants/b9dc3814542b4ff1-640.webp",
+        "width": 640,
+        "height": 960,
+        "bytes": 69644
+      },
+      {
+        "src": "/image-variants/b9dc3814542b4ff1-960.webp",
+        "width": 960,
+        "height": 1440,
+        "bytes": 136126
+      },
+      {
+        "src": "/image-variants/b9dc3814542b4ff1-1000.webp",
+        "width": 1000,
+        "height": 1500,
+        "bytes": 147844
+      }
+    ]
+  },
+  "/brand/kiho-logo-header-transparent.png": {
+    "width": 708,
+    "height": 567,
+    "originalBytes": 122666,
+    "variants": [
+      {
+        "src": "/image-variants/baba4ffc5eb1df0a-96.webp",
+        "width": 96,
+        "height": 77,
+        "bytes": 4266
+      },
+      {
+        "src": "/image-variants/baba4ffc5eb1df0a-320.webp",
+        "width": 320,
+        "height": 256,
+        "bytes": 29238
+      },
+      {
+        "src": "/image-variants/baba4ffc5eb1df0a-640.webp",
+        "width": 640,
+        "height": 513,
+        "bytes": 91268
+      },
+      {
+        "src": "/image-variants/baba4ffc5eb1df0a-708.webp",
+        "width": 708,
+        "height": 567,
+        "bytes": 74506
+      }
+    ]
+  },
+  "/brand/kiho-logo-master-transparent.png": {
+    "width": 748,
+    "height": 611,
+    "originalBytes": 124016,
+    "variants": [
+      {
+        "src": "/image-variants/27453d1581c3aa16-96.webp",
+        "width": 96,
+        "height": 78,
+        "bytes": 4216
+      },
+      {
+        "src": "/image-variants/27453d1581c3aa16-320.webp",
+        "width": 320,
+        "height": 261,
+        "bytes": 26664
+      },
+      {
+        "src": "/image-variants/27453d1581c3aa16-640.webp",
+        "width": 640,
+        "height": 523,
+        "bytes": 84746
+      },
+      {
+        "src": "/image-variants/27453d1581c3aa16-748.webp",
+        "width": 748,
+        "height": 611,
+        "bytes": 74724
+      }
+    ]
+  },
+  "/photobooth/mockups/cafe-chill-4x5-mockup.webp": {
+    "width": 1080,
+    "height": 1350,
+    "originalBytes": 85336,
+    "variants": [
+      {
+        "src": "/image-variants/ddc23e01d6e87d82-96.webp",
+        "width": 96,
+        "height": 120,
+        "bytes": 2052
+      },
+      {
+        "src": "/image-variants/ddc23e01d6e87d82-320.webp",
+        "width": 320,
+        "height": 400,
+        "bytes": 11378
+      },
+      {
+        "src": "/image-variants/ddc23e01d6e87d82-640.webp",
+        "width": 640,
+        "height": 800,
+        "bytes": 31430
+      },
+      {
+        "src": "/image-variants/ddc23e01d6e87d82-960.webp",
+        "width": 960,
+        "height": 1200,
+        "bytes": 54780
+      },
+      {
+        "src": "/image-variants/ddc23e01d6e87d82-1080.webp",
+        "width": 1080,
+        "height": 1350,
+        "bytes": 70518
+      }
+    ]
+  },
+  "/photobooth/mockups/cafe-chill-9x16-mockup.webp": {
+    "width": 1080,
+    "height": 1920,
+    "originalBytes": 99286,
+    "variants": [
+      {
+        "src": "/image-variants/7f257d0ca47c29fc-96.webp",
+        "width": 96,
+        "height": 171,
+        "bytes": 2424
+      },
+      {
+        "src": "/image-variants/7f257d0ca47c29fc-320.webp",
+        "width": 320,
+        "height": 569,
+        "bytes": 12846
+      },
+      {
+        "src": "/image-variants/7f257d0ca47c29fc-640.webp",
+        "width": 640,
+        "height": 1138,
+        "bytes": 36282
+      },
+      {
+        "src": "/image-variants/7f257d0ca47c29fc-900.webp",
+        "width": 900,
+        "height": 1600,
+        "bytes": 57088
+      }
+    ]
+  },
+  "/photobooth/mockups/dong-hoi-sunset-4x5-mockup.webp": {
+    "width": 1080,
+    "height": 1350,
+    "originalBytes": 82928,
+    "variants": [
+      {
+        "src": "/image-variants/bba1006c37ee4582-96.webp",
+        "width": 96,
+        "height": 120,
+        "bytes": 2262
+      },
+      {
+        "src": "/image-variants/bba1006c37ee4582-320.webp",
+        "width": 320,
+        "height": 400,
+        "bytes": 12144
+      },
+      {
+        "src": "/image-variants/bba1006c37ee4582-640.webp",
+        "width": 640,
+        "height": 800,
+        "bytes": 31580
+      },
+      {
+        "src": "/image-variants/bba1006c37ee4582-960.webp",
+        "width": 960,
+        "height": 1200,
+        "bytes": 53864
+      },
+      {
+        "src": "/image-variants/bba1006c37ee4582-1080.webp",
+        "width": 1080,
+        "height": 1350,
+        "bytes": 66898
+      }
+    ]
+  },
+  "/photobooth/mockups/dong-hoi-sunset-9x16-mockup.webp": {
+    "width": 1080,
+    "height": 1920,
+    "originalBytes": 106622,
+    "variants": [
+      {
+        "src": "/image-variants/74bf579ec97d860c-96.webp",
+        "width": 96,
+        "height": 171,
+        "bytes": 2702
+      },
+      {
+        "src": "/image-variants/74bf579ec97d860c-320.webp",
+        "width": 320,
+        "height": 569,
+        "bytes": 14074
+      },
+      {
+        "src": "/image-variants/74bf579ec97d860c-640.webp",
+        "width": 640,
+        "height": 1138,
+        "bytes": 36882
+      },
+      {
+        "src": "/image-variants/74bf579ec97d860c-900.webp",
+        "width": 900,
+        "height": 1600,
+        "bytes": 58908
+      }
+    ]
+  },
+  "/photobooth/mockups/phong-nha-4x5-mockup.webp": {
+    "width": 1080,
+    "height": 1350,
+    "originalBytes": 186872,
+    "variants": [
+      {
+        "src": "/image-variants/cdd5a4ff72a8b01a-96.webp",
+        "width": 96,
+        "height": 120,
+        "bytes": 3226
+      },
+      {
+        "src": "/image-variants/cdd5a4ff72a8b01a-320.webp",
+        "width": 320,
+        "height": 400,
+        "bytes": 21588
+      },
+      {
+        "src": "/image-variants/cdd5a4ff72a8b01a-640.webp",
+        "width": 640,
+        "height": 800,
+        "bytes": 65566
+      },
+      {
+        "src": "/image-variants/cdd5a4ff72a8b01a-960.webp",
+        "width": 960,
+        "height": 1200,
+        "bytes": 118390
+      },
+      {
+        "src": "/image-variants/cdd5a4ff72a8b01a-1080.webp",
+        "width": 1080,
+        "height": 1350,
+        "bytes": 147726
+      }
+    ]
+  },
+  "/photobooth/mockups/phong-nha-9x16-mockup.webp": {
+    "width": 1080,
+    "height": 1920,
+    "originalBytes": 226150,
+    "variants": [
+      {
+        "src": "/image-variants/aacc7dc3634dcbf4-96.webp",
+        "width": 96,
+        "height": 171,
+        "bytes": 3762
+      },
+      {
+        "src": "/image-variants/aacc7dc3634dcbf4-320.webp",
+        "width": 320,
+        "height": 569,
+        "bytes": 26010
+      },
+      {
+        "src": "/image-variants/aacc7dc3634dcbf4-640.webp",
+        "width": 640,
+        "height": 1138,
+        "bytes": 79122
+      },
+      {
+        "src": "/image-variants/aacc7dc3634dcbf4-900.webp",
+        "width": 900,
+        "height": 1600,
+        "bytes": 130532
+      }
+    ]
+  },
+  "/photobooth/mockups/y2k-flash-4x5-mockup.webp": {
+    "width": 1080,
+    "height": 1350,
+    "originalBytes": 90760,
+    "variants": [
+      {
+        "src": "/image-variants/4cf8f03955fe3ee2-96.webp",
+        "width": 96,
+        "height": 120,
+        "bytes": 2802
+      },
+      {
+        "src": "/image-variants/4cf8f03955fe3ee2-320.webp",
+        "width": 320,
+        "height": 400,
+        "bytes": 14528
+      },
+      {
+        "src": "/image-variants/4cf8f03955fe3ee2-640.webp",
+        "width": 640,
+        "height": 800,
+        "bytes": 36066
+      },
+      {
+        "src": "/image-variants/4cf8f03955fe3ee2-960.webp",
+        "width": 960,
+        "height": 1200,
+        "bytes": 61042
+      },
+      {
+        "src": "/image-variants/4cf8f03955fe3ee2-1080.webp",
+        "width": 1080,
+        "height": 1350,
+        "bytes": 74462
+      }
+    ]
+  },
+  "/photobooth/mockups/y2k-flash-9x16-mockup.webp": {
+    "width": 1080,
+    "height": 1920,
+    "originalBytes": 102860,
+    "variants": [
+      {
+        "src": "/image-variants/43a8b79f154adc5c-96.webp",
+        "width": 96,
+        "height": 171,
+        "bytes": 3296
+      },
+      {
+        "src": "/image-variants/43a8b79f154adc5c-320.webp",
+        "width": 320,
+        "height": 569,
+        "bytes": 16916
+      },
+      {
+        "src": "/image-variants/43a8b79f154adc5c-640.webp",
+        "width": 640,
+        "height": 1138,
+        "bytes": 40954
+      },
+      {
+        "src": "/image-variants/43a8b79f154adc5c-900.webp",
+        "width": 900,
+        "height": 1600,
+        "bytes": 62162
+      }
+    ]
+  },
+  "/photobooth/frames/cafe-chill-4x5.png": {
+    "width": 1080,
+    "height": 1350,
+    "originalBytes": 76967,
+    "variants": [
+      {
+        "src": "/image-variants/31da3bdbdb9a9d52-96.webp",
+        "width": 96,
+        "height": 120,
+        "bytes": 1464
+      },
+      {
+        "src": "/image-variants/31da3bdbdb9a9d52-320.webp",
+        "width": 320,
+        "height": 400,
+        "bytes": 6652
+      },
+      {
+        "src": "/image-variants/31da3bdbdb9a9d52-640.webp",
+        "width": 640,
+        "height": 800,
+        "bytes": 19310
+      },
+      {
+        "src": "/image-variants/31da3bdbdb9a9d52-960.webp",
+        "width": 960,
+        "height": 1200,
+        "bytes": 33498
+      },
+      {
+        "src": "/image-variants/31da3bdbdb9a9d52-1080.webp",
+        "width": 1080,
+        "height": 1350,
+        "bytes": 36234
+      }
+    ]
+  },
+  "/photobooth/frames/cafe-chill-9x16.png": {
+    "width": 1080,
+    "height": 1920,
+    "originalBytes": 90587,
+    "variants": [
+      {
+        "src": "/image-variants/07e1c246ba86e7c1-96.webp",
+        "width": 96,
+        "height": 171,
+        "bytes": 1656
+      },
+      {
+        "src": "/image-variants/07e1c246ba86e7c1-320.webp",
+        "width": 320,
+        "height": 569,
+        "bytes": 7814
+      },
+      {
+        "src": "/image-variants/07e1c246ba86e7c1-640.webp",
+        "width": 640,
+        "height": 1138,
+        "bytes": 22316
+      },
+      {
+        "src": "/image-variants/07e1c246ba86e7c1-900.webp",
+        "width": 900,
+        "height": 1600,
+        "bytes": 34754
+      }
+    ]
+  },
+  "/photobooth/frames/dong-hoi-sunset-4x5.png": {
+    "width": 1080,
+    "height": 1350,
+    "originalBytes": 135217,
+    "variants": [
+      {
+        "src": "/image-variants/d819b10d3759ec8a-96.webp",
+        "width": 96,
+        "height": 120,
+        "bytes": 1650
+      },
+      {
+        "src": "/image-variants/d819b10d3759ec8a-320.webp",
+        "width": 320,
+        "height": 400,
+        "bytes": 8418
+      },
+      {
+        "src": "/image-variants/d819b10d3759ec8a-640.webp",
+        "width": 640,
+        "height": 800,
+        "bytes": 21884
+      },
+      {
+        "src": "/image-variants/d819b10d3759ec8a-960.webp",
+        "width": 960,
+        "height": 1200,
+        "bytes": 36576
+      },
+      {
+        "src": "/image-variants/d819b10d3759ec8a-1080.webp",
+        "width": 1080,
+        "height": 1350,
+        "bytes": 39564
+      }
+    ]
+  },
+  "/photobooth/frames/dong-hoi-sunset-9x16.png": {
+    "width": 1080,
+    "height": 1920,
+    "originalBytes": 162993,
+    "variants": [
+      {
+        "src": "/image-variants/3d8bea505ffadae0-96.webp",
+        "width": 96,
+        "height": 171,
+        "bytes": 1852
+      },
+      {
+        "src": "/image-variants/3d8bea505ffadae0-320.webp",
+        "width": 320,
+        "height": 569,
+        "bytes": 9554
+      },
+      {
+        "src": "/image-variants/3d8bea505ffadae0-640.webp",
+        "width": 640,
+        "height": 1138,
+        "bytes": 24734
+      },
+      {
+        "src": "/image-variants/3d8bea505ffadae0-900.webp",
+        "width": 900,
+        "height": 1600,
+        "bytes": 38532
+      }
+    ]
+  },
+  "/photobooth/frames/phong-nha-4x5.png": {
+    "width": 1080,
+    "height": 1350,
+    "originalBytes": 120077,
+    "variants": [
+      {
+        "src": "/image-variants/6f89b5c254ebd59f-96.webp",
+        "width": 96,
+        "height": 120,
+        "bytes": 2070
+      },
+      {
+        "src": "/image-variants/6f89b5c254ebd59f-320.webp",
+        "width": 320,
+        "height": 400,
+        "bytes": 10678
+      },
+      {
+        "src": "/image-variants/6f89b5c254ebd59f-640.webp",
+        "width": 640,
+        "height": 800,
+        "bytes": 29790
+      },
+      {
+        "src": "/image-variants/6f89b5c254ebd59f-960.webp",
+        "width": 960,
+        "height": 1200,
+        "bytes": 48560
+      },
+      {
+        "src": "/image-variants/6f89b5c254ebd59f-1080.webp",
+        "width": 1080,
+        "height": 1350,
+        "bytes": 55106
+      }
+    ]
+  },
+  "/photobooth/frames/phong-nha-9x16.png": {
+    "width": 1080,
+    "height": 1920,
+    "originalBytes": 131983,
+    "variants": [
+      {
+        "src": "/image-variants/3aa719743864f3b3-96.webp",
+        "width": 96,
+        "height": 171,
+        "bytes": 2164
+      },
+      {
+        "src": "/image-variants/3aa719743864f3b3-320.webp",
+        "width": 320,
+        "height": 569,
+        "bytes": 12150
+      },
+      {
+        "src": "/image-variants/3aa719743864f3b3-640.webp",
+        "width": 640,
+        "height": 1138,
+        "bytes": 33596
+      },
+      {
+        "src": "/image-variants/3aa719743864f3b3-900.webp",
+        "width": 900,
+        "height": 1600,
+        "bytes": 53252
+      }
+    ]
+  },
+  "/photobooth/frames/y2k-flash-4x5.png": {
+    "width": 1080,
+    "height": 1350,
+    "originalBytes": 296298,
+    "variants": [
+      {
+        "src": "/image-variants/b837b6977d9efa22-96.webp",
+        "width": 96,
+        "height": 120,
+        "bytes": 2216
+      },
+      {
+        "src": "/image-variants/b837b6977d9efa22-320.webp",
+        "width": 320,
+        "height": 400,
+        "bytes": 8220
+      },
+      {
+        "src": "/image-variants/b837b6977d9efa22-640.webp",
+        "width": 640,
+        "height": 800,
+        "bytes": 18488
+      },
+      {
+        "src": "/image-variants/b837b6977d9efa22-960.webp",
+        "width": 960,
+        "height": 1200,
+        "bytes": 29370
+      },
+      {
+        "src": "/image-variants/b837b6977d9efa22-1080.webp",
+        "width": 1080,
+        "height": 1350,
+        "bytes": 29598
+      }
+    ]
+  },
+  "/photobooth/frames/y2k-flash-9x16.png": {
+    "width": 1080,
+    "height": 1920,
+    "originalBytes": 403759,
+    "variants": [
+      {
+        "src": "/image-variants/dd4c80d967b4a1c8-96.webp",
+        "width": 96,
+        "height": 171,
+        "bytes": 2582
+      },
+      {
+        "src": "/image-variants/dd4c80d967b4a1c8-320.webp",
+        "width": 320,
+        "height": 569,
+        "bytes": 9238
+      },
+      {
+        "src": "/image-variants/dd4c80d967b4a1c8-640.webp",
+        "width": 640,
+        "height": 1138,
+        "bytes": 20262
+      },
+      {
+        "src": "/image-variants/dd4c80d967b4a1c8-900.webp",
+        "width": 900,
+        "height": 1600,
+        "bytes": 29044
+      }
+    ]
+  },
+  "/uploads/poster/1787858402545-iib8cf.png": {
+    "width": 1254,
+    "height": 1254,
+    "originalBytes": 1938590,
+    "variants": [
+      {
+        "src": "/image-variants/a5aedb93af070541-96.webp",
+        "width": 96,
+        "height": 96,
+        "bytes": 3056
+      },
+      {
+        "src": "/image-variants/a5aedb93af070541-320.webp",
+        "width": 320,
+        "height": 320,
+        "bytes": 17194
+      },
+      {
+        "src": "/image-variants/a5aedb93af070541-640.webp",
+        "width": 640,
+        "height": 640,
+        "bytes": 48752
+      },
+      {
+        "src": "/image-variants/a5aedb93af070541-960.webp",
+        "width": 960,
+        "height": 960,
+        "bytes": 94354
+      },
+      {
+        "src": "/image-variants/a5aedb93af070541-1254.webp",
+        "width": 1254,
+        "height": 1254,
+        "bytes": 144282
+      }
+    ]
+  },
+  "/uploads/samples/1787858275151-h68c3n.jpg": {
+    "width": 1024,
+    "height": 1024,
+    "originalBytes": 526048,
+    "variants": [
+      {
+        "src": "/image-variants/81683d1a7323f7e1-96.webp",
+        "width": 96,
+        "height": 96,
+        "bytes": 1106
+      },
+      {
+        "src": "/image-variants/81683d1a7323f7e1-320.webp",
+        "width": 320,
+        "height": 320,
+        "bytes": 6638
+      },
+      {
+        "src": "/image-variants/81683d1a7323f7e1-640.webp",
+        "width": 640,
+        "height": 640,
+        "bytes": 23386
+      },
+      {
+        "src": "/image-variants/81683d1a7323f7e1-960.webp",
+        "width": 960,
+        "height": 960,
+        "bytes": 44198
+      },
+      {
+        "src": "/image-variants/81683d1a7323f7e1-1024.webp",
+        "width": 1024,
+        "height": 1024,
+        "bytes": 50722
+      }
+    ]
+  },
+  "/uploads/samples/1787858437105-q3o7u6.jpg": {
+    "width": 640,
+    "height": 801,
+    "originalBytes": 102965,
+    "variants": [
+      {
+        "src": "/image-variants/0a5e4578b898470d-96.webp",
+        "width": 96,
+        "height": 120,
+        "bytes": 4832
+      },
+      {
+        "src": "/image-variants/0a5e4578b898470d-320.webp",
+        "width": 320,
+        "height": 400,
+        "bytes": 36566
+      },
+      {
+        "src": "/image-variants/0a5e4578b898470d-640.webp",
+        "width": 640,
+        "height": 801,
+        "bytes": 111590
+      }
+    ]
+  },
+  "/uploads/samples/1787858437120-vr1j6t.jpg": {
+    "width": 640,
+    "height": 800,
+    "originalBytes": 52826,
+    "variants": [
+      {
+        "src": "/image-variants/ac97726ff2d04916-96.webp",
+        "width": 96,
+        "height": 120,
+        "bytes": 1854
+      },
+      {
+        "src": "/image-variants/ac97726ff2d04916-320.webp",
+        "width": 320,
+        "height": 400,
+        "bytes": 15666
+      },
+      {
+        "src": "/image-variants/ac97726ff2d04916-640.webp",
+        "width": 640,
+        "height": 800,
+        "bytes": 54880
+      }
+    ]
+  },
+  "/uploads/samples/1787858437147-7ps7xi.jpg": {
+    "width": 640,
+    "height": 800,
+    "originalBytes": 115662,
+    "variants": [
+      {
+        "src": "/image-variants/3c31e6d917c3689f-96.webp",
+        "width": 96,
+        "height": 120,
+        "bytes": 5196
+      },
+      {
+        "src": "/image-variants/3c31e6d917c3689f-320.webp",
+        "width": 320,
+        "height": 400,
+        "bytes": 41970
+      },
+      {
+        "src": "/image-variants/3c31e6d917c3689f-640.webp",
+        "width": 640,
+        "height": 800,
+        "bytes": 123274
+      }
+    ]
+  },
+  "/uploads/samples/1787858437184-0lfjox.jpg": {
+    "width": 640,
+    "height": 800,
+    "originalBytes": 69953,
+    "variants": [
+      {
+        "src": "/image-variants/ee74558cf747cf53-96.webp",
+        "width": 96,
+        "height": 120,
+        "bytes": 3072
+      },
+      {
+        "src": "/image-variants/ee74558cf747cf53-320.webp",
+        "width": 320,
+        "height": 400,
+        "bytes": 22828
+      },
+      {
+        "src": "/image-variants/ee74558cf747cf53-640.webp",
+        "width": 640,
+        "height": 800,
+        "bytes": 67308
+      }
+    ]
+  },
+  "/uploads/samples/1787858437221-h885uy.jpg": {
+    "width": 640,
+    "height": 800,
+    "originalBytes": 55959,
+    "variants": [
+      {
+        "src": "/image-variants/2c686195717314eb-96.webp",
+        "width": 96,
+        "height": 120,
+        "bytes": 2000
+      },
+      {
+        "src": "/image-variants/2c686195717314eb-320.webp",
+        "width": 320,
+        "height": 400,
+        "bytes": 16752
+      },
+      {
+        "src": "/image-variants/2c686195717314eb-640.webp",
+        "width": 640,
+        "height": 800,
+        "bytes": 57766
+      }
+    ]
+  },
+  "/uploads/samples/1787858437250-54yzg5.jpg": {
+    "width": 640,
+    "height": 800,
+    "originalBytes": 51860,
+    "variants": [
+      {
+        "src": "/image-variants/9d30a933e8f66a76-96.webp",
+        "width": 96,
+        "height": 120,
+        "bytes": 3010
+      },
+      {
+        "src": "/image-variants/9d30a933e8f66a76-320.webp",
+        "width": 320,
+        "height": 400,
+        "bytes": 19218
+      },
+      {
+        "src": "/image-variants/9d30a933e8f66a76-640.webp",
+        "width": 640,
+        "height": 800,
+        "bytes": 46162
+      }
+    ]
+  },
+  "/uploads/samples/1787858437283-v52gst.jpg": {
+    "width": 640,
+    "height": 800,
+    "originalBytes": 33278,
+    "variants": [
+      {
+        "src": "/image-variants/6dce03e9437d9338-96.webp",
+        "width": 96,
+        "height": 120,
+        "bytes": 1784
+      },
+      {
+        "src": "/image-variants/6dce03e9437d9338-320.webp",
+        "width": 320,
+        "height": 400,
+        "bytes": 10588
+      },
+      {
+        "src": "/image-variants/6dce03e9437d9338-640.webp",
+        "width": 640,
+        "height": 800,
+        "bytes": 28114
+      }
+    ]
+  },
+  "/uploads/samples/1787858437379-eltucc.jpg": {
+    "width": 640,
+    "height": 800,
+    "originalBytes": 104463,
+    "variants": [
+      {
+        "src": "/image-variants/9ef7c5fdee824ee6-96.webp",
+        "width": 96,
+        "height": 120,
+        "bytes": 5030
+      },
+      {
+        "src": "/image-variants/9ef7c5fdee824ee6-320.webp",
+        "width": 320,
+        "height": 400,
+        "bytes": 34318
+      },
+      {
+        "src": "/image-variants/9ef7c5fdee824ee6-640.webp",
+        "width": 640,
+        "height": 800,
+        "bytes": 101044
+      }
+    ]
+  },
+  "/uploads/samples/1787858437486-jigugd.jpg": {
+    "width": 640,
+    "height": 800,
+    "originalBytes": 57561,
+    "variants": [
+      {
+        "src": "/image-variants/02280c224d0acd1b-96.webp",
+        "width": 96,
+        "height": 120,
+        "bytes": 3832
+      },
+      {
+        "src": "/image-variants/02280c224d0acd1b-320.webp",
+        "width": 320,
+        "height": 400,
+        "bytes": 22340
+      },
+      {
+        "src": "/image-variants/02280c224d0acd1b-640.webp",
+        "width": 640,
+        "height": 800,
+        "bytes": 50782
+      }
+    ]
+  },
+  "/uploads/samples/1787858437626-zgux18.jpg": {
+    "width": 640,
+    "height": 800,
+    "originalBytes": 102962,
+    "variants": [
+      {
+        "src": "/image-variants/07716d6788bc7c54-96.webp",
+        "width": 96,
+        "height": 120,
+        "bytes": 4994
+      },
+      {
+        "src": "/image-variants/07716d6788bc7c54-320.webp",
+        "width": 320,
+        "height": 400,
+        "bytes": 33818
+      },
+      {
+        "src": "/image-variants/07716d6788bc7c54-640.webp",
+        "width": 640,
+        "height": 800,
+        "bytes": 100236
+      }
+    ]
+  },
+  "/uploads/samples/1787858437737-n1z35w.jpg": {
+    "width": 640,
+    "height": 800,
+    "originalBytes": 44533,
+    "variants": [
+      {
+        "src": "/image-variants/134cb06a9fae8030-96.webp",
+        "width": 96,
+        "height": 120,
+        "bytes": 3150
+      },
+      {
+        "src": "/image-variants/134cb06a9fae8030-320.webp",
+        "width": 320,
+        "height": 400,
+        "bytes": 14728
+      },
+      {
+        "src": "/image-variants/134cb06a9fae8030-640.webp",
+        "width": 640,
+        "height": 800,
+        "bytes": 36458
+      }
+    ]
+  },
+  "/uploads/samples/1787858477231-7n5rkj.jpg": {
+    "width": 640,
+    "height": 800,
+    "originalBytes": 51860,
+    "variants": [
+      {
+        "src": "/image-variants/9d30a933e8f66a76-96.webp",
+        "width": 96,
+        "height": 120,
+        "bytes": 3010
+      },
+      {
+        "src": "/image-variants/9d30a933e8f66a76-320.webp",
+        "width": 320,
+        "height": 400,
+        "bytes": 19218
+      },
+      {
+        "src": "/image-variants/9d30a933e8f66a76-640.webp",
+        "width": 640,
+        "height": 800,
+        "bytes": 46162
+      }
+    ]
+  },
+  "/uploads/samples/1787858634800-0fnki4.jpg": {
+    "width": 640,
+    "height": 800,
+    "originalBytes": 55959,
+    "variants": [
+      {
+        "src": "/image-variants/2c686195717314eb-96.webp",
+        "width": 96,
+        "height": 120,
+        "bytes": 2000
+      },
+      {
+        "src": "/image-variants/2c686195717314eb-320.webp",
+        "width": 320,
+        "height": 400,
+        "bytes": 16752
+      },
+      {
+        "src": "/image-variants/2c686195717314eb-640.webp",
+        "width": 640,
+        "height": 800,
+        "bytes": 57766
+      }
+    ]
+  },
+  "/uploads/samples/1787858634815-y5ssln.jpg": {
+    "width": 640,
+    "height": 800,
+    "originalBytes": 51860,
+    "variants": [
+      {
+        "src": "/image-variants/9d30a933e8f66a76-96.webp",
+        "width": 96,
+        "height": 120,
+        "bytes": 3010
+      },
+      {
+        "src": "/image-variants/9d30a933e8f66a76-320.webp",
+        "width": 320,
+        "height": 400,
+        "bytes": 19218
+      },
+      {
+        "src": "/image-variants/9d30a933e8f66a76-640.webp",
+        "width": 640,
+        "height": 800,
+        "bytes": 46162
+      }
+    ]
+  },
+  "https://hykuvvhxepijndqxrcke.supabase.co/storage/v1/object/public/equipment-images/sample/1787941562635-d8sktg.jpg": {
+    "width": 640,
+    "height": 800,
+    "originalBytes": 51860,
+    "variants": [
+      {
+        "src": "/image-variants/9d30a933e8f66a76-96.webp",
+        "width": 96,
+        "height": 120,
+        "bytes": 3010
+      },
+      {
+        "src": "/image-variants/9d30a933e8f66a76-320.webp",
+        "width": 320,
+        "height": 400,
+        "bytes": 19218
+      },
+      {
+        "src": "/image-variants/9d30a933e8f66a76-640.webp",
+        "width": 640,
+        "height": 800,
+        "bytes": 46162
+      }
+    ]
+  },
+  "https://hykuvvhxepijndqxrcke.supabase.co/storage/v1/object/public/equipment-images/sample/1787941564091-5v2vjm.jpg": {
+    "width": 640,
+    "height": 800,
+    "originalBytes": 33278,
+    "variants": [
+      {
+        "src": "/image-variants/6dce03e9437d9338-96.webp",
+        "width": 96,
+        "height": 120,
+        "bytes": 1784
+      },
+      {
+        "src": "/image-variants/6dce03e9437d9338-320.webp",
+        "width": 320,
+        "height": 400,
+        "bytes": 10588
+      },
+      {
+        "src": "/image-variants/6dce03e9437d9338-640.webp",
+        "width": 640,
+        "height": 800,
+        "bytes": 28114
+      }
+    ]
+  },
+  "https://hykuvvhxepijndqxrcke.supabase.co/storage/v1/object/public/equipment-images/sample/1787941593730-bkyx4j.jpg": {
+    "width": 640,
+    "height": 800,
+    "originalBytes": 52826,
+    "variants": [
+      {
+        "src": "/image-variants/ac97726ff2d04916-96.webp",
+        "width": 96,
+        "height": 120,
+        "bytes": 1854
+      },
+      {
+        "src": "/image-variants/ac97726ff2d04916-320.webp",
+        "width": 320,
+        "height": 400,
+        "bytes": 15666
+      },
+      {
+        "src": "/image-variants/ac97726ff2d04916-640.webp",
+        "width": 640,
+        "height": 800,
+        "bytes": 54880
+      }
+    ]
+  },
+  "https://hykuvvhxepijndqxrcke.supabase.co/storage/v1/object/public/equipment-images/sample/1787941595923-1o2j3d.jpg": {
+    "width": 640,
+    "height": 800,
+    "originalBytes": 115662,
+    "variants": [
+      {
+        "src": "/image-variants/3c31e6d917c3689f-96.webp",
+        "width": 96,
+        "height": 120,
+        "bytes": 5196
+      },
+      {
+        "src": "/image-variants/3c31e6d917c3689f-320.webp",
+        "width": 320,
+        "height": 400,
+        "bytes": 41970
+      },
+      {
+        "src": "/image-variants/3c31e6d917c3689f-640.webp",
+        "width": 640,
+        "height": 800,
+        "bytes": 123274
+      }
+    ]
+  },
+  "https://hykuvvhxepijndqxrcke.supabase.co/storage/v1/object/public/equipment-images/sample/1787941598238-b1ptz1.jpg": {
+    "width": 640,
+    "height": 800,
+    "originalBytes": 104463,
+    "variants": [
+      {
+        "src": "/image-variants/9ef7c5fdee824ee6-96.webp",
+        "width": 96,
+        "height": 120,
+        "bytes": 5030
+      },
+      {
+        "src": "/image-variants/9ef7c5fdee824ee6-320.webp",
+        "width": 320,
+        "height": 400,
+        "bytes": 34318
+      },
+      {
+        "src": "/image-variants/9ef7c5fdee824ee6-640.webp",
+        "width": 640,
+        "height": 800,
+        "bytes": 101044
+      }
+    ]
+  },
+  "https://hykuvvhxepijndqxrcke.supabase.co/storage/v1/object/public/equipment-images/sample/1787941600388-j3dvx8.jpg": {
+    "width": 640,
+    "height": 800,
+    "originalBytes": 57561,
+    "variants": [
+      {
+        "src": "/image-variants/02280c224d0acd1b-96.webp",
+        "width": 96,
+        "height": 120,
+        "bytes": 3832
+      },
+      {
+        "src": "/image-variants/02280c224d0acd1b-320.webp",
+        "width": 320,
+        "height": 400,
+        "bytes": 22340
+      },
+      {
+        "src": "/image-variants/02280c224d0acd1b-640.webp",
+        "width": 640,
+        "height": 800,
+        "bytes": 50782
+      }
+    ]
+  },
+  "https://hykuvvhxepijndqxrcke.supabase.co/storage/v1/object/public/equipment-images/sample/1788025960566-0i57by.jpg": {
+    "width": 640,
+    "height": 800,
+    "originalBytes": 101420,
+    "variants": [
+      {
+        "src": "/image-variants/96b0b52bb385faa5-96.webp",
+        "width": 96,
+        "height": 120,
+        "bytes": 5210
+      },
+      {
+        "src": "/image-variants/96b0b52bb385faa5-320.webp",
+        "width": 320,
+        "height": 400,
+        "bytes": 36220
+      },
+      {
+        "src": "/image-variants/96b0b52bb385faa5-640.webp",
+        "width": 640,
+        "height": 800,
+        "bytes": 101048
+      }
+    ]
+  },
+  "https://hykuvvhxepijndqxrcke.supabase.co/storage/v1/object/public/equipment-images/sample/1788025962807-mb4nvw.jpg": {
+    "width": 640,
+    "height": 800,
+    "originalBytes": 58781,
+    "variants": [
+      {
+        "src": "/image-variants/728d3e8e88e3b452-96.webp",
+        "width": 96,
+        "height": 120,
+        "bytes": 3850
+      },
+      {
+        "src": "/image-variants/728d3e8e88e3b452-320.webp",
+        "width": 320,
+        "height": 400,
+        "bytes": 20636
+      },
+      {
+        "src": "/image-variants/728d3e8e88e3b452-640.webp",
+        "width": 640,
+        "height": 800,
+        "bytes": 51902
+      }
+    ]
+  },
+  "https://hykuvvhxepijndqxrcke.supabase.co/storage/v1/object/public/equipment-images/sample/1788026017675-thh8py.jpg": {
+    "width": 640,
+    "height": 800,
+    "originalBytes": 105254,
+    "variants": [
+      {
+        "src": "/image-variants/db7d41456e569df9-96.webp",
+        "width": 96,
+        "height": 120,
+        "bytes": 5316
+      },
+      {
+        "src": "/image-variants/db7d41456e569df9-320.webp",
+        "width": 320,
+        "height": 400,
+        "bytes": 38250
+      },
+      {
+        "src": "/image-variants/db7d41456e569df9-640.webp",
+        "width": 640,
+        "height": 800,
+        "bytes": 106728
+      }
+    ]
+  },
+  "https://hykuvvhxepijndqxrcke.supabase.co/storage/v1/object/public/equipment-images/sample/1788026019183-17tm3k.jpg": {
+    "width": 640,
+    "height": 800,
+    "originalBytes": 72384,
+    "variants": [
+      {
+        "src": "/image-variants/c3153f539f355a8a-96.webp",
+        "width": 96,
+        "height": 120,
+        "bytes": 4510
+      },
+      {
+        "src": "/image-variants/c3153f539f355a8a-320.webp",
+        "width": 320,
+        "height": 400,
+        "bytes": 29170
+      },
+      {
+        "src": "/image-variants/c3153f539f355a8a-640.webp",
+        "width": 640,
+        "height": 800,
+        "bytes": 70778
+      }
+    ]
+  },
+  "https://hykuvvhxepijndqxrcke.supabase.co/storage/v1/object/public/equipment-images/sample/1788026020783-s79tgs.jpg": {
+    "width": 640,
+    "height": 800,
+    "originalBytes": 44581,
+    "variants": [
+      {
+        "src": "/image-variants/5e3a2733c14b9b74-96.webp",
+        "width": 96,
+        "height": 120,
+        "bytes": 2452
+      },
+      {
+        "src": "/image-variants/5e3a2733c14b9b74-320.webp",
+        "width": 320,
+        "height": 400,
+        "bytes": 15588
+      },
+      {
+        "src": "/image-variants/5e3a2733c14b9b74-640.webp",
+        "width": 640,
+        "height": 800,
+        "bytes": 40570
+      }
+    ]
+  },
+  "https://hykuvvhxepijndqxrcke.supabase.co/storage/v1/object/public/equipment-images/sample/1788026041555-lr864w.jpg": {
+    "width": 640,
+    "height": 800,
+    "originalBytes": 42768,
+    "variants": [
+      {
+        "src": "/image-variants/8ef1d23569697635-96.webp",
+        "width": 96,
+        "height": 120,
+        "bytes": 2590
+      },
+      {
+        "src": "/image-variants/8ef1d23569697635-320.webp",
+        "width": 320,
+        "height": 400,
+        "bytes": 14278
+      },
+      {
+        "src": "/image-variants/8ef1d23569697635-640.webp",
+        "width": 640,
+        "height": 800,
+        "bytes": 36036
+      }
+    ]
+  },
+  "https://hykuvvhxepijndqxrcke.supabase.co/storage/v1/object/public/equipment-images/sample/1788026043149-ucogaz.jpg": {
+    "width": 640,
+    "height": 800,
+    "originalBytes": 84848,
+    "variants": [
+      {
+        "src": "/image-variants/fea2332a69ad41b1-96.webp",
+        "width": 96,
+        "height": 120,
+        "bytes": 4458
+      },
+      {
+        "src": "/image-variants/fea2332a69ad41b1-320.webp",
+        "width": 320,
+        "height": 400,
+        "bytes": 28864
+      },
+      {
+        "src": "/image-variants/fea2332a69ad41b1-640.webp",
+        "width": 640,
+        "height": 800,
+        "bytes": 75926
+      }
+    ]
+  },
+  "https://hykuvvhxepijndqxrcke.supabase.co/storage/v1/object/public/equipment-images/sample/1788026044918-gwi63y.jpg": {
+    "width": 640,
+    "height": 800,
+    "originalBytes": 73219,
+    "variants": [
+      {
+        "src": "/image-variants/c6df762ec1324809-96.webp",
+        "width": 96,
+        "height": 120,
+        "bytes": 4196
+      },
+      {
+        "src": "/image-variants/c6df762ec1324809-320.webp",
+        "width": 320,
+        "height": 400,
+        "bytes": 26396
+      },
+      {
+        "src": "/image-variants/c6df762ec1324809-640.webp",
+        "width": 640,
+        "height": 800,
+        "bytes": 62870
+      }
+    ]
+  },
+  "https://hykuvvhxepijndqxrcke.supabase.co/storage/v1/object/public/equipment-images/sample/1788026046290-bvdh3n.jpg": {
+    "width": 640,
+    "height": 800,
+    "originalBytes": 42041,
+    "variants": [
+      {
+        "src": "/image-variants/64eabe92fff48ed9-96.webp",
+        "width": 96,
+        "height": 120,
+        "bytes": 2384
+      },
+      {
+        "src": "/image-variants/64eabe92fff48ed9-320.webp",
+        "width": 320,
+        "height": 400,
+        "bytes": 13994
+      },
+      {
+        "src": "/image-variants/64eabe92fff48ed9-640.webp",
+        "width": 640,
+        "height": 800,
+        "bytes": 35800
+      }
+    ]
+  },
+  "https://hykuvvhxepijndqxrcke.supabase.co/storage/v1/object/public/equipment-images/sample/1788026047511-uxpfbv.jpg": {
+    "width": 640,
+    "height": 800,
+    "originalBytes": 46398,
+    "variants": [
+      {
+        "src": "/image-variants/43e50042b7167c12-96.webp",
+        "width": 96,
+        "height": 120,
+        "bytes": 2530
+      },
+      {
+        "src": "/image-variants/43e50042b7167c12-320.webp",
+        "width": 320,
+        "height": 400,
+        "bytes": 15208
+      },
+      {
+        "src": "/image-variants/43e50042b7167c12-640.webp",
+        "width": 640,
+        "height": 800,
+        "bytes": 39932
+      }
+    ]
+  },
+  "https://hykuvvhxepijndqxrcke.supabase.co/storage/v1/object/public/equipment-images/sample/1788026049153-r1odww.jpg": {
+    "width": 640,
+    "height": 800,
+    "originalBytes": 46833,
+    "variants": [
+      {
+        "src": "/image-variants/87d6c14e435539f6-96.webp",
+        "width": 96,
+        "height": 120,
+        "bytes": 2710
+      },
+      {
+        "src": "/image-variants/87d6c14e435539f6-320.webp",
+        "width": 320,
+        "height": 400,
+        "bytes": 15884
+      },
+      {
+        "src": "/image-variants/87d6c14e435539f6-640.webp",
+        "width": 640,
+        "height": 800,
+        "bytes": 40928
+      }
+    ]
+  },
+  "https://hykuvvhxepijndqxrcke.supabase.co/storage/v1/object/public/equipment-images/sample/1788026050586-ezjfjr.jpg": {
+    "width": 640,
+    "height": 800,
+    "originalBytes": 100652,
+    "variants": [
+      {
+        "src": "/image-variants/9d75bf9063a0bbd6-96.webp",
+        "width": 96,
+        "height": 120,
+        "bytes": 4800
+      },
+      {
+        "src": "/image-variants/9d75bf9063a0bbd6-320.webp",
+        "width": 320,
+        "height": 400,
+        "bytes": 33012
+      },
+      {
+        "src": "/image-variants/9d75bf9063a0bbd6-640.webp",
+        "width": 640,
+        "height": 800,
+        "bytes": 105782
+      }
+    ]
+  },
+  "https://hykuvvhxepijndqxrcke.supabase.co/storage/v1/object/public/equipment-images/sample/1788026071040-gca8aa.jpg": {
+    "width": 640,
+    "height": 800,
+    "originalBytes": 31020,
+    "variants": [
+      {
+        "src": "/image-variants/d049fa5ed6deda93-96.webp",
+        "width": 96,
+        "height": 120,
+        "bytes": 1602
+      },
+      {
+        "src": "/image-variants/d049fa5ed6deda93-320.webp",
+        "width": 320,
+        "height": 400,
+        "bytes": 9220
+      },
+      {
+        "src": "/image-variants/d049fa5ed6deda93-640.webp",
+        "width": 640,
+        "height": 800,
+        "bytes": 23014
+      }
+    ]
+  },
+  "https://hykuvvhxepijndqxrcke.supabase.co/storage/v1/object/public/equipment-images/sample/1788026072533-x4q6mu.jpg": {
+    "width": 640,
+    "height": 800,
+    "originalBytes": 71194,
+    "variants": [
+      {
+        "src": "/image-variants/f45e16e0eb41bc0d-96.webp",
+        "width": 96,
+        "height": 120,
+        "bytes": 4276
+      },
+      {
+        "src": "/image-variants/f45e16e0eb41bc0d-320.webp",
+        "width": 320,
+        "height": 400,
+        "bytes": 26642
+      },
+      {
+        "src": "/image-variants/f45e16e0eb41bc0d-640.webp",
+        "width": 640,
+        "height": 800,
+        "bytes": 70630
+      }
+    ]
+  },
+  "https://hykuvvhxepijndqxrcke.supabase.co/storage/v1/object/public/equipment-images/sample/1788026074370-wtyzex.jpg": {
+    "width": 640,
+    "height": 800,
+    "originalBytes": 73261,
+    "variants": [
+      {
+        "src": "/image-variants/ea064138985a9b41-96.webp",
+        "width": 96,
+        "height": 120,
+        "bytes": 4806
+      },
+      {
+        "src": "/image-variants/ea064138985a9b41-320.webp",
+        "width": 320,
+        "height": 400,
+        "bytes": 28694
+      },
+      {
+        "src": "/image-variants/ea064138985a9b41-640.webp",
+        "width": 640,
+        "height": 800,
+        "bytes": 70628
+      }
+    ]
+  },
+  "https://hykuvvhxepijndqxrcke.supabase.co/storage/v1/object/public/equipment-images/sample/1788026115490-jjz8j7.jpg": {
+    "width": 640,
+    "height": 800,
+    "originalBytes": 31020,
+    "variants": [
+      {
+        "src": "/image-variants/d049fa5ed6deda93-96.webp",
+        "width": 96,
+        "height": 120,
+        "bytes": 1602
+      },
+      {
+        "src": "/image-variants/d049fa5ed6deda93-320.webp",
+        "width": 320,
+        "height": 400,
+        "bytes": 9220
+      },
+      {
+        "src": "/image-variants/d049fa5ed6deda93-640.webp",
+        "width": 640,
+        "height": 800,
+        "bytes": 23014
+      }
+    ]
+  },
+  "https://hykuvvhxepijndqxrcke.supabase.co/storage/v1/object/public/equipment-images/sample/1788026117291-a3dmzn.jpg": {
+    "width": 640,
+    "height": 800,
+    "originalBytes": 71194,
+    "variants": [
+      {
+        "src": "/image-variants/f45e16e0eb41bc0d-96.webp",
+        "width": 96,
+        "height": 120,
+        "bytes": 4276
+      },
+      {
+        "src": "/image-variants/f45e16e0eb41bc0d-320.webp",
+        "width": 320,
+        "height": 400,
+        "bytes": 26642
+      },
+      {
+        "src": "/image-variants/f45e16e0eb41bc0d-640.webp",
+        "width": 640,
+        "height": 800,
+        "bytes": 70630
+      }
+    ]
+  },
+  "https://hykuvvhxepijndqxrcke.supabase.co/storage/v1/object/public/equipment-images/sample/1788026118695-yqm4wm.jpg": {
+    "width": 640,
+    "height": 800,
+    "originalBytes": 73261,
+    "variants": [
+      {
+        "src": "/image-variants/ea064138985a9b41-96.webp",
+        "width": 96,
+        "height": 120,
+        "bytes": 4806
+      },
+      {
+        "src": "/image-variants/ea064138985a9b41-320.webp",
+        "width": 320,
+        "height": 400,
+        "bytes": 28694
+      },
+      {
+        "src": "/image-variants/ea064138985a9b41-640.webp",
+        "width": 640,
+        "height": 800,
+        "bytes": 70628
+      }
+    ]
+  },
+  "https://hykuvvhxepijndqxrcke.supabase.co/storage/v1/object/public/equipment-images/sample/1788026174928-57v8j1.jpg": {
+    "width": 640,
+    "height": 800,
+    "originalBytes": 106562,
+    "variants": [
+      {
+        "src": "/image-variants/686e27adbb2bb072-96.webp",
+        "width": 96,
+        "height": 120,
+        "bytes": 5436
+      },
+      {
+        "src": "/image-variants/686e27adbb2bb072-320.webp",
+        "width": 320,
+        "height": 400,
+        "bytes": 36724
+      },
+      {
+        "src": "/image-variants/686e27adbb2bb072-640.webp",
+        "width": 640,
+        "height": 800,
+        "bytes": 103086
+      }
+    ]
+  },
+  "https://hykuvvhxepijndqxrcke.supabase.co/storage/v1/object/public/equipment-images/sample/1788026176981-4mibkw.jpg": {
+    "width": 640,
+    "height": 800,
+    "originalBytes": 67838,
+    "variants": [
+      {
+        "src": "/image-variants/1a246d9a714bf77f-96.webp",
+        "width": 96,
+        "height": 120,
+        "bytes": 4126
+      },
+      {
+        "src": "/image-variants/1a246d9a714bf77f-320.webp",
+        "width": 320,
+        "height": 400,
+        "bytes": 23780
+      },
+      {
+        "src": "/image-variants/1a246d9a714bf77f-640.webp",
+        "width": 640,
+        "height": 800,
+        "bytes": 59192
+      }
+    ]
+  },
+  "https://hykuvvhxepijndqxrcke.supabase.co/storage/v1/object/public/equipment-images/sample/1788026178554-79ud6p.jpg": {
+    "width": 640,
+    "height": 800,
+    "originalBytes": 73066,
+    "variants": [
+      {
+        "src": "/image-variants/76d508d8bfd7d4de-96.webp",
+        "width": 96,
+        "height": 120,
+        "bytes": 4250
+      },
+      {
+        "src": "/image-variants/76d508d8bfd7d4de-320.webp",
+        "width": 320,
+        "height": 400,
+        "bytes": 25936
+      },
+      {
+        "src": "/image-variants/76d508d8bfd7d4de-640.webp",
+        "width": 640,
+        "height": 800,
+        "bytes": 66970
+      }
+    ]
+  },
+  "https://hykuvvhxepijndqxrcke.supabase.co/storage/v1/object/public/equipment-images/sample/1788026179975-jaepyh.jpg": {
+    "width": 640,
+    "height": 800,
+    "originalBytes": 65430,
+    "variants": [
+      {
+        "src": "/image-variants/05570ed55907dfbe-96.webp",
+        "width": 96,
+        "height": 120,
+        "bytes": 3096
+      },
+      {
+        "src": "/image-variants/05570ed55907dfbe-320.webp",
+        "width": 320,
+        "height": 400,
+        "bytes": 20858
+      },
+      {
+        "src": "/image-variants/05570ed55907dfbe-640.webp",
+        "width": 640,
+        "height": 800,
+        "bytes": 62070
+      }
+    ]
+  },
+  "https://hykuvvhxepijndqxrcke.supabase.co/storage/v1/object/public/equipment-images/sample/1788026210993-prrrcy.jpg": {
+    "width": 640,
+    "height": 800,
+    "originalBytes": 100750,
+    "variants": [
+      {
+        "src": "/image-variants/177a6045b8e3c615-96.webp",
+        "width": 96,
+        "height": 120,
+        "bytes": 4898
+      },
+      {
+        "src": "/image-variants/177a6045b8e3c615-320.webp",
+        "width": 320,
+        "height": 400,
+        "bytes": 34292
+      },
+      {
+        "src": "/image-variants/177a6045b8e3c615-640.webp",
+        "width": 640,
+        "height": 800,
+        "bytes": 95102
+      }
+    ]
+  },
+  "https://hykuvvhxepijndqxrcke.supabase.co/storage/v1/object/public/equipment-images/sample/1788026212912-gphoh1.jpg": {
+    "width": 640,
+    "height": 800,
+    "originalBytes": 60267,
+    "variants": [
+      {
+        "src": "/image-variants/dec3cd463a994d1e-96.webp",
+        "width": 96,
+        "height": 120,
+        "bytes": 2818
+      },
+      {
+        "src": "/image-variants/dec3cd463a994d1e-320.webp",
+        "width": 320,
+        "height": 400,
+        "bytes": 19096
+      },
+      {
+        "src": "/image-variants/dec3cd463a994d1e-640.webp",
+        "width": 640,
+        "height": 800,
+        "bytes": 53768
+      }
+    ]
+  },
+  "https://hykuvvhxepijndqxrcke.supabase.co/storage/v1/object/public/equipment-images/sample/1788026214580-8zbw0p.jpg": {
+    "width": 640,
+    "height": 800,
+    "originalBytes": 92868,
+    "variants": [
+      {
+        "src": "/image-variants/809a43e697730e8f-96.webp",
+        "width": 96,
+        "height": 120,
+        "bytes": 4954
+      },
+      {
+        "src": "/image-variants/809a43e697730e8f-320.webp",
+        "width": 320,
+        "height": 400,
+        "bytes": 34964
+      },
+      {
+        "src": "/image-variants/809a43e697730e8f-640.webp",
+        "width": 640,
+        "height": 800,
+        "bytes": 96064
+      }
+    ]
+  },
+  "https://hykuvvhxepijndqxrcke.supabase.co/storage/v1/object/public/equipment-images/storefront/1788178386138-celfze.jpg": {
+    "width": 2560,
+    "height": 1920,
+    "originalBytes": 804933,
+    "variants": [
+      {
+        "src": "/image-variants/b2fe9ac89701ee72-96.webp",
+        "width": 96,
+        "height": 72,
+        "bytes": 2808
+      },
+      {
+        "src": "/image-variants/b2fe9ac89701ee72-320.webp",
+        "width": 320,
+        "height": 240,
+        "bytes": 18194
+      },
+      {
+        "src": "/image-variants/b2fe9ac89701ee72-640.webp",
+        "width": 640,
+        "height": 480,
+        "bytes": 54362
+      },
+      {
+        "src": "/image-variants/b2fe9ac89701ee72-960.webp",
+        "width": 960,
+        "height": 720,
+        "bytes": 105132
+      },
+      {
+        "src": "/image-variants/b2fe9ac89701ee72-1600.webp",
+        "width": 1600,
+        "height": 1200,
+        "bytes": 234328
+      }
+    ]
+  },
+  "https://hykuvvhxepijndqxrcke.supabase.co/storage/v1/object/public/equipment-images/storefront/1788178391614-9yp84t.jpg": {
+    "width": 1926,
+    "height": 2568,
+    "originalBytes": 540158,
+    "variants": [
+      {
+        "src": "/image-variants/0afaf95b99da50c8-96.webp",
+        "width": 96,
+        "height": 128,
+        "bytes": 3188
+      },
+      {
+        "src": "/image-variants/0afaf95b99da50c8-320.webp",
+        "width": 320,
+        "height": 427,
+        "bytes": 19632
+      },
+      {
+        "src": "/image-variants/0afaf95b99da50c8-640.webp",
+        "width": 640,
+        "height": 853,
+        "bytes": 54554
+      },
+      {
+        "src": "/image-variants/0afaf95b99da50c8-960.webp",
+        "width": 960,
+        "height": 1280,
+        "bytes": 101362
+      },
+      {
+        "src": "/image-variants/0afaf95b99da50c8-1200.webp",
+        "width": 1200,
+        "height": 1600,
+        "bytes": 141236
+      }
+    ]
+  },
+  "https://hykuvvhxepijndqxrcke.supabase.co/storage/v1/object/public/equipment-images/storefront/1788178464636-3a5m4a.jpg": {
+    "width": 1706,
+    "height": 2560,
+    "originalBytes": 514604,
+    "variants": [
+      {
+        "src": "/image-variants/9ab4009ad6628b40-96.webp",
+        "width": 96,
+        "height": 144,
+        "bytes": 3532
+      },
+      {
+        "src": "/image-variants/9ab4009ad6628b40-320.webp",
+        "width": 320,
+        "height": 480,
+        "bytes": 20112
+      },
+      {
+        "src": "/image-variants/9ab4009ad6628b40-640.webp",
+        "width": 640,
+        "height": 960,
+        "bytes": 56320
+      },
+      {
+        "src": "/image-variants/9ab4009ad6628b40-960.webp",
+        "width": 960,
+        "height": 1441,
+        "bytes": 105616
+      },
+      {
+        "src": "/image-variants/9ab4009ad6628b40-1066.webp",
+        "width": 1066,
+        "height": 1600,
+        "bytes": 126152
+      }
+    ]
+  }
+}

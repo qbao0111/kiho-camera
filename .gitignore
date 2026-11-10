@@ -40,6 +40,10 @@ next-env.d.ts
 /public/uploads/
 /scratch/
 /supabase/.temp/
+/.open-next/
+/.wrangler/
+/.static-site/
+/.dev.vars*
 
 .env*
 

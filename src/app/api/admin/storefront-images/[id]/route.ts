@@ -13,14 +13,14 @@ function unauthorized() {
 
 export async function PATCH(
   req: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   if (!(await getAuthenticatedAdmin())) return unauthorized();
 
   if (!isSameOriginRequest(req)) return NextResponse.json({ success: false, error: "Forbidden" }, { status: 403 });
 
   try {
-    const { id } = params;
+    const { id } = await params;
     if (!isUuid(id)) return NextResponse.json({ success: false, error: "ID ảnh không hợp lệ." }, { status: 400 });
     const body = await readJsonBody<unknown>(req, 32 * 1024);
     if (!isRecord(body)) throw new InvalidRequestBodyError();
@@ -43,14 +43,14 @@ export async function PATCH(
 
 export async function DELETE(
   req: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   if (!(await getAuthenticatedAdmin())) return unauthorized();
 
   if (!isSameOriginRequest(req)) return NextResponse.json({ success: false, error: "Forbidden" }, { status: 403 });
 
   try {
-    const { id } = params;
+    const { id } = await params;
     if (!isUuid(id)) return NextResponse.json({ success: false, error: "ID ảnh không hợp lệ." }, { status: 400 });
 
     const result = await deleteStorefrontImage(id);

@@ -7,6 +7,8 @@ import { getStorefrontImages } from "@/lib/services/storefront";
 import { PageTransition } from "@/components/ui/motion";
 
 export const revalidate = 120;
+// Workers Free has no persistent ISR cache configured; always read current public data.
+export const dynamic = "force-dynamic";
 
 export default async function PublicLayout({
   children,

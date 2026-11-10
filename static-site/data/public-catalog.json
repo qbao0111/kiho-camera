@@ -1,0 +1,1117 @@
+{
+  "exportedAt": "2026-10-10T15:41:38.795Z",
+  "equipment": [
+    {
+      "id": "e0000000-0000-0000-0000-000000000001",
+      "category_id": "c1111111-1111-1111-1111-111111111111",
+      "brand": "Fujifilm",
+      "name": "FUJIFILM X100VI",
+      "slug": "fujifilm-x100vi",
+      "short_description": "Flagship compact cao cấp, màu film đẹp, chống rung IBIS và độ phân giải 40.2MP.",
+      "description": "Fujifilm X100VI phù hợp du lịch, streetlife, chân dung và những ai yêu màu film đặc trưng của Fujifilm.",
+      "price_session": 350000,
+      "price_per_day": 450000,
+      "price_three_days": 420000,
+      "price_poster_url": "/images/price-posters/fujifilm-x100vi.webp",
+      "deposit_note": "Không cần cọc tiền máy — chỉ cần ảnh CCCD hoặc VNeID để xác minh.",
+      "specifications": {
+        "Ống kính": "Fujinon 23mm f/2",
+        "Chống rung": "IBIS 5 trục",
+        "Cảm biến": "40.2MP X-Trans CMOS 5 HR"
+      },
+      "included_items": [
+        "Thân máy",
+        "2 pin",
+        "Sạc",
+        "Thẻ nhớ",
+        "Túi chống sốc",
+        "Đầu đọc thẻ"
+      ],
+      "use_cases": [
+        "Du lịch",
+        "Chân dung",
+        "Màu film",
+        "Streetlife",
+        "Couple"
+      ],
+      "badges": [
+        "Kiho Pick",
+        "Màu film",
+        "IBIS"
+      ],
+      "is_featured": true,
+      "is_active": true,
+      "sort_order": 1,
+      "seo_title": "Thuê Fujifilm X100VI tại Quảng Bình | Kiho Camera",
+      "seo_description": "Thuê Fujifilm X100VI tại Đồng Hới, Quảng Bình. Giá rõ ràng, phụ kiện đi kèm, không cần cọc tiền máy.",
+      "updated_at": "2026-08-28T17:02:54.306541+00:00",
+      "category": {
+        "id": "c1111111-1111-1111-1111-111111111111",
+        "name": "Máy ảnh",
+        "slug": "may-anh",
+        "description": "12 dòng máy ảnh du lịch được Kiho Camera tuyển chọn tại Đồng Hới, Quảng Bình",
+        "icon": "Camera",
+        "sort_order": 1,
+        "is_active": true
+      },
+      "images": [
+        {
+          "id": "4ba60c3e-4c31-44d8-a259-12737778c205",
+          "equipment_id": "e0000000-0000-0000-0000-000000000001",
+          "image_url": "/images/cameras/fujifilm-x100vi.jpg",
+          "alt_text": null,
+          "is_cover": true,
+          "sort_order": 1
+        }
+      ],
+      "sample_images": [
+        {
+          "id": "7ca561ce-b654-4cc2-92f4-c27e79a41001",
+          "equipment_id": "e0000000-0000-0000-0000-000000000001",
+          "image_url": "https://hykuvvhxepijndqxrcke.supabase.co/storage/v1/object/public/equipment-images/sample/1788025960566-0i57by.jpg",
+          "caption": "Ảnh chụp thực tế tại Quảng Bình",
+          "alt_text": null,
+          "sort_order": 1,
+          "is_active": true
+        },
+        {
+          "id": "79bb4bfa-9427-4ee0-a1f4-be7f137d31b0",
+          "equipment_id": "e0000000-0000-0000-0000-000000000001",
+          "image_url": "https://hykuvvhxepijndqxrcke.supabase.co/storage/v1/object/public/equipment-images/sample/1788025962807-mb4nvw.jpg",
+          "caption": "Ảnh chụp thực tế tại Quảng Bình",
+          "alt_text": null,
+          "sort_order": 2,
+          "is_active": true
+        },
+        {
+          "id": "facfc898-f40f-400e-ac29-d06b942aba2a",
+          "equipment_id": "e0000000-0000-0000-0000-000000000001",
+          "image_url": "https://hykuvvhxepijndqxrcke.supabase.co/storage/v1/object/public/equipment-images/sample/1788026017675-thh8py.jpg",
+          "caption": "Ảnh chụp thực tế tại Quảng Bình",
+          "alt_text": null,
+          "sort_order": 3,
+          "is_active": true
+        },
+        {
+          "id": "7646f2b3-f2cf-401c-b7b4-1f492c76f585",
+          "equipment_id": "e0000000-0000-0000-0000-000000000001",
+          "image_url": "https://hykuvvhxepijndqxrcke.supabase.co/storage/v1/object/public/equipment-images/sample/1788026019183-17tm3k.jpg",
+          "caption": "Ảnh chụp thực tế tại Quảng Bình",
+          "alt_text": null,
+          "sort_order": 4,
+          "is_active": true
+        },
+        {
+          "id": "b536b8e4-c428-48cd-a22c-83ba0e45d4cd",
+          "equipment_id": "e0000000-0000-0000-0000-000000000001",
+          "image_url": "https://hykuvvhxepijndqxrcke.supabase.co/storage/v1/object/public/equipment-images/sample/1788026020783-s79tgs.jpg",
+          "caption": "Ảnh chụp thực tế tại Quảng Bình",
+          "alt_text": null,
+          "sort_order": 5,
+          "is_active": true
+        }
+      ]
+    },
+    {
+      "id": "e0000000-0000-0000-0000-000000000002",
+      "category_id": "c1111111-1111-1111-1111-111111111111",
+      "brand": "Fujifilm",
+      "name": "FUJIFILM X100V",
+      "slug": "fujifilm-x100v",
+      "short_description": "Thiết kế rangefinder cổ điển, màu film Classic Negative đẹp và thân máy nhỏ gọn.",
+      "description": "Fujifilm X100V rất hợp đi cafe, dạo phố, couple và du lịch nhờ màu ảnh có cá tính và thiết kế gọn đẹp.",
+      "price_session": 250000,
+      "price_per_day": 380000,
+      "price_three_days": 350000,
+      "price_poster_url": "/images/price-posters/fujifilm-x100v.webp",
+      "deposit_note": "Không cần cọc tiền máy — chỉ cần ảnh CCCD hoặc VNeID để xác minh.",
+      "specifications": {
+        "Màu film": "Classic Negative và Film Simulation",
+        "Ống kính": "Fujinon 23mm f/2",
+        "Cảm biến": "26.1MP X-Trans CMOS 4"
+      },
+      "included_items": [
+        "Thân máy",
+        "2 pin",
+        "Sạc",
+        "Thẻ nhớ",
+        "Túi chống sốc",
+        "Đầu đọc thẻ"
+      ],
+      "use_cases": [
+        "Du lịch",
+        "Màu film",
+        "Couple",
+        "Cafe",
+        "Streetlife"
+      ],
+      "badges": [
+        "Màu film đẹp",
+        "Classic Neg"
+      ],
+      "is_featured": true,
+      "is_active": true,
+      "sort_order": 2,
+      "seo_title": "Thuê Fujifilm X100V tại Quảng Bình | Kiho Camera",
+      "seo_description": "Thuê Fujifilm X100V màu film tại Đồng Hới, Quảng Bình. Giá niêm yết rõ ràng và phụ kiện đi kèm.",
+      "updated_at": "2026-08-28T17:02:54.306541+00:00",
+      "category": {
+        "id": "c1111111-1111-1111-1111-111111111111",
+        "name": "Máy ảnh",
+        "slug": "may-anh",
+        "description": "12 dòng máy ảnh du lịch được Kiho Camera tuyển chọn tại Đồng Hới, Quảng Bình",
+        "icon": "Camera",
+        "sort_order": 1,
+        "is_active": true
+      },
+      "images": [
+        {
+          "id": "4fb1ef0f-2ee2-4f44-b70c-476d2e18e93d",
+          "equipment_id": "e0000000-0000-0000-0000-000000000002",
+          "image_url": "/images/cameras/fujifilm-x100v.jpg",
+          "alt_text": null,
+          "is_cover": true,
+          "sort_order": 1
+        }
+      ],
+      "sample_images": [
+        {
+          "id": "b936284a-47b8-42a7-a33c-b653af79367b",
+          "equipment_id": "e0000000-0000-0000-0000-000000000002",
+          "image_url": "https://hykuvvhxepijndqxrcke.supabase.co/storage/v1/object/public/equipment-images/sample/1788026041555-lr864w.jpg",
+          "caption": "Ảnh chụp thực tế tại Quảng Bình",
+          "alt_text": null,
+          "sort_order": 1,
+          "is_active": true
+        },
+        {
+          "id": "afc6e2d4-8656-445c-9ffe-b7617c4491de",
+          "equipment_id": "e0000000-0000-0000-0000-000000000002",
+          "image_url": "https://hykuvvhxepijndqxrcke.supabase.co/storage/v1/object/public/equipment-images/sample/1788026043149-ucogaz.jpg",
+          "caption": "Ảnh chụp thực tế tại Quảng Bình",
+          "alt_text": null,
+          "sort_order": 2,
+          "is_active": true
+        },
+        {
+          "id": "14173264-0ab4-41cc-b3d2-f9bba09d4358",
+          "equipment_id": "e0000000-0000-0000-0000-000000000002",
+          "image_url": "https://hykuvvhxepijndqxrcke.supabase.co/storage/v1/object/public/equipment-images/sample/1788026044918-gwi63y.jpg",
+          "caption": "Ảnh chụp thực tế tại Quảng Bình",
+          "alt_text": null,
+          "sort_order": 3,
+          "is_active": true
+        },
+        {
+          "id": "5499a983-d733-4e7c-827b-8714636c0c58",
+          "equipment_id": "e0000000-0000-0000-0000-000000000002",
+          "image_url": "https://hykuvvhxepijndqxrcke.supabase.co/storage/v1/object/public/equipment-images/sample/1788026046290-bvdh3n.jpg",
+          "caption": "Ảnh chụp thực tế tại Quảng Bình",
+          "alt_text": null,
+          "sort_order": 4,
+          "is_active": true
+        },
+        {
+          "id": "d12b0256-fa3d-4fb8-8b4f-881f7ee2831e",
+          "equipment_id": "e0000000-0000-0000-0000-000000000002",
+          "image_url": "https://hykuvvhxepijndqxrcke.supabase.co/storage/v1/object/public/equipment-images/sample/1788026047511-uxpfbv.jpg",
+          "caption": "Ảnh chụp thực tế tại Quảng Bình",
+          "alt_text": null,
+          "sort_order": 5,
+          "is_active": true
+        },
+        {
+          "id": "503358bc-a21b-41fe-aa84-fba93bbabe89",
+          "equipment_id": "e0000000-0000-0000-0000-000000000002",
+          "image_url": "https://hykuvvhxepijndqxrcke.supabase.co/storage/v1/object/public/equipment-images/sample/1788026049153-r1odww.jpg",
+          "caption": "Ảnh chụp thực tế tại Quảng Bình",
+          "alt_text": null,
+          "sort_order": 6,
+          "is_active": true
+        },
+        {
+          "id": "c5c2df77-9caa-4a68-bb33-b8dbd767cbaf",
+          "equipment_id": "e0000000-0000-0000-0000-000000000002",
+          "image_url": "https://hykuvvhxepijndqxrcke.supabase.co/storage/v1/object/public/equipment-images/sample/1788026050586-ezjfjr.jpg",
+          "caption": "Ảnh chụp thực tế tại Quảng Bình",
+          "alt_text": null,
+          "sort_order": 7,
+          "is_active": true
+        }
+      ]
+    },
+    {
+      "id": "e0000000-0000-0000-0000-000000000003",
+      "category_id": "c1111111-1111-1111-1111-111111111111",
+      "brand": "Fujifilm",
+      "name": "FUJIFILM XS10",
+      "slug": "fujifilm-xs10",
+      "short_description": "Mirrorless đa dụng có IBIS, màn hình xoay lật, phù hợp vừa chụp vừa quay.",
+      "description": "Fujifilm X-S10 là lựa chọn cân bằng cho du lịch, chân dung và vlog với chống rung trong thân máy.",
+      "price_session": 230000,
+      "price_per_day": 350000,
+      "price_three_days": 320000,
+      "price_poster_url": "/images/price-posters/fujifilm-xs10.webp",
+      "deposit_note": "Không cần cọc tiền máy — chỉ cần ảnh CCCD hoặc VNeID để xác minh.",
+      "specifications": {
+        "Màn hình": "Xoay lật đa góc",
+        "Chống rung": "IBIS 5 trục",
+        "Cảm biến": "26.1MP X-Trans CMOS 4"
+      },
+      "included_items": [
+        "Thân máy",
+        "Lens đi kèm theo bộ",
+        "2 pin",
+        "Sạc",
+        "Thẻ nhớ",
+        "Túi chống sốc",
+        "Đầu đọc thẻ"
+      ],
+      "use_cases": [
+        "Du lịch",
+        "Vlog",
+        "Chân dung",
+        "Màu film"
+      ],
+      "badges": [
+        "Quay & Chụp",
+        "IBIS"
+      ],
+      "is_featured": true,
+      "is_active": true,
+      "sort_order": 3,
+      "seo_title": "Thuê Fujifilm X-S10 tại Quảng Bình | Kiho Camera",
+      "seo_description": "Thuê Fujifilm X-S10 tại Đồng Hới, Quảng Bình. Phù hợp du lịch, vlog và chụp chân dung.",
+      "updated_at": "2026-08-28T17:02:54.306541+00:00",
+      "category": {
+        "id": "c1111111-1111-1111-1111-111111111111",
+        "name": "Máy ảnh",
+        "slug": "may-anh",
+        "description": "12 dòng máy ảnh du lịch được Kiho Camera tuyển chọn tại Đồng Hới, Quảng Bình",
+        "icon": "Camera",
+        "sort_order": 1,
+        "is_active": true
+      },
+      "images": [
+        {
+          "id": "a0000000-0000-0000-0000-000000000003",
+          "equipment_id": "e0000000-0000-0000-0000-000000000003",
+          "image_url": "/images/cameras/fujifilm-xs10.jpg",
+          "alt_text": "Fujifilm X-S10 tại Kiho Camera",
+          "is_cover": true,
+          "sort_order": 1
+        }
+      ],
+      "sample_images": []
+    },
+    {
+      "id": "e0000000-0000-0000-0000-000000000004",
+      "category_id": "c1111111-1111-1111-1111-111111111111",
+      "brand": "Canon",
+      "name": "CANON M100",
+      "slug": "canon-m100",
+      "short_description": "Nhỏ gọn, dễ dùng, màn hình lật selfie và màu da Canon sáng trong.",
+      "description": "Canon M100 hợp người mới, đi cafe, check-in và du lịch nhẹ nhàng nhờ thân máy nhỏ gọn và thao tác đơn giản.",
+      "price_session": 100000,
+      "price_per_day": 180000,
+      "price_three_days": 150000,
+      "price_poster_url": "/images/price-posters/canon-m100.webp",
+      "deposit_note": "Không cần cọc tiền máy — chỉ cần ảnh CCCD hoặc VNeID để xác minh.",
+      "specifications": {
+        "Lấy nét": "Dual Pixel CMOS AF",
+        "Màn hình": "Lật selfie",
+        "Cảm biến": "APS-C CMOS 24.2MP"
+      },
+      "included_items": [
+        "Thân máy",
+        "Lens đi kèm theo bộ",
+        "2 pin",
+        "Sạc",
+        "Thẻ nhớ",
+        "Túi chống sốc",
+        "Đầu đọc thẻ"
+      ],
+      "use_cases": [
+        "Check-in",
+        "Cafe",
+        "Selfie",
+        "Du lịch"
+      ],
+      "badges": [
+        "Dễ dùng",
+        "Nhỏ gọn"
+      ],
+      "is_featured": false,
+      "is_active": true,
+      "sort_order": 4,
+      "seo_title": "Thuê Canon M100 tại Quảng Bình | Kiho Camera",
+      "seo_description": "Thuê Canon M100 tại Đồng Hới, Quảng Bình. Máy nhỏ gọn, dễ dùng, phù hợp check-in và selfie.",
+      "updated_at": "2026-08-28T17:02:54.306541+00:00",
+      "category": {
+        "id": "c1111111-1111-1111-1111-111111111111",
+        "name": "Máy ảnh",
+        "slug": "may-anh",
+        "description": "12 dòng máy ảnh du lịch được Kiho Camera tuyển chọn tại Đồng Hới, Quảng Bình",
+        "icon": "Camera",
+        "sort_order": 1,
+        "is_active": true
+      },
+      "images": [
+        {
+          "id": "c785ff6c-775e-4750-bc13-53010d4b6e16",
+          "equipment_id": "e0000000-0000-0000-0000-000000000004",
+          "image_url": "/images/cameras/canon-m100.jpg",
+          "alt_text": null,
+          "is_cover": true,
+          "sort_order": 1
+        }
+      ],
+      "sample_images": [
+        {
+          "id": "47767552-1a5a-4cd2-a29b-8ccc9b93320a",
+          "equipment_id": "e0000000-0000-0000-0000-000000000004",
+          "image_url": "https://hykuvvhxepijndqxrcke.supabase.co/storage/v1/object/public/equipment-images/sample/1788026071040-gca8aa.jpg",
+          "caption": "Ảnh chụp thực tế tại Quảng Bình",
+          "alt_text": null,
+          "sort_order": 1,
+          "is_active": true
+        },
+        {
+          "id": "0233c36c-ab7d-4ed5-98d7-e6b9f627a9f3",
+          "equipment_id": "e0000000-0000-0000-0000-000000000004",
+          "image_url": "https://hykuvvhxepijndqxrcke.supabase.co/storage/v1/object/public/equipment-images/sample/1788026072533-x4q6mu.jpg",
+          "caption": "Ảnh chụp thực tế tại Quảng Bình",
+          "alt_text": null,
+          "sort_order": 2,
+          "is_active": true
+        },
+        {
+          "id": "11675ffd-589b-4cbc-8bcc-67805639da30",
+          "equipment_id": "e0000000-0000-0000-0000-000000000004",
+          "image_url": "https://hykuvvhxepijndqxrcke.supabase.co/storage/v1/object/public/equipment-images/sample/1788026074370-wtyzex.jpg",
+          "caption": "Ảnh chụp thực tế tại Quảng Bình",
+          "alt_text": null,
+          "sort_order": 3,
+          "is_active": true
+        }
+      ]
+    },
+    {
+      "id": "e0000000-0000-0000-0000-000000000005",
+      "category_id": "c1111111-1111-1111-1111-111111111111",
+      "brand": "Canon",
+      "name": "CANON RP",
+      "slug": "canon-eos-rp",
+      "short_description": "Full-frame nhỏ gọn, xóa phông đẹp, hợp chân dung và chụp cảnh.",
+      "description": "Canon EOS RP mang chất lượng full-frame trong thân máy gọn nhẹ, phù hợp chân dung, couple và các chuyến đi cần ảnh có chiều sâu.",
+      "price_session": 170000,
+      "price_per_day": 280000,
+      "price_three_days": 250000,
+      "price_poster_url": "/images/price-posters/canon-eos-rp.webp",
+      "deposit_note": "Không cần cọc tiền máy — chỉ cần ảnh CCCD hoặc VNeID để xác minh.",
+      "specifications": {
+        "Loại": "Mirrorless full-frame",
+        "Cảm biến": "Full-Frame CMOS 26.2MP",
+        "Bộ xử lý": "DIGIC 8"
+      },
+      "included_items": [
+        "Thân máy",
+        "Lens đi kèm theo bộ",
+        "2 pin",
+        "Sạc",
+        "Thẻ nhớ",
+        "Túi chống sốc",
+        "Đầu đọc thẻ"
+      ],
+      "use_cases": [
+        "Chân dung",
+        "Couple",
+        "Phong cảnh",
+        "Du lịch"
+      ],
+      "badges": [
+        "Full-frame",
+        "Xóa phông đẹp"
+      ],
+      "is_featured": false,
+      "is_active": true,
+      "sort_order": 5,
+      "seo_title": "Thuê Canon EOS RP tại Quảng Bình | Kiho Camera",
+      "seo_description": "Thuê Canon EOS RP full-frame tại Đồng Hới, Quảng Bình. Hợp chân dung, couple và du lịch.",
+      "updated_at": "2026-08-28T17:02:54.306541+00:00",
+      "category": {
+        "id": "c1111111-1111-1111-1111-111111111111",
+        "name": "Máy ảnh",
+        "slug": "may-anh",
+        "description": "12 dòng máy ảnh du lịch được Kiho Camera tuyển chọn tại Đồng Hới, Quảng Bình",
+        "icon": "Camera",
+        "sort_order": 1,
+        "is_active": true
+      },
+      "images": [
+        {
+          "id": "a0000000-0000-0000-0000-000000000005",
+          "equipment_id": "e0000000-0000-0000-0000-000000000005",
+          "image_url": "/images/cameras/canon-rp.jpg",
+          "alt_text": "Canon EOS RP tại Kiho Camera",
+          "is_cover": true,
+          "sort_order": 1
+        }
+      ],
+      "sample_images": []
+    },
+    {
+      "id": "e0000000-0000-0000-0000-000000000006",
+      "category_id": "c1111111-1111-1111-1111-111111111111",
+      "brand": "Canon",
+      "name": "CANON G7X MARK III",
+      "slug": "canon-g7x-mark-iii",
+      "short_description": "Compact quốc dân cho du lịch, selfie và vlog với ống kính sáng f/1.8-2.8.",
+      "description": "Canon G7X Mark III nhỏ gọn, dễ mang theo và được yêu thích cho du lịch, selfie, vlog và chụp đời thường.",
+      "price_session": 200000,
+      "price_per_day": 320000,
+      "price_three_days": 300000,
+      "price_poster_url": "/images/price-posters/canon-g7x-mark-iii.webp",
+      "deposit_note": "Không cần cọc tiền máy — chỉ cần ảnh CCCD hoặc VNeID để xác minh.",
+      "specifications": {
+        "Màn hình": "Lật selfie",
+        "Ống kính": "24-100mm f/1.8-2.8",
+        "Cảm biến": "1-inch CMOS 20.1MP"
+      },
+      "included_items": [
+        "Máy ảnh",
+        "2 pin",
+        "Sạc",
+        "Thẻ nhớ",
+        "Túi chống sốc",
+        "Đầu đọc thẻ"
+      ],
+      "use_cases": [
+        "Du lịch",
+        "Selfie",
+        "Vlog",
+        "Cafe",
+        "Check-in"
+      ],
+      "badges": [
+        "Compact",
+        "Vlog"
+      ],
+      "is_featured": true,
+      "is_active": true,
+      "sort_order": 6,
+      "seo_title": "Thuê Canon G7X Mark III tại Quảng Bình | Kiho Camera",
+      "seo_description": "Thuê Canon G7X Mark III tại Đồng Hới, Quảng Bình. Compact nhỏ gọn cho du lịch, selfie và vlog.",
+      "updated_at": "2026-08-28T17:02:54.306541+00:00",
+      "category": {
+        "id": "c1111111-1111-1111-1111-111111111111",
+        "name": "Máy ảnh",
+        "slug": "may-anh",
+        "description": "12 dòng máy ảnh du lịch được Kiho Camera tuyển chọn tại Đồng Hới, Quảng Bình",
+        "icon": "Camera",
+        "sort_order": 1,
+        "is_active": true
+      },
+      "images": [
+        {
+          "id": "a0000000-0000-0000-0000-000000000006",
+          "equipment_id": "e0000000-0000-0000-0000-000000000006",
+          "image_url": "/images/cameras/canon-g7x-mark3.jpg",
+          "alt_text": "Canon G7X Mark III tại Kiho Camera",
+          "is_cover": true,
+          "sort_order": 1
+        }
+      ],
+      "sample_images": []
+    },
+    {
+      "id": "e0000000-0000-0000-0000-000000000007",
+      "category_id": "c1111111-1111-1111-1111-111111111111",
+      "brand": "Canon",
+      "name": "CANON R50",
+      "slug": "canon-eos-r50",
+      "short_description": "Mirrorless nhỏ nhẹ 375g, lấy nét nhanh, màu da đẹp và rất dễ dùng cho người mới.",
+      "description": "Canon EOS R50 là lựa chọn Kiho thường gợi ý cho người mới nhờ thân máy nhẹ, autofocus tốt và khả năng chụp/quay linh hoạt.",
+      "price_session": 150000,
+      "price_per_day": 250000,
+      "price_three_days": 230000,
+      "price_poster_url": "/images/price-posters/canon-eos-r50.webp",
+      "deposit_note": "Không cần cọc tiền máy — chỉ cần ảnh CCCD hoặc VNeID để xác minh.",
+      "specifications": {
+        "Lấy nét": "Dual Pixel CMOS AF II",
+        "Cảm biến": "APS-C CMOS 24.2MP",
+        "Trọng lượng": "Khoảng 375g"
+      },
+      "included_items": [
+        "Thân máy",
+        "Lens RF-S 18-45mm đi kèm",
+        "2 pin",
+        "Sạc",
+        "Thẻ nhớ",
+        "Túi chống sốc",
+        "Đầu đọc thẻ"
+      ],
+      "use_cases": [
+        "Du lịch",
+        "Chân dung",
+        "Vlog",
+        "Selfie",
+        "Couple"
+      ],
+      "badges": [
+        "Kiho Pick",
+        "Dễ dùng",
+        "375g"
+      ],
+      "is_featured": true,
+      "is_active": true,
+      "sort_order": 7,
+      "seo_title": "Thuê Canon EOS R50 tại Quảng Bình | Kiho Camera",
+      "seo_description": "Thuê Canon EOS R50 tại Đồng Hới, Quảng Bình. Nhẹ, dễ dùng, phù hợp người mới và du lịch.",
+      "updated_at": "2026-08-28T17:02:54.306541+00:00",
+      "category": {
+        "id": "c1111111-1111-1111-1111-111111111111",
+        "name": "Máy ảnh",
+        "slug": "may-anh",
+        "description": "12 dòng máy ảnh du lịch được Kiho Camera tuyển chọn tại Đồng Hới, Quảng Bình",
+        "icon": "Camera",
+        "sort_order": 1,
+        "is_active": true
+      },
+      "images": [
+        {
+          "id": "8c0778e7-0c6a-40fa-989f-2e8b40a2a76c",
+          "equipment_id": "e0000000-0000-0000-0000-000000000007",
+          "image_url": "/images/cameras/canon-r50.jpg",
+          "alt_text": null,
+          "is_cover": true,
+          "sort_order": 1
+        }
+      ],
+      "sample_images": [
+        {
+          "id": "bef0c875-ba38-42f7-b058-9602da9518de",
+          "equipment_id": "e0000000-0000-0000-0000-000000000007",
+          "image_url": "https://hykuvvhxepijndqxrcke.supabase.co/storage/v1/object/public/equipment-images/sample/1787941562635-d8sktg.jpg",
+          "caption": "Ảnh chụp thực tế tại Quảng Bình",
+          "alt_text": null,
+          "sort_order": 1,
+          "is_active": true
+        },
+        {
+          "id": "31bc6a3e-8b4d-4a14-9147-e885c2941f34",
+          "equipment_id": "e0000000-0000-0000-0000-000000000007",
+          "image_url": "https://hykuvvhxepijndqxrcke.supabase.co/storage/v1/object/public/equipment-images/sample/1787941564091-5v2vjm.jpg",
+          "caption": "Ảnh chụp thực tế tại Quảng Bình",
+          "alt_text": null,
+          "sort_order": 2,
+          "is_active": true
+        },
+        {
+          "id": "1386df94-c10a-45a0-ba8e-e6dfadf34353",
+          "equipment_id": "e0000000-0000-0000-0000-000000000007",
+          "image_url": "https://hykuvvhxepijndqxrcke.supabase.co/storage/v1/object/public/equipment-images/sample/1787941593730-bkyx4j.jpg",
+          "caption": "Ảnh chụp thực tế tại Quảng Bình",
+          "alt_text": null,
+          "sort_order": 3,
+          "is_active": true
+        },
+        {
+          "id": "f656cc93-427c-4baa-ba67-4eeb9e1edf22",
+          "equipment_id": "e0000000-0000-0000-0000-000000000007",
+          "image_url": "https://hykuvvhxepijndqxrcke.supabase.co/storage/v1/object/public/equipment-images/sample/1787941595923-1o2j3d.jpg",
+          "caption": "Ảnh chụp thực tế tại Quảng Bình",
+          "alt_text": null,
+          "sort_order": 4,
+          "is_active": true
+        },
+        {
+          "id": "b0f43dce-45dc-4ffe-83db-803652313a87",
+          "equipment_id": "e0000000-0000-0000-0000-000000000007",
+          "image_url": "https://hykuvvhxepijndqxrcke.supabase.co/storage/v1/object/public/equipment-images/sample/1787941598238-b1ptz1.jpg",
+          "caption": "Ảnh chụp thực tế tại Quảng Bình",
+          "alt_text": null,
+          "sort_order": 5,
+          "is_active": true
+        },
+        {
+          "id": "3a9c2445-81b1-4632-889a-591abf6d2830",
+          "equipment_id": "e0000000-0000-0000-0000-000000000007",
+          "image_url": "https://hykuvvhxepijndqxrcke.supabase.co/storage/v1/object/public/equipment-images/sample/1787941600388-j3dvx8.jpg",
+          "caption": "Ảnh chụp thực tế tại Quảng Bình",
+          "alt_text": null,
+          "sort_order": 6,
+          "is_active": true
+        }
+      ]
+    },
+    {
+      "id": "e0000000-0000-0000-0000-000000000008",
+      "category_id": "c1111111-1111-1111-1111-111111111111",
+      "brand": "Canon",
+      "name": "CANON M3",
+      "slug": "canon-m3",
+      "short_description": "Mirrorless gọn nhẹ, cảm biến APS-C 24.2MP, phù hợp du lịch và check-in tiết kiệm.",
+      "description": "Canon EOS M3 là lựa chọn dễ tiếp cận cho du lịch, gia đình và check-in với thân máy gọn cùng lens zoom đi kèm.",
+      "price_session": 110000,
+      "price_per_day": 180000,
+      "price_three_days": 150000,
+      "price_poster_url": "/images/price-posters/canon-m3.webp",
+      "deposit_note": "Không cần cọc tiền máy — chỉ cần ảnh CCCD hoặc VNeID để xác minh.",
+      "specifications": {
+        "Loại": "Mirrorless",
+        "Màn hình": "Lật selfie",
+        "Cảm biến": "APS-C CMOS 24.2MP"
+      },
+      "included_items": [
+        "Thân máy",
+        "Lens đi kèm theo bộ",
+        "2 pin",
+        "Sạc",
+        "Thẻ nhớ",
+        "Túi chống sốc",
+        "Đầu đọc thẻ"
+      ],
+      "use_cases": [
+        "Du lịch",
+        "Gia đình",
+        "Check-in"
+      ],
+      "badges": [
+        "Tiết kiệm",
+        "Gọn nhẹ"
+      ],
+      "is_featured": false,
+      "is_active": true,
+      "sort_order": 8,
+      "seo_title": "Thuê Canon M3 tại Quảng Bình | Kiho Camera",
+      "seo_description": "Thuê Canon M3 tại Đồng Hới, Quảng Bình. Gọn nhẹ, dễ dùng và phù hợp các chuyến đi.",
+      "updated_at": "2026-08-28T17:02:54.306541+00:00",
+      "category": {
+        "id": "c1111111-1111-1111-1111-111111111111",
+        "name": "Máy ảnh",
+        "slug": "may-anh",
+        "description": "12 dòng máy ảnh du lịch được Kiho Camera tuyển chọn tại Đồng Hới, Quảng Bình",
+        "icon": "Camera",
+        "sort_order": 1,
+        "is_active": true
+      },
+      "images": [
+        {
+          "id": "db6f439c-49f6-4564-a050-4b06d203a1dd",
+          "equipment_id": "e0000000-0000-0000-0000-000000000008",
+          "image_url": "/images/cameras/canon-m3.jpg",
+          "alt_text": null,
+          "is_cover": true,
+          "sort_order": 1
+        }
+      ],
+      "sample_images": [
+        {
+          "id": "d9ee0e18-621c-41c7-88d9-ce4f75239f9a",
+          "equipment_id": "e0000000-0000-0000-0000-000000000008",
+          "image_url": "https://hykuvvhxepijndqxrcke.supabase.co/storage/v1/object/public/equipment-images/sample/1788026115490-jjz8j7.jpg",
+          "caption": "Ảnh chụp thực tế tại Quảng Bình",
+          "alt_text": null,
+          "sort_order": 1,
+          "is_active": true
+        },
+        {
+          "id": "21e41e80-e659-46d2-a32a-6b73f0418615",
+          "equipment_id": "e0000000-0000-0000-0000-000000000008",
+          "image_url": "https://hykuvvhxepijndqxrcke.supabase.co/storage/v1/object/public/equipment-images/sample/1788026117291-a3dmzn.jpg",
+          "caption": "Ảnh chụp thực tế tại Quảng Bình",
+          "alt_text": null,
+          "sort_order": 2,
+          "is_active": true
+        },
+        {
+          "id": "48c1b08c-b465-4f8d-b7f9-ee26f7953410",
+          "equipment_id": "e0000000-0000-0000-0000-000000000008",
+          "image_url": "https://hykuvvhxepijndqxrcke.supabase.co/storage/v1/object/public/equipment-images/sample/1788026118695-yqm4wm.jpg",
+          "caption": "Ảnh chụp thực tế tại Quảng Bình",
+          "alt_text": null,
+          "sort_order": 3,
+          "is_active": true
+        }
+      ]
+    },
+    {
+      "id": "e0000000-0000-0000-0000-000000000009",
+      "category_id": "c1111111-1111-1111-1111-111111111111",
+      "brand": "Sony",
+      "name": "SONY ZV1 MARK II",
+      "slug": "sony-zv1-mark-ii",
+      "short_description": "Compact creator với góc rộng, lấy nét nhanh và thiết kế tối ưu cho vlog.",
+      "description": "Sony ZV-1 II phù hợp daily vlog, reels và content du lịch với thân máy nhỏ gọn và góc quay rộng.",
+      "price_session": 130000,
+      "price_per_day": 200000,
+      "price_three_days": 180000,
+      "price_poster_url": "/images/price-posters/sony-zv1-mark-ii.webp",
+      "deposit_note": "Không cần cọc tiền máy — chỉ cần ảnh CCCD hoặc VNeID để xác minh.",
+      "specifications": {
+        "Ống kính": "18-50mm",
+        "Cảm biến": "1-inch 20.1MP",
+        "Định hướng": "Vlog & Content"
+      },
+      "included_items": [
+        "Máy ảnh",
+        "2 pin",
+        "Sạc",
+        "Thẻ nhớ",
+        "Túi chống sốc",
+        "Đầu đọc thẻ"
+      ],
+      "use_cases": [
+        "Vlog",
+        "Reels",
+        "Content",
+        "Du lịch"
+      ],
+      "badges": [
+        "Creator",
+        "Góc rộng"
+      ],
+      "is_featured": true,
+      "is_active": true,
+      "sort_order": 9,
+      "seo_title": "Thuê Sony ZV-1 II tại Quảng Bình | Kiho Camera",
+      "seo_description": "Thuê Sony ZV-1 II tại Đồng Hới, Quảng Bình. Phù hợp vlog, reels và content du lịch.",
+      "updated_at": "2026-08-28T17:02:54.306541+00:00",
+      "category": {
+        "id": "c1111111-1111-1111-1111-111111111111",
+        "name": "Máy ảnh",
+        "slug": "may-anh",
+        "description": "12 dòng máy ảnh du lịch được Kiho Camera tuyển chọn tại Đồng Hới, Quảng Bình",
+        "icon": "Camera",
+        "sort_order": 1,
+        "is_active": true
+      },
+      "images": [
+        {
+          "id": "a0000000-0000-0000-0000-000000000009",
+          "equipment_id": "e0000000-0000-0000-0000-000000000009",
+          "image_url": "/images/cameras/sony-zv1-mark2.jpg",
+          "alt_text": "Sony ZV-1 II tại Kiho Camera",
+          "is_cover": true,
+          "sort_order": 1
+        }
+      ],
+      "sample_images": []
+    },
+    {
+      "id": "e0000000-0000-0000-0000-000000000010",
+      "category_id": "c1111111-1111-1111-1111-111111111111",
+      "brand": "Sony",
+      "name": "SONY ZV1F",
+      "slug": "sony-zv1f",
+      "short_description": "Compact nhỏ gọn cho TikTok, Reels, selfie video và content hàng ngày.",
+      "description": "Sony ZV-1F là lựa chọn nhẹ và đơn giản cho creator mới bắt đầu, vlog ngắn và nội dung mạng xã hội.",
+      "price_session": 90000,
+      "price_per_day": 150000,
+      "price_three_days": 130000,
+      "price_poster_url": "/images/price-posters/sony-zv1f.webp",
+      "deposit_note": "Không cần cọc tiền máy — chỉ cần ảnh CCCD hoặc VNeID để xác minh.",
+      "specifications": {
+        "Ống kính": "20mm f/2.0",
+        "Cảm biến": "1-inch 20.1MP",
+        "Định hướng": "Vlog & Content"
+      },
+      "included_items": [
+        "Máy ảnh",
+        "2 pin",
+        "Sạc",
+        "Thẻ nhớ",
+        "Túi chống sốc",
+        "Đầu đọc thẻ"
+      ],
+      "use_cases": [
+        "Vlog",
+        "TikTok",
+        "Reels",
+        "Selfie video"
+      ],
+      "badges": [
+        "Creator",
+        "Nhỏ gọn"
+      ],
+      "is_featured": false,
+      "is_active": true,
+      "sort_order": 10,
+      "seo_title": "Thuê Sony ZV-1F tại Quảng Bình | Kiho Camera",
+      "seo_description": "Thuê Sony ZV-1F tại Đồng Hới, Quảng Bình. Nhỏ gọn cho vlog, TikTok và Reels.",
+      "updated_at": "2026-08-28T17:02:54.306541+00:00",
+      "category": {
+        "id": "c1111111-1111-1111-1111-111111111111",
+        "name": "Máy ảnh",
+        "slug": "may-anh",
+        "description": "12 dòng máy ảnh du lịch được Kiho Camera tuyển chọn tại Đồng Hới, Quảng Bình",
+        "icon": "Camera",
+        "sort_order": 1,
+        "is_active": true
+      },
+      "images": [
+        {
+          "id": "a0000000-0000-0000-0000-000000000010",
+          "equipment_id": "e0000000-0000-0000-0000-000000000010",
+          "image_url": "/images/cameras/sony-zv1f.jpg",
+          "alt_text": "Sony ZV-1F tại Kiho Camera",
+          "is_cover": true,
+          "sort_order": 1
+        }
+      ],
+      "sample_images": []
+    },
+    {
+      "id": "e0000000-0000-0000-0000-000000000011",
+      "category_id": "c1111111-1111-1111-1111-111111111111",
+      "brand": "Canon",
+      "name": "CANON M",
+      "slug": "canon-m",
+      "short_description": "Mirrorless Canon nhỏ gọn, giá dễ tiếp cận cho người mới và chuyến đi ngắn.",
+      "description": "Canon EOS M phù hợp người mới cần một chiếc máy ảnh nhỏ gọn, dễ mang theo với mức chi phí tiết kiệm.",
+      "price_session": 90000,
+      "price_per_day": 150000,
+      "price_three_days": 130000,
+      "price_poster_url": "/images/price-posters/canon-m.webp",
+      "deposit_note": "Không cần cọc tiền máy — chỉ cần ảnh CCCD hoặc VNeID để xác minh.",
+      "specifications": {
+        "Loại": "Mirrorless",
+        "Phong cách": "Nhỏ gọn",
+        "Cảm biến": "APS-C CMOS 18MP"
+      },
+      "included_items": [
+        "Thân máy",
+        "Lens đi kèm theo bộ",
+        "2 pin",
+        "Sạc",
+        "Thẻ nhớ",
+        "Túi chống sốc",
+        "Đầu đọc thẻ"
+      ],
+      "use_cases": [
+        "Du lịch",
+        "Người mới",
+        "Check-in"
+      ],
+      "badges": [
+        "Tiết kiệm",
+        "Dễ mang"
+      ],
+      "is_featured": false,
+      "is_active": true,
+      "sort_order": 11,
+      "seo_title": "Thuê Canon EOS M tại Quảng Bình | Kiho Camera",
+      "seo_description": "Thuê Canon EOS M tại Đồng Hới, Quảng Bình. Giá dễ tiếp cận cho người mới và chuyến đi ngắn.",
+      "updated_at": "2026-08-28T17:02:54.306541+00:00",
+      "category": {
+        "id": "c1111111-1111-1111-1111-111111111111",
+        "name": "Máy ảnh",
+        "slug": "may-anh",
+        "description": "12 dòng máy ảnh du lịch được Kiho Camera tuyển chọn tại Đồng Hới, Quảng Bình",
+        "icon": "Camera",
+        "sort_order": 1,
+        "is_active": true
+      },
+      "images": [
+        {
+          "id": "5c8a5281-3ee0-4f33-ac3b-0e8bcc994e56",
+          "equipment_id": "e0000000-0000-0000-0000-000000000011",
+          "image_url": "/images/cameras/canon-m.jpg",
+          "alt_text": null,
+          "is_cover": true,
+          "sort_order": 1
+        }
+      ],
+      "sample_images": [
+        {
+          "id": "5538a98f-ba3c-4df1-9dfb-477c71fa8cfc",
+          "equipment_id": "e0000000-0000-0000-0000-000000000011",
+          "image_url": "https://hykuvvhxepijndqxrcke.supabase.co/storage/v1/object/public/equipment-images/sample/1788026210993-prrrcy.jpg",
+          "caption": "Ảnh chụp thực tế tại Quảng Bình",
+          "alt_text": null,
+          "sort_order": 1,
+          "is_active": true
+        },
+        {
+          "id": "95806b99-4e52-4401-b36f-13c0b6914247",
+          "equipment_id": "e0000000-0000-0000-0000-000000000011",
+          "image_url": "https://hykuvvhxepijndqxrcke.supabase.co/storage/v1/object/public/equipment-images/sample/1788026212912-gphoh1.jpg",
+          "caption": "Ảnh chụp thực tế tại Quảng Bình",
+          "alt_text": null,
+          "sort_order": 2,
+          "is_active": true
+        },
+        {
+          "id": "02159472-8dea-45cf-a084-11e52893fc8d",
+          "equipment_id": "e0000000-0000-0000-0000-000000000011",
+          "image_url": "https://hykuvvhxepijndqxrcke.supabase.co/storage/v1/object/public/equipment-images/sample/1788026214580-8zbw0p.jpg",
+          "caption": "Ảnh chụp thực tế tại Quảng Bình",
+          "alt_text": null,
+          "sort_order": 3,
+          "is_active": true
+        }
+      ]
+    },
+    {
+      "id": "e0000000-0000-0000-0000-000000000012",
+      "category_id": "c1111111-1111-1111-1111-111111111111",
+      "brand": "Canon",
+      "name": "CANON IXY 640",
+      "slug": "canon-ixy-640",
+      "short_description": "Digicam nhỏ gọn mang vibe Y2K, hợp ảnh flash đêm và những bộ ảnh vui, tự nhiên.",
+      "description": "Canon IXY 640 là digicam nhỏ gọn dành cho những ai thích chất ảnh compact, flash đêm và phong cách Y2K.",
+      "price_session": 80000,
+      "price_per_day": 120000,
+      "price_three_days": 100000,
+      "price_poster_url": "/images/price-posters/canon-ixy-640.webp",
+      "deposit_note": "Không cần cọc tiền máy — chỉ cần ảnh CCCD hoặc VNeID để xác minh.",
+      "specifications": {
+        "Zoom": "Quang học 12x",
+        "Phong cách": "Digicam / Y2K",
+        "Cảm biến": "20.2MP"
+      },
+      "included_items": [
+        "Máy ảnh",
+        "Pin",
+        "Sạc",
+        "Thẻ nhớ",
+        "Túi chống sốc",
+        "Đầu đọc thẻ"
+      ],
+      "use_cases": [
+        "Y2K",
+        "Flash đêm",
+        "Đi chơi",
+        "Party"
+      ],
+      "badges": [
+        "Digicam",
+        "Y2K"
+      ],
+      "is_featured": false,
+      "is_active": true,
+      "sort_order": 12,
+      "seo_title": "Thuê Canon IXY 640 tại Quảng Bình | Kiho Camera",
+      "seo_description": "Thuê Canon IXY 640 tại Đồng Hới, Quảng Bình. Digicam nhỏ gọn cho ảnh flash đêm và phong cách Y2K.",
+      "updated_at": "2026-08-28T17:02:54.306541+00:00",
+      "category": {
+        "id": "c1111111-1111-1111-1111-111111111111",
+        "name": "Máy ảnh",
+        "slug": "may-anh",
+        "description": "12 dòng máy ảnh du lịch được Kiho Camera tuyển chọn tại Đồng Hới, Quảng Bình",
+        "icon": "Camera",
+        "sort_order": 1,
+        "is_active": true
+      },
+      "images": [
+        {
+          "id": "b59117d8-67c3-4e64-8d43-48b64503bad8",
+          "equipment_id": "e0000000-0000-0000-0000-000000000012",
+          "image_url": "/images/cameras/canon-ixy640.jpg",
+          "alt_text": null,
+          "is_cover": true,
+          "sort_order": 1
+        }
+      ],
+      "sample_images": [
+        {
+          "id": "4427d551-7ff4-4751-9d71-c7bfaf304ed6",
+          "equipment_id": "e0000000-0000-0000-0000-000000000012",
+          "image_url": "https://hykuvvhxepijndqxrcke.supabase.co/storage/v1/object/public/equipment-images/sample/1788026174928-57v8j1.jpg",
+          "caption": "Ảnh chụp thực tế tại Quảng Bình",
+          "alt_text": null,
+          "sort_order": 1,
+          "is_active": true
+        },
+        {
+          "id": "9240f097-8c05-48cf-ad88-883b27f59dfc",
+          "equipment_id": "e0000000-0000-0000-0000-000000000012",
+          "image_url": "https://hykuvvhxepijndqxrcke.supabase.co/storage/v1/object/public/equipment-images/sample/1788026176981-4mibkw.jpg",
+          "caption": "Ảnh chụp thực tế tại Quảng Bình",
+          "alt_text": null,
+          "sort_order": 2,
+          "is_active": true
+        },
+        {
+          "id": "383880e5-b9d1-4873-b941-5a68e4bc51f9",
+          "equipment_id": "e0000000-0000-0000-0000-000000000012",
+          "image_url": "https://hykuvvhxepijndqxrcke.supabase.co/storage/v1/object/public/equipment-images/sample/1788026178554-79ud6p.jpg",
+          "caption": "Ảnh chụp thực tế tại Quảng Bình",
+          "alt_text": null,
+          "sort_order": 3,
+          "is_active": true
+        },
+        {
+          "id": "41d8d1cf-1d3e-4366-8a70-df2f06658fe7",
+          "equipment_id": "e0000000-0000-0000-0000-000000000012",
+          "image_url": "https://hykuvvhxepijndqxrcke.supabase.co/storage/v1/object/public/equipment-images/sample/1788026179975-jaepyh.jpg",
+          "caption": "Ảnh chụp thực tế tại Quảng Bình",
+          "alt_text": null,
+          "sort_order": 4,
+          "is_active": true
+        }
+      ]
+    }
+  ],
+  "categories": [
+    {
+      "id": "c1111111-1111-1111-1111-111111111111",
+      "name": "Máy ảnh",
+      "slug": "may-anh",
+      "description": "12 dòng máy ảnh du lịch được Kiho Camera tuyển chọn tại Đồng Hới, Quảng Bình",
+      "icon": "Camera",
+      "sort_order": 1,
+      "is_active": true
+    }
+  ],
+  "settings": {
+    "id": 1,
+    "shop_name": "Kiho Camera",
+    "tagline": "Cho thuê máy ảnh Quảng Bình – Máy xịn, giá rõ ràng, thuê nhanh tại Đồng Hới.",
+    "address": "48 Ngô Quyền, TP. Đồng Hới, Tỉnh Quảng Bình",
+    "phone": "0387 274 669",
+    "facebook_url": "https://facebook.com/profile.php?id=61590749292801",
+    "messenger_url": "https://m.me/61590749292801",
+    "tiktok_url": "https://tiktok.com/@kihocamera",
+    "instagram_url": "https://www.instagram.com/thuemayanhqbb/",
+    "maps_url": "https://maps.app.goo.gl/g8zpfJM5h8mHrZ5J9?g_st=ic",
+    "maps_embed_url": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3805.6857812055096!2d106.61832509999999!3d17.4747472!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3147571d99ad51d7%3A0x61a7dcab4e56eaae!2sKiho%20Camera!5e0!3m2!1svi!2s!4v1787953353906!5m2!1svi!2s",
+    "opening_hours": "07:30 - 21:00 (Tất cả các ngày trong tuần)",
+    "hero_title": "Cho thuê máy ảnh tại Quảng Bình",
+    "hero_subtitle": "Máy đẹp, dễ sử dụng, giá rõ ràng. Thuê máy ảnh du lịch chất lượng cao tại Kiho Camera Đồng Hới.",
+    "hero_image": "/images/cameras/fujifilm-x100vi.jpg",
+    "about_text": "Kiho Camera là địa chỉ cho thuê máy ảnh uy tín hàng đầu tại 48 Ngô Quyền, Đồng Hới, Quảng Bình.",
+    "footer_text": "© 2026 Kiho Camera - Dịch vụ cho thuê máy ảnh uy tín tại Quảng Bình. Hotline/Zalo: 0387 274 669."
+  },
+  "storefront": [
+    {
+      "id": "95ccaff1-3443-4d05-8357-97352a757a01",
+      "image_url": "https://hykuvvhxepijndqxrcke.supabase.co/storage/v1/object/public/equipment-images/storefront/1788178386138-celfze.jpg",
+      "alt_text": "Mặt tiền Kiho Camera tại 48 Ngô Quyền, Đồng Hới",
+      "caption": null,
+      "sort_order": 0,
+      "is_cover": true,
+      "is_active": true
+    },
+    {
+      "id": "e809dfa2-9fab-406d-864e-6b4a60fc7045",
+      "image_url": "https://hykuvvhxepijndqxrcke.supabase.co/storage/v1/object/public/equipment-images/storefront/1788178391614-9yp84t.jpg",
+      "alt_text": "",
+      "caption": null,
+      "sort_order": 1,
+      "is_cover": false,
+      "is_active": true
+    },
+    {
+      "id": "3ee2ca4f-9bce-472d-a577-8c3198064cf3",
+      "image_url": "https://hykuvvhxepijndqxrcke.supabase.co/storage/v1/object/public/equipment-images/storefront/1788178464636-3a5m4a.jpg",
+      "alt_text": "",
+      "caption": null,
+      "sort_order": 2,
+      "is_cover": false,
+      "is_active": true
+    }
+  ],
+  "feedback": []
+}
